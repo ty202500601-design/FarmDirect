@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FarmDirect – Fresh Carrots</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><span class="logo-icon">🌱</span><span>FarmDirect</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="products.html" class="nav-link active">Products</a>
+    </div>
+    <div class="nav-actions">
+      <a href="cart.html" class="cart-btn" title="Cart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></a>
+      <a href="login.html" class="login-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Login</a>
+    </div>
+  </div>
+</nav>
+
+<div class="detail-wrap">
+  <div class="container">
+    <a href="products.html" class="back-link">← Back to Products</a>
+    <div class="product-detail">
+      <div class="detail-image">
+        <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=800" alt="Fresh Carrots">
+        <span class="badge-organic large">Organic</span>
+      </div>
+      <div class="detail-info">
+        <span class="detail-category">Vegetables</span>
+        <h1 class="detail-title">Fresh Carrots</h1>
+        <div style="display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;">
+          <p class="detail-farmer">🌾 Green Valley Farm</p>
+          <span class="shop-rating"><span class="s">★</span> 4.9 Shop Rating</span>
+        </div>
+        <div class="detail-rating-row">
+          <div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div>
+          <span class="rating-score">4.9</span>
+          <span class="detail-rating-count">· 89 buyer reviews</span>
+        </div>
+        <p class="detail-price">₱195<span>/kg</span></p>
+        <p class="detail-desc">Sweet and crunchy carrots pulled fresh from the earth. Rich in beta-carotene and perfect for snacking, juicing, or cooking. Grown without pesticides in Davao del Sur's rich volcanic soil.</p>
+        <div class="detail-meta">
+          <div><strong>Origin</strong>Davao del Sur</div>
+          <div><strong>Harvest</strong>Weekly</div>
+          <div><strong>Stock</strong>Available</div>
+        </div>
+        <div class="qty-row">
+          <span>Quantity:</span>
+          <div class="qty-display">
+            <span style="padding:0 0.6rem;">−</span><span>1</span><span style="padding:0 0.6rem;">+</span>
+          </div>
+        </div>
+        <a href="cart.html" class="add-cart-btn" style="margin-top:0.5rem;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</a>
+      </div>
+    </div>
+
+    <!-- BUYER REVIEWS -->
+    <section class="reviews-section">
+      <h2 class="section-title">Buyer Reviews</h2>
+      <div class="reviews-summary">
+        <div class="reviews-score-big">4.9</div>
+        <div class="reviews-score-detail">
+          <div class="stars" style="font-size:1.1rem;"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div>
+          <p class="reviews-total">Based on 89 verified purchases</p>
+          <p style="font-size:0.85rem;color:var(--green);font-weight:600;margin-top:0.3rem;">97% say the product was fresh on arrival</p>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div><p class="reviewer-name">Maria Santos</p><p class="review-date">February 28, 2026</p></div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem;">
+            <div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div>
+            <span class="review-product-tag">Fresh Carrots</span>
+          </div>
+        </div>
+        <p class="review-text">Sobrang fresh ng mga carrots! Dumating pa sila na malamig at may basa-basa pa sa packaging — parang bagong butas sa lupa. Mas masarap pa sila kaysa sa nabibili ko sa palengke. Definitely ordering again!</p>
+        <p class="review-verified">✔ Verified Purchase</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div><p class="reviewer-name">Joel Reyes</p><p class="review-date">February 20, 2026</p></div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem;">
+            <div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div>
+            <span class="review-product-tag">Fresh Carrots</span>
+          </div>
+        </div>
+        <p class="review-text">Used these for my restaurant and the guests immediately noticed the difference. The color is vibrant orange, not the pale ones you get in groceries. Crisp, sweet, and zero rot in the whole batch. Green Valley Farm is the real deal.</p>
+        <p class="review-verified">✔ Verified Purchase</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div><p class="reviewer-name">Ana Lim</p><p class="review-date">February 14, 2026</p></div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem;">
+            <div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s empty">★</span></div>
+            <span class="review-product-tag">Fresh Carrots</span>
+          </div>
+        </div>
+        <p class="review-text">Arrived fresh and well-packed. One or two pieces had minor bruising but the rest were perfect. Taste-wise, really good — sweet and crunchy. My kids love eating them raw as snacks. Will order again.</p>
+        <p class="review-verified">✔ Verified Purchase</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div><p class="reviewer-name">Rhea Mendoza</p><p class="review-date">January 30, 2026</p></div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem;">
+            <div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div>
+            <span class="review-product-tag">Fresh Carrots</span>
+          </div>
+        </div>
+        <p class="review-text">I've been buying from Green Valley Farm for 3 months now and they never disappoint. The carrots are always farm-fresh and taste amazing in my nilaga and ginisa. Delivery is also fast — usually comes the next day!</p>
+        <p class="review-verified">✔ Verified Purchase</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div><p class="reviewer-name">Carlo Buenaventura</p><p class="review-date">January 18, 2026</p></div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem;">
+            <div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div>
+            <span class="review-product-tag">Fresh Carrots</span>
+          </div>
+        </div>
+        <p class="review-text">Best carrots I've ever had delivered. They were wrapped individually and placed in an insulated box. Still firm and cool when I opened the package. The organic label is not just for show — you can really taste the difference. 10/10!</p>
+        <p class="review-verified">✔ Verified Purchase</p>
+      </div>
+    </section>
+
+    <!-- RELATED -->
+    <section class="related-section">
+      <h2 class="section-title">You May Also Like</h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=600" alt="Heirloom Tomatoes"><span class="badge-organic">Organic</span></div></a>
+          <div class="card-body">
+            <a href="product-detail.html" class="card-title">Heirloom Tomatoes</a>
+            <div class="card-farmer-rating"><span class="card-farmer">Sunrise Farm</span><span class="shop-rating"><span class="s">★</span> 4.8</span></div>
+            <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div><span class="stars-label">(124)</span></div>
+            <p class="card-price">₱280<span class="card-unit">/kg</span></p>
+            <a href="cart.html" class="add-cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=600" alt="Mixed Greens"><span class="badge-organic">Organic</span></div></a>
+          <div class="card-body">
+            <a href="product-detail.html" class="card-title">Mixed Greens</a>
+            <div class="card-farmer-rating"><span class="card-farmer">Green Valley Farm</span><span class="shop-rating"><span class="s">★</span> 4.9</span></div>
+            <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div><span class="stars-label">(67)</span></div>
+            <p class="card-price">₱335<span class="card-unit">/bunch</span></p>
+            <a href="cart.html" class="add-cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=600" alt="Bell Peppers"></div></a>
+          <div class="card-body">
+            <a href="product-detail.html" class="card-title">Bell Peppers Mix</a>
+            <div class="card-farmer-rating"><span class="card-farmer">Sunrise Farm</span><span class="shop-rating"><span class="s">★</span> 4.8</span></div>
+            <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div><span class="stars-label">(45)</span></div>
+            <p class="card-price">₱225<span class="card-unit">/kg</span></p>
+            <a href="cart.html" class="add-cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">🌱 FarmDirect</div>
+    <p>Connecting farmers to your table, fresh every day.</p>
+    <div class="footer-links"><a href="index.html">Home</a><a href="products.html">Products</a><a href="cart.html">Cart</a><a href="login.html">Login</a></div>
+    <p class="footer-copy">© 2026 FarmDirect. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
