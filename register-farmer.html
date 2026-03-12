@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Direct - Farmer Register</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="logo">
+            🌿
+            <span class="logo-text">Farm<span>Direct</span></span>
+        </div>
+    </header>
+
+    <main class="auth-wrapper">
+        <div class="auth-card wide">
+            <a href="login-farmer.html" class="back-btn">← Back</a>
+            <div class="auth-title">Create Farmer Account</div>
+            <div class="auth-sub">Fill in your details to get started.</div>
+
+            <div class="tabs">
+                <a href="login-farmer.html" class="tab">Sign In</a>
+                <a href="register-farmer.html" class="tab active">Register</a>
+            </div>
+
+            <form action="verify.html" method="post">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" placeholder="Juan Dela Cruz" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="you@email.com" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" placeholder="Min. 8 characters" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Farm / Business Name</label>
+                    <input type="text" class="form-input" placeholder="e.g. Dela Cruz Farm" name="farm_name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Farm Location</label>
+                    <input type="text" class="form-input" placeholder="Barangay, Municipality, Province" name="location" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Produce / Products You Sell</label>
+                    <input type="text" class="form-input" placeholder="e.g. Tomatoes, Carrots, Lettuce" name="produce" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Upload Valid Government ID</label>
+                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png,.pdf" name="id_file" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">ID Type</label>
+                    <select class="form-input" name="id_type" required>
+                        <option value="">Select ID type...</option>
+                        <option>PhilSys / National ID</option>
+                        <option>Driver's License</option>
+                        <option>Passport</option>
+                        <option>SSS / GSIS ID</option>
+                        <option>Voter's ID</option>
+                        <option>Postal ID</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Farm Photo <span class="opt">(optional)</span></label>
+                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png" name="farm_photo">
+                </div>
+                <button type="submit" class="btn-primary">Create Account</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>© 2026 FarmDirect. All rights reserved.</footer>
+
+</body>
+</html>
