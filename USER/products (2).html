@@ -6,11 +6,50 @@
 <title>FarmDirect – All Products</title>
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Pill active state via :target — targets the section anchor, styles sibling pill in the nav */
+  .pill-all    { background: var(--green); color: white; border-color: var(--green); }
+  #meats:target    { scroll-margin-top: calc(var(--nav-h) + 80px); }
+  #vegetables:target { scroll-margin-top: calc(var(--nav-h) + 80px); }
+  #fruits:target   { scroll-margin-top: calc(var(--nav-h) + 80px); }
+  #dairy:target    { scroll-margin-top: calc(var(--nav-h) + 80px); }
+  #eggs:target     { scroll-margin-top: calc(var(--nav-h) + 80px); }
+  #pantry:target   { scroll-margin-top: calc(var(--nav-h) + 80px); }
+
+  /*
+    CSS-only active pill trick:
+    We use the :target pseudo-class on the hidden anchor spans placed just BEFORE each section.
+    The pill links all point to these anchors.
+    When an anchor is :target, we un-default "All" and highlight the relevant pill.
+  */
+
+  /* By default All is active */
+  .pill-all { background: var(--green); color: white; border-color: var(--green); }
+
+  /* When any specific section is targeted, remove All active */
+  #meats:target    ~ .categories-wrap .pill-all,
+  #vegetables:target ~ .categories-wrap .pill-all,
+  #fruits:target   ~ .categories-wrap .pill-all,
+  #dairy:target    ~ .categories-wrap .pill-all,
+  #eggs:target     ~ .categories-wrap .pill-all,
+  #pantry:target   ~ .categories-wrap .pill-all {
+    background: var(--white); color: var(--text-mid); border-color: var(--border);
+  }
+
+  /* Highlight the correct pill */
+  #meats:target    ~ .categories-wrap .pill-meats    { background: var(--green); color: white; border-color: var(--green); }
+  #vegetables:target ~ .categories-wrap .pill-veg    { background: var(--green); color: white; border-color: var(--green); }
+  #fruits:target   ~ .categories-wrap .pill-fruits   { background: var(--green); color: white; border-color: var(--green); }
+  #dairy:target    ~ .categories-wrap .pill-dairy    { background: var(--green); color: white; border-color: var(--green); }
+  #eggs:target     ~ .categories-wrap .pill-eggs     { background: var(--green); color: white; border-color: var(--green); }
+  #pantry:target   ~ .categories-wrap .pill-pantry   { background: var(--green); color: white; border-color: var(--green); }
+</style>
 </head>
 <body>
+
 <nav class="navbar">
   <div class="nav-inner">
-    <a href="index.html" class="logo"><span class="logo-icon">🌱</span><span>FarmDirect</span></a>
+    <a href="index.html" class="logo">FarmDirect</a>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
       <a href="products.html" class="nav-link active">Products</a>
@@ -22,6 +61,20 @@
   </div>
 </nav>
 
+<!--
+  IMPORTANT STRUCTURE NOTE:
+  The hidden anchor spans must be BEFORE .categories-wrap so the CSS :target sibling selector (~) can reach it.
+  Structure: [anchor span] [anchor span] ... [.categories-wrap] [products section]
+  All anchors sit at the top of the page (before categories), so :target ~ .categories-wrap works.
+-->
+
+<span id="meats"></span>
+<span id="vegetables"></span>
+<span id="fruits"></span>
+<span id="dairy"></span>
+<span id="eggs"></span>
+<span id="pantry"></span>
+
 <section class="page-header">
   <h1>All Products</h1>
   <p>Farm-fresh goods from local farmers, delivered directly to you</p>
@@ -31,22 +84,73 @@
   </div>
 </section>
 
-<section class="categories-section">
+<section class="categories-section categories-wrap">
   <div class="category-pills">
-    <a href="index.html" class="pill">All</a>
-    <a href="#vegetables" class="pill active">Vegetables</a>
-    <a href="#fruits" class="pill">Fruits</a>
-    <a href="#dairy" class="pill">Dairy</a>
-    <a href="#eggs" class="pill">Eggs</a>
-    <a href="#bakery" class="pill">Bakery</a>
-    <a href="#pantry" class="pill">Pantry</a>
+    <a href="products.html" class="pill pill-all">All</a>
+    <a href="#meats"      class="pill pill-meats">Meats</a>
+    <a href="#vegetables" class="pill pill-veg">Vegetables</a>
+    <a href="#fruits"     class="pill pill-fruits">Fruits</a>
+    <a href="#dairy"      class="pill pill-dairy">Dairy</a>
+    <a href="#eggs"       class="pill pill-eggs">Eggs</a>
+    <a href="#pantry"     class="pill pill-pantry">Pantry</a>
   </div>
 </section>
 
 <section class="products-section">
   <div class="container">
 
-    <h2 class="section-title" id="vegetables">🥬 Vegetables</h2>
+    <!-- MEATS -->
+    <h2 class="section-title" id="meats-section">Meats</h2>
+    <div class="products-grid" style="margin-bottom:3rem;">
+
+      <div class="product-card">
+        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1603048297172-c92544798d5a?w=600" alt="Grass-Fed Beef"><span class="badge-organic">Organic</span></div></a>
+        <div class="card-body">
+          <a href="product-detail.html" class="card-title">Grass-Fed Beef</a>
+          <div class="card-farmer-rating"><span class="card-farmer">Highland Ranch</span><span class="shop-rating"><span class="s">★</span> 4.9</span></div>
+          <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div><span class="stars-label">(87 reviews)</span></div>
+          <p class="card-price">₱620<span class="card-unit">/kg</span></p>
+          <a href="cart.html" class="add-cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=600" alt="Free-Range Chicken"><span class="badge-organic">Organic</span></div></a>
+        <div class="card-body">
+          <a href="product-detail.html" class="card-title">Free-Range Chicken</a>
+          <div class="card-farmer-rating"><span class="card-farmer">Sunrise Poultry</span><span class="shop-rating"><span class="s">★</span> 4.8</span></div>
+          <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div><span class="stars-label">(102 reviews)</span></div>
+          <p class="card-price">₱380<span class="card-unit">/kg</span></p>
+          <a href="cart.html" class="add-cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600" alt="Pork Belly"><span class="badge-organic">Organic</span></div></a>
+        <div class="card-body">
+          <a href="product-detail.html" class="card-title">Pork Belly</a>
+          <div class="card-farmer-rating"><span class="card-farmer">Green Meadow Farm</span><span class="shop-rating"><span class="s">★</span> 4.7</span></div>
+          <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s empty">★</span></div><span class="stars-label">(64 reviews)</span></div>
+          <p class="card-price">₱420<span class="card-unit">/kg</span></p>
+          <a href="cart.html" class="add-cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1615937657715-bc7b4b7962c1?w=600" alt="Fresh Tilapia"></div></a>
+        <div class="card-body">
+          <a href="product-detail.html" class="card-title">Fresh Tilapia</a>
+          <div class="card-farmer-rating"><span class="card-farmer">Riverside Aquafarm</span><span class="shop-rating"><span class="s">★</span> 4.6</span></div>
+          <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s empty">★</span></div><span class="stars-label">(49 reviews)</span></div>
+          <p class="card-price">₱250<span class="card-unit">/kg</span></p>
+          <a href="cart.html" class="add-cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- VEGETABLES -->
+    <h2 class="section-title" id="vegetables-section">Vegetables</h2>
     <div class="products-grid" style="margin-bottom:3rem;">
 
       <div class="product-card">
@@ -83,7 +187,7 @@
       </div>
 
       <div class="product-card">
-        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=600" alt="Bell Peppers"></div></a>
+        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=600" alt="Bell Peppers Mix"></div></a>
         <div class="card-body">
           <a href="product-detail.html" class="card-title">Bell Peppers Mix</a>
           <div class="card-farmer-rating"><span class="card-farmer">Sunrise Farm</span><span class="shop-rating"><span class="s">★</span> 4.8</span></div>
@@ -95,7 +199,8 @@
 
     </div>
 
-    <h2 class="section-title" id="fruits">🍓 Fruits</h2>
+    <!-- FRUITS -->
+    <h2 class="section-title" id="fruits-section">Fruits</h2>
     <div class="products-grid" style="margin-bottom:3rem;">
 
       <div class="product-card">
@@ -114,30 +219,42 @@
         <div class="card-body">
           <a href="product-detail.html" class="card-title">Organic Avocados</a>
           <div class="card-farmer-rating"><span class="card-farmer">Summit Grove</span><span class="shop-rating"><span class="s">★</span> 4.6</span></div>
-          <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div><span class="stars-label">(41 reviews)</span></div>
+          <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s empty">★</span></div><span class="stars-label">(41 reviews)</span></div>
           <p class="card-price">₱140<span class="card-unit">/pc</span></p>
           <a href="cart.html" class="add-cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</a>
         </div>
       </div>
 
       <div class="product-card">
-        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=600" alt="Mangoes"></div></a>
+        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=600" alt="Fresh Mangoes"><span class="badge-organic">Organic</span></div></a>
         <div class="card-body">
-          <a href="product-detail.html" class="card-title">Mango Assortment</a>
-          <div class="card-farmer-rating"><span class="card-farmer">Golden Sun Farm</span><span class="shop-rating"><span class="s">★</span> 4.9</span></div>
-          <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div><span class="stars-label">(135 reviews)</span></div>
-          <p class="card-price">₱250<span class="card-unit">/kg</span></p>
+          <a href="product-detail.html" class="card-title">Fresh Mangoes</a>
+          <div class="card-farmer-rating"><span class="card-farmer">Tropical Farms</span><span class="shop-rating"><span class="s">★</span> 4.9</span></div>
+          <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div><span class="stars-label">(93 reviews)</span></div>
+          <p class="card-price">₱180<span class="card-unit">/kg</span></p>
+          <a href="cart.html" class="add-cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?w=600" alt="Cavendish Bananas"><span class="badge-organic">Organic</span></div></a>
+        <div class="card-body">
+          <a href="product-detail.html" class="card-title">Cavendish Bananas</a>
+          <div class="card-farmer-rating"><span class="card-farmer">Valley Harvest</span><span class="shop-rating"><span class="s">★</span> 4.7</span></div>
+          <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s empty">★</span></div><span class="stars-label">(61 reviews)</span></div>
+          <p class="card-price">₱90<span class="card-unit">/kg</span></p>
           <a href="cart.html" class="add-cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</a>
         </div>
       </div>
 
     </div>
 
-    <h2 class="section-title" id="dairy">🥛 Dairy</h2>
+    <!-- DAIRY -->
+    <h2 class="section-title" id="dairy-section">Dairy</h2>
     <div class="products-grid" style="margin-bottom:3rem;">
 
       <div class="product-card">
-        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=600" alt="Farm Fresh Milk"></div></a>
+        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=600" alt="Farm Fresh Milk"><span class="badge-organic">Organic</span></div></a>
         <div class="card-body">
           <a href="product-detail.html" class="card-title">Farm Fresh Milk</a>
           <div class="card-farmer-rating"><span class="card-farmer">Happy Cow Dairy</span><span class="shop-rating"><span class="s">★</span> 4.8</span></div>
@@ -148,18 +265,18 @@
       </div>
 
       <div class="product-card">
-        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=600" alt="Artisan Cheese"></div></a>
+        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=600" alt="Organic Cheese"><span class="badge-organic">Organic</span></div></a>
         <div class="card-body">
-          <a href="product-detail.html" class="card-title">Artisan Cheese</a>
-          <div class="card-farmer-rating"><span class="card-farmer">Happy Cow Dairy</span><span class="shop-rating"><span class="s">★</span> 4.8</span></div>
-          <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div><span class="stars-label">(61 reviews)</span></div>
-          <p class="card-price">₱505<span class="card-unit">/block</span></p>
+          <a href="product-detail.html" class="card-title">Organic Cheese</a>
+          <div class="card-farmer-rating"><span class="card-farmer">Happy Cow Dairy</span><span class="shop-rating"><span class="s">★</span> 4.7</span></div>
+          <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s empty">★</span></div><span class="stars-label">(55 reviews)</span></div>
+          <p class="card-price">₱480<span class="card-unit">/200g</span></p>
           <a href="cart.html" class="add-cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</a>
         </div>
       </div>
 
       <div class="product-card">
-        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600" alt="Greek Yogurt"></div></a>
+        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1571212515416-fca988083f13?w=600" alt="Greek Yogurt"><span class="badge-organic">Organic</span></div></a>
         <div class="card-body">
           <a href="product-detail.html" class="card-title">Greek Yogurt</a>
           <div class="card-farmer-rating"><span class="card-farmer">Happy Cow Dairy</span><span class="shop-rating"><span class="s">★</span> 4.8</span></div>
@@ -171,13 +288,14 @@
 
     </div>
 
-    <h2 class="section-title" id="eggs">🥚 Eggs</h2>
+    <!-- EGGS -->
+    <h2 class="section-title" id="eggs-section">Eggs</h2>
     <div class="products-grid" style="margin-bottom:3rem;">
 
       <div class="product-card">
-        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1518569656558-1f25e69d2fd4?w=600" alt="Free-Range Eggs"></div></a>
+        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1518569656558-1f25e69d2fd4?w=600" alt="Free-Range Chicken Eggs"></div></a>
         <div class="card-body">
-          <a href="product-detail.html" class="card-title">Free-Range Eggs</a>
+          <a href="product-detail.html" class="card-title">Free-Range Chicken Eggs</a>
           <div class="card-farmer-rating"><span class="card-farmer">Morning Roost Farm</span><span class="shop-rating"><span class="s">★</span> 4.7</span></div>
           <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div><span class="stars-label">(112 reviews)</span></div>
           <p class="card-price">₱240<span class="card-unit">/dozen</span></p>
@@ -186,7 +304,7 @@
       </div>
 
       <div class="product-card">
-        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=600" alt="Duck Eggs"></div></a>
+        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=600" alt="Duck Eggs"></div></a>
         <div class="card-body">
           <a href="product-detail.html" class="card-title">Duck Eggs</a>
           <div class="card-farmer-rating"><span class="card-farmer">Riverside Poultry</span><span class="shop-rating"><span class="s">★</span> 4.5</span></div>
@@ -198,34 +316,8 @@
 
     </div>
 
-    <h2 class="section-title" id="bakery">🍞 Bakery</h2>
-    <div class="products-grid" style="margin-bottom:3rem;">
-
-      <div class="product-card">
-        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600" alt="Sourdough Bread"></div></a>
-        <div class="card-body">
-          <a href="product-detail.html" class="card-title">Sourdough Bread</a>
-          <div class="card-farmer-rating"><span class="card-farmer">Fieldstone Bakehouse</span><span class="shop-rating"><span class="s">★</span> 4.9</span></div>
-          <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div><span class="stars-label">(76 reviews)</span></div>
-          <p class="card-price">₱420<span class="card-unit">/loaf</span></p>
-          <a href="cart.html" class="add-cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1606101273945-e9eba14a6d3a?w=600" alt="Banana Bread"></div></a>
-        <div class="card-body">
-          <a href="product-detail.html" class="card-title">Banana Bread</a>
-          <div class="card-farmer-rating"><span class="card-farmer">Fieldstone Bakehouse</span><span class="shop-rating"><span class="s">★</span> 4.9</span></div>
-          <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></div><span class="stars-label">(38 reviews)</span></div>
-          <p class="card-price">₱295<span class="card-unit">/loaf</span></p>
-          <a href="cart.html" class="add-cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</a>
-        </div>
-      </div>
-
-    </div>
-
-    <h2 class="section-title" id="pantry">🍯 Pantry</h2>
+    <!-- PANTRY -->
+    <h2 class="section-title" id="pantry-section">Pantry</h2>
     <div class="products-grid" style="margin-bottom:3rem;">
 
       <div class="product-card">
@@ -250,17 +342,32 @@
         </div>
       </div>
 
+      <div class="product-card">
+        <a href="product-detail.html"><div class="card-image"><img src="https://images.unsplash.com/photo-1543352634-99a5d50ae78e?w=600" alt="Apple Cider Vinegar"><span class="badge-organic">Organic</span></div></a>
+        <div class="card-body">
+          <a href="product-detail.html" class="card-title">Apple Cider Vinegar</a>
+          <div class="card-farmer-rating"><span class="card-farmer">Orchard Pure Co.</span><span class="shop-rating"><span class="s">★</span> 4.7</span></div>
+          <div class="rating-row"><div class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s empty">★</span></div><span class="stars-label">(36 reviews)</span></div>
+          <p class="card-price">₱340<span class="card-unit">/bottle</span></p>
+          <a href="cart.html" class="add-cart-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Add to Cart</a>
+        </div>
+      </div>
+
     </div>
+
   </div>
 </section>
 
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-logo">🌱 FarmDirect</div>
+    <div class="footer-logo">FarmDirect</div>
     <p>Connecting farmers to your table, fresh every day.</p>
-    <div class="footer-links"><a href="index.html">Home</a><a href="products.html">Products</a><a href="cart.html">Cart</a><a href="login.html">Login</a></div>
+    <div class="footer-links">
+      <a href="index.html">Home</a><a href="products.html">Products</a><a href="cart.html">Cart</a><a href="login.html">Login</a>
+    </div>
     <p class="footer-copy">© 2026 FarmDirect. All rights reserved.</p>
   </div>
 </footer>
+
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FarmDirect – Checkout</title>
+<title>FarmDirect – Confirm Order</title>
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
@@ -26,59 +26,46 @@
 <div class="checkout-wrap">
   <div class="container">
     <h1 class="page-title">Checkout</h1>
-
     <div class="checkout-steps">
-      <div class="step active"><span class="step-num">1</span> Delivery</div>
+      <div class="step done"><span class="step-num">&#10003;</span> Delivery</div>
       <div class="step-line"></div>
-      <div class="step"><span class="step-num">2</span> Payment</div>
+      <div class="step done"><span class="step-num">&#10003;</span> Payment</div>
       <div class="step-line"></div>
-      <div class="step"><span class="step-num">3</span> Confirm</div>
+      <div class="step active"><span class="step-num">3</span> Confirm</div>
     </div>
 
     <div class="checkout-layout">
-      <div class="checkout-form-wrap">
-        <h2>Delivery Information</h2>
-        <div class="form-grid">
-          <div class="form-group">
-            <label>First Name *</label>
-            <input type="text" placeholder="Juan">
-          </div>
-          <div class="form-group">
-            <label>Last Name *</label>
-            <input type="text" placeholder="dela Cruz">
-          </div>
-          <div class="form-group full">
-            <label>Email *</label>
-            <input type="email" placeholder="juan@email.com">
-          </div>
-          <div class="form-group full">
-            <label>Phone Number *</label>
-            <div class="phone-wrap">
-              <span class="phone-prefix">+63</span>
-              <input type="tel" placeholder="912 345 6789">
-            </div>
-          </div>
-          <div class="form-group full">
-            <label>Address *</label>
-            <input type="text" placeholder="House No., Street, Barangay">
-          </div>
-          <div class="form-group">
-            <label>City *</label>
-            <input type="text" placeholder="Cagayan de Oro">
-          </div>
-          <div class="form-group">
-            <label>ZIP Code</label>
-            <input type="text" placeholder="9000">
-          </div>
-          <div class="form-group full">
-            <label>Delivery Notes (optional)</label>
-            <textarea rows="3" placeholder="e.g. Leave at the gate..."></textarea>
-          </div>
+      <div>
+
+        <div class="confirm-box">
+          <h3>Delivery Details</h3>
+          <div class="confirm-row"><span class="confirm-label">Name</span><strong>Juan dela Cruz</strong></div>
+          <div class="confirm-row"><span class="confirm-label">Email</span><strong>juan@email.com</strong></div>
+          <div class="confirm-row"><span class="confirm-label">Phone</span><strong>+63 912 345 6789</strong></div>
+          <div class="confirm-row"><span class="confirm-label">Address</span><strong>123 Rizal St., Brgy. Carmen, CDO 9000</strong></div>
+          <div class="confirm-row"><span class="confirm-label">Notes</span><strong>Leave at gate</strong></div>
         </div>
+
+        <div class="confirm-box">
+          <h3>Payment Method</h3>
+          <div class="confirm-row"><span class="confirm-label">Method</span><strong>GCash</strong></div>
+        </div>
+
+        <div class="confirm-box">
+          <h3>Order Items</h3>
+          <div class="review-item"><span>Fresh Carrots x2</span><span>₱390</span></div>
+          <div class="review-item"><span>Heirloom Tomatoes x1</span><span>₱280</span></div>
+          <div class="review-item"><span>Raw Honey x1</span><span>₱560</span></div>
+          <div class="review-item"><span>Subtotal</span><span>₱1,230</span></div>
+          <div class="review-item"><span>Delivery Fee</span><span>₱80</span></div>
+          <div class="review-item total-row"><span>Total</span><span>₱1,310</span></div>
+        </div>
+
         <div class="step-nav">
-          <a href="cart.html" class="secondary-btn">← Back to Cart</a>
-          <a href="checkout-payment.html" class="add-cart-btn" style="width:auto;">Continue to Payment →</a>
+          <a href="checkout-payment.html" class="secondary-btn">← Back</a>
+          <a href="order-success.html" class="add-cart-btn" style="width:auto;">Place Order</a>
         </div>
+
       </div>
 
       <div class="summary-card">

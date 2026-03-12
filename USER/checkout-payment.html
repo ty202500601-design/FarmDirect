@@ -6,13 +6,56 @@
 <title>FarmDirect – Payment</title>
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /*
+    CSS-only payment selection:
+    Radio inputs are hidden. Each is immediately followed by its <label>.
+    We use input:checked + label to apply the green highlighted style.
+    Each option links to a different confirm page so the selection is "remembered"
+    by which link the user follows.
+  */
+  .payment-options input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+  .pay-label {
+    display: flex; align-items: center; gap: 0.9rem;
+    border: 2px solid var(--border); border-radius: 10px;
+    padding: 0.9rem 1.1rem; font-size: 0.97rem; font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  }
+  .pay-label:hover { border-color: var(--green-mid); transform: translateX(3px); }
+  .pay-radio-dot {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid var(--border); background: white; flex-shrink: 0;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .payment-options input[type="radio"]:checked + .pay-label {
+    border-color: var(--green); background: var(--green-light);
+  }
+  .payment-options input[type="radio"]:checked + .pay-label .pay-radio-dot {
+    border-color: var(--green);
+    box-shadow: inset 0 0 0 4px var(--green);
+  }
+
+  /* Two separate "Continue" buttons, one per payment method.
+     Both are hidden by default; each is shown when its radio is checked. */
+  .pay-continue { display: none; }
+  #pay-cod:checked   ~ .pay-continue-cod   { display: inline-flex; }
+  #pay-gcash:checked ~ .pay-continue-gcash { display: inline-flex; }
+  /* Fallback: show COD button if nothing selected yet */
+  .pay-continue-default { display: inline-flex; }
+  #pay-cod:checked   ~ .pay-continue-default,
+  #pay-gcash:checked ~ .pay-continue-default { display: none; }
+</style>
 </head>
 <body>
 
 <nav class="navbar">
   <div class="nav-inner">
-    <a href="index.html" class="logo"><span class="logo-icon">🌱</span><span>FarmDirect</span></a>
-    <div class="nav-links"><a href="index.html" class="nav-link">Home</a><a href="products.html" class="nav-link">Products</a></div>
+    <a href="index.html" class="logo">FarmDirect</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="products.html" class="nav-link">Products</a>
+    </div>
     <div class="nav-actions">
       <a href="cart.html" class="cart-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></a>
       <a href="login.html" class="login-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Login</a>
@@ -24,33 +67,61 @@
   <div class="container">
     <h1 class="page-title">Checkout</h1>
     <div class="checkout-steps">
-      <div class="step done"><span class="step-num">✓</span> Delivery</div>
+      <div class="step done"><span class="step-num">&#10003;</span> Delivery</div>
       <div class="step-line"></div>
       <div class="step active"><span class="step-num">2</span> Payment</div>
       <div class="step-line"></div>
       <div class="step"><span class="step-num">3</span> Confirm</div>
     </div>
+
     <div class="checkout-layout">
       <div class="checkout-form-wrap">
         <h2>Payment Method</h2>
+
+        <!--
+          The radio inputs must be OUTSIDE the label (siblings), placed before all the
+          continue buttons so the ~ general sibling selector can reach them.
+          Structure per option: <input id="pay-X"> <label for="pay-X" class="pay-label">
+          Then continue buttons after ALL options.
+        -->
         <div class="payment-options">
-          <div class="pay-option selected"><input type="radio" name="payment" checked> 💵 Cash on Delivery</div>
-          <div class="pay-option"><input type="radio" name="payment"> 📱 GCash</div>
-          <div class="pay-option"><input type="radio" name="payment"> 💳 Credit / Debit Card</div>
+
+          <input type="radio" name="payment" id="pay-cod" checked>
+          <label for="pay-cod" class="pay-label">
+            <span class="pay-radio-dot"></span>
+            Cash on Delivery
+          </label>
+
+          <input type="radio" name="payment" id="pay-gcash">
+          <label for="pay-gcash" class="pay-label">
+            <span class="pay-radio-dot"></span>
+            GCash
+          </label>
+
+          <!-- Default button (COD selected by default) -->
+          <a href="checkout-confirm-cod.html" class="add-cart-btn pay-continue pay-continue-default" style="width:auto;margin-top:0.5rem;">Review Order →</a>
+
+          <!-- Shown when COD is explicitly selected -->
+          <a href="checkout-confirm-cod.html" class="add-cart-btn pay-continue pay-continue-cod" style="width:auto;margin-top:0.5rem;">Review Order →</a>
+
+          <!-- Shown when GCash is selected -->
+          <a href="checkout-confirm-gcash.html" class="add-cart-btn pay-continue pay-continue-gcash" style="width:auto;margin-top:0.5rem;">Review Order →</a>
+
         </div>
-        <div class="step-nav">
+
+        <div class="step-nav" style="margin-top:0;">
           <a href="checkout.html" class="secondary-btn">← Back</a>
-          <a href="checkout-confirm.html" class="add-cart-btn" style="width:auto;">Review Order →</a>
         </div>
       </div>
+
       <div class="summary-card">
         <h2>Order Summary</h2>
-        <div class="summary-row"><span>Fresh Carrots x2</span><span>₱398</span></div>
-        <div class="summary-row"><span>Heirloom Tomatoes x1</span><span>₱285</span></div>
-        <div class="summary-row"><span>Raw Honey x1</span><span>₱568</span></div>
-        <div class="summary-row"><span>Subtotal</span><span>₱1,251</span></div>
-        <div class="summary-row"><span>Delivery Fee</span><span>₱89</span></div>
-        <div class="summary-row total-row"><span>Total</span><span>₱1,340</span></div>
+        <div class="summary-row"><span>Fresh Carrots x2</span><span>₱390</span></div>
+        <div class="summary-row"><span>Heirloom Tomatoes x1</span><span>₱280</span></div>
+        <div class="summary-row"><span>Raw Honey x1</span><span>₱560</span></div>
+        <div class="summary-row"><span>Subtotal</span><span>₱1,230</span></div>
+        <div class="summary-row"><span>Delivery Fee</span><span>₱80</span></div>
+        <div class="summary-row total-row"><span>Total</span><span>₱1,310</span></div>
       </div>
     </div>
   </div>
@@ -58,11 +129,14 @@
 
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-logo">🌱 FarmDirect</div>
+    <div class="footer-logo">FarmDirect</div>
     <p>Connecting farmers to your table, fresh every day.</p>
-    <div class="footer-links"><a href="index.html">Home</a><a href="products.html">Products</a><a href="cart.html">Cart</a><a href="login.html">Login</a></div>
+    <div class="footer-links">
+      <a href="index.html">Home</a><a href="products.html">Products</a><a href="cart.html">Cart</a><a href="login.html">Login</a>
+    </div>
     <p class="footer-copy">© 2026 FarmDirect. All rights reserved.</p>
   </div>
 </footer>
+
 </body>
 </html>
