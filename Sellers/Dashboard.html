@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farm Direct - Dashboard</title>
+<link rel="stylesheet" href="Farmers.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="logo"><a href="#"></a>
+            <i data-lucide="leaf"></i>
+            <span class="logo-text">Farm
+                <span>Direct</span>
+            </span>
+        </div>
+
+        
+        <div class="topbar-right">
+            <div class="dropdown">
+                <div class="icon-wrapper">
+                    <i data-lucide="bell"></i>
+                    <span class="notf"></span>
+                </div>
+                <div class="dropdown-menu">
+                    <p><strong>Notifications</strong></p>
+                    <p>- New orders</p>
+                    <p>- Order has been Delivered</p>
+                </div>
+            </div>
+            <div class="dropdown">
+                <div class="icon-wrapper">
+                    <i data-lucide="message-circle"></i>
+                    <span class="notf"></span>
+                </div>
+                <div class="dropdown-menu">
+                    <p><strong>Messages</strong></p>
+                    <p>- Maria: Is the corn available?</p>
+                    <p>- Pedro: Delivery tomorrow?</p>
+                </div>
+            </div>
+            <div class="dropdown">
+                <div class="profile">
+                    <div class="avatar">JD</div>
+                </div>
+                <div class="dropdown-menu">
+                    <p><a href="#"></a>Management</p>
+                    <p><a href="#"></a>Profile</p>
+                    <p><a href="#"></a>Settings</p>
+                    <p><a href="#"></a>Logout</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <a href="#">Home</a>
+        <a href="Dashboard.html">Dashboard</a>
+        <a href="Products.html">Products</a>
+        <a href="#">Orders</a>
+        <a href="#">Reviews</a>
+        <a href="#">Settings</a>
+    </nav>
+
+    <main class="farmers-main">
+        <div class="dash">
+            <div class="dash-title">Farmer's Hub Dashboard</div>
+            <p class="dash-sub">Welcome back, Seller! Here's what's happening today.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card s1">
+                <div class="stat-icon inco">💰</div>
+                <div class="stat-label">Total Revenue</div>
+                <div class="stat-val">₱7,560</div>
+                <div class="stat-pos">▲ +12.4% this month</div>
+            </div>
+
+            <div class="stat-card s2">
+                <div class="stat-icon actPro">📦</div>
+                <div class="stat-label">Active Products</div>
+                <div class="stat-val">5</div>
+                <div class="stat-pos">▲ +2 new products</div>
+            </div>
+
+            <div class="stat-card s3">
+                <div class="stat-icon totOr">🛒</div>
+                <div class="stat-label">Total Orders</div>
+                <div class="stat-val">480</div>
+                <div class="stat-pos">▲ +10 this last week</div>
+            </div>
+        </div>
+
+        <div class="g2">
+        <div class="card">
+            <div class="card-head">
+                <span class="card-title">📋 Recent Orders</span>
+                <a href="orders.html" class="card-act">View All</a>
+            </div>
+
+            <table class="tbl">
+                <thead>
+                    <tr>
+                        <th>PRODUCT</th>
+                        <th>AMOUNT</th>
+                        <th>DATE</th>
+                        <th>STATUS</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="cell-flex"></div>
+                            <img src="IMG/Tomatoes.jpg" alt="Red Tomatoes" class="produce">
+                            <div class="tbl-name">Fresh Tomatoes</div>
+                            <div class="tbl-num">ORD-00241</div>
+                        </td>
+
+                        <td>
+                            <b>₱380</b>
+                        </td>
+                        <td class="date">Mar 1, 2026</td>
+                        <td>
+                            <span class="status del">Delivered</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="cell-flex"></div>
+                            <img src="IMG/Carrots.jpg" alt="Fresh harvest carrots" class="produce">
+                            <div class="tbl-name">Organic Carrots</div>
+                            <div class="tbl-num">ORD-00240</div>
+                        </td>
+
+                        <td>
+                            <b>₱210</b>
+                        </td>
+                        <td class="date">Feb 28, 2026</td>
+                        <td>
+                            <span class="status pen">Pending</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="cell-flex"></div>
+                            <img src="IMG/Strawberries.jpg" alt="Clean Strawberries" class="produce">
+                            <div class="tbl-name">Strawberries</div>
+                            <div class="tbl-num">ORD-00239</div>
+                        </td>
+
+                        <td>
+                            <b>₱560</b>
+                        </td>
+                        <td class="date">Mar 4, 2026</td>
+                        <td>
+                            <span class="status pro">Processing</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="cell-flex"></div>
+                            <img src="IMG/Lettuce.jpg" alt="Clean and freash lettuce" class="produce">
+                            <div class="tbl-name">Fresh Lettuce</div>
+                            <div class="tbl-num">ORD-00238</div>
+                        </td>
+
+                        <td>
+                            <b>₱150</b>
+                        </td>
+                        <td class="date">Mar 5, 2026</td>
+                        <td>
+                            <span class="status del">Delivered</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="cell-flex"></div>
+                            <img src="IMG/Corn.jpg" alt="Yellow Sweet Corn" class="produce">
+                            <div class="tbl-name">Sweet Corn</div>
+                            <div class="tbl-num">ORD-00237</div>
+                        </td>
+
+                        <td>
+                            <b>₱290</b>
+                        </td>
+                        <td class="date">Mar 3, 2026</td>
+                        <td>
+                            <span class="status can">Cancelled</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <div class="card-head">
+                <span class="card-title">🏆 Top Products</span>
+            </div>
+            <div class="tp-item">
+                <div class="tp-rank r1">1</div>
+                <img src="IMG/Lettuce.jpg" alt="Clean and freash lettuce" class="produce">
+                <div class="tp-info">
+                    <div class="tp-name">Fresh Lettuce</div>
+                    <div class="tp-meta">120 sold · ₱25/bundle</div>
+                    <div class="tp-bar-wrap">
+                        <div class="tp-bar"></div>
+                    </div>
+                </div>
+                <div class="tp-rev">
+                    <div class="tp-rev-val">₱3,000</div>
+                    <div class="tp-rev-lbl">revenue</div>
+                </div>
+            </div>
+            <div class="tp-item">
+                <div class="tp-rank r2">2</div>
+                <img src="IMG/Corn.jpg" alt="Yellow Sweet Corn" class="produce">
+                <div class="tp-info">
+                    <div class="tp-name">Sweet Corn</div>
+                    <div class="tp-meta">95 sold · ₱20/pc</div>
+                    <div class="tp-bar-wrap">
+                        <div class="tp-bar" style="width:79%"></div>
+                    </div>
+                </div>
+                <div class="tp-rev">
+                    <div class="tp-rev-val">₱1,900</div>
+                    <div class="tp-rev-lbl">revenue</div>
+                </div>
+            </div>
+            <div class="tp-item">
+                <div class="tp-rank r3">3</div>
+                <img src="IMG/Tomatoes.jpg" alt="Red Tomatoes" class="produce">
+                <div class="tp-info">
+                    <div class="tp-name">Fresh Tomatoes</div>
+                    <div class="tp-meta">80 sold · ₱35/kg</div>
+                    <div class="tp-bar-wrap">
+                        <div class="tp-bar" style="width:67%"></div>
+                    </div>
+                </div>
+                <div class="tp-rev">
+                    <div class="tp-rev-val">₱2,800</div>
+                    <div class="tp-rev-lbl">revenue</div>
+                </div>
+            </div>
+            <div class="tp-item">
+                <div class="tp-rank rn">4</div>
+                <img src="IMG/Strawberries.jpg" alt="Clean Strawberries" class="produce">
+                <div class="tp-info">
+                    <div class="tp-name">Strawberries</div>
+                    <div class="tp-meta">60 sold · ₱90/box</div>
+                    <div class="tp-bar-wrap">
+                        <div class="tp-bar" style="width:50%"></div>
+                    </div>
+                </div>
+                <div class="tp-rev">
+                    <div class="tp-rev-val">₱5,400</div>
+                    <div class="tp-rev-lbl">revenue</div>
+                </div>
+            </div>
+            <div class="tp-item">
+                <div class="tp-rank rn">5</div>
+                <img src="IMG/Carrots.jpg" alt="Fresh harvest carrots" class="produce">
+                <div class="tp-info">
+                    <div class="tp-name">Organic Carrots</div>
+                    <div class="tp-meta">45 sold · ₱30/bundle</div>
+                    <div class="tp-bar-wrap">
+                        <div class="tp-bar" style="width:38%"></div>
+                    </div>
+                </div>
+                <div class="tp-rev">
+                    <div class="tp-rev-val">₱1,350</div>
+                    <div class="tp-rev-lbl">revenue</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<script>
+lucide.createIcons();
+</script>
+
+</body>
+</html>
