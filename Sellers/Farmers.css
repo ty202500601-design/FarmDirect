@@ -505,3 +505,24 @@
     margin-top:3px;
 }
 
+.edit{
+    flex:1;
+    text-align:center;
+    padding:7px;
+    border:1px solid #d1d5db;
+    border-radius:6px;
+    font-size:12px;
+    font-weight:600;
+    color:#374151;
+}
+
+.stock{
+    flex:1;
+    text-align:center;
+    padding:7px;
+    background:#25943f;
+    border-radius:6px;
+    font-size:12px;
+    font-weight:600;
+    color:#fff;
+}
