@@ -3,37 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FarmDirect – Your Cart</title>
+<title>Your Cart – FarmDirect Zamboanga</title>
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
+
+
 <nav class="navbar">
+  <input type="checkbox" id="menu-check" class="menu-checkbox">
   <div class="nav-inner">
-    <a href="index.html" class="logo">FarmDirect</a>
+    <a href="index.html" class="logo"><span class="logo-icon"></span><span>FarmDirect</span></a>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
       <a href="products.html" class="nav-link">Products</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
     </div>
     <div class="nav-actions">
-      <a href="cart.html" class="cart-btn" title="Cart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></a>
-      <a href="login.html" class="login-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Login</a>
+      <a href="cart.html" class="cart-btn" title="Cart">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+      </a>
+      <a href="login.html" class="login-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+          <polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
+        </svg>
+        Login
+      </a>
+      <label for="menu-check" class="menu-toggle">
+        <span></span><span></span><span></span>
+      </label>
     </div>
+  </div>
+  
+  <label for="menu-check" class="menu-overlay"></label>
+  
+  <div class="menu-panel">
+    <div class="menu-section">
+      <h3>Navigation</h3>
+      <a href="index.html" class="menu-item">Home</a>
+      <a href="products.html" class="menu-item">Browse Products</a>
+      <a href="dashboard.html" class="menu-item">My Dashboard</a>
+    </div>
+    <a href="checkout.html" class="menu-cta">Proceed to Checkout</a>
   </div>
 </nav>
 
 <div class="cart-wrap">
   <div class="container">
     <h1 class="page-title">Your Cart</h1>
+    
     <div class="cart-layout">
       <div class="cart-items">
-
         <div class="cart-item">
           <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=200" alt="Fresh Carrots">
           <div class="cart-item-info">
             <h3><a href="product-detail.html">Fresh Carrots</a></h3>
-            <p class="cart-farmer">Green Valley Farm</p>
+            <p class="cart-farmer">Green Valley Farm, Labuan</p>
             <p class="cart-price-line">₱195/kg</p>
           </div>
           <div class="cart-item-controls">
@@ -49,7 +78,7 @@
           <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200" alt="Heirloom Tomatoes">
           <div class="cart-item-info">
             <h3><a href="product-detail.html">Heirloom Tomatoes</a></h3>
-            <p class="cart-farmer">Sunrise Farm</p>
+            <p class="cart-farmer">Sunrise Farm, Tugbungan</p>
             <p class="cart-price-line">₱280/kg</p>
           </div>
           <div class="cart-item-controls">
@@ -65,7 +94,7 @@
           <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=200" alt="Raw Honey">
           <div class="cart-item-info">
             <h3><a href="product-detail.html">Raw Honey</a></h3>
-            <p class="cart-farmer">Beeline Apiary</p>
+            <p class="cart-farmer">Beeline Apiary, Pasonanca</p>
             <p class="cart-price-line">₱560/jar</p>
           </div>
           <div class="cart-item-controls">
@@ -76,7 +105,6 @@
             <a href="cart.html" class="remove-link">Remove</a>
           </div>
         </div>
-
       </div>
 
       <div class="summary-card">
@@ -96,12 +124,20 @@
 
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-logo">FarmDirect</div>
-    <p>Connecting farmers to your table, fresh every day.</p>
-    <div class="footer-links">
-      <a href="index.html">Home</a><a href="products.html">Products</a><a href="cart.html">Cart</a><a href="login.html">Login</a>
+    <div class="footer-col">
+      <div class="footer-logo"> FarmDirect</div>
+      <p class="footer-desc">Fresh from Zamboanga farms</p>
     </div>
-    <p class="footer-copy">© 2026 FarmDirect. All rights reserved.</p>
+    <div class="footer-col">
+      <h4>Links</h4>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FarmDirect Zamboanga. All rights reserved.</p>
+    </div>
   </div>
 </footer>
 

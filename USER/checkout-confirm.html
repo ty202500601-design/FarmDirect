@@ -3,23 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FarmDirect – Confirm Order</title>
+<title>Confirm Order – FarmDirect</title>
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <nav class="navbar">
+  <input type="checkbox" id="menu-check" class="menu-checkbox">
   <div class="nav-inner">
-    <a href="index.html" class="logo">FarmDirect</a>
+    <a href="index.html" class="logo"><span class="logo-icon"></span><span>FarmDirect</span></a>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
       <a href="products.html" class="nav-link">Products</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
     </div>
     <div class="nav-actions">
       <a href="cart.html" class="cart-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></a>
       <a href="login.html" class="login-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Login</a>
+      <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
     </div>
+  </div>
+  <label for="menu-check" class="menu-overlay"></label>
+  <div class="menu-panel">
+    <div class="menu-section"><h3>Navigation</h3><a href="index.html" class="menu-item">Home</a></div>
   </div>
 </nav>
 
@@ -27,23 +33,22 @@
   <div class="container">
     <h1 class="page-title">Checkout</h1>
     <div class="checkout-steps">
-      <div class="step done"><span class="step-num">&#10003;</span> Delivery</div>
+      <div class="step done"><span class="step-num">✓</span> Delivery</div>
       <div class="step-line"></div>
-      <div class="step done"><span class="step-num">&#10003;</span> Payment</div>
+      <div class="step done"><span class="step-num">✓</span> Payment</div>
       <div class="step-line"></div>
       <div class="step active"><span class="step-num">3</span> Confirm</div>
     </div>
 
     <div class="checkout-layout">
       <div>
-
         <div class="confirm-box">
           <h3>Delivery Details</h3>
           <div class="confirm-row"><span class="confirm-label">Name</span><strong>Juan dela Cruz</strong></div>
-          <div class="confirm-row"><span class="confirm-label">Email</span><strong>juan@email.com</strong></div>
+          <div class="confirm-row"><span class="confirm-label">Email</span><strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9af0effbf4dafff7fbf3f6b4f9f5f7">[email&#160;protected]</a></strong></div>
           <div class="confirm-row"><span class="confirm-label">Phone</span><strong>+63 912 345 6789</strong></div>
-          <div class="confirm-row"><span class="confirm-label">Address</span><strong>123 Rizal St., Brgy. Carmen, CDO 9000</strong></div>
-          <div class="confirm-row"><span class="confirm-label">Notes</span><strong>Leave at gate</strong></div>
+          <div class="confirm-row"><span class="confirm-label">Address</span><strong>123 Rizal St., Brgy. Tetuan, Zamboanga City 7000</strong></div>
+          <div class="confirm-row"><span class="confirm-label">Courier</span><strong>Grab (₱80)</strong></div>
         </div>
 
         <div class="confirm-box">
@@ -65,7 +70,6 @@
           <a href="checkout-payment.html" class="secondary-btn">← Back</a>
           <a href="order-success.html" class="add-cart-btn" style="width:auto;">Place Order</a>
         </div>
-
       </div>
 
       <div class="summary-card">
@@ -83,14 +87,4 @@
 
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-logo">FarmDirect</div>
-    <p>Connecting farmers to your table, fresh every day.</p>
-    <div class="footer-links">
-      <a href="index.html">Home</a><a href="products.html">Products</a><a href="cart.html">Cart</a><a href="login.html">Login</a>
-    </div>
-    <p class="footer-copy">© 2026 FarmDirect. All rights reserved.</p>
-  </div>
-</footer>
-
-</body>
-</html>
+    <div class="footer-col"><div class="footer-logo">Farm Direct

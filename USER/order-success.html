@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FarmDirect – Order Placed!</title>
+<title>Order Placed! – FarmDirect</title>
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   .success-page { min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: calc(var(--nav-h) + 2rem) 1.2rem 4rem; }
-  .success-card { background: var(--white); border-radius: var(--radius); border: 1.5px solid var(--border); padding: 3rem 2.5rem; max-width: 500px; width: 100%; text-align: center; box-shadow: var(--shadow-md); animation: fadeUp 0.6s ease both; }
-  .success-icon { font-size: 4rem; margin-bottom: 1rem; }
-  .success-card h1 { font-family: var(--font-display); font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem; }
+  .success-card { background: var(--white); border-radius: var(--radius); border: 2px solid var(--border); padding: 3rem 2.5rem; max-width: 500px; width: 100%; text-align: center; box-shadow: var(--shadow-md); animation: fadeUp 0.6s ease both; }
+  .success-icon { font-size: 5rem; margin-bottom: 1rem; }
+  .success-card h1 { font-family: var(--font-display); font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
   .success-card p { color: var(--text-mid); font-size: 0.97rem; line-height: 1.7; }
   .order-num { display: inline-block; background: var(--green-light); color: var(--green-dark); font-weight: 700; padding: 0.4rem 1rem; border-radius: 8px; margin: 1rem 0; font-size: 1rem; }
   .success-actions { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.5rem; }
@@ -21,13 +20,23 @@
 <body>
 
 <nav class="navbar">
+  <input type="checkbox" id="menu-check" class="menu-checkbox">
   <div class="nav-inner">
-    <a href="index.html" class="logo"><span class="logo-icon">🌱</span><span>FarmDirect</span></a>
-    <div class="nav-links"><a href="index.html" class="nav-link">Home</a><a href="products.html" class="nav-link">Products</a></div>
+    <a href="index.html" class="logo"><span class="logo-icon"></span><span>FarmDirect</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="products.html" class="nav-link">Products</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+    </div>
     <div class="nav-actions">
       <a href="cart.html" class="cart-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></a>
       <a href="login.html" class="login-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Login</a>
+      <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
     </div>
+  </div>
+  <label for="menu-check" class="menu-overlay"></label>
+  <div class="menu-panel">
+    <div class="menu-section"><h3>Navigation</h3><a href="index.html" class="menu-item">Home</a><a href="products.html" class="menu-item">Products</a><a href="dashboard.html" class="menu-item">Dashboard</a></div>
   </div>
 </nav>
 
@@ -35,22 +44,21 @@
   <div class="success-card">
     <div class="success-icon">✅</div>
     <h1>Order Placed!</h1>
-    <p>Salamat sa iyong order sa FarmDirect! Your fresh produce is being prepared for delivery.</p>
+    <p>Salamat sa iyong order! Your fresh produce from Zamboanga farms is being prepared for delivery.</p>
     <div class="order-num">Order #FD-482617</div>
-    <p>You'll receive a confirmation once your order has been picked up. Estimated delivery: <strong>1–2 business days</strong>.</p>
+    <p>Estimated delivery: <strong>2-4 hours </strong> via Grab to your address in Zamboanga City.</p>
     <div class="success-actions">
-      <a href="index.html" class="add-cart-btn">Continue Shopping 🌱</a>
-      <a href="products.html" class="outline-btn">Browse More Products</a>
+      <a href="order-tracking.html" class="add-cart-btn">Track Your Order 📦</a>
+      <a href="products.html" class="outline-btn">Continue Shopping</a>
+      <a href="dashboard.html" class="outline-btn">Go to Dashboard</a>
     </div>
   </div>
 </div>
 
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-logo">🌱 FarmDirect</div>
-    <p>Connecting farmers to your table, fresh every day.</p>
-    <div class="footer-links"><a href="index.html">Home</a><a href="products.html">Products</a><a href="cart.html">Cart</a><a href="login.html">Login</a></div>
-    <p class="footer-copy">© 2026 FarmDirect. All rights reserved.</p>
+    <div class="footer-col"><div class="footer-logo"> FarmDirect</div><p class="footer-desc">Fresh from Zamboanga farms</p></div>
+    <div class="footer-bottom"><p>© 2026 FarmDirect</p></div>
   </div>
 </footer>
 </body>
