@@ -1,5 +1,5 @@
 :root {
-  /* Updated darker green matching footer */
+  
   --green:       #1a2e1e;
   --green-dark:  #0f1a10;
   --green-light: #e3ebe4;
@@ -16,7 +16,6 @@
   --shadow-md:   0 6px 32px rgba(0,0,0,0.12);
   --radius:      14px;
   --radius-sm:   8px;
-  /* Changed to more natural, less AI-looking fonts */
   --font-display:'Georgia', 'Times New Roman', serif;
   --font-body:   'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   --nav-h:       70px;
