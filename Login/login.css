@@ -1,7 +1,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
     background: #f3fdf5;
     min-height: 100vh;
     display: flex;
@@ -10,7 +10,7 @@ body {
 
 /* TOPBAR */
 .topbar {
-    background: green;
+    background: #1a2e1e;
     height: 60px;
     display: flex;
     align-items: center;
@@ -20,7 +20,7 @@ body {
     box-shadow: 0 2px 12px rgba(15,61,30,.4);
 }
 .logo { display: flex; align-items: center; gap: 10px; font-size: 22px; }
-.logo-text { font-family: serif; font-size: 22px; color: #fff; }
+.logo-text { font-family: Georgia, 'Times New Roman', serif; font-size: 22px; color: #fff; }
 .logo-text span { color: #86e59e; }
 
 /* LAYOUT */
@@ -71,7 +71,7 @@ body {
 .divider { display: flex; align-items: center; gap: 10px; margin: 18px 0; color: #9ca3af; font-size: 12px; }
 .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #e5e7eb; }
 
-footer { text-align: center; padding: 18px; font-size: 12px; color: #9ca3af; }
+footer { text-align: center; padding: 18px; font-size: 12px; color: #fff; background: #1a2e1e; font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; }
 
 @media (max-width: 520px) {
     .auth-card, .auth-card.wide { padding: 28px 18px; }
