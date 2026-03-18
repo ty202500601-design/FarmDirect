@@ -1,207 +1,224 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Farm Direct - Products</title>
-<link rel="stylesheet" href="Farmers.css">
-<script src="https://unpkg.com/lucide@latest"></script>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Farm Direct - Products</title>
+    <link rel="stylesheet" href="Farmers.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
 
-<body>
+  <body>
     <header class="topbar">
-        <div class="logo"><a href="#"></a>
-            <i data-lucide="leaf"></i>
-            <span class="logo-text">Farm
-                <span>Direct</span>
-            </span>
-        </div>
+      <div class="logo">
+        <a href="#"></a>
+        <i data-lucide="leaf"></i>
+        <span class="logo-text"
+          >Farm
+          <span>Direct</span>
+        </span>
+      </div>
 
-        
-        <div class="topbar-right">
-            <div class="dropdown">
-                <div class="icon-wrapper">
-                    <i data-lucide="bell"></i>
-                    <span class="notf"></span>
-                </div>
-                <div class="dropdown-menu">
-                    <p><strong>Notifications</strong></p>
-                    <p>- New orders</p>
-                    <p>- Order has been Delivered</p>
-                </div>
-            </div>
-            <div class="dropdown">
-                <div class="icon-wrapper">
-                    <i data-lucide="message-circle"></i>
-                    <span class="notf"></span>
-                </div>
-                <div class="dropdown-menu">
-                    <p><strong>Messages</strong></p>
-                    <p>- Maria: Is the corn available?</p>
-                    <p>- Pedro: Delivery tomorrow?</p>
-                </div>
-            </div>
-            <div class="dropdown">
-                <div class="profile">
-                    <div class="avatar">JD</div>
-                </div>
-                <div class="dropdown-menu">
-                    <p><a href="#"></a>Management</p>
-                    <p><a href="#"></a>Profile</p>
-                    <p><a href="#"></a>Settings</p>
-                    <p><a href="#"></a>Logout</p>
-                </div>
-            </div>
+      <div class="topbar-right">
+        <div class="dropdown">
+          <div class="icon-wrapper">
+            <i data-lucide="bell"></i>
+            <span class="notf"></span>
+          </div>
+          <div class="dropdown-menu">
+            <p><strong>Notifications</strong></p>
+            <p>- New orders</p>
+            <p>- Order has been Delivered</p>
+          </div>
         </div>
+        <div class="dropdown">
+          <div class="icon-wrapper">
+            <i data-lucide="message-circle"></i>
+            <span class="notf"></span>
+          </div>
+          <div class="dropdown-menu">
+            <p><strong>Messages</strong></p>
+            <p>- Maria: Is the corn available?</p>
+            <p>- Pedro: Delivery tomorrow?</p>
+          </div>
+        </div>
+        <div class="dropdown">
+          <div class="profile">
+            <div class="avatar">JD</div>
+          </div>
+          <div class="dropdown-menu">
+            <a href="Dashboard.html">Management</a>
+            <a href="Settings.html">Profile</a>
+            <a href="Settings.html">Settings</a>
+            <a href="#">Logout</a>
+          </div>
+        </div>
+      </div>
     </header>
 
     <nav class="navbar">
-        <a href="#">Home</a>
-        <a href="Dashboard.html">Dashboard</a>
-        <a href="Products.html">Products</a>
-        <a href="Orders.html">Orders</a>
-        <a href="#">Reviews</a>
-        <a href="#">Settings</a>
+      <a href="#">Home</a>
+      <a href="Dashboard.html">Dashboard</a>
+      <a href="Products.html">Products</a>
+      <a href="Orders.html">Orders</a>
+      <a href="Reviews.html">Reviews</a>
+      <a href="Settings.html">Settings</a>
     </nav>
 
     <main class="farmers-main">
-        <div class="dash">
-            <div class="dash-title">Farmer's Products</div>
-            <p class="dash-sub">Welcome back, Seller! Here are your products</p>
+      <div class="dash">
+        <div class="dash-title">Farmer's Products</div>
+        <p class="dash-sub">Welcome back, Seller! Here are your products</p>
+        <a href="NewOrders.html" class="ph-btn">Add product</a>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card s1">
+          <div class="stat-icon tot">📦</div>
+          <div class="stat-label">Total Listed</div>
+          <div class="stat-val">5</div>
+          <div class="stat-pos">▲ +2 this month</div>
         </div>
 
-        <div class="stats-grid">
-            <div class="stat-card s1">
-                <div class="stat-icon tot">📦</div>
-                <div class="stat-label">Total Listed</div>
-                <div class="stat-val">5</div>
-                <div class="stat-pos">▲ +2 this month</div>
-            </div>
-
-            <div class="stat-card s2">
-                <div class="stat-icon sto">✅</div>
-                <div class="stat-label">In Stock</div>
-                <div class="stat-val">5</div>
-                <div class="stat-pos">Selling well</div>
-            </div>
-
-            <div class="stat-card s3">
-                <div class="stat-icon low">⚠️</div>
-                <div class="stat-label">Low / Reorder</div>
-                <div class="stat-val">2</div>
-                <div class="stat-neg">Needs attention</div>
-            </div>
+        <div class="stat-card s2">
+          <div class="stat-icon sto">✅</div>
+          <div class="stat-label">In Stock</div>
+          <div class="stat-val">5</div>
+          <div class="stat-pos">Selling well</div>
         </div>
 
-        <div class="card">
-            <div class="card-head">
-                <span class="card-title">All Products (5)</span>
-                <span class="badge b-g">All Active</span>
-            </div>
+        <div class="stat-card s3">
+          <div class="stat-icon low">⚠️</div>
+          <div class="stat-label">Low / Reorder</div>
+          <div class="stat-val">2</div>
+          <div class="stat-neg">Needs attention</div>
+        </div>
+      </div>
 
-            <div class="prod-grid">
-                <div class="prod-card">
-                    <img src="IMG/Tomatoes.jpg" alt="Red Tomatoes" class="prod-img">
-                    <div class="prod-body">
-                        <div class="prod-name">Fresh Tomatoes</div>
-                        <div class="prod-cat">Vegetables</div>
-                        <div class="prod-price">₱35 
-                            <span class="prod-unit">per kg</span>
-                        </div>
-                        <div class="prod-stock">📦 Stock: 4 units</div>
-                        <div style="margin-top:6px">
-                            <span class="badge b-r">Low Stock</span>
-                        </div>
-                        <div style="display:flex;gap:6px;margin-top:10px">
-                            <a href="products.html" class="edit">✏️ Edit</a>
-                            <a href="products.html" class="stock">📥 Stock</a>
-                        </div>
-                    </div>
-                </div>
-                        
-                <div class="prod-card">
-                    <img src="IMG/Carrots.jpg" alt="Fresh harvest carrots" class="prod-img">
-                    <div class="prod-body">
-                        <div class="prod-name">Organic Carrots</div>
-                        <div class="prod-cat">Root Crops</div>
-                        <div class="prod-price">₱30 
-                            <span class="prod-unit">per bundle</span>
-                        </div>
-                        <div class="prod-stock">📦 Stock: 12 units</div>
-                        <div style="margin-top:6px">
-                            <span class="badge b-y">Running Low</span>
-                        </div>
-                        <div style="display:flex;gap:6px;margin-top:10px">
-                            <a href="products.html" class="edit">✏️ Edit</a>
-                            <a href="products.html" class="stock">📥 Stock</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="prod-card">
-                    <img src="IMG/Lettuce.jpg" alt="Clean and freash lettuce" class="prod-img">
-                    <div class="prod-body">
-                        <div class="prod-name">Fresh Lettuce</div>
-                        <div class="prod-cat">Leafy Greens</div>
-                        <div class="prod-price">₱25 
-                            <span class="prod-unit">per bundle</span>
-                        </div>
-                        <div class="prod-stock">📦 Stock: 30 units</div>
-                        <div style="margin-top:6px">
-                            <span class="badge b-g">In Stock</span>
-                        </div>
-                        <div style="display:flex;gap:6px;margin-top:10px">
-                            <a href="products.html" class="edit">✏️ Edit</a>
-                            <a href="products.html" class="stock">📥 Stock</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="prod-card">
-                    <img src="IMG/Corn.jpg" alt="Yellow Sweet Corn" class="prod-img">
-                    <div class="prod-body">
-                        <div class="prod-name">Sweet Corn</div>
-                        <div class="prod-cat">Grains</div>
-                        <div class="prod-price">₱20 
-                            <span class="prod-unit">per piece</span>
-                        </div>
-                        <div class="prod-stock">📦 Stock: 55 units</div>
-                        <div style="margin-top:6px">
-                            <span class="badge b-g">In Stock</span>
-                        </div>
-                        <div style="display:flex;gap:6px;margin-top:10px">
-                            <a href="products.html" class="edit">✏️ Edit</a>
-                            <a href="products.html" class="stock">📥 Stock</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="prod-card">
-                    <img src="IMG/Strawberries.jpg" alt="Clean Strawberries" class="prod-img">
-                    <div class="prod-body">
-                        <div class="prod-name">Strawberries</div>
-                        <div class="prod-cat">Fruits</div>
-                        <div class="prod-price">₱90 
-                            <span class="prod-unit">per box</span>
-                        </div>
-                        <div class="prod-stock">📦 Stock: 6 units</div>
-                        <div style="margin-top:6px">
-                            <span class="badge b-r">Low Stock</span>
-                        </div>
-                        <div style="display:flex;gap:6px;margin-top:10px">
-                            <a href="products.html" class="edit">✏️ Edit</a>
-                            <a href="products.html" class="stock">📥 Stock</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">All Products (5)</span>
+          <span class="badge b-g">All Active</span>
         </div>
 
+        <div class="prod-grid">
+          <div class="prod-card">
+            <img src="IMG/Tomatoes.jpg" alt="Red Tomatoes" class="prod-img" />
+            <div class="prod-body">
+              <div class="prod-name">Fresh Tomatoes</div>
+              <div class="prod-cat">Vegetables</div>
+              <div class="prod-price">
+                ₱35
+                <span class="prod-unit">per kg</span>
+              </div>
+              <div class="prod-stock">📦 Stock: 4 units</div>
+              <div style="margin-top: 6px">
+                <span class="badge b-r">Low Stock</span>
+              </div>
+              <div style="display: flex; gap: 6px; margin-top: 10px">
+                <a href="products.html" class="edit">✏️ Edit</a>
+                <a href="products.html" class="stock">📥 Stock</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="prod-card">
+            <img
+              src="IMG/Carrots.jpg"
+              alt="Fresh harvest carrots"
+              class="prod-img"
+            />
+            <div class="prod-body">
+              <div class="prod-name">Organic Carrots</div>
+              <div class="prod-cat">Root Crops</div>
+              <div class="prod-price">
+                ₱30
+                <span class="prod-unit">per bundle</span>
+              </div>
+              <div class="prod-stock">📦 Stock: 12 units</div>
+              <div style="margin-top: 6px">
+                <span class="badge b-y">Running Low</span>
+              </div>
+              <div style="display: flex; gap: 6px; margin-top: 10px">
+                <a href="products.html" class="edit">✏️ Edit</a>
+                <a href="products.html" class="stock">📥 Stock</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="prod-card">
+            <img
+              src="IMG/Lettuce.jpg"
+              alt="Clean and freash lettuce"
+              class="prod-img"
+            />
+            <div class="prod-body">
+              <div class="prod-name">Fresh Lettuce</div>
+              <div class="prod-cat">Leafy Greens</div>
+              <div class="prod-price">
+                ₱25
+                <span class="prod-unit">per bundle</span>
+              </div>
+              <div class="prod-stock">📦 Stock: 30 units</div>
+              <div style="margin-top: 6px">
+                <span class="badge b-g">In Stock</span>
+              </div>
+              <div style="display: flex; gap: 6px; margin-top: 10px">
+                <a href="products.html" class="edit">✏️ Edit</a>
+                <a href="products.html" class="stock">📥 Stock</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="prod-card">
+            <img src="IMG/Corn.jpg" alt="Yellow Sweet Corn" class="prod-img" />
+            <div class="prod-body">
+              <div class="prod-name">Sweet Corn</div>
+              <div class="prod-cat">Grains</div>
+              <div class="prod-price">
+                ₱20
+                <span class="prod-unit">per piece</span>
+              </div>
+              <div class="prod-stock">📦 Stock: 55 units</div>
+              <div style="margin-top: 6px">
+                <span class="badge b-g">In Stock</span>
+              </div>
+              <div style="display: flex; gap: 6px; margin-top: 10px">
+                <a href="products.html" class="edit">✏️ Edit</a>
+                <a href="products.html" class="stock">📥 Stock</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="prod-card">
+            <img
+              src="IMG/Strawberries.jpg"
+              alt="Clean Strawberries"
+              class="prod-img"
+            />
+            <div class="prod-body">
+              <div class="prod-name">Strawberries</div>
+              <div class="prod-cat">Fruits</div>
+              <div class="prod-price">
+                ₱90
+                <span class="prod-unit">per box</span>
+              </div>
+              <div class="prod-stock">📦 Stock: 6 units</div>
+              <div style="margin-top: 6px">
+                <span class="badge b-r">Low Stock</span>
+              </div>
+              <div style="display: flex; gap: 6px; margin-top: 10px">
+                <a href="products.html" class="edit">✏️ Edit</a>
+                <a href="products.html" class="stock">📥 Stock</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
-<script>
-lucide.createIcons();
-</script>
-
-</body>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
 </html>

@@ -1,0 +1,82 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.container{
+    padding: 20px;
+    border: 2px solid red;
+    margin: 10px;
+    text-align: center;
+}
+
+.rounded-rectangle{
+    border-color: blue;
+    border-radius: 25px;
+}
+
+.circle{
+    border-color: green;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.box1{
+    width:300px;
+    height: 100px;
+    border: 1px solid purple;
+}
+
+.box2 {
+    width: 300px;
+    height: 100px;
+    border: 1px solid orange;
+    padding: 40px;
+}
+
+.block{
+    display: block;
+    width: 100px;
+}
+.inline{
+    display: inline;
+    width:50px;
+}
+.inline-block{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+.relative{
+    background-color: aqua;
+    border: none;
+    position: relative;
+    top: 10px;
+    left: 10px;
+    bottom: 10px;
+}
+.absolute{
+    background-color: coral;
+    border: none;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    z-index: -1; /*-1 to move down, 2 to move up in layers*/
+}
+.fixed{
+    background-color: lightgreen;
+    border: none;
+    position: fixed;
+    top: 0px;
+    border-radius: 20px;
+}
+.sticky{
+    background-color: lightseagreen;
+    border: none;
+    position: sticky;
+    bottom: 0px;
+}
+

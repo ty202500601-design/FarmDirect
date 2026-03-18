@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Webdev.css">
+</head>
+<body>
+    <main>
+        <div class = "container">
+            <p>BOX</p>
+        </div>
+        <div class = "container rounded-rectangle">
+            <p>RECTANGLE</p>
+        </div>
+        <div class = "container circle">
+            <p><br><br>CIRCLE</p>
+        </div>
+        <div class = "container box1">
+            <p>BOX1</p>
+        </div>
+        <div class = "container box2">
+            <p>BOX2</p>
+        </div>
+        <div class = "block">Block</div>
+        <div class = "block">Block</div>
+        <div class = "inline">Inline</ediv>
+        <div class = "inline">Inline</div>
+        <div class = "inline-block">Inline Block</div>
+        <div class = "inline-block">Inline Block</div>
+        <div class="nav">NAVIGATION BAR</div>
+        <ul>
+        <li href = "#home">HOMEPAGE</li>
+        <li href = "#set">SETTINGS</li>
+        <li href = "#more">MORE</li>
+        </ul>
+    </main>
+        <div id = "home">
+            <p>HOMEPAGE</p>
+            <p>This is the Homepage of the website</p>
+        </div>
+        <div id = "set">
+            <p>SETTINGS</p>
+            <p>This will be the settings of the website</p>
+        </div>
+        <div id = "more">
+            <p>MORE</p>
+            <p>I guess more information about the website</p>
+        </div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farm Direct - Dashboard</title>
+<link rel="stylesheet" href="farm.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+<nav class="navigation">
+    <div class="bar">
+        <div class="logo">Farm Direct</div>
+
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#"><i data-lucide="bell"></i></a></li>
+
+            <li class="dropdown">
+                <a href="#"><i data-lucide="menu"></i></a>
+                <ul class="menu">
+                    <li><a href="farm.html">Dashboard</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="orders.html">Orders</a></li>
+                    <li><a href="Profile.html">Profile</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<h1 class="farmers">Farmer's Hub Dashboard</h1>
+
+<div class="info">
+    <div class="blocks">
+        <div>
+            <p class="text">Total Revenue</p>
+            <h2>₱ 7,560</h2>
+        </div>
+    </div>
+
+    <div class="blocks">
+        <div>
+            <p class="text">Active Products</p>
+            <h2>12</h2>
+        </div>
+    </div>
+
+    <div class="blocks">
+        <div>
+            <p class="text">Total Orders</p>
+            <h2>480</h2>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-sections">
+
+    <div class="card">
+        <h2>Recent Orders</h2>
+        <h3 id = "one"><a href="orders.html"></a>View All</h3>
+
+        <div class="order-item">
+            <img src="https://via.placeholder.com/60" alt="Product">
+            <div class="order-info">
+                <p class="product-name">Fresh Tomatoes</p>
+                <p class="order-date">March 1, 2026</p>
+            </div>
+            <span class="status delivered">Delivered</span>
+        </div>
+
+        <div class="order-item">
+            <img src="https://via.placeholder.com/60" alt="Product">
+            <div class="order-info">
+                <p class="product-name">Organic Carrots</p>
+                <p class="order-date">Feb 28, 2026</p>
+            </div>
+            <span class="status pending">Pending</span>
+        </div>
+
+        <div class="order-item">
+            <img src="https://via.placeholder.com/60" alt="Product">
+            <div class="order-info">
+                <p class="product-name">Strawberries</p>
+                <p class="order-date">March 4, 2026</p>
+            </div>
+            <span class="status processing">Processing</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Top Selling Products</h2>
+
+        <div class="product-item">
+            <img src="https://via.placeholder.com/60" alt="Product">
+            <div class="product-info">
+                <p class="product-name">Fresh Lettuce</p>
+                <p class="sales">120 Sold</p>
+            </div>
+        </div>
+
+        <div class="product-item">
+            <img src="https://via.placeholder.com/60" alt="Product">
+            <div class="product-info">
+                <p class="product-name">Sweet Corn</p>
+                <p class="sales">95 Sold</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+lucide.createIcons();
+</script>
+
+</body>
+</html>

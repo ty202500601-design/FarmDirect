@@ -1,0 +1,43 @@
+html{
+    background-color: bisque;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+section#bscs1a{
+    background-color: aquamarine;
+    height: 100vh;
+    text-align: center;
+}
+section#bscs1b{
+    background-color: lightblue;
+    height: 100vh;
+}
+
+ul li{
+    padding: 20px;
+    display: inline;
+}
+ul li a{
+    font-size: 30px;
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+    font-weight: lighter;
+}
+ul li:hover{
+    background-color: red;
+    font-weight: bolder;
+}
+#bscs1b h2{
+    text-align: center;
+    padding-top: 10px;
+}
+.f-green{
+    color:rgb(71, 189, 71) !important;
+}
+section#bscs1a p:nth-child(2){
+    background-color: rgb(239, 108, 196);
+} 

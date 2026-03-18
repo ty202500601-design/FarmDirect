@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Farm Direct - Add Product</title>
+    <link rel="stylesheet" href="New.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="logo">
+        <a href="#"></a>
+        <i data-lucide="leaf"></i>
+        <span class="logo-text"
+          >Farm
+          <span>Direct</span>
+        </span>
+      </div>
+
+      <div class="topbar-right">
+        <div class="dropdown">
+          <div class="icon-wrapper">
+            <i data-lucide="bell"></i>
+            <span class="notf"></span>
+          </div>
+          <div class="dropdown-menu">
+            <p><strong>Notifications</strong></p>
+            <p>- New orders</p>
+            <p>- Order has been Delivered</p>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <div class="icon-wrapper">
+            <i data-lucide="message-circle"></i>
+            <span class="notf"></span>
+          </div>
+          <div class="dropdown-menu">
+            <p><strong>Messages</strong></p>
+            <p>- Maria: Is the corn available?</p>
+            <p>- Pedro: Delivery tomorrow?</p>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <div class="profile">
+            <div class="avatar">JD</div>
+          </div>
+          <div class="dropdown-menu">
+            <a href="Dashboard.html">Management</a>
+            <a href="Settings.html">Profile</a>
+            <a href="Settings.html">Settings</a>
+            <a href="#">Logout</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="navbar">
+      <a href="#">Home</a>
+      <a href="Dashboard.html">Dashboard</a>
+      <a href="Products.html">Products</a>
+      <a href="Orders.html">Orders</a>
+      <a href="Reviews.html">Reviews</a>
+      <a href="Settings.html">Settings</a>
+    </nav>
+
+    <main class="farmers-main">
+      <div class="dash">
+        <div class="dash-title">Add Products</div>
+        <p class="dash-sub">
+          Fill in the details to list a new product in your store.
+        </p>
+      </div>
+
+      <div class="submit-bar">
+        <div class="submit-bar-left">📋 Product will appear in <b>My Products</b> after saving.</div>
+        <div class="btn-group">
+          <a href="Products.html" class="btn-cancel">✕ Cancel</a>
+          <a href="Products.html" class="btn-save">✅ Save Product</a>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-card-head"><span class="sc-icon">📸</span><span class="sc-title">Product Photos</span></div>
+        <div class="section-card-body">
+
+          <div class="form-group" style="margin-bottom:10px">
+            <label>Main Photo *</label>
+            <span class="hint">First photo customers will see. Use a clear, well-lit image.</span>
+          </div>
+
+          <div class="file-upload-box">
+            <input type="file" accept="image/*" name="main_photo"/>
+            <div class="upload-icon">📷</div>
+            <div class="upload-title">Upload Main Photo</div>
+            <div class="upload-sub">Drag &amp; drop or <span>click to browse</span></div>
+            <div class="upload-sub" style="margin-top:4px">JPG, PNG, WEBP · Max 5MB</div>
+          </div>
+
+          <div style="margin-top:16px">
+            <label style="font-size:12.5px;font-weight:700;color:#374151;display:block;margin-bottom:8px">
+              Additional Photos
+              <span style="font-weight:400;color:#9ca3af">(optional — up to 4 more)</span>
+            </label>
+            <div class="photo-slots">
+              <div class="photo-slot">
+                <input type="file" accept="image/*" name="photo_2"/>
+                <span class="photo-slot-icon">＋</span>
+                <span>Photo 2</span>
+              </div>
+              <div class="photo-slot">
+                <input type="file" accept="image/*" name="photo_3"/>
+                <span class="photo-slot-icon">＋</span>
+                <span>Photo 3</span>
+              </div>
+              <div class="photo-slot">
+                <input type="file" accept="image/*" name="photo_4"/>
+                <span class="photo-slot-icon">＋</span>
+                <span>Photo 4</span>
+              </div>
+              <div class="photo-slot">
+                <input type="file" accept="image/*" name="photo_5"/>
+                <span class="photo-slot-icon">＋</span>
+                <span>Photo 5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tip-box">
+            💡 <b>Tip:</b> Good product photos increase sales by up to 3x. Use natural light and a clean background.
+          </div>
+
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-card-head"><span class="sc-icon">📝</span><span class="sc-title">Basic Information</span></div>
+        <div class="section-card-body">
+          <div class="form-group">
+            <label>Product Name *</label>
+            <input type="text" name="product_name" placeholder="e.g. Fresh Tomatoes, Organic Carrots…"/>
+          </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Category *</label>
+              <select name="category">
+                <option value="" disabled selected>Select a category</option>
+                <option>Vegetables</option>
+                <option>Fruits</option>
+                <option>Dairy</option>
+                <option>Grains</option>
+                <option>Meat</option>
+                <option>Others</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Unit of Measurement *</label>
+              <select name="unit">
+                <option value="" disabled selected>Select unit</option>
+                <option>per kg</option>
+                <option>per bundle</option>
+                <option>per piece</option>
+                <option>per box</option>
+                <option>per 100g</option>
+                <option>per pack</option>
+                <option>per tray</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label>Description</label>
+            <textarea name="description" placeholder="Describe your product — freshness, how it's grown, best uses, tips for buyers…"></textarea>
+            <span class="hint">A good description builds trust and increases sales.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-card-head"><span class="sc-icon">💰</span><span class="sc-title">Pricing &amp; Stock</span></div>
+        <div class="section-card-body">
+          <div class="form-row-3">
+            <div class="form-group">
+              <label>Price (₱) *</label>
+              <input type="number" name="price" placeholder="0.00" min="0" step="0.01"/>
+              <span class="hint">Price per unit selected above.</span>
+            </div>
+            <div class="form-group">
+              <label>Stock Quantity *</label>
+              <input type="number" name="stock" placeholder="0" min="0"/>
+              <span class="hint">How many units available now.</span>
+            </div>
+            <div class="form-group">
+              <label>Low Stock Alert at</label>
+              <input type="number" name="low_stock_alert" placeholder="e.g. 5" min="0"/>
+              <span class="hint">Warn me when stock drops below this.</span>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label>Stock Status *</label>
+            <div class="status-opts">
+              <label class="status-opt opt-g"><input type="radio" name="status" value="in_stock" checked/> ✅ In Stock</label>
+              <label class="status-opt opt-y"><input type="radio" name="status" value="running_low"/> ⚠️ Running Low</label>
+              <label class="status-opt opt-r"><input type="radio" name="status" value="low_stock"/> 🔴 Low Stock</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-card-head"><span class="sc-icon">🚚</span><span class="sc-title">Shipping Details</span></div>
+        <div class="section-card-body">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Estimated Prep Time</label>
+              <select name="prep_time">
+                <option selected>Same day</option>
+                <option>1 day</option>
+                <option>2 days</option>
+                <option>3 days</option>
+              </select>
+              <span class="hint">How long before item is ready to ship.</span>
+            </div>
+            <div class="form-group">
+              <label>Product Weight (approx.)</label>
+              <input type="text" name="weight" placeholder="e.g. 0.5 kg, 200g"/>
+              <span class="hint">Used to estimate shipping fees.</span>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label>Special Handling Notes</label>
+            <input type="text" name="handling" placeholder="e.g. Keep refrigerated, Handle with care, Fragile…"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="submit-bar">
+        <div class="submit-bar-left">Ready to publish? Click <b>Save Product</b> to add it to your store.</div>
+        <div class="btn-group">
+          <a href="Products.html" class="btn-cancel">✕ Cancel</a>
+          <a href="Products.html" class="btn-save">✅ Save Product</a>
+        </div>
+      </div>
+
+    </div>
+    </main>
+
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
