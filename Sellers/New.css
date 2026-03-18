@@ -1,28 +1,77 @@
+:root {
+  --green: #1a2e1e;
+  --green-dark: #0f1a10;
+  --green-light: #e3ebe4;
+  --green-mid: #2d5030;
+  --green-accent: #3d6840;
+  --cream: #faf8f3;
+  --white: #ffffff;
+  --text: #1a1a1a;
+  --text-mid: #444;
+  --text-light: #888;
+  --border: #e0dbd0;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --font-display: 'Georgia', 'Times New Roman', serif;
+  --font-body: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+body {
+  font-family: var(--font-body);
+}
+
 .topbar {
-  background-color: green;
-  color: #fff;
-  padding: 0 28px;
-  height: 60px;
+  background: linear-gradient(135deg, #1a2e1e 0%, #2d5030 100%);
+  color: white;
+  padding: 0 2rem;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 200;
-  box-shadow: 0 2px 12px rgba(15, 61, 30, 0.4);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.topbar i {
+  color: white;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.5rem;
   cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.logo:hover {
+  opacity: 0.85;
+}
+
+.logo-icon {
+  font-size: 28px;
+}
+
+.logo-text {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+}
+
+.logo-text span {
+  color: var(--green-accent);
 }
 
 .logo-text {
@@ -64,7 +113,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #a7f185;
+  background: #a7f185; /* you can change this */
   color: rgb(0, 0, 0);
   font-weight: bold;
   font-size: 14px;
@@ -106,28 +155,32 @@
 }
 
 .navbar {
-  background: #145a2b;
-  padding: 10px 28px;
+  background: #1a2e1e;
+  padding: 0.8rem 2rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
 }
 
 .navbar a {
-  text-decoration: none;
   color: white;
-  font-size: 17px;
-  font-weight: bolder;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
 }
 
 .navbar a:hover {
-  text-decoration: underline;
-  color: #a7f185;
+  background: var(--green-light);
+  color: var(--green);
 }
 
 .farmers-main {
-  flex: 1;
-  padding: 26px 28px;
-  min-width: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
 .dash {
@@ -435,4 +488,23 @@
 .btn-group {
   display: flex;
   gap: 10px;
+}
+
+.footer {
+  background: var(--green);
+  color: #8aab8e;
+  padding: 3rem 2rem 1.5rem;
+  margin-top: 3rem;
+}
+
+.footer-logo {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+}
+
+.footer-bottom {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 13px;
 }
