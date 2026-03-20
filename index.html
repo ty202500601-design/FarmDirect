@@ -5,6 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FarmDirect – Fresh from Zamboanga Farms to Your Table</title>
 <link rel="stylesheet" href="index.css">
+<style>
+/* Notif bell — matches style.css */
+.notif-wrap { position: relative; display: flex; align-items: center; }
+.notif-btn {
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; color: #fff !important; cursor: pointer;
+  background: transparent !important; border: none !important;
+  -webkit-appearance: none; appearance: none;
+  transition: background 0.2s; position: relative; flex-shrink: 0; outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.notif-btn svg, .notif-btn svg path, .notif-btn svg circle { stroke: #fff !important; }
+.notif-btn:hover, .notif-btn:focus { background: rgba(255,255,255,0.2) !important; }
+.notif-badge {
+  position: absolute; top: 7px; right: 7px;
+  width: 9px; height: 9px;
+  background: #ef5350; border-radius: 50%; border: 2px solid #1a2e1e;
+  pointer-events: none;
+}
+.notif-dropdown {
+  position: absolute; top: calc(100% + 14px); right: -6px;
+  width: 320px; background: #fff; border-radius: 14px;
+  border: 2px solid #e0dbd0; box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  z-index: 1200; display: flex; flex-direction: column; overflow: hidden;
+  opacity: 0; pointer-events: none;
+  transform: translateY(-6px) scale(0.98); transform-origin: top right;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.notif-dropdown::before {
+  content: ''; position: absolute; top: -7px; right: 14px;
+  width: 13px; height: 13px; background: #1a2e1e;
+  transform: rotate(45deg); border-radius: 2px; z-index: -1;
+}
+.notif-wrap:focus-within .notif-dropdown { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
+.notif-header { background: #1a2e1e; color: white; padding: 0.85rem 1.2rem; font-weight: 700; font-size: 0.95rem; position: relative; z-index: 1; }
+.notif-list { display: flex; flex-direction: column; max-height: 340px; overflow-y: auto; }
+.notif-item { display: flex; gap: 0.9rem; padding: 0.9rem 1.1rem; border-bottom: 1px solid #e0dbd0; transition: background 0.18s; align-items: flex-start; }
+.notif-item:hover { background: #faf8f3; }
+.notif-item:last-child { border-bottom: none; }
+.notif-content { flex: 1; display: flex; flex-direction: column; gap: 0.18rem; }
+.notif-content strong { font-size: 0.87rem; font-weight: 600; color: #1a1a1a; }
+.notif-content p { font-size: 0.81rem; color: #444; line-height: 1.4; }
+.notif-time { font-size: 0.73rem; color: #888; }
+.notif-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #888; }
+@media(max-width:500px){ .notif-dropdown { right: -50px; width: calc(100vw - 1.5rem); } }
+</style>
 </head>
 <body>
 
@@ -12,54 +59,87 @@
   <input type="checkbox" id="menu-check" class="menu-checkbox">
   <div class="nav-inner">
     <a href="index.html" class="logo">
-      <span class="logo-icon">🌾</span>
+      <span class="logo-leaf"></span>
       <span>FarmDirect</span>
     </a>
     <div class="nav-links">
       <a href="index.html" class="nav-link active">Home</a>
-      <a href="USER/home-page.html" class="nav-link">Products</a>
+      <a href="USER/products.html" class="nav-link">Products</a>
       <a href="#how-it-works" class="nav-link">How It Works</a>
       <a href="#about" class="nav-link">About</a>
     </div>
     <div class="nav-actions">
       <a href="USER/cart.html" class="cart-btn" title="Cart">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
           <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
         </svg>
       </a>
-      <a href="../Login/login.html">Sign Up</a>
+      <div class="notif-wrap">
+        <button class="notif-btn" tabindex="0" aria-label="Notifications" style="color:#fff;background:transparent;border:none;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <span class="notif-badge"></span>
+        </button>
+        <div class="notif-dropdown">
+          <div class="notif-header"><h4>Notifications</h4></div>
+          <div class="notif-list">
+            <div class="notif-item">
+              <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+              <div class="notif-content"><strong>Green Valley Farm</strong><p>Your carrots order is ready for pickup today!</p><span class="notif-time">10 min ago</span></div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+              <div class="notif-content"><strong>Sunrise Farm</strong><p>Fresh tomatoes harvested this morning!</p><span class="notif-time">1 hour ago</span></div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div class="notif-content"><strong>Seasonal Alert</strong><p>Mango season is here! Fresh mangoes from Vitali farms now available.</p><span class="notif-time">5 hours ago</span></div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div class="notif-content"><strong>Coming Soon</strong><p>Lanzones season starts in April from Culianan farms.</p><span class="notif-time">1 day ago</span></div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /notif-wrap -->
+      <a href="Login/login.html" class="login-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+          <polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
+        </svg>
+        Login
+      </a>
       <label for="menu-check" class="menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </label>
     </div>
   </div>
-  
   <label for="menu-check" class="menu-overlay"></label>
-  
   <div class="menu-panel">
     <div class="menu-section">
       <h3>Navigation</h3>
       <a href="index.html" class="menu-item">Home</a>
-      <a href="USER/home-page.html" class="menu-item">Browse Products</a>
+      <a href="USER/products.html" class="menu-item">Browse Products</a>
+      <a href="USER/Dashboard.html" class="menu-item">My Dashboard</a>
       <a href="USER/cart.html" class="menu-item">Shopping Cart</a>
     </div>
     <div class="menu-section">
       <h3>Categories</h3>
-      <a href="USER/home-page.html#meats" class="menu-item">Meats</a>
-      <a href="USER/home-page.html#vegetables" class="menu-item">Vegetables</a>
-      <a href="USER/home-page.html#fruits" class="menu-item">Fruits</a>
-      <a href="USER/home-page.html#dairy" class="menu-item">Dairy</a>
-      <a href="USER/home-page.html#eggs" class="menu-item">Eggs</a>
-      <a href="USER/home-page.html#pantry" class="menu-item">Pantry</a>
+      <a href="USER/products.html#vegetables" class="menu-item">Vegetables</a>
+      <a href="USER/products.html#fruits" class="menu-item">Fruits</a>
+      <a href="USER/products.html#meats" class="menu-item">Meats</a>
+      <a href="USER/products.html#dairy" class="menu-item">Dairy</a>
+      <a href="USER/products.html#eggs" class="menu-item">Eggs</a>
+      <a href="USER/products.html#pantry" class="menu-item">Pantry</a>
     </div>
     <div class="menu-section">
       <h3>Account</h3>
-      <a href="../Login/login.html">Login / Register</a>
+      <a href="Login/login.html" class="menu-item">Login / Register</a>
     </div>
-    <a href="USER/home-page.html" class="menu-cta">Start Shopping</a>
+    <a href="USER/products.html" class="menu-cta">Start Shopping</a>
   </div>
 </nav>
 
@@ -74,7 +154,7 @@
       </h1>
       <p class="hero-subtitle">Connect directly with verified local farmers in Zamboanga City. Get fresh, organic produce delivered within 24 hours. Supporting local agriculture, one harvest at a time.</p>
       <div class="hero-buttons">
-        <a href="USER/home-page.html" class="btn-primary">
+        <a href="USER/products.html" class="btn-primary">
           <span>Browse Products</span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <polyline points="9 18 15 12 9 6"/>
@@ -127,11 +207,17 @@
       </div>
       <div class="visual-card card-3">
         <div class="farmer-profile">
-          <img src="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=100" alt="Farmer">
+          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=400" alt="Verified Local Farmers" style="width:100%;height:110px;object-fit:cover;border-radius:10px;margin-bottom:.6rem;">
           <div class="farmer-info">
-            <div class="farmer-name">Juan dela Cruz</div>
-            <div class="farmer-location">📍 Vitali, Zamboanga</div>
-            <div class="farmer-rating">⭐ 4.9 (87 reviews)</div>
+            <div class="farmer-name" style="font-size:1rem;">Verified Local Farmers</div>
+            <div class="farmer-location" style="display:flex;align-items:center;gap:.3rem;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Zamboanga Peninsula
+            </div>
+            <div class="farmer-rating" style="display:flex;align-items:center;gap:.3rem;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#f5a623" stroke="#f5a623" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              120+ trusted farmers
+            </div>
           </div>
         </div>
       </div>
@@ -143,36 +229,57 @@
 <section class="categories-section">
   <div class="container">
     <h2 class="section-title-center">Shop by Category</h2>
-    <div class="category-grid">
-      <a href="USER/home-page.html#vegetables" class="category-card">
-        <div class="category-icon">🥬</div>
-        <h3>Vegetables</h3>
-        <p>Fresh greens & produce</p>
+    <p class="section-subtitle">Browse 34 products across 6 categories from verified Zamboanga farmers</p>
+
+    <div class="home-pill-bar">
+      <a href="USER/products.html#vegetables" class="home-pill pill-veg">
+        <span class="home-pill-icon" style="background:#e8f5e9;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2d5030" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </span>
+        <span class="home-pill-label">Vegetables</span>
+        <span class="home-pill-count">6 items</span>
       </a>
-      <a href="USER/home-page.html#fruits" class="category-card">
-        <div class="category-icon">🥭</div>
-        <h3>Fruits</h3>
-        <p>Seasonal & tropical</p>
+      <a href="USER/products.html#fruits" class="home-pill pill-fruits">
+        <span class="home-pill-icon" style="background:#fff8e1;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f57f17" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 2v4M4.93 4.93l2.83 2.83"/></svg>
+        </span>
+        <span class="home-pill-label">Fruits</span>
+        <span class="home-pill-count">6 items</span>
       </a>
-      <a href="USER/home-page.html#meats" class="category-card">
-        <div class="category-icon">🥩</div>
-        <h3>Meats</h3>
-        <p>Grass-fed & organic</p>
+      <a href="USER/products.html#meats" class="home-pill pill-meats">
+        <span class="home-pill-icon" style="background:#fce4ec;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c62828" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </span>
+        <span class="home-pill-label">Meats</span>
+        <span class="home-pill-count">6 items</span>
       </a>
-      <a href="USER/home-page.html#dairy" class="category-card">
-        <div class="category-icon">🥛</div>
-        <h3>Dairy</h3>
-        <p>Fresh milk & cheese</p>
+      <a href="USER/products.html#dairy" class="home-pill pill-dairy">
+        <span class="home-pill-icon" style="background:#e3f2fd;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2.2"><path d="M8 2h8l1 6H7L8 2z"/><rect x="5" y="8" width="14" height="14" rx="2"/></svg>
+        </span>
+        <span class="home-pill-label">Dairy</span>
+        <span class="home-pill-count">5 items</span>
       </a>
-      <a href="USER/home-page.html#eggs" class="category-card">
-        <div class="category-icon">🥚</div>
-        <h3>Eggs</h3>
-        <p>Free-range & organic</p>
+      <a href="USER/products.html#eggs" class="home-pill pill-eggs">
+        <span class="home-pill-icon" style="background:#fffde7;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f9a825" stroke-width="2.2"><ellipse cx="12" cy="13" rx="7" ry="9"/></svg>
+        </span>
+        <span class="home-pill-label">Eggs</span>
+        <span class="home-pill-count">5 items</span>
       </a>
-      <a href="USER/home-page.html#pantry" class="category-card">
-        <div class="category-icon">🌾</div>
-        <h3>Pantry</h3>
-        <p>Rice, grains & more</p>
+      <a href="USER/products.html#pantry" class="home-pill pill-pantry">
+        <span class="home-pill-icon" style="background:#f3e5f5;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6a1b9a" stroke-width="2.2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg>
+        </span>
+        <span class="home-pill-label">Pantry</span>
+        <span class="home-pill-count">6 items</span>
+      </a>
+    </div>
+
+    <div class="categories-browse-all">
+      <a href="USER/products.html" class="categories-browse-link">
+        View all products
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
   </div>
@@ -214,7 +321,7 @@
         <h2 class="section-title">Featured This Week</h2>
         <p class="section-desc">Freshly harvested from our partner farms</p>
       </div>
-      <a href="USER/home-page.html" class="view-all-link">
+      <a href="USER/products.html" class="view-all-link">
         View All Products
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="9 18 15 12 9 6"/>
@@ -415,7 +522,7 @@
     <div class="cta-content">
       <h2>Ready to Get Fresh Farm Produce?</h2>
       <p>Join thousands of Zamboanga residents enjoying farm-fresh quality delivered to their doorstep</p>
-      <a href="USER/home-page.html" class="btn-cta">Start Shopping Now</a>
+      <a href="USER/products.html" class="btn-cta">Start Shopping Now</a>
     </div>
   </div>
 </section>
@@ -441,17 +548,17 @@
         <div class="footer-col">
           <h4>Quick Links</h4>
           <a href="index.html">Home</a>
-          <a href="USER/home-page.html">Browse Products</a>
-          <a href="USER/home-page.html">Dashboard</a>
+          <a href="USER/products.html">Browse Products</a>
+          <a href="USER/products.html">Dashboard</a>
           <a href="USER/cart.html">Shopping Cart</a>
         </div>
         
         <div class="footer-col">
           <h4>Categories</h4>
-          <a href="USER/home-page.html#vegetables">Vegetables</a>
-          <a href="USER/home-page.html#fruits">Fruits</a>
-          <a href="USER/home-page.html#meats">Meats</a>
-          <a href="USER/home-page.html#dairy">Dairy</a>
+          <a href="USER/products.html#vegetables">Vegetables</a>
+          <a href="USER/products.html#fruits">Fruits</a>
+          <a href="USER/products.html#meats">Meats</a>
+          <a href="USER/products.html#dairy">Dairy</a>
         </div>
         
         <div class="footer-col">
@@ -470,31 +577,6 @@
   </div>
 </footer>
 
-<!-- CHAT WIDGET -->
-<input type="checkbox" id="chat-check" class="chat-checkbox">
-<label for="chat-check" class="chat-trigger">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-  </svg>
-</label>
-<div class="chat-window">
-  <div class="chat-header">
-    <h4>Chat with Farmer</h4>
-    <label for="chat-check" class="chat-close">×</label>
-  </div>
-  <div class="chat-body">
-    <div class="chat-message seller">
-      <p>Hello! How can I help you today?</p>
-    </div>
-    <div class="chat-message buyer">
-      <p>Hi! Do you have organic tomatoes available?</p>
-    </div>
-    <div class="chat-message seller">
-      <p>Yes! Fresh harvest this morning. How many kilos do you need?</p>
-    </div>
-  </div>
-  <div class="chat-input-wrap">
-    <input type="text" placeholder="Type your message...">
-    <button class="chat-send">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1=
+
+</body>
+</html>

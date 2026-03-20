@@ -8,16 +8,18 @@
 </head>
 <body>
 
-
-
 <nav class="navbar">
   <input type="checkbox" id="menu-check" class="menu-checkbox">
+  
   <div class="nav-inner">
-    <a href="index.html" class="logo"><span class="logo-icon"></span><span>FarmDirect</span></a>
+    <a href="../index.html" class="logo">
+      <span class="logo-icon"></span>
+      <span>FarmDirect</span>
+    </a>
     <div class="nav-links">
-      <a href="index.html" class="nav-link">Home</a>
+      <a href="../index.html" class="nav-link">Home</a>
       <a href="products.html" class="nav-link active">Products</a>
-      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="Dashboard.html" class="nav-link">Dashboard</a>
     </div>
     <div class="nav-actions">
       <a href="cart.html" class="cart-btn" title="Cart">
@@ -26,7 +28,91 @@
           <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
         </svg>
       </a>
-      <a href="login.html" class="login-btn">
+      
+      <div class="notif-wrap">
+        <button class="notif-btn" tabindex="0" aria-label="Notifications">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <span class="notif-badge"></span>
+        </button>
+        <div class="notif-dropdown">
+    <div class="notif-header">
+      <h4>Notifications</h4>
+    </div>
+    <div class="notif-list">
+      <div class="notif-item">
+        <div class="notif-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <div class="notif-content">
+          <strong>Green Valley Farm</strong>
+          <p>Your carrots order is ready for pickup today!</p>
+          <span class="notif-time">10 minutes ago</span>
+        </div>
+      </div>
+      
+      <div class="notif-item">
+        <div class="notif-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <div class="notif-content">
+          <strong>Sunrise Farm</strong>
+          <p>Fresh tomatoes harvested this morning! Limited stock available.</p>
+          <span class="notif-time">1 hour ago</span>
+        </div>
+      </div>
+      
+      <div class="notif-item">
+        <div class="notif-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <div class="notif-content">
+          <strong>Beeline Apiary</strong>
+          <p>Honey restocked! Get your organic honey while supplies last.</p>
+          <span class="notif-time">3 hours ago</span>
+        </div>
+      </div>
+      
+      <div class="notif-item">
+        <div class="notif-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+          </svg>
+        </div>
+        <div class="notif-content">
+          <strong>Seasonal Alert</strong>
+          <p>Mango season is here! Fresh mangoes from Vitali farms now available.</p>
+          <span class="notif-time">5 hours ago</span>
+        </div>
+      </div>
+      
+      <div class="notif-item">
+        <div class="notif-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+          </svg>
+        </div>
+        <div class="notif-content">
+          <strong>Coming Soon</strong>
+          <p>Lanzones season starts in April from Culianan farms. Pre-order now!</p>
+          <span class="notif-time">1 day ago</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+        </div><!-- /notif-wrap -->
+      </div><!-- /notif-wrap -->
+      
+      <a href="../Login/login.html" class="login-btn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
           <polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
@@ -39,14 +125,15 @@
     </div>
   </div>
   
+  
   <label for="menu-check" class="menu-overlay"></label>
   
   <div class="menu-panel">
     <div class="menu-section">
       <h3>Navigation</h3>
-      <a href="index.html" class="menu-item">Home</a>
+      <a href="../index.html" class="menu-item">Home</a>
       <a href="products.html" class="menu-item">Browse Products</a>
-      <a href="dashboard.html" class="menu-item">My Dashboard</a>
+      <a href="Dashboard.html" class="menu-item">My Dashboard</a>
       <a href="cart.html" class="menu-item">Shopping Cart</a>
     </div>
     <a href="cart.html" class="menu-cta">View Cart</a>
@@ -59,16 +146,44 @@
     
     <div class="product-detail">
       <div class="detail-image">
-        <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=800" alt="Fresh Carrots">
-        <span class="verified-badge">✓ Verified Farmer</span>
-        <span class="badge-organic large">Organic</span>
+        <div class="image-slider">
+          <input type="radio" name="slider" id="slide-1" checked class="slider-radio">
+          <input type="radio" name="slider" id="slide-2" class="slider-radio">
+          <input type="radio" name="slider" id="slide-3" class="slider-radio">
+          <input type="radio" name="slider" id="slide-4" class="slider-radio">
+          
+          <div class="slider-images">
+            <div class="slider-image">
+              <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=800" alt="Fresh Carrots - Main View">
+            </div>
+            <div class="slider-image">
+              <img src="https://images.unsplash.com/photo-1447175008436-054170c2e979?w=800" alt="Fresh Carrots - Close-up">
+            </div>
+            <div class="slider-image">
+              <img src="https://images.unsplash.com/photo-1522184216316-3c25379f9760?w=800" alt="Fresh Carrots - Farm View">
+            </div>
+            <div class="slider-image">
+              <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800" alt="Fresh Carrots - Harvest Basket">
+            </div>
+          </div>
+          
+          <div class="slider-nav">
+            <label for="slide-1" class="slider-label"></label>
+            <label for="slide-2" class="slider-label"></label>
+            <label for="slide-3" class="slider-label"></label>
+            <label for="slide-4" class="slider-label"></label>
+          </div>
+          
+          <span class="verified-badge">✓ Verified Farmer</span>
+          <span class="badge-organic large">Organic</span>
+        </div>
       </div>
       
       <div class="detail-info">
         <span class="detail-category">Vegetables</span>
         <h1 class="detail-title">Fresh Carrots</h1>
         <div style="display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;">
-          <p class="detail-farmer">🌾 Green Valley Farm, Labuan, Zamboanga</p>
+          <p class="detail-farmer">Green Valley Farm, Labuan, Zamboanga</p>
           <span class="shop-rating"><span class="s">★</span> 4.9 Shop Rating</span>
         </div>
         
@@ -93,9 +208,9 @@
         <div class="qty-row">
           <span>Quantity:</span>
           <div class="qty-display">
-            <span style="padding:0 0.6rem;">−</span>
-            <span>1</span>
-            <span style="padding:0 0.6rem;">+</span>
+            <span class="qty-btn">−</span>
+            <span class="qty-value">1</span>
+            <span class="qty-btn">+</span>
           </div>
         </div>
         
@@ -127,7 +242,7 @@
       <div class="review-card">
         <div class="review-header">
           <div>
-            <p class="reviewer-name">Maria Santos</p>
+            <p class="reviewer-name">M***a S***os</p>
             <p class="review-date">March 10, 2026</p>
           </div>
           <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem;">
@@ -144,7 +259,7 @@
       <div class="review-card">
         <div class="review-header">
           <div>
-            <p class="reviewer-name">Joel Reyes</p>
+            <p class="reviewer-name">J**l R***s</p>
             <p class="review-date">March 5, 2026</p>
           </div>
           <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem;">
@@ -155,6 +270,40 @@
           </div>
         </div>
         <p class="review-text">Used these for my restaurant in Zamboanga. Customers noticed the vibrant orange color and sweet taste. Green Valley Farm is reliable and the delivery via Grab was fast!</p>
+        <p class="review-verified">✔ Verified Purchase</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div>
+            <p class="reviewer-name">A*a G***ia</p>
+            <p class="review-date">March 1, 2026</p>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem;">
+            <div class="stars">
+              <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
+            </div>
+            <span class="review-product-tag">Fresh Carrots</span>
+          </div>
+        </div>
+        <p class="review-text">Perfect for my kids! They actually want to eat vegetables now. Very sweet and crunchy. Highly recommended for families in Zamboanga!</p>
+        <p class="review-verified">✔ Verified Purchase</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div>
+            <p class="reviewer-name">P***o C**z</p>
+            <p class="review-date">February 28, 2026</p>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem;">
+            <div class="stars">
+              <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
+            </div>
+            <span class="review-product-tag">Fresh Carrots</span>
+          </div>
+        </div>
+        <p class="review-text">Excellent quality! Been buying from Green Valley Farm for months now. Always fresh, always on time. Best carrots in Zamboanga City!</p>
         <p class="review-verified">✔ Verified Purchase</p>
       </div>
     </section>
@@ -173,7 +322,7 @@
           <div class="card-body">
             <a href="product-detail.html" class="card-title">Heirloom Tomatoes</a>
             <div class="card-farmer-rating">
-              <span class="card-farmer">🌾 Sunrise Farm, Tugbungan</span>
+              <span class="card-farmer">Sunrise Farm, Tugbungan</span>
               <span class="shop-rating"><span class="s">★</span> 4.8</span>
             </div>
             <div class="rating-row">
@@ -192,49 +341,77 @@
             </a>
           </div>
         </div>
+
+        <div class="product-card">
+          <a href="product-detail.html">
+            <div class="card-image">
+              <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600" alt="Lettuce">
+              <span class="verified-badge">✓ Verified</span>
+            </div>
+          </a>
+          <div class="card-body">
+            <a href="product-detail.html" class="card-title">Fresh Lettuce</a>
+            <div class="card-farmer-rating">
+              <span class="card-farmer">Labuan Greens</span>
+              <span class="shop-rating"><span class="s">★</span> 4.7</span>
+            </div>
+            <div class="rating-row">
+              <div class="stars">
+                <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
+              </div>
+              <span class="stars-label">(56)</span>
+            </div>
+            <p class="card-price">₱150<span class="card-unit">/kg</span></p>
+            <a href="cart.html" class="add-cart-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+              </svg>
+              Add to Cart
+            </a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <a href="product-detail.html">
+            <div class="card-image">
+              <img src="https://images.unsplash.com/photo-1617343267181-9b19d22c8c2f?w=600" alt="Eggplant">
+              <span class="verified-badge">✓ Verified</span>
+              <span class="badge-organic">Organic</span>
+            </div>
+          </a>
+          <div class="card-body">
+            <a href="product-detail.html" class="card-title">Fresh Eggplant</a>
+            <div class="card-farmer-rating">
+              <span class="card-farmer">Pasonanca Organic</span>
+              <span class="shop-rating"><span class="s">★</span> 4.9</span>
+            </div>
+            <div class="rating-row">
+              <div class="stars">
+                <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
+              </div>
+              <span class="stars-label">(78)</span>
+            </div>
+            <p class="card-price">₱120<span class="card-unit">/kg</span></p>
+            <a href="cart.html" class="add-cart-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+              </svg>
+              Add to Cart
+            </a>
+          </div>
+        </div>
       </div>
     </section>
-  </div>
-</div>
-
-<input type="checkbox" id="chat-check" class="chat-checkbox">
-<label for="chat-check" class="chat-trigger">💬</label>
-<div class="chat-window">
-  <div class="chat-header">
-    <h4>Chat with Green Valley Farm</h4>
-    <label for="chat-check" class="chat-close">×</label>
-  </div>
-  <div class="chat-body">
-    <div class="chat-message seller">
-      <p>Hello! How can I help you?</p>
-    </div>
-  </div>
-  <div class="chat-input-wrap">
-    <input type="text" placeholder="Ask about this product...">
-    <div class="chat-send">➤</div>
   </div>
 </div>
 
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-col">
-      <div class="footer-logo"> FarmDirect</div>
+      <div class="footer-logo">FarmDirect</div>
       <p class="footer-desc">Connecting Zamboanga farmers to your table.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Quick Links</h4>
-      <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="dashboard.html">Dashboard</a>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <div class="footer-contact">
-        <p>📍 Zamboanga City, Philippines</p>
-        <a href="tel:+639123456789">📞 +63 912 345 6789</a>
-      </div>
     </div>
     <div class="footer-bottom">
       <p>© 2026 FarmDirect Zamboanga. All rights reserved.</p>
