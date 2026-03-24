@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Farm Direct - Settings</title>
+    <title>FarmDirect – Settings</title>
     <link rel="stylesheet" href="Settings.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
   </head>
@@ -14,7 +14,6 @@
         <span class="logo-icon">🌾</span>
         <span class="logo-text">FarmDirect</span>
       </div>
-
       <div class="topbar-right">
         <div class="dropdown">
           <div class="icon-wrapper">
@@ -23,8 +22,8 @@
           </div>
           <div class="dropdown-menu">
             <p><strong>Notifications</strong></p>
-            <p>- New orders</p>
-            <p>- Order has been Delivered</p>
+            <p>🛒 New order received</p>
+            <p>✅ Order #00241 Delivered</p>
           </div>
         </div>
         <div class="dropdown">
@@ -34,8 +33,8 @@
           </div>
           <div class="dropdown-menu">
             <p><strong>Messages</strong></p>
-            <p>- Maria: Is the corn available?</p>
-            <p>- Pedro: Delivery tomorrow?</p>
+            <p>Maria: Is the corn available?</p>
+            <p>Pedro: Delivery tomorrow?</p>
           </div>
         </div>
         <div class="dropdown">
@@ -58,44 +57,70 @@
       <a href="Products.html">Products</a>
       <a href="Orders.html">Orders</a>
       <a href="Reviews.html">Reviews</a>
-      <a href="Settings.html">Settings</a>
+      <a href="Settings.html" class="active">Settings</a>
     </nav>
 
     <main class="farmers-main">
       <div class="dash">
         <div class="dash-title">Settings</div>
-        <p class="dash-sub">Check and/or change information.</p>
+        <p class="dash-sub">Check and/or change your information.</p>
       </div>
 
       <div class="g2b">
+        <!-- LEFT COLUMN -->
         <div>
+          <!-- Account Settings -->
           <div class="card">
             <div class="card-head">
               <span class="card-title">👤 Account Settings</span>
             </div>
             <div class="form-section">
               <div class="form-section-title">PERSONAL DETAILS</div>
+
               <div class="form-row">
                 <div class="form-group">
-                  <label>Display Name</label><input value="Juan Dela Cruz" />
+                  <label>Display Name</label>
+                  <input value="Juan Dela Cruz" />
                 </div>
                 <div class="form-group">
-                  <label>Username</label><input value="@juanfarm" />
+                  <label>Username</label>
+                  <input value="@juanfarm" />
                 </div>
               </div>
+
               <div class="form-row">
                 <div class="form-group">
-                  <label>Phone Number</label><input value="+63 912 345 6789" />
+                  <label>Phone Number</label>
+                  <input value="+63 912 345 6789" />
                 </div>
                 <div class="form-group">
-                  <label>Location</label
-                  ><input value="Davao City, Davao Region" />
+                  <label>Location</label>
+                  <input value="Zamboanga City" />
                 </div>
               </div>
+
+              <!-- Birthday row -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Birthday 🎂</label>
+                  <input type="date" value="1995-06-15" />
+                  <span class="field-hint">Used for account verification only.</span>
+                </div>
+                <div class="form-group">
+                  <label>Gender</label>
+                  <select>
+                    <option selected>Male</option>
+                    <option>Female</option>
+                    <option>Prefer not to say</option>
+                  </select>
+                </div>
+              </div>
+
               <a href="settings.html" class="ph-btn">💾 Save Changes</a>
             </div>
           </div>
 
+          <!-- Store Settings -->
           <div class="card">
             <div class="card-head">
               <span class="card-title">🏪 Store Settings</span>
@@ -122,19 +147,17 @@
                   </select>
                 </div>
               </div>
-
               <div class="form-row full">
                 <div class="form-group">
                   <label>Store Description</label>
-                  <textarea>
-We provide fresh, organic produce straight from our family farm in Zamboanga City. Harvested daily for maximum freshness.</textarea
-                  >
+                  <textarea>We provide fresh, organic produce straight from our family farm in Zamboanga City. Harvested daily for maximum freshness.</textarea>
                 </div>
               </div>
               <a href="settings.html" class="ph-btn">💾 Save Store Info</a>
             </div>
           </div>
 
+          <!-- Change Password -->
           <div class="card">
             <div class="card-head">
               <span class="card-title">🔒 Change Password</span>
@@ -161,47 +184,26 @@ We provide fresh, organic produce straight from our family farm in Zamboanga Cit
           </div>
         </div>
 
+        <!-- RIGHT COLUMN -->
         <div>
+          <!-- Notifications -->
           <div class="card">
             <div class="card-head">
               <span class="card-title">🔔 Notifications</span>
             </div>
             <div class="form-section">
-              <div class="toggle-row">
-                <span>New order alerts</span>
-                <input type="checkbox" checked />
-              </div>
-              <div class="toggle-row">
-                <span>Low stock warnings</span>
-                <input type="checkbox" checked />
-              </div>
-              <div class="toggle-row">
-                <span>New customer reviews</span>
-                <input type="checkbox" checked />
-              </div>
-              <div class="toggle-row">
-                <span>Payment received</span>
-                <input type="checkbox" checked />
-              </div>
-              <div class="toggle-row">
-                <span>Order delivered confirmation</span>
-                <input type="checkbox" checked />
-              </div>
-              <div class="toggle-row">
-                <span>Weekly sales summary email</span>
-                <input type="checkbox" checked />
-              </div>
-              <div class="toggle-row">
-                <span>Promotional updates</span>
-                <input type="checkbox" />
-              </div>
-              <div class="toggle-row">
-                <span>New follower alerts</span>
-                <input type="checkbox" />
-              </div>
+              <div class="toggle-row"><span>New order alerts</span><input type="checkbox" checked /></div>
+              <div class="toggle-row"><span>Low stock warnings</span><input type="checkbox" checked /></div>
+              <div class="toggle-row"><span>New customer reviews</span><input type="checkbox" checked /></div>
+              <div class="toggle-row"><span>Payment received</span><input type="checkbox" checked /></div>
+              <div class="toggle-row"><span>Order delivered confirmation</span><input type="checkbox" checked /></div>
+              <div class="toggle-row"><span>Weekly sales summary email</span><input type="checkbox" checked /></div>
+              <div class="toggle-row"><span>Promotional updates</span><input type="checkbox" /></div>
+              <div class="toggle-row"><span>New follower alerts</span><input type="checkbox" /></div>
             </div>
           </div>
 
+          <!-- Shipping -->
           <div class="card">
             <div class="card-head">
               <span class="card-title">🚚 Shipping Preferences</span>
@@ -233,30 +235,20 @@ We provide fresh, organic produce straight from our family farm in Zamboanga Cit
                   <input value="₱0" />
                 </div>
               </div>
-              <a href="settings.html" class="ph-btn"
-                >💾 Save Shipping Settings</a
-              >
+              <a href="settings.html" class="ph-btn">💾 Save Shipping Settings</a>
             </div>
           </div>
 
-          <div class="card" style="border-color: #fecaca">
-            <div class="card-head" style="background: #fff5f5">
-              <span class="card-title" style="color: #ef4444"
-                >⚠️ Danger Zone</span
-              >
+          <!-- Danger Zone -->
+          <div class="card" style="border-color:#fecaca">
+            <div class="card-head" style="background:#fff5f5">
+              <span class="card-title" style="color:#ef4444">⚠️ Danger Zone</span>
             </div>
             <div class="form-section">
-              <p
-                style="
-                  font-size: 13px;
-                  color: #6b7280;
-                  margin-bottom: 14px;
-                  line-height: 1.6;
-                "
-              >
+              <p style="font-size:13px;color:#6b7280;margin-bottom:14px;line-height:1.6">
                 These actions are permanent and cannot be undone.
               </p>
-              <div style="display: flex; gap: 10px">
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
                 <a href="settings.html" class="danger">🚫 Deactivate Store</a>
                 <a href="settings.html" class="danger">🗑️ Delete Account</a>
               </div>
@@ -271,19 +263,15 @@ We provide fresh, organic produce straight from our family farm in Zamboanga Cit
         <div class="footer-main">
           <div>
             <div class="footer-logo">🌾 FarmDirect</div>
-            <p class="footer-desc">
-              Connecting farmers to buyers. Fresh and local.
-            </p>
+            <p class="footer-desc">Connecting farmers to buyers. Fresh and local.</p>
           </div>
         </div>
         <div class="footer-bottom">
-          <p>© 2026 FarmDirect. All rights reserved.</p>
+          <p>© 2026 FarmDirect Zamboanga. All rights reserved.</p>
         </div>
       </div>
     </footer>
 
-    <script>
-      lucide.createIcons();
-    </script>
+    <script>lucide.createIcons();</script>
   </body>
 </html>
