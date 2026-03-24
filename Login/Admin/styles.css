@@ -183,83 +183,12 @@ body {
   transition: background 0.2s ease;
 }
 
-/* Top Bar Styles */
-.header {
-    background-color: #2d5030; /* Your specific color */
-    height: 70px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
-    /* Negative margins to pull the header to the edges of the main container */
-    margin: -2rem -2rem 2rem -2rem; 
-    color: white;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-
-.search-container {
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.15); /* Glassmorphism effect */
-    border-radius: 8px;
-    padding: 0 1rem;
-    width: 450px;
-    transition: background 0.3s ease;
-}
-
-.search-container:focus-within {
-    background: rgba(255, 255, 255, 0.25);
-}
-
-.search-bar {
-    background: transparent;
-    border: none;
-    padding: 0.8rem;
-    color: white;
-    width: 100%;
-    outline: none;
-}
-
-.search-bar::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.search-icon {
-    font-size: 0.9rem;
-    opacity: 0.8;
-}
-
-/* Header Icons */
-.header-icons {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.icon-badge-container {
-    position: relative;
-    cursor: pointer;
-}
-
-.dot {
-    position: absolute;
-    top: -2px;
-    right: -2px;
-    height: 8px;
-    width: 8px;
-    background-color: #ef4444; /* Red dot */
-    border-radius: 50%;
-    border: 2px solid #2d5030;
-}
-
-.logout-icon {
-    cursor: pointer;
-    opacity: 0.9;
-    transition: opacity 0.2s;
-}
-
-.logout-icon:hover {
-    opacity: 1;
+/* Page Header & Buttons */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 .btn-primary {
@@ -360,6 +289,3 @@ body {
   cursor: pointer;
 }
 
-/* New Badges for Inventory */
-.badge.low-stock { background: #fef3c7; color: #92400e; }
-.badge.out-of-stock { background: #fee2e2; color: #b91c1c; }
