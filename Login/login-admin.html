@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Direct - Admin Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="logo">
+            🌿
+            <span class="logo-text">Farm<span>Direct</span></span>
+        </div>
+    </header>
+
+    <main class="auth-wrapper">
+        <div class="auth-card">
+            <a href="login.html" class="back-btn">← Back</a>
+            <div class="auth-title">🔐 Admin Sign In</div>
+            <div class="auth-sub">Restricted access. Admins only.</div>
+
+            <form action="Admin/dashboard.html" method="get">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="admin@farmdirect.com" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" placeholder="••••••••" name="password" required>
+                </div>
+                <button type="submit" class="btn-primary">Sign In</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>© 2026 FarmDirect. All rights reserved.</footer>
+
+</body>
+</html>

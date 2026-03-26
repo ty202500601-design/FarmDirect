@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - FarmDirect Admin</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">FarmDirect</div>
+            <nav>
+                <a href="dashboard.html" class="nav-item">Dashboard</a>
+                <a href="product.html" class="nav-item active">Products</a>
+                <a href="orders.html" class="nav-item">Orders</a>
+                <a href="vendors.html" class="nav-item">Vendors</a>
+                <a href="customers.html" class="nav-item">Customers</a>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">AD</div>
+                <div class="user-info">
+                    <p class="name">Admin User</p>
+                    <p class="email">admin@market.com</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <input type="text" placeholder="Search products, orders, customers..." class="search-bar">
+                <div class="header-icons">
+                    <span class="notification">🔔</span>
+                    <span class="logout">⏻</span>
+                </div>
+            </header>
+
+            <div class="page-header">
+                <div class="title-group">
+                    <h1>Products</h1>
+                    <p class="subtitle">Manage your farmer market inventory</p>
+                </div>
+                <button class="btn-primary">+ Add Product</button>
+            </div>
+
+            <div class="utility-bar card">
+                <input type="text" placeholder="Search products or vendors..." class="inline-search">
+                <div class="filter-group">
+                    <select class="category-select">
+                        <option>All Categories</option>
+                        <option>Vegetables</option>
+                        <option>Fruits</option>
+                        <option>Meat</option>
+                        <option>Dairy</option>s
+                    </select>
+                </div>
+            </div>
+
+            <div class="product-grid">
+                <div class="product-card card">
+                    <img src="IMAGES/tomato.webp" alt="Tomatoes" class="product-img">
+                    <div class="product-info">
+                        <h3>Organic Tomatoes</h3>
+                        <p class="vendor">Green Valley Farm</p>
+                        <div class="price-row">
+                            <span class="price">P70.00/kg</span>
+                            <span class="badge completed">In Stock</span>
+                        </div>
+                        <div class="stock-row">
+                            <span>Stock: 150</span>
+                            <span class="category-tag">Vegetables</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-outline">✎ Edit</button>
+                            <button class="btn-icon-delete">🗑</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card card">
+                    <img src="IMAGES/berry.webp" alt="Strawberries" class="product-img">
+                    <div class="product-info">
+                        <h3>Fresh Strawberries</h3>
+                        <p class="vendor">Berry Best Farm</p>
+                        <div class="price-row">
+                            <span class="price">P400.00/kg</span>
+                            <span class="badge pending">Low Stock</span>
+                        </div>
+                        <div class="stock-row">
+                            <span>Stock: 20</span>
+                            <span class="category-tag">Fruits</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-outline">✎ Edit</button>
+                            <button class="btn-icon-delete">🗑</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
