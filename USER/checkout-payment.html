@@ -4,11 +4,43 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Payment – FarmDirect</title>
+<!-- Shared stylesheet for all USER pages -->
 <link rel="stylesheet" href="style.css">
+<style>
+/* On mobile the layout stacks vertically.
+   Order Summary is placed first in the DOM so it naturally appears above Payment Method.
+   On desktop both columns sit side by side. */
+.checkout-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.checkout-form-wrap {
+  flex: 1;
+  min-width: 280px;
+}
+.summary-card {
+  flex: 0 0 300px;
+}
+
+/* On mobile the summary card sits above the form because of DOM order */
+@media (max-width: 700px) {
+  .checkout-layout {
+    flex-direction: column;
+  }
+  .summary-card {
+    flex: none;
+    width: 100%;
+    /* Summary is first in DOM, so it already appears above payment method */
+  }
+}
+</style>
 </head>
 <body>
 
 <!-- NAVIGATION BAR -->
+<!-- NAVIGATION BAR — same across all USER pages -->
 <nav class="navbar">
   <input type="checkbox" id="menu-check" class="menu-checkbox">
   <div class="nav-inner">
@@ -93,6 +125,7 @@
     <h1 class="page-title">Checkout</h1>
 
     <!-- STEP INDICATOR -->
+    <!-- STEP INDICATOR — Step 1 marked done, Step 2 active -->
     <div class="checkout-steps">
       <div class="step done"><span class="step-num">✓</span> Delivery</div>
       <div class="step-line"></div>
@@ -108,6 +141,26 @@
       <div class="checkout-form-wrap">
         <h2>Payment Method</h2>
 
+    <!-- TWO-COLUMN LAYOUT: Order Summary (left/top) + Payment Method (right/bottom)
+         On mobile the summary card appears first because it comes first in the DOM -->
+    <div class="checkout-layout">
+
+      <!-- ORDER SUMMARY — shown first in DOM so it stacks above Payment on mobile -->
+      <div class="summary-card">
+        <h2>Order Summary</h2>
+        <div class="summary-row"><span>Fresh Carrots x2</span><span>₱390</span></div>
+        <div class="summary-row"><span>Heirloom Tomatoes x1</span><span>₱280</span></div>
+        <div class="summary-row"><span>Raw Honey x1</span><span>₱560</span></div>
+        <div class="summary-row"><span>Subtotal</span><span>₱1,230</span></div>
+        <div class="summary-row"><span>Delivery Fee</span><span>₱80</span></div>
+        <div class="summary-row total-row"><span>Total</span><span>₱1,310</span></div>
+      </div>
+
+      <!-- PAYMENT METHOD — appears below summary on mobile, beside it on desktop -->
+      <div class="checkout-form-wrap">
+        <h2>Payment Method</h2>
+
+        <!-- Payment options: Cash on Delivery or GCash -->
         <div class="payment-options">
           <input type="radio" name="payment" id="pay-cod" checked>
           <label for="pay-cod" class="pay-label">
@@ -138,11 +191,18 @@
         <div class="summary-row total-row"><span>Total</span><span>₱1,310</span></div>
       </div>
 
+        <div style="margin-top:1.5rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <a href="checkout.html" class="secondary-btn" style="padding:0.65rem 1.2rem; border:1px solid #ccc; border-radius:6px; text-decoration:none; color:#444; font-size:0.9rem; background:#fff;">← Back</a>
+          <a href="checkout-confirm.html" style="display:inline-block; text-align:center; padding:0.5rem 1.1rem; background:#1b3a2d; color:#fff; border-radius:6px; text-decoration:none; font-size:0.85rem; font-weight:600;">Review Order →</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
 
 <!-- FOOTER -->
+<!-- FOOTER — consistent across all USER pages -->
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-col">
@@ -177,3 +237,8 @@
 
 </body>
 </html>
+        <a href="/cdn-cgi/l/email-protection#e8808d848487a88e899a858c819a8d8b9cc69880"><span class="__cf_email__" data-cfemail="244c4148484b6442455649404d564147500a544c">FarmDirect@gmail.com</span></a>
+        <a href="tel:+639001234567">+63 900 123 4567</a>
+      </div>
+    </div>
+    
