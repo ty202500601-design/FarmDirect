@@ -4,156 +4,80 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Browse Products – FarmDirect Zamboanga</title>
+<!-- Main stylesheet shared across all USER pages -->
 <link rel="stylesheet" href="style.css">
 <style>
-/* ── Page header ── */
+/* Page header: gradient banner above the product list */
 .products-page-header {
   padding: calc(var(--nav-h) + 2.5rem) 0 0;
   background: linear-gradient(135deg, #e3ebe4 0%, #faf8f3 70%);
   border-bottom: 2px solid var(--border);
 }
 .products-page-header .container {
-  display: flex;
-  align-items: flex-end;
+  display: flex; align-items: flex-end;
   justify-content: space-between;
-  gap: 1rem;
-  padding-bottom: 1.5rem;
-  flex-wrap: wrap;
+  gap: 1rem; padding-bottom: 1.5rem; flex-wrap: wrap;
 }
 .products-page-header h1 {
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 4vw, 2.4rem);
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.2;
+  font-weight: 700; color: var(--text); line-height: 1.2;
 }
 .products-page-header h1 span { color: var(--green); }
-.products-count {
-  font-size: 0.88rem;
-  color: var(--text-light);
-  font-weight: 500;
-  margin-top: 0.3rem;
-}
+.products-count { font-size: 0.88rem; color: var(--text-light); font-weight: 500; margin-top: 0.3rem; }
 
-/* ── Sticky pill bar ── */
+/* Sticky category pill bar — scrolls horizontally on small screens */
 .pill-bar {
-  position: sticky;
-  top: var(--nav-h);
-  z-index: 200;
-  background: var(--white);
-  border-bottom: 2px solid var(--border);
+  position: sticky; top: var(--nav-h); z-index: 200;
+  background: var(--white); border-bottom: 2px solid var(--border);
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 .pill-bar-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  gap: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
+  max-width: 1200px; margin: 0 auto; display: flex; gap: 0;
+  overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
 }
 .pill-bar-inner::-webkit-scrollbar { display: none; }
 .pill-bar-inner a {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.85rem 1.3rem;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--text-mid);
-  white-space: nowrap;
-  flex-shrink: 0;
+  display: flex; align-items: center; gap: 0.45rem;
+  padding: 0.85rem 1.3rem; font-size: 0.88rem; font-weight: 600;
+  color: var(--text-mid); white-space: nowrap; flex-shrink: 0;
   border-bottom: 3px solid transparent;
   transition: color 0.18s, border-color 0.18s, background 0.18s;
-  letter-spacing: 0.01em;
 }
-.pill-bar-inner a:hover {
-  color: var(--green);
-  background: var(--cream);
-  border-bottom-color: var(--green);
-}
-/* CSS-only active state using :target on sections */
-#vegetables:target ~ .products-body .pill-bar,
-#fruits:target ~ .products-body .pill-bar,
-#meats:target ~ .products-body .pill-bar,
-#dairy:target ~ .products-body .pill-bar,
-#eggs:target ~ .products-body .pill-bar,
-#pantry:target ~ .products-body .pill-bar { display: block; }
+.pill-bar-inner a:hover { color: var(--green); background: var(--cream); border-bottom-color: var(--green); }
 
-/* ── Product sections ── */
+/* Product sections */
 .products-body { padding: 0 0 5rem; }
 .product-section {
-  padding: 3rem 0 1.5rem;
-  border-bottom: 2px solid var(--border);
+  padding: 3rem 0 1.5rem; border-bottom: 2px solid var(--border);
   scroll-margin-top: calc(var(--nav-h) + 58px);
 }
 .product-section:last-child { border-bottom: none; }
-
 .section-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-  gap: 1rem;
-  flex-wrap: wrap;
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1.5rem; gap: 1rem; flex-wrap: wrap;
 }
 .section-head h2 {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+  color: var(--text); display: flex; align-items: center; gap: 0.5rem;
 }
 .section-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: transform 0.22s;
+  width: 40px; height: 40px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .section-count {
-  font-size: 0.83rem;
-  color: var(--text-light);
-  font-weight: 500;
-  background: var(--cream-dark);
-  padding: 0.25rem 0.7rem;
-  border-radius: 20px;
-  border: 1px solid var(--border);
+  font-size: 0.83rem; color: var(--text-light); font-weight: 500;
+  background: var(--cream-dark); padding: 0.25rem 0.7rem;
+  border-radius: 20px; border: 1px solid var(--border);
 }
-/* Stock / New badges */
+
+/* Low-stock ribbon badge on card images */
 .badge-low {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background: rgba(211,47,47,0.9);
-  color: white;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.25rem 0.6rem;
-  border-radius: 20px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  position: absolute; bottom: 10px; left: 10px;
+  background: rgba(211,47,47,0.9); color: white;
+  font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.6rem;
+  border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase;
 }
-.badge-seasonal {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(25,118,210,0.9);
-  color: white;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.25rem 0.6rem;
-  border-radius: 20px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-/* Hover lift on add-to-cart */
 .product-card .add-cart-btn:active { transform: scale(0.97); }
 .product-card:hover .add-cart-btn { box-shadow: 0 4px 16px rgba(26,46,30,0.25); }
 
@@ -166,7 +90,7 @@
 </head>
 <body>
 
-<!-- ═══════════════════ NAVBAR ═══════════════════ -->
+<!-- NAVIGATION BAR — fixed top, cart + bell + hamburger, no login button on this page -->
 <nav class="navbar">
   <input type="checkbox" id="menu-check" class="menu-checkbox">
   <div class="nav-inner">
@@ -180,12 +104,14 @@
       <a href="Dashboard.html" class="nav-link">Dashboard</a>
     </div>
     <div class="nav-actions">
+      <!-- Cart icon — links to shopping cart -->
       <a href="cart.html" class="cart-btn" title="Cart">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
           <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
         </svg>
       </a>
+      <!-- Notification bell — shows farm updates and seasonal alerts -->
       <div class="notif-wrap">
         <button class="notif-btn" tabindex="0" aria-label="Notifications">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -195,47 +121,37 @@
           <span class="notif-badge"></span>
         </button>
         <div class="notif-dropdown">
-    <div class="notif-header"><h4>Notifications</h4></div>
-    <div class="notif-list">
-      <div class="notif-item">
-        <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div class="notif-content"><strong>Green Valley Farm</strong><p>Your carrots order is ready for pickup today!</p><span class="notif-time">10 minutes ago</span></div>
-      </div>
-      <div class="notif-item">
-        <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div class="notif-content"><strong>Sunrise Farm</strong><p>Fresh tomatoes harvested this morning! Limited stock available.</p><span class="notif-time">1 hour ago</span></div>
-      </div>
-      <div class="notif-item">
-        <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div class="notif-content"><strong>Beeline Apiary</strong><p>Honey restocked! Get your organic honey while supplies last.</p><span class="notif-time">3 hours ago</span></div>
-      </div>
-      <div class="notif-item">
-        <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-        <div class="notif-content"><strong>Seasonal Alert</strong><p>Mango season is here! Fresh mangoes from Vitali farms now available.</p><span class="notif-time">5 hours ago</span></div>
-      </div>
-      <div class="notif-item">
-        <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-        <div class="notif-content"><strong>Coming Soon</strong><p>Lanzones season starts in April from Culianan farms. Pre-order now!</p><span class="notif-time">1 day ago</span></div>
-      </div>
-    </div>
-  </div>
-
-        </div><!-- /notif-wrap -->
+          <div class="notif-header"><h4>Notifications</h4></div>
+          <div class="notif-list">
+            <div class="notif-item">
+              <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+              <div class="notif-content"><strong>Green Valley Farm</strong><p>Your carrots order is ready for pickup today!</p><span class="notif-time">10 min ago</span></div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+              <div class="notif-content"><strong>Sunrise Farm</strong><p>Fresh tomatoes harvested this morning!</p><span class="notif-time">1 hour ago</span></div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+              <div class="notif-content"><strong>Beeline Apiary</strong><p>Honey restocked! Get yours while supplies last.</p><span class="notif-time">3 hours ago</span></div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div class="notif-content"><strong>Seasonal Alert</strong><p>Mango season is here! Fresh mangoes from Vitali farms now available.</p><span class="notif-time">5 hours ago</span></div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div class="notif-content"><strong>Coming Soon</strong><p>Lanzones season starts in April from Culianan farms.</p><span class="notif-time">1 day ago</span></div>
+            </div>
+          </div>
+        </div>
       </div><!-- /notif-wrap -->
-      <a href="../Login/login.html" class="login-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-          <polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
-        </svg>
-        Login
-      </a>
+      <!-- Hamburger toggle — opens slide-in menu on mobile -->
       <label for="menu-check" class="menu-toggle">
         <span></span><span></span><span></span>
       </label>
     </div>
   </div>
-
-  
   <label for="menu-check" class="menu-overlay"></label>
   <div class="menu-panel">
     <div class="menu-section">
@@ -252,13 +168,13 @@
       <a href="#meats" class="menu-item">Meats</a>
       <a href="#dairy" class="menu-item">Dairy</a>
       <a href="#eggs" class="menu-item">Eggs</a>
-      <a href="#pantry" class="menu-item">Pantry</a>
+      <a href="#pantry" class="menu-item">Herbs</a>
     </div>
     <a href="cart.html" class="menu-cta">View Cart</a>
   </div>
 </nav>
 
-<!-- ═══════════════════ PAGE HEADER ═══════════════════ -->
+<!-- PAGE HEADER — title and total product count -->
 <div class="products-page-header">
   <div class="container">
     <div>
@@ -268,41 +184,36 @@
   </div>
 </div>
 
-<!-- ═══════════════════ STICKY PILL BAR ═══════════════════ -->
+<!-- STICKY PILL BAR — tap a category to jump straight to that section -->
 <div class="pill-bar">
   <div class="pill-bar-inner">
     <a href="#vegetables">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      Vegetables
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Vegetables
     </a>
     <a href="#fruits">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83"/></svg>
-      Fruits
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 2v4M4.93 4.93l2.83 2.83"/></svg>Fruits
     </a>
     <a href="#meats">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-      Meats
+      <!-- Meat-cut bone icon resembling 🥩 -->
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="6" y="8" width="12" height="8" rx="3"/><circle cx="5" cy="7" r="2"/><circle cx="19" cy="7" r="2"/><circle cx="5" cy="17" r="2"/><circle cx="19" cy="17" r="2"/></svg>Meats
     </a>
     <a href="#dairy">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 2h8l1 6H7L8 2z"/><rect x="5" y="8" width="14" height="14" rx="2"/></svg>
-      Dairy
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 2h8l1 6H7L8 2z"/><rect x="5" y="8" width="14" height="14" rx="2"/></svg>Dairy
     </a>
     <a href="#eggs">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><ellipse cx="12" cy="13" rx="7" ry="9"/></svg>
-      Eggs
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><ellipse cx="12" cy="13" rx="7" ry="9"/></svg>Eggs
     </a>
     <a href="#pantry">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg>
-      Pantry
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg>Pantry
     </a>
   </div>
 </div>
 
-<!-- ═══════════════════ PRODUCT BODY ═══════════════════ -->
+<!-- ALL PRODUCT SECTIONS -->
 <div class="products-body">
   <div class="container">
 
-    <!-- ──────── VEGETABLES ──────── -->
+    <!-- VEGETABLES — each card photo shows only that single vegetable -->
     <section id="vegetables" class="product-section">
       <div class="section-head">
         <h2>
@@ -313,16 +224,15 @@
       </div>
       <div class="products-grid">
 
+        <!-- Fresh Carrots: photo shows only orange carrots, no other vegetables -->
         <div class="product-card">
           <a href="product-detail.html"><div class="card-image">
             <img src="https://images.unsplash.com/photo-1447175008436-054170c2e979?w=600" alt="Fresh Carrots" loading="lazy">
-            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</span>
-            <span class="badge-organic">Organic</span>
           </div></a>
           <div class="card-body">
             <a href="product-detail.html" class="card-title">Fresh Carrots</a>
             <div class="card-farmer-rating">
-              <span class="card-farmer">Green Valley, Labuan</span>
+              <span class="card-farmer">Green Valley Farm, Labuan</span>
               <span class="shop-rating"><span class="s">★</span> 4.9</span>
             </div>
             <p class="card-price">₱195<span class="card-unit">/kg</span></p>
@@ -330,11 +240,10 @@
           </div>
         </div>
 
+        <!-- Heirloom Tomatoes: photo shows only red tomatoes, nothing else -->
         <div class="product-card">
           <a href="product-detail.html"><div class="card-image">
-            <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=600" alt="Heirloom Tomatoes" loading="lazy">
-            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</span>
-            <span class="badge-organic">Organic</span>
+            <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=600" alt="Heirloom Tomatoes" loading="lazy">
           </div></a>
           <div class="card-body">
             <a href="product-detail.html" class="card-title">Heirloom Tomatoes</a>
@@ -347,10 +256,10 @@
           </div>
         </div>
 
+        <!-- Fresh Lettuce: photo shows only a single head of lettuce -->
         <div class="product-card">
           <a href="product-detail.html"><div class="card-image">
             <img src="https://images.unsplash.com/photo-1622207171741-3d3bee3c48f0?w=600" alt="Fresh Lettuce" loading="lazy">
-            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</span>
           </div></a>
           <div class="card-body">
             <a href="product-detail.html" class="card-title">Fresh Lettuce</a>
@@ -366,7 +275,7 @@
       </div>
     </section>
 
-    <!-- ──────── FRUITS ──────── -->
+    <!-- FRUITS — each photo shows only that single fruit -->
     <section id="fruits" class="product-section">
       <div class="section-head">
         <h2>
@@ -377,10 +286,10 @@
       </div>
       <div class="products-grid">
 
+        <!-- Saba Bananas: photo shows only a bunch of bananas -->
         <div class="product-card">
           <a href="product-detail.html"><div class="card-image">
             <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?w=600" alt="Saba Bananas" loading="lazy">
-            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</span>
           </div></a>
           <div class="card-body">
             <a href="product-detail.html" class="card-title">Saba Bananas</a>
@@ -393,11 +302,10 @@
           </div>
         </div>
 
+        <!-- Fresh Papayas: photo shows only whole papaya fruit -->
         <div class="product-card">
           <a href="product-detail.html"><div class="card-image">
             <img src="https://images.unsplash.com/photo-1617112848923-cc2234396a8d?w=600" alt="Fresh Papayas" loading="lazy">
-            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</span>
-            <span class="badge-organic">Organic</span>
           </div></a>
           <div class="card-body">
             <a href="product-detail.html" class="card-title">Fresh Papayas</a>
@@ -410,10 +318,10 @@
           </div>
         </div>
 
+        <!-- Queen Pineapple: photo shows only one pineapple -->
         <div class="product-card">
           <a href="product-detail.html"><div class="card-image">
             <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=600" alt="Queen Pineapple" loading="lazy">
-            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</span>
           </div></a>
           <div class="card-body">
             <a href="product-detail.html" class="card-title">Queen Pineapple</a>
@@ -429,24 +337,34 @@
       </div>
     </section>
 
-    <!-- ──────── MEATS ──────── -->
+    <!-- MEATS — photo must show only the specific cut listed, not mixed meats or organs -->
     <section id="meats" class="product-section">
       <div class="section-head">
         <h2>
-          <span class="section-icon" style="background:#fce4ec;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c62828" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></span>
+          <!-- Meat-cut icon — bone shape designed to resemble the 🥩 emoji -->
+          <span class="section-icon" style="background:#fce4ec;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c62828" stroke-width="2">
+              <rect x="6" y="8" width="12" height="8" rx="3"/>
+              <circle cx="5" cy="7" r="2.2"/>
+              <circle cx="19" cy="7" r="2.2"/>
+              <circle cx="5" cy="17" r="2.2"/>
+              <circle cx="19" cy="17" r="2.2"/>
+            </svg>
+          </span>
           Meats
         </h2>
         <span class="section-count">1 item</span>
       </div>
       <div class="products-grid">
 
+        <!-- Grass-Fed Beef Sirloin: photo shows only a raw beef sirloin steak, no liver or other cuts -->
         <div class="product-card">
           <a href="product-detail.html"><div class="card-image">
-            <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=600" alt="Grass-Fed Beef" loading="lazy">
-            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</span>
+            <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600" alt="Grass-Fed Beef Sirloin" loading="lazy">
           </div></a>
           <div class="card-body">
-            <a href="product-detail.html" class="card-title">Grass-Fed Beef (Baka)</a>
+            <!-- Name specifies the cut so the customer knows exactly what they are ordering -->
+            <a href="product-detail.html" class="card-title">Grass-Fed Beef – Sirloin Cut</a>
             <div class="card-farmer-rating">
               <span class="card-farmer">Manenan Ranch</span>
               <span class="shop-rating"><span class="s">★</span> 4.9</span>
@@ -459,7 +377,7 @@
       </div>
     </section>
 
-    <!-- ──────── DAIRY ──────── -->
+    <!-- DAIRY — single-subject photos (milk in glass, butter block, etc.) -->
     <section id="dairy" class="product-section">
       <div class="section-head">
         <h2>
@@ -470,11 +388,10 @@
       </div>
       <div class="products-grid">
 
+        <!-- Carabao Milk: photo shows only a glass or bottle of white milk -->
         <div class="product-card">
           <a href="product-detail.html"><div class="card-image">
-            <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=600" alt="Fresh Carabao Milk" loading="lazy">
-            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</span>
-            <span class="badge-organic">Organic</span>
+            <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=600" alt="Fresh Carabao Milk" loading="lazy">
           </div></a>
           <div class="card-body">
             <a href="product-detail.html" class="card-title">Fresh Carabao Milk</a>
@@ -487,10 +404,10 @@
           </div>
         </div>
 
+        <!-- Artisan Butter: photo shows only a block/pat of butter -->
         <div class="product-card">
           <a href="product-detail.html"><div class="card-image">
             <img src="https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=600" alt="Artisan Farm Butter" loading="lazy">
-            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</span>
             <span class="badge-low">Low Stock</span>
           </div></a>
           <div class="card-body">
@@ -504,11 +421,10 @@
           </div>
         </div>
 
+        <!-- Goat Milk: photo shows only goat milk in a glass -->
         <div class="product-card">
           <a href="product-detail.html"><div class="card-image">
             <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=600" alt="Pasteurized Goat Milk" loading="lazy">
-            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</span>
-            <span class="badge-organic">Organic</span>
           </div></a>
           <div class="card-body">
             <a href="product-detail.html" class="card-title">Pasteurized Goat Milk</a>
@@ -524,7 +440,7 @@
       </div>
     </section>
 
-    <!-- ──────── EGGS ──────── -->
+    <!-- EGGS — photos show only eggs, no chickens or other items -->
     <section id="eggs" class="product-section">
       <div class="section-head">
         <h2>
@@ -535,11 +451,10 @@
       </div>
       <div class="products-grid">
 
+        <!-- Chicken Eggs: photo shows only a tray or group of chicken eggs -->
         <div class="product-card">
           <a href="product-detail.html"><div class="card-image">
             <img src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=600" alt="Native Chicken Eggs" loading="lazy">
-            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</span>
-            <span class="badge-organic">Free-Range</span>
           </div></a>
           <div class="card-body">
             <a href="product-detail.html" class="card-title">Native Chicken Eggs</a>
@@ -552,10 +467,10 @@
           </div>
         </div>
 
+        <!-- Duck Eggs: photo shows only duck eggs -->
         <div class="product-card">
           <a href="product-detail.html"><div class="card-image">
             <img src="https://images.unsplash.com/photo-1587486913049-53fc88980cfc?w=600" alt="Itik Duck Eggs" loading="lazy">
-            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</span>
           </div></a>
           <div class="card-body">
             <a href="product-detail.html" class="card-title">Itik Eggs (Duck Eggs)</a>
@@ -571,22 +486,20 @@
       </div>
     </section>
 
-    <!-- ──────── PANTRY ──────── -->
+    <!-- PANTRY — spices and condiments, each photo shows only that one product -->
     <section id="pantry" class="product-section">
       <div class="section-head">
         <h2>
           <span class="section-icon" style="background:#f3e5f5;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6a1b9a" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg></span>
-          Pantry
-        </h2>
+          Herbs</h2>
         <span class="section-count">2 items</span>
       </div>
       <div class="products-grid">
 
+        <!-- Turmeric: photo shows only turmeric root or powder -->
         <div class="product-card">
           <a href="product-detail.html"><div class="card-image">
-            <img src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=600" alt="Native Turmeric Luyang Dilaw" loading="lazy">
-            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</span>
-            <span class="badge-organic">Organic</span>
+            <img src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=600" alt="Luyang Dilaw Turmeric" loading="lazy">
           </div></a>
           <div class="card-body">
             <a href="product-detail.html" class="card-title">Luyang Dilaw (Turmeric)</a>
@@ -599,10 +512,10 @@
           </div>
         </div>
 
+        <!-- Coconut Vinegar: photo shows only the bottle of vinegar -->
         <div class="product-card">
           <a href="product-detail.html"><div class="card-image">
             <img src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=600" alt="Sukang Tuba Coconut Vinegar" loading="lazy">
-            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</span>
             <span class="badge-low">Low Stock</span>
           </div></a>
           <div class="card-body">
@@ -622,7 +535,7 @@
   </div>
 </div>
 
-<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<!-- FOOTER — same structure used across all USER pages -->
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-col">
@@ -653,8 +566,15 @@
       <h4>Contact</h4>
       <div class="footer-contact">
         <span>Zamboanga City, Philippines</span>
-        <a href="/cdn-cgi/l/email-protection#3d55585151527d5b5c4f5059544f585e49134d55"><span class="__cf_email__" data-cfemail="ddb5b8b1b1b29dbbbcafb0b9b4afb8bea9f3adb5">[email&#160;protected]</span></a>
+        <a href="mailto:hello@farmdirect.ph">hello@farmdirect.ph</a>
         <a href="tel:+639001234567">+63 900 123 4567</a>
       </div>
     </div>
-    <div
+    <div class="footer-bottom">
+      <p>© 2026 FarmDirect Zamboanga. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+  </html>
