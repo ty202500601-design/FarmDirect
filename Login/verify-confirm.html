@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Direct - Application Submitted</title>
+    <link rel="stylesheet" href="login.css">
+    <style>
+        .confirm-icon {
+            font-size: 52px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .confirm-steps {
+            background: #f3fdf5;
+            border: 1px solid #d1fae5;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 20px 0;
+        }
+        .confirm-steps p {
+            font-size: 13px;
+            color: #374151;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .confirm-steps p:last-child { margin-bottom: 0; }
+        .step-num {
+            background: green;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="logo">
+            <span class="logo-text">Farm<span>Direct</span></span>
+        </div>
+    </header>
+
+    <main class="auth-wrapper">
+        <div class="auth-card">
+            <div class="confirm-icon">✅</div>
+            <div class="auth-title">Application Submitted!</div>
+            <div class="auth-sub">Thank you for applying as a FarmDirect Farmer.</div>
+
+            <div class="confirm-steps">
+                <p>
+                    <span class="step-num">1</span>
+                    Your application has been received and is now under review by our team.
+                </p>
+                <p>
+                    <span class="step-num">2</span>
+                    We will verify your submitted documents within 3–5 business days.
+                </p>
+                <p>
+                    <span class="step-num">3</span>
+                    Once approved, your account will be upgraded to a Farmer account and you can start listing products.
+                </p>
+            </div>
+
+            <a href="login.html" class="btn-primary" style="display:block; text-align:center; text-decoration:none; padding:11px; margin-top:8px;">
+                Back to Login
+            </a>
+        </div>
+    </main>
+
+    <footer>© 2026 FarmDirect. All rights reserved.</footer>
+
+</body>
+</html>
