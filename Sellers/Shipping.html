@@ -1,208 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Farm Direct - Track Order</title>
-    <link rel="stylesheet" href="Shipping.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farm Direct – Track Order</title>
+  <link rel="stylesheet" href="Shipping.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
 
-  <body>
-    <!-- HEADER -->
-    <header class="topbar">
-      <div class="logo">
-        <span class="logo-icon">🌾</span>
-        <span class="logo-text">FarmDirect</span>
-      </div>
-
-      <div class="topbar-right">
-        <div class="dropdown">
-          <div class="icon-wrapper">
-            <i data-lucide="bell"></i>
-            <span class="notf"></span>
-          </div>
-          <div class="dropdown-menu">
-            <p><strong>Notifications</strong></p>
-            <p>- New orders</p>
-            <p>- Order has been Delivered</p>
-          </div>
-        </div>
-        <div class="dropdown">
-          <div class="icon-wrapper">
-            <i data-lucide="message-circle"></i>
-            <span class="notf"></span>
-          </div>
-          <div class="dropdown-menu">
-            <p><strong>Messages</strong></p>
-            <p>- Maria: Is the corn available?</p>
-            <p>- Pedro: Delivery tomorrow?</p>
-          </div>
-        </div>
-        <div class="dropdown">
-          <div class="profile">
-            <div class="avatar">JD</div>
-          </div>
-          <div class="dropdown-menu">
-            <a href="Dashboard.html">Management</a>
-            <a href="Settings.html">Profile</a>
-            <a href="Settings.html">Settings</a>
-            <a href="../index.html">Logout</a>
+<nav class="navbar">
+  <input type="checkbox" id="menu-check" class="menu-checkbox">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></a>
+    <div class="nav-links">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="Dashboard.html" class="nav-link">Dashboard</a>
+      <a href="Products.html" class="nav-link">Products</a>
+      <a href="Orders.html" class="nav-link active">Orders</a>
+      <a href="Reviews.html" class="nav-link">Reviews</a>
+      <a href="Settings.html" class="nav-link">Settings</a>
+    </div>
+    <div class="nav-actions">
+      <div class="notif-wrap">
+        <button class="notif-btn" tabindex="0" aria-label="Notifications">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-badge"></span>
+        </button>
+        <div class="notif-dropdown">
+          <div class="notif-header"><h4>Notifications</h4></div>
+          <div class="notif-list">
+            <div class="notif-item"><div class="notif-content"><strong>New Order</strong><p>🛒 New order received</p></div><span class="notif-time">5 min ago</span></div>
+            <div class="notif-item"><div class="notif-content"><strong>Order Delivered</strong><p>✅ Order #00241 Delivered</p></div><span class="notif-time">1 hr ago</span></div>
           </div>
         </div>
       </div>
-    </header>
-
-    <nav class="navbar">
-      <a href="../index.html">Home</a>
-      <a href="Dashboard.html">Dashboard</a>
-      <a href="Products.html">Products</a>
-      <a href="Orders.html">Orders</a>
-      <a href="Reviews.html">Reviews</a>
-      <a href="Settings.html">Settings</a>
-    </nav>
-
-    <main class="farmers-main">
-
-      <div class="dash">
-        <div>
-          <div class="dash-title">📦 Track Order</div>
-          <p class="dash-sub">Real-time shipment tracking for your orders.</p>
-        </div>
-        <a href="Orders.html" class="back-btn">← Back to Orders</a>
-      </div>
-
-      <div class="track-grid">
-
-        <!-- ORDER SUMMARY -->
-        <div class="card order-summary">
-          <div class="card-head">
-            <span class="card-title">Order Summary</span>
-            <span class="badge b-del">Delivered</span>
-          </div>
-          <div class="summary-body">
-            <div class="summary-row">
-              <span class="summary-label">Order ID</span>
-              <span class="summary-val"><b>ORD-00241</b></span>
-            </div>
-            <div class="summary-row">
-              <span class="summary-label">Product</span>
-              <span class="summary-val">Fresh Tomatoes</span>
-            </div>
-            <div class="summary-row">
-              <span class="summary-label">Customer</span>
-              <span class="summary-val">Maria Santos</span>
-            </div>
-            <div class="summary-row">
-              <span class="summary-label">Address</span>
-              <span class="summary-val">Lunzuran, Zamboanga City</span>
-            </div>
-            <div class="summary-row">
-              <span class="summary-label">Amount</span>
-              <span class="summary-val amount">₱210</span>
-            </div>
-            <div class="summary-row">
-              <span class="summary-label">Payment</span>
-              <span class="summary-val">GCash</span>
-            </div>
-            <div class="summary-row">
-              <span class="summary-label">Order Date</span>
-              <span class="summary-val">Mar 1, 2026</span>
-            </div>
-            <div class="summary-row">
-              <span class="summary-label">Est. Delivery</span>
-              <span class="summary-val">Mar 3, 2026</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- TRACKING TIMELINE -->
-        <div class="card">
-          <div class="card-head">
-            <span class="card-title">🚚 Shipment Progress</span>
-          </div>
-          <div class="timeline">
-
-            <div class="step done">
-              <div class="step-icon">✅</div>
-              <div class="step-line"></div>
-              <div class="step-content">
-                <div class="step-title">Order Placed</div>
-                <div class="step-time">Mar 1, 2026 · 9:12 AM</div>
-                <div class="step-desc">Your order has been received and confirmed.</div>
-              </div>
-            </div>
-
-            <div class="step done">
-              <div class="step-icon">📦</div>
-              <div class="step-line"></div>
-              <div class="step-content">
-                <div class="step-title">Preparing Order</div>
-                <div class="step-time">Mar 1, 2026 · 11:00 AM</div>
-                <div class="step-desc">Farmer is packing your fresh produce.</div>
-              </div>
-            </div>
-
-            <div class="step done">
-              <div class="step-icon">🏍️</div>
-              <div class="step-line"></div>
-              <div class="step-content">
-                <div class="step-title">Out for Delivery</div>
-                <div class="step-time">Mar 2, 2026 · 8:30 AM</div>
-                <div class="step-desc">Rider is on the way to your address.</div>
-              </div>
-            </div>
-
-            <div class="step done last">
-              <div class="step-icon">🏠</div>
-              <div class="step-line"></div>
-              <div class="step-content">
-                <div class="step-title">Delivered</div>
-                <div class="step-time">Mar 3, 2026 · 2:45 PM</div>
-                <div class="step-desc">Package successfully delivered. Enjoy your fresh produce!</div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-
-      <!-- COURIER INFO -->
-      <div class="card courier-card">
-        <div class="card-head">
-          <span class="card-title">🏍️ Courier Details</span>
-        </div>
-        <div class="courier-body">
-          <div class="courier-avatar">RD</div>
-          <div class="courier-info">
-            <div class="courier-name">Rodrigo Dela Cruz</div>
-            <div class="courier-meta">FarmDirect Rider · Zamboanga City</div>
-            <div class="courier-plate">Plate: ABC-1234</div>
-          </div>
-          <div class="courier-actions">
-            <a href="tel:+639000000000" class="courier-btn call">📞 Call Rider</a>
-            <a href="#" class="courier-btn msg">💬 Message</a>
+      <div class="notif-wrap">
+        <button class="notif-btn" tabindex="0" aria-label="Profile">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+        <div class="notif-dropdown" style="min-width:180px;">
+          <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
+          <div class="notif-list">
+            <div class="notif-item"><div class="notif-content"><a href="Dashboard.html">📊 Management</a></div></div>
+            <div class="notif-item"><div class="notif-content"><a href="Settings.html">👤 Profile</a></div></div>
+            <div class="notif-item"><div class="notif-content"><a href="Settings.html">⚙️ Settings</a></div></div>
+            <div class="notif-item"><div class="notif-content"><a href="../index.html">🚪 Logout</a></div></div>
           </div>
         </div>
       </div>
+      <div class="avatar-badge">JD</div>
+      <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
+    </div>
+  </div>
+  <label for="menu-check" class="menu-overlay"></label>
+  <div class="menu-panel">
+    <div class="menu-section">
+      <h3>Navigation</h3>
+      <a href="../index.html" class="menu-item">Home</a>
+      <a href="Dashboard.html" class="menu-item">Dashboard</a>
+      <a href="Products.html" class="menu-item">Products</a>
+      <a href="Orders.html" class="menu-item">Orders</a>
+      <a href="Reviews.html" class="menu-item">Reviews</a>
+      <a href="Settings.html" class="menu-item">Settings</a>
+    </div>
+    <a href="../index.html" class="menu-cta">Logout</a>
+  </div>
+</nav>
 
-    </main>
+<main class="farmers-main">
+  <div class="dash">
+    <div><div class="dash-title">📦 Track Order</div><p class="dash-sub">Real-time shipment tracking for your orders.</p></div>
+    <a href="Orders.html" class="back-btn">← Back to Orders</a>
+  </div>
 
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-main">
-          <div>
-            <div class="footer-logo">🌾 FarmDirect</div>
-            <p class="footer-desc">Connecting farmers to buyers. Fresh and local.</p>
-          </div>
+  <div class="track-grid">
+    <div class="card order-summary">
+      <div class="card-head"><span class="card-title">Order Summary</span><span class="badge b-del">Delivered</span></div>
+      <div class="summary-body">
+        <div class="summary-row"><span class="summary-label">Order ID</span><span class="summary-val"><b>ORD-00241</b></span></div>
+        <div class="summary-row"><span class="summary-label">Product</span><span class="summary-val">Fresh Tomatoes</span></div>
+        <div class="summary-row"><span class="summary-label">Customer</span><span class="summary-val">Maria Santos</span></div>
+        <div class="summary-row"><span class="summary-label">Address</span><span class="summary-val">Lunzuran, Zamboanga City</span></div>
+        <div class="summary-row"><span class="summary-label">Amount</span><span class="summary-val amount">₱210</span></div>
+        <div class="summary-row"><span class="summary-label">Payment</span><span class="summary-val">GCash</span></div>
+        <div class="summary-row"><span class="summary-label">Order Date</span><span class="summary-val">Mar 1, 2026</span></div>
+        <div class="summary-row"><span class="summary-label">Est. Delivery</span><span class="summary-val">Mar 3, 2026</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-title">🚚 Shipment Progress</span></div>
+      <div class="timeline">
+        <div class="step done">
+          <div class="step-icon">✅</div><div class="step-line"></div>
+          <div class="step-content"><div class="step-title">Order Placed</div><div class="step-time">Mar 1, 2026 · 9:12 AM</div><div class="step-desc">Your order has been received and confirmed.</div></div>
         </div>
-        <div class="footer-bottom">
-          <p>© 2026 FarmDirect. All rights reserved.</p>
+        <div class="step done">
+          <div class="step-icon">📦</div><div class="step-line"></div>
+          <div class="step-content"><div class="step-title">Preparing Order</div><div class="step-time">Mar 1, 2026 · 11:00 AM</div><div class="step-desc">Farmer is packing your fresh produce.</div></div>
+        </div>
+        <div class="step done">
+          <div class="step-icon">🏍️</div><div class="step-line"></div>
+          <div class="step-content"><div class="step-title">Out for Delivery</div><div class="step-time">Mar 2, 2026 · 8:30 AM</div><div class="step-desc">Rider is on the way to your address.</div></div>
+        </div>
+        <div class="step done last">
+          <div class="step-icon">🏠</div><div class="step-line"></div>
+          <div class="step-content"><div class="step-title">Delivered</div><div class="step-time">Mar 3, 2026 · 2:45 PM</div><div class="step-desc">Package successfully delivered. Enjoy your fresh produce!</div></div>
         </div>
       </div>
-    </footer>
+    </div>
+  </div>
 
-    <script>lucide.createIcons();</script>
-  </body>
+  <div class="card courier-card">
+    <div class="card-head"><span class="card-title">🏍️ Courier Details</span></div>
+    <div class="courier-body">
+      <div class="courier-avatar">RD</div>
+      <div class="courier-info">
+        <div class="courier-name">Rodrigo Dela Cruz</div>
+        <div class="courier-meta">FarmDirect Rider · Zamboanga City</div>
+        <div class="courier-plate">Plate: ABC-1234</div>
+      </div>
+      <div class="courier-actions">
+        <a href="tel:+639000000000" class="courier-btn call">📞 Call Rider</a>
+        <a href="#" class="courier-btn msg">💬 Message</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col"><div class="footer-logo">🌾 FarmDirect</div><p class="footer-desc">Connecting Zamboanga farmers directly to your table.</p></div>
+    <div class="footer-bottom"><p>© 2026 FarmDirect Zamboanga. All rights reserved.</p></div>
+  </div>
+</footer>
+<script>lucide.createIcons();</script>
+</body>
 </html>

@@ -1,319 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Farm Direct - Reviews</title>
-    <link rel="stylesheet" href="Reviews.css" />
-    <script src="https://unpkg.com/lucide@latest"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farm Direct – Reviews</title>
+  <link rel="stylesheet" href="Reviews.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
 
-  <body>
-    <!-- HEADER -->
-    <header class="topbar">
-      <div class="logo">
-        <span class="logo-icon">🌾</span>
-        <span class="logo-text">FarmDirect</span>
-      </div>
-
-      <div class="topbar-right">
-        <div class="dropdown">
-          <div class="icon-wrapper">
-            <i data-lucide="bell"></i>
-            <span class="notf"></span>
-          </div>
-          <div class="dropdown-menu">
-            <p><strong>Notifications</strong></p>
-            <p>- New orders</p>
-            <p>- Order has been Delivered</p>
-          </div>
-        </div>
-
-        <div class="dropdown">
-          <div class="icon-wrapper">
-            <i data-lucide="message-circle"></i>
-            <span class="notf"></span>
-          </div>
-          <div class="dropdown-menu">
-            <p><strong>Messages</strong></p>
-            <p>- Maria: Is the corn available?</p>
-            <p>- Pedro: Delivery tomorrow?</p>
-          </div>
-        </div>
-
-        <div class="dropdown">
-          <div class="profile">
-            <div class="avatar">JD</div>
-          </div>
-          <div class="dropdown-menu">
-            <a href="Dashboard.html">Management</a>
-            <a href="Settings.html">Profile</a>
-            <a href="Settings.html">Settings</a>
-            <a href="../index.html">Logout</a>
+<nav class="navbar">
+  <input type="checkbox" id="menu-check" class="menu-checkbox">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></a>
+    <div class="nav-links">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="Dashboard.html" class="nav-link">Dashboard</a>
+      <a href="Products.html" class="nav-link">Products</a>
+      <a href="Orders.html" class="nav-link">Orders</a>
+      <a href="Reviews.html" class="nav-link active">Reviews</a>
+      <a href="Settings.html" class="nav-link">Settings</a>
+    </div>
+    <div class="nav-actions">
+      <div class="notif-wrap">
+        <button class="notif-btn" tabindex="0" aria-label="Notifications">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-badge"></span>
+        </button>
+        <div class="notif-dropdown">
+          <div class="notif-header"><h4>Notifications</h4></div>
+          <div class="notif-list">
+            <div class="notif-item"><div class="notif-content"><strong>New Order</strong><p>🛒 New order received</p></div><span class="notif-time">5 min ago</span></div>
+            <div class="notif-item"><div class="notif-content"><strong>Order Delivered</strong><p>✅ Order #00241 Delivered</p></div><span class="notif-time">1 hr ago</span></div>
           </div>
         </div>
       </div>
-    </header>
-
-    <nav class="navbar">
-      <a href="../index.html">Home</a>
-      <a href="Dashboard.html">Dashboard</a>
-      <a href="Products.html">Products</a>
-      <a href="Orders.html">Orders</a>
-      <a href="Reviews.html">Reviews</a>
-      <a href="Settings.html">Settings</a>
-    </nav>
-
-    <main class="farmers-main">
-      <div class="dash">
-        <div class="dash-title">Customers Reviews</div>
-        <p class="dash-sub">Monitor and Respond to the customers feedback.</p>
-      </div>
-
-      <div class="g2b">
-        <div class="card">
-          <div class="card-head">
-            <span class="card-title">Customer Reviews</span>
-            <span class="badge b-y">4 Reviews</span>
-          </div>
-
-          <div class="review-item">
-            <div class="review-head">
-              <div class="review-av">MS</div>
-              <div>
-                <div class="reviewer">Maria Santos</div>
-                <div class="reviewer-comments">Fresh Lettuce · Mar 5, 2026</div>
-              </div>
-              <div class="stars">★★★★★</div>
-            </div>
-
-            <div class="review-text">
-              "Super fresh and well-packed! Will definitely order again from
-              Rianne's Farm. Delivery was fast too!"
-            </div>
-
-            <div class="review-reply">
-              <b>Juan (You):</b> Thank you so much, Maria! So happy you loved
-              the lettuce. We always harvest fresh before packing. See you on
-              your next order!
-            </div>
-
-            <div class="review-actions">
-              <label class="rev-btn reply" for="reply-1">💬 Reply</label>
-              <label class="rev-btn edit" for="reply-1">✏️ Edit</label>
-            </div>
-
-            <input type="checkbox" id="reply-1" class="reply-toggle" />
-            <div class="reply-box">
-              <textarea
-                class="reply-input"
-                placeholder="Write your reply..."
-              ></textarea>
-              <div class="reply-btn-row">
-                <label for="reply-1" class="rev-btn cancel">Close</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="review-item">
-            <div class="review-head">
-              <div class="review-av">JE</div>
-              <div>
-                <div class="reviewer">Juan Enriquez</div>
-                <div class="reviewer-comments">
-                  Fresh Tomatoes · Mar 3, 2026
-                </div>
-              </div>
-              <div class="stars">★★★★☆</div>
-            </div>
-
-            <div class="review-text">
-              "Good quality tomatoes. A bit small compared to the photos but
-              still fresh and tasty. Will try again."
-            </div>
-
-            <div class="review-reply">
-              <b>Juan (You):</b> Thanks for the honest feedback, Juan! We'll
-              make sure to better match the product photos next time.
-            </div>
-
-            <div class="review-actions">
-              <label class="rev-btn reply" for="reply-2">💬 Reply</label>
-              <label class="rev-btn edit" for="reply-2">✏️ Edit</label>
-            </div>
-
-            <input type="checkbox" id="reply-2" class="reply-toggle" />
-            <div class="reply-box">
-              <textarea
-                class="reply-input"
-                placeholder="Write your reply..."
-              ></textarea>
-              <div class="reply-btn-row">
-                <label for="reply-2" class="rev-btn cancel">Close</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="review-item">
-            <div class="review-head">
-              <div class="review-av">AR</div>
-              <div>
-                <div class="reviewer">Ana Reyes</div>
-                <div class="reviewer-comments">Strawberries · Mar 1, 2026</div>
-              </div>
-              <div class="stars">★★★★★</div>
-            </div>
-
-            <div class="review-text">
-              "Best strawberries I've bought online! So sweet and fresh — came
-              in perfect condition. Highly recommend!"
-            </div>
-
-            <div class="review-reply">
-              <b>Juan (You):</b> That means the world to us, Ana! Our
-              strawberries are handpicked at peak ripeness just for you.
-            </div>
-
-            <div class="review-actions">
-              <label class="rev-btn reply" for="reply-3">💬 Reply</label>
-              <label class="rev-btn edit" for="reply-3">✏️ Edit</label>
-            </div>
-
-            <input type="checkbox" id="reply-3" class="reply-toggle" />
-            <div class="reply-box">
-              <textarea
-                class="reply-input"
-                placeholder="Write your reply..."
-              ></textarea>
-              <div class="reply-btn-row">
-                <label for="reply-3" class="rev-btn cancel">Close</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="review-item">
-            <div class="review-head">
-              <div class="review-av">CB</div>
-              <div>
-                <div class="reviewer">Carlos Bautista</div>
-                <div class="reviewer-comments">
-                  Organic Carrots · Feb 28, 2026
-                </div>
-              </div>
-              <div class="stars">★★★☆☆</div>
-            </div>
-
-            <div class="review-text">
-              "Carrots were okay but I was expecting organic-certified ones.
-              Packaging was neat and delivery was on time."
-            </div>
-
-            <div class="review-reply">
-              <b>Juan (You): </b> Hi Carlos, thank you for your feedback! We're
-              working on certification. Our produce is grown without pesticides.
-            </div>
-
-            <div class="review-actions">
-              <label class="rev-btn reply" for="reply-4">💬 Reply</label>
-              <label class="rev-btn edit" for="reply-4">✏️ Edit</label>
-            </div>
-
-            <input type="checkbox" id="reply-4" class="reply-toggle" />
-            <div class="reply-box">
-              <textarea
-                class="reply-input"
-                placeholder="Write your reply..."
-              ></textarea>
-              <div class="reply-btn-row">
-                <label for="reply-4" class="rev-btn cancel">Close</label>
-              </div>
-            </div>
+      <div class="notif-wrap">
+        <button class="notif-btn" tabindex="0" aria-label="Profile">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+        <div class="notif-dropdown" style="min-width:180px;">
+          <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
+          <div class="notif-list">
+            <div class="notif-item"><div class="notif-content"><a href="Dashboard.html">📊 Management</a></div></div>
+            <div class="notif-item"><div class="notif-content"><a href="Settings.html">👤 Profile</a></div></div>
+            <div class="notif-item"><div class="notif-content"><a href="Settings.html">⚙️ Settings</a></div></div>
+            <div class="notif-item"><div class="notif-content"><a href="../index.html">🚪 Logout</a></div></div>
           </div>
         </div>
       </div>
+      <div class="avatar-badge">JD</div>
+      <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
+    </div>
+  </div>
+  <label for="menu-check" class="menu-overlay"></label>
+  <div class="menu-panel">
+    <div class="menu-section">
+      <h3>Navigation</h3>
+      <a href="../index.html" class="menu-item">Home</a>
+      <a href="Dashboard.html" class="menu-item">Dashboard</a>
+      <a href="Products.html" class="menu-item">Products</a>
+      <a href="Orders.html" class="menu-item">Orders</a>
+      <a href="Reviews.html" class="menu-item">Reviews</a>
+      <a href="Settings.html" class="menu-item">Settings</a>
+    </div>
+    <a href="../index.html" class="menu-cta">Logout</a>
+  </div>
+</nav>
 
+<main class="farmers-main">
+  <div class="dash">
+    <div><div class="dash-title">Customer Reviews</div><p class="dash-sub">Monitor and respond to customer feedback.</p></div>
+  </div>
+
+  <div class="g2b">
+    <div class="card">
+      <div class="card-head"><span class="card-title">Customer Reviews</span><span class="badge b-y">4 Reviews</span></div>
+
+      <div class="review-item">
+        <div class="review-head"><div class="review-av">MS</div><div><div class="reviewer">Maria Santos</div><div class="reviewer-comments">Fresh Lettuce · Mar 5, 2026</div></div><div class="stars">★★★★★</div></div>
+        <div class="review-text">"Super fresh and well-packed! Will definitely order again from Rianne's Farm. Delivery was fast too!"</div>
+        <div class="review-reply"><b>Juan (You):</b> Thank you so much, Maria! So happy you loved the lettuce. We always harvest fresh before packing. See you on your next order!</div>
+        <div class="review-actions"><label class="rev-btn reply" for="reply-1">💬 Reply</label><label class="rev-btn edit" for="reply-1">✏️ Edit</label></div>
+        <input type="checkbox" id="reply-1" class="reply-toggle"/>
+        <div class="reply-box"><textarea class="reply-input" placeholder="Write your reply..."></textarea><div class="reply-btn-row"><label for="reply-1" class="rev-btn cancel">Close</label></div></div>
+      </div>
+
+      <div class="review-item">
+        <div class="review-head"><div class="review-av">JE</div><div><div class="reviewer">Juan Enriquez</div><div class="reviewer-comments">Fresh Tomatoes · Mar 3, 2026</div></div><div class="stars">★★★★☆</div></div>
+        <div class="review-text">"Good quality tomatoes. A bit small compared to the photos but still fresh and tasty. Will try again."</div>
+        <div class="review-reply"><b>Juan (You):</b> Thanks for the honest feedback, Juan! We'll make sure to better match the product photos next time.</div>
+        <div class="review-actions"><label class="rev-btn reply" for="reply-2">💬 Reply</label><label class="rev-btn edit" for="reply-2">✏️ Edit</label></div>
+        <input type="checkbox" id="reply-2" class="reply-toggle"/>
+        <div class="reply-box"><textarea class="reply-input" placeholder="Write your reply..."></textarea><div class="reply-btn-row"><label for="reply-2" class="rev-btn cancel">Close</label></div></div>
+      </div>
+
+      <div class="review-item">
+        <div class="review-head"><div class="review-av">AR</div><div><div class="reviewer">Ana Reyes</div><div class="reviewer-comments">Strawberries · Mar 1, 2026</div></div><div class="stars">★★★★★</div></div>
+        <div class="review-text">"Best strawberries I've bought online! So sweet and fresh — came in perfect condition. Highly recommend!"</div>
+        <div class="review-reply"><b>Juan (You):</b> That means the world to us, Ana! Our strawberries are handpicked at peak ripeness just for you.</div>
+        <div class="review-actions"><label class="rev-btn reply" for="reply-3">💬 Reply</label><label class="rev-btn edit" for="reply-3">✏️ Edit</label></div>
+        <input type="checkbox" id="reply-3" class="reply-toggle"/>
+        <div class="reply-box"><textarea class="reply-input" placeholder="Write your reply..."></textarea><div class="reply-btn-row"><label for="reply-3" class="rev-btn cancel">Close</label></div></div>
+      </div>
+
+      <div class="review-item">
+        <div class="review-head"><div class="review-av">CB</div><div><div class="reviewer">Carlos Bautista</div><div class="reviewer-comments">Organic Carrots · Feb 28, 2026</div></div><div class="stars">★★★☆☆</div></div>
+        <div class="review-text">"Carrots were okay but I was expecting organic-certified ones. Packaging was neat and delivery was on time."</div>
+        <div class="review-reply"><b>Juan (You):</b> Hi Carlos, thank you for your feedback! We're working on certification. Our produce is grown without pesticides.</div>
+        <div class="review-actions"><label class="rev-btn reply" for="reply-4">💬 Reply</label><label class="rev-btn edit" for="reply-4">✏️ Edit</label></div>
+        <input type="checkbox" id="reply-4" class="reply-toggle"/>
+        <div class="reply-box"><textarea class="reply-input" placeholder="Write your reply..."></textarea><div class="reply-btn-row"><label for="reply-4" class="rev-btn cancel">Close</label></div></div>
+      </div>
+    </div>
+
+    <div>
       <div class="stats-grids">
-        <div class="stat-card s1">
-          <div class="stat-icon rate">⭐</div>
-          <div class="stat-label">AVERAGE RATING</div>
-          <div class="stat-val">4.9</div>
-          <div class="stat-pos">Excellent</div>
-        </div>
-
-        <div class="stat-card s2">
-          <div class="stat-icon rew">💬</div>
-          <div class="stat-label">TOTAL REVIEWS</div>
-          <div class="stat-val">91</div>
-          <div class="stat-pos">▲ 9 This Month</div>
-        </div>
-
+        <div class="stat-card s1"><div class="stat-icon rate">⭐</div><div class="stat-label">Average Rating</div><div class="stat-val">4.9</div><div class="stat-pos">Excellent</div></div>
+        <div class="stat-card s2"><div class="stat-icon rew">💬</div><div class="stat-label">Total Reviews</div><div class="stat-val">91</div><div class="stat-pos">▲ 9 This Month</div></div>
         <div class="bar-chart">
-          <div class="bar-row">
-            <span class="bar-lbl pos">★★★★★</span>
-            <div class="bar-track">
-              <div
-                class="bar-fill"
-                style="width: 78%; background: #fde68a"
-              ></div>
-            </div>
-            <span class="bar-val">73 (78%)</span>
-          </div>
-
-          <div class="bar-row">
-            <span class="bar-lbl pos">★★★★☆</span>
-            <div class="bar-track">
-              <div
-                class="bar-fill"
-                style="width: 16%; background: #fde68a"
-              ></div>
-            </div>
-            <span class="bar-val">15 (16%)</span>
-          </div>
-
-          <div class="bar-row">
-            <span class="bar-lbl pos">★★★☆☆</span>
-            <div class="bar-track">
-              <div
-                class="bar-fill"
-                style="width: 6%; background: #fde68a"
-              ></div>
-            </div>
-            <span class="bar-val">6 (6%)</span>
-          </div>
-
-          <div class="bar-row">
-            <span class="bar-lbl neg">★★☆☆☆</span>
-            <div class="bar-track"></div>
-            <span class="bar-val">0 (0%)</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-lbl neg">★☆☆☆☆</span>
-            <div class="bar-track"></div>
-            <span class="bar-val">0 (0%)</span>
-          </div>
+          <div class="bar-row"><span class="bar-lbl pos">★★★★★</span><div class="bar-track"><div class="bar-fill" style="width:78%;background:#fde68a"></div></div><span class="bar-val">73 (78%)</span></div>
+          <div class="bar-row"><span class="bar-lbl pos">★★★★☆</span><div class="bar-track"><div class="bar-fill" style="width:16%;background:#fde68a"></div></div><span class="bar-val">15 (16%)</span></div>
+          <div class="bar-row"><span class="bar-lbl pos">★★★☆☆</span><div class="bar-track"><div class="bar-fill" style="width:6%;background:#fde68a"></div></div><span class="bar-val">6 (6%)</span></div>
+          <div class="bar-row"><span class="bar-lbl neg">★★☆☆☆</span><div class="bar-track"></div><span class="bar-val">0 (0%)</span></div>
+          <div class="bar-row"><span class="bar-lbl neg">★☆☆☆☆</span><div class="bar-track"></div><span class="bar-val">0 (0%)</span></div>
         </div>
       </div>
-    </main>
+    </div>
+  </div>
+</main>
 
-    <!-- FOOTER OF THE WEBSITE -->
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-main">
-          <div>
-            <div class="footer-logo">🌾 FarmDirect</div>
-            <p class="footer-desc">
-              Connecting farmers to buyers. Fresh and local.
-            </p>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>© 2026 FarmDirect. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
-
-    <script>
-      lucide.createIcons();
-    </script>
-  </body>
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col"><div class="footer-logo">🌾 FarmDirect</div><p class="footer-desc">Connecting Zamboanga farmers directly to your table.</p></div>
+    <div class="footer-bottom"><p>© 2026 FarmDirect Zamboanga. All rights reserved.</p></div>
+  </div>
+</footer>
+<script>lucide.createIcons();</script>
+</body>
 </html>

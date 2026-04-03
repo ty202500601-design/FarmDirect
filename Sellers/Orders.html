@@ -1,440 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Farm Direct - Orders</title>
-    <link rel="stylesheet" href="Orders.css" />
-    <script src="https://unpkg.com/lucide@latest"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farm Direct – Orders</title>
+  <link rel="stylesheet" href="Orders.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
 
-  <body>
-    <!-- HEADER -->
-    <header class="topbar">
-      <div class="logo">
-        <span class="logo-icon">🌾</span>
-        <span class="logo-text">FarmDirect</span>
-      </div>
-
-      <div class="topbar-right">
-        <div class="dropdown">
-          <div class="icon-wrapper">
-            <i data-lucide="bell"></i>
-            <span class="notf"></span>
-          </div>
-          <div class="dropdown-menu">
-            <p><strong>Notifications</strong></p>
-            <p>- New orders</p>
-            <p>- Order has been Delivered</p>
-          </div>
-        </div>
-        <div class="dropdown">
-          <div class="icon-wrapper">
-            <i data-lucide="message-circle"></i>
-            <span class="notf"></span>
-          </div>
-          <div class="dropdown-menu">
-            <p><strong>Messages</strong></p>
-            <p>- Maria: Is the corn available?</p>
-            <p>- Pedro: Delivery tomorrow?</p>
-          </div>
-        </div>
-        <div class="dropdown">
-          <div class="profile">
-            <div class="avatar">JD</div>
-          </div>
-          <div class="dropdown-menu">
-            <a href="Dashboard.html">Management</a>
-            <a href="Settings.html">Profile</a>
-            <a href="Settings.html">Settings</a>
-            <a href="../index.html">Logout</a>
+<nav class="navbar">
+  <input type="checkbox" id="menu-check" class="menu-checkbox">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></a>
+    <div class="nav-links">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="Dashboard.html" class="nav-link">Dashboard</a>
+      <a href="Products.html" class="nav-link">Products</a>
+      <a href="Orders.html" class="nav-link active">Orders</a>
+      <a href="Reviews.html" class="nav-link">Reviews</a>
+      <a href="Settings.html" class="nav-link">Settings</a>
+    </div>
+    <div class="nav-actions">
+      <div class="notif-wrap">
+        <button class="notif-btn" tabindex="0" aria-label="Notifications">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-badge"></span>
+        </button>
+        <div class="notif-dropdown">
+          <div class="notif-header"><h4>Notifications</h4></div>
+          <div class="notif-list">
+            <div class="notif-item"><div class="notif-content"><strong>New Order</strong><p>🛒 New order received</p></div><span class="notif-time">5 min ago</span></div>
+            <div class="notif-item"><div class="notif-content"><strong>Order Delivered</strong><p>✅ Order #00241 Delivered</p></div><span class="notif-time">1 hr ago</span></div>
           </div>
         </div>
       </div>
-    </header>
-
-    <nav class="navbar">
-      <a href="../index.html">Home</a>
-      <a href="Dashboard.html">Dashboard</a>
-      <a href="Products.html">Products</a>
-      <a href="Orders.html">Orders</a>
-      <a href="Reviews.html">Reviews</a>
-      <a href="Settings.html">Settings</a>
-    </nav>
-
-    <main class="farmers-main">
-      <div class="dash">
-        <div class="dash-title">Customers Orders</div>
-        <p class="dash-sub">
-          Here are the customers orders.
-        </p>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-card s1">
-          <div class="stat-icon ord">🛒</div>
-          <div class="stat-label">TOTAL ORDERS</div>
-          <div class="stat-val">236</div>
-          <div class="stat-pos">▲ 10 thiss week</div>
-        </div>
-
-        <div class="stat-card s2">
-          <div class="stat-icon ding">⏳</div>
-          <div class="stat-label">PENDING</div>
-          <div class="stat-val">2</div>
-          <div class="stat-pos">Needs attention</div>
-        </div>
-
-        <div class="stat-card s3">
-          <div class="stat-icon ress">🔄</div>
-          <div class="stat-label">PROGRESSING</div>
-          <div class="stat-val">4</div>
-          <div class="stat-pos">In progress</div>
-        </div>
-
-        <div class="stat-card s3">
-          <div class="stat-icon del">✅</div>
-          <div class="stat-label">DELIVERED</div>
-          <div class="stat-val">4</div>
-          <div class="stat-pos">This week</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-head">
-          <span class="card-title">All Orders</span
-          ><span style="font-size: 12px; color: #6b7280">8 total</span>
-        </div>
-        <table class="tbl">
-          <thead>
-            <tr>
-              <th>ORDER ID</th>
-              <th>PRODUCT</th>
-              <th>CUSTOMER</th>
-              <th>AMOUNT</th>
-              <th>DATE</th>
-              <th>PAYMENT</th>
-              <th>STATUS</th>
-              <th></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td>
-                <b>ORD-00241</b>
-              </td>
-              <td>
-                <div class="cell-flex">
-                  <img
-                    src="IMG/Tomatoes.jpg"
-                    alt="Red Tomatoes"
-                    class="produce"
-                  />
-                  <div class="tbl-name">Fresh Tomatoes</div>
-                </div>
-              </td>
-              <td>
-                <b>Maria Santos</b><br />
-                <span style="font-size: 11px; color: #6b7280"
-                  >Lunzuran, Zamboanga City</span
-                >
-              </td>
-              <td>
-                <b>₱210</b>
-              </td>
-              <td style="font-size: 12px; color: #6b7280">Mar 1, 2026</td>
-              <td style="font-size: 12px">GCash</td>
-              <td>
-                <span class="badge b-del">Delivered</span>
-              </td>
-              <td>
-                <a
-                  href="Shipping.html"
-                  style="font-size: 12px; font-weight: 600; color: #25943f"
-                  >Track →</a
-                >
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <b>ORD-00240</b>
-              </td>
-              <td>
-                <div class="cell-flex">
-                  <img
-                    src="IMG/Carrots.jpg"
-                    alt="Fresh harvest carrots"
-                    class="produce"
-                  />
-                  <div class="tbl-name">Organic Carrots</div>
-                </div>
-              </td>
-              <td>
-                <b>Juan dela Cruz</b><br />
-                <span style="font-size: 11px; color: #6b7280"
-                  >Culianan, Zamboanga City</span
-                >
-              </td>
-              <td>
-                <b>₱210</b>
-              </td>
-              <td style="font-size: 12px; color: #6b7280">Feb 28, 2026</td>
-              <td style="font-size: 12px">COD</td>
-              <td>
-                <span class="badge b-pen">Pending</span>
-              </td>
-              <td>
-                <a
-                  href="Shipping.html"
-                  style="font-size: 12px; font-weight: 600; color: #25943f"
-                  >Track →</a
-                >
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <b>ORD-00239</b>
-              </td>
-              <td>
-                <div class="cell-flex">
-                  <img
-                    src="IMG/Strawberries.jpg"
-                    alt="Clean Strawberries"
-                    class="produce"
-                  />
-                  <div class="tbl-name">Strawberries</div>
-                </div>
-              </td>
-              <td>
-                <b>Ana Reyes</b><br />
-                <span style="font-size: 11px; color: #6b7280"
-                  >Guisao, Zamboanga City</span
-                >
-              </td>
-              <td>
-                <b>₱450</b>
-              </td>
-              <td style="font-size: 12px; color: #6b7280">Mar 4, 2026</td>
-              <td style="font-size: 12px">GCash</td>
-              <td>
-                <span class="badge b-pro">Processing</span>
-              </td>
-              <td>
-                <a
-                  href="Shipping.html"
-                  style="font-size: 12px; font-weight: 600; color: #25943f"
-                  >Track →</a
-                >
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <b>ORD-00238</b>
-              </td>
-              <td>
-                <div class="cell-flex">
-                  <img
-                    src="IMG/Lettuce.jpg"
-                    alt="Clean and freash lettuce"
-                    class="produce"
-                  />
-                  <div class="tbl-name">Fresh Lettuce</div>
-                </div>
-              </td>
-              <td>
-                <b>Carlos Bautista</b><br />
-                <span style="font-size: 11px; color: #6b7280"
-                  >Guisao, Zamboanga City</span
-                >
-              </td>
-              <td>
-                <b>₱200</b>
-              </td>
-              <td style="font-size: 12px; color: #6b7280">Mar 5, 2026</td>
-              <td style="font-size: 12px">GCash</td>
-              <td>
-                <span class="badge b-del">Delivered</span>
-              </td>
-              <td>
-                <a
-                  href="Shipping.html"
-                  style="font-size: 12px; font-weight: 600; color: #25943f"
-                  >Track →</a
-                >
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <b>ORD-00237</b>
-              </td>
-              <td>
-                <div class="cell-flex">
-                  <img
-                    src="IMG/Corn.jpg"
-                    alt="Yellow Sweet Corn"
-                    class="produce"
-                  />
-                  <div class="tbl-name">Sweet Corn</div>
-                </div>
-              </td>
-              <td>
-                <b>Liza Gomez</b><br />
-                <span style="font-size: 11px; color: #6b7280"
-                  >Putik, Zamboanga City</span
-                >
-              </td>
-              <td>
-                <b>₱440</b>
-              </td>
-              <td style="font-size: 12px; color: #6b7280">Mar 3, 2026</td>
-              <td style="font-size: 12px">PayMaya</td>
-              <td>
-                <span class="badge b-can">Cancelled</span>
-              </td>
-              <td>
-                <span style="color: #9ca3af">—</span>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <b>ORD-00236</b>
-              </td>
-              <td>
-                <div class="cell-flex">
-                  <img
-                    src="IMG/Lettuce.jpg"
-                    alt="Clean and freash lettuce"
-                    class="produce"
-                  />
-                  <div class="tbl-name">Fresh Lettuce</div>
-                </div>
-              </td>
-              <td>
-                <b>Bert Villanueva</b><br />
-                <span style="font-size: 11px; color: #6b7280"
-                  >Sta.Maria , Zamboanga City</span
-                >
-              </td>
-              <td>
-                <b>₱140</b>
-              </td>
-              <td style="font-size: 12px; color: #6b7280">Mar 2, 2026</td>
-              <td style="font-size: 12px">COD</td>
-              <td>
-                <span class="badge b-del">Delivered</span>
-              </td>
-              <td>
-                <a
-                  href="Shipping.html"
-                  style="font-size: 12px; font-weight: 600; color: #25943f"
-                  >Track →</a
-                >
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <b>ORD-00235</b>
-              </td>
-              <td>
-                <div class="cell-flex">
-                  <img
-                    src="IMG/Lettuce.jpg"
-                    alt="Clean and freash lettuce"
-                    class="produce"
-                  />
-                  <div class="tbl-name">Fresh Lettuce</div>
-                </div>
-              </td>
-              <td>
-                <b>Grace Tan</b><br />
-                <span style="font-size: 11px; color: #6b7280"
-                  >Ipil, Zamboanga City</span
-                >
-              </td>
-              <td>
-                <b>₱168</b>
-              </td>
-              <td style="font-size: 12px; color: #6b7280">Mar 1, 2026</td>
-              <td style="font-size: 12px">GCash</td>
-              <td>
-                <span class="badge b-del">Delivered</span>
-              </td>
-              <td>
-                <a
-                  href="Shipping.html"
-                  style="font-size: 12px; font-weight: 600; color: #25943f"
-                  >Track →</a
-                >
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <b>ORD-00234</b>
-              </td>
-              <td>
-                <div class="cell-flex">
-                  <img
-                    src="IMG/Corn.jpg"
-                    alt="Yellow Sweet Corn"
-                    class="produce"
-                  />
-                  <div class="tbl-name">Sweet Corn</div>
-                </div>
-              </td>
-              <td>
-                <b>Ramon Cruz</b><br />
-                <span style="font-size: 11px; color: #6b7280"
-                  >Cabaluay, Zamboanga City</span
-                >
-              </td>
-              <td>
-                <b>₱220</b>
-              </td>
-              <td style="font-size: 12px; color: #6b7280">Feb 27, 2026</td>
-              <td style="font-size: 12px">COD</td>
-              <td>
-                <span class="badge b-pen">Pending</span>
-              </td>
-              <td>
-                <a
-                  href="Shipping.html"
-                  style="font-size: 12px; font-weight: 600; color: #25943f"
-                  >Track →</a
-                >
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </main>
-
-    <!-- FOOTER OF THE WEBSITE -->
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-main">
-          <div>
-            <div class="footer-logo">🌾 FarmDirect</div>
-            <p class="footer-desc">
-              Connecting farmers to buyers. Fresh and local.
-            </p>
+      <div class="notif-wrap">
+        <button class="notif-btn" tabindex="0" aria-label="Profile">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+        <div class="notif-dropdown" style="min-width:180px;">
+          <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
+          <div class="notif-list">
+            <div class="notif-item"><div class="notif-content"><a href="Dashboard.html">📊 Management</a></div></div>
+            <div class="notif-item"><div class="notif-content"><a href="Settings.html">👤 Profile</a></div></div>
+            <div class="notif-item"><div class="notif-content"><a href="Settings.html">⚙️ Settings</a></div></div>
+            <div class="notif-item"><div class="notif-content"><a href="../index.html">🚪 Logout</a></div></div>
           </div>
         </div>
-        <div class="footer-bottom">
-          <p>© 2026 FarmDirect. All rights reserved.</p>
-        </div>
       </div>
-    </footer>
+      <div class="avatar-badge">JD</div>
+      <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
+    </div>
+  </div>
+  <label for="menu-check" class="menu-overlay"></label>
+  <div class="menu-panel">
+    <div class="menu-section">
+      <h3>Navigation</h3>
+      <a href="../index.html" class="menu-item">Home</a>
+      <a href="Dashboard.html" class="menu-item">Dashboard</a>
+      <a href="Products.html" class="menu-item">Products</a>
+      <a href="Orders.html" class="menu-item">Orders</a>
+      <a href="Reviews.html" class="menu-item">Reviews</a>
+      <a href="Settings.html" class="menu-item">Settings</a>
+    </div>
+    <a href="../index.html" class="menu-cta">Logout</a>
+  </div>
+</nav>
 
-    <script>
-      lucide.createIcons();
-    </script>
-  </body>
+<main class="farmers-main">
+  <div class="dash">
+    <div><div class="dash-title">Customer Orders</div><p class="dash-sub">Here are the customer orders.</p></div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card s1"><div class="stat-icon ord">🛒</div><div class="stat-label">Total Orders</div><div class="stat-val">236</div><div class="stat-pos">▲ 10 this week</div></div>
+    <div class="stat-card s2"><div class="stat-icon ding">⏳</div><div class="stat-label">Pending</div><div class="stat-val">2</div><div class="stat-pos">Needs attention</div></div>
+    <div class="stat-card s3"><div class="stat-icon ress">🔄</div><div class="stat-label">Processing</div><div class="stat-val">4</div><div class="stat-pos">In progress</div></div>
+    <div class="stat-card s4"><div class="stat-icon del">✅</div><div class="stat-label">Delivered</div><div class="stat-val">4</div><div class="stat-pos">This week</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="card-title">All Orders</span>
+      <span style="font-size:12px;color:#6b7280">8 total</span>
+    </div>
+    <table class="tbl">
+      <thead>
+        <tr><th>Order ID</th><th>Product</th><th>Customer</th><th>Amount</th><th>Date</th><th>Payment</th><th>Status</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>ORD-00241</b></td>
+          <td><div class="cell-flex"><img src="IMG/Tomatoes.jpg" alt="Red Tomatoes" class="produce"/><div class="tbl-name">Fresh Tomatoes</div></div></td>
+          <td><b>Maria Santos</b><br><span style="font-size:11px;color:#6b7280">Lunzuran, Zamboanga City</span></td>
+          <td><b>₱210</b></td><td class="date">Mar 1, 2026</td><td style="font-size:12px">GCash</td>
+          <td><span class="badge b-del">Delivered</span></td>
+          <td><a href="Shipping.html" style="font-size:12px;font-weight:600;color:#25943f">Track →</a></td>
+        </tr>
+        <tr>
+          <td><b>ORD-00240</b></td>
+          <td><div class="cell-flex"><img src="IMG/Carrots.jpg" alt="Fresh harvest carrots" class="produce"/><div class="tbl-name">Organic Carrots</div></div></td>
+          <td><b>Juan dela Cruz</b><br><span style="font-size:11px;color:#6b7280">Culianan, Zamboanga City</span></td>
+          <td><b>₱210</b></td><td class="date">Feb 28, 2026</td><td style="font-size:12px">COD</td>
+          <td><span class="badge b-pen">Pending</span></td>
+          <td><a href="Shipping.html" style="font-size:12px;font-weight:600;color:#25943f">Track →</a></td>
+        </tr>
+        <tr>
+          <td><b>ORD-00239</b></td>
+          <td><div class="cell-flex"><img src="IMG/Strawberries.jpg" alt="Strawberries" class="produce"/><div class="tbl-name">Strawberries</div></div></td>
+          <td><b>Ana Reyes</b><br><span style="font-size:11px;color:#6b7280">Guisao, Zamboanga City</span></td>
+          <td><b>₱450</b></td><td class="date">Mar 4, 2026</td><td style="font-size:12px">GCash</td>
+          <td><span class="badge b-pro">Processing</span></td>
+          <td><a href="Shipping.html" style="font-size:12px;font-weight:600;color:#25943f">Track →</a></td>
+        </tr>
+        <tr>
+          <td><b>ORD-00238</b></td>
+          <td><div class="cell-flex"><img src="IMG/Lettuce.jpg" alt="Lettuce" class="produce"/><div class="tbl-name">Fresh Lettuce</div></div></td>
+          <td><b>Carlos Bautista</b><br><span style="font-size:11px;color:#6b7280">Guisao, Zamboanga City</span></td>
+          <td><b>₱200</b></td><td class="date">Mar 5, 2026</td><td style="font-size:12px">GCash</td>
+          <td><span class="badge b-del">Delivered</span></td>
+          <td><a href="Shipping.html" style="font-size:12px;font-weight:600;color:#25943f">Track →</a></td>
+        </tr>
+        <tr>
+          <td><b>ORD-00237</b></td>
+          <td><div class="cell-flex"><img src="IMG/Corn.jpg" alt="Sweet Corn" class="produce"/><div class="tbl-name">Sweet Corn</div></div></td>
+          <td><b>Liza Gomez</b><br><span style="font-size:11px;color:#6b7280">Putik, Zamboanga City</span></td>
+          <td><b>₱440</b></td><td class="date">Mar 3, 2026</td><td style="font-size:12px">PayMaya</td>
+          <td><span class="badge b-can">Cancelled</span></td>
+          <td><span style="color:#9ca3af">—</span></td>
+        </tr>
+        <tr>
+          <td><b>ORD-00236</b></td>
+          <td><div class="cell-flex"><img src="IMG/Lettuce.jpg" alt="Lettuce" class="produce"/><div class="tbl-name">Fresh Lettuce</div></div></td>
+          <td><b>Bert Villanueva</b><br><span style="font-size:11px;color:#6b7280">Sta. Maria, Zamboanga City</span></td>
+          <td><b>₱140</b></td><td class="date">Mar 2, 2026</td><td style="font-size:12px">COD</td>
+          <td><span class="badge b-del">Delivered</span></td>
+          <td><a href="Shipping.html" style="font-size:12px;font-weight:600;color:#25943f">Track →</a></td>
+        </tr>
+        <tr>
+          <td><b>ORD-00235</b></td>
+          <td><div class="cell-flex"><img src="IMG/Lettuce.jpg" alt="Lettuce" class="produce"/><div class="tbl-name">Fresh Lettuce</div></div></td>
+          <td><b>Grace Tan</b><br><span style="font-size:11px;color:#6b7280">Ipil, Zamboanga City</span></td>
+          <td><b>₱168</b></td><td class="date">Mar 1, 2026</td><td style="font-size:12px">GCash</td>
+          <td><span class="badge b-del">Delivered</span></td>
+          <td><a href="Shipping.html" style="font-size:12px;font-weight:600;color:#25943f">Track →</a></td>
+        </tr>
+        <tr>
+          <td><b>ORD-00234</b></td>
+          <td><div class="cell-flex"><img src="IMG/Corn.jpg" alt="Sweet Corn" class="produce"/><div class="tbl-name">Sweet Corn</div></div></td>
+          <td><b>Ramon Cruz</b><br><span style="font-size:11px;color:#6b7280">Cabaluay, Zamboanga City</span></td>
+          <td><b>₱220</b></td><td class="date">Feb 27, 2026</td><td style="font-size:12px">COD</td>
+          <td><span class="badge b-pen">Pending</span></td>
+          <td><a href="Shipping.html" style="font-size:12px;font-weight:600;color:#25943f">Track →</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col"><div class="footer-logo">🌾 FarmDirect</div><p class="footer-desc">Connecting Zamboanga farmers directly to your table.</p></div>
+    <div class="footer-bottom"><p>© 2026 FarmDirect Zamboanga. All rights reserved.</p></div>
+  </div>
+</footer>
+<script>lucide.createIcons();</script>
+</body>
 </html>
