@@ -5,188 +5,343 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout – FarmDirect Zamboanga</title>
 <link rel="stylesheet" href="style.css">
+<style>
+/* Checkout page uses same cart-style navbar */
+.cart-navbar {
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  background:var(--green); height:var(--nav-h);
+  box-shadow:0 2px 16px rgba(0,0,0,0.18);
+}
+.cart-nav-inner {
+  max-width:1200px; margin:0 auto; padding:0 1.2rem;
+  height:100%; display:flex; align-items:center; gap:0.9rem;
+}
+.cart-nav-back { color:#fff; display:flex; align-items:center; flex-shrink:0; }
+.cart-nav-title {
+  font-family:var(--font-display); font-size:1.15rem; font-weight:700;
+  color:#fff; flex:1;
+}
+
+/* Checkout body */
+.co-wrap { padding: calc(var(--nav-h) + 1rem) 0 6rem; min-height:100vh; }
+.co-inner { max-width:700px; margin:0 auto; padding:0 1.2rem; display:flex; flex-direction:column; gap:0.7rem; }
+
+/* Section card */
+.co-card { background:var(--white); border-radius:var(--radius); border:1.5px solid var(--border); overflow:hidden; }
+.co-card-hdr { display:flex; align-items:center; justify-content:space-between; padding:0.85rem 1.1rem; border-bottom:1px solid var(--border); background:var(--cream); }
+.co-card-hdr-title { font-size:0.92rem; font-weight:700; color:var(--text); display:flex; align-items:center; gap:0.5rem; }
+.co-card-hdr-action { font-size:0.8rem; color:var(--green); font-weight:700; cursor:pointer; }
+
+/* Address block */
+.addr-block { padding:1rem 1.1rem; }
+.addr-name { font-size:0.97rem; font-weight:700; margin-bottom:0.15rem; }
+.addr-phone { font-size:0.83rem; color:var(--text-mid); margin-bottom:0.2rem; }
+.addr-full { font-size:0.86rem; color:var(--text-mid); line-height:1.5; }
+.addr-tag { display:inline-block; background:var(--green-light); color:var(--green); font-size:0.67rem; font-weight:700; padding:0.1rem 0.45rem; border-radius:4px; margin-left:0.4rem; }
+
+/* Address form (shown if no address) */
+.addr-form-toggle { display:none; padding:1rem 1.1rem; }
+.addr-form-toggle.show { display:block; }
+
+/* Order item row */
+.oi { display:flex; gap:0.75rem; padding:0.85rem 1.1rem; border-bottom:1px solid var(--border); align-items:center; }
+.oi:last-child { border-bottom:none; }
+.oi-img { width:64px; height:64px; object-fit:cover; border-radius:var(--radius-sm); flex-shrink:0; border:1.5px solid var(--border); }
+.oi-body { flex:1; min-width:0; }
+.oi-name { font-size:0.88rem; font-weight:600; color:var(--text); line-height:1.3; margin-bottom:0.18rem; }
+.oi-variant { font-size:0.75rem; color:var(--text-light); }
+.oi-price-row { display:flex; align-items:center; gap:0.4rem; margin-top:0.2rem; }
+.oi-price { font-size:0.98rem; font-weight:800; color:var(--orange); }
+.oi-orig { font-size:0.73rem; color:var(--text-light); text-decoration:line-through; }
+.oi-disc { background:var(--orange); color:#fff; font-size:0.6rem; font-weight:700; padding:0.07rem 0.3rem; border-radius:3px; }
+.oi-qty { font-size:0.78rem; color:var(--text-light); flex-shrink:0; }
+
+/* Shipping option */
+.ship-opts { padding:0.6rem 1.1rem; display:flex; flex-direction:column; gap:0.5rem; }
+.ship-opt { display:flex; align-items:center; gap:0.75rem; padding:0.75rem 0.9rem; border:2px solid var(--border); border-radius:10px; cursor:pointer; transition:border-color 0.2s, background 0.2s; }
+.ship-opt.selected { border-color:var(--green); background:var(--green-light); }
+.ship-radio { width:17px; height:17px; flex-shrink:0; accent-color:var(--green); }
+.ship-info { flex:1; }
+.ship-name { font-size:0.9rem; font-weight:700; color:var(--text); }
+.ship-desc { font-size:0.76rem; color:var(--text-light); margin-top:0.1rem; }
+.ship-price { font-size:0.95rem; font-weight:800; color:var(--green); flex-shrink:0; }
+.ship-free { color:var(--green-bright); font-weight:800; }
+
+/* Voucher section */
+.voucher-row { display:flex; align-items:center; justify-content:space-between; padding:0.9rem 1.1rem; }
+.voucher-left { display:flex; align-items:center; gap:0.6rem; }
+.voucher-icon { font-size:1.3rem; }
+.voucher-text { font-size:0.88rem; font-weight:700; color:var(--text); }
+.voucher-sub { font-size:0.75rem; color:var(--orange); font-weight:600; }
+.voucher-arrow { color:var(--text-light); }
+
+/* Payment method */
+.pay-row { display:flex; align-items:center; gap:0.75rem; padding:0.9rem 1.1rem; }
+.pay-icon-big { font-size:1.5rem; flex-shrink:0; }
+.pay-details { flex:1; }
+.pay-name { font-size:0.9rem; font-weight:700; }
+.pay-sub { font-size:0.75rem; color:var(--text-light); }
+
+/* Order summary */
+.summary-rows { padding:0.5rem 1.1rem 1rem; }
+.srow { display:flex; justify-content:space-between; padding:0.45rem 0; font-size:0.88rem; color:var(--text-mid); }
+.srow.disc { color:var(--orange); font-weight:600; }
+.srow.total { font-size:1.05rem; font-weight:800; color:var(--text); border-top:2px solid var(--border); margin-top:0.4rem; padding-top:0.7rem; }
+.srow.total span:last-child { color:var(--orange); }
+
+/* Sticky place-order bar */
+.place-order-bar {
+  position:fixed; bottom:0; left:0; right:0; z-index:200;
+  background:var(--white); border-top:2px solid var(--border);
+  padding:0.75rem 1.2rem; display:flex; align-items:center; gap:1rem;
+  box-shadow:0 -4px 20px rgba(0,0,0,0.1);
+}
+.po-totals { flex:1; }
+.po-label { font-size:0.72rem; color:var(--text-light); }
+.po-amt { font-size:1.15rem; font-weight:800; color:var(--orange); }
+.po-saved { font-size:0.7rem; color:var(--orange); font-weight:600; }
+.po-btn {
+  background:var(--green); color:#fff; border:none; border-radius:10px;
+  padding:0.75rem 1.6rem; font-size:0.92rem; font-weight:700; cursor:pointer;
+  transition:background 0.2s; white-space:nowrap; text-decoration:none;
+  display:inline-flex; align-items:center; flex-shrink:0;
+}
+.po-btn:hover { background:var(--green-mid); }
+
+/* Address form fields */
+.addr-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin-top:0.7rem; }
+.af-group { display:flex; flex-direction:column; gap:0.35rem; }
+.af-group.full { grid-column:1/-1; }
+.af-group label { font-size:0.83rem; font-weight:600; color:var(--text-mid); }
+.af-group input, .af-group textarea, .af-group select {
+  padding:0.65rem 0.9rem; border:2px solid var(--border); border-radius:var(--radius-sm);
+  font-size:0.9rem; background:var(--cream); color:var(--text);
+  transition:border-color 0.2s;
+}
+.af-group input:focus, .af-group textarea:focus { border-color:var(--green); }
+.af-save-btn {
+  background:var(--green); color:#fff; border:none; padding:0.65rem 1.2rem;
+  border-radius:var(--radius-sm); font-size:0.88rem; font-weight:700; cursor:pointer;
+  margin-top:0.5rem; display:inline-block;
+}
+
+@media(max-width:600px) {
+  .addr-form-grid { grid-template-columns:1fr; }
+}
+</style>
 </head>
 <body>
 
-
-
-<nav class="navbar">
-  <input type="checkbox" id="menu-check" class="menu-checkbox">
-  <div class="nav-inner">
-    <a href="../index.html" class="logo">
-      <span class="logo-leaf"></span>
-      <span>FarmDirect</span>
+<!-- NAVBAR -->
+<nav class="cart-navbar">
+  <div class="cart-nav-inner">
+    <a href="cart.html" class="cart-nav-back" title="Back">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
     </a>
-    <div class="nav-links">
-      <a href="../index.html" class="nav-link active">Home</a>
-      <a href="products.html" class="nav-link">Products</a>
-      <a href="Dashboard.html" class="nav-link">Dashboard</a>
-    </div>
-    <div class="nav-actions">
-      <a href="cart.html" class="cart-btn" title="Cart">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-        </svg>
-      </a>
-      <div class="notif-wrap">
-        <button class="notif-btn" tabindex="0" aria-label="Notifications">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-          </svg>
-          <span class="notif-badge"></span>
-        </button>
-        <div class="notif-dropdown">
-          <div class="notif-header"><h4>Notifications</h4></div>
-          <div class="notif-list">
-      <div class="notif-item">
-        <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div class="notif-content"><strong>Green Valley Farm</strong><p>Your carrots order is ready for pickup today!</p><span class="notif-time">10 min ago</span></div>
-      </div>
-      <div class="notif-item">
-        <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div class="notif-content"><strong>Sunrise Farm</strong><p>Fresh tomatoes harvested this morning!</p><span class="notif-time">1 hour ago</span></div>
-      </div>
-      <div class="notif-item">
-        <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div class="notif-content"><strong>Beeline Apiary</strong><p>Honey restocked! Get yours while supplies last.</p><span class="notif-time">3 hours ago</span></div>
-      </div>
-      <div class="notif-item">
-        <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-        <div class="notif-content"><strong>Seasonal Alert</strong><p>Mango season is here! Fresh mangoes from Vitali farms now available.</p><span class="notif-time">5 hours ago</span></div>
-      </div>
-      <div class="notif-item">
-        <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-        <div class="notif-content"><strong>Coming Soon</strong><p>Lanzones season starts in April from Culianan farms.</p><span class="notif-time">1 day ago</span></div>
-      </div>
-          </div>
-        </div>
-      </div><!-- /notif-wrap -->
-      <a href="../Login/login.html" class="login-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-          <polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
-        </svg>
-        Login
-      </a>
-      <label for="menu-check" class="menu-toggle">
-        <span></span><span></span><span></span>
-      </label>
-    </div>
-  </div>
-  <label for="menu-check" class="menu-overlay"></label>
-  <div class="menu-panel">
-    <div class="menu-section">
-      <h3>Navigation</h3>
-      <a href="../index.html" class="menu-item">Home</a>
-      <a href="products.html" class="menu-item">Browse Products</a>
-      <a href="Dashboard.html" class="menu-item">My Dashboard</a>
-      <a href="cart.html" class="menu-item">Shopping Cart</a>
-    </div>
-    <a href="cart.html" class="menu-cta">View Cart</a>
+    <span class="cart-nav-title">Checkout</span>
   </div>
 </nav>
 
-<div class="checkout-wrap">
-  <div class="container">
-    <h1 class="page-title">Checkout</h1>
+<!-- CHECKOUT BODY -->
+<div class="co-wrap">
+  <div class="co-inner">
 
-    <div class="checkout-steps">
-      <div class="step active"><span class="step-num">1</span> Delivery</div>
-      <div class="step-line"></div>
-      <div class="step"><span class="step-num">2</span> Payment</div>
-      <div class="step-line"></div>
-      <div class="step"><span class="step-num">3</span> Confirm</div>
-    </div>
-
-    <div class="checkout-layout">
-      <div class="checkout-form-wrap">
-        <h2>Delivery Information</h2>
-        <div class="form-grid">
-          <div class="form-group">
-            <label>First Name *</label>
-            <input type="text" placeholder="Juan">
-          </div>
-          <div class="form-group">
-            <label>Last Name *</label>
-            <input type="text" placeholder="dela Cruz">
-          </div>
-          <div class="form-group full">
-            <label>Email *</label>
-            <input type="email" placeholder="juan@email.com">
-          </div>
-          <div class="form-group full">
-            <label>Phone Number *</label>
-            <div class="phone-wrap">
-              <span class="phone-prefix">+63</span>
-              <input type="tel" placeholder="912 345 6789">
-            </div>
-          </div>
-          <div class="form-group full">
-            <label>Address *</label>
-            <input type="text" placeholder="House No., Street, Barangay">
-          </div>
-          <div class="form-group">
-            <label>City *</label>
-            <input type="text" placeholder="Zamboanga City" value="Zamboanga City">
-          </div>
-          <div class="form-group">
-            <label>ZIP Code</label>
-            <input type="text" placeholder="7000">
-          </div>
-          <div class="form-group full">
-            <label>Delivery Notes (optional)</label>
-            <textarea rows="3" placeholder="e.g. Leave at the gate, call upon arrival..."></textarea>
-          </div>
-        </div>
-
-        <h2 style="margin-top:2rem;">Choose Courier</h2>
-        <div class="courier-options">
-          <input type="radio" name="courier" id="courier-maxim" checked>
-          <label for="courier-maxim" class="courier-label">
-            <span class="courier-radio-dot"></span>
-            <div class="courier-info">
-              <div class="courier-name">🚗 Maxim</div>
-              <div class="courier-desc">Fast local delivery across Zamboanga City</div>
-            </div>
-            <div class="courier-price">₱60</div>
-          </label>
-
-          <input type="radio" name="courier" id="courier-grab">
-          <label for="courier-grab" class="courier-label">
-            <span class="courier-radio-dot"></span>
-            <div class="courier-info">
-              <div class="courier-name">🚕 Grab</div>
-              <div class="courier-desc">Reliable delivery with tracking</div>
-            </div>
-            <div class="courier-price">₱80</div>
-          </label>
-        </div>
-
-        <div class="step-nav">
-          <a href="cart.html" class="secondary-btn">← Back to Cart</a>
-          <a href="checkout-payment.html" class="add-cart-btn" style="width:auto;">Continue to Payment →</a>
-        </div>
+    <!-- ① DELIVERY ADDRESS -->
+    <div class="co-card">
+      <div class="co-card-hdr">
+        <span class="co-card-hdr-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Delivery Address
+        </span>
+        <span class="co-card-hdr-action" onclick="toggleAddrForm()">Change</span>
       </div>
 
-      
+      <!-- SAVED ADDRESS (shown by default — hide this when no address) -->
+      <div class="addr-block" id="saved-addr">
+        <div class="addr-name">Juan dela Cruz <span class="addr-tag">Home</span></div>
+        <div class="addr-phone">+63 912 345 6789</div>
+        <div class="addr-full">123 Rizal St., Brgy. Tetuan, Zamboanga City 7000, Zamboanga del Sur</div>
+      </div>
+
+      <!-- ADDRESS FORM (hidden by default, shown when no address or "Change" is tapped) -->
+      <div class="addr-form-toggle" id="addr-form">
+        <p style="font-size:0.85rem;color:var(--text-mid);margin-bottom:0.3rem;">Enter your delivery address:</p>
+        <div class="addr-form-grid">
+          <div class="af-group"><label>First Name *</label><input type="text" placeholder="Juan"></div>
+          <div class="af-group"><label>Last Name *</label><input type="text" placeholder="dela Cruz"></div>
+          <div class="af-group full"><label>Phone Number *</label>
+            <div style="display:flex;border:2px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;background:var(--cream);">
+              <span style="display:flex;align-items:center;padding:0 0.7rem;background:var(--cream-dark);border-right:2px solid var(--border);font-size:0.9rem;font-weight:600;color:var(--text-mid);">+63</span>
+              <input type="tel" placeholder="912 345 6789" style="flex:1;border:none!important;background:transparent!important;padding:0.65rem 0.9rem;">
+            </div>
+          </div>
+          <div class="af-group full"><label>Street Address *</label><input type="text" placeholder="House No., Street, Barangay"></div>
+          <div class="af-group"><label>City *</label><input type="text" value="Zamboanga City"></div>
+          <div class="af-group"><label>ZIP Code</label><input type="text" placeholder="7000"></div>
+          <div class="af-group full"><label>Delivery Notes (optional)</label><textarea rows="2" placeholder="e.g. Leave at gate, call on arrival…"></textarea></div>
+        </div>
+        <button class="af-save-btn" onclick="saveAddress()">Save Address</button>
       </div>
     </div>
+
+    <!-- ② ORDER ITEMS -->
+    <div class="co-card">
+      <div class="co-card-hdr">
+        <span class="co-card-hdr-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Order Items (3)
+        </span>
+      </div>
+      <div class="oi">
+        <img class="oi-img" src="https://images.unsplash.com/photo-1447175008436-054170c2e979?w=200" alt="Carrots">
+        <div class="oi-body">
+          <div class="oi-name">Fresh Organic Carrots</div>
+          <div class="oi-variant">Green Valley Farm, Labuan</div>
+          <div class="oi-price-row"><span class="oi-price">₱195</span><span class="oi-orig">₱220</span><span class="oi-disc">-11%</span><span style="font-size:0.73rem;color:var(--text-light);">/kg</span></div>
+        </div>
+        <span class="oi-qty">x2</span>
+      </div>
+      <div class="oi">
+        <img class="oi-img" src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200" alt="Tomatoes">
+        <div class="oi-body">
+          <div class="oi-name">Heirloom Tomatoes</div>
+          <div class="oi-variant">Sunrise Farm, Tugbungan</div>
+          <div class="oi-price-row"><span class="oi-price">₱280</span><span class="oi-orig">₱350</span><span class="oi-disc">-20%</span><span style="font-size:0.73rem;color:var(--text-light);">/kg</span></div>
+        </div>
+        <span class="oi-qty">x1</span>
+      </div>
+      <div class="oi">
+        <img class="oi-img" src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=200" alt="Watermelon">
+        <div class="oi-body">
+          <div class="oi-name">Sweet Watermelon</div>
+          <div class="oi-variant">Sunrise Farm, Tugbungan</div>
+          <div class="oi-price-row"><span class="oi-price" style="color:var(--green);">₱560</span><span style="font-size:0.73rem;color:var(--text-light);">/piece</span></div>
+        </div>
+        <span class="oi-qty">x1</span>
+      </div>
+    </div>
+
+    <!-- ③ SHIPPING OPTION -->
+    <div class="co-card">
+      <div class="co-card-hdr">
+        <span class="co-card-hdr-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          Shipping Option
+        </span>
+      </div>
+      <div class="ship-opts">
+        <label class="ship-opt selected" onclick="selectShip(this,'maxim')">
+          <input type="radio" name="ship" class="ship-radio" checked>
+          <div class="ship-info">
+            <div class="ship-name">🚗 Maxim</div>
+            <div class="ship-desc">Fast local delivery across Zamboanga City · Est. 1–2 hrs</div>
+          </div>
+          <span class="ship-price">₱60</span>
+        </label>
+        <label class="ship-opt" onclick="selectShip(this,'grab')">
+          <input type="radio" name="ship" class="ship-radio">
+          <div class="ship-info">
+            <div class="ship-name">🚕 Grab</div>
+            <div class="ship-desc">Reliable delivery with live tracking · Est. 30–60 min</div>
+          </div>
+          <span class="ship-price">₱80</span>
+        </label>
+        <label class="ship-opt" onclick="selectShip(this,'pickup')">
+          <input type="radio" name="ship" class="ship-radio">
+          <div class="ship-info">
+            <div class="ship-name">🏬 Farm Pickup</div>
+            <div class="ship-desc">Coordinate with farmer directly — zero delivery fee</div>
+          </div>
+          <span class="ship-price ship-free">FREE</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- ④ VOUCHERS -->
+    <div class="co-card">
+      <div class="co-card-hdr">
+        <span class="co-card-hdr-title">🎫 FarmDirect Vouchers</span>
+      </div>
+      <!-- Applied voucher -->
+      <div style="padding:0.75rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <div style="font-size:0.88rem;font-weight:700;color:var(--green);">✓ FARMSAVE50 Applied</div>
+          <div style="font-size:0.76rem;color:var(--orange);font-weight:600;">−₱50 discount</div>
+        </div>
+        <span style="font-size:0.8rem;color:var(--text-light);cursor:pointer;">Change</span>
+      </div>
+      <!-- Available vouchers -->
+      <div style="padding:0.8rem 1.1rem;display:flex;gap:0.6rem;flex-wrap:wrap;">
+        <div style="border:1px dashed var(--orange);border-radius:8px;padding:0.5rem 0.8rem;font-size:0.76rem;cursor:pointer;">
+          <div style="font-weight:800;color:var(--orange);">FRESH10</div>
+          <div style="color:var(--text-mid);">10% off veggies</div>
+        </div>
+        <div style="border:1px dashed var(--green);border-radius:8px;padding:0.5rem 0.8rem;font-size:0.76rem;cursor:pointer;opacity:0.55;">
+          <div style="font-weight:800;color:var(--green);">NEWBUYER</div>
+          <div style="color:var(--text-light);">New users only</div>
+        </div>
+        <div style="border:1px dashed var(--border);border-radius:8px;padding:0.5rem 0.8rem;font-size:0.76rem;display:flex;align-items:center;gap:0.4rem;cursor:pointer;background:var(--cream);">
+          <span>+ Enter code</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑤ PAYMENT METHOD -->
+    <div class="co-card">
+      <div class="co-card-hdr">
+        <span class="co-card-hdr-title">💳 Payment Method</span>
+        <span class="co-card-hdr-action">Change</span>
+      </div>
+      <div class="pay-row">
+        <span class="pay-icon-big">💵</span>
+        <div class="pay-details">
+          <div class="pay-name">Cash on Delivery</div>
+          <div class="pay-sub">Pay when your order arrives</div>
+        </div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+    </div>
+
+    <!-- ⑥ ORDER SUMMARY -->
+    <div class="co-card">
+      <div class="co-card-hdr"><span class="co-card-hdr-title">Order Summary</span></div>
+      <div class="summary-rows">
+        <div class="srow"><span>Merchandise Subtotal</span><span>₱1,230</span></div>
+        <div class="srow disc"><span>🎉 Discount Savings</span><span>−₱121</span></div>
+        <div class="srow disc"><span>🎫 Voucher (FARMSAVE50)</span><span>−₱50</span></div>
+        <div class="srow"><span>Shipping Fee (Maxim)</span><span>₱60</span></div>
+        <div class="srow total"><span>Total Payment</span><span>₱1,119</span></div>
+      </div>
+    </div>
+
   </div>
 </div>
 
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-col">
-      <div class="footer-logo"> FarmDirect</div>
-      <p class="footer-desc">Fresh from Zamboanga farms</p>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 FarmDirect Zamboanga</p>
-    </div>
+<!-- STICKY PLACE ORDER BAR -->
+<div class="place-order-bar">
+  <div class="po-totals">
+    <div class="po-label">Total Payment</div>
+    <div class="po-amt">₱1,119</div>
+    <div class="po-saved">You save ₱171 🎉</div>
   </div>
-</footer>
+  <a href="order-success.html" class="po-btn">Place Order →</a>
+</div>
 
+<script>
+function selectShip(el, type){
+  document.querySelectorAll('.ship-opt').forEach(function(o){ o.classList.remove('selected'); });
+  el.classList.add('selected');
+}
+function toggleAddrForm(){
+  var f = document.getElementById('addr-form');
+  var s = document.getElementById('saved-addr');
+  if(f.classList.contains('show')){ f.classList.remove('show'); s.style.display=''; }
+  else { f.classList.add('show'); s.style.display='none'; }
+}
+function saveAddress(){
+  document.getElementById('addr-form').classList.remove('show');
+  document.getElementById('saved-addr').style.display='';
+}
+</script>
 </body>
 </html>
