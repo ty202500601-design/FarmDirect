@@ -3,34 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farm Direct - Buyer Register</title>
+    <title>Farm Direct - Register</title>
     <link rel="stylesheet" href="login.css">
+    <style>
+        .seller-note {
+            margin-top: 18px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            padding: 14px 16px;
+            text-align: center;
+            font-size: 13px;
+            color: #374151;
+        }
+        .seller-note a {
+            color: green;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .seller-note a:hover { text-decoration: underline; }
+    </style>
 </head>
 
 <body>
 
     <header class="topbar">
         <div class="logo">
-            🌿
             <span class="logo-text">Farm<span>Direct</span></span>
         </div>
     </header>
 
     <main class="auth-wrapper">
         <div class="auth-card wide">
-            <a href="login-buyer.html" class="back-btn">← Back</a>
-            <div class="auth-title">Create Buyer Account</div>
+            <a href="login.html" class="back-btn">← Back</a>
+            <div class="auth-title">Create an Account</div>
             <div class="auth-sub">Fill in your details to get started.</div>
 
             <div class="tabs">
-                <a href="login-buyer.html" class="tab">Sign In</a>
+                <a href="login.html" class="tab">Sign In</a>
                 <a href="register-buyer.html" class="tab active">Register</a>
             </div>
 
-            <form action="verify.html" method="post">
+            <form action="../USER/Dashboard.html" method="get">
                 <div class="form-group">
-                    <label class="form-label">Full Name</label>
-                    <input type="text" class="form-input" placeholder="Juan Dela Cruz" name="name" required>
+                    <label class="form-label">Last Name</label>
+                    <input type="text" class="form-input" placeholder="Last Name" name="last_name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Middle Name <span class="opt">(optional)</span></label>
+                    <input type="text" class="form-input" placeholder="Middle Name" name="middle_name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">First Name</label>
+                    <input type="text" class="form-input" placeholder="First Name" name="first_name" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Email Address</label>
@@ -40,12 +65,12 @@
                     <label class="form-label">Mobile Number</label>
                     <div class="phone-wrap">
                         <div class="phone-prefix">🇵🇭 +63</div>
-                        <input type="tel" class="form-input" placeholder="9XX XXX XXXX" name="phone" maxlength="10" required>
+                        <input type="tel" class="form-input" placeholder="9XX XXX XXXX" name="phone" maxlength="10" pattern="9[0-9]{9}" title="Enter a valid PH mobile number starting with 9" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-input" placeholder="Min. 8 characters" name="password" required>
+                    <input type="password" class="form-input" placeholder="Min. 8 characters" name="password" minlength="8" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Delivery Address</label>
@@ -65,10 +90,17 @@
                         <option>SSS / GSIS ID</option>
                         <option>Voter's ID</option>
                         <option>Postal ID</option>
+                        <option>Other Type of ID</option>
                     </select>
                 </div>
                 <button type="submit" class="btn-primary">Create Account</button>
             </form>
+
+            <div class="seller-note">
+                🌾 Are you a farmer? <strong>Sign up as a regular user first.</strong><br>
+                You can <a href="verify-farmer.html">apply to become a verified seller</a> from your dashboard after registering.
+            </div>
+
         </div>
     </main>
 

@@ -3,567 +3,343 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard – FarmDirect Zamboanga</title>
+<title>My Account – FarmDirect Zamboanga</title>
 <link rel="stylesheet" href="style.css">
+<style>
+/* ── DASHBOARD SPECIFIC ── */
+
+/* FIX: Ensure content starts BELOW the fixed navbar so it's not cut in half */
+.dash-wrap { 
+  padding-top: var(--nav-h); 
+  padding-bottom: 5rem; 
+  min-height: 100vh; 
+  background: #f8f9fa; 
+}
+
+/* Profile hero banner */
+.profile-banner {
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+  padding: 1.8rem 1.2rem 1.5rem; 
+  position: relative; 
+  overflow: hidden;
+}
+.profile-banner::after {
+  content:''; position:absolute; top:-60px; right:-60px;
+  width:200px; height:200px;
+  background:rgba(255,255,255,0.06); border-radius:50%;
+}
+.profile-top { display:flex; align-items:center; gap:1.2rem; margin-bottom:1rem; position: relative; z-index: 2;}
+.profile-avatar {
+  width:68px; height:68px; border-radius:50%;
+  background:rgba(255,255,255,0.2); border:3px solid rgba(255,255,255,0.5);
+  display:flex; align-items:center; justify-content:center;
+  font-size:2rem; flex-shrink:0; cursor:pointer; position:relative; color: #fff;
+  font-weight: 800;
+}
+.avatar-edit {
+  position:absolute; bottom:0; right:0; width:22px; height:22px;
+  background:var(--orange); border-radius:50%; border:2px solid #fff;
+  display:flex; align-items:center; justify-content:center;
+}
+.profile-info { flex:1; min-width:0; }
+.profile-name { font-family:var(--font-display); font-size:1.3rem; font-weight:700; color:#fff; }
+.profile-tier {
+  display:inline-flex; align-items:center; gap:0.4rem;
+  background:rgba(255,255,255,0.18); color:#fff;
+  font-size:0.75rem; font-weight:700; padding:0.25rem 0.8rem; border-radius:20px;
+  margin-top:0.4rem; cursor:pointer;
+}
+.profile-follow { display:flex; gap:1.5rem; margin-top:0.6rem; }
+.follow-item { font-size:0.85rem; color:rgba(255,255,255,0.9); cursor:pointer; }
+.follow-item strong { font-weight:800; color:#fff; font-size:1.05rem; }
+.profile-settings {
+  width:42px; height:42px; border-radius:50%; background:rgba(255,255,255,0.15);
+  display:flex; align-items:center; justify-content:center; color:#fff; flex-shrink:0;
+  transition:background 0.2s; cursor:pointer;
+}
+
+/* VIP strip */
+.vip-strip {
+  display:flex; align-items:center; gap:0.8rem;
+  background:linear-gradient(135deg,#fffbf0,#fff3cd);
+  border:1.5px solid #f5d98a; border-radius:var(--radius-sm);
+  padding:0.8rem 1.1rem; cursor:pointer; margin-bottom: 0.8rem;
+}
+.vip-badge { background:var(--gold); color:#fff; font-size:0.75rem; font-weight:800; padding:0.2rem 0.6rem; border-radius:4px; }
+.vip-text { flex:1; font-size:0.9rem; font-weight:700; color:#a07000; }
+
+/* Dashboard Cards */
+.dash-card { background:var(--white); border-radius:var(--radius); border:1.5px solid var(--border); margin-bottom: 0.8rem; overflow:hidden; }
+.dash-card-hdr { display:flex; align-items:center; justify-content:space-between; padding:1.1rem 1.2rem; border-bottom:1px solid var(--border); }
+.dash-card-title { font-size:1.05rem; font-weight:700; color:var(--text); }
+.dash-card-link { font-size:0.85rem; color:var(--text-light); text-decoration: none;}
+
+/* Purchase Steps */
+.purchase-steps { display:grid; grid-template-columns:repeat(4,1fr); padding:1.3rem 0.5rem; }
+.ps-item { display:flex; flex-direction:column; align-items:center; gap:0.6rem; cursor:pointer; position:relative; text-decoration: none;}
+.ps-icon { width:52px; height:52px; border-radius:50%; border:2px solid var(--border); display:flex; align-items:center; justify-content:center; background:var(--white); color: var(--text-mid); transition: 0.2s; }
+.ps-item:hover .ps-icon { border-color: var(--green); color: var(--green); }
+.ps-label { font-size:0.8rem; font-weight:600; color:var(--text-mid); }
+.ps-badge {
+  position:absolute; top:-2px; right:calc(50% - 28px);
+  background:var(--orange); color:#fff; font-size:0.7rem; font-weight:800;
+  width:19px; height:19px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid #fff;
+}
+
+/* Start Selling - THE SPECIFIC LINK YOU REQUESTED */
+.start-selling-card {
+  display:flex; align-items:center; gap:1.1rem;
+  background: linear-gradient(135deg, #f0f7f1 0%, #ffffff 100%);
+  border: 1.5px solid var(--green-mid); border-radius:var(--radius);
+  padding: 1.3rem; cursor:pointer; margin-bottom:0.8rem;
+  text-decoration: none; transition: all 0.2s ease;
+}
+.start-selling-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--green); }
+.ss-icon { width:54px; height:54px; border-radius:14px; background:var(--green); display:flex; align-items:center; justify-content:center; flex-shrink:0; color: #fff;}
+.ss-body { flex:1; }
+.ss-title { font-size:1.1rem; font-weight:800; color:var(--green); margin-bottom:0.2rem; }
+.ss-sub { font-size:0.88rem; color:var(--text-mid); }
+
+/* Activity Grid */
+.activities-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.9rem; padding:1.1rem; }
+.act-item {
+  display:flex; align-items:center; gap:0.9rem;
+  border:1.5px solid var(--border); border-radius:14px; padding:1rem;
+  cursor:pointer; text-decoration: none; transition: 0.2s;
+}
+.act-item:hover { border-color: var(--green); background: var(--green-light); }
+.act-icon { font-size: 1.6rem; width:44px; height:44px; display:flex; align-items:center; justify-content:center; background: var(--cream); border-radius: 10px;}
+.act-title { font-size:0.95rem; font-weight:700; color:var(--text); }
+.act-sub { font-size:0.78rem; color:var(--text-light); }
+
+/* Recently Viewed */
+.recent-view-scroll { display: flex; gap: 1.2rem; overflow-x: auto; padding: 1.2rem; scroll-padding: 1.2rem; scrollbar-width: none; }
+.recent-view-scroll::-webkit-scrollbar { display: none; }
+.rv-card { flex: 0 0 145px; text-decoration: none; transition: 0.2s; }
+.rv-card:hover { opacity: 0.8; }
+.rv-img { width: 145px; height: 145px; border-radius: 14px; object-fit: cover; border: 1.5px solid var(--border); margin-bottom: 0.6rem; }
+.rv-name { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
+.rv-price { color: var(--green); font-weight: 800; font-size: 1rem; }
+
+/* Settings List */
+.acc-list { display:flex; flex-direction:column; }
+.acc-item {
+  display:flex; align-items:center; gap:1.1rem; padding:1.2rem;
+  border-bottom:1px solid var(--border); text-decoration: none; color: var(--text);
+  transition: background 0.2s;
+}
+.acc-item:hover { background: var(--cream); }
+.acc-item:last-child { border-bottom:none; }
+.acc-icon { color:var(--text-mid); width: 22px; }
+.acc-text { flex:1; font-size:1rem; font-weight:600; }
+
+.logout-container { padding: 2rem 1.2rem 4rem; }
+.logout-btn {
+  display:block; width:100%; padding:1.1rem;
+  background: #fff; border: 2.5px solid var(--border); border-radius: 14px;
+  text-align:center; color: var(--red); font-weight: 800; text-decoration: none;
+  transition: all 0.2s;
+}
+.logout-btn:hover { background: var(--red-light); border-color: var(--red); }
+
+@media (max-width: 600px) {
+  .activities-grid { grid-template-columns: 1fr; }
+  .profile-banner { padding-top: 2rem; }
+}
+</style>
 </head>
 <body>
 
 <nav class="navbar">
-  <input type="checkbox" id="menu-check" class="menu-checkbox">
-  
   <div class="nav-inner">
-    <a href="../index.html" class="logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></a>
+    <a href="../index.html" class="logo"><span class="logo-leaf"></span><span>FarmDirect</span></a>
     <div class="nav-links">
       <a href="../index.html" class="nav-link">Home</a>
       <a href="products.html" class="nav-link">Products</a>
       <a href="Dashboard.html" class="nav-link active">Dashboard</a>
     </div>
     <div class="nav-actions">
-      <a href="cart.html" class="cart-btn" title="Cart">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-        </svg>
-      </a>
-      
-      <div class="notif-wrap">
-        <button class="notif-btn" tabindex="0" aria-label="Notifications">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-          </svg>
-          <span class="notif-badge"></span>
-        </button>
-        <div class="notif-dropdown">
-    <div class="notif-header">
-      <h4>Notifications</h4>
+       <a href="cart.html" class="cart-btn">
+         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+         <span class="cart-count">3</span>
+       </a>
     </div>
-    <div class="notif-list">
-      <div class="notif-item">
-        <div class="notif-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          </svg>
-        </div>
-        <div class="notif-content">
-          <strong>Green Valley Farm</strong>
-          <p>Your carrots order is ready for pickup today!</p>
-          <span class="notif-time">10 minutes ago</span>
-        </div>
-      </div>
-      
-      <div class="notif-item">
-        <div class="notif-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          </svg>
-        </div>
-        <div class="notif-content">
-          <strong>Sunrise Farm</strong>
-          <p>Fresh tomatoes harvested this morning! Limited stock available.</p>
-          <span class="notif-time">1 hour ago</span>
-        </div>
-      </div>
-      
-      <div class="notif-item">
-        <div class="notif-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          </svg>
-        </div>
-        <div class="notif-content">
-          <strong>Beeline Apiary</strong>
-          <p>Honey restocked! Get your organic honey while supplies last.</p>
-          <span class="notif-time">3 hours ago</span>
-        </div>
-      </div>
-      
-      <div class="notif-item">
-        <div class="notif-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
-          </svg>
-        </div>
-        <div class="notif-content">
-          <strong>Seasonal Alert</strong>
-          <p>🥭 Mango season is here! Fresh mangoes from Vitali farms now available.</p>
-          <span class="notif-time">5 hours ago</span>
-        </div>
-      </div>
-      
-      <div class="notif-item">
-        <div class="notif-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
-          </svg>
-        </div>
-        <div class="notif-content">
-          <strong>Coming Soon</strong>
-          <p>Lanzones season starts in April from Culianan farms. Pre-order now!</p>
-          <span class="notif-time">1 day ago</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-        </div><!-- /notif-wrap -->
-      </div><!-- /notif-wrap -->
-      
-      <a href="../Login/login.html" class="login-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-          <polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
-        </svg>
-        Login
-      </a>
-      <label for="menu-check" class="menu-toggle">
-        <span></span><span></span><span></span>
-      </label>
-    </div>
-  </div>
-  
-  
-  <label for="menu-check" class="menu-overlay"></label>
-  
-  <div class="menu-panel">
-    <div class="menu-section">
-      <h3>Navigation</h3>
-      <a href="../index.html" class="menu-item">Home</a>
-      <a href="products.html" class="menu-item">Browse Products</a>
-      <a href="Dashboard.html" class="menu-item">My Dashboard</a>
-      <a href="cart.html" class="menu-item">Shopping Cart</a>
-    </div>
-    <a href="cart.html" class="menu-cta">View Cart</a>
   </div>
 </nav>
 
-<div style="padding-top:var(--nav-h);"></div>
-
-<section class="dashboard-section">
-  <div class="container">
-    <h1 class="page-title">My Dashboard</h1>
-
-    <!-- Guest login prompt -->
-    <div class="guest-banner">
-      <div class="guest-banner-text">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <div>
-          <strong>Sign in to your account</strong>
-          <p>Track orders, save favourites, and get personalised recommendations.</p>
+<div class="dash-wrap">
+  <div class="profile-banner">
+    <div class="profile-top">
+      <div class="profile-avatar">
+        J
+        <div class="avatar-edit"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg></div>
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Juan Dela Cruz</div>
+        <div class="profile-tier">Silver Member ›</div>
+        <div class="profile-follow">
+          <div class="follow-item"><strong>12</strong> Following</div>
+          <div class="follow-item"><strong>52</strong> Followers</div>
         </div>
       </div>
-      <div class="guest-banner-actions">
-        <a href="../Login/login.html" class="add-cart-btn" style="width:auto;padding:.65rem 1.4rem;">Sign In</a>
-        <a href="../Login/login.html" class="guest-register-btn">Create Account</a>
-      </div>
-    </div>
-
-    <div class="dashboard-grid">
-      <div class="dashboard-card">
-        <div class="dashboard-icon">📦</div>
-        <h3>Recent Orders</h3>
-        <p class="dashboard-value">3 orders</p>
-        <a href="Order_tracking.html" class="dashboard-link">View All →</a>
-      </div>
-      
-      <div class="dashboard-card">
-        <div class="dashboard-icon">❤️</div>
-        <h3>Saved Items</h3>
-        <p class="dashboard-value">12 products</p>
-        <a href="products.html" class="dashboard-link">Browse →</a>
-      </div>
-      
-      <div class="dashboard-card">
-        <div class="dashboard-icon">🌾</div>
-        <h3>Favorite Farmers</h3>
-        <p class="dashboard-value">5 farmers</p>
-        <a href="products.html" class="dashboard-link">Discover →</a>
-      </div>
-    </div>
-
-    <h2 class="section-title" style="margin-top:3rem;">Nearby Farmers</h2>
-    <div class="products-grid">
-      <div class="product-card">
-        <a href="product-detail.html">
-          <div class="card-image">
-            <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600" alt="Fresh Carrots">
-            <span class="verified-badge">✓ Verified</span>
-            <span class="badge-organic">Organic</span>
-          </div>
-        </a>
-        <div class="card-body">
-          <a href="product-detail.html" class="card-title">Fresh Carrots</a>
-          <div class="card-farmer-rating">
-            <span class="card-farmer">🌾 Green Valley, Labuan</span>
-            <span class="shop-rating"><span class="s">★</span> 4.9</span>
-          </div>
-          <div class="rating-row">
-            <div class="stars">
-              <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
-            </div>
-            <span class="stars-label">(89)</span>
-          </div>
-          <p class="card-price">₱195<span class="card-unit">/kg</span></p>
-          <a href="cart.html" class="add-cart-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            </svg>
-            Add to Cart
-          </a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <a href="product-detail.html">
-          <div class="card-image">
-            <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=600" alt="Tomatoes">
-            <span class="verified-badge">✓ Verified</span>
-            <span class="badge-organic">Organic</span>
-          </div>
-        </a>
-        <div class="card-body">
-          <a href="product-detail.html" class="card-title">Heirloom Tomatoes</a>
-          <div class="card-farmer-rating">
-            <span class="card-farmer">🌾 Sunrise Farm, Tugbungan</span>
-            <span class="shop-rating"><span class="s">★</span> 4.8</span>
-          </div>
-          <div class="rating-row">
-            <div class="stars">
-              <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
-            </div>
-            <span class="stars-label">(124)</span>
-          </div>
-          <p class="card-price">₱280<span class="card-unit">/kg</span></p>
-          <a href="cart.html" class="add-cart-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            </svg>
-            Add to Cart
-          </a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <a href="product-detail.html">
-          <div class="card-image">
-            <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600" alt="Lettuce">
-            <span class="verified-badge">✓ Verified</span>
-          </div>
-        </a>
-        <div class="card-body">
-          <a href="product-detail.html" class="card-title">Fresh Lettuce</a>
-          <div class="card-farmer-rating">
-            <span class="card-farmer">🌾 Labuan Greens</span>
-            <span class="shop-rating"><span class="s">★</span> 4.7</span>
-          </div>
-          <div class="rating-row">
-            <div class="stars">
-              <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
-            </div>
-            <span class="stars-label">(56)</span>
-          </div>
-          <p class="card-price">₱150<span class="card-unit">/kg</span></p>
-          <a href="cart.html" class="add-cart-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            </svg>
-            Add to Cart
-          </a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <a href="product-detail.html">
-          <div class="card-image">
-            <img src="https://images.unsplash.com/photo-1617343267181-9b19d22c8c2f?w=600" alt="Eggplant">
-            <span class="verified-badge">✓ Verified</span>
-            <span class="badge-organic">Organic</span>
-          </div>
-        </a>
-        <div class="card-body">
-          <a href="product-detail.html" class="card-title">Fresh Eggplant</a>
-          <div class="card-farmer-rating">
-            <span class="card-farmer">🌾 Pasonanca Organic</span>
-            <span class="shop-rating"><span class="s">★</span> 4.9</span>
-          </div>
-          <div class="rating-row">
-            <div class="stars">
-              <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
-            </div>
-            <span class="stars-label">(78)</span>
-          </div>
-          <p class="card-price">₱120<span class="card-unit">/kg</span></p>
-          <a href="cart.html" class="add-cart-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            </svg>
-            Add to Cart
-          </a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <a href="product-detail.html">
-          <div class="card-image">
-            <img src="https://images.unsplash.com/photo-1583612021-204744c5f18d?w=600" alt="Okra">
-            <span class="verified-badge">✓ Verified</span>
-          </div>
-        </a>
-        <div class="card-body">
-          <a href="product-detail.html" class="card-title">Fresh Okra</a>
-          <div class="card-farmer-rating">
-            <span class="card-farmer">🌾 Vitali Gardens</span>
-            <span class="shop-rating"><span class="s">★</span> 4.6</span>
-          </div>
-          <div class="rating-row">
-            <div class="stars">
-              <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
-            </div>
-            <span class="stars-label">(42)</span>
-          </div>
-          <p class="card-price">₱90<span class="card-unit">/kg</span></p>
-          <a href="cart.html" class="add-cart-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            </svg>
-            Add to Cart
-          </a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <a href="product-detail.html">
-          <div class="card-image">
-            <img src="https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=600" alt="Bitter Gourd">
-            <span class="verified-badge">✓ Verified</span>
-            <span class="badge-organic">Organic</span>
-          </div>
-        </a>
-        <div class="card-body">
-          <a href="product-detail.html" class="card-title">Bitter Gourd (Ampalaya)</a>
-          <div class="card-farmer-rating">
-            <span class="card-farmer">🌾 Culianan Farms</span>
-            <span class="shop-rating"><span class="s">★</span> 4.8</span>
-          </div>
-          <div class="rating-row">
-            <div class="stars">
-              <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
-            </div>
-            <span class="stars-label">(67)</span>
-          </div>
-          <p class="card-price">₱110<span class="card-unit">/kg</span></p>
-          <a href="cart.html" class="add-cart-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            </svg>
-            Add to Cart
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="section-title" style="margin-top:3rem;">Recommended for You</h2>
-    <div class="products-grid">
-      <div class="product-card">
-        <a href="product-detail.html">
-          <div class="card-image">
-            <img src="https://images.unsplash.com/photo-1553279702-acf4fd70afc7?w=600" alt="Mangoes">
-            <span class="verified-badge">✓ Verified</span>
-            <span class="badge-organic">Organic</span>
-          </div>
-        </a>
-        <div class="card-body">
-          <a href="product-detail.html" class="card-title">Sweet Mangoes</a>
-          <div class="card-farmer-rating">
-            <span class="card-farmer">🌾 Vitali Orchards</span>
-            <span class="shop-rating"><span class="s">★</span> 5.0</span>
-          </div>
-          <div class="rating-row">
-            <div class="stars">
-              <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
-            </div>
-            <span class="stars-label">(143)</span>
-          </div>
-          <p class="card-price">₱180<span class="card-unit">/kg</span></p>
-          <a href="cart.html" class="add-cart-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            </svg>
-            Add to Cart
-          </a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <a href="product-detail.html">
-          <div class="card-image">
-            <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=600" alt="Bananas">
-            <span class="verified-badge">✓ Verified</span>
-          </div>
-        </a>
-        <div class="card-body">
-          <a href="product-detail.html" class="card-title">Saba Bananas</a>
-          <div class="card-farmer-rating">
-            <span class="card-farmer">🌾 Labuan Plantation</span>
-            <span class="shop-rating"><span class="s">★</span> 4.9</span>
-          </div>
-          <div class="rating-row">
-            <div class="stars">
-              <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
-            </div>
-            <span class="stars-label">(98)</span>
-          </div>
-          <p class="card-price">₱60<span class="card-unit">/kg</span></p>
-          <a href="cart.html" class="add-cart-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            </svg>
-            Add to Cart
-          </a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <a href="product-detail.html">
-          <div class="card-image">
-            <img src="https://images.unsplash.com/photo-1517282009859-f000ec3b26fe?w=600" alt="Papayas">
-            <span class="verified-badge">✓ Verified</span>
-            <span class="badge-organic">Organic</span>
-          </div>
-        </a>
-        <div class="card-body">
-          <a href="product-detail.html" class="card-title">Fresh Papayas</a>
-          <div class="card-farmer-rating">
-            <span class="card-farmer">🌾 Pasonanca Fruits</span>
-            <span class="shop-rating"><span class="s">★</span> 4.7</span>
-          </div>
-          <div class="rating-row">
-            <div class="stars">
-              <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
-            </div>
-            <span class="stars-label">(71)</span>
-          </div>
-          <p class="card-price">₱85<span class="card-unit">/kg</span></p>
-          <a href="cart.html" class="add-cart-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            </svg>
-            Add to Cart
-          </a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <a href="product-detail.html">
-          <div class="card-image">
-            <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=600" alt="Pineapples">
-            <span class="verified-badge">✓ Verified</span>
-          </div>
-        </a>
-        <div class="card-body">
-          <a href="product-detail.html" class="card-title">Sweet Pineapples</a>
-          <div class="card-farmer-rating">
-            <span class="card-farmer">🌾 Taluksangay Tropics</span>
-            <span class="shop-rating"><span class="s">★</span> 4.8</span>
-          </div>
-          <div class="rating-row">
-            <div class="stars">
-              <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
-            </div>
-            <span class="stars-label">(85)</span>
-          </div>
-          <p class="card-price">₱140<span class="card-unit">/kg</span></p>
-          <a href="cart.html" class="add-cart-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            </svg>
-            Add to Cart
-          </a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <a href="product-detail.html">
-          <div class="card-image">
-            <img src="https://images.unsplash.com/photo-1589606663923-283bbd309229?w=600" alt="Coconuts">
-            <span class="verified-badge">✓ Verified</span>
-            <span class="badge-organic">Organic</span>
-          </div>
-        </a>
-        <div class="card-body">
-          <a href="product-detail.html" class="card-title">Fresh Coconuts</a>
-          <div class="card-farmer-rating">
-            <span class="card-farmer">🌾 Ayala Coconut Farm</span>
-            <span class="shop-rating"><span class="s">★</span> 4.9</span>
-          </div>
-          <div class="rating-row">
-            <div class="stars">
-              <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
-            </div>
-            <span class="stars-label">(102)</span>
-          </div>
-          <p class="card-price">₱45<span class="card-unit">/pc</span></p>
-          <a href="cart.html" class="add-cart-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            </svg>
-            Add to Cart
-          </a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <a href="product-detail.html">
-          <div class="card-image">
-            <img src="https://images.unsplash.com/photo-1634142143983-6c7d30672081?w=600" alt="Lanzones">
-            <span class="verified-badge">✓ Verified</span>
-          </div>
-        </a>
-        <div class="card-body">
-          <a href="product-detail.html" class="card-title">Lanzones (Pre-order)</a>
-          <div class="card-farmer-rating">
-            <span class="card-farmer">🌾 Culianan Orchards</span>
-            <span class="shop-rating"><span class="s">★</span> 5.0</span>
-          </div>
-          <div class="rating-row">
-            <div class="stars">
-              <span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span>
-            </div>
-            <span class="stars-label">(156)</span>
-          </div>
-          <p class="card-price">₱220<span class="card-unit">/kg</span></p>
-          <a href="cart.html" class="add-cart-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            </svg>
-            Pre-order Now
-          </a>
-        </div>
+      <div class="profile-settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
       </div>
     </div>
   </div>
-</section>
+
+  <div class="container" style="padding: 0.8rem;">
+    
+    <div class="vip-strip">
+      <div class="vip-badge">VIP</div>
+      <div class="vip-text">Exclusive Farm Tours: Book your visit now!</div>
+      <span style="color:#a07000; font-size:1.3rem;">›</span>
+    </div>
+
+    <div class="dash-card">
+      <div class="dash-card-hdr">
+        <div class="dash-card-title">My Purchases</div>
+        <a href="#" class="dash-card-link">View Purchase History ›</a>
+      </div>
+      <div class="purchase-steps">
+        <a href="#" class="ps-item">
+          <div class="ps-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg></div>
+          <div class="ps-label">To Pay</div>
+          <div class="ps-badge">2</div>
+        </a>
+        <a href="#" class="ps-item">
+          <div class="ps-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></div>
+          <div class="ps-label">To Ship</div>
+        </a>
+        <a href="#" class="ps-item">
+          <div class="ps-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 17h4V5H2v12h3m10 0h4v-7h-4v7Zm-5 0v2m4-2v2m-9-2v2"/></svg></div>
+          <div class="ps-label">To Receive</div>
+          <div class="ps-badge">1</div>
+        </a>
+        <a href="#" class="ps-item">
+          <div class="ps-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="ps-label">To Rate</div>
+        </a>
+      </div>
+    </div>
+
+    <a href="../Login/verify-farmer.html" class="start-selling-card">
+      <div class="ss-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="ss-body">
+        <div class="ss-title">Start Selling on FarmDirect</div>
+        <div class="ss-sub">Register as a Zamboanga Farmer today</div>
+      </div>
+      <span style="color:var(--green); font-weight:900; font-size:1.5rem;">›</span>
+    </a>
+
+    <div class="dash-card">
+      <div class="dash-card-hdr"><div class="dash-card-title">My Activities</div></div>
+      <div class="activities-grid">
+        <a href="#" class="act-item">
+          <div class="act-icon">❤️</div>
+          <div class="act-body">
+            <div class="act-title">Wishlist</div>
+            <div class="act-sub">12 items saved</div>
+          </div>
+        </a>
+        <a href="#" class="act-item">
+          <div class="act-icon">🎟️</div>
+          <div class="act-body">
+            <div class="act-title">My Vouchers</div>
+            <div class="act-sub">3 new vouchers</div>
+          </div>
+        </a>
+        <a href="#" class="act-item">
+          <div class="act-icon">🌱</div>
+          <div class="act-body">
+            <div class="act-title">Farm Bits</div>
+            <div class="act-sub">450 points</div>
+          </div>
+        </a>
+        <a href="#" class="act-item">
+          <div class="act-icon">⭐</div>
+          <div class="act-body">
+            <div class="act-title">My Ratings</div>
+            <div class="act-sub">View feedback</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="dash-card">
+      <div class="dash-card-hdr"><div class="dash-card-title">Recently Viewed</div></div>
+      <div class="recent-view-scroll">
+        <a href="#" class="rv-card">
+          <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=300" class="rv-img">
+          <div class="rv-name">Fresh Carrots</div>
+          <div class="rv-price">₱85.00</div>
+        </a>
+        <a href="#" class="rv-card">
+          <img src="https://images.unsplash.com/photo-1518977676601-b53f02ac6d31?w=300" class="rv-img">
+          <div class="rv-name">Native Potatoes</div>
+          <div class="rv-price">₱95.00</div>
+        </a>
+        <a href="#" class="rv-card">
+          <img src="https://images.unsplash.com/photo-1566385101042-1a0aa0c12e8c?w=300" class="rv-img">
+          <div class="rv-name">Fresh Cabbage</div>
+          <div class="rv-price">₱60.00</div>
+        </a>
+        <a href="#" class="rv-card">
+          <img src="https://images.unsplash.com/photo-1590865101275-4d99c14856cc?w=300" class="rv-img">
+          <div class="rv-name">Organic Ginger</div>
+          <div class="rv-price">₱45.00</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="dash-card">
+      <div class="acc-list">
+        <a href="#" class="acc-item">
+          <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div class="acc-text">Account Information</div>
+          <span style="color:var(--border);">›</span>
+        </a>
+        <a href="#" class="acc-item">
+          <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="acc-text">My Addresses</div>
+          <span style="color:var(--border);">›</span>
+        </a>
+        <a href="#" class="acc-item">
+          <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <div class="acc-text">Privacy & Security</div>
+          <span style="color:var(--border);">›</span>
+        </a>
+        <a href="#" class="acc-item">
+          <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="acc-text">Help Center</div>
+          <span style="color:var(--border);">›</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="logout-container">
+      <a href="../Login/login.html" class="logout-btn">Log Out</a>
+    </div>
+
+  </div>
+</div>
 
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-col">
-      <div class="footer-logo">🌾 FarmDirect</div>
-      <p class="footer-desc">Connecting Zamboanga farmers directly to your table</p>
+      <div class="footer-logo"><span class="logo-leaf"></span> FarmDirect</div>
+      <p class="footer-desc">Verified Local Farmers. Fresh Daily. Zamboanga City.</p>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 FarmDirect Zamboanga. All rights reserved.</p>
+    <div class="footer-col">
+      <h4>Account</h4>
+      <div class="footer-links">
+        <a href="Dashboard.html">My Dashboard</a>
+        <a href="cart.html">Shopping Cart</a>
+      </div>
     </div>
   </div>
 </footer>
