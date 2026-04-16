@@ -14,17 +14,20 @@
   <div class="nav-inner">
     <a href="../index.html" class="logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></a>
     <div class="nav-links">
-      <a href="../index.html" class="nav-link">Home</a>
+      <a href="../index.html"   class="nav-link">Home</a>
       <a href="Dashboard.html" class="nav-link">Dashboard</a>
-      <a href="Products.html" class="nav-link">Products</a>
-      <a href="Orders.html" class="nav-link active">Orders</a>
-      <a href="Reviews.html" class="nav-link">Reviews</a>
-      <a href="Settings.html" class="nav-link">Settings</a>
+      <a href="Products.html"  class="nav-link">Products</a>
+      <a href="Orders.html"    class="nav-link active">Orders</a>
+      <a href="Reviews.html"   class="nav-link">Reviews</a>
+      <a href="Settings.html"  class="nav-link">Settings</a>
     </div>
     <div class="nav-actions">
       <div class="notif-wrap">
         <button class="notif-btn" tabindex="0" aria-label="Notifications">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
           <span class="notif-badge"></span>
         </button>
         <div class="notif-dropdown">
@@ -37,7 +40,10 @@
       </div>
       <div class="notif-wrap">
         <button class="notif-btn" tabindex="0" aria-label="Profile">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
         </button>
         <div class="notif-dropdown" style="min-width:180px;">
           <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
@@ -57,84 +63,619 @@
   <div class="menu-panel">
     <div class="menu-section">
       <h3>Navigation</h3>
-      <a href="../index.html" class="menu-item">Home</a>
+      <a href="../index.html"   class="menu-item">Home</a>
       <a href="Dashboard.html" class="menu-item">Dashboard</a>
-      <a href="Products.html" class="menu-item">Products</a>
-      <a href="Orders.html" class="menu-item">Orders</a>
-      <a href="Reviews.html" class="menu-item">Reviews</a>
-      <a href="Settings.html" class="menu-item">Settings</a>
+      <a href="Products.html"  class="menu-item">Products</a>
+      <a href="Orders.html"    class="menu-item">Orders</a>
+      <a href="Reviews.html"   class="menu-item">Reviews</a>
+      <a href="Settings.html"  class="menu-item">Settings</a>
     </div>
     <a href="../index.html" class="menu-cta">Logout</a>
   </div>
 </nav>
 
 <main class="farmers-main">
+
+  <!-- Page header -->
   <div class="dash">
-    <div><div class="dash-title">📦 Track Order</div><p class="dash-sub">Real-time shipment tracking for your orders.</p></div>
+    <div>
+      <div class="dash-title">📦 Track Order</div>
+      <p class="dash-sub">View shipment progress and status for each order.</p>
+    </div>
     <a href="Orders.html" class="back-btn">← Back to Orders</a>
   </div>
 
-  <div class="track-grid">
-    <div class="card order-summary">
-      <div class="card-head"><span class="card-title">Order Summary</span><span class="badge b-del">Delivered</span></div>
-      <div class="summary-body">
-        <div class="summary-row"><span class="summary-label">Order ID</span><span class="summary-val"><b>ORD-00241</b></span></div>
-        <div class="summary-row"><span class="summary-label">Product</span><span class="summary-val">Fresh Tomatoes</span></div>
-        <div class="summary-row"><span class="summary-label">Customer</span><span class="summary-val">Maria Santos</span></div>
-        <div class="summary-row"><span class="summary-label">Address</span><span class="summary-val">Lunzuran, Zamboanga City</span></div>
-        <div class="summary-row"><span class="summary-label">Amount</span><span class="summary-val amount">₱210</span></div>
-        <div class="summary-row"><span class="summary-label">Payment</span><span class="summary-val">GCash</span></div>
-        <div class="summary-row"><span class="summary-label">Order Date</span><span class="summary-val">Mar 1, 2026</span></div>
-        <div class="summary-row"><span class="summary-label">Est. Delivery</span><span class="summary-val">Mar 3, 2026</span></div>
+  <!-- ══════════════════════════════════════
+       ORDER STATUS TABS — switch between views
+  ══════════════════════════════════════ -->
+  <div class="order-tabs">
+    <button class="otab otab-pen active"   onclick="showOrder('pending')">⏳ Pending <span class="otab-order">ORD-00240</span></button>
+    <button class="otab otab-pro"          onclick="showOrder('processing')">🔄 Processing <span class="otab-order">ORD-00239</span></button>
+    <button class="otab otab-del"          onclick="showOrder('delivered')">✅ Delivered <span class="otab-order">ORD-00241</span></button>
+    <button class="otab otab-can"          onclick="showOrder('cancelled')">❌ Cancelled <span class="otab-order">ORD-00237</span></button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       VIEW: PENDING — ORD-00240
+  ══════════════════════════════════════ -->
+  <div class="order-view" id="view-pending">
+
+    <div class="status-banner banner-pending">
+      <span class="sb-icon">⏳</span>
+      <div>
+        <div class="sb-title">Awaiting Confirmation</div>
+        <div class="sb-sub">This order is waiting for you to confirm and begin preparation. Please act soon — the customer is waiting.</div>
+      </div>
+      <div class="sb-actions">
+        <button class="sb-btn sb-btn-primary" onclick="showToast('✅ Order confirmed! Now move to Processing.')">✅ Confirm Order</button>
+        <button class="sb-btn sb-btn-danger"  onclick="showOrder('cancelled')">✕ Cancel Order</button>
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-head"><span class="card-title">🚚 Shipment Progress</span></div>
-      <div class="timeline">
-        <div class="step done">
-          <div class="step-icon">✅</div><div class="step-line"></div>
-          <div class="step-content"><div class="step-title">Order Placed</div><div class="step-time">Mar 1, 2026 · 9:12 AM</div><div class="step-desc">Your order has been received and confirmed.</div></div>
+    <div class="track-grid">
+      <div class="card order-summary">
+        <div class="card-head">
+          <span class="card-title">Order Summary</span>
+          <span class="badge b-pen">⏳ Pending</span>
         </div>
-        <div class="step done">
-          <div class="step-icon">📦</div><div class="step-line"></div>
-          <div class="step-content"><div class="step-title">Preparing Order</div><div class="step-time">Mar 1, 2026 · 11:00 AM</div><div class="step-desc">Farmer is packing your fresh produce.</div></div>
-        </div>
-        <div class="step done">
-          <div class="step-icon">🏍️</div><div class="step-line"></div>
-          <div class="step-content"><div class="step-title">Out for Delivery</div><div class="step-time">Mar 2, 2026 · 8:30 AM</div><div class="step-desc">Rider is on the way to your address.</div></div>
-        </div>
-        <div class="step done last">
-          <div class="step-icon">🏠</div><div class="step-line"></div>
-          <div class="step-content"><div class="step-title">Delivered</div><div class="step-time">Mar 3, 2026 · 2:45 PM</div><div class="step-desc">Package successfully delivered. Enjoy your fresh produce!</div></div>
+        <div class="summary-body">
+          <div class="summary-row"><span class="summary-label">Order ID</span><span class="summary-val"><b>ORD-00240</b></span></div>
+          <div class="summary-row"><span class="summary-label">Product</span><span class="summary-val">Organic Carrots</span></div>
+          <div class="summary-row"><span class="summary-label">Quantity</span><span class="summary-val">1 kg</span></div>
+          <div class="summary-row"><span class="summary-label">Customer</span><span class="summary-val">Juan dela Cruz</span></div>
+          <div class="summary-row"><span class="summary-label">Address</span><span class="summary-val">Culianan, Zamboanga City</span></div>
+          <div class="summary-row"><span class="summary-label">Amount</span><span class="summary-val amount">₱210</span></div>
+          <div class="summary-row"><span class="summary-label">Payment</span><span class="summary-val">COD</span></div>
+          <div class="summary-row"><span class="summary-label">Order Date</span><span class="summary-val">Feb 28, 2026</span></div>
+          <div class="summary-row"><span class="summary-label">Est. Delivery</span><span class="summary-val">Mar 2, 2026</span></div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="card courier-card">
-    <div class="card-head"><span class="card-title">🏍️ Courier Details</span></div>
-    <div class="courier-body">
-      <div class="courier-avatar">RD</div>
-      <div class="courier-info">
-        <div class="courier-name">Rodrigo Dela Cruz</div>
-        <div class="courier-meta">FarmDirect Rider · Zamboanga City</div>
-        <div class="courier-plate">Plate: ABC-1234</div>
-      </div>
-      <div class="courier-actions">
-        <a href="tel:+639000000000" class="courier-btn call">📞 Call Rider</a>
-        <a href="#" class="courier-btn msg">💬 Message</a>
+      <div class="card">
+        <div class="card-head"><span class="card-title">🚚 Shipment Progress</span></div>
+        <div class="timeline">
+
+          <div class="step step-done">
+            <div class="step-dot step-dot-done">✅</div>
+            <div class="step-line step-line-done"></div>
+            <div class="step-content">
+              <div class="step-title">Order Placed</div>
+              <div class="step-time">Feb 28, 2026 · 10:45 AM</div>
+              <div class="step-desc">Customer placed the order and payment method confirmed (COD).</div>
+            </div>
+          </div>
+
+          <div class="step step-active">
+            <div class="step-dot step-dot-active">⏳</div>
+            <div class="step-line step-line-pending"></div>
+            <div class="step-content">
+              <div class="step-title step-title-active">Awaiting Farmer Confirmation <span class="pulse-tag">Now</span></div>
+              <div class="step-time">Waiting since Feb 28, 2026 · 10:46 AM</div>
+              <div class="step-desc">The order is waiting for you to review and confirm before preparation begins.</div>
+            </div>
+          </div>
+
+          <div class="step step-upcoming">
+            <div class="step-dot step-dot-upcoming">📦</div>
+            <div class="step-line step-line-pending"></div>
+            <div class="step-content">
+              <div class="step-title step-title-upcoming">Preparing Order</div>
+              <div class="step-time">Not started yet</div>
+              <div class="step-desc">Once confirmed, you will harvest and pack the produce for delivery.</div>
+            </div>
+          </div>
+
+          <div class="step step-upcoming">
+            <div class="step-dot step-dot-upcoming">🏍️</div>
+            <div class="step-line step-line-pending"></div>
+            <div class="step-content">
+              <div class="step-title step-title-upcoming">Out for Delivery</div>
+              <div class="step-time">Not started yet</div>
+              <div class="step-desc">Rider will pick up and deliver to the customer's address.</div>
+            </div>
+          </div>
+
+          <div class="step step-upcoming step-last">
+            <div class="step-dot step-dot-upcoming">🏠</div>
+            <div class="step-line" style="display:none"></div>
+            <div class="step-content">
+              <div class="step-title step-title-upcoming">Delivered</div>
+              <div class="step-time">Not yet</div>
+              <div class="step-desc">Order will be marked delivered once customer confirms receipt.</div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
-  </div>
+
+    <!-- No courier yet -->
+    <div class="card courier-card">
+      <div class="card-head"><span class="card-title">🏍️ Courier Assignment</span></div>
+      <div class="no-courier-body">
+        <div class="no-courier-icon">🏍️</div>
+        <div class="no-courier-text">
+          <strong>No rider assigned yet</strong>
+          <p>A rider will be assigned once you confirm the order and begin preparation.</p>
+        </div>
+        <button class="sb-btn sb-btn-primary" onclick="showToast('✅ Order confirmed and rider notified!')">Confirm & Assign Rider</button>
+      </div>
+    </div>
+
+  </div><!-- /view-pending -->
+
+
+  <!-- ══════════════════════════════════════
+       VIEW: PROCESSING — ORD-00239
+  ══════════════════════════════════════ -->
+  <div class="order-view hidden" id="view-processing">
+
+    <div class="status-banner banner-processing">
+      <span class="sb-icon">🔄</span>
+      <div>
+        <div class="sb-title">Order is Being Prepared</div>
+        <div class="sb-sub">You confirmed this order. Harvest and pack the produce, then mark it ready for the rider to pick up.</div>
+      </div>
+      <div class="sb-actions">
+        <button class="sb-btn sb-btn-primary" onclick="showToast('🏍️ Order handed to rider! Status updated to Out for Delivery.')">Hand to Rider →</button>
+      </div>
+    </div>
+
+    <div class="track-grid">
+      <div class="card order-summary">
+        <div class="card-head">
+          <span class="card-title">Order Summary</span>
+          <span class="badge b-pro">🔄 Processing</span>
+        </div>
+        <div class="summary-body">
+          <div class="summary-row"><span class="summary-label">Order ID</span><span class="summary-val"><b>ORD-00239</b></span></div>
+          <div class="summary-row"><span class="summary-label">Product</span><span class="summary-val">Strawberries</span></div>
+          <div class="summary-row"><span class="summary-label">Quantity</span><span class="summary-val">5 boxes</span></div>
+          <div class="summary-row"><span class="summary-label">Customer</span><span class="summary-val">Ana Reyes</span></div>
+          <div class="summary-row"><span class="summary-label">Address</span><span class="summary-val">Guisao, Zamboanga City</span></div>
+          <div class="summary-row"><span class="summary-label">Amount</span><span class="summary-val amount">₱450</span></div>
+          <div class="summary-row"><span class="summary-label">Payment</span><span class="summary-val">GCash</span></div>
+          <div class="summary-row"><span class="summary-label">Order Date</span><span class="summary-val">Mar 4, 2026</span></div>
+          <div class="summary-row"><span class="summary-label">Est. Delivery</span><span class="summary-val">Mar 4, 2026 (same day)</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="card-title">🚚 Shipment Progress</span></div>
+        <div class="timeline">
+
+          <div class="step step-done">
+            <div class="step-dot step-dot-done">✅</div>
+            <div class="step-line step-line-done"></div>
+            <div class="step-content">
+              <div class="step-title">Order Placed</div>
+              <div class="step-time">Mar 4, 2026 · 7:30 AM</div>
+              <div class="step-desc">Customer placed the order. GCash payment confirmed.</div>
+            </div>
+          </div>
+
+          <div class="step step-done">
+            <div class="step-dot step-dot-done">✅</div>
+            <div class="step-line step-line-done"></div>
+            <div class="step-content">
+              <div class="step-title">Order Confirmed</div>
+              <div class="step-time">Mar 4, 2026 · 7:45 AM</div>
+              <div class="step-desc">You confirmed the order and started preparation.</div>
+            </div>
+          </div>
+
+          <div class="step step-active">
+            <div class="step-dot step-dot-processing">🔄</div>
+            <div class="step-line step-line-pending"></div>
+            <div class="step-content">
+              <div class="step-title step-title-active">Preparing Order <span class="pulse-tag pulse-blue">In Progress</span></div>
+              <div class="step-time">Started Mar 4, 2026 · 8:00 AM</div>
+              <div class="step-desc">Harvesting and packing 5 boxes of strawberries for Ana Reyes.</div>
+            </div>
+          </div>
+
+          <div class="step step-upcoming">
+            <div class="step-dot step-dot-upcoming">🏍️</div>
+            <div class="step-line step-line-pending"></div>
+            <div class="step-content">
+              <div class="step-title step-title-upcoming">Out for Delivery</div>
+              <div class="step-time">Waiting for handoff</div>
+              <div class="step-desc">Once packed, click "Hand to Rider" above and the rider will pick up.</div>
+            </div>
+          </div>
+
+          <div class="step step-upcoming step-last">
+            <div class="step-dot step-dot-upcoming">🏠</div>
+            <div class="step-line" style="display:none"></div>
+            <div class="step-content">
+              <div class="step-title step-title-upcoming">Delivered</div>
+              <div class="step-time">Est. Mar 4, 2026 (same day)</div>
+              <div class="step-desc">Order will be confirmed delivered once customer receives it.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Rider assigned but not yet picked up -->
+    <div class="card courier-card">
+      <div class="card-head"><span class="card-title">🏍️ Courier Details</span><span class="badge b-y">⏳ Awaiting Pickup</span></div>
+      <div class="courier-body">
+        <div class="courier-avatar">RD</div>
+        <div class="courier-info">
+          <div class="courier-name">Rodrigo Dela Cruz</div>
+          <div class="courier-meta">FarmDirect Rider · Zamboanga City</div>
+          <div class="courier-plate">Plate: ABC-1234</div>
+          <div class="courier-status-tag">🕐 Rider assigned — waiting for your packing to finish</div>
+        </div>
+        <div class="courier-actions">
+          <a href="tel:+639000000000" class="courier-btn call">📞 Call Rider</a>
+          <a href="#" class="courier-btn msg">💬 Message</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /view-processing -->
+
+
+  <!-- ══════════════════════════════════════
+       VIEW: DELIVERED — ORD-00241
+  ══════════════════════════════════════ -->
+  <div class="order-view hidden" id="view-delivered">
+
+    <div class="status-banner banner-delivered">
+      <span class="sb-icon">✅</span>
+      <div>
+        <div class="sb-title">Order Successfully Delivered!</div>
+        <div class="sb-sub">The customer confirmed receipt on Mar 3, 2026 at 2:45 PM. Payment has been settled.</div>
+      </div>
+      <div class="sb-actions">
+        <a href="Reviews.html" class="sb-btn sb-btn-outline">⭐ View Review</a>
+      </div>
+    </div>
+
+    <div class="track-grid">
+      <div class="card order-summary">
+        <div class="card-head">
+          <span class="card-title">Order Summary</span>
+          <span class="badge b-del">✅ Delivered</span>
+        </div>
+        <div class="summary-body">
+          <div class="summary-row"><span class="summary-label">Order ID</span><span class="summary-val"><b>ORD-00241</b></span></div>
+          <div class="summary-row"><span class="summary-label">Product</span><span class="summary-val">Fresh Tomatoes</span></div>
+          <div class="summary-row"><span class="summary-label">Quantity</span><span class="summary-val">2 kg</span></div>
+          <div class="summary-row"><span class="summary-label">Customer</span><span class="summary-val">Maria Santos</span></div>
+          <div class="summary-row"><span class="summary-label">Address</span><span class="summary-val">Lunzuran, Zamboanga City</span></div>
+          <div class="summary-row"><span class="summary-label">Amount</span><span class="summary-val amount">₱380</span></div>
+          <div class="summary-row"><span class="summary-label">Payment</span><span class="summary-val">GCash ✅ Paid</span></div>
+          <div class="summary-row"><span class="summary-label">Order Date</span><span class="summary-val">Mar 1, 2026</span></div>
+          <div class="summary-row"><span class="summary-label">Delivered On</span><span class="summary-val" style="color:var(--success);font-weight:700;">Mar 3, 2026 · 2:45 PM</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="card-title">🚚 Shipment Progress</span></div>
+        <div class="timeline">
+
+          <div class="step step-done">
+            <div class="step-dot step-dot-done">✅</div>
+            <div class="step-line step-line-done"></div>
+            <div class="step-content">
+              <div class="step-title">Order Placed</div>
+              <div class="step-time">Mar 1, 2026 · 9:12 AM</div>
+              <div class="step-desc">Customer placed the order and GCash payment confirmed.</div>
+            </div>
+          </div>
+
+          <div class="step step-done">
+            <div class="step-dot step-dot-done">✅</div>
+            <div class="step-line step-line-done"></div>
+            <div class="step-content">
+              <div class="step-title">Order Confirmed</div>
+              <div class="step-time">Mar 1, 2026 · 9:30 AM</div>
+              <div class="step-desc">Farmer confirmed and started preparation.</div>
+            </div>
+          </div>
+
+          <div class="step step-done">
+            <div class="step-dot step-dot-done">✅</div>
+            <div class="step-line step-line-done"></div>
+            <div class="step-content">
+              <div class="step-title">Preparing Order</div>
+              <div class="step-time">Mar 1, 2026 · 11:00 AM</div>
+              <div class="step-desc">Tomatoes harvested, sorted, and packed for delivery.</div>
+            </div>
+          </div>
+
+          <div class="step step-done">
+            <div class="step-dot step-dot-done">✅</div>
+            <div class="step-line step-line-done"></div>
+            <div class="step-content">
+              <div class="step-title">Out for Delivery</div>
+              <div class="step-time">Mar 2, 2026 · 8:30 AM</div>
+              <div class="step-desc">Rider Rodrigo picked up and is on the way to Lunzuran.</div>
+            </div>
+          </div>
+
+          <div class="step step-done step-last">
+            <div class="step-dot step-dot-done">🏠</div>
+            <div class="step-line" style="display:none"></div>
+            <div class="step-content">
+              <div class="step-title">Delivered ✅</div>
+              <div class="step-time">Mar 3, 2026 · 2:45 PM</div>
+              <div class="step-desc">Package successfully delivered to Maria Santos. Customer confirmed receipt.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card courier-card">
+      <div class="card-head"><span class="card-title">🏍️ Courier Details</span><span class="badge b-del">✅ Delivered</span></div>
+      <div class="courier-body">
+        <div class="courier-avatar">RD</div>
+        <div class="courier-info">
+          <div class="courier-name">Rodrigo Dela Cruz</div>
+          <div class="courier-meta">FarmDirect Rider · Zamboanga City</div>
+          <div class="courier-plate">Plate: ABC-1234</div>
+        </div>
+        <div class="courier-actions">
+          <a href="tel:+639000000000" class="courier-btn call">📞 Call Rider</a>
+          <a href="#" class="courier-btn msg">💬 Message</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /view-delivered -->
+
+
+  <!-- ══════════════════════════════════════
+       VIEW: CANCELLED — ORD-00237
+  ══════════════════════════════════════ -->
+  <div class="order-view hidden" id="view-cancelled">
+
+    <div class="status-banner banner-cancelled">
+      <span class="sb-icon">❌</span>
+      <div>
+        <div class="sb-title">Order Cancelled</div>
+        <div class="sb-sub">This order was cancelled on Mar 3, 2026 at 1:15 PM. See the reason and details below.</div>
+      </div>
+      <div class="sb-actions">
+        <a href="Orders.html" class="sb-btn sb-btn-outline-white">← View All Orders</a>
+      </div>
+    </div>
+
+    <div class="track-grid">
+      <div class="card order-summary">
+        <div class="card-head">
+          <span class="card-title">Order Summary</span>
+          <span class="badge b-can">❌ Cancelled</span>
+        </div>
+        <div class="summary-body">
+          <div class="summary-row"><span class="summary-label">Order ID</span><span class="summary-val"><b>ORD-00237</b></span></div>
+          <div class="summary-row"><span class="summary-label">Product</span><span class="summary-val">Sweet Corn</span></div>
+          <div class="summary-row"><span class="summary-label">Quantity</span><span class="summary-val">22 pieces</span></div>
+          <div class="summary-row"><span class="summary-label">Customer</span><span class="summary-val">Liza Gomez</span></div>
+          <div class="summary-row"><span class="summary-label">Address</span><span class="summary-val">Putik, Zamboanga City</span></div>
+          <div class="summary-row"><span class="summary-label">Amount</span><span class="summary-val" style="color:var(--danger);font-weight:700;">₱440 — Refunded</span></div>
+          <div class="summary-row"><span class="summary-label">Payment</span><span class="summary-val">PayMaya</span></div>
+          <div class="summary-row"><span class="summary-label">Order Date</span><span class="summary-val">Mar 3, 2026</span></div>
+          <div class="summary-row"><span class="summary-label">Cancelled On</span><span class="summary-val" style="color:var(--danger);font-weight:700;">Mar 3, 2026 · 1:15 PM</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="card-title">🚚 Shipment Progress</span></div>
+        <div class="timeline">
+
+          <div class="step step-done">
+            <div class="step-dot step-dot-done">✅</div>
+            <div class="step-line step-line-done"></div>
+            <div class="step-content">
+              <div class="step-title">Order Placed</div>
+              <div class="step-time">Mar 3, 2026 · 10:00 AM</div>
+              <div class="step-desc">Customer placed the order. PayMaya payment confirmed.</div>
+            </div>
+          </div>
+
+          <div class="step step-cancelled">
+            <div class="step-dot step-dot-cancelled">❌</div>
+            <div class="step-line step-line-cancelled"></div>
+            <div class="step-content">
+              <div class="step-title step-title-cancelled">Order Cancelled</div>
+              <div class="step-time">Mar 3, 2026 · 1:15 PM</div>
+              <div class="step-desc">The order was cancelled before preparation began. See cancellation reason below.</div>
+            </div>
+          </div>
+
+          <div class="step step-void">
+            <div class="step-dot step-dot-void">📦</div>
+            <div class="step-line step-line-void"></div>
+            <div class="step-content">
+              <div class="step-title step-title-void">Preparing Order</div>
+              <div class="step-time">—</div>
+              <div class="step-desc">Did not proceed.</div>
+            </div>
+          </div>
+
+          <div class="step step-void">
+            <div class="step-dot step-dot-void">🏍️</div>
+            <div class="step-line step-line-void"></div>
+            <div class="step-content">
+              <div class="step-title step-title-void">Out for Delivery</div>
+              <div class="step-time">—</div>
+              <div class="step-desc">Did not proceed.</div>
+            </div>
+          </div>
+
+          <div class="step step-void step-last">
+            <div class="step-dot step-dot-void">🏠</div>
+            <div class="step-line" style="display:none"></div>
+            <div class="step-content">
+              <div class="step-title step-title-void">Delivered</div>
+              <div class="step-time">—</div>
+              <div class="step-desc">Did not proceed.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CANCELLATION REASON CARD -->
+    <div class="card cancellation-card">
+      <div class="card-head">
+        <span class="card-title">❌ Cancellation Details</span>
+        <span class="badge b-can">Cancelled by Customer</span>
+      </div>
+      <div class="cancellation-body">
+
+        <div class="cancel-reason-block">
+          <div class="cancel-reason-label">Reason for Cancellation</div>
+          <div class="cancel-reason-tag">
+            <span class="cancel-reason-icon">💬</span>
+            <span class="cancel-reason-text">Customer changed their mind</span>
+          </div>
+          <div class="cancel-reason-message">
+            "Sorry po, nabili na ko ng mais sa palengke kanina. I'll order again next time."
+          </div>
+        </div>
+
+        <div class="cancel-info-grid">
+          <div class="cancel-info-item">
+            <div class="cancel-info-label">Cancelled By</div>
+            <div class="cancel-info-val">Liza Gomez (Customer)</div>
+          </div>
+          <div class="cancel-info-item">
+            <div class="cancel-info-label">Cancelled On</div>
+            <div class="cancel-info-val">Mar 3, 2026 · 1:15 PM</div>
+          </div>
+          <div class="cancel-info-item">
+            <div class="cancel-info-label">Time After Order</div>
+            <div class="cancel-info-val">1 hour 15 minutes</div>
+          </div>
+          <div class="cancel-info-item">
+            <div class="cancel-info-label">Stage at Cancellation</div>
+            <div class="cancel-info-val">Before preparation started</div>
+          </div>
+          <div class="cancel-info-item">
+            <div class="cancel-info-label">Refund Status</div>
+            <div class="cancel-info-val" style="color:var(--success);font-weight:700;">✅ ₱440 refunded via PayMaya</div>
+          </div>
+          <div class="cancel-info-item">
+            <div class="cancel-info-label">Stock Restored</div>
+            <div class="cancel-info-val" style="color:var(--success);font-weight:700;">✅ 22 pieces returned to stock</div>
+          </div>
+        </div>
+
+        <!-- Common reasons reference -->
+        <div class="cancel-common-reasons">
+          <div class="ccr-title">📋 Common cancellation reasons on FarmDirect</div>
+          <div class="ccr-list">
+            <div class="ccr-item ccr-customer">
+              <span class="ccr-badge ccr-badge-cust">Customer</span>
+              <span>Changed mind / found elsewhere</span>
+            </div>
+            <div class="ccr-item ccr-customer">
+              <span class="ccr-badge ccr-badge-cust">Customer</span>
+              <span>Ordered by mistake</span>
+            </div>
+            <div class="ccr-item ccr-customer">
+              <span class="ccr-badge ccr-badge-cust">Customer</span>
+              <span>Cannot receive delivery today</span>
+            </div>
+            <div class="ccr-item ccr-farmer">
+              <span class="ccr-badge ccr-badge-farm">Farmer</span>
+              <span>Product no longer available / sold out</span>
+            </div>
+            <div class="ccr-item ccr-farmer">
+              <span class="ccr-badge ccr-badge-farm">Farmer</span>
+              <span>Unable to deliver to the address</span>
+            </div>
+            <div class="ccr-item ccr-farmer">
+              <span class="ccr-badge ccr-badge-farm">Farmer</span>
+              <span>Produce quality not suitable for delivery</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cancel-farmer-note">
+          <strong>💡 Farmer tip:</strong> Too many cancellations can lower your store rating. If you need to cancel an order, always message the customer first and explain the reason clearly.
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /view-cancelled -->
+
 </main>
 
+<!-- Toast -->
+<div class="shipping-toast" id="shipping-toast"></div>
+
 <footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-col"><div class="footer-logo">🌾 FarmDirect</div><p class="footer-desc">Connecting Zamboanga farmers directly to your table.</p></div>
+  <div class="footer-container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></div>
+        <p class="footer-desc">Connecting Zamboanga farmers to your table. Fresh, local, and delivered with care.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link">Facebook</a>
+          <a href="#" class="social-link">Instagram</a>
+          <a href="#" class="social-link">Twitter</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <a href="../index.html">Home</a>
+          <a href="Products.html">My Products</a>
+          <a href="Dashboard.html">Dashboard</a>
+          <a href="Orders.html">Orders</a>
+        </div>
+        <div class="footer-col">
+          <h4>Categories</h4>
+          <a href="#">Vegetables</a>
+          <a href="#">Fruits</a>
+          <a href="#">Meats</a>
+          <a href="#">Dairy</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="tel:+639123456789">+63 912 345 6789</a>
+          <a href="mailto:hello@farmdirect.ph">hello@farmdirect.ph</a>
+          <p>Mon-Sat: 6AM - 8PM</p>
+          <p>Zamboanga City, PH</p>
+        </div>
+      </div>
+    </div>
     <div class="footer-bottom"><p>© 2026 FarmDirect Zamboanga. All rights reserved.</p></div>
   </div>
 </footer>
-<script>lucide.createIcons();</script>
+
+<script>
+lucide.createIcons();
+
+function showOrder(state) {
+  // Hide all views
+  document.querySelectorAll('.order-view').forEach(v => v.classList.add('hidden'));
+  // Deactivate all tabs
+  document.querySelectorAll('.otab').forEach(t => t.classList.remove('active'));
+  // Show selected view
+  document.getElementById('view-' + state).classList.remove('hidden');
+  // Activate selected tab
+  const tabMap = { pending:'otab-pen', processing:'otab-pro', delivered:'otab-del', cancelled:'otab-can' };
+  document.querySelector('.' + tabMap[state]).classList.add('active');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('shipping-toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+</script>
 </body>
 </html>

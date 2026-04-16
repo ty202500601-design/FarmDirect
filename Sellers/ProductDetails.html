@@ -232,28 +232,83 @@
         <!-- Farmer controls -->
         <div class="farmer-controls">
 
-          <div class="fc-row">
-            <span class="fc-label">Stock</span>
-            <div class="fc-val-row">
-              <div class="qty-ctrl">
-                <button class="qty-btn" onclick="changeStock(-1)">−</button>
-                <span class="qty-val" id="stock-display">4</span>
-                <button class="qty-btn" onclick="changeStock(1)">+</button>
-              </div>
-              <span class="qty-stock">units · <a href="#" class="inline-link">Set alert threshold</a></span>
+          <!-- Stock + Price per unit — driven by what's set in StockUpdate -->
+          <!-- Each row = one unit that has stock. No checkboxes needed. -->
+          <div class="fc-row fc-row-col">
+            <div class="ustock-header-row">
+              <span class="fc-label">Stock &amp; Price per unit</span>
+              <span class="ustock-from-note">
+                📦 Pulled from your stock settings ·
+                <a href="StockUpdate.html" class="inline-link">Update Stock →</a>
+              </span>
             </div>
-          </div>
 
-          <div class="fc-row">
-            <span class="fc-label">Price / kg</span>
-            <div class="fc-val-row">
-              <div class="price-edit-wrap">
-                <span class="price-currency">₱</span>
-                <input type="number" id="price-input" value="35" min="1" class="price-edit-input" oninput="updateRevenue()"/>
-                <span class="price-per">/ kg</span>
+            <div class="ustock-grid">
+
+              <!-- per kg — 4 kg in stock (from StockUpdate) -->
+              <div class="ustock-row ustock-primary">
+                <div class="ustock-left">
+                  <span class="ustock-icon">⚖️</span>
+                  <div class="ustock-info">
+                    <span class="ustock-unit">per kg</span>
+                    <span class="ustock-qty-tag ustock-qty-low">4 kg · 🔴 Low</span>
+                  </div>
+                  <span class="ustock-primary-star" title="Primary unit used for revenue estimate">★ Primary</span>
+                </div>
+                <div class="ustock-price-wrap">
+                  <span class="ustock-currency">₱</span>
+                  <input type="number" id="price-kg" value="35" min="0" class="ustock-price-input" oninput="updateRevenue()"/>
+                  <span class="ustock-per">/ kg</span>
+                </div>
               </div>
-              <span class="price-rev-note" id="rev-note">Est. revenue if all sold: <b>₱140</b></span>
+
+              <!-- per bundle — 20 bundles in stock -->
+              <div class="ustock-row">
+                <div class="ustock-left">
+                  <span class="ustock-icon">🌿</span>
+                  <div class="ustock-info">
+                    <span class="ustock-unit">per bundle</span>
+                    <span class="ustock-qty-tag ustock-qty-ok">20 bundles · ✅ Good</span>
+                  </div>
+                </div>
+                <div class="ustock-price-wrap">
+                  <span class="ustock-currency">₱</span>
+                  <input type="number" id="price-bundle" value="18" min="0" class="ustock-price-input" oninput="updateRevenue()"/>
+                  <span class="ustock-per">/ bundle</span>
+                </div>
+              </div>
+
+              <!-- per box — 3 boxes in stock -->
+              <div class="ustock-row">
+                <div class="ustock-left">
+                  <span class="ustock-icon">🗃️</span>
+                  <div class="ustock-info">
+                    <span class="ustock-unit">per box</span>
+                    <span class="ustock-qty-tag ustock-qty-warn">3 boxes · ⚠️ Low</span>
+                  </div>
+                </div>
+                <div class="ustock-price-wrap">
+                  <span class="ustock-currency">₱</span>
+                  <input type="number" id="price-box" value="160" min="0" class="ustock-price-input" oninput="updateRevenue()"/>
+                  <span class="ustock-per">/ box</span>
+                </div>
+              </div>
+
             </div>
+
+            <!-- Revenue estimate row -->
+            <div class="ustock-revenue-row">
+              <span class="ustock-rev-label">Est. total revenue if all sold:</span>
+              <div class="ustock-rev-breakdown" id="rev-breakdown">
+                <span class="ustock-rev-chip" id="rev-kg">₱140 <span>kg</span></span>
+                <span class="ustock-rev-plus">+</span>
+                <span class="ustock-rev-chip" id="rev-bundle">₱360 <span>bundles</span></span>
+                <span class="ustock-rev-plus">+</span>
+                <span class="ustock-rev-chip" id="rev-box">₱480 <span>boxes</span></span>
+                <span class="ustock-rev-total">= <b id="rev-total">₱980</b></span>
+              </div>
+            </div>
+
           </div>
 
           <div class="fc-row">
@@ -617,7 +672,7 @@
         <div class="footer-col">
           <h4>Contact</h4>
           <a href="tel:+639123456789">+63 912 345 6789</a>
-          <a href="mailto:hello@farmdirect.ph">hello@farmdirect.ph</a>
+          <a href="/cdn-cgi/l/email-protection#3d55585151527d5b5c4f5059544f585e49134d55"><span class="__cf_email__" data-cfemail="81e9e4ededeec1e7e0f3ece5e8f3e4e2f5aff1e9">[email&#160;protected]</span></a>
           <p>Mon-Sat: 6AM - 8PM</p>
           <p>Zamboanga City, PH</p>
         </div>
@@ -627,19 +682,37 @@
   </div>
 </footer>
 
-<script>
-let stock = 4;
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+let stock = 4; // total kg (primary) — kept for backward compat
 function changeStock(d) {
   stock = Math.max(0, stock + d);
-  document.getElementById('stock-display').textContent = stock;
+  if (document.getElementById('stock-display')) document.getElementById('stock-display').textContent = stock;
   updateRevenue();
 }
 function updateRevenue() {
-  const price = parseFloat(document.getElementById('price-input').value) || 0;
-  const rev = (price * stock).toLocaleString();
-  const note = 'Est. revenue if all sold: <b>₱' + rev + '</b>';
-  document.getElementById('rev-note').innerHTML = note;
-  document.getElementById('rev-note-inline').textContent = '₱' + rev;
+  // Stock values (match StockUpdate.html)
+  const stocks = { kg: 4, bundle: 20, box: 3 };
+  const priceKg     = parseFloat(document.getElementById('price-kg')?.value)     || 0;
+  const priceBundle = parseFloat(document.getElementById('price-bundle')?.value) || 0;
+  const priceBox    = parseFloat(document.getElementById('price-box')?.value)    || 0;
+
+  const revKg     = priceKg     * stocks.kg;
+  const revBundle = priceBundle * stocks.bundle;
+  const revBox    = priceBox    * stocks.box;
+  const total     = revKg + revBundle + revBox;
+
+  // Update revenue chips
+  const chipKg     = document.getElementById('rev-kg');
+  const chipBundle = document.getElementById('rev-bundle');
+  const chipBox    = document.getElementById('rev-box');
+  const chipTotal  = document.getElementById('rev-total');
+  const noteInline = document.getElementById('rev-note-inline');
+
+  if (chipKg)     chipKg.innerHTML     = '₱' + revKg.toLocaleString()     + ' <span>kg</span>';
+  if (chipBundle) chipBundle.innerHTML = '₱' + revBundle.toLocaleString() + ' <span>bundles</span>';
+  if (chipBox)    chipBox.innerHTML    = '₱' + revBox.toLocaleString()    + ' <span>boxes</span>';
+  if (chipTotal)  chipTotal.textContent = '₱' + total.toLocaleString();
+  if (noteInline) noteInline.textContent = '₱' + total.toLocaleString();
 }
 function saveStock() {
   const toast = document.getElementById('cart-toast');
@@ -657,7 +730,7 @@ function switchTab(btn, id) {
   btn.classList.add('active');
   document.getElementById(id).classList.add('active');
 }
-document.querySelectorAll('.rfbtn').forEach(b => {
+document.querySelectorlls('.rfbtn').forEach(b => {
   b.addEventListener('click', function() {
     document.querySelectorAll('.rfbtn').forEach(x => x.classList.remove('active'));
     this.classList.add('active');
