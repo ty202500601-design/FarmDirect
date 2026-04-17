@@ -1,7 +1,5 @@
 /* ============================================================
    FarmDirect Zamboanga — Master Stylesheet
-   Shopee-inspired features: flash sales, discounts, vouchers,
-   wishlist, ratings, search, and more.
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -745,6 +743,446 @@ input.wishlist-check:checked + label.wishlist-btn { color: var(--red); }
 .success-actions { display: flex; flex-direction: column; gap: 0.7rem; margin-top: 1.4rem; }
 .outline-btn { display: flex; align-items: center; justify-content: center; border: 2px solid var(--green); color: var(--green); padding: 0.65rem 1.1rem; border-radius: 10px; font-size: 0.9rem; font-weight: 600; transition: background 0.2s; }
 .outline-btn:hover { background: var(--green-light); }
+
+/* ── CHECKOUT PAYMENT PAGE ── */
+
+/* Side-by-side layout: form on left, summary on right */
+.checkout-layout {
+  display: flex; gap: 1.8rem; align-items: flex-start; flex-wrap: wrap;
+}
+/* Form takes up remaining space */
+.checkout-form-col {
+  flex: 1; min-width: 280px;
+}
+/* Summary card fixed width */
+.checkout-summary-col {
+  flex: 0 0 300px;
+}
+
+/* GCash input form — hidden by default, shows when GCash radio is checked */
+.gcash-form {
+  display: none; padding: 1rem; background: var(--green-light);
+  border-radius: 10px; margin-top: 0.5rem; border: 1px solid rgba(26,58,34,0.2);
+}
+#pay-gcash:checked ~ .gcash-form { display: block; }
+
+/* Small lock icon row below payment options */
+.pay-security {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;
+  padding: 0.6rem 0.9rem; background: var(--cream);
+  border-radius: 8px; border: 1px solid var(--border);
+}
+
+/* GCash promo banner — uses site green instead of mismatched blue */
+.gcash-promo-banner {
+  background: linear-gradient(135deg, var(--green), var(--green-mid));
+  color: #fff; border-radius: 10px;
+  padding: 0.85rem 1.1rem; margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.7rem; font-size: 0.84rem;
+  border: 1px solid var(--green-dark);
+}
+.gcash-promo-icon { font-size: 1.3rem; flex-shrink: 0; }
+
+/* GCash cashback badge inside the radio label */
+.gcash-cashback-badge {
+  background: var(--green); color: #fff;
+  font-size: 0.65rem; font-weight: 700;
+  padding: 0.1rem 0.45rem; border-radius: 4px; margin-left: 0.35rem;
+  vertical-align: middle;
+}
+
+/* ── CHECKOUT CONFIRM PAGE ── */
+
+/* Centered narrow layout for the confirm page */
+.confirm-layout { max-width: 640px; margin: 0 auto; }
+
+/* Savings highlight box — green theme to match the site */
+.savings-highlight {
+  background: var(--green-light);
+  border: 2px solid var(--green); border-radius: var(--radius);
+  padding: 1rem 1.3rem; text-align: center; margin-bottom: 1.2rem;
+  position: relative; overflow: hidden;
+}
+/* Subtle leaf pattern in the background */
+.savings-highlight::before {
+  content: '🌿'; position: absolute; right: 1rem; top: 50%;
+  transform: translateY(-50%); font-size: 3rem; opacity: 0.12; pointer-events: none;
+}
+.savings-highlight-title {
+  font-size: 0.95rem; font-weight: 700; color: var(--green);
+}
+.savings-highlight-sub {
+  font-size: 0.8rem; color: var(--green-mid); margin-top: 0.3rem; opacity: 0.85;
+}
+
+/* Terms note below the order summary */
+.terms-note {
+  font-size: 0.8rem; color: var(--text-light);
+  text-align: center; margin-bottom: 1rem;
+}
+.terms-note a { color: var(--green); font-weight: 600; }
+.terms-note a:hover { text-decoration: underline; }
+
+/* Place Order button — deep green, stands out as the primary action */
+.place-order-btn {
+  width: auto; background: var(--green-dark);
+  border: 2px solid var(--green-dark);
+}
+.place-order-btn:hover { background: var(--green); }
+
+/* Edit link inside confirm boxes */
+.confirm-edit-link {
+  font-size: 0.8rem; color: var(--green);
+  font-weight: 600; display: inline-block; margin-top: 0.5rem;
+  transition: opacity 0.2s;
+}
+.confirm-edit-link:hover { opacity: 0.7; }
+
+/* ── ORDER SUCCESS PAGE ── */
+
+/* Success card — slightly wider, green top border accent */
+.success-card-wide {
+  background: var(--white); border-radius: var(--radius);
+  border: 2px solid var(--border); border-top: 4px solid var(--green);
+  padding: 2.5rem 2rem;
+  max-width: 520px; width: 100%; text-align: center;
+  box-shadow: var(--shadow-md); animation: popIn 0.5s ease both;
+}
+.success-card-wide h1 {
+  font-family: var(--font-display); font-size: 1.9rem;
+  font-weight: 700; margin-bottom: 0.4rem; color: var(--green);
+}
+.success-card-wide > p {
+  color: var(--text-mid); font-size: 0.9rem; line-height: 1.6;
+}
+
+/* Order detail rows inside the cream box */
+.order-details-box {
+  background: var(--green-light); border-radius: 10px;
+  border: 1.5px solid rgba(26,58,34,0.2); padding: 1rem 1.2rem;
+  margin: 1rem 0; text-align: left;
+}
+.order-details-row {
+  display: flex; justify-content: space-between;
+  font-size: 0.85rem; padding: 0.3rem 0;
+}
+.order-details-row span { color: var(--green-mid); }
+.order-details-row strong { color: var(--text); }
+
+/* Separator line inside the details box */
+.order-details-divider {
+  border-top: 1px solid rgba(26,58,34,0.15); margin-top: 0.3rem; padding-top: 0.5rem;
+}
+
+/* Total amount row — bold green */
+.order-details-total strong {
+  color: var(--green); font-size: 1.05rem; font-weight: 800;
+}
+/* Savings row — orange accent is appropriate here as a celebration */
+.order-details-saved span, .order-details-saved strong { color: var(--orange); }
+
+/* Voucher earned box — deep green gradient matching navbar */
+.voucher-earned {
+  background: linear-gradient(135deg, var(--green), var(--green-mid));
+  color: #fff; border-radius: 10px;
+  padding: 1rem 1.2rem; margin: 0.7rem 0;
+  border: 1px solid var(--green-dark);
+}
+.voucher-earned h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.15rem; }
+.voucher-earned p { font-size: 0.78rem; opacity: 0.9; line-height: 1.5; }
+/* Voucher code chip — stands out on the green background */
+.voucher-earned code {
+  background: rgba(255,255,255,0.2); padding: 0.15rem 0.55rem;
+  border-radius: 5px; font-size: 0.92rem; font-weight: 800; letter-spacing: 0.06em;
+  border: 1px solid rgba(255,255,255,0.35);
+}
+
+/* Review prompt box — cream with green border, fits the site palette */
+.review-prompt {
+  background: var(--cream); border: 2px solid var(--border);
+  border-radius: 10px; padding: 1rem 1.2rem; margin-top: 1rem; text-align: left;
+}
+.review-prompt h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text); }
+.review-prompt-sub { font-size: 0.8rem; color: var(--text-mid); margin-bottom: 0.4rem; }
+
+/* Row of star emoji buttons */
+.star-input { display: flex; gap: 0.3rem; justify-content: center; margin: 0.4rem 0; }
+.star-input span { font-size: 1.6rem; cursor: pointer; transition: transform 0.15s; }
+.star-input span:hover { transform: scale(1.2); }
+
+/* ── ORDER TRACKING PAGE ── */
+
+/* Main wrapper with top padding to clear the navbar */
+.tracking-wrap { padding: calc(var(--nav-h) + 2rem) 0 5rem; min-height: 100vh; }
+
+/* Card that shows order number, date, status etc. */
+.order-meta-card {
+  background: var(--white); border-radius: var(--radius);
+  border: 2px solid var(--border); border-top: 3px solid var(--green);
+  padding: 1.5rem; margin-bottom: 1.8rem;
+}
+.order-meta-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1.2rem;
+}
+.meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+.meta-label { font-size: 0.78rem; color: var(--text-light); font-weight: 500; text-transform: uppercase; letter-spacing: 0.03em; }
+.meta-value { font-size: 0.98rem; font-weight: 700; color: var(--text); }
+.meta-value.green { color: var(--green); font-size: 1.1rem; }
+.meta-value.orange { color: var(--orange); }
+/* Status uses green-adjacent purple to stand out without clashing */
+.meta-value.purple { color: #5c3d7a; font-weight: 700; }
+
+/* Fake map placeholder — green gradient matching the site's farm feel */
+.live-map {
+  background: linear-gradient(135deg, var(--green-light) 0%, var(--cream) 50%, #ddeedd 100%);
+  border-radius: var(--radius); border: 2px solid var(--border);
+  height: 220px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.8rem; position: relative; overflow: hidden;
+}
+/* Subtle grid lines drawn using a background SVG */
+.live-map::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M0 30h60M30 0v60' stroke='rgba(26,58,34,0.07)' stroke-width='1'/%3E%3C/svg%3E");
+}
+/* Bouncing taxi pin */
+.map-pin { font-size: 2.5rem; animation: bounce 1.5s infinite; position: relative; z-index: 1; }
+.map-label { position: relative; z-index: 1; text-align: center; }
+.map-label-title { font-weight: 700; color: var(--green); font-size: 0.97rem; }
+.map-label-sub { font-size: 0.82rem; color: var(--text-mid); }
+@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+/* Driver info card — clean white card with green left accent */
+.driver-card {
+  display: flex; align-items: center; gap: 1rem;
+  background: var(--white); border: 2px solid var(--border);
+  border-left: 4px solid var(--green);
+  border-radius: var(--radius); padding: 1rem 1.2rem; margin-bottom: 1.8rem;
+}
+.driver-avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--green-light); border: 2px solid rgba(26,58,34,0.2);
+  display: flex; align-items: center;
+  justify-content: center; font-size: 1.5rem; flex-shrink: 0;
+}
+.driver-info { flex: 1; }
+.driver-name { font-weight: 700; font-size: 0.97rem; }
+.driver-plate { font-size: 0.82rem; color: var(--text-light); }
+.driver-rating {
+  display: flex; align-items: center; gap: 0.3rem;
+  font-size: 0.82rem; color: var(--gold); font-weight: 600; margin-top: 0.1rem;
+}
+.driver-actions { display: flex; gap: 0.6rem; }
+/* Call button — solid green matches site buttons */
+.driver-call-btn {
+  background: var(--green); color: #fff; border: none;
+  border-radius: 8px; padding: 0.5rem 1rem; font-size: 0.83rem;
+  font-weight: 600; cursor: pointer; transition: background 0.2s;
+}
+.driver-call-btn:hover { background: var(--green-mid); }
+
+/* Chat button — outlined style so it reads as secondary */
+.driver-chat-btn {
+  background: var(--white); color: var(--green);
+  border: 2px solid var(--green); border-radius: 8px;
+  padding: 0.5rem 1rem; font-size: 0.83rem; font-weight: 600; cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.driver-chat-btn:hover { background: var(--green-light); }
+
+/* Order items summary box on tracking page */
+.tracking-items-box {
+  background: var(--white); border-radius: var(--radius);
+  border: 2px solid var(--border); padding: 1.8rem; margin-top: 1.8rem;
+}
+.tracking-items-title {
+  font-family: var(--font-display); font-size: 1.15rem; color: var(--text);
+  margin-bottom: 1rem; padding-bottom: 0.7rem; border-bottom: 2px solid var(--border);
+}
+
+/* Leave a review box — green-light background to tie into the page */
+.review-after-box {
+  background: var(--green-light); border: 2px solid rgba(26,58,34,0.2);
+  border-radius: var(--radius); padding: 1.4rem; margin-top: 1.8rem;
+}
+.review-after-box h3 {
+  font-family: var(--font-display); font-size: 1.1rem;
+  font-weight: 700; margin-bottom: 0.6rem; color: var(--green);
+}
+.review-form-sub { font-size: 0.85rem; color: var(--text-mid); margin-bottom: 0.5rem; }
+.review-form textarea {
+  width: 100%; padding: 0.7rem 0.9rem;
+  border: 2px solid rgba(26,58,34,0.2); border-radius: 8px;
+  font-family: var(--font-body); font-size: 0.9rem;
+  resize: vertical; margin: 0.6rem 0; background: var(--white);
+}
+.review-form textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(26,58,34,0.1); }
+.review-stars-row { display: flex; gap: 0.4rem; margin: 0.3rem 0; }
+.review-stars-row span { font-size: 1.8rem; cursor: pointer; transition: transform 0.15s; }
+.review-stars-row span:hover { transform: scale(1.2); }
+/* Submit button — green to match the section */
+.review-submit-btn {
+  background: var(--green); color: #fff; border: none;
+  padding: 0.65rem 1.4rem; border-radius: 8px;
+  font-size: 0.88rem; font-weight: 700; cursor: pointer;
+  transition: background 0.2s;
+}
+.review-submit-btn:hover { background: var(--green-mid); }
+.review-submit-btn[disabled] { opacity: 0.45; cursor: not-allowed; background: var(--green); }
+
+/* ── PRODUCT DETAIL PAGE ── */
+
+/* Main page wrapper with top padding */
+.detail-container { padding: calc(var(--nav-h) + 2rem) 0 5rem; }
+
+/* Back button with arrow */
+.back-nav { margin-bottom: 1.5rem; }
+.btn-back {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  color: var(--text-mid); text-decoration: none; font-weight: 600;
+  font-size: 0.9rem; padding: 0.6rem 1.2rem; border-radius: 50px;
+  background: var(--white); transition: all 0.2s ease;
+  border: 1.5px solid var(--border);
+}
+.btn-back:hover { background: var(--green-light); color: var(--green); border-color: var(--green); transform: translateX(-3px); }
+
+/* Two-column grid: image on left, info on right */
+.product-main {
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 2.5rem;
+  background: var(--white); padding: 2.5rem; border-radius: var(--radius);
+  border: 1.5px solid var(--border); box-shadow: var(--shadow);
+}
+
+/* Square image with border */
+.main-img {
+  aspect-ratio: 1; border-radius: var(--radius-sm); overflow: hidden;
+  border: 2px solid var(--border); background: var(--cream-dark);
+}
+.main-img img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Row of small thumbnail images */
+.thumb-list { display: flex; gap: 0.8rem; margin-top: 1rem; }
+.thumb {
+  width: 75px; height: 75px; border-radius: var(--radius-sm);
+  border: 2px solid var(--border); cursor: pointer; overflow: hidden;
+  transition: border-color 0.2s;
+}
+.thumb:hover { border-color: var(--green-mid); }
+.thumb.active { border-color: var(--green); box-shadow: 0 0 0 2px var(--green-light); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Right column: stacks all product info */
+.info-col { display: flex; flex-direction: column; gap: 1.2rem; }
+
+/* Large product name */
+.prod-title {
+  font-family: var(--font-display); font-size: 2.1rem;
+  font-weight: 700; color: var(--text); line-height: 1.25;
+}
+
+/* Green price box with left border accent */
+.price-box {
+  background: var(--green-light); padding: 1.3rem 1.5rem;
+  border-radius: var(--radius-sm); border-left: 5px solid var(--green);
+}
+.price-now { font-size: 2.3rem; font-weight: 800; color: var(--green); }
+.price-row-inner { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+.price-original {
+  text-decoration: line-through; color: var(--text-light); font-size: 1.1rem;
+}
+
+/* Green discount badge on detail page (consistent with site style) */
+.badge-discount-green {
+  background: var(--green); color: white;
+  padding: 0.2rem 0.65rem; border-radius: 5px;
+  font-size: 0.83rem; font-weight: 700;
+}
+
+/* Quantity selector: minus/input/plus in a pill */
+.qty-ctrl {
+  display: inline-flex; border: 2px solid var(--border);
+  border-radius: 8px; overflow: hidden;
+}
+.qty-ctrl button {
+  padding: 0.55rem 1rem; border: none; background: var(--cream-dark);
+  cursor: pointer; font-size: 1rem; font-weight: 700; color: var(--green);
+  transition: background 0.2s;
+}
+.qty-ctrl button:hover { background: var(--green-light); }
+.qty-ctrl input {
+  width: 52px; text-align: center; border: none; background: var(--white);
+  font-size: 0.95rem; font-weight: 700; color: var(--text);
+}
+.qty-available { color: var(--text-light); font-size: 0.85rem; }
+
+/* Two action buttons side by side */
+.detail-card-btns { display: flex; gap: 0.8rem; margin-top: 0.5rem; }
+.btn-addcart-detail, .btn-buynow-detail {
+  flex: 1; height: 50px; display: flex; align-items: center;
+  justify-content: center; text-decoration: none;
+  font-weight: 700; font-size: 0.95rem; border-radius: 9px;
+  transition: all 0.2s ease;
+}
+/* Add to cart — light green outline, turns solid on hover */
+.btn-addcart-detail {
+  background-color: var(--green-light); color: var(--green);
+  border: 2px solid var(--green);
+}
+.btn-addcart-detail:hover { background-color: var(--green); color: var(--white); }
+/* Buy now — solid dark green, primary action */
+.btn-buynow-detail {
+  background-color: var(--green-dark); color: var(--white); border: none;
+}
+.btn-buynow-detail:hover { background-color: var(--green); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(26,58,34,0.25); }
+
+/* Section headings inside the detail page */
+.detail-section-title {
+  font-family: var(--font-display); font-size: 1.5rem; margin: 2.5rem 0 1.2rem;
+  color: var(--text); font-weight: 700;
+  border-bottom: 2px solid var(--green-light); padding-bottom: 0.6rem;
+}
+
+/* Individual review entry */
+.rev-card { padding: 1.8rem 0; border-bottom: 1px solid var(--border); }
+.rev-card:last-child { border-bottom: none; }
+.rev-card-header { font-weight: 700; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+
+/* Photo attached to a customer review */
+.review-photo {
+  width: 160px; height: 160px; border-radius: 10px; object-fit: cover;
+  margin-top: 0.8rem; border: 2px solid var(--border);
+}
+.review-text-body { margin-top: 0.5rem; color: var(--text-mid); line-height: 1.6; }
+
+/* Small grid of similar product cards below main product */
+.similar-products { margin-top: 2rem; }
+
+/* Next step button: auto width so it doesn't stretch full width */
+.checkout-next-btn { width: auto; }
+
+/* Thin divider line in the order summary card */
+.summary-divider { border: none; height: 1px; background: var(--border); margin: 0.4rem 0; }
+
+/* Savings row in the confirm order items list */
+.review-item.savings { color: var(--orange); font-weight: 600; }
+
+/* ── RESPONSIVE: checkout payment ── */
+@media (max-width: 760px) {
+  .checkout-layout { flex-direction: column-reverse; }
+  .checkout-summary-col { flex: none; width: 100%; }
+}
+@media (max-width: 600px) {
+  /* Stack back/next buttons vertically on small screens */
+  .step-nav { flex-direction: column-reverse; gap: 0.8rem; }
+  .step-nav .secondary-btn,
+  .step-nav .add-cart-btn { width: 100%; text-align: center; justify-content: center; }
+}
+
+/* ── RESPONSIVE: product detail ── */
+@media (max-width: 768px) {
+  .product-main { grid-template-columns: 1fr; padding: 1.5rem; }
+  .detail-card-btns { flex-direction: column; }
+}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
