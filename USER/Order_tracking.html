@@ -5,40 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Track Order – FarmDirect</title>
 <link rel="stylesheet" href="style.css">
-<style>
-.tracking-wrap { padding: calc(var(--nav-h) + 2rem) 0 5rem; min-height: 100vh; }
-.order-meta-card { background: var(--white); border-radius: var(--radius); border: 2px solid var(--border); padding: 1.5rem; margin-bottom: 1.8rem; }
-.order-meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1.2rem; }
-.meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
-.meta-label { font-size: 0.78rem; color: var(--text-light); font-weight: 500; }
-.meta-value { font-size: 0.98rem; font-weight: 700; color: var(--text); }
-.meta-value.green { color: var(--green); font-size: 1.1rem; }
-.meta-value.orange { color: var(--orange); }
-/* Live tracking map mock */
-.live-map { background: linear-gradient(135deg, #c8deca 0%, #e4efe6 50%, #d4e8d6 100%); border-radius: var(--radius); border: 2px solid var(--border); height: 220px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.8rem; position: relative; overflow: hidden; }
-.live-map::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M0 30h60M30 0v60' stroke='rgba(0,0,0,0.06)' stroke-width='1'/%3E%3C/svg%3E"); }
-.map-pin { font-size: 2.5rem; animation: bounce 1.5s infinite; position: relative; z-index: 1; }
-.map-label { position: relative; z-index: 1; text-align: center; }
-@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-.driver-card { display: flex; align-items: center; gap: 1rem; background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.2rem; margin-bottom: 1.8rem; }
-.driver-avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
-.driver-info { flex: 1; }
-.driver-name { font-weight: 700; font-size: 0.97rem; }
-.driver-plate { font-size: 0.82rem; color: var(--text-light); }
-.driver-rating { display: flex; align-items: center; gap: 0.3rem; font-size: 0.82rem; color: var(--gold); font-weight: 600; margin-top: 0.1rem; }
-.driver-actions { display: flex; gap: 0.6rem; }
-.driver-call-btn { background: var(--green); color: #fff; border: none; border-radius: 8px; padding: 0.5rem 1rem; font-size: 0.83rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
-.driver-call-btn:hover { opacity: 0.85; }
-/* Review after delivery */
-.review-after-box { background: var(--gold-light); border: 2px solid #f5d98a; border-radius: var(--radius); padding: 1.4rem; margin-top: 1.8rem; }
-.review-after-box h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; }
-.review-form textarea { width: 100%; padding: 0.7rem 0.9rem; border: 2px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 0.9rem; resize: vertical; margin: 0.6rem 0; }
-.review-form textarea:focus { border-color: var(--gold); }
-.review-stars-row { display: flex; gap: 0.4rem; margin: 0.3rem 0; }
-.review-stars-row span { font-size: 1.8rem; cursor: pointer; transition: transform 0.15s; }
-.review-stars-row span:hover { transform: scale(1.2); }
-.review-submit-btn { background: var(--gold); color: #fff; border: none; padding: 0.65rem 1.4rem; border-radius: 8px; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
-</style>
 </head>
 <body>
 
@@ -46,16 +12,52 @@
   <input type="checkbox" id="menu-check" class="menu-checkbox">
   <div class="nav-inner">
     <a href="../index.html" class="logo"><span class="logo-leaf"></span><span>FarmDirect</span></a>
-    <div class="nav-links"><a href="../index.html" class="nav-link">Home</a><a href="products.html" class="nav-link">Products</a><a href="Dashboard.html" class="nav-link active">Dashboard</a></div>
+    <div class="nav-links">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="products.html" class="nav-link">Products</a>
+      <a href="Dashboard.html" class="nav-link active">Dashboard</a>
+    </div>
     <div class="nav-actions">
-      <a href="cart.html" class="cart-btn"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></a>
-      <div class="notif-wrap"><button class="notif-btn" tabindex="0"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="notif-badge"></span></button><div class="notif-dropdown"><div class="notif-header"><h4>Notifications</h4></div><div class="notif-list"><div class="notif-item"><div class="notif-icon">🚕</div><div class="notif-content"><strong>Driver Update</strong><p>Your Grab driver is 10 minutes away!</p><span class="notif-time">2 min ago</span></div></div></div></div></div>
-      <a href="../Login/login.html" class="login-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Login</a>
+      <a href="cart.html" class="cart-btn">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      </a>
+      <div class="notif-wrap">
+        <button class="notif-btn" tabindex="0">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-badge"></span>
+        </button>
+        <div class="notif-dropdown">
+          <div class="notif-header"><h4>Notifications</h4></div>
+          <div class="notif-list">
+            <div class="notif-item">
+              <div class="notif-icon">🚕</div>
+              <div class="notif-content">
+                <strong>Driver Update</strong>
+                <p>Your Grab driver is 10 minutes away!</p>
+                <span class="notif-time">2 min ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="../Login/login.html" class="login-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        Login
+      </a>
       <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
     </div>
   </div>
   <label for="menu-check" class="menu-overlay"></label>
-  <div class="menu-panel"><div class="menu-section"><h3>Navigation</h3><a href="../index.html" class="menu-item">Home</a><a href="products.html" class="menu-item">Browse Products</a><a href="Dashboard.html" class="menu-item">My Dashboard</a><a href="cart.html" class="menu-item">Shopping Cart</a></div><a href="cart.html" class="menu-cta">View Cart</a></div>
+  <div class="menu-panel">
+    <div class="menu-section">
+      <h3>Navigation</h3>
+      <a href="../index.html" class="menu-item">Home</a>
+      <a href="products.html" class="menu-item">Browse Products</a>
+      <a href="Dashboard.html" class="menu-item">My Dashboard</a>
+      <a href="cart.html" class="menu-item">Shopping Cart</a>
+    </div>
+    <a href="cart.html" class="menu-cta">View Cart</a>
+  </div>
 </nav>
 
 <div class="tracking-wrap">
@@ -63,7 +65,7 @@
     <a href="Dashboard.html" class="back-link">← Back to Dashboard</a>
     <h1 class="page-title">Track Your Order</h1>
 
-    <!-- ORDER META -->
+    <!-- Quick order info: number, date, courier, total, status -->
     <div class="order-meta-card">
       <div class="order-meta-grid">
         <div class="meta-item"><span class="meta-label">Order Number</span><span class="meta-value">#FD-482617</span></div>
@@ -71,22 +73,22 @@
         <div class="meta-item"><span class="meta-label">Delivery via</span><span class="meta-value">🚕 Grab</span></div>
         <div class="meta-item"><span class="meta-label">Total</span><span class="meta-value green">₱1,139</span></div>
         <div class="meta-item"><span class="meta-label">You Saved</span><span class="meta-value orange">₱171 🎉</span></div>
-        <div class="meta-item"><span class="meta-label">Status</span><span class="meta-value" style="color:#7b1fa2;font-weight:700;">Out for Delivery 🚚</span></div>
+        <div class="meta-item"><span class="meta-label">Status</span><span class="meta-value purple">Out for Delivery 🚚</span></div>
       </div>
     </div>
 
-    <!-- LIVE MAP PLACEHOLDER -->
+    <!-- Fake map showing driver location with bouncing pin -->
     <div class="live-map">
-      <div style="text-align:center;position:relative;z-index:1;">
+      <div>
         <div class="map-pin">🚕</div>
         <div class="map-label">
-          <p style="font-weight:700;color:var(--green);font-size:0.97rem;">Driver is on the way!</p>
-          <p style="font-size:0.82rem;color:var(--text-mid);">Est. 10 minutes away · Tetuan, Zamboanga City</p>
+          <p class="map-label-title">Driver is on the way!</p>
+          <p class="map-label-sub">Est. 10 minutes away · Tetuan, Zamboanga City</p>
         </div>
       </div>
     </div>
 
-    <!-- DRIVER INFO -->
+    <!-- Driver profile with call and chat buttons -->
     <div class="driver-card">
       <div class="driver-avatar">👨</div>
       <div class="driver-info">
@@ -96,11 +98,12 @@
       </div>
       <div class="driver-actions">
         <button class="driver-call-btn">📞 Call</button>
-        <label for="chat-check" class="driver-call-btn" style="cursor:pointer;background:var(--cream);color:var(--text);border:2px solid var(--border);">💬 Chat</label>
+        <!-- Chat button opens the chat widget below -->
+        <label for="chat-check" class="driver-chat-btn">💬 Chat</label>
       </div>
     </div>
 
-    <!-- TRACKING STEPS -->
+    <!-- Step-by-step delivery progress -->
     <div class="tracking-steps">
       <div class="tracking-step completed">
         <div class="tracking-icon">✓</div>
@@ -135,36 +138,40 @@
       </div>
     </div>
 
-    <!-- ORDER ITEMS SUMMARY -->
-    <div style="background:var(--white);border-radius:var(--radius);border:2px solid var(--border);padding:1.8rem;margin-top:1.8rem;">
-      <h3 style="font-family:var(--font-display);font-size:1.15rem;margin-bottom:1rem;padding-bottom:0.7rem;border-bottom:2px solid var(--border);">Order Items</h3>
+    <!-- Itemized list of what was ordered -->
+    <div class="tracking-items-box">
+      <h3 class="tracking-items-title">Order Items</h3>
       <div class="review-item"><span>Fresh Organic Carrots x2</span><span>₱390</span></div>
       <div class="review-item"><span>Heirloom Tomatoes x1</span><span>₱280</span></div>
       <div class="review-item"><span>Sweet Watermelon x1</span><span>₱560</span></div>
-      <div class="review-item"><span>Discount Savings</span><span style="color:var(--orange);">−₱121</span></div>
-      <div class="review-item"><span>Voucher (FARMSAVE50)</span><span style="color:var(--orange);">−₱50</span></div>
+      <div class="review-item savings"><span>Discount Savings</span><span>−₱121</span></div>
+      <div class="review-item savings"><span>Voucher (FARMSAVE50)</span><span>−₱50</span></div>
       <div class="review-item"><span>Delivery Fee</span><span>₱80</span></div>
       <div class="review-item total-row"><span>Total</span><span>₱1,139</span></div>
     </div>
 
-    <!-- LEAVE A REVIEW AFTER DELIVERY -->
+    <!-- Review form: locked until delivery is confirmed -->
     <div class="review-after-box">
       <h3>⭐ Leave a Review</h3>
-      <p style="font-size:0.85rem;color:var(--text-mid);margin-bottom:0.5rem;">Your feedback helps local farmers improve! Reviews are only visible after delivery is confirmed.</p>
+      <p class="review-form-sub">Your feedback helps local farmers improve! Reviews are only visible after delivery is confirmed.</p>
       <div class="review-form">
-        <p style="font-size:0.85rem;font-weight:600;margin-bottom:0.3rem;">Rate your order:</p>
+        <p>Rate your order:</p>
         <div class="review-stars-row">
-          <span title="1 star">⭐</span><span title="2 stars">⭐</span><span title="3 stars">⭐</span><span title="4 stars">⭐</span><span title="5 stars">⭐</span>
+          <span title="1 star">⭐</span>
+          <span title="2 stars">⭐</span>
+          <span title="3 stars">⭐</span>
+          <span title="4 stars">⭐</span>
+          <span title="5 stars">⭐</span>
         </div>
         <textarea rows="3" placeholder="Tell the farmer what you loved about the produce… (available after delivery)"></textarea>
-        <button class="review-submit-btn" disabled style="opacity:0.5;cursor:not-allowed;">Submit Review (available after delivery)</button>
+        <button class="review-submit-btn" disabled>Submit Review (available after delivery)</button>
       </div>
     </div>
 
   </div>
 </div>
 
-<!-- CHAT WIDGET -->
+<!-- Chat widget: toggles open when driver chat button is clicked -->
 <input type="checkbox" id="chat-check" class="chat-checkbox">
 <label for="chat-check" class="chat-trigger">💬</label>
 <div class="chat-window">
@@ -184,10 +191,33 @@
 
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-col"><div class="footer-logo"><span class="logo-leaf"></span> FarmDirect</div><p class="footer-desc">Fresh from Zamboanga farms to your table. Verified. Local. Honest.</p></div>
-    <div class="footer-col"><h4>Shop</h4><div class="footer-links"><a href="products.html">Browse Products</a><a href="cart.html">Shopping Cart</a></div></div>
-    <div class="footer-col"><h4>Account</h4><div class="footer-links"><a href="../Login/login.html">Sign In</a><a href="Dashboard.html">My Dashboard</a><a href="Order_tracking.html">Track Order</a></div></div>
-    <div class="footer-col"><h4>Contact</h4><div class="footer-contact"><span>Zamboanga City, Philippines</span><a href="mailto:hello@farmdirect.ph">hello@farmdirect.ph</a><a href="tel:+639001234567">+63 900 123 4567</a></div></div>
+    <div class="footer-col">
+      <div class="footer-logo"><span class="logo-leaf"></span> FarmDirect</div>
+      <p class="footer-desc">Fresh from Zamboanga farms to your table. Verified. Local. Honest.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <div class="footer-links">
+        <a href="products.html">Browse Products</a>
+        <a href="cart.html">Shopping Cart</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Account</h4>
+      <div class="footer-links">
+        <a href="../Login/login.html">Sign In</a>
+        <a href="Dashboard.html">My Dashboard</a>
+        <a href="Order_tracking.html">Track Order</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="footer-contact">
+        <span>Zamboanga City, Philippines</span>
+        <a href="mailto:hello@farmdirect.ph">hello@farmdirect.ph</a>
+        <a href="tel:+639001234567">+63 900 123 4567</a>
+      </div>
+    </div>
     <div class="footer-bottom"><p>© 2026 FarmDirect Zamboanga. All rights reserved.</p></div>
   </div>
 </footer>
