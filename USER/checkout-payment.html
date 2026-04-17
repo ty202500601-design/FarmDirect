@@ -5,16 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Payment – FarmDirect</title>
 <link rel="stylesheet" href="style.css">
-<style>
-.checkout-layout { display: flex; gap: 1.8rem; align-items: flex-start; flex-wrap: wrap; }
-.checkout-form-wrap { flex: 1; min-width: 280px; }
-.summary-card { flex: 0 0 300px; }
-@media (max-width: 760px) { .checkout-layout { flex-direction: column-reverse; } .summary-card { flex: none; width: 100%; } }
-@media (max-width: 600px) { .step-nav { flex-direction: column-reverse; gap: 0.8rem; } .step-nav .secondary-btn, .step-nav .add-cart-btn { width: 100%; text-align: center; justify-content: center; } }
-.gcash-form { display: none; padding: 1rem; background: var(--cream); border-radius: 10px; margin-top: 0.5rem; border: 1px solid var(--border); }
-#pay-gcash:checked ~ .gcash-form { display: block; }
-.pay-security { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-light); margin-top: 1rem; }
-</style>
 </head>
 <body>
 
@@ -22,21 +12,62 @@
   <input type="checkbox" id="menu-check" class="menu-checkbox">
   <div class="nav-inner">
     <a href="../index.html" class="logo"><span class="logo-leaf"></span><span>FarmDirect</span></a>
-    <div class="nav-links"><a href="../index.html" class="nav-link">Home</a><a href="products.html" class="nav-link">Products</a><a href="Dashboard.html" class="nav-link">Dashboard</a></div>
+    <div class="nav-links">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="products.html" class="nav-link">Products</a>
+      <a href="Dashboard.html" class="nav-link">Dashboard</a>
+    </div>
     <div class="nav-actions">
-      <a href="cart.html" class="cart-btn"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span class="cart-count">3</span></a>
-      <div class="notif-wrap"><button class="notif-btn" tabindex="0" aria-label="Notifications"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="notif-badge"></span></button><div class="notif-dropdown"><div class="notif-header"><h4>Notifications</h4></div><div class="notif-list"><div class="notif-item"><div class="notif-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="notif-content"><strong>Tip</strong><p>Pay with GCash and get ₱20 cashback on your next order!</p><span class="notif-time">Promo</span></div></div></div></div></div>
-      <a href="../Login/login.html" class="login-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Login</a>
+      <a href="cart.html" class="cart-btn">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-count">3</span>
+      </a>
+      <div class="notif-wrap">
+        <button class="notif-btn" tabindex="0" aria-label="Notifications">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-badge"></span>
+        </button>
+        <div class="notif-dropdown">
+          <div class="notif-header"><h4>Notifications</h4></div>
+          <div class="notif-list">
+            <div class="notif-item">
+              <div class="notif-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div class="notif-content">
+                <strong>Tip</strong>
+                <p>Pay with GCash and get ₱20 cashback on your next order!</p>
+                <span class="notif-time">Promo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="../Login/login.html" class="login-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        Login
+      </a>
       <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
     </div>
   </div>
   <label for="menu-check" class="menu-overlay"></label>
-  <div class="menu-panel"><div class="menu-section"><h3>Navigation</h3><a href="../index.html" class="menu-item">Home</a><a href="products.html" class="menu-item">Browse Products</a><a href="Dashboard.html" class="menu-item">My Dashboard</a><a href="cart.html" class="menu-item">Shopping Cart</a></div><a href="cart.html" class="menu-cta">View Cart</a></div>
+  <div class="menu-panel">
+    <div class="menu-section">
+      <h3>Navigation</h3>
+      <a href="../index.html" class="menu-item">Home</a>
+      <a href="products.html" class="menu-item">Browse Products</a>
+      <a href="Dashboard.html" class="menu-item">My Dashboard</a>
+      <a href="cart.html" class="menu-item">Shopping Cart</a>
+    </div>
+    <a href="cart.html" class="menu-cta">View Cart</a>
+  </div>
 </nav>
 
 <div class="checkout-wrap">
   <div class="container">
     <h1 class="page-title">Checkout</h1>
+
+    <!-- Step indicator: shows which step the user is on -->
     <div class="checkout-steps">
       <div class="step done"><span class="step-num">✓</span> Delivery</div>
       <div class="step-line"></div>
@@ -46,88 +77,132 @@
     </div>
 
     <div class="checkout-layout">
-      <!-- ORDER SUMMARY (first in DOM = top on mobile) -->
-      <div class="summary-card">
-        <h2>Order Summary</h2>
-        <div class="summary-row"><span>Fresh Organic Carrots x2</span><span>₱390</span></div>
-        <div class="summary-row"><span>Heirloom Tomatoes x1</span><span>₱280</span></div>
-        <div class="summary-row"><span>Sweet Watermelon x1</span><span>₱560</span></div>
-        <div style="height:1px;background:var(--border);margin:0.4rem 0;"></div>
-        <div class="summary-row"><span>Subtotal</span><span>₱1,230</span></div>
-        <div class="summary-row savings"><span>🎉 Discount Savings</span><span>−₱121</span></div>
-        <div class="summary-row savings"><span>🎫 Voucher</span><span>−₱50</span></div>
-        <div class="summary-row"><span>Delivery (Grab)</span><span>₱80</span></div>
-        <div class="summary-row total-row"><span>Total</span><span>₱1,139</span></div>
+
+      <!-- Order summary shown on the right (or top on mobile) -->
+      <div class="checkout-summary-col">
+        <div class="summary-card">
+          <h2>Order Summary</h2>
+          <div class="summary-row"><span>Fresh Organic Carrots x2</span><span>₱390</span></div>
+          <div class="summary-row"><span>Heirloom Tomatoes x1</span><span>₱280</span></div>
+          <div class="summary-row"><span>Sweet Watermelon x1</span><span>₱560</span></div>
+          <hr class="summary-divider">
+          <div class="summary-row"><span>Subtotal</span><span>₱1,230</span></div>
+          <div class="summary-row savings"><span>🎉 Discount Savings</span><span>−₱121</span></div>
+          <div class="summary-row savings"><span>🎫 Voucher</span><span>−₱50</span></div>
+          <div class="summary-row"><span>Delivery (Grab)</span><span>₱80</span></div>
+          <div class="summary-row total-row"><span>Total</span><span>₱1,139</span></div>
+        </div>
       </div>
 
-      <!-- PAYMENT METHOD -->
-      <div class="checkout-form-wrap">
-        <h2>Payment Method</h2>
+      <!-- Payment method selection form -->
+      <div class="checkout-form-col">
+        <div class="checkout-form-wrap">
+          <h2>Payment Method</h2>
 
-        <!-- GCash promo -->
-        <div style="background:linear-gradient(135deg,#0078d4,#003d8f);color:#fff;border-radius:10px;padding:0.8rem 1.1rem;margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;font-size:0.83rem;">
-          <span style="font-size:1.3rem;">💳</span>
-          <div><strong>Pay with GCash</strong> and get <strong>₱20 cashback</strong> on your next order!</div>
-        </div>
-
-        <div class="payment-options">
-          <input type="radio" name="payment" id="pay-cod" checked>
-          <label for="pay-cod" class="pay-label">
-            <span class="pay-radio-dot"></span>
-            <span class="pay-icon">💵</span>
-            <div style="flex:1;">
-              <div style="font-weight:700;">Cash on Delivery</div>
-              <div style="font-size:0.8rem;color:var(--text-light);">Pay when your order arrives</div>
-            </div>
-          </label>
-
-          <input type="radio" name="payment" id="pay-gcash">
-          <label for="pay-gcash" class="pay-label">
-            <span class="pay-radio-dot"></span>
-            <span class="pay-icon">📱</span>
-            <div style="flex:1;">
-              <div style="font-weight:700;">GCash <span style="background:var(--orange);color:#fff;font-size:0.65rem;font-weight:700;padding:0.1rem 0.4rem;border-radius:3px;margin-left:0.3rem;">+₱20 Cashback</span></div>
-              <div style="font-size:0.8rem;color:var(--text-light);">Instant digital payment</div>
-            </div>
-          </label>
-          <!-- GCash form reveals when gcash is selected (CSS trick) -->
-          <div class="gcash-form">
-            <div class="form-group" style="margin-bottom:0.7rem;">
-              <label>GCash Number</label>
-              <div class="phone-wrap"><span class="phone-prefix">+63</span><input type="tel" placeholder="917 000 0000"></div>
-            </div>
+          <!-- GCash cashback promo banner -->
+          <div class="gcash-promo-banner">
+            <span class="gcash-promo-icon">💳</span>
+            <div><strong>Pay with GCash</strong> and get <strong>₱20 cashback</strong> on your next order!</div>
           </div>
 
-          <input type="radio" name="payment" id="pay-bank">
-          <label for="pay-bank" class="pay-label">
-            <span class="pay-radio-dot"></span>
-            <span class="pay-icon">🏦</span>
-            <div style="flex:1;">
-              <div style="font-weight:700;">Bank Transfer</div>
-              <div style="font-size:0.8rem;color:var(--text-light);">BDO, BPI, UnionBank</div>
+          <!-- Three payment radio options -->
+          <div class="payment-options">
+
+            <!-- Option 1: Cash on Delivery -->
+            <input type="radio" name="payment" id="pay-cod" checked>
+            <label for="pay-cod" class="pay-label">
+              <span class="pay-radio-dot"></span>
+              <span class="pay-icon">💵</span>
+              <div>
+                <div class="courier-name">Cash on Delivery</div>
+                <div class="courier-desc">Pay when your order arrives</div>
+              </div>
+            </label>
+
+            <!-- Option 2: GCash digital payment -->
+            <input type="radio" name="payment" id="pay-gcash">
+            <label for="pay-gcash" class="pay-label">
+              <span class="pay-radio-dot"></span>
+              <span class="pay-icon">📱</span>
+              <div>
+                <div class="courier-name">
+                  GCash
+                  <span class="gcash-cashback-badge">+₱20 Cashback</span>
+                </div>
+                <div class="courier-desc">Instant digital payment</div>
+              </div>
+            </label>
+
+            <!-- GCash phone number input: only visible when GCash is selected (CSS sibling trick) -->
+            <div class="gcash-form">
+              <div class="form-group">
+                <label>GCash Number</label>
+                <div class="phone-wrap">
+                  <span class="phone-prefix">+63</span>
+                  <input type="tel" placeholder="917 000 0000">
+                </div>
+              </div>
             </div>
-          </label>
-        </div>
 
-        <div class="pay-security">
-          🔒 Your payment information is encrypted and secure.
-        </div>
+            <!-- Option 3: Bank Transfer -->
+            <input type="radio" name="payment" id="pay-bank">
+            <label for="pay-bank" class="pay-label">
+              <span class="pay-radio-dot"></span>
+              <span class="pay-icon">🏦</span>
+              <div>
+                <div class="courier-name">Bank Transfer</div>
+                <div class="courier-desc">BDO, BPI, UnionBank</div>
+              </div>
+            </label>
 
-        <div class="step-nav">
-          <a href="checkout.html" class="secondary-btn">← Back</a>
-          <a href="checkout-confirm.html" class="add-cart-btn" style="width:auto;">Review Order →</a>
+          </div>
+
+          <!-- Security reassurance text -->
+          <div class="pay-security">
+            🔒 Your payment information is encrypted and secure.
+          </div>
+
+          <!-- Back and next navigation buttons -->
+          <div class="step-nav">
+            <a href="checkout.html" class="secondary-btn">← Back</a>
+            <a href="checkout-confirm.html" class="add-cart-btn checkout-next-btn">Review Order →</a>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
 
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-col"><div class="footer-logo"><span class="logo-leaf"></span> FarmDirect</div><p class="footer-desc">Fresh from Zamboanga farms to your table. Verified. Local. Honest.</p></div>
-    <div class="footer-col"><h4>Shop</h4><div class="footer-links"><a href="products.html">Browse Products</a><a href="cart.html">Shopping Cart</a></div></div>
-    <div class="footer-col"><h4>Account</h4><div class="footer-links"><a href="../Login/login.html">Sign In</a><a href="Dashboard.html">My Dashboard</a><a href="Order_tracking.html">Track Order</a></div></div>
-    <div class="footer-col"><h4>Contact</h4><div class="footer-contact"><span>Zamboanga City, Philippines</span><a href="mailto:hello@farmdirect.ph">hello@farmdirect.ph</a><a href="tel:+639001234567">+63 900 123 4567</a></div></div>
+    <div class="footer-col">
+      <div class="footer-logo"><span class="logo-leaf"></span> FarmDirect</div>
+      <p class="footer-desc">Fresh from Zamboanga farms to your table. Verified. Local. Honest.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <div class="footer-links">
+        <a href="products.html">Browse Products</a>
+        <a href="cart.html">Shopping Cart</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Account</h4>
+      <div class="footer-links">
+        <a href="../Login/login.html">Sign In</a>
+        <a href="Dashboard.html">My Dashboard</a>
+        <a href="Order_tracking.html">Track Order</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="footer-contact">
+        <span>Zamboanga City, Philippines</span>
+        <a href="mailto:hello@farmdirect.ph">hello@farmdirect.ph</a>
+        <a href="tel:+639001234567">+63 900 123 4567</a>
+      </div>
+    </div>
     <div class="footer-bottom"><p>© 2026 FarmDirect Zamboanga. All rights reserved.</p></div>
   </div>
 </footer>
