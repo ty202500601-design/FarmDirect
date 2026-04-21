@@ -1,742 +1,1334 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fresh Tomatoes – FarmDirect</title>
-  <link rel="stylesheet" href="ProductDetails.css" />
-</head>
-<body>
-
-<!-- ═══ NAVBAR — farmer style ═══ -->
-<nav class="navbar">
-  <input type="checkbox" id="menu-check" class="menu-checkbox">
-  <div class="nav-inner">
-    <a href="../index.html" class="logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></a>
-    <div class="nav-links">
-      <a href="../index.html"   class="nav-link">Home</a>
-      <a href="Dashboard.html" class="nav-link">Dashboard</a>
-      <a href="Products.html"  class="nav-link active">Products</a>
-      <a href="Orders.html"    class="nav-link">Orders</a>
-      <a href="Reviews.html"   class="nav-link">Reviews</a>
-      <a href="Settings.html"  class="nav-link">Settings</a>
-    </div>
-    <div class="nav-actions">
-      <div class="notif-wrap">
-        <button class="notif-btn" tabindex="0" aria-label="Notifications">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-          </svg>
-          <span class="notif-badge"></span>
-        </button>
-        <div class="notif-dropdown">
-          <div class="notif-header"><h4>Notifications</h4></div>
-          <div class="notif-list">
-            <div class="notif-item"><div class="notif-content"><strong>New Order</strong><p>🛒 New order received — ORD-00242</p></div><span class="notif-time">5 min ago</span></div>
-            <div class="notif-item"><div class="notif-content"><strong>Order Delivered</strong><p>✅ Order #00241 has been delivered.</p></div><span class="notif-time">1 hr ago</span></div>
-            <div class="notif-item"><div class="notif-content"><strong>⚠️ Freshness Alert</strong><p>Fresh Tomatoes batch has only 4 days left!</p></div><span class="notif-time">2 hrs ago</span></div>
-          </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fresh Tomatoes – FarmDirect</title>
+    <link rel="stylesheet" href="ProductDetails.css" />
+  </head>
+  <body>
+    <!-- ═══ NAVBAR — farmer style ═══ -->
+    <nav class="navbar">
+      <input type="checkbox" id="menu-check" class="menu-checkbox" />
+      <div class="nav-inner">
+        <a href="../index.html" class="logo"
+          ><span class="logo-icon">🌾</span><span>FarmDirect</span></a
+        >
+        <div class="nav-links">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="Dashboard.html" class="nav-link">Dashboard</a>
+          <a href="Products.html" class="nav-link active">Products</a>
+          <a href="Orders.html" class="nav-link">Orders</a>
+          <a href="Reviews.html" class="nav-link">Reviews</a>
+          <a href="Settings.html" class="nav-link">Settings</a>
         </div>
-      </div>
-      <div class="notif-wrap">
-        <button class="notif-btn" tabindex="0" aria-label="Profile">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-        </button>
-        <div class="notif-dropdown" style="min-width:180px;">
-          <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
-          <div class="notif-list">
-            <div class="notif-item"><div class="notif-content"><a href="Dashboard.html">📊 Management</a></div></div>
-            <div class="notif-item"><div class="notif-content"><a href="Settings.html">👤 Profile</a></div></div>
-            <div class="notif-item"><div class="notif-content"><a href="Settings.html">⚙️ Settings</a></div></div>
-            <div class="notif-item"><div class="notif-content"><a href="../index.html">🚪 Logout</a></div></div>
-          </div>
-        </div>
-      </div>
-      <div class="avatar-badge">JD</div>
-      <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
-    </div>
-  </div>
-  <label for="menu-check" class="menu-overlay"></label>
-  <div class="menu-panel">
-    <div class="menu-section">
-      <h3>Navigation</h3>
-      <a href="../index.html"   class="menu-item">Home</a>
-      <a href="Dashboard.html" class="menu-item">Dashboard</a>
-      <a href="Products.html"  class="menu-item">Products</a>
-      <a href="Orders.html"    class="menu-item">Orders</a>
-      <a href="Reviews.html"   class="menu-item">Reviews</a>
-      <a href="Settings.html"  class="menu-item">Settings</a>
-    </div>
-    <a href="../index.html" class="menu-cta">Logout</a>
-  </div>
-</nav>
-
-<div class="page-wrap">
-
-  <!-- BREADCRUMB -->
-  <div class="breadcrumb-bar">
-    <div class="container">
-      <nav class="breadcrumb">
-        <a href="Dashboard.html">Dashboard</a>
-        <span class="bc-sep">›</span>
-        <a href="Products.html">My Products</a>
-        <span class="bc-sep">›</span>
-        <span class="bc-current">Fresh Tomatoes</span>
-      </nav>
-    </div>
-  </div>
-
-  <div class="container">
-
-    <!-- FARMER CONTROL BAR -->
-    <div class="control-bar">
-      <div class="control-bar-left">
-        <a href="Products.html" class="back-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-          Back to Products
-        </a>
-        <span class="control-sep">|</span>
-        <span class="control-title">Product Detail</span>
-        <span class="live-badge">🟢 Live</span>
-      </div>
-      <div class="control-bar-right">
-        <a href="NewOrders.html" class="ctrl-btn ctrl-edit">✏️ Edit Product</a>
-        <button class="ctrl-btn ctrl-stock" onclick="saveStock()">📥 Update Stock</button>
-        <button class="ctrl-btn ctrl-pause">⏸ Pause Listing</button>
-      </div>
-    </div>
-
-    <!-- FARMER STATS STRIP -->
-    <div class="farmer-stats-strip">
-      <div class="fstat">
-        <div class="fstat-icon">💰</div>
-        <div><div class="fstat-val">₱7,560</div><div class="fstat-lbl">Total Revenue</div></div>
-      </div>
-      <div class="fstat">
-        <div class="fstat-icon">📦</div>
-        <div><div class="fstat-val">347</div><div class="fstat-lbl">Units Sold</div></div>
-      </div>
-      <div class="fstat">
-        <div class="fstat-icon">⭐</div>
-        <div><div class="fstat-val">4.8</div><div class="fstat-lbl">Avg. Rating</div></div>
-      </div>
-      <div class="fstat">
-        <div class="fstat-icon">👁️</div>
-        <div><div class="fstat-val">1,204</div><div class="fstat-lbl">Views (30d)</div></div>
-      </div>
-      <div class="fstat fstat-alert">
-        <div class="fstat-icon">⚠️</div>
-        <div><div class="fstat-val fstat-red">4 units</div><div class="fstat-lbl">Stock Left</div></div>
-      </div>
-      <div class="fstat fstat-alert">
-        <div class="fstat-icon">🕐</div>
-        <div><div class="fstat-val fstat-orange">4 days</div><div class="fstat-lbl">Until Expiry</div></div>
-      </div>
-    </div>
-
-    <!-- MAIN PRODUCT SECTION -->
-    <div class="product-main">
-
-      <!-- LEFT: Image Gallery -->
-      <div class="gallery-col">
-        <div class="gallery-main">
-          <img id="main-img"
-            src="IMG/Tomatoes.jpg" alt="Fresh Tomatoes"
-            onerror="this.src='https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=800'" />
-          <span class="gallery-badge-organic">Organic</span>
-          <span class="gallery-badge-verified">✓ Verified</span>
-        </div>
-        <div class="gallery-thumbs">
-          <div class="thumb active" onclick="switchImg(this,'IMG/Tomatoes.jpg')">
-            <img src="IMG/Tomatoes.jpg" alt="Thumb 1"
-              onerror="this.src='https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200'"/>
-          </div>
-          <div class="thumb" onclick="switchImg(this,'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=800')">
-            <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200" alt="Thumb 2"/>
-          </div>
-          <div class="thumb" onclick="switchImg(this,'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=800')">
-            <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=200" alt="Thumb 3"/>
-          </div>
-          <div class="thumb" onclick="switchImg(this,'https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?w=800')">
-            <img src="https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?w=200" alt="Thumb 4"/>
-          </div>
-        </div>
-        <div class="upload-hint-box">
-          <span>📷 Manage product photos</span>
-          <a href="NewOrders.html" class="upload-hint-link">Edit Photos →</a>
-        </div>
-      </div>
-
-      <!-- RIGHT: Product Info — farmer view -->
-      <div class="info-col">
-
-        <div class="store-row">
-          <div class="store-avatar">SF</div>
-          <div class="store-meta">
-            <span class="store-name">Sunrise Farm · Juan Dela Cruz</span>
-            <span class="store-loc">📍 Tugbungan, Zamboanga City</span>
-          </div>
-          <span class="store-verified-badge">✓ Verified Seller</span>
-        </div>
-
-        <h1 class="product-title">Fresh Tomatoes</h1>
-
-        <div class="rating-row">
-          <span class="rating-score">4.8</span>
-          <div class="stars-row">
-            <span class="star filled">★</span><span class="star filled">★</span>
-            <span class="star filled">★</span><span class="star filled">★</span>
-            <span class="star half">★</span>
-          </div>
-          <span class="rating-count">(124 ratings)</span>
-          <span class="rating-sep">|</span>
-          <span class="sold-count">347 sold</span>
-          <span class="rating-sep">|</span>
-          <span class="stock-count stock-low">🔴 Low Stock (4 left)</span>
-        </div>
-
-        <!-- Price block -->
-        <div class="price-block">
-          <span class="price-main">₱35</span>
-          <span class="price-unit">/ kg</span>
-          <span class="price-original">₱40</span>
-          <span class="discount-tag">-13% OFF</span>
-          <span class="price-revenue-note">→ Est. revenue if all sold: <b id="rev-note-inline">₱140</b></span>
-        </div>
-
-        <div class="product-tags">
-          <span class="tag tag-organic">🌿 Organic</span>
-          <span class="tag tag-fresh">🌅 Harvested Daily</span>
-          <span class="tag tag-local">📍 Tugbungan</span>
-          <span class="tag tag-cat">🥦 Vegetables</span>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- Shelf life bar -->
-        <div class="shelf-bar">
-          <div class="shelf-label">
-            <span>🕐 Freshness Status</span>
-            <span class="shelf-days shelf-warn">4 days left</span>
-          </div>
-          <div class="shelf-track"><div class="shelf-fill shelf-fill-warn" style="width:40%"></div></div>
-          <div class="shelf-hint">Harvested Mar 27, 2026 · Expires Apr 3, 2026 · Room temperature</div>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- Farmer controls -->
-        <div class="farmer-controls">
-
-          <!-- Stock + Price per unit — driven by what's set in StockUpdate -->
-          <!-- Each row = one unit that has stock. No checkboxes needed. -->
-          <div class="fc-row fc-row-col">
-            <div class="ustock-header-row">
-              <span class="fc-label">Stock &amp; Price per unit</span>
-              <span class="ustock-from-note">
-                📦 Pulled from your stock settings ·
-                <a href="StockUpdate.html" class="inline-link">Update Stock →</a>
-              </span>
-            </div>
-
-            <div class="ustock-grid">
-
-              <!-- per kg — 4 kg in stock (from StockUpdate) -->
-              <div class="ustock-row ustock-primary">
-                <div class="ustock-left">
-                  <span class="ustock-icon">⚖️</span>
-                  <div class="ustock-info">
-                    <span class="ustock-unit">per kg</span>
-                    <span class="ustock-qty-tag ustock-qty-low">4 kg · 🔴 Low</span>
+        <div class="nav-actions">
+          <div class="notif-wrap">
+            <button class="notif-btn" tabindex="0" aria-label="Notifications">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+              <span class="notif-badge"></span>
+            </button>
+            <div class="notif-dropdown">
+              <div class="notif-header"><h4>Notifications</h4></div>
+              <div class="notif-list">
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <strong>New Order</strong>
+                    <p>🛒 New order received — ORD-00242</p>
                   </div>
-                  <span class="ustock-primary-star" title="Primary unit used for revenue estimate">★ Primary</span>
+                  <span class="notif-time">5 min ago</span>
                 </div>
-                <div class="ustock-price-wrap">
-                  <span class="ustock-currency">₱</span>
-                  <input type="number" id="price-kg" value="35" min="0" class="ustock-price-input" oninput="updateRevenue()"/>
-                  <span class="ustock-per">/ kg</span>
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <strong>Order Delivered</strong>
+                    <p>✅ Order #00241 has been delivered.</p>
+                  </div>
+                  <span class="notif-time">1 hr ago</span>
+                </div>
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <strong>⚠️ Freshness Alert</strong>
+                    <p>Fresh Tomatoes batch has only 4 days left!</p>
+                  </div>
+                  <span class="notif-time">2 hrs ago</span>
                 </div>
               </div>
-
-              <!-- per bundle — 20 bundles in stock -->
-              <div class="ustock-row">
-                <div class="ustock-left">
-                  <span class="ustock-icon">🌿</span>
-                  <div class="ustock-info">
-                    <span class="ustock-unit">per bundle</span>
-                    <span class="ustock-qty-tag ustock-qty-ok">20 bundles · ✅ Good</span>
+            </div>
+          </div>
+          <div class="notif-wrap">
+            <button class="notif-btn" tabindex="0" aria-label="Profile">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </button>
+            <div class="notif-dropdown" style="min-width: 180px">
+              <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
+              <div class="notif-list">
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <a href="Dashboard.html">📊 Management</a>
                   </div>
                 </div>
-                <div class="ustock-price-wrap">
-                  <span class="ustock-currency">₱</span>
-                  <input type="number" id="price-bundle" value="18" min="0" class="ustock-price-input" oninput="updateRevenue()"/>
-                  <span class="ustock-per">/ bundle</span>
-                </div>
-              </div>
-
-              <!-- per box — 3 boxes in stock -->
-              <div class="ustock-row">
-                <div class="ustock-left">
-                  <span class="ustock-icon">🗃️</span>
-                  <div class="ustock-info">
-                    <span class="ustock-unit">per box</span>
-                    <span class="ustock-qty-tag ustock-qty-warn">3 boxes · ⚠️ Low</span>
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <a href="Settings.html">👤 Profile</a>
                   </div>
                 </div>
-                <div class="ustock-price-wrap">
-                  <span class="ustock-currency">₱</span>
-                  <input type="number" id="price-box" value="160" min="0" class="ustock-price-input" oninput="updateRevenue()"/>
-                  <span class="ustock-per">/ box</span>
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <a href="Settings.html">⚙️ Settings</a>
+                  </div>
+                </div>
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <a href="../index.html">🚪 Logout</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="avatar-badge">JD</div>
+          <label for="menu-check" class="menu-toggle"
+            ><span></span><span></span><span></span
+          ></label>
+        </div>
+      </div>
+      <label for="menu-check" class="menu-overlay"></label>
+      <div class="menu-panel">
+        <div class="menu-section">
+          <h3>Navigation</h3>
+          <a href="../index.html" class="menu-item">Home</a>
+          <a href="Dashboard.html" class="menu-item">Dashboard</a>
+          <a href="Products.html" class="menu-item">Products</a>
+          <a href="Orders.html" class="menu-item">Orders</a>
+          <a href="Reviews.html" class="menu-item">Reviews</a>
+          <a href="Settings.html" class="menu-item">Settings</a>
+        </div>
+        <a href="../index.html" class="menu-cta">Logout</a>
+      </div>
+    </nav>
+
+    <div class="page-wrap">
+      <!-- BREADCRUMB -->
+      <div class="breadcrumb-bar">
+        <div class="container">
+          <nav class="breadcrumb">
+            <a href="Dashboard.html">Dashboard</a>
+            <span class="bc-sep">›</span>
+            <a href="Products.html">My Products</a>
+            <span class="bc-sep">›</span>
+            <span class="bc-current">Fresh Tomatoes</span>
+          </nav>
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- FARMER CONTROL BAR -->
+        <div class="control-bar">
+          <div class="control-bar-left">
+            <a href="Products.html" class="back-link">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+              Back to Products
+            </a>
+            <span class="control-sep">|</span>
+            <span class="control-title">Product Detail</span>
+            <span class="live-badge">🟢 Live</span>
+          </div>
+          <div class="control-bar-right">
+            <a href="NewOrders.html" class="ctrl-btn ctrl-edit"
+              >✏️ Edit Product</a
+            >
+            <button class="ctrl-btn ctrl-stock" onclick="saveStock()">
+              📥 Update Stock
+            </button>
+            <button class="ctrl-btn ctrl-pause">⏸ Pause Listing</button>
+          </div>
+        </div>
+
+        <!-- FARMER STATS STRIP -->
+        <div class="farmer-stats-strip">
+          <div class="fstat">
+            <div class="fstat-icon">💰</div>
+            <div>
+              <div class="fstat-val">₱7,560</div>
+              <div class="fstat-lbl">Total Revenue</div>
+            </div>
+          </div>
+          <div class="fstat">
+            <div class="fstat-icon">📦</div>
+            <div>
+              <div class="fstat-val">347</div>
+              <div class="fstat-lbl">Units Sold</div>
+            </div>
+          </div>
+          <div class="fstat">
+            <div class="fstat-icon">⭐</div>
+            <div>
+              <div class="fstat-val">4.8</div>
+              <div class="fstat-lbl">Avg. Rating</div>
+            </div>
+          </div>
+          <div class="fstat">
+            <div class="fstat-icon">👁️</div>
+            <div>
+              <div class="fstat-val">1,204</div>
+              <div class="fstat-lbl">Views (30d)</div>
+            </div>
+          </div>
+          <div class="fstat fstat-alert">
+            <div class="fstat-icon">⚠️</div>
+            <div>
+              <div class="fstat-val fstat-red">4 units</div>
+              <div class="fstat-lbl">Stock Left</div>
+            </div>
+          </div>
+          <div class="fstat fstat-alert">
+            <div class="fstat-icon">🕐</div>
+            <div>
+              <div class="fstat-val fstat-orange">4 days</div>
+              <div class="fstat-lbl">Until Expiry</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAIN PRODUCT SECTION -->
+        <div class="product-main">
+          <!-- LEFT: Image Gallery -->
+          <div class="gallery-col">
+            <div class="gallery-main">
+              <img
+                id="main-img"
+                src="IMG/Tomatoes.jpg"
+                alt="Fresh Tomatoes"
+                onerror="
+                  this.src =
+                    'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=800'
+                "
+              />
+              <span class="gallery-badge-organic">Organic</span>
+              <span class="gallery-badge-verified">✓ Verified</span>
+            </div>
+            <div class="gallery-thumbs">
+              <div
+                class="thumb active"
+                onclick="switchImg(this, 'IMG/Tomatoes.jpg')"
+              >
+                <img
+                  src="IMG/Tomatoes.jpg"
+                  alt="Thumb 1"
+                  onerror="
+                    this.src =
+                      'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200'
+                  "
+                />
+              </div>
+              <div
+                class="thumb"
+                onclick="
+                  switchImg(
+                    this,
+                    'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=800',
+                  )
+                "
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200"
+                  alt="Thumb 2"
+                />
+              </div>
+              <div
+                class="thumb"
+                onclick="
+                  switchImg(
+                    this,
+                    'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=800',
+                  )
+                "
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=200"
+                  alt="Thumb 3"
+                />
+              </div>
+              <div
+                class="thumb"
+                onclick="
+                  switchImg(
+                    this,
+                    'https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?w=800',
+                  )
+                "
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?w=200"
+                  alt="Thumb 4"
+                />
+              </div>
+            </div>
+            <div class="upload-hint-box">
+              <span>📷 Manage product photos</span>
+              <a href="NewOrders.html" class="upload-hint-link"
+                >Edit Photos →</a
+              >
+            </div>
+          </div>
+
+          <!-- RIGHT: Product Info — farmer view -->
+          <div class="info-col">
+            <div class="store-row">
+              <div class="store-avatar">SF</div>
+              <div class="store-meta">
+                <span class="store-name">Sunrise Farm · Juan Dela Cruz</span>
+                <span class="store-loc">📍 Tugbungan, Zamboanga City</span>
+              </div>
+              <span class="store-verified-badge">✓ Verified Seller</span>
+            </div>
+
+            <h1 class="product-title">Fresh Tomatoes</h1>
+
+            <div class="rating-row">
+              <span class="rating-score">4.8</span>
+              <div class="stars-row">
+                <span class="star filled">★</span
+                ><span class="star filled">★</span>
+                <span class="star filled">★</span
+                ><span class="star filled">★</span>
+                <span class="star half">★</span>
+              </div>
+              <span class="rating-count">(124 ratings)</span>
+              <span class="rating-sep">|</span>
+              <span class="sold-count">347 sold</span>
+              <span class="rating-sep">|</span>
+              <span class="stock-count stock-low">🔴 Low Stock (4 left)</span>
+            </div>
+
+            <!-- Price block -->
+            <div class="price-block">
+              <span class="price-main">₱35</span>
+              <span class="price-unit">/ kg</span>
+              <span class="price-original">₱40</span>
+              <span class="discount-tag">-13% OFF</span>
+              <span class="price-revenue-note"
+                >→ Est. revenue if all sold:
+                <b id="rev-note-inline">₱140</b></span
+              >
+            </div>
+
+            <div class="product-tags">
+              <span class="tag tag-organic">🌿 Organic</span>
+              <span class="tag tag-fresh">🌅 Harvested Daily</span>
+              <span class="tag tag-local">📍 Tugbungan</span>
+              <span class="tag tag-cat">🥦 Vegetables</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Shelf life bar -->
+            <div class="shelf-bar">
+              <div class="shelf-label">
+                <span>🕐 Freshness Status</span>
+                <span class="shelf-days shelf-warn">4 days left</span>
+              </div>
+              <div class="shelf-track">
+                <div
+                  class="shelf-fill shelf-fill-warn"
+                  style="width: 40%"
+                ></div>
+              </div>
+              <div class="shelf-hint">
+                Harvested Mar 27, 2026 · Expires Apr 3, 2026 · Room temperature
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Farmer controls -->
+            <div class="farmer-controls">
+              <!-- Stock + Price per unit — driven by what's set in StockUpdate -->
+              <!-- Each row = one unit that has stock. No checkboxes needed. -->
+              <div class="fc-row fc-row-col">
+                <div class="ustock-header-row">
+                  <span class="fc-label">Stock &amp; Price per unit</span>
+                  <span class="ustock-from-note">
+                    📦 Pulled from your stock settings ·
+                    <a href="StockUpdate.html" class="inline-link"
+                      >Update Stock →</a
+                    >
+                  </span>
+                </div>
+
+                <div class="ustock-grid">
+                  <!-- per kg — 4 kg in stock (from StockUpdate) -->
+                  <div class="ustock-row ustock-primary">
+                    <div class="ustock-left">
+                      <span class="ustock-icon">⚖️</span>
+                      <div class="ustock-info">
+                        <span class="ustock-unit">per kg</span>
+                        <span class="ustock-qty-tag ustock-qty-low"
+                          >4 kg · 🔴 Low</span
+                        >
+                      </div>
+                      <span
+                        class="ustock-primary-star"
+                        title="Primary unit used for revenue estimate"
+                        >★ Primary</span
+                      >
+                    </div>
+                    <div class="ustock-price-wrap">
+                      <span class="ustock-currency">₱</span>
+                      <input
+                        type="number"
+                        id="price-kg"
+                        value="35"
+                        min="0"
+                        class="ustock-price-input"
+                        oninput="updateRevenue()"
+                      />
+                      <span class="ustock-per">/ kg</span>
+                    </div>
+                  </div>
+
+                  <!-- per bundle — 20 bundles in stock -->
+                  <div class="ustock-row">
+                    <div class="ustock-left">
+                      <span class="ustock-icon">🌿</span>
+                      <div class="ustock-info">
+                        <span class="ustock-unit">per bundle</span>
+                        <span class="ustock-qty-tag ustock-qty-ok"
+                          >20 bundles · ✅ Good</span
+                        >
+                      </div>
+                    </div>
+                    <div class="ustock-price-wrap">
+                      <span class="ustock-currency">₱</span>
+                      <input
+                        type="number"
+                        id="price-bundle"
+                        value="18"
+                        min="0"
+                        class="ustock-price-input"
+                        oninput="updateRevenue()"
+                      />
+                      <span class="ustock-per">/ bundle</span>
+                    </div>
+                  </div>
+
+                  <!-- per box — 3 boxes in stock -->
+                  <div class="ustock-row">
+                    <div class="ustock-left">
+                      <span class="ustock-icon">🗃️</span>
+                      <div class="ustock-info">
+                        <span class="ustock-unit">per box</span>
+                        <span class="ustock-qty-tag ustock-qty-warn"
+                          >3 boxes · ⚠️ Low</span
+                        >
+                      </div>
+                    </div>
+                    <div class="ustock-price-wrap">
+                      <span class="ustock-currency">₱</span>
+                      <input
+                        type="number"
+                        id="price-box"
+                        value="160"
+                        min="0"
+                        class="ustock-price-input"
+                        oninput="updateRevenue()"
+                      />
+                      <span class="ustock-per">/ box</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Revenue estimate row -->
+                <div class="ustock-revenue-row">
+                  <span class="ustock-rev-label"
+                    >Est. total revenue if all sold:</span
+                  >
+                  <div class="ustock-rev-breakdown" id="rev-breakdown">
+                    <span class="ustock-rev-chip" id="rev-kg"
+                      >₱140 <span>kg</span></span
+                    >
+                    <span class="ustock-rev-plus">+</span>
+                    <span class="ustock-rev-chip" id="rev-bundle"
+                      >₱360 <span>bundles</span></span
+                    >
+                    <span class="ustock-rev-plus">+</span>
+                    <span class="ustock-rev-chip" id="rev-box"
+                      >₱480 <span>boxes</span></span
+                    >
+                    <span class="ustock-rev-total"
+                      >= <b id="rev-total">₱980</b></span
+                    >
+                  </div>
                 </div>
               </div>
 
-            </div>
-
-            <!-- Revenue estimate row -->
-            <div class="ustock-revenue-row">
-              <span class="ustock-rev-label">Est. total revenue if all sold:</span>
-              <div class="ustock-rev-breakdown" id="rev-breakdown">
-                <span class="ustock-rev-chip" id="rev-kg">₱140 <span>kg</span></span>
-                <span class="ustock-rev-plus">+</span>
-                <span class="ustock-rev-chip" id="rev-bundle">₱360 <span>bundles</span></span>
-                <span class="ustock-rev-plus">+</span>
-                <span class="ustock-rev-chip" id="rev-box">₱480 <span>boxes</span></span>
-                <span class="ustock-rev-total">= <b id="rev-total">₱980</b></span>
+              <div class="fc-row">
+                <span class="fc-label">Status</span>
+                <div class="fc-val-row">
+                  <div class="status-toggle-wrap">
+                    <label class="status-opt-toggle opt-g"
+                      ><input type="radio" name="lst" value="live" checked /> 🟢
+                      Live</label
+                    >
+                    <label class="status-opt-toggle opt-y"
+                      ><input type="radio" name="lst" value="paused" /> ⏸
+                      Paused</label
+                    >
+                    <label class="status-opt-toggle opt-r"
+                      ><input type="radio" name="lst" value="sold_out" /> 🔴
+                      Sold Out</label
+                    >
+                  </div>
+                </div>
               </div>
             </div>
 
+            <div class="divider"></div>
+
+            <div class="delivery-row">
+              <div class="delivery-item">
+                <span class="del-icon">🚚</span>
+                <div>
+                  <div class="del-label">Delivery</div>
+                  <div class="del-val">Zamboanga City · ₱50 flat</div>
+                </div>
+              </div>
+              <div class="delivery-item">
+                <span class="del-icon">⏱️</span>
+                <div>
+                  <div class="del-label">Prep Time</div>
+                  <div class="del-val">Same day (order before 12PM)</div>
+                </div>
+              </div>
+              <div class="delivery-item">
+                <span class="del-icon">💳</span>
+                <div>
+                  <div class="del-label">Payment</div>
+                  <div class="del-val">GCash · COD · PayMaya</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="action-btns">
+              <a href="NewOrders.html" class="btn-edit-product"
+                >✏️ Edit Product</a
+              >
+              <button class="btn-update-stock" onclick="saveStock()">
+                📥 Save Stock
+              </button>
+              <button
+                class="btn-delete"
+                onclick="confirm('Remove this listing?')"
+              >
+                🗑️
+              </button>
+            </div>
+
+            <div class="cart-toast" id="cart-toast">✅ Changes saved!</div>
+          </div>
+          <!-- /info-col -->
+        </div>
+        <!-- /product-main -->
+
+        <!-- TABS -->
+        <div class="tabs-section">
+          <div class="tabs-header">
+            <button
+              class="tab-btn active"
+              onclick="switchTab(this, 'tab-desc')"
+            >
+              📋 Description
+            </button>
+            <button class="tab-btn" onclick="switchTab(this, 'tab-specs')">
+              📊 Details & Specs
+            </button>
+            <button class="tab-btn" onclick="switchTab(this, 'tab-reviews')">
+              ⭐ Reviews (124)
+            </button>
+            <button class="tab-btn" onclick="switchTab(this, 'tab-orders')">
+              📦 Recent Orders
+            </button>
+            <button class="tab-btn" onclick="switchTab(this, 'tab-analytics')">
+              📈 Analytics
+            </button>
           </div>
 
-          <div class="fc-row">
-            <span class="fc-label">Status</span>
-            <div class="fc-val-row">
-              <div class="status-toggle-wrap">
-                <label class="status-opt-toggle opt-g"><input type="radio" name="lst" value="live" checked/> 🟢 Live</label>
-                <label class="status-opt-toggle opt-y"><input type="radio" name="lst" value="paused"/> ⏸ Paused</label>
-                <label class="status-opt-toggle opt-r"><input type="radio" name="lst" value="sold_out"/> 🔴 Sold Out</label>
+          <!-- Description -->
+          <div class="tab-content active" id="tab-desc">
+            <div class="desc-body">
+              <div class="desc-farmer-note">
+                👨‍🌾 This is how your product description appears to buyers.
+                <a href="NewOrders.html">Edit description →</a>
+              </div>
+              <h3>About This Product</h3>
+              <p>
+                Our Fresh Tomatoes are grown on the fertile fields of Tugbungan,
+                Zamboanga City by Juan Dela Cruz and the Sunrise Farm family.
+                Each tomato is hand-picked every morning to ensure they reach
+                buyers at peak ripeness with the best flavor and nutritional
+                value.
+              </p>
+              <p>
+                Grown without synthetic pesticides and harvested daily, these
+                tomatoes are perfect for home cooking, carinderias, and
+                restaurants.
+              </p>
+              <div
+                class="desc-tip"
+                style="
+                  border-color: #fecaca;
+                  background: #fff5f5;
+                  color: #991b1b;
+                  margin-bottom: 1rem;
+                "
+              >
+                🕐 <b>Freshness Notice (visible to buyers):</b> This batch was
+                harvested <b>March 27, 2026</b>. Estimated expiry:
+                <b>April 3, 2026</b> (4 days left). Buyers are prompted to order
+                soon.
+              </div>
+              <h3>Why Choose Our Tomatoes?</h3>
+              <ul class="desc-list">
+                <li>
+                  🌿 <strong>100% Organic</strong> — No synthetic pesticides or
+                  fertilizers
+                </li>
+                <li>
+                  🌅 <strong>Harvested Daily</strong> — Picked fresh every
+                  morning before delivery
+                </li>
+                <li>
+                  📦 <strong>Carefully Packed</strong> — Padded packaging to
+                  prevent bruising
+                </li>
+                <li>
+                  🔬 <strong>Lab-Tested</strong> — Certified clean and safe for
+                  consumption
+                </li>
+                <li>
+                  🌱 <strong>Sustainably Grown</strong> — Rainwater irrigation,
+                  composting practices
+                </li>
+              </ul>
+              <h3>Best Uses</h3>
+              <p>
+                Salads, pasta sauce, bruschetta, fresh salsa, grilling, and
+                sandwiches.
+              </p>
+              <div class="desc-tip">
+                💡 <strong>Storage Tip (shown to buyers):</strong> Store at room
+                temperature away from direct sunlight. Once cut, refrigerate and
+                consume within 2 days.
               </div>
             </div>
           </div>
 
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="delivery-row">
-          <div class="delivery-item">
-            <span class="del-icon">🚚</span>
-            <div><div class="del-label">Delivery</div><div class="del-val">Zamboanga City · ₱50 flat</div></div>
-          </div>
-          <div class="delivery-item">
-            <span class="del-icon">⏱️</span>
-            <div><div class="del-label">Prep Time</div><div class="del-val">Same day (order before 12PM)</div></div>
-          </div>
-          <div class="delivery-item">
-            <span class="del-icon">💳</span>
-            <div><div class="del-label">Payment</div><div class="del-val">GCash · COD · PayMaya</div></div>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="action-btns">
-          <a href="NewOrders.html" class="btn-edit-product">✏️ Edit Product</a>
-          <button class="btn-update-stock" onclick="saveStock()">📥 Save Stock</button>
-          <button class="btn-delete" onclick="confirm('Remove this listing?')">🗑️</button>
-        </div>
-
-        <div class="cart-toast" id="cart-toast">✅ Changes saved!</div>
-
-      </div><!-- /info-col -->
-    </div><!-- /product-main -->
-
-    <!-- TABS -->
-    <div class="tabs-section">
-      <div class="tabs-header">
-        <button class="tab-btn active" onclick="switchTab(this,'tab-desc')">📋 Description</button>
-        <button class="tab-btn" onclick="switchTab(this,'tab-specs')">📊 Details & Specs</button>
-        <button class="tab-btn" onclick="switchTab(this,'tab-reviews')">⭐ Reviews (124)</button>
-        <button class="tab-btn" onclick="switchTab(this,'tab-orders')">📦 Recent Orders</button>
-        <button class="tab-btn" onclick="switchTab(this,'tab-analytics')">📈 Analytics</button>
-      </div>
-
-      <!-- Description -->
-      <div class="tab-content active" id="tab-desc">
-        <div class="desc-body">
-          <div class="desc-farmer-note">
-            👨‍🌾 This is how your product description appears to buyers.
-            <a href="NewOrders.html">Edit description →</a>
-          </div>
-          <h3>About This Product</h3>
-          <p>Our Fresh Tomatoes are grown on the fertile fields of Tugbungan, Zamboanga City by Juan Dela Cruz and the Sunrise Farm family. Each tomato is hand-picked every morning to ensure they reach buyers at peak ripeness with the best flavor and nutritional value.</p>
-          <p>Grown without synthetic pesticides and harvested daily, these tomatoes are perfect for home cooking, carinderias, and restaurants.</p>
-          <div class="desc-tip" style="border-color:#fecaca;background:#fff5f5;color:#991b1b;margin-bottom:1rem;">
-            🕐 <b>Freshness Notice (visible to buyers):</b> This batch was harvested <b>March 27, 2026</b>. Estimated expiry: <b>April 3, 2026</b> (4 days left). Buyers are prompted to order soon.
-          </div>
-          <h3>Why Choose Our Tomatoes?</h3>
-          <ul class="desc-list">
-            <li>🌿 <strong>100% Organic</strong> — No synthetic pesticides or fertilizers</li>
-            <li>🌅 <strong>Harvested Daily</strong> — Picked fresh every morning before delivery</li>
-            <li>📦 <strong>Carefully Packed</strong> — Padded packaging to prevent bruising</li>
-            <li>🔬 <strong>Lab-Tested</strong> — Certified clean and safe for consumption</li>
-            <li>🌱 <strong>Sustainably Grown</strong> — Rainwater irrigation, composting practices</li>
-          </ul>
-          <h3>Best Uses</h3>
-          <p>Salads, pasta sauce, bruschetta, fresh salsa, grilling, and sandwiches.</p>
-          <div class="desc-tip">
-            💡 <strong>Storage Tip (shown to buyers):</strong> Store at room temperature away from direct sunlight. Once cut, refrigerate and consume within 2 days.
-          </div>
-        </div>
-      </div>
-
-      <!-- Specs -->
-      <div class="tab-content" id="tab-specs">
-        <div class="specs-table">
-          <div class="spec-row"><span class="spec-key">Product Name</span><span class="spec-val">Fresh Tomatoes</span></div>
-          <div class="spec-row"><span class="spec-key">Category</span><span class="spec-val">Vegetables</span></div>
-          <div class="spec-row"><span class="spec-key">Farm</span><span class="spec-val">Sunrise Farm, Tugbungan</span></div>
-          <div class="spec-row"><span class="spec-key">Farmer</span><span class="spec-val">Juan Dela Cruz (JD)</span></div>
-          <div class="spec-row"><span class="spec-key">Harvest Date</span><span class="spec-val">March 27, 2026</span></div>
-          <div class="spec-row"><span class="spec-key">Expiry Date</span><span class="spec-val">April 3, 2026 <span style="color:#dc2626;font-size:0.8rem;font-weight:700;">⚠️ 4 days left</span></span></div>
-          <div class="spec-row"><span class="spec-key">Shelf Life</span><span class="spec-val">7 days from harvest (room temp)</span></div>
-          <div class="spec-row"><span class="spec-key">Storage</span><span class="spec-val">Room temperature, away from sunlight</span></div>
-          <div class="spec-row"><span class="spec-key">Unit</span><span class="spec-val">Per kilogram (kg)</span></div>
-          <div class="spec-row"><span class="spec-key">Price</span><span class="spec-val">₱35 per kg</span></div>
-          <div class="spec-row"><span class="spec-key">Stock</span><span class="spec-val">4 units <span style="color:#dc2626;font-size:0.8rem;font-weight:700;">🔴 Low Stock</span></span></div>
-          <div class="spec-row"><span class="spec-key">Certification</span><span class="spec-val">Organic — OCCP Certified</span></div>
-          <div class="spec-row"><span class="spec-key">Delivery Area</span><span class="spec-val">All barangays, Zamboanga City</span></div>
-          <div class="spec-row"><span class="spec-key">Payment</span><span class="spec-val">GCash, COD, PayMaya</span></div>
-          <div class="spec-row"><span class="spec-key">Listed Since</span><span class="spec-val">January 2026</span></div>
-          <div class="spec-row"><span class="spec-key">Total Revenue</span><span class="spec-val" style="color:var(--green);font-weight:800;">₱7,560</span></div>
-        </div>
-      </div>
-
-      <!-- Reviews -->
-      <div class="tab-content" id="tab-reviews">
-        <div class="reviews-summary">
-          <div class="rating-big">
-            <div class="rating-number">4.8</div>
-            <div class="rating-stars-big">★★★★★</div>
-            <div class="rating-out">out of 5</div>
-          </div>
-          <div class="rating-bars">
-            <div class="rbar-row"><span class="rbar-lbl">5 ★</span><div class="rbar-track"><div class="rbar-fill" style="width:78%"></div></div><span class="rbar-count">96</span></div>
-            <div class="rbar-row"><span class="rbar-lbl">4 ★</span><div class="rbar-track"><div class="rbar-fill" style="width:15%"></div></div><span class="rbar-count">19</span></div>
-            <div class="rbar-row"><span class="rbar-lbl">3 ★</span><div class="rbar-track"><div class="rbar-fill" style="width:5%"></div></div><span class="rbar-count">6</span></div>
-            <div class="rbar-row"><span class="rbar-lbl">2 ★</span><div class="rbar-track"><div class="rbar-fill" style="width:2%"></div></div><span class="rbar-count">2</span></div>
-            <div class="rbar-row"><span class="rbar-lbl">1 ★</span><div class="rbar-track"><div class="rbar-fill" style="width:1%"></div></div><span class="rbar-count">1</span></div>
-          </div>
-          <div class="review-filter-btns">
-            <button class="rfbtn active">All (124)</button>
-            <button class="rfbtn">5 ★ (96)</button>
-            <button class="rfbtn">4 ★ (19)</button>
-            <button class="rfbtn">💬 Needs Reply</button>
-          </div>
-        </div>
-
-        <div class="reviews-list">
-
-          <div class="review-card">
-            <div class="reviewer-row">
-              <div class="rev-avatar">MS</div>
-              <div class="rev-info"><div class="rev-name">Maria Santos</div><div class="rev-date">March 5, 2026</div></div>
-              <div class="rev-stars">★★★★★</div>
-              <span class="rev-verified-badge">✓ Verified Purchase</span>
-            </div>
-            <div class="rev-variant">2 kg · GCash · ₱380 · ORD-00241</div>
-            <p class="rev-text">"Super fresh and juicy! These tomatoes are so much better than what you get at the palengke. You can really taste the difference — sweet, rich, and no mushy parts. Will definitely order again!"</p>
-            <div class="rev-photos">
-              <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=150" alt="Review photo"/>
-              <img src="https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?w=150" alt="Review photo"/>
-            </div>
-            <div class="seller-reply">
-              <div class="reply-header">🌾 Your Reply (Sunrise Farm)</div>
-              <p>Thank you so much, Maria! We harvest every morning to make sure they reach you at peak freshness. See you on your next order! 🍅</p>
-            </div>
-            <div class="rev-actions-farmer">
-              <button class="rev-act-btn">✏️ Edit Reply</button>
-              <a href="Orders.html" class="rev-act-btn">📦 View Order</a>
-            </div>
-          </div>
-
-          <div class="review-card">
-            <div class="reviewer-row">
-              <div class="rev-avatar" style="background:#fff8e0;color:#b45309;">JE</div>
-              <div class="rev-info"><div class="rev-name">Juan Enriquez</div><div class="rev-date">March 3, 2026</div></div>
-              <div class="rev-stars">★★★★☆</div>
-              <span class="rev-verified-badge">✓ Verified Purchase</span>
-            </div>
-            <div class="rev-variant">1 kg · COD · ₱210 · ORD-00240</div>
-            <p class="rev-text">"Good quality tomatoes. A bit smaller than the photos but still fresh and flavorful. Delivery was on time and packaging was great. Would order again."</p>
-            <div class="seller-reply">
-              <div class="reply-header">🌾 Your Reply (Sunrise Farm)</div>
-              <p>Thanks for the feedback! We'll make sure to better represent size in our photos next time.</p>
-            </div>
-            <div class="rev-actions-farmer">
-              <button class="rev-act-btn">✏️ Edit Reply</button>
-              <a href="Orders.html" class="rev-act-btn">📦 View Order</a>
-            </div>
-          </div>
-
-          <div class="review-card review-card-unreplied">
-            <div class="unreplied-tag">💬 Needs Your Reply</div>
-            <div class="reviewer-row">
-              <div class="rev-avatar" style="background:#f0fdf4;color:#166534;">AR</div>
-              <div class="rev-info"><div class="rev-name">Ana Reyes</div><div class="rev-date">March 1, 2026</div></div>
-              <div class="rev-stars">★★★★★</div>
-              <span class="rev-verified-badge">✓ Verified Purchase</span>
-            </div>
-            <div class="rev-variant">5 kg · GCash · ₱560 · ORD-00239</div>
-            <p class="rev-text">"I run a small carenderia and these tomatoes are now a staple! My customers always comment on how fresh the sauce tastes. Highly recommend!"</p>
-            <div class="reply-compose">
-              <textarea class="reply-textarea" placeholder="Write your reply to Ana Reyes…"></textarea>
-              <div class="reply-compose-actions">
-                <button class="reply-send-btn" onclick="saveStock()">✅ Send Reply</button>
+          <!-- Specs -->
+          <div class="tab-content" id="tab-specs">
+            <div class="specs-table">
+              <div class="spec-row">
+                <span class="spec-key">Product Name</span
+                ><span class="spec-val">Fresh Tomatoes</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Category</span
+                ><span class="spec-val">Vegetables</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Farm</span
+                ><span class="spec-val">Sunrise Farm, Tugbungan</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Farmer</span
+                ><span class="spec-val">Juan Dela Cruz (JD)</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Harvest Date</span
+                ><span class="spec-val">March 27, 2026</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Expiry Date</span
+                ><span class="spec-val"
+                  >April 3, 2026
+                  <span
+                    style="color: #dc2626; font-size: 0.8rem; font-weight: 700"
+                    >⚠️ 4 days left</span
+                  ></span
+                >
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Shelf Life</span
+                ><span class="spec-val">7 days from harvest (room temp)</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Storage</span
+                ><span class="spec-val"
+                  >Room temperature, away from sunlight</span
+                >
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Unit</span
+                ><span class="spec-val">Per kilogram (kg)</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Price</span
+                ><span class="spec-val">₱35 per kg</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Stock</span
+                ><span class="spec-val"
+                  >4 units
+                  <span
+                    style="color: #dc2626; font-size: 0.8rem; font-weight: 700"
+                    >🔴 Low Stock</span
+                  ></span
+                >
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Certification</span
+                ><span class="spec-val">Organic — OCCP Certified</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Delivery Area</span
+                ><span class="spec-val">All barangays, Zamboanga City</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Payment</span
+                ><span class="spec-val">GCash, COD, PayMaya</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Listed Since</span
+                ><span class="spec-val">January 2026</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Total Revenue</span
+                ><span
+                  class="spec-val"
+                  style="color: var(--green); font-weight: 800"
+                  >₱7,560</span
+                >
               </div>
             </div>
-            <div class="rev-actions-farmer">
-              <a href="Orders.html" class="rev-act-btn">📦 View Order</a>
+          </div>
+
+          <!-- Reviews -->
+          <div class="tab-content" id="tab-reviews">
+            <div class="reviews-summary">
+              <div class="rating-big">
+                <div class="rating-number">4.8</div>
+                <div class="rating-stars-big">★★★★★</div>
+                <div class="rating-out">out of 5</div>
+              </div>
+              <div class="rating-bars">
+                <div class="rbar-row">
+                  <span class="rbar-lbl">5 ★</span>
+                  <div class="rbar-track">
+                    <div class="rbar-fill" style="width: 78%"></div>
+                  </div>
+                  <span class="rbar-count">96</span>
+                </div>
+                <div class="rbar-row">
+                  <span class="rbar-lbl">4 ★</span>
+                  <div class="rbar-track">
+                    <div class="rbar-fill" style="width: 15%"></div>
+                  </div>
+                  <span class="rbar-count">19</span>
+                </div>
+                <div class="rbar-row">
+                  <span class="rbar-lbl">3 ★</span>
+                  <div class="rbar-track">
+                    <div class="rbar-fill" style="width: 5%"></div>
+                  </div>
+                  <span class="rbar-count">6</span>
+                </div>
+                <div class="rbar-row">
+                  <span class="rbar-lbl">2 ★</span>
+                  <div class="rbar-track">
+                    <div class="rbar-fill" style="width: 2%"></div>
+                  </div>
+                  <span class="rbar-count">2</span>
+                </div>
+                <div class="rbar-row">
+                  <span class="rbar-lbl">1 ★</span>
+                  <div class="rbar-track">
+                    <div class="rbar-fill" style="width: 1%"></div>
+                  </div>
+                  <span class="rbar-count">1</span>
+                </div>
+              </div>
+              <div class="review-filter-btns">
+                <button class="rfbtn active">All (124)</button>
+                <button class="rfbtn">5 ★ (96)</button>
+                <button class="rfbtn">4 ★ (19)</button>
+                <button class="rfbtn">💬 Needs Reply</button>
+              </div>
+            </div>
+
+            <div class="reviews-list">
+              <div class="review-card">
+                <div class="reviewer-row">
+                  <div class="rev-avatar">MS</div>
+                  <div class="rev-info">
+                    <div class="rev-name">Maria Santos</div>
+                    <div class="rev-date">March 5, 2026</div>
+                  </div>
+                  <div class="rev-stars">★★★★★</div>
+                  <span class="rev-verified-badge">✓ Verified Purchase</span>
+                </div>
+                <div class="rev-variant">2 kg · GCash · ₱380 · ORD-00241</div>
+                <p class="rev-text">
+                  "Super fresh and juicy! These tomatoes are so much better than
+                  what you get at the palengke. You can really taste the
+                  difference — sweet, rich, and no mushy parts. Will definitely
+                  order again!"
+                </p>
+                <div class="rev-photos">
+                  <img
+                    src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=150"
+                    alt="Review photo"
+                  />
+                  <img
+                    src="https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?w=150"
+                    alt="Review photo"
+                  />
+                </div>
+                <div class="seller-reply">
+                  <div class="reply-header">🌾 Your Reply (Sunrise Farm)</div>
+                  <p>
+                    Thank you so much, Maria! We harvest every morning to make
+                    sure they reach you at peak freshness. See you on your next
+                    order! 🍅
+                  </p>
+                </div>
+                <div class="rev-actions-farmer">
+                  <button class="rev-act-btn">✏️ Edit Reply</button>
+                  <a href="Orders.html" class="rev-act-btn">📦 View Order</a>
+                </div>
+              </div>
+
+              <div class="review-card">
+                <div class="reviewer-row">
+                  <div
+                    class="rev-avatar"
+                    style="background: #fff8e0; color: #b45309"
+                  >
+                    JE
+                  </div>
+                  <div class="rev-info">
+                    <div class="rev-name">Juan Enriquez</div>
+                    <div class="rev-date">March 3, 2026</div>
+                  </div>
+                  <div class="rev-stars">★★★★☆</div>
+                  <span class="rev-verified-badge">✓ Verified Purchase</span>
+                </div>
+                <div class="rev-variant">1 kg · COD · ₱210 · ORD-00240</div>
+                <p class="rev-text">
+                  "Good quality tomatoes. A bit smaller than the photos but
+                  still fresh and flavorful. Delivery was on time and packaging
+                  was great. Would order again."
+                </p>
+                <div class="seller-reply">
+                  <div class="reply-header">🌾 Your Reply (Sunrise Farm)</div>
+                  <p>
+                    Thanks for the feedback! We'll make sure to better represent
+                    size in our photos next time.
+                  </p>
+                </div>
+                <div class="rev-actions-farmer">
+                  <button class="rev-act-btn">✏️ Edit Reply</button>
+                  <a href="Orders.html" class="rev-act-btn">📦 View Order</a>
+                </div>
+              </div>
+
+              <div class="review-card review-card-unreplied">
+                <div class="unreplied-tag">💬 Needs Your Reply</div>
+                <div class="reviewer-row">
+                  <div
+                    class="rev-avatar"
+                    style="background: #f0fdf4; color: #166534"
+                  >
+                    AR
+                  </div>
+                  <div class="rev-info">
+                    <div class="rev-name">Ana Reyes</div>
+                    <div class="rev-date">March 1, 2026</div>
+                  </div>
+                  <div class="rev-stars">★★★★★</div>
+                  <span class="rev-verified-badge">✓ Verified Purchase</span>
+                </div>
+                <div class="rev-variant">5 kg · GCash · ₱560 · ORD-00239</div>
+                <p class="rev-text">
+                  "I run a small carenderia and these tomatoes are now a staple!
+                  My customers always comment on how fresh the sauce tastes.
+                  Highly recommend!"
+                </p>
+                <div class="reply-compose">
+                  <textarea
+                    class="reply-textarea"
+                    placeholder="Write your reply to Ana Reyes…"
+                  ></textarea>
+                  <div class="reply-compose-actions">
+                    <button class="reply-send-btn" onclick="saveStock()">
+                      ✅ Send Reply
+                    </button>
+                  </div>
+                </div>
+                <div class="rev-actions-farmer">
+                  <a href="Orders.html" class="rev-act-btn">📦 View Order</a>
+                </div>
+              </div>
+
+              <div class="review-card">
+                <div class="reviewer-row">
+                  <div
+                    class="rev-avatar"
+                    style="background: #eff6ff; color: #1d4ed8"
+                  >
+                    CB
+                  </div>
+                  <div class="rev-info">
+                    <div class="rev-name">Carlos Bautista</div>
+                    <div class="rev-date">Feb 28, 2026</div>
+                  </div>
+                  <div class="rev-stars">★★★★★</div>
+                  <span class="rev-verified-badge">✓ Verified Purchase</span>
+                </div>
+                <div class="rev-variant">2 kg · PayMaya · ORD-00238</div>
+                <p class="rev-text">
+                  "Arrived in perfect condition. Thoughtful packaging — each
+                  tomato individually wrapped. Fresh smell, vibrant color,
+                  excellent taste. Farm-to-table done right."
+                </p>
+                <div class="seller-reply">
+                  <div class="reply-header">🌾 Your Reply (Sunrise Farm)</div>
+                  <p>
+                    So happy to hear that, Carlos! Careful packing is something
+                    we take very seriously. Hope to see you again!
+                  </p>
+                </div>
+                <div class="rev-actions-farmer">
+                  <button class="rev-act-btn">✏️ Edit Reply</button>
+                  <a href="Orders.html" class="rev-act-btn">📦 View Order</a>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="review-card">
-            <div class="reviewer-row">
-              <div class="rev-avatar" style="background:#eff6ff;color:#1d4ed8;">CB</div>
-              <div class="rev-info"><div class="rev-name">Carlos Bautista</div><div class="rev-date">Feb 28, 2026</div></div>
-              <div class="rev-stars">★★★★★</div>
-              <span class="rev-verified-badge">✓ Verified Purchase</span>
+          <!-- Recent Orders -->
+          <div class="tab-content" id="tab-orders">
+            <div class="orders-note">
+              Orders for <b>Fresh Tomatoes</b>.
+              <a href="Orders.html">View all orders →</a>
             </div>
-            <div class="rev-variant">2 kg · PayMaya · ORD-00238</div>
-            <p class="rev-text">"Arrived in perfect condition. Thoughtful packaging — each tomato individually wrapped. Fresh smell, vibrant color, excellent taste. Farm-to-table done right."</p>
-            <div class="seller-reply">
-              <div class="reply-header">🌾 Your Reply (Sunrise Farm)</div>
-              <p>So happy to hear that, Carlos! Careful packing is something we take very seriously. Hope to see you again!</p>
-            </div>
-            <div class="rev-actions-farmer">
-              <button class="rev-act-btn">✏️ Edit Reply</button>
-              <a href="Orders.html" class="rev-act-btn">📦 View Order</a>
-            </div>
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Qty</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>ORD-00241</b></td>
+                  <td>
+                    <b>Maria Santos</b><br /><span
+                      style="font-size: 11px; color: #6b7280"
+                      >Lunzuran, ZC</span
+                    >
+                  </td>
+                  <td>2 kg</td>
+                  <td><b>₱380</b></td>
+                  <td class="date">Mar 1, 2026</td>
+                  <td style="font-size: 12px">GCash</td>
+                  <td><span class="status del">Delivered</span></td>
+                  <td>
+                    <a
+                      href="Shipping.html"
+                      style="font-size: 12px; font-weight: 600; color: #25943f"
+                      >Track →</a
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>ORD-00240</b></td>
+                  <td>
+                    <b>Juan dela Cruz</b><br /><span
+                      style="font-size: 11px; color: #6b7280"
+                      >Culianan, ZC</span
+                    >
+                  </td>
+                  <td>1 kg</td>
+                  <td><b>₱210</b></td>
+                  <td class="date">Feb 28, 2026</td>
+                  <td style="font-size: 12px">COD</td>
+                  <td><span class="status pen">Pending</span></td>
+                  <td>
+                    <a
+                      href="Shipping.html"
+                      style="font-size: 12px; font-weight: 600; color: #25943f"
+                      >Track →</a
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>ORD-00239</b></td>
+                  <td>
+                    <b>Ana Reyes</b><br /><span
+                      style="font-size: 11px; color: #6b7280"
+                      >Guisao, ZC</span
+                    >
+                  </td>
+                  <td>5 kg</td>
+                  <td><b>₱560</b></td>
+                  <td class="date">Mar 4, 2026</td>
+                  <td style="font-size: 12px">GCash</td>
+                  <td><span class="status pro">Processing</span></td>
+                  <td>
+                    <a
+                      href="Shipping.html"
+                      style="font-size: 12px; font-weight: 600; color: #25943f"
+                      >Track →</a
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>ORD-00238</b></td>
+                  <td>
+                    <b>Carlos Bautista</b><br /><span
+                      style="font-size: 11px; color: #6b7280"
+                      >Guisao, ZC</span
+                    >
+                  </td>
+                  <td>2 kg</td>
+                  <td><b>₱200</b></td>
+                  <td class="date">Mar 5, 2026</td>
+                  <td style="font-size: 12px">GCash</td>
+                  <td><span class="status del">Delivered</span></td>
+                  <td>
+                    <a
+                      href="Shipping.html"
+                      style="font-size: 12px; font-weight: 600; color: #25943f"
+                      >Track →</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
+          <!-- Analytics -->
+          <div class="tab-content" id="tab-analytics">
+            <div class="analytics-grid">
+              <div class="analytic-card">
+                <div class="analytic-icon">💰</div>
+                <div class="analytic-val">₱7,560</div>
+                <div class="analytic-lbl">Total Revenue</div>
+                <div class="analytic-sub">▲ +12.4% this month</div>
+              </div>
+              <div class="analytic-card">
+                <div class="analytic-icon">📦</div>
+                <div class="analytic-val">347</div>
+                <div class="analytic-lbl">Units Sold</div>
+                <div class="analytic-sub">▲ +28 this week</div>
+              </div>
+              <div class="analytic-card">
+                <div class="analytic-icon">👁️</div>
+                <div class="analytic-val">1,204</div>
+                <div class="analytic-lbl">Product Views</div>
+                <div class="analytic-sub">Last 30 days</div>
+              </div>
+              <div class="analytic-card">
+                <div class="analytic-icon">🛒</div>
+                <div class="analytic-val">28.8%</div>
+                <div class="analytic-lbl">Conversion Rate</div>
+                <div class="analytic-sub">Views → Orders</div>
+              </div>
+              <div class="analytic-card analytic-alert">
+                <div class="analytic-icon">⚠️</div>
+                <div class="analytic-val" style="color: #ca8a04">4 days</div>
+                <div class="analytic-lbl">Until Expiry</div>
+                <div class="analytic-sub" style="color: #ca8a04">
+                  Harvested Mar 27
+                </div>
+              </div>
+              <div class="analytic-card analytic-alert">
+                <div class="analytic-icon">📉</div>
+                <div class="analytic-val" style="color: #dc2626">4 units</div>
+                <div class="analytic-lbl">Stock Remaining</div>
+                <div class="analytic-sub" style="color: #dc2626">
+                  Restock soon!
+                </div>
+              </div>
+            </div>
+            <div class="analytics-tip">
+              💡 <b>Suggestion:</b> You have 4 units left with 4 days before
+              expiry. Consider a <b>limited-time discount</b> to move stock and
+              avoid waste.
+              <a
+                href="NewOrders.html"
+                class="inline-link"
+                style="margin-left: 6px"
+                >Update price →</a
+              >
+            </div>
+          </div>
+        </div>
+        <!-- /tabs-section -->
+
+        <!-- YOUR OTHER PRODUCTS -->
+        <div class="related-section">
+          <h2 class="related-title">Your Other Products</h2>
+          <div class="related-grid">
+            <a href="ProductDetail.html" class="related-card">
+              <div class="related-img">
+                <img
+                  src="IMG/Carrots.jpg"
+                  alt="Carrots"
+                  onerror="
+                    this.src =
+                      'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400'
+                  "
+                />
+                <span class="rel-badge shelf-ok-badge">18d left</span>
+              </div>
+              <div class="related-body">
+                <div class="related-name">Organic Carrots</div>
+                <div class="related-farm">📦 Stock: 12 · Running Low</div>
+                <div class="related-stars">★★★★★ <span>(45 sold)</span></div>
+                <div class="related-price">₱30<span>/bundle</span></div>
+              </div>
+            </a>
+            <a href="ProductDetail.html" class="related-card">
+              <div class="related-img">
+                <img
+                  src="IMG/Lettuce.jpg"
+                  alt="Lettuce"
+                  onerror="
+                    this.src =
+                      'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400'
+                  "
+                />
+                <span class="rel-badge shelf-danger-badge">2d left</span>
+              </div>
+              <div class="related-body">
+                <div class="related-name">Fresh Lettuce</div>
+                <div class="related-farm">📦 Stock: 30 · In Stock</div>
+                <div class="related-stars">★★★★★ <span>(120 sold)</span></div>
+                <div class="related-price">₱25<span>/bundle</span></div>
+              </div>
+            </a>
+            <a href="ProductDetail.html" class="related-card">
+              <div class="related-img">
+                <img
+                  src="IMG/Corn.jpg"
+                  alt="Corn"
+                  onerror="
+                    this.src =
+                      'https://images.unsplash.com/photo-1603048297172-c92544798d5a?w=400'
+                  "
+                />
+                <span class="rel-badge shelf-ok-badge">7d left</span>
+              </div>
+              <div class="related-body">
+                <div class="related-name">Sweet Corn</div>
+                <div class="related-farm">📦 Stock: 55 · In Stock</div>
+                <div class="related-stars">★★★★☆ <span>(95 sold)</span></div>
+                <div class="related-price">₱20<span>/piece</span></div>
+              </div>
+            </a>
+            <a href="ProductDetail.html" class="related-card">
+              <div class="related-img">
+                <img
+                  src="IMG/Strawberries.jpg"
+                  alt="Strawberries"
+                  onerror="
+                    this.src =
+                      'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400'
+                  "
+                />
+                <span class="rel-badge shelf-danger-badge">1d left</span>
+              </div>
+              <div class="related-body">
+                <div class="related-name">Strawberries</div>
+                <div class="related-farm">📦 Stock: 6 · Low Stock</div>
+                <div class="related-stars">★★★★★ <span>(60 sold)</span></div>
+                <div class="related-price">₱90<span>/box</span></div>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
-
-      <!-- Recent Orders -->
-      <div class="tab-content" id="tab-orders">
-        <div class="orders-note">Orders for <b>Fresh Tomatoes</b>. <a href="Orders.html">View all orders →</a></div>
-        <table class="tbl">
-          <thead>
-            <tr><th>Order ID</th><th>Customer</th><th>Qty</th><th>Amount</th><th>Date</th><th>Payment</th><th>Status</th><th></th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><b>ORD-00241</b></td>
-              <td><b>Maria Santos</b><br><span style="font-size:11px;color:#6b7280">Lunzuran, ZC</span></td>
-              <td>2 kg</td><td><b>₱380</b></td><td class="date">Mar 1, 2026</td><td style="font-size:12px">GCash</td>
-              <td><span class="status del">Delivered</span></td>
-              <td><a href="Shipping.html" style="font-size:12px;font-weight:600;color:#25943f">Track →</a></td>
-            </tr>
-            <tr>
-              <td><b>ORD-00240</b></td>
-              <td><b>Juan dela Cruz</b><br><span style="font-size:11px;color:#6b7280">Culianan, ZC</span></td>
-              <td>1 kg</td><td><b>₱210</b></td><td class="date">Feb 28, 2026</td><td style="font-size:12px">COD</td>
-              <td><span class="status pen">Pending</span></td>
-              <td><a href="Shipping.html" style="font-size:12px;font-weight:600;color:#25943f">Track →</a></td>
-            </tr>
-            <tr>
-              <td><b>ORD-00239</b></td>
-              <td><b>Ana Reyes</b><br><span style="font-size:11px;color:#6b7280">Guisao, ZC</span></td>
-              <td>5 kg</td><td><b>₱560</b></td><td class="date">Mar 4, 2026</td><td style="font-size:12px">GCash</td>
-              <td><span class="status pro">Processing</span></td>
-              <td><a href="Shipping.html" style="font-size:12px;font-weight:600;color:#25943f">Track →</a></td>
-            </tr>
-            <tr>
-              <td><b>ORD-00238</b></td>
-              <td><b>Carlos Bautista</b><br><span style="font-size:11px;color:#6b7280">Guisao, ZC</span></td>
-              <td>2 kg</td><td><b>₱200</b></td><td class="date">Mar 5, 2026</td><td style="font-size:12px">GCash</td>
-              <td><span class="status del">Delivered</span></td>
-              <td><a href="Shipping.html" style="font-size:12px;font-weight:600;color:#25943f">Track →</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Analytics -->
-      <div class="tab-content" id="tab-analytics">
-        <div class="analytics-grid">
-          <div class="analytic-card"><div class="analytic-icon">💰</div><div class="analytic-val">₱7,560</div><div class="analytic-lbl">Total Revenue</div><div class="analytic-sub">▲ +12.4% this month</div></div>
-          <div class="analytic-card"><div class="analytic-icon">📦</div><div class="analytic-val">347</div><div class="analytic-lbl">Units Sold</div><div class="analytic-sub">▲ +28 this week</div></div>
-          <div class="analytic-card"><div class="analytic-icon">👁️</div><div class="analytic-val">1,204</div><div class="analytic-lbl">Product Views</div><div class="analytic-sub">Last 30 days</div></div>
-          <div class="analytic-card"><div class="analytic-icon">🛒</div><div class="analytic-val">28.8%</div><div class="analytic-lbl">Conversion Rate</div><div class="analytic-sub">Views → Orders</div></div>
-          <div class="analytic-card analytic-alert"><div class="analytic-icon">⚠️</div><div class="analytic-val" style="color:#ca8a04;">4 days</div><div class="analytic-lbl">Until Expiry</div><div class="analytic-sub" style="color:#ca8a04;">Harvested Mar 27</div></div>
-          <div class="analytic-card analytic-alert"><div class="analytic-icon">📉</div><div class="analytic-val" style="color:#dc2626;">4 units</div><div class="analytic-lbl">Stock Remaining</div><div class="analytic-sub" style="color:#dc2626;">Restock soon!</div></div>
-        </div>
-        <div class="analytics-tip">
-          💡 <b>Suggestion:</b> You have 4 units left with 4 days before expiry. Consider a <b>limited-time discount</b> to move stock and avoid waste.
-          <a href="NewOrders.html" class="inline-link" style="margin-left:6px">Update price →</a>
-        </div>
-      </div>
-
-    </div><!-- /tabs-section -->
-
-    <!-- YOUR OTHER PRODUCTS -->
-    <div class="related-section">
-      <h2 class="related-title">Your Other Products</h2>
-      <div class="related-grid">
-        <a href="ProductDetail.html" class="related-card">
-          <div class="related-img">
-            <img src="IMG/Carrots.jpg" alt="Carrots" onerror="this.src='https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400'"/>
-            <span class="rel-badge shelf-ok-badge">18d left</span>
-          </div>
-          <div class="related-body">
-            <div class="related-name">Organic Carrots</div>
-            <div class="related-farm">📦 Stock: 12 · Running Low</div>
-            <div class="related-stars">★★★★★ <span>(45 sold)</span></div>
-            <div class="related-price">₱30<span>/bundle</span></div>
-          </div>
-        </a>
-        <a href="ProductDetail.html" class="related-card">
-          <div class="related-img">
-            <img src="IMG/Lettuce.jpg" alt="Lettuce" onerror="this.src='https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400'"/>
-            <span class="rel-badge shelf-danger-badge">2d left</span>
-          </div>
-          <div class="related-body">
-            <div class="related-name">Fresh Lettuce</div>
-            <div class="related-farm">📦 Stock: 30 · In Stock</div>
-            <div class="related-stars">★★★★★ <span>(120 sold)</span></div>
-            <div class="related-price">₱25<span>/bundle</span></div>
-          </div>
-        </a>
-        <a href="ProductDetail.html" class="related-card">
-          <div class="related-img">
-            <img src="IMG/Corn.jpg" alt="Corn" onerror="this.src='https://images.unsplash.com/photo-1603048297172-c92544798d5a?w=400'"/>
-            <span class="rel-badge shelf-ok-badge">7d left</span>
-          </div>
-          <div class="related-body">
-            <div class="related-name">Sweet Corn</div>
-            <div class="related-farm">📦 Stock: 55 · In Stock</div>
-            <div class="related-stars">★★★★☆ <span>(95 sold)</span></div>
-            <div class="related-price">₱20<span>/piece</span></div>
-          </div>
-        </a>
-        <a href="ProductDetail.html" class="related-card">
-          <div class="related-img">
-            <img src="IMG/Strawberries.jpg" alt="Strawberries" onerror="this.src='https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400'"/>
-            <span class="rel-badge shelf-danger-badge">1d left</span>
-          </div>
-          <div class="related-body">
-            <div class="related-name">Strawberries</div>
-            <div class="related-farm">📦 Stock: 6 · Low Stock</div>
-            <div class="related-stars">★★★★★ <span>(60 sold)</span></div>
-            <div class="related-price">₱90<span>/box</span></div>
-          </div>
-        </a>
-      </div>
+      <!-- /container -->
     </div>
+    <!-- /page-wrap -->
 
-  </div><!-- /container -->
-</div><!-- /page-wrap -->
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-container">
-    <div class="footer-main">
-      <div class="footer-brand">
-        <div class="footer-logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></div>
-        <p class="footer-desc">Connecting Zamboanga farmers to your table. Fresh, local, and delivered with care.</p>
-        <div class="footer-social">
-          <a href="#" class="social-link">Facebook</a>
-          <a href="#" class="social-link">Instagram</a>
-          <a href="#" class="social-link">Twitter</a>
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-main">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <span class="logo-icon">🌾</span><span>FarmDirect</span>
+            </div>
+            <p class="footer-desc">
+              Connecting Zamboanga farmers to your table. Fresh, local, and
+              delivered with care.
+            </p>
+            <div class="footer-social">
+              <a href="#" class="social-link">Facebook</a>
+              <a href="#" class="social-link">Instagram</a>
+              <a href="#" class="social-link">Twitter</a>
+            </div>
+          </div>
+          <div class="footer-links">
+            <div class="footer-col">
+              <h4>Quick Links</h4>
+              <a href="../index.html">Home</a>
+              <a href="Products.html">My Products</a>
+              <a href="Dashboard.html">Dashboard</a>
+              <a href="Orders.html">Orders</a>
+            </div>
+            <div class="footer-col">
+              <h4>Categories</h4>
+              <a href="#">Vegetables</a>
+              <a href="#">Fruits</a>
+              <a href="#">Meats</a>
+              <a href="#">Dairy</a>
+            </div>
+            <div class="footer-col">
+              <h4>Contact</h4>
+              <a href="tel:+639123456789">+63 912 345 6789</a>
+              <a
+                href="/cdn-cgi/l/email-protection#3d55585151527d5b5c4f5059544f585e49134d55"
+                ><span
+                  class="__cf_email__"
+                  data-cfemail="81e9e4ededeec1e7e0f3ece5e8f3e4e2f5aff1e9"
+                  >[email&#160;protected]</span
+                ></a
+              >
+              <p>Mon-Sat: 6AM - 8PM</p>
+              <p>Zamboanga City, PH</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 FarmDirect Zamboanga. All rights reserved.</p>
         </div>
       </div>
-      <div class="footer-links">
-        <div class="footer-col">
-          <h4>Quick Links</h4>
-          <a href="../index.html">Home</a>
-          <a href="Products.html">My Products</a>
-          <a href="Dashboard.html">Dashboard</a>
-          <a href="Orders.html">Orders</a>
-        </div>
-        <div class="footer-col">
-          <h4>Categories</h4>
-          <a href="#">Vegetables</a>
-          <a href="#">Fruits</a>
-          <a href="#">Meats</a>
-          <a href="#">Dairy</a>
-        </div>
-        <div class="footer-col">
-          <h4>Contact</h4>
-          <a href="tel:+639123456789">+63 912 345 6789</a>
-          <a href="/cdn-cgi/l/email-protection#3d55585151527d5b5c4f5059544f585e49134d55"><span class="__cf_email__" data-cfemail="81e9e4ededeec1e7e0f3ece5e8f3e4e2f5aff1e9">[email&#160;protected]</span></a>
-          <p>Mon-Sat: 6AM - 8PM</p>
-          <p>Zamboanga City, PH</p>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom"><p>© 2026 FarmDirect Zamboanga. All rights reserved.</p></div>
-  </div>
-</footer>
+    </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-let stock = 4; // total kg (primary) — kept for backward compat
-function changeStock(d) {
-  stock = Math.max(0, stock + d);
-  if (document.getElementById('stock-display')) document.getElementById('stock-display').textContent = stock;
-  updateRevenue();
-}
-function updateRevenue() {
-  // Stock values (match StockUpdate.html)
-  const stocks = { kg: 4, bundle: 20, box: 3 };
-  const priceKg     = parseFloat(document.getElementById('price-kg')?.value)     || 0;
-  const priceBundle = parseFloat(document.getElementById('price-bundle')?.value) || 0;
-  const priceBox    = parseFloat(document.getElementById('price-box')?.value)    || 0;
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script>
+      let stock = 4; // total kg (primary) — kept for backward compat
+      function changeStock(d) {
+        stock = Math.max(0, stock + d);
+        if (document.getElementById("stock-display"))
+          document.getElementById("stock-display").textContent = stock;
+        updateRevenue();
+      }
+      function updateRevenue() {
+        // Stock values (match StockUpdate.html)
+        const stocks = { kg: 4, bundle: 20, box: 3 };
+        const priceKg =
+          parseFloat(document.getElementById("price-kg")?.value) || 0;
+        const priceBundle =
+          parseFloat(document.getElementById("price-bundle")?.value) || 0;
+        const priceBox =
+          parseFloat(document.getElementById("price-box")?.value) || 0;
 
-  const revKg     = priceKg     * stocks.kg;
-  const revBundle = priceBundle * stocks.bundle;
-  const revBox    = priceBox    * stocks.box;
-  const total     = revKg + revBundle + revBox;
+        const revKg = priceKg * stocks.kg;
+        const revBundle = priceBundle * stocks.bundle;
+        const revBox = priceBox * stocks.box;
+        const total = revKg + revBundle + revBox;
 
-  // Update revenue chips
-  const chipKg     = document.getElementById('rev-kg');
-  const chipBundle = document.getElementById('rev-bundle');
-  const chipBox    = document.getElementById('rev-box');
-  const chipTotal  = document.getElementById('rev-total');
-  const noteInline = document.getElementById('rev-note-inline');
+        // Update revenue chips
+        const chipKg = document.getElementById("rev-kg");
+        const chipBundle = document.getElementById("rev-bundle");
+        const chipBox = document.getElementById("rev-box");
+        const chipTotal = document.getElementById("rev-total");
+        const noteInline = document.getElementById("rev-note-inline");
 
-  if (chipKg)     chipKg.innerHTML     = '₱' + revKg.toLocaleString()     + ' <span>kg</span>';
-  if (chipBundle) chipBundle.innerHTML = '₱' + revBundle.toLocaleString() + ' <span>bundles</span>';
-  if (chipBox)    chipBox.innerHTML    = '₱' + revBox.toLocaleString()    + ' <span>boxes</span>';
-  if (chipTotal)  chipTotal.textContent = '₱' + total.toLocaleString();
-  if (noteInline) noteInline.textContent = '₱' + total.toLocaleString();
-}
-function saveStock() {
-  const toast = document.getElementById('cart-toast');
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2500);
-}
-function switchImg(el, src) {
-  document.getElementById('main-img').src = src;
-  document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-}
-function switchTab(btn, id) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById(id).classList.add('active');
-}
-document.querySelectorlls('.rfbtn').forEach(b => {
-  b.addEventListener('click', function() {
-    document.querySelectorAll('.rfbtn').forEach(x => x.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
-updateRevenue();
-</script>
-</body>
+        if (chipKg)
+          chipKg.innerHTML = "₱" + revKg.toLocaleString() + " <span>kg</span>";
+        if (chipBundle)
+          chipBundle.innerHTML =
+            "₱" + revBundle.toLocaleString() + " <span>bundles</span>";
+        if (chipBox)
+          chipBox.innerHTML =
+            "₱" + revBox.toLocaleString() + " <span>boxes</span>";
+        if (chipTotal) chipTotal.textContent = "₱" + total.toLocaleString();
+        if (noteInline) noteInline.textContent = "₱" + total.toLocaleString();
+      }
+      function saveStock() {
+        const toast = document.getElementById("cart-toast");
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2500);
+      }
+      function switchImg(el, src) {
+        document.getElementById("main-img").src = src;
+        document
+          .querySelectorAll(".thumb")
+          .forEach((t) => t.classList.remove("active"));
+        el.classList.add("active");
+      }
+      function switchTab(btn, id) {
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((c) => c.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById(id).classList.add("active");
+      }
+      document.querySelectorlls(".rfbtn").forEach((b) => {
+        b.addEventListener("click", function () {
+          document
+            .querySelectorAll(".rfbtn")
+            .forEach((x) => x.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+      updateRevenue();
+    </script>
+  </body>
 </html>
