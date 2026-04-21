@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Farm Direct – Add Product</title>
+  <title>Farm Direct – Add Products</title>
   <link rel="stylesheet" href="New.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -36,20 +36,17 @@
         </div>
       </div>
       <div class="notif-wrap">
-        <button class="notif-btn" tabindex="0" aria-label="Profile">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </button>
+        <button class="notif-btn avatar-badge-btn" tabindex="0" aria-label="Profile">JD</button>
         <div class="notif-dropdown" style="min-width:180px;">
           <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
           <div class="notif-list">
             <div class="notif-item"><div class="notif-content"><a href="Dashboard.html">📊 Management</a></div></div>
-            <div class="notif-item"><div class="notif-content"><a href="Settings.html">👤 Profile</a></div></div>
+            <div class="notif-item"><div class="notif-content"><a href="Profile.html">👤 Profile</a></div></div>
             <div class="notif-item"><div class="notif-content"><a href="Settings.html">⚙️ Settings</a></div></div>
             <div class="notif-item"><div class="notif-content"><a href="../index.html">🚪 Logout</a></div></div>
           </div>
         </div>
       </div>
-      <div class="avatar-badge">JD</div>
       <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
     </div>
   </div>
@@ -69,287 +66,72 @@
 </nav>
 
 <main class="farmers-main">
+
+  <!-- PAGE HEADER -->
   <div class="dash">
-    <div class="dash-title">Add Product</div>
-    <p class="dash-sub">Fill in the details to list a new product in your store.</p>
+    <div>
+      <div class="dash-title">Add Products</div>
+      <p class="dash-sub">Fill in each product's details. You can add multiple products before saving them all at once.</p>
+    </div>
+    <span class="ap-counter-badge" id="ap-counter-badge" style="display:none;">0 products added</span>
   </div>
 
+  <!-- TOP ACTION BAR -->
   <div class="submit-bar">
-    <div class="submit-bar-left">📋 Product will appear in <b>My Products</b> after saving.</div>
+    <div class="submit-bar-left">📋 Products will appear in <b>My Products</b> after saving.</div>
     <div class="btn-group">
       <a href="Products.html" class="btn-cancel">✕ Cancel</a>
-      <a href="Products.html" class="btn-save">✅ Save Product</a>
+      <button type="button" class="btn-save" id="top-save-btn" onclick="apShowSaveBar()" style="display:none;">✅ Save All Products</button>
     </div>
   </div>
 
-  <div class="section-card">
-    <div class="section-card-head"><span class="sc-icon">📸</span><span class="sc-title">Product Photos</span></div>
-    <div class="section-card-body">
-      <div class="form-group" style="margin-bottom:10px"><label>Main Photo *</label><span class="hint">First photo customers will see. Use a clear, well-lit image.</span></div>
-      <div class="file-upload-box">
-        <input type="file" accept="image/*" name="main_photo"/>
-        <div class="upload-icon">📷</div>
-        <div class="upload-title">Upload Main Photo</div>
-        <div class="upload-sub">Drag &amp; drop or <span>click to browse</span></div>
-        <div class="upload-sub" style="margin-top:4px">JPG, PNG, WEBP · Max 5MB</div>
+  <!-- ═══ ACCORDION PRODUCT STACK ═══ -->
+  <div class="ap-stack" id="ap-stack"></div>
+
+  <!-- "ADD ANOTHER?" PROMPT -->
+  <div class="ap-another-prompt" id="ap-another-prompt" style="display:none;">
+    <div class="ap-another-inner">
+      <div class="ap-another-icon">🎉</div>
+      <div class="ap-another-text">
+        <strong>Product added!</strong>
+        <span>Do you want to add another product?</span>
       </div>
-      <div style="margin-top:16px">
-        <label style="font-size:12.5px;font-weight:700;color:#374151;display:block;margin-bottom:8px">Additional Photos <span style="font-weight:400;color:#9ca3af">(optional — up to 4 more)</span></label>
-        <div class="photo-slots">
-          <div class="photo-slot"><input type="file" accept="image/*" name="photo_2"/><span class="photo-slot-icon">＋</span><span>Photo 2</span></div>
-          <div class="photo-slot"><input type="file" accept="image/*" name="photo_3"/><span class="photo-slot-icon">＋</span><span>Photo 3</span></div>
-          <div class="photo-slot"><input type="file" accept="image/*" name="photo_4"/><span class="photo-slot-icon">＋</span><span>Photo 4</span></div>
-          <div class="photo-slot"><input type="file" accept="image/*" name="photo_5"/><span class="photo-slot-icon">＋</span><span>Photo 5</span></div>
-        </div>
-      </div>
-      <div class="tip-box">💡 <b>Tip:</b> Good product photos increase sales by up to 3x. Use natural light and a clean background.</div>
-    </div>
-  </div>
-
-  <div class="section-card">
-    <div class="section-card-head"><span class="sc-icon">📝</span><span class="sc-title">Basic Information</span></div>
-    <div class="section-card-body">
-      <div class="form-group"><label>Product Name *</label><input type="text" name="product_name" placeholder="e.g. Fresh Tomatoes, Organic Carrots…"/></div>
-      <div class="form-group">
-        <label>Category *</label>
-        <select name="category">
-          <option value="" disabled selected>Select a category</option>
-          <option>Vegetables</option>
-          <option>Fruits</option>
-          <option>Dairy</option>
-          <option>Grains</option>
-          <option>Meat</option>
-          <option>Others</option>
-        </select>
-      </div>
-
-      <div class="form-group" style="margin-bottom:0">
-        <label>Unit of Measurement *</label>
-        <span class="hint" style="display:block;margin-bottom:10px">Check all units this product can be sold in. The <b>primary unit</b> will be used for pricing.</span>
-
-        <div class="unit-checkbox-grid">
-
-          <label class="unit-check-card" id="ucard-kg">
-            <input type="checkbox" name="unit" value="per kg" onchange="handleUnitCheck(this)"/>
-            <div class="unit-check-icon">⚖️</div>
-            <div class="unit-check-label">per kg</div>
-            <div class="unit-check-sub">Kilogram</div>
-            <span class="unit-primary-tag" id="utag-kg">Primary</span>
-          </label>
-
-          <label class="unit-check-card" id="ucard-100g">
-            <input type="checkbox" name="unit" value="per 100g" onchange="handleUnitCheck(this)"/>
-            <div class="unit-check-icon">🔢</div>
-            <div class="unit-check-label">per 100g</div>
-            <div class="unit-check-sub">100 Grams</div>
-            <span class="unit-primary-tag" id="utag-100g">Primary</span>
-          </label>
-
-          <label class="unit-check-card" id="ucard-bundle">
-            <input type="checkbox" name="unit" value="per bundle" onchange="handleUnitCheck(this)"/>
-            <div class="unit-check-icon">🌿</div>
-            <div class="unit-check-label">per bundle</div>
-            <div class="unit-check-sub">Bundle / Bunch</div>
-            <span class="unit-primary-tag" id="utag-bundle">Primary</span>
-          </label>
-
-          <label class="unit-check-card" id="ucard-piece">
-            <input type="checkbox" name="unit" value="per piece" onchange="handleUnitCheck(this)"/>
-            <div class="unit-check-icon">🔵</div>
-            <div class="unit-check-label">per piece</div>
-            <div class="unit-check-sub">Individual Item</div>
-            <span class="unit-primary-tag" id="utag-piece">Primary</span>
-          </label>
-
-          <label class="unit-check-card" id="ucard-pack">
-            <input type="checkbox" name="unit" value="per pack" onchange="handleUnitCheck(this)"/>
-            <div class="unit-check-icon">📦</div>
-            <div class="unit-check-label">per pack</div>
-            <div class="unit-check-sub">Sealed Pack</div>
-            <span class="unit-primary-tag" id="utag-pack">Primary</span>
-          </label>
-
-          <label class="unit-check-card" id="ucard-box">
-            <input type="checkbox" name="unit" value="per box" onchange="handleUnitCheck(this)"/>
-            <div class="unit-check-icon">🗃️</div>
-            <div class="unit-check-label">per box</div>
-            <div class="unit-check-sub">Box / Crate</div>
-            <span class="unit-primary-tag" id="utag-box">Primary</span>
-          </label>
-
-          <label class="unit-check-card" id="ucard-tray">
-            <input type="checkbox" name="unit" value="per tray" onchange="handleUnitCheck(this)"/>
-            <div class="unit-check-icon">🍱</div>
-            <div class="unit-check-label">per tray</div>
-            <div class="unit-check-sub">Tray / Punnet</div>
-            <span class="unit-primary-tag" id="utag-tray">Primary</span>
-          </label>
-
-          <label class="unit-check-card" id="ucard-sack">
-            <input type="checkbox" name="unit" value="per sack" onchange="handleUnitCheck(this)"/>
-            <div class="unit-check-icon">👜</div>
-            <div class="unit-check-label">per sack</div>
-            <div class="unit-check-sub">Sack / Bayong</div>
-            <span class="unit-primary-tag" id="utag-sack">Primary</span>
-          </label>
-
-        </div>
-
-        <!-- Primary unit selector — appears after at least one is checked -->
-        <div class="unit-primary-selector" id="unit-primary-wrap" style="display:none;">
-          <span class="unit-primary-label">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            Set primary unit for pricing:
-          </span>
-          <select id="unit-primary-select" name="unit_primary" onchange="updatePrimaryBadge()">
-            <option value="">— choose —</option>
-          </select>
-          <span class="hint" style="margin-top:4px;display:block">Buyers will see the price in this unit (e.g. ₱35 <b>per kg</b>).</span>
-        </div>
-
-        <!-- Summary pill row -->
-        <div class="unit-selected-summary" id="unit-summary" style="display:none;">
-          <span class="unit-summary-label">Selected units:</span>
-          <div class="unit-pills" id="unit-pills"></div>
-        </div>
-
-      </div>
-      <div class="form-group" style="margin-bottom:0"><label>Description</label><textarea name="description" placeholder="Describe your product — freshness, how it's grown, best uses, tips for buyers…"></textarea><span class="hint">A good description builds trust and increases sales.</span></div>
-    </div>
-  </div>
-
-  <div class="section-card">
-    <div class="section-card-head"><span class="sc-icon">💰</span><span class="sc-title">Pricing &amp; Stock</span></div>
-    <div class="section-card-body">
-      <div class="form-row-3">
-        <div class="form-group"><label>Price (₱) *</label><input type="number" name="price" placeholder="0.00" min="0" step="0.01"/><span class="hint">Price per unit selected above.</span></div>
-        <div class="form-group"><label>Stock Quantity *</label><input type="number" name="stock" placeholder="0" min="0"/><span class="hint">How many units available now.</span></div>
-        <div class="form-group"><label>Low Stock Alert at</label><input type="number" name="low_stock_alert" placeholder="e.g. 5" min="0"/><span class="hint">Warn me when stock drops below this.</span></div>
+      <div class="ap-another-btns">
+        <button type="button" class="btn-save ap-btn-yes" onclick="apAddAnother()">+ Add Another Product</button>
+        <button type="button" class="btn-cancel ap-btn-no" onclick="apShowSaveBar()">No, I'm Done</button>
       </div>
     </div>
   </div>
 
-  <div class="section-card">
-    <div class="section-card-head"><span class="sc-icon">🚚</span><span class="sc-title">Shipping Details</span></div>
-    <div class="section-card-body">
-      <div class="form-row-2">
-        <div class="form-group"><label>Estimated Prep Time</label><select name="prep_time"><option selected>Same day</option><option>1 day</option><option>2 days</option><option>3 days</option></select><span class="hint">How long before item is ready to ship.</span></div>
-        <div class="form-group"><label>Product Weight (approx.)</label><input type="text" name="weight" placeholder="e.g. 0.5 kg, 200g"/><span class="hint">Used to estimate shipping fees.</span></div>
-      </div>
-      <div class="form-group" style="margin-bottom:0"><label>Special Handling Notes</label><input type="text" name="handling" placeholder="e.g. Keep refrigerated, Handle with care, Fragile…"/></div>
+  <!-- SAVE ALL BAR -->
+  <div class="ap-save-bar submit-bar" id="ap-save-bar" style="display:none;">
+    <div class="submit-bar-left">
+      <span id="ap-save-label">Ready to publish?</span> Click <b>Save All Products</b> to add them to your store.
     </div>
-  </div>
-
-  
-  <div class="section-card">
-    <div class="section-card-head"><span class="sc-icon">🕐</span><span class="sc-title">Freshness &amp; Shelf Life</span></div>
-    <div class="section-card-body">
-
-      <div class="tip-box" style="margin-bottom:1.2rem;">
-        🥦 <b>Important for perishable products:</b> Let buyers know when your produce was harvested and how long it stays fresh. This builds trust and reduces returns.
-      </div>
-
-      <div class="form-row-2">
-        <div class="form-group">
-          <label>Harvest Date *</label>
-          <input type="date" name="harvest_date" />
-          <span class="hint">When was this batch harvested?</span>
-        </div>
-        <div class="form-group">
-          <label>Shelf Life (days) *</label>
-          <select name="shelf_life_days">
-            <option value="" disabled selected>Select shelf life</option>
-            <optgroup label="Very Perishable (1–3 days)">
-              <option value="1">1 day — e.g. Fresh-cut herbs, sprouts</option>
-              <option value="2">2 days — e.g. Strawberries, fresh basil</option>
-              <option value="3">3 days — e.g. Leafy greens, lettuce</option>
-            </optgroup>
-            <optgroup label="Short (4–7 days)">
-              <option value="4">4 days — e.g. Tomatoes, mushrooms</option>
-              <option value="5">5 days — e.g. Bell peppers, eggplant</option>
-              <option value="7">7 days — e.g. Corn, broccoli, cucumbers</option>
-            </optgroup>
-            <optgroup label="Moderate (8–21 days)">
-              <option value="10">10 days — e.g. Cabbage, okra</option>
-              <option value="14">14 days — e.g. Carrots, beets, radish</option>
-              <option value="21">21 days — e.g. Sweet potato, squash</option>
-            </optgroup>
-            <optgroup label="Long (30+ days)">
-              <option value="30">30 days — e.g. Onions, garlic</option>
-              <option value="60">60 days — e.g. Potatoes, pumpkin</option>
-            </optgroup>
-          </select>
-          <span class="hint">Estimated days product stays fresh from harvest.</span>
-        </div>
-      </div>
-
-      <div class="form-row-2">
-        <div class="form-group">
-          <label>Storage Instructions</label>
-          <select name="storage">
-            <option selected>Room temperature</option>
-            <option>Refrigerate (2–8°C)</option>
-            <option>Cool &amp; dry place</option>
-            <option>Keep away from sunlight</option>
-            <option>Store in water (e.g. fresh herbs)</option>
-          </select>
-          <span class="hint">Helps buyers store correctly to extend freshness.</span>
-        </div>
-        <div class="form-group">
-          <label>Freshness Guarantee</label>  
-          <select name="freshness_guarantee">
-            <option selected>Harvested same day as delivery</option>
-            <option>Harvested within 24 hours</option>
-            <option>Harvested within 2 days</option>
-            <option>No guarantee specified</option>
-          </select>
-          <span class="hint">What freshness promise do you make to buyers?</span>
-        </div>
-      </div>
-
-      <!-- Live expiry preview -->
-      <div class="expiry-preview" id="expiry-preview">
-        <div class="expiry-preview-head">📅 Expiry Preview</div>
-        <div class="expiry-preview-body">
-          <div class="expiry-row">
-            <span class="expiry-lbl">Harvest Date</span>
-            <span class="expiry-val" id="prev-harvest">—</span>
-          </div>
-          <div class="expiry-row">
-            <span class="expiry-lbl">Estimated Expiry</span>
-            <span class="expiry-val" id="prev-expiry">—</span>
-          </div>
-          <div class="expiry-row">
-            <span class="expiry-lbl">Days Remaining</span>
-            <span class="expiry-val" id="prev-days">—</span>
-          </div>
-          <div class="shelf-track" style="margin-top:8px;height:8px;">
-            <div class="shelf-fill shelf-fill-ok" id="prev-bar" style="width:0%"></div>
-          </div>
-          <div style="font-size:0.72rem;color:var(--text-light);margin-top:4px" id="prev-note">Set harvest date and shelf life to see preview.</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-<div class="submit-bar">
-    <div class="submit-bar-left">Ready to publish? Click <b>Save Product</b> to add it to your store.</div>
     <div class="btn-group">
-      <a href="Products.html" class="btn-cancel">✕ Cancel</a>
-      <a href="Products.html" class="btn-save">✅ Save Product</a>
+      <button type="button" class="btn-cancel" onclick="apAddAnother()">+ Add Another</button>
+      <button type="button" class="btn-save" onclick="apSaveAll()">✅ Save All Products</button>
     </div>
   </div>
+
+  <!-- SUCCESS STATE -->
+  <div class="ap-success" id="ap-success" style="display:none;">
+    <div class="ap-success-icon">🌾</div>
+    <h2 class="ap-success-title" id="ap-success-title">Products Saved!</h2>
+    <p class="ap-success-sub" id="ap-success-sub">Your products are now live on your store.</p>
+    <div class="ap-success-actions">
+      <a href="Products.html" class="btn-save">View My Products →</a>
+      <button type="button" class="btn-cancel" onclick="apReset()">+ Add More Products</button>
+    </div>
+  </div>
+
 </main>
 
 <footer class="footer">
   <div class="footer-container">
     <div class="footer-main">
       <div class="footer-brand">
-        <div class="footer-logo">
-          <span class="logo-icon">🌾</span>
-          <span>FarmDirect</span>
-        </div>
+        <div class="footer-logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></div>
         <p class="footer-desc">Connecting Zamboanga farmers to your table. Fresh, local, and delivered with care.</p>
         <div class="footer-social">
           <a href="#" class="social-link">Facebook</a>
@@ -375,42 +157,74 @@
         <div class="footer-col">
           <h4>Contact</h4>
           <a href="tel:+639123456789">+63 912 345 6789</a>
-          <a href="/cdn-cgi/l/email-protection#fd9598919192bd9b9c8f9099948f989e89d38d95"><span class="__cf_email__" data-cfemail="b3dbd6dfdfdcf3d5d2c1ded7dac1d6d0c79dc3db">[email&#160;protected]</span></a>
+          <a href="mailto:hello@farmdirect.ph">hello@farmdirect.ph</a>
           <p>Mon-Sat: 6AM - 8PM</p>
           <p>Zamboanga City, PH</p>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 FarmDirect Zamboanga. All rights reserved.</p>
-    </div>
+    <div class="footer-bottom"><p>&copy; 2026 FarmDirect Zamboanga. All rights reserved.</p></div>
   </div>
 </footer>
 
 <script>
 lucide.createIcons();
 
-// ── UNIT OF MEASUREMENT CHECKBOXES ──
-function handleUnitCheck(cb) {
-  const checked = Array.from(document.querySelectorAll('input[name="unit"]:checked'));
-  const wrap    = document.getElementById('unit-primary-wrap');
-  const summary = document.getElementById('unit-summary');
-  const select  = document.getElementById('unit-primary-select');
-  const pills   = document.getElementById('unit-pills');
+/* ═══════════════════════════════════════════
+   MULTI-PRODUCT ACCORDION FLOW
+═══════════════════════════════════════════ */
 
-  // Style each card
-  document.querySelectorAll('.unit-check-card').forEach(card => {
+let apProducts  = [];
+let apCardCount = 0;
+
+const CAT_EMOJI = {
+  Vegetables:'🥦', Fruits:'🍑', Dairy:'🥛',
+  Grains:'🌾', Meat:'🥩', Others:'📦'
+};
+
+/* ── Update the counter badge ── */
+function apUpdateCounter() {
+  const badge = document.getElementById('ap-counter-badge');
+  const topBtn = document.getElementById('top-save-btn');
+  const n = apProducts.length;
+  if (n > 0) {
+    badge.textContent = n + ' product' + (n !== 1 ? 's' : '') + ' added';
+    badge.style.display = 'inline-flex';
+    topBtn.style.display = 'inline-flex';
+  } else {
+    badge.style.display = 'none';
+    topBtn.style.display = 'none';
+  }
+}
+
+/* ── Enable/disable "Mark as Done" button ── */
+function apCheckDone(id) {
+  const name  = (document.getElementById('ap-name-'  + id)?.value || '').trim();
+  const cat   = (document.getElementById('ap-cat-'   + id)?.value || '').trim();
+  const price = (document.getElementById('ap-price-' + id)?.value || '').trim();
+  const btn   = document.getElementById('ap-done-btn-' + id);
+  if (btn) btn.disabled = !(name && cat && price);
+}
+
+/* ── Unit checkbox logic (per-card) ── */
+function apHandleUnitCheck(cb, id) {
+  const checked = Array.from(document.querySelectorAll('#ap-units-' + id + ' input[type="checkbox"]:checked'));
+  const wrap    = document.getElementById('ap-unit-primary-wrap-' + id);
+  const summary = document.getElementById('ap-unit-summary-' + id);
+  const select  = document.getElementById('ap-unit-primary-select-' + id);
+  const pills   = document.getElementById('ap-unit-pills-' + id);
+
+  document.querySelectorAll('#ap-units-' + id + ' .unit-check-card').forEach(card => {
     const inp = card.querySelector('input[type="checkbox"]');
     card.classList.toggle('unit-checked', inp.checked);
   });
 
   if (checked.length === 0) {
-    wrap.style.display    = 'none';
+    wrap.style.display = 'none';
     summary.style.display = 'none';
     return;
   }
 
-  // Rebuild primary select
   const currentPrimary = select.value;
   select.innerHTML = '<option value="">— choose —</option>';
   checked.forEach(inp => {
@@ -420,33 +234,27 @@ function handleUnitCheck(cb) {
     if (inp.value === currentPrimary) opt.selected = true;
     select.appendChild(opt);
   });
-  // Auto-select if only one checked
-  if (checked.length === 1) {
-    select.value = checked[0].value;
-  }
+  if (checked.length === 1) select.value = checked[0].value;
 
   wrap.style.display    = 'block';
   summary.style.display = 'flex';
-
-  updatePrimaryBadge();
-  updateSummaryPills(checked);
+  apUpdatePrimaryBadge(id);
+  apUpdateSummaryPills(id, checked);
 }
 
-function updatePrimaryBadge() {
-  const primary = document.getElementById('unit-primary-select').value;
-  // Hide all tags
-  document.querySelectorAll('.unit-primary-tag').forEach(t => t.style.display = 'none');
+function apUpdatePrimaryBadge(id) {
+  const primary = document.getElementById('ap-unit-primary-select-' + id)?.value || '';
+  document.querySelectorAll('#ap-units-' + id + ' .unit-primary-tag').forEach(t => t.style.display = 'none');
   if (primary) {
-    // Map value to tag id
     const key = primary.replace('per ', '').replace(' ', '-');
-    const tag = document.getElementById('utag-' + key);
+    const tag = document.getElementById('ap-utag-' + id + '-' + key);
     if (tag) tag.style.display = 'inline-block';
   }
 }
 
-function updateSummaryPills(checked) {
-  const pills   = document.getElementById('unit-pills');
-  const primary = document.getElementById('unit-primary-select').value;
+function apUpdateSummaryPills(id, checked) {
+  const pills   = document.getElementById('ap-unit-pills-' + id);
+  const primary = document.getElementById('ap-unit-primary-select-' + id)?.value || '';
   pills.innerHTML = '';
   checked.forEach(inp => {
     const pill = document.createElement('span');
@@ -456,82 +264,436 @@ function updateSummaryPills(checked) {
   });
 }
 
-document.getElementById('unit-primary-select')?.addEventListener('change', function() {
-  updatePrimaryBadge();
-  const checked = Array.from(document.querySelectorAll('input[name="unit"]:checked'));
-  updateSummaryPills(checked);
-});
+/* ── Live expiry preview (per-card) ── */
+function apUpdateExpiry(id) {
+  const harvestVal = document.getElementById('ap-harvest-' + id)?.value || '';
+  const shelfDays  = parseInt(document.getElementById('ap-shelf-' + id)?.value) || 0;
 
-// ── LIVE EXPIRY PREVIEW ──
-function updateExpiry() {
-  const harvestInput = document.querySelector('[name="harvest_date"]');
-  const shelfInput   = document.querySelector('[name="shelf_life_days"]');
-  if (!harvestInput || !shelfInput) return;
-
-  const harvestVal = harvestInput.value;
-  const shelfDays  = parseInt(shelfInput.value) || 0;
-
-  const prevHarvest = document.getElementById('prev-harvest');
-  const prevExpiry  = document.getElementById('prev-expiry');
-  const prevDays    = document.getElementById('prev-days');
-  const prevBar     = document.getElementById('prev-bar');
-  const prevNote    = document.getElementById('prev-note');
+  const prevHarvest = document.getElementById('ap-prev-harvest-' + id);
+  const prevExpiry  = document.getElementById('ap-prev-expiry-'  + id);
+  const prevDays    = document.getElementById('ap-prev-days-'    + id);
+  const prevBar     = document.getElementById('ap-prev-bar-'     + id);
+  const prevNote    = document.getElementById('ap-prev-note-'    + id);
 
   if (!harvestVal || !shelfDays) {
-    prevHarvest.textContent = '—';
-    prevExpiry.textContent  = '—';
-    prevDays.textContent    = '—';
-    prevBar.style.width     = '0%';
-    prevNote.textContent    = 'Set harvest date and shelf life to see preview.';
+    prevHarvest.textContent = '—'; prevExpiry.textContent = '—';
+    prevDays.textContent = '—'; prevBar.style.width = '0%';
+    prevNote.textContent = 'Set harvest date and shelf life to see preview.';
     return;
   }
 
-  const harvest = new Date(harvestVal);
-  const expiry  = new Date(harvest);
+  const harvest  = new Date(harvestVal);
+  const expiry   = new Date(harvest);
   expiry.setDate(expiry.getDate() + shelfDays);
-
-  const today    = new Date();
-  today.setHours(0,0,0,0);
-  const diffMs   = expiry - today;
-  const daysLeft = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+  const today    = new Date(); today.setHours(0,0,0,0);
+  const daysLeft = Math.ceil((expiry - today) / 86400000);
   const pct      = Math.max(0, Math.min(100, Math.round((daysLeft / shelfDays) * 100)));
+  const opts     = { year:'numeric', month:'short', day:'numeric' };
 
-  const opts = { year:'numeric', month:'short', day:'numeric' };
   prevHarvest.textContent = harvest.toLocaleDateString('en-PH', opts);
   prevExpiry.textContent  = expiry.toLocaleDateString('en-PH', opts);
-
   prevBar.className = 'shelf-fill';
   prevDays.style.color = '';
 
   if (daysLeft <= 0) {
-    prevDays.textContent = '❌ Already expired';
-    prevDays.style.color = '#dc2626';
-    prevBar.classList.add('shelf-fill-danger');
-    prevBar.style.width = '5%';
-    prevNote.textContent = '⚠️ This product has already passed its shelf life. Update the harvest date.';
+    prevDays.textContent = '❌ Already expired'; prevDays.style.color = '#dc2626';
+    prevBar.classList.add('shelf-fill-danger'); prevBar.style.width = '5%';
+    prevNote.textContent = '⚠️ This product has already passed its shelf life.';
   } else if (daysLeft <= 3) {
-    prevDays.textContent = daysLeft + ' day' + (daysLeft > 1 ? 's' : '') + ' left ⚠️';
-    prevDays.style.color = '#dc2626';
-    prevBar.classList.add('shelf-fill-danger');
-    prevBar.style.width = pct + '%';
-    prevNote.textContent = '🔴 Critical: This product expires very soon. Consider same-day delivery only.';
+    prevDays.textContent = daysLeft + ' day' + (daysLeft > 1 ? 's' : '') + ' left ⚠️'; prevDays.style.color = '#dc2626';
+    prevBar.classList.add('shelf-fill-danger'); prevBar.style.width = pct + '%';
+    prevNote.textContent = '🔴 Critical: expires very soon. Consider same-day delivery only.';
   } else if (daysLeft <= 7) {
-    prevDays.textContent = daysLeft + ' days left ⚠️';
-    prevDays.style.color = '#ca8a04';
-    prevBar.classList.add('shelf-fill-warn');
-    prevBar.style.width = pct + '%';
+    prevDays.textContent = daysLeft + ' days left ⚠️'; prevDays.style.color = '#ca8a04';
+    prevBar.classList.add('shelf-fill-warn'); prevBar.style.width = pct + '%';
     prevNote.textContent = '⚠️ Short shelf life. Communicate the expiry date clearly to buyers.';
   } else {
-    prevDays.textContent = daysLeft + ' days left ✅';
-    prevDays.style.color = '#16a34a';
-    prevBar.classList.add('shelf-fill-ok');
-    prevBar.style.width = pct + '%';
-    prevNote.textContent = '✅ Good shelf life. Buyers will see this product as fresh and trustworthy.';
+    prevDays.textContent = daysLeft + ' days left ✅'; prevDays.style.color = '#16a34a';
+    prevBar.classList.add('shelf-fill-ok'); prevBar.style.width = pct + '%';
+    prevNote.textContent = '✅ Good shelf life. Buyers will see this product as fresh.';
   }
 }
 
-document.querySelector('[name="harvest_date"]')?.addEventListener('change', updateExpiry);
-document.querySelector('[name="shelf_life_days"]')?.addEventListener('change', updateExpiry);
+/* ── Toggle a completed card open/closed ── */
+function apToggleCard(id) {
+  const body = document.getElementById('ap-body-' + id);
+  const chev = document.getElementById('ap-chev-' + id);
+  const open = body.style.display !== 'none';
+  body.style.display   = open ? 'none' : 'block';
+  chev.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
+}
+
+/* ── Build one product card's HTML ── */
+function apBuildCard(id) {
+  const unitDefs = [
+    { val:'per kg',     icon:'⚖️', label:'per kg',     sub:'Kilogram',       key:'kg'     },
+    { val:'per 100g',   icon:'🔢', label:'per 100g',   sub:'100 Grams',      key:'100g'   },
+    { val:'per bundle', icon:'🌿', label:'per bundle', sub:'Bundle / Bunch',  key:'bundle' },
+    { val:'per piece',  icon:'🔵', label:'per piece',  sub:'Individual Item', key:'piece'  },
+    { val:'per pack',   icon:'📦', label:'per pack',   sub:'Sealed Pack',     key:'pack'   },
+    { val:'per box',    icon:'🗃️', label:'per box',    sub:'Box / Crate',     key:'box'    },
+    { val:'per tray',   icon:'🍱', label:'per tray',   sub:'Tray / Punnet',   key:'tray'   },
+    { val:'per sack',   icon:'👜', label:'per sack',   sub:'Sack / Bayong',   key:'sack'   },
+  ];
+
+  const unitCards = unitDefs.map(u => `
+    <label class="unit-check-card" id="ap-ucard-${id}-${u.key}">
+      <input type="checkbox" value="${u.val}" onchange="apHandleUnitCheck(this,${id})"/>
+      <div class="unit-check-icon">${u.icon}</div>
+      <div class="unit-check-label">${u.label}</div>
+      <div class="unit-check-sub">${u.sub}</div>
+      <span class="unit-primary-tag" id="ap-utag-${id}-${u.key}">Primary</span>
+    </label>`).join('');
+
+  const unitOptions = unitDefs.map(u => `<option value="${u.val}">${u.val}</option>`).join('');
+
+  return `
+  <div class="ap-card section-card" id="ap-card-${id}">
+
+    <!-- Collapsed header (shown after Mark Done) -->
+    <div class="ap-card-header" id="ap-header-${id}" style="display:none;" onclick="apToggleCard(${id})">
+      <div class="section-card-head" style="cursor:pointer; user-select:none; justify-content:space-between;">
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <span class="sc-icon" id="ap-thumb-${id}">📦</span>
+          <div>
+            <div class="sc-title" id="ap-sname-${id}">—</div>
+            <div style="font-size:0.78rem; color:var(--text-light); margin-top:2px;" id="ap-ssub-${id}">—</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <span class="badge b-g">✓ Done</span>
+          <svg id="ap-chev-${id}" width="18" height="18" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5"
+               style="flex-shrink:0; transition:transform .25s; color:var(--text-light);">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form body -->
+    <div id="ap-body-${id}">
+      <div class="section-card-head">
+        <span class="sc-icon">📝</span>
+        <span class="sc-title">Product #${id}</span>
+        <span style="font-size:0.78rem; color:var(--text-light); margin-left:0.5rem;">Fill in the details below</span>
+      </div>
+      <div class="section-card-body">
+
+        <!-- ── Photos ── -->
+        <div style="margin-bottom:1.3rem;">
+          <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.9rem;">
+            <span style="font-size:1.1rem;">📸</span>
+            <span style="font-family:var(--font-display); font-size:0.97rem; font-weight:700;">Product Photos</span>
+          </div>
+          <div class="form-group" style="margin-bottom:10px"><label>Main Photo *</label><span class="hint">First photo customers will see.</span></div>
+          <div class="file-upload-box">
+            <input type="file" accept="image/*"/>
+            <div class="upload-icon">📷</div>
+            <div class="upload-title">Upload Main Photo</div>
+            <div class="upload-sub">Drag &amp; drop or <span>click to browse</span></div>
+            <div class="upload-sub" style="margin-top:4px">JPG, PNG, WEBP · Max 5MB</div>
+          </div>
+          <div style="margin-top:14px">
+            <label style="font-size:12.5px;font-weight:700;color:#374151;display:block;margin-bottom:8px">Additional Photos <span style="font-weight:400;color:#9ca3af">(optional — up to 4 more)</span></label>
+            <div class="photo-slots">
+              <div class="photo-slot"><input type="file" accept="image/*"/><span class="photo-slot-icon">＋</span><span>Photo 2</span></div>
+              <div class="photo-slot"><input type="file" accept="image/*"/><span class="photo-slot-icon">＋</span><span>Photo 3</span></div>
+              <div class="photo-slot"><input type="file" accept="image/*"/><span class="photo-slot-icon">＋</span><span>Photo 4</span></div>
+              <div class="photo-slot"><input type="file" accept="image/*"/><span class="photo-slot-icon">＋</span><span>Photo 5</span></div>
+            </div>
+          </div>
+          <div class="tip-box">💡 <b>Tip:</b> Good product photos increase sales by up to 3x. Use natural light and a clean background.</div>
+        </div>
+
+        <hr style="border:none; border-top:1.5px solid var(--border); margin:1.3rem 0;">
+
+        <!-- ── Basic Info ── -->
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;">
+          <span style="font-size:1.1rem;">📝</span>
+          <span style="font-family:var(--font-display); font-size:0.97rem; font-weight:700;">Basic Information</span>
+        </div>
+
+        <div class="form-group">
+          <label>Product Name *</label>
+          <input type="text" id="ap-name-${id}" placeholder="e.g. Fresh Tomatoes, Organic Carrots…"
+                 oninput="apCheckDone(${id})"/>
+        </div>
+
+        <div class="form-group">
+          <label>Category *</label>
+          <select id="ap-cat-${id}" onchange="apCheckDone(${id})">
+            <option value="" disabled selected>Select a category</option>
+            <option>Vegetables</option><option>Fruits</option><option>Dairy</option>
+            <option>Grains</option><option>Meat</option><option>Others</option>
+          </select>
+        </div>
+
+        <!-- Unit of measurement -->
+        <div class="form-group" style="margin-bottom:0">
+          <label>Unit of Measurement *</label>
+          <span class="hint" style="display:block;margin-bottom:10px">Check all units this product can be sold in.</span>
+          <div class="unit-checkbox-grid" id="ap-units-${id}">${unitCards}</div>
+
+          <div class="unit-primary-selector" id="ap-unit-primary-wrap-${id}" style="display:none;">
+            <span class="unit-primary-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Set primary unit for pricing:
+            </span>
+            <select id="ap-unit-primary-select-${id}" onchange="apUpdatePrimaryBadge(${id}); apUpdateSummaryPills(${id}, Array.from(document.querySelectorAll('#ap-units-${id} input:checked')))">
+              <option value="">— choose —</option>${unitOptions}
+            </select>
+            <span class="hint" style="margin-top:4px;display:block">Buyers will see the price in this unit.</span>
+          </div>
+
+          <div class="unit-selected-summary" id="ap-unit-summary-${id}" style="display:none;">
+            <span class="unit-summary-label">Selected units:</span>
+            <div class="unit-pills" id="ap-unit-pills-${id}"></div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:0; margin-top:1rem;">
+          <label>Description</label>
+          <textarea placeholder="Describe your product — freshness, how it's grown, best uses, tips for buyers…"></textarea>
+          <span class="hint">A good description builds trust and increases sales.</span>
+        </div>
+
+        <hr style="border:none; border-top:1.5px solid var(--border); margin:1.3rem 0;">
+
+        <!-- ── Pricing & Stock ── -->
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;">
+          <span style="font-size:1.1rem;">💰</span>
+          <span style="font-family:var(--font-display); font-size:0.97rem; font-weight:700;">Pricing &amp; Stock</span>
+        </div>
+        <div class="form-row-3">
+          <div class="form-group">
+            <label>Price (₱) *</label>
+            <input type="number" id="ap-price-${id}" placeholder="0.00" min="0" step="0.01" oninput="apCheckDone(${id})"/>
+            <span class="hint">Price per unit selected above.</span>
+          </div>
+          <div class="form-group">
+            <label>Stock Quantity *</label>
+            <input type="number" placeholder="0" min="0"/>
+            <span class="hint">How many units available now.</span>
+          </div>
+          <div class="form-group">
+            <label>Low Stock Alert at</label>
+            <input type="number" placeholder="e.g. 5" min="0"/>
+            <span class="hint">Warn me when stock drops below this.</span>
+          </div>
+        </div>
+
+        <hr style="border:none; border-top:1.5px solid var(--border); margin:1.3rem 0;">
+
+        <!-- ── Shipping ── -->
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;">
+          <span style="font-size:1.1rem;">🚚</span>
+          <span style="font-family:var(--font-display); font-size:0.97rem; font-weight:700;">Shipping Details</span>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label>Estimated Prep Time</label>
+            <select><option selected>Same day</option><option>1 day</option><option>2 days</option><option>3 days</option></select>
+            <span class="hint">How long before item is ready to ship.</span>
+          </div>
+          <div class="form-group">
+            <label>Product Weight (approx.)</label>
+            <input type="text" placeholder="e.g. 0.5 kg, 200g"/>
+            <span class="hint">Used to estimate shipping fees.</span>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:0">
+          <label>Special Handling Notes</label>
+          <input type="text" placeholder="e.g. Keep refrigerated, Handle with care, Fragile…"/>
+        </div>
+
+        <hr style="border:none; border-top:1.5px solid var(--border); margin:1.3rem 0;">
+
+        <!-- ── Freshness & Shelf Life ── -->
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.8rem;">
+          <span style="font-size:1.1rem;">🕐</span>
+          <span style="font-family:var(--font-display); font-size:0.97rem; font-weight:700;">Freshness &amp; Shelf Life</span>
+        </div>
+        <div class="tip-box" style="margin-bottom:1.2rem;">
+          🥦 <b>Important for perishable products:</b> Let buyers know when your produce was harvested and how long it stays fresh.
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label>Harvest Date *</label>
+            <input type="date" id="ap-harvest-${id}" onchange="apUpdateExpiry(${id})"/>
+            <span class="hint">When was this batch harvested?</span>
+          </div>
+          <div class="form-group">
+            <label>Shelf Life (days) *</label>
+            <select id="ap-shelf-${id}" onchange="apUpdateExpiry(${id})">
+              <option value="" disabled selected>Select shelf life</option>
+              <optgroup label="Very Perishable (1–3 days)">
+                <option value="1">1 day — e.g. Fresh-cut herbs, sprouts</option>
+                <option value="2">2 days — e.g. Strawberries, fresh basil</option>
+                <option value="3">3 days — e.g. Leafy greens, lettuce</option>
+              </optgroup>
+              <optgroup label="Short (4–7 days)">
+                <option value="4">4 days — e.g. Tomatoes, mushrooms</option>
+                <option value="5">5 days — e.g. Bell peppers, eggplant</option>
+                <option value="7">7 days — e.g. Corn, broccoli, cucumbers</option>
+              </optgroup>
+              <optgroup label="Moderate (8–21 days)">
+                <option value="10">10 days — e.g. Cabbage, okra</option>
+                <option value="14">14 days — e.g. Carrots, beets, radish</option>
+                <option value="21">21 days — e.g. Sweet potato, squash</option>
+              </optgroup>
+              <optgroup label="Long (30+ days)">
+                <option value="30">30 days — e.g. Onions, garlic</option>
+                <option value="60">60 days — e.g. Potatoes, pumpkin</option>
+              </optgroup>
+            </select>
+            <span class="hint">Estimated days product stays fresh from harvest.</span>
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label>Storage Instructions</label>
+            <select>
+              <option selected>Room temperature</option>
+              <option>Refrigerate (2–8°C)</option>
+              <option>Cool &amp; dry place</option>
+              <option>Keep away from sunlight</option>
+              <option>Store in water (e.g. fresh herbs)</option>
+            </select>
+            <span class="hint">Helps buyers store correctly to extend freshness.</span>
+          </div>
+          <div class="form-group">
+            <label>Freshness Guarantee</label>
+            <select>
+              <option selected>Harvested same day as delivery</option>
+              <option>Harvested within 24 hours</option>
+              <option>Harvested within 2 days</option>
+              <option>No guarantee specified</option>
+            </select>
+            <span class="hint">What freshness promise do you make to buyers?</span>
+          </div>
+        </div>
+
+        <!-- Expiry preview -->
+        <div class="expiry-preview">
+          <div class="expiry-preview-head">📅 Expiry Preview</div>
+          <div class="expiry-preview-body">
+            <div class="expiry-row"><span class="expiry-lbl">Harvest Date</span><span class="expiry-val" id="ap-prev-harvest-${id}">—</span></div>
+            <div class="expiry-row"><span class="expiry-lbl">Estimated Expiry</span><span class="expiry-val" id="ap-prev-expiry-${id}">—</span></div>
+            <div class="expiry-row"><span class="expiry-lbl">Days Remaining</span><span class="expiry-val" id="ap-prev-days-${id}">—</span></div>
+            <div class="shelf-track" style="margin-top:8px;height:8px;">
+              <div class="shelf-fill shelf-fill-ok" id="ap-prev-bar-${id}" style="width:0%"></div>
+            </div>
+            <div style="font-size:0.72rem;color:var(--text-light);margin-top:4px" id="ap-prev-note-${id}">Set harvest date and shelf life to see preview.</div>
+          </div>
+        </div>
+
+        <!-- ── Mark as Done footer ── -->
+        <div class="ap-form-footer">
+          <span style="font-size:0.78rem; color:var(--text-light);"><span style="color:#ef5350">*</span> Required fields</span>
+          <button type="button" class="btn-save ap-btn-done" id="ap-done-btn-${id}"
+                  onclick="apMarkDone(${id})" disabled>
+            ✓ Mark as Done
+          </button>
+        </div>
+
+      </div><!-- /section-card-body -->
+    </div><!-- /ap-body -->
+  </div><!-- /ap-card -->`;
+}
+
+/* ── Mark a product done → collapse → show prompt ── */
+function apMarkDone(id) {
+  const name  = (document.getElementById('ap-name-'  + id)?.value || '').trim();
+  const cat   = (document.getElementById('ap-cat-'   + id)?.value || '').trim();
+  const price = (document.getElementById('ap-price-' + id)?.value || '').trim();
+  const primary = document.getElementById('ap-unit-primary-select-' + id)?.value || '';
+
+  // Populate collapsed header
+  document.getElementById('ap-sname-' + id).textContent = name;
+  const subParts = [];
+  if (cat)     subParts.push((CAT_EMOJI[cat] || '') + ' ' + cat);
+  if (price)   subParts.push('₱' + parseFloat(price).toLocaleString() + (primary ? ' ' + primary : ''));
+  document.getElementById('ap-ssub-'  + id).textContent = subParts.join(' · ');
+  document.getElementById('ap-thumb-' + id).textContent = CAT_EMOJI[cat] || '📦';
+
+  // Hide body, show collapsed header
+  document.getElementById('ap-body-'   + id).style.display = 'none';
+  document.getElementById('ap-header-' + id).style.display = 'block';
+
+  // Style card as done
+  const card = document.getElementById('ap-card-' + id);
+  card.classList.add('ap-card-done');
+
+  // Store
+  apProducts.push({ id, name, cat, price, primary });
+  apUpdateCounter();
+
+  // Show prompt
+  document.getElementById('ap-save-bar').style.display      = 'none';
+  document.getElementById('ap-another-prompt').style.display = 'flex';
+  document.getElementById('ap-another-prompt').scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+/* ── Add another product card ── */
+function apAddAnother() {
+  document.getElementById('ap-another-prompt').style.display = 'none';
+  document.getElementById('ap-save-bar').style.display       = 'none';
+
+  apCardCount++;
+  const stack = document.getElementById('ap-stack');
+  const div   = document.createElement('div');
+  div.innerHTML = apBuildCard(apCardCount);
+  stack.appendChild(div.firstElementChild);
+
+  document.getElementById('ap-card-' + apCardCount)
+          .scrollIntoView({ behavior:'smooth', block:'start' });
+  setTimeout(() => {
+    document.getElementById('ap-name-' + apCardCount)?.focus();
+  }, 400);
+}
+
+/* ── Show save bar ── */
+function apShowSaveBar() {
+  document.getElementById('ap-another-prompt').style.display = 'none';
+  const n     = apProducts.length;
+  const names = apProducts.map(p => p.name).join(', ');
+  document.getElementById('ap-save-label').textContent =
+    n + ' product' + (n !== 1 ? 's' : '') + ' ready to save: ' + names + '.';
+  const bar = document.getElementById('ap-save-bar');
+  bar.style.display = 'flex';
+  bar.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+/* ── Save all ── */
+function apSaveAll() {
+  const n     = apProducts.length;
+  const names = apProducts.map(p => p.name).join(', ');
+
+  document.getElementById('ap-save-bar').style.display = 'none';
+  document.getElementById('ap-stack').innerHTML        = '';
+
+  document.getElementById('ap-success-title').textContent =
+    n + ' Product' + (n !== 1 ? 's' : '') + ' Saved!';
+  document.getElementById('ap-success-sub').textContent =
+    names + (n !== 1 ? ' are' : ' is') + ' now live on your store.';
+
+  document.getElementById('ap-success').style.display = 'flex';
+  document.getElementById('ap-success').scrollIntoView({ behavior:'smooth', block:'start' });
+
+  apProducts  = [];
+  apCardCount = 0;
+  apUpdateCounter();
+}
+
+/* ── Reset to start fresh ── */
+function apReset() {
+  document.getElementById('ap-success').style.display = 'none';
+  apAddAnother();
+}
+
+/* ── Bootstrap: open first card ── */
+apAddAnother();
 </script>
 </body>
 </html>

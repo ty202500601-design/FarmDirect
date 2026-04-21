@@ -36,20 +36,17 @@
         </div>
       </div>
       <div class="notif-wrap">
-        <button class="notif-btn" tabindex="0" aria-label="Profile">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </button>
+        <button class="notif-btn avatar-badge-btn" tabindex="0" aria-label="Profile">JD</button>
         <div class="notif-dropdown" style="min-width:180px;">
           <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
           <div class="notif-list">
             <div class="notif-item"><div class="notif-content"><a href="Dashboard.html">📊 Management</a></div></div>
-            <div class="notif-item"><div class="notif-content"><a href="Settings.html">👤 Profile</a></div></div>
+            <div class="notif-item"><div class="notif-content"><a href="Profile.html">👤 Profile</a></div></div>
             <div class="notif-item"><div class="notif-content"><a href="Settings.html">⚙️ Settings</a></div></div>
             <div class="notif-item"><div class="notif-content"><a href="../index.html">🚪 Logout</a></div></div>
           </div>
         </div>
       </div>
-      <div class="avatar-badge">JD</div>
       <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
     </div>
   </div>
@@ -80,10 +77,35 @@
         <div class="card-head"><span class="card-title">👤 Account Settings</span></div>
         <div class="form-section">
           <div class="form-section-title">Personal Details</div>
-          <div class="form-row">
-            <div class="form-group"><label>Name (Last Name, First Name, M.I)</label><input value="Dela Cruz, Juan"/></div>
+
+          <!-- Name row — 4 inline fields -->
+          <div class="form-group" style="margin-bottom:1rem;">
+            <label>Full Name</label>
+            <div class="name-fields-row">
+              <div class="name-field">
+                <input value="Dela Cruz" placeholder="Last Name"/>
+                <span class="name-field-label">Last Name *</span>
+              </div>
+              <div class="name-field">
+                <input value="Juan" placeholder="First Name"/>
+                <span class="name-field-label">First Name *</span>
+              </div>
+              <div class="name-field name-field-sm">
+                <input value="A" placeholder="M.I."/>
+                <span class="name-field-label">M.I. *</span>
+              </div>
+              <div class="name-field name-field-sm">
+                <input value="" placeholder="e.g. Jr."/>
+                <span class="name-field-label">Suffix <span style="font-weight:400;color:var(--text-light)">(optional)</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Email full width -->
+          <div class="form-row full" style="margin-bottom:1rem;">
             <div class="form-group"><label>Email</label><input value="juan@gmail.com"/></div>
           </div>
+
           <div class="form-row">
             <div class="form-group"><label>Phone Number</label><input value="+63 912 345 6789"/></div>
             <div class="form-group"><label>Location</label><input value="Cabaluay, Zamboanga City"/></div>
