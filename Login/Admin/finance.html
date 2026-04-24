@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>FarmDirect | Financials</title>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header"><h2>FARMDirect</h2></div>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">📊 Dashboard</a></li>
+                <li><a href="users.html">👥 Management</a></li>
+                <li><a href="products.html">🌽 Moderation</a></li>
+                <li><a href="orders.html">🚚 Logistics</a></li>
+                <li class="active"><a href="finance.html">💰 Financials</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <h1>Farmer Payouts & Finances</h1>
+            <button class="btn btn-info">📊 Export Monthly Report</button>
+        </header>
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Farmer Name</th>
+                        <th>Account Details</th>
+                        <th>Pending Payout</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Juan Dela Cruz</td>
+                        <td>GCash: 0912****345</td>
+                        <td><strong>₱12,450.00</strong></td>
+                        <td>
+                            <button class="btn btn-success">Approve Payout</button>
+                            <button class="btn btn-outline">View Invoice</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Maria Clara</td>
+                        <td>BPI: 1234-****-89</td>
+                        <td><strong>₱8,200.00</strong></td>
+                        <td>
+                            <button class="btn btn-success">Approve Payout</button>
+                            <button class="btn btn-outline">View Invoice</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

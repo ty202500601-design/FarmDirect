@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>FarmDirect | Product Moderation</title>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header"><h2>FARMDirect</h2></div>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">📊 Dashboard</a></li>
+                <li><a href="users.html">👥 Management</a></li>
+                <li class="active"><a href="products.html">🌽 Moderation</a></li>
+                <li><a href="orders.html">🚚 Logistics</a></li>
+                <li><a href="finance.html">💰 Financials</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <h1>Product Catalog Moderation</h1>
+            <div class="search-bar"><input type="text" placeholder="Search products..."></div>
+        </header>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;">
+            <div class="card">
+                <div style="height:180px; background:#e9ecef; border-radius:6px; display:flex; align-items:center; justify-content:center; margin-bottom:15px; color:#adb5bd;">
+                    [Rice Grain Image]
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:start;">
+                    <div>
+                        <h3 style="font-size:1.1rem;">Organic Dinorado</h3>
+                        <p style="color:var(--text-muted); font-size:0.85rem;">Farmer: Juan D.</p>
+                    </div>
+                    <span class="badge bg-yellow">Pending</span>
+                </div>
+                <div style="margin-top:20px; display:flex; gap:10px;">
+                    <button class="btn btn-success" style="flex:1;">Approve</button>
+                    <button class="btn btn-outline" style="flex:1;">Edit</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div style="height:180px; background:#e9ecef; border-radius:6px; display:flex; align-items:center; justify-content:center; margin-bottom:15px; color:#adb5bd;">
+                    [Cabbage Image]
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:start;">
+                    <div>
+                        <h3 style="font-size:1.1rem;">Fresh Cabbage</h3>
+                        <p style="color:var(--text-muted); font-size:0.85rem;">Farmer: Maria C.</p>
+                    </div>
+                    <span class="badge bg-green">Live</span>
+                </div>
+                <div style="margin-top:20px; display:flex; gap:10px;">
+                    <button class="btn btn-danger" style="flex:1;">Take Down</button>
+                    <button class="btn btn-outline" style="flex:1;">Edit</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

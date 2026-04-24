@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>FarmDirect | Management</title>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header"><h2>FARMDirect</h2></div>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">📊 Dashboard</a></li>
+                <li class="active"><a href="users.html">👥 Management</a></li>
+                <li><a href="products.html">🌽 Moderation</a></li>
+                <li><a href="orders.html">🚚 Logistics</a></li>
+                <li><a href="finance.html">💰 Financials</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-bar" style="display:flex; justify-content: space-between;">
+            <h1>Farmer Management</h1>
+            <button class="btn btn-primary">+ Add New Farmer</button>
+        </header>
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Farmer Name</th>
+                        <th>Barangay</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Juan Dela Cruz</td>
+                        <td>Zambowood</td>
+                        <td><span class="badge bg-green">Active</span></td>
+                        <td>
+                            <button class="btn btn-outline">View Info</button>
+                            <button class="btn btn-danger">Suspend</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

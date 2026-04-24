@@ -2,151 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders - FarmDirect Admin</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
+    <title>FarmDirect | Logistics</title>
 </head>
 <body>
-    <div class="dashboard-container">
-        <aside class="sidebar">
-            <div class="logo">FarmDirect</div>
-            <nav>
-                <a href="dashboard.html" class="nav-item">Dashboard</a>
-                <a href="product.html" class="nav-item">Products</a>
-                <a href="orders.html" class="nav-item active">Orders</a>
-                <a href="vendors.html" class="nav-item">Vendors</a>
-                <a href="customers.html" class="nav-item">Customers</a>
-                <a href="requests.html" class="nav-item">Pending Requests</a>
-            </nav>
-            <div class="user-profile">
-                <div class="avatar">AD</div>
-                <div class="user-details">
-                    <p class="user-name">Admin User</p>
-                    <p class="user-email">admin@market.com</p>
-                </div>
-            </div>
-        </aside>
+    <aside class="sidebar">
+        <div class="sidebar-header"><h2>FARMDirect</h2></div>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">📊 Dashboard</a></li>
+                <li><a href="users.html">👥 Management</a></li>
+                <li><a href="products.html">🌽 Moderation</a></li>
+                <li class="active"><a href="orders.html">🚚 Logistics</a></li>
+                <li class="active"><a href="finance.html">💰 Financials</a></li>
+            </ul>
+        </nav>
+    </aside>
 
-        <main class="main-content">
-            <header class="top-nav">
-                <div class="search-wrapper">
-                    <i class="ph ph-magnifying-glass"></i>
-                    <input type="text" placeholder="Search products, orders, customers...">
-                </div>
-                <div class="top-icons">
-                    <i class="ph ph-bell"></i>
-                    <i class="ph ph-sign-out"></i>
-                </div>
-            </header>
+    <main class="main-content">
+        <header class="top-bar">
+            <h1>Logistics & Delivery</h1>
+        </header>
 
-            <div class="content-header">
-                <div class="title-group">
-                    <h1>Orders</h1>
-                    <p>Manage and track all orders</p>
-                </div>
-                <button class="export-btn">
-                    <i class="ph ph-download-simple"></i> Export Orders
-                </button>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card active">
-                    <p>All Orders</p>
-                    <span class="count">6</span>
-                </div>
-                <div class="stat-card">
-                    <p>Pending</p>
-                    <span class="count orange">1</span>
-                </div>
-                <div class="stat-card">
-                    <p>Processing</p>
-                    <span class="count blue">4</span>
-                </div>
-                <div class="stat-card">
-                    <p>Completed</p>
-                    <span class="count green">1</span>
-                </div>
-                <div class="stat-card">
-                    <p>Cancelled</p>
-                    <span class="count red">0</span>
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+            <div class="card">
+                <h3>Zamboanga City Delivery Clusters</h3>
+                <div style="padding:20px; text-align:center;">
+                    <img src="image_076fc9.png" alt="Zamboanga Map" style="width:100%; max-width:500px; border-radius:8px; border:1px solid var(--border-color);">
+                    <div style="margin-top:15px; display:flex; justify-content:center; gap:15px; font-size:0.85rem;">
+                        <span>📍 <strong>5</strong> Zambowood</span>
+                        <span>📍 <strong>3</strong> Divisoria</span>
+                        <span>📍 <strong>8</strong> Santa Maria</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="table-section">
-                <div class="table-search">
-                    <input type="text" placeholder="Search by order ID or customer name...">
+            <div class="card">
+                <h3>Platform Health</h3>
+                <div style="margin-top:20px;">
+                    <p style="margin-bottom:10px;">Drivers Active: <strong>12</strong></p>
+                    <p style="margin-bottom:10px;">On-Time Delivery: <strong style="color:var(--btn-success)">98%</strong></p>
+                    <button class="btn btn-info" style="width:100%; margin-top:20px;">Broadcast to Drivers</button>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Customer</th>
-                            <th>Date</th>
-                            <th>Items</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>ORD-001</td>
-                            <td>Meryll Evangelista</td>
-                            <td>2026-03-08</td>
-                            <td>5</td>
-                            <td class="bold">P800.00</td>
-                            <td><span class="badge completed">Completed <i class="ph ph-caret-down"></i></span></td>
-                            <td><button class="view-btn"><i class="ph ph-eye"></i> View</button></td>
-                        </tr>
-                        <tr>
-                            <td>ORD-002</td>
-                            <td>Leandro Marcos</td>
-                            <td>2026-03-08</td>
-                            <td>3</td>
-                            <td class="bold">P350.00</td>
-                            <td><span class="badge processing">Processing <i class="ph ph-caret-down"></i></span></td>
-                            <td><button class="view-btn"><i class="ph ph-eye"></i> View</button></td>
-                        </tr>
-                        <tr>
-                            <td>ORD-003</td>
-                            <td>Vennice Compas</td>
-                            <td>2026-03-08</td>
-                            <td>6</td>
-                            <td class="bold">P899.00</td>
-                            <td><span class="badge pending">Pending <i class="ph ph-caret-down"></i></span></td>
-                            <td><button class="view-btn"><i class="ph ph-eye"></i> View</button></td>
-                        </tr>
-                        <tr>
-                            <td>ORD-004</td>
-                            <td>Rianne Joyce</td>
-                            <td>2026-03-08</td>
-                            <td>3</td>
-                            <td class="bold">P500.00</td>
-                            <td><span class="badge processing">Processing <i class="ph ph-caret-down"></i></span></td>
-                            <td><button class="view-btn"><i class="ph ph-eye"></i> View</button></td>
-                        </tr>
-                        <tr>
-                            <td>ORD-005</td>
-                            <td>Enzo Machutes</td>
-                            <td>2026-03-08</td>
-                            <td>8</td>
-                            <td class="bold">P1000.00</td>
-                            <td><span class="badge processing">Processing <i class="ph ph-caret-down"></i></span></td>
-                            <td><button class="view-btn"><i class="ph ph-eye"></i> View</button></td>
-                        </tr>
-                        <tr>
-                            <td>ORD-006</td>
-                            <td>Xandrea Galimba</td>
-                            <td>2026-03-08</td>
-                            <td>4</td>
-                            <td class="bold">P650.00</td>
-                            <td><span class="badge processing">Processing <i class="ph ph-caret-down"></i></span></td>
-                            <td><button class="view-btn"><i class="ph ph-eye"></i> View</button></td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
-        </main>
-    </div>
+        </div>
+
+        <div class="card" style="margin-top:20px;">
+            <h3>Active Shipments</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Dest. Barangay</th>
+                        <th>Progress</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#FD-9921</td>
+                        <td>Zambowood</td>
+                        <td><span style="color:var(--accent-green)">Harvesting...</span></td>
+                        <td><button class="btn btn-outline">Track</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
 </html>
