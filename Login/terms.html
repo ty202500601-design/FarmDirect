@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Direct - Terms and Conditions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+            background: #f3fdf5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #1a1a1a;
+        }
+
+        /* TOPBAR */
+        .topbar {
+            background: #1a3a22;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding: 0 28px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+            border-bottom: 1px solid #0f2014;
+        }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-text { font-family: 'Lora', 'Georgia', serif; font-size: 22px; font-weight: 700; color: #fff; }
+        .logo-text span { color: #fff; }
+
+        /* MAIN CONTENT */
+        .page-wrapper {
+            flex: 1;
+            max-width: 780px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 48px 24px 64px;
+        }
+
+        /* HEADER */
+        .doc-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 32px;
+            border-bottom: 2px solid #d1fae5;
+        }
+        .doc-badge {
+            display: inline-block;
+            background: #d1fae5;
+            color: #15803d;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+        .doc-title {
+            font-family: 'Lora', 'Georgia', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a3a22;
+            margin-bottom: 10px;
+        }
+        .doc-subtitle {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+        .doc-meta {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+        .doc-meta span {
+            font-size: 12px;
+            color: #9ca3af;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* TABLE OF CONTENTS */
+        .toc {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 40px;
+        }
+        .toc-title {
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .6px;
+            color: #1a3a22;
+            margin-bottom: 14px;
+        }
+        .toc-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 24px;
+        }
+        .toc-list li a {
+            font-size: 13px;
+            color: #15803d;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .toc-list li a:hover { text-decoration: underline; }
+        .toc-num {
+            font-size: 11px;
+            color: #9ca3af;
+            font-weight: 700;
+            min-width: 18px;
+        }
+
+        /* SECTIONS */
+        .section {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 28px 32px;
+            margin-bottom: 20px;
+        }
+        .section-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+        .section-num {
+            background: #1a3a22;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .section-title {
+            font-family: 'Lora', 'Georgia', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a3a22;
+        }
+        .section p {
+            font-size: 14px;
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        .section p:last-child { margin-bottom: 0; }
+        .section ul {
+            list-style: none;
+            margin: 10px 0 14px 0;
+        }
+        .section ul li {
+            font-size: 14px;
+            color: #444;
+            line-height: 1.7;
+            padding: 4px 0 4px 20px;
+            position: relative;
+        }
+        .section ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #15803d;
+            font-weight: 700;
+            font-size: 13px;
+        }
+        .section ul li.cross::before { content: '✗'; color: #dc2626; }
+
+        .highlight-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 14px 0;
+            font-size: 13px;
+            color: #374151;
+            line-height: 1.7;
+        }
+        .highlight-box strong { color: #15803d; }
+
+        .warning-box {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 14px 0;
+            font-size: 13px;
+            color: #374151;
+            line-height: 1.7;
+        }
+        .warning-box strong { color: #c2410c; }
+
+        /* BACK BUTTON */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #6b7280;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 28px;
+        }
+        .back-btn:hover { color: #1a3a22; }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 18px;
+            font-size: 12px;
+            color: #fff;
+            background: #1a3a22;
+            font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+        }
+
+        @media (max-width: 600px) {
+            .page-wrapper { padding: 28px 16px 48px; }
+            .toc-list { grid-template-columns: 1fr; }
+            .section { padding: 20px 18px; }
+            .doc-title { font-size: 24px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <a href="login.html" class="logo">
+            <span class="logo-text">Farm<span>Direct</span></span>
+        </a>
+    </header>
+
+    <main class="page-wrapper">
+
+        <a href="javascript:history.back()" class="back-btn">← Back</a>
+
+        <!-- DOCUMENT HEADER -->
+        <div class="doc-header">
+            <div class="doc-badge">Legal Document</div>
+            <div class="doc-title">Terms and Conditions</div>
+            <div class="doc-subtitle">Please read these terms carefully before using FarmDirect.<br>By registering, you agree to be bound by the following terms.</div>
+            <div class="doc-meta">
+                <span>📅 Effective Date: January 1, 2026</span>
+                <span>📍 Zamboanga City, Philippines</span>
+                <span>🔄 Last Updated: April 2026</span>
+            </div>
+        </div>
+
+        <!-- TABLE OF CONTENTS -->
+        <div class="toc">
+            <div class="toc-title">Table of Contents</div>
+            <ul class="toc-list">
+                <li><a href="#s1"><span class="toc-num">01</span> Acceptance of Terms</a></li>
+                <li><a href="#s2"><span class="toc-num">02</span> About FarmDirect</a></li>
+                <li><a href="#s3"><span class="toc-num">03</span> User Accounts</a></li>
+                <li><a href="#s4"><span class="toc-num">04</span> Buyer Responsibilities</a></li>
+                <li><a href="#s5"><span class="toc-num">05</span> Farmer / Seller Verification</a></li>
+                <li><a href="#s6"><span class="toc-num">06</span> Prohibited Activities</a></li>
+                <li><a href="#s7"><span class="toc-num">07</span> Privacy and Data</a></li>
+                <li><a href="#s8"><span class="toc-num">08</span> Limitation of Liability</a></li>
+                <li><a href="#s9"><span class="toc-num">09</span> Termination of Account</a></li>
+                <li><a href="#s10"><span class="toc-num">10</span> Contact Information</a></li>
+            </ul>
+        </div>
+
+        <!-- SECTION 1 -->
+        <div class="section" id="s1">
+            <div class="section-header">
+                <div class="section-num">1</div>
+                <div class="section-title">Acceptance of Terms</div>
+            </div>
+            <p>By accessing, registering, or using FarmDirect ("the Platform"), you confirm that you have read, understood, and agreed to these Terms and Conditions. These terms apply to all users of the platform, including Buyers, Farmers/Sellers, and Administrators.</p>
+            <p>If you do not agree with any part of these terms, you must not use the platform. FarmDirect reserves the right to update these terms at any time. Continued use of the platform after changes are posted constitutes acceptance of the updated terms.</p>
+            <div class="highlight-box">
+                <strong>📌 Note:</strong> These Terms and Conditions were created for the FarmDirect academic project, developed as a Web Development course requirement at a higher education institution in Zamboanga City, Philippines.
+            </div>
+        </div>
+
+        <!-- SECTION 2 -->
+        <div class="section" id="s2">
+            <div class="section-header">
+                <div class="section-num">2</div>
+                <div class="section-title">About FarmDirect</div>
+            </div>
+            <p>FarmDirect is a farm-to-consumer online marketplace connecting verified local farmers in Zamboanga City with buyers who seek fresh, locally sourced agricultural products. The platform serves as a bridge between agricultural producers and consumers, promoting local trade and food security in the region.</p>
+            <p>FarmDirect offers the following services:</p>
+            <ul>
+                <li>An online marketplace for fresh agricultural products from Zamboanga City farms</li>
+                <li>A verified farmer registration and application system</li>
+                <li>A buyer registration and product browsing experience</li>
+                <li>Order and delivery coordination between farmers and buyers</li>
+                <li>A secure messaging system between farmers and buyers</li>
+            </ul>
+        </div>
+
+        <!-- SECTION 3 -->
+        <div class="section" id="s3">
+            <div class="section-header">
+                <div class="section-num">3</div>
+                <div class="section-title">User Accounts</div>
+            </div>
+            <p>To use FarmDirect, all users must create an account by providing accurate and complete information. You are responsible for maintaining the confidentiality of your account credentials.</p>
+            <ul>
+                <li>You must provide your real full name, valid email address, and a working Philippine mobile number</li>
+                <li>You must upload a valid government-issued ID during registration</li>
+                <li>You are responsible for all activity that occurs under your account</li>
+                <li>You must notify FarmDirect immediately of any unauthorized use of your account</li>
+                <li>Each person may only hold one registered account on the platform</li>
+            </ul>
+            <div class="warning-box">
+                <strong>⚠️ Warning:</strong> Creating fake accounts, providing false information, or impersonating another person is strictly prohibited and may result in permanent suspension.
+            </div>
+        </div>
+
+        <!-- SECTION 4 -->
+        <div class="section" id="s4">
+            <div class="section-header">
+                <div class="section-num">4</div>
+                <div class="section-title">Buyer Responsibilities</div>
+            </div>
+            <p>As a registered Buyer on FarmDirect, you agree to the following:</p>
+            <ul>
+                <li>Provide an accurate delivery address for all orders placed</li>
+                <li>Pay for orders in full before or upon delivery as agreed with the farmer</li>
+                <li>Treat farmers and platform staff with respect in all communications</li>
+                <li>Not place orders with no intention of completing the purchase</li>
+                <li>Report any product quality issues within 24 hours of delivery</li>
+                <li>Not misuse the review or rating system to unfairly harm a farmer's reputation</li>
+            </ul>
+            <p>Buyers are the primary consumers of the platform. All purchases support local Zamboanga City farmers directly, and buyers are encouraged to engage responsibly with the agricultural community.</p>
+        </div>
+
+        <!-- SECTION 5 -->
+        <div class="section" id="s5">
+            <div class="section-header">
+                <div class="section-num">5</div>
+                <div class="section-title">Farmer / Seller Verification</div>
+            </div>
+            <p>All users start as regular Buyers upon registration. To become a verified Farmer/Seller on FarmDirect, users must complete the Farmer Verification process, which includes:</p>
+            <ul>
+                <li>Submission of an RSBSA Certificate (Registry System for Basic Sectors in Agriculture)</li>
+                <li>Submission of a Barangay Certificate confirming residency and farmer status</li>
+                <li>Submission of a valid government-issued ID</li>
+                <li>Providing accurate farm location, farm name, and list of products</li>
+            </ul>
+            <p>FarmDirect reserves the right to approve or reject any farmer application. Applications are reviewed within 3–5 business days. Submitting false, forged, or invalid documents will result in immediate and permanent account suspension.</p>
+            <div class="highlight-box">
+                <strong>✅ Once approved:</strong> Your account will be upgraded to a Farmer account, giving you access to the Seller Dashboard where you can list products, manage orders, and communicate with buyers.
+            </div>
+        </div>
+
+        <!-- SECTION 6 -->
+        <div class="section" id="s6">
+            <div class="section-header">
+                <div class="section-num">6</div>
+                <div class="section-title">Prohibited Activities</div>
+            </div>
+            <p>The following activities are strictly prohibited on FarmDirect:</p>
+            <ul>
+                <li class="cross">Listing or selling non-agricultural, illegal, or prohibited products</li>
+                <li class="cross">Misrepresenting the quality, origin, or nature of products listed</li>
+                <li class="cross">Harassing, threatening, or engaging in abusive behavior toward other users</li>
+                <li class="cross">Attempting to bypass the verification process through fraudulent documents</li>
+                <li class="cross">Using the platform for money laundering or fraudulent transactions</li>
+                <li class="cross">Scraping, copying, or reproducing platform content without permission</li>
+                <li class="cross">Creating multiple accounts to manipulate ratings or reviews</li>
+                <li class="cross">Sharing login credentials with other individuals</li>
+            </ul>
+            <p>FarmDirect reserves the right to remove any content, suspend, or permanently ban any user found violating these prohibitions without prior notice.</p>
+        </div>
+
+        <!-- SECTION 7 -->
+        <div class="section" id="s7">
+            <div class="section-header">
+                <div class="section-num">7</div>
+                <div class="section-title">Privacy and Data</div>
+            </div>
+            <p>FarmDirect collects personal information during registration, including your name, email address, mobile number, delivery address, and government ID. This information is used solely for the purpose of operating the platform and verifying user identities.</p>
+            <ul>
+                <li>Your personal data will not be sold to third parties</li>
+                <li>Government IDs are collected for verification purposes only and are handled securely</li>
+                <li>Your contact information may be shared with farmers or buyers only as necessary to complete a transaction</li>
+                <li>You may request deletion of your account and associated data at any time</li>
+            </ul>
+            <div class="highlight-box">
+                <strong>🔒 Data Security:</strong> FarmDirect is committed to protecting your personal information in accordance with the Data Privacy Act of 2012 (Republic Act No. 10173) of the Philippines.
+            </div>
+        </div>
+
+        <!-- SECTION 8 -->
+        <div class="section" id="s8">
+            <div class="section-header">
+                <div class="section-num">8</div>
+                <div class="section-title">Limitation of Liability</div>
+            </div>
+            <p>FarmDirect serves as a platform connecting buyers and farmers. The platform is not directly responsible for:</p>
+            <ul>
+                <li class="cross">The quality, freshness, or safety of products sold by farmers</li>
+                <li class="cross">Delays or issues in delivery arrangements between buyers and farmers</li>
+                <li class="cross">Disputes between buyers and sellers arising from transactions</li>
+                <li class="cross">Loss or damage resulting from unauthorized account access due to user negligence</li>
+            </ul>
+            <p>While FarmDirect makes every effort to verify farmers and maintain platform integrity, users engage in transactions at their own discretion. FarmDirect encourages all users to communicate directly and resolve disputes amicably.</p>
+        </div>
+
+        <!-- SECTION 9 -->
+        <div class="section" id="s9">
+            <div class="section-header">
+                <div class="section-num">9</div>
+                <div class="section-title">Termination of Account</div>
+            </div>
+            <p>FarmDirect reserves the right to suspend or permanently terminate any account that violates these Terms and Conditions. Reasons for termination include but are not limited to:</p>
+            <ul>
+                <li class="cross">Submission of fraudulent or forged verification documents</li>
+                <li class="cross">Repeated violations of platform rules and community guidelines</li>
+                <li class="cross">Engaging in prohibited activities as outlined in Section 6</li>
+                <li class="cross">Inactivity for a period exceeding 12 consecutive months</li>
+            </ul>
+            <p>Users may also voluntarily deactivate their accounts at any time by contacting FarmDirect support. Upon termination, all associated data may be retained for legal compliance purposes for up to 6 months before permanent deletion.</p>
+        </div>
+
+        <!-- SECTION 10 -->
+        <div class="section" id="s10">
+            <div class="section-header">
+                <div class="section-num">10</div>
+                <div class="section-title">Contact Information</div>
+            </div>
+            <p>If you have questions, concerns, or feedback regarding these Terms and Conditions or the FarmDirect platform, please reach out to us through the following:</p>
+            <ul>
+                <li>📧 Email: support@farmdirect.ph</li>
+                <li>📞 Phone: +63 912 345 6789</li>
+                <li>🕐 Support Hours: Monday – Saturday, 6:00 AM – 8:00 PM</li>
+                <li>📍 Location: Zamboanga City, Philippines</li>
+            </ul>
+            <div class="highlight-box">
+                <strong>🌿 Thank you</strong> for being part of FarmDirect. By agreeing to these terms, you are helping support local Zamboanga City farmers and contributing to a healthier, more connected food community.
+            </div>
+        </div>
+
+    </main>
+
+    <footer>© 2026 FarmDirect Zamboanga. All rights reserved.</footer>
+
+</body>
+</html>

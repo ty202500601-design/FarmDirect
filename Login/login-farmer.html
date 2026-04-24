@@ -5,13 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farm Direct - Farmer Login</title>
     <link rel="stylesheet" href="login.css">
+    <style>
+        .farmer-note {
+            margin-top: 18px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            padding: 14px 16px;
+            text-align: center;
+            font-size: 13px;
+            color: #374151;
+        }
+        .farmer-note a {
+            color: green;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .farmer-note a:hover { text-decoration: underline; }
+    </style>
 </head>
 
 <body>
 
     <header class="topbar">
         <div class="logo">
-    
             <span class="logo-text">Farm<span>Direct</span></span>
         </div>
     </header>
@@ -20,12 +37,7 @@
         <div class="auth-card">
             <a href="login.html" class="back-btn">← Back</a>
             <div class="auth-title">🌾 Farmer Sign In</div>
-            <div class="auth-sub">Welcome back, Farmer!</div>
-
-            <div class="tabs">
-                <a href="login-farmer.html" class="tab active">Sign In</a>
-                <a href="register-farmer.html" class="tab">Register</a>
-            </div>
+            <div class="auth-sub">Welcome back, Farmer! Sign in to access your seller dashboard.</div>
 
             <form action="../Sellers/Dashboard.html" method="get">
                 <div class="form-group">
@@ -47,6 +59,11 @@
             <a href="#" class="btn-outline">
                 <img src="https://www.svgrepo.com/show/448224/facebook.svg" alt="Facebook"> Sign in with Facebook
             </a>
+
+            <div class="farmer-note">
+                Not a verified farmer yet?<br>
+                <a href="register-buyer.html">Register as a regular user first</a> and apply for farmer verification from your dashboard.
+            </div>
         </div>
     </main>
 

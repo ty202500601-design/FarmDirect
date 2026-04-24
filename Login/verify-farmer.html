@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Direct - Apply as Farmer/Seller</title>
+    <link rel="stylesheet" href="login.css">
+    <style>
+        .section-label {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .6px;
+            color: green;
+            margin: 24px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #d1fae5;
+        }
+        .cert-note {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 12px;
+            color: #374151;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .cert-note strong { color: #15803d; }
+        .required-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            color: #dc2626;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 4px;
+            padding: 1px 5px;
+            margin-left: 6px;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
+        .optional-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            color: #6b7280;
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            padding: 1px 5px;
+            margin-left: 6px;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
+        .file-hint {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="logo">
+            <span class="logo-text">Farm<span>Direct</span></span>
+        </div>
+    </header>
+
+    <main class="auth-wrapper">
+        <div class="auth-card wide">
+            <a href="../USER/Dashboard.html" class="back-btn">← Back to Dashboard</a>
+            <div class="auth-title">🌾 Apply as a Farmer/Seller</div>
+            <div class="auth-sub">Complete the form below. Our team will review your application within 3–5 business days.</div>
+
+            <div class="cert-note">
+                <strong>📋 Important:</strong> You must be a registered FarmDirect user before applying. Submitting false or invalid documents will result in permanent account suspension.
+            </div>
+
+            <form action="verify-confirm.html" method="get">
+
+                <!-- SECTION 1: Farm Info -->
+                <div class="section-label">Farm Information</div>
+
+                <div class="form-group">
+                    <label class="form-label">Farm / Business Name <span class="required-badge">Required</span></label>
+                    <input type="text" class="form-input" placeholder="e.g. Dela Cruz Farm" name="farm_name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Farm Location <span class="required-badge">Required</span></label>
+                    <input type="text" class="form-input" placeholder="Barangay, Municipality, Province" name="location" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Products You Sell <span class="required-badge">Required</span></label>
+                    <input type="text" class="form-input" placeholder="e.g. Tomatoes, Carrots, Lettuce" name="produce" required>
+                </div>
+
+                <!-- SECTION 2: Required Certificates -->
+                <div class="section-label">Required Verification Documents</div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        RSBSA Certificate (Registry System for Basic Sectors in Agriculture)
+                        <span class="required-badge">Required</span>
+                    </label>
+                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png,.pdf" name="rsbsa" required>
+                    <div class="file-hint">Your official RSBSA registration from the Department of Agriculture. JPG, PNG, or PDF.</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Barangay Certificate (as Farmer/Resident)
+                        <span class="required-badge">Required</span>
+                    </label>
+                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png,.pdf" name="barangay_cert" required>
+                    <div class="file-hint">Certifies you are a recognized farmer/resident in your barangay. JPG, PNG, or PDF.</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Valid Government-Issued ID
+                        <span class="required-badge">Required</span>
+                    </label>
+                    <select class="form-input" name="id_type" required style="margin-bottom:8px;">
+                        <option value="">Select ID type...</option>
+                        <option>PhilSys / National ID</option>
+                        <option>Driver's License</option>
+                        <option>Passport</option>
+                        <option>SSS / GSIS ID</option>
+                        <option>Voter's ID</option>
+                        <option>Postal ID</option>
+                    </select>
+                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png,.pdf" name="gov_id" required>
+                    <div class="file-hint">Upload a clear photo or scan of your selected ID. JPG, PNG, or PDF.</div>
+                </div>
+
+                <!-- SECTION 3: Optional Certificates -->
+                <div class="section-label">Additional Documents (Optional but Recommended)</div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        DTI / SEC Business Registration
+                        <span class="optional-badge">Optional</span>
+                    </label>
+                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png,.pdf" name="dti_sec">
+                    <div class="file-hint">Required only if operating as a registered farm business. JPG, PNG, or PDF.</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Farm Photo
+                        <span class="optional-badge">Optional</span>
+                    </label>
+                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png" name="farm_photo">
+                    <div class="file-hint">A clear photo of your farm or produce. Helps speed up the verification process.</div>
+                </div>
+
+                <div class="form-group" style="display:flex; align-items:flex-start; gap:10px;">
+                    <input type="checkbox" name="terms" id="terms" required style="margin-top:3px; accent-color:green; width:16px; height:16px; flex-shrink:0;">
+                    <label for="terms" style="font-size:13px; color:#374151; font-weight:400; text-transform:none; letter-spacing:0;">
+                        I agree to the <a href="terms.html" target="_blank" style="color:green; font-weight:600;">Terms and Conditions</a> of FarmDirect.
+                    </label>
+                </div>
+                <button type="submit" class="btn-primary">Submit Application</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>© 2026 FarmDirect. All rights reserved.</footer>
+
+</body>
+</html>

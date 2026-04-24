@@ -4,132 +4,47 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Order Placed! – FarmDirect</title>
-<!-- Shared stylesheet for all USER pages -->
 <link rel="stylesheet" href="style.css">
-<style>
-/* Success page — vertically centered card on a cream background */
-.success-page {
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: calc(var(--nav-h) + 2rem) 1.2rem 4rem;
-}
-/* The green-bordered card containing the success message */
-.success-card {
-  background: var(--white);
-  border-radius: var(--radius);
-  border: 2px solid var(--border);
-  padding: 3rem 2.5rem;
-  max-width: 500px;
-  width: 100%;
-  text-align: center;
-  box-shadow: var(--shadow-md);
-  animation: fadeUp 0.6s ease both;
-}
-.success-icon { font-size: 5rem; margin-bottom: 1rem; }
-.success-card h1 {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-.success-card p { color: var(--text-mid); font-size: 0.97rem; line-height: 1.7; }
-/* Order number pill — green badge showing the order reference -->
-.order-num {
-  display: inline-block;
-  background: var(--green-light);
-  color: var(--green-dark);
-  font-weight: 700;
-  padding: 0.4rem 1rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-  font-size: 1rem;
-}
-/* Stack of action buttons below the order details */
-.success-actions { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.5rem; }
-/* Outline button variant — green border, no fill */
-.outline-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid var(--green);
-  color: var(--green);
-  padding: 0.7rem 1.2rem;
-  border-radius: 10px;
-  font-size: 0.92rem;
-  font-weight: 600;
-  transition: background 0.2s;
-}
-.outline-btn:hover { background: var(--green-light); }
-</style>
 </head>
 <body>
 
-<!-- NAVIGATION BAR — same across all USER pages -->
 <nav class="navbar">
   <input type="checkbox" id="menu-check" class="menu-checkbox">
   <div class="nav-inner">
-    <a href="../index.html" class="logo">
-      <span class="logo-leaf"></span>
-      <span>FarmDirect</span>
-    </a>
+    <a href="../index.html" class="logo"><span class="logo-leaf"></span><span>FarmDirect</span></a>
     <div class="nav-links">
-      <a href="../index.html" class="nav-link active">Home</a>
+      <a href="../index.html" class="nav-link">Home</a>
       <a href="products.html" class="nav-link">Products</a>
       <a href="Dashboard.html" class="nav-link">Dashboard</a>
     </div>
     <div class="nav-actions">
-      <a href="cart.html" class="cart-btn" title="Cart">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-        </svg>
+      <a href="cart.html" class="cart-btn">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       </a>
       <div class="notif-wrap">
-        <button class="notif-btn" tabindex="0" aria-label="Notifications">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-          </svg>
+        <button class="notif-btn" tabindex="0">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <span class="notif-badge"></span>
         </button>
         <div class="notif-dropdown">
           <div class="notif-header"><h4>Notifications</h4></div>
           <div class="notif-list">
             <div class="notif-item">
-              <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-              <div class="notif-content"><strong>Green Valley Farm</strong><p>Your carrots order is ready for pickup today!</p><span class="notif-time">10 min ago</span></div>
-            </div>
-            <div class="notif-item">
-              <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-              <div class="notif-content"><strong>Sunrise Farm</strong><p>Fresh tomatoes harvested this morning!</p><span class="notif-time">1 hour ago</span></div>
-            </div>
-            <div class="notif-item">
-              <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-              <div class="notif-content"><strong>Beeline Apiary</strong><p>Honey restocked! Get yours while supplies last.</p><span class="notif-time">3 hours ago</span></div>
-            </div>
-            <div class="notif-item">
-              <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-              <div class="notif-content"><strong>Seasonal Alert</strong><p>Mango season is here! Fresh mangoes from Vitali farms now available.</p><span class="notif-time">5 hours ago</span></div>
-            </div>
-            <div class="notif-item">
-              <div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-              <div class="notif-content"><strong>Coming Soon</strong><p>Lanzones season starts in April from Culianan farms.</p><span class="notif-time">1 day ago</span></div>
+              <div class="notif-icon">✅</div>
+              <div class="notif-content">
+                <strong>Order Confirmed!</strong>
+                <p>Order #FD-482617 has been placed. Farmer has been notified.</p>
+                <span class="notif-time">Just now</span>
+              </div>
             </div>
           </div>
         </div>
-      </div><!-- /notif-wrap -->
+      </div>
       <a href="../Login/login.html" class="login-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-          <polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
-        </svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
         Login
       </a>
-      <label for="menu-check" class="menu-toggle">
-        <span></span><span></span><span></span>
-      </label>
+      <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
     </div>
   </div>
   <label for="menu-check" class="menu-overlay"></label>
@@ -141,34 +56,66 @@
       <a href="Dashboard.html" class="menu-item">My Dashboard</a>
       <a href="cart.html" class="menu-item">Shopping Cart</a>
     </div>
-    <a href="cart.html" class="menu-cta">View Cart</a>
+    <a href="products.html" class="menu-cta">Continue Shopping</a>
   </div>
 </nav>
 
-<!-- ORDER SUCCESS PAGE — shown after a successful order submission -->
+<!-- Centered success card on a full-height page -->
 <div class="success-page">
-  <div class="success-card">
-    <!-- Big checkmark emoji as the primary success indicator -->
+  <div class="success-card-wide">
+
+    <!-- Big checkmark icon -->
     <div class="success-icon">✅</div>
     <h1>Order Placed!</h1>
     <p>Salamat sa iyong order! Your fresh produce from Zamboanga farms is being prepared for delivery.</p>
-    <!-- Unique order reference number for tracking -->
+
+    <!-- Order number badge -->
     <div class="order-num">Order #FD-482617</div>
-    <p>Estimated delivery: <strong>2-4 hours</strong> via Grab to your address in Zamboanga City.</p>
-    <!-- Action buttons: track order, keep shopping, or go to dashboard -->
+
+    <!-- Summary of order details in a cream box -->
+    <div class="order-details-box">
+      <div class="order-details-row"><span>Date</span><strong>March 26, 2026 · 2:34 PM</strong></div>
+      <div class="order-details-row"><span>Courier</span><strong>🚕 Grab</strong></div>
+      <div class="order-details-row"><span>Est. Delivery</span><strong>2–4 hours</strong></div>
+      <div class="order-details-row"><span>Payment</span><strong>💵 Cash on Delivery</strong></div>
+      <!-- Divider before totals -->
+      <div class="order-details-row order-details-divider order-details-total">
+        <span>Total Paid</span><strong>₱1,139</strong>
+      </div>
+      <div class="order-details-row order-details-saved">
+        <span>🎉 You saved</span><strong>₱171</strong>
+      </div>
+    </div>
+
+    <!-- Voucher reward for completing the order -->
+    <div class="voucher-earned">
+      <h4>🎁 You earned a voucher!</h4>
+      <p>Thanks for your order! Use <code>THANKYOU30</code> on your next purchase for ₱30 off. Valid for 7 days.</p>
+    </div>
+
+    <!-- Quick star rating before full review after delivery -->
+    <div class="review-prompt">
+      <h4>⭐ Rate your experience</h4>
+      <p class="review-prompt-sub">How was your order so far? You can write a full review after delivery.</p>
+      <div class="star-input">
+        <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+      </div>
+    </div>
+
+    <!-- Action buttons: track order, continue shopping, dashboard -->
     <div class="success-actions">
-      <a href="Order tracking.html" class="add-cart-btn">Track Your Order</a>
+      <a href="Order_tracking.html" class="add-cart-btn">📦 Track Your Order</a>
       <a href="products.html" class="outline-btn">Continue Shopping</a>
       <a href="Dashboard.html" class="outline-btn">Go to Dashboard</a>
     </div>
+
   </div>
 </div>
 
-<!-- FOOTER — consistent across all USER pages -->
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-col">
-      <div class="footer-logo">FarmDirect</div>
+      <div class="footer-logo"><span class="logo-leaf"></span> FarmDirect</div>
       <p class="footer-desc">Fresh from Zamboanga farms to your table. Verified. Local. Honest.</p>
     </div>
     <div class="footer-col">
@@ -183,7 +130,7 @@
       <div class="footer-links">
         <a href="../Login/login.html">Sign In</a>
         <a href="Dashboard.html">My Dashboard</a>
-        <a href="Order tracking.html">Track Order</a>
+        <a href="Order_tracking.html">Track Order</a>
       </div>
     </div>
     <div class="footer-col">
@@ -194,11 +141,8 @@
         <a href="tel:+639001234567">+63 900 123 4567</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 FarmDirect Zamboanga. All rights reserved.</p>
-    </div>
+    <div class="footer-bottom"><p>© 2026 FarmDirect Zamboanga. All rights reserved.</p></div>
   </div>
 </footer>
-
 </body>
 </html>
