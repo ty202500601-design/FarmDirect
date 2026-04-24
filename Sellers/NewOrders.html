@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Farm Direct – Add Products</title>
+  <title>Farm Direct – Add Product</title>
   <link rel="stylesheet" href="New.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-
+ 
 <nav class="navbar">
   <input type="checkbox" id="menu-check" class="menu-checkbox">
   <div class="nav-inner">
@@ -64,45 +64,33 @@
     <a href="../index.html" class="menu-cta">Logout</a>
   </div>
 </nav>
-
+ 
 <main class="farmers-main">
-
-  <!-- PAGE HEADER -->
-  <div class="dash">
-    <div>
-      <div class="dash-title">Add Products</div>
-      <p class="dash-sub">Fill in each product's details. You can add multiple products before saving them all at once.</p>
+ 
+  <!-- TOP BAR -->
+  <div class="submit-bar" id="ap-top-bar">
+    <div class="submit-bar-left">
+      <span id="ap-counter-badge" style="display:none;" class="badge b-b"></span>
+      <span>Add new products to your store — fill in details below.</span>
     </div>
-    <span class="ap-counter-badge" id="ap-counter-badge" style="display:none;">0 products added</span>
-  </div>
-
-  <!-- TOP ACTION BAR -->
-  <div class="submit-bar">
-    <div class="submit-bar-left">📋 Products will appear in <b>My Products</b> after saving.</div>
     <div class="btn-group">
-      <a href="Products.html" class="btn-cancel">✕ Cancel</a>
-      <button type="button" class="btn-save" id="top-save-btn" onclick="apShowSaveBar()" style="display:none;">✅ Save All Products</button>
+      <a href="Products.html" class="btn-cancel">← Back to Products</a>
+      <button type="button" class="btn-save" id="top-save-btn" style="display:none;" onclick="apShowSaveBar()">💾 Save All Products</button>
     </div>
   </div>
-
-  <!-- ═══ ACCORDION PRODUCT STACK ═══ -->
-  <div class="ap-stack" id="ap-stack"></div>
-
-  <!-- "ADD ANOTHER?" PROMPT -->
+ 
+  <!-- CARD STACK -->
+  <div id="ap-stack"></div>
+ 
+  <!-- ADD ANOTHER PROMPT -->
   <div class="ap-another-prompt" id="ap-another-prompt" style="display:none;">
     <div class="ap-another-inner">
-      <div class="ap-another-icon">🎉</div>
-      <div class="ap-another-text">
-        <strong>Product added!</strong>
-        <span>Do you want to add another product?</span>
-      </div>
-      <div class="ap-another-btns">
-        <button type="button" class="btn-save ap-btn-yes" onclick="apAddAnother()">+ Add Another Product</button>
-        <button type="button" class="btn-cancel ap-btn-no" onclick="apShowSaveBar()">No, I'm Done</button>
-      </div>
+      <span class="ap-another-label">✅ Product saved! Add another?</span>
+      <button type="button" class="btn-save ap-btn-yes" onclick="apAddAnother()">+ Add Another Product</button>
+      <button type="button" class="btn-cancel ap-btn-no" onclick="apShowSaveBar()">No, I'm Done</button>
     </div>
   </div>
-
+ 
   <!-- SAVE ALL BAR -->
   <div class="ap-save-bar submit-bar" id="ap-save-bar" style="display:none;">
     <div class="submit-bar-left">
@@ -113,7 +101,7 @@
       <button type="button" class="btn-save" onclick="apSaveAll()">✅ Save All Products</button>
     </div>
   </div>
-
+ 
   <!-- SUCCESS STATE -->
   <div class="ap-success" id="ap-success" style="display:none;">
     <div class="ap-success-icon">🌾</div>
@@ -124,65 +112,80 @@
       <button type="button" class="btn-cancel" onclick="apReset()">+ Add More Products</button>
     </div>
   </div>
-
+ 
 </main>
-
+ 
 <footer class="footer">
   <div class="footer-container">
     <div class="footer-main">
       <div class="footer-brand">
         <div class="footer-logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></div>
         <p class="footer-desc">Connecting Zamboanga farmers to your table. Fresh, local, and delivered with care.</p>
-        <div class="footer-social">
-          <a href="#" class="social-link">Facebook</a>
-          <a href="#" class="social-link">Instagram</a>
-          <a href="#" class="social-link">Twitter</a>
-        </div>
       </div>
       <div class="footer-links">
-        <div class="footer-col">
-          <h4>Quick Links</h4>
-          <a href="../index.html">Home</a>
-          <a href="Products.html">My Products</a>
-          <a href="Dashboard.html">Dashboard</a>
-          <a href="Orders.html">Orders</a>
-        </div>
-        <div class="footer-col">
-          <h4>Categories</h4>
-          <a href="#">Vegetables</a>
-          <a href="#">Fruits</a>
-          <a href="#">Meats</a>
-          <a href="#">Dairy</a>
-        </div>
-        <div class="footer-col">
-          <h4>Contact</h4>
-          <a href="tel:+639123456789">+63 912 345 6789</a>
-          <a href="mailto:hello@farmdirect.ph">hello@farmdirect.ph</a>
-          <p>Mon-Sat: 6AM - 8PM</p>
-          <p>Zamboanga City, PH</p>
-        </div>
+        <div class="footer-col"><h4>Quick Links</h4><a href="../index.html">Home</a><a href="Products.html">My Products</a><a href="Dashboard.html">Dashboard</a><a href="Orders.html">Orders</a></div>
+        <div class="footer-col"><h4>Categories</h4><a href="#">Vegetables</a><a href="#">Fruits</a><a href="#">Meats</a><a href="#">Dairy</a></div>
+        <div class="footer-col"><h4>Contact</h4><a href="tel:+639123456789">+63 912 345 6789</a><a href="mailto:hello@farmdirect.ph">hello@farmdirect.ph</a><p>Mon-Sat: 6AM - 8PM</p><p>Zamboanga City, PH</p></div>
       </div>
     </div>
     <div class="footer-bottom"><p>&copy; 2026 FarmDirect Zamboanga. All rights reserved.</p></div>
   </div>
 </footer>
-
+ 
 <script>
 lucide.createIcons();
-
-/* ═══════════════════════════════════════════
-   MULTI-PRODUCT ACCORDION FLOW
-═══════════════════════════════════════════ */
-
-let apProducts  = [];
-let apCardCount = 0;
-
+ 
+/* ═══════════════════════════════════════════════════════════
+   EXPIRY LOGIC — category-aware rules
+   ═══════════════════════════════════════════════════════════ */
+ 
+// Categories where expiry = source date + shelf life (calculated)
+const CALC_EXPIRY_CATS = ['Vegetables', 'Fruits', 'Grains', 'Others'];
+// Categories using processing date instead of harvest date
+const PROCESSING_CATS  = ['Meat'];
+// Categories where expiry is manually entered from package
+const MANUAL_EXPIRY_CATS = ['Dairy'];
+ 
+// Default shelf life suggestions per category (days)
+const DEFAULT_SHELF = {
+  Vegetables: 7,
+  Fruits: 5,
+  Dairy: 14,
+  Grains: 180,
+  Meat: 3,
+  Others: 7
+};
+ 
 const CAT_EMOJI = {
   Vegetables:'🥦', Fruits:'🍑', Dairy:'🥛',
   Grains:'🌾', Meat:'🥩', Others:'📦'
 };
-
-/* ── Update the counter badge ── */
+ 
+// Labels shown on the date field based on category
+const DATE_LABEL = {
+  Meat: 'Processing Date *',
+  Dairy: 'Processing / Pack Date',
+  default: 'Harvest Date *'
+};
+ 
+function calcExpiryDate(sourceDate, shelfDays) {
+  const d = new Date(sourceDate + 'T00:00:00');
+  d.setDate(d.getDate() + parseInt(shelfDays));
+  return d;
+}
+ 
+function daysLeft(expiryDate) {
+  const today = new Date(); today.setHours(0,0,0,0);
+  return Math.ceil((expiryDate - today) / 86400000);
+}
+ 
+/* ═══════════════════════════════════════════════════════════
+   CARD BUILDER
+   ═══════════════════════════════════════════════════════════ */
+ 
+let apProducts  = [];
+let apCardCount = 0;
+ 
 function apUpdateCounter() {
   const badge = document.getElementById('ap-counter-badge');
   const topBtn = document.getElementById('top-save-btn');
@@ -196,52 +199,226 @@ function apUpdateCounter() {
     topBtn.style.display = 'none';
   }
 }
-
-/* ── Enable/disable "Mark as Done" button ── */
+ 
 function apCheckDone(id) {
   const name  = (document.getElementById('ap-name-'  + id)?.value || '').trim();
   const cat   = (document.getElementById('ap-cat-'   + id)?.value || '').trim();
-  const price = (document.getElementById('ap-price-' + id)?.value || '').trim();
-  const btn   = document.getElementById('ap-done-btn-' + id);
-  if (btn) btn.disabled = !(name && cat && price);
+ 
+  // Price is valid if at least one unit price row has a value > 0
+  const priceInputs = document.querySelectorAll('#ap-price-rows-' + id + ' input[data-unit]');
+  const hasPrice    = priceInputs.length > 0
+    ? Array.from(priceInputs).some(inp => parseFloat(inp.value) > 0)
+    : false;
+ 
+  const btn = document.getElementById('ap-done-btn-' + id);
+  if (btn) btn.disabled = !(name && cat && hasPrice);
 }
-
-/* ── Unit checkbox logic (per-card) ── */
+ 
+/* ── Update freshness section based on category ── */
+function apOnCategoryChange(id) {
+  apCheckDone(id);
+  const cat = document.getElementById('ap-cat-' + id)?.value || '';
+ 
+  const isManual     = MANUAL_EXPIRY_CATS.includes(cat);
+  const isProcessing = PROCESSING_CATS.includes(cat);
+ 
+  // Toggle shelf life vs manual expiry
+  const shelfWrap  = document.getElementById('ap-shelf-wrap-' + id);
+  const manualWrap = document.getElementById('ap-manual-wrap-' + id);
+  shelfWrap.style.display  = isManual ? 'none' : '';
+  manualWrap.style.display = isManual ? ''     : 'none';
+ 
+  // Update date field label
+  const dateLabel = document.getElementById('ap-date-label-' + id);
+  dateLabel.textContent = DATE_LABEL[cat] || DATE_LABEL.default;
+ 
+  // Category-specific tip
+  const tip = document.getElementById('ap-bestbefore-tip-' + id);
+  const tips = {
+    Vegetables: '🥦 <b>Vegetables:</b> Enter harvest date + shelf life. Expiry is auto-calculated.',
+    Fruits:     '🍎 <b>Fruits:</b> Enter harvest date + shelf life. Expiry is auto-calculated.',
+    Meat:       '🥩 <b>Meat:</b> Enter processing date. Shelf life is short (1–5 days). Expiry auto-calculated.',
+    Dairy:      '🥛 <b>Dairy:</b> Enter the best before date printed on the package — do not calculate from harvest.',
+    Grains:     '🌾 <b>Grains:</b> Enter milling/pack date + shelf life. Long shelf life (months).',
+    Others:     '📦 <b>Others:</b> Enter source date + estimated shelf life.'
+  };
+  tip.innerHTML = tips[cat] || tips['Others'];
+ 
+  // Pre-fill default shelf life
+  if (!isManual) {
+    const shelfSel = document.getElementById('ap-shelf-' + id);
+    if (shelfSel && DEFAULT_SHELF[cat]) shelfSel.value = DEFAULT_SHELF[cat];
+  }
+ 
+  apUpdateExpiry(id);
+}
+ 
+/* ── Live expiry preview ── */
+function apUpdateExpiry(id) {
+  const cat      = document.getElementById('ap-cat-' + id)?.value || '';
+  const isManual = MANUAL_EXPIRY_CATS.includes(cat);
+ 
+  const prevHarvest = document.getElementById('ap-prev-harvest-' + id);
+  const prevExpiry  = document.getElementById('ap-prev-expiry-'  + id);
+  const prevDays    = document.getElementById('ap-prev-days-'    + id);
+  const prevBar     = document.getElementById('ap-prev-bar-'     + id);
+  const prevNote    = document.getElementById('ap-prev-note-'    + id);
+  const prevMethod  = document.getElementById('ap-prev-method-'  + id);
+ 
+  const opts = { year:'numeric', month:'short', day:'numeric' };
+ 
+  if (isManual) {
+    // Dairy — use manually entered best before date
+    const manualVal = document.getElementById('ap-expiry-manual-' + id)?.value || '';
+    const sourceVal = document.getElementById('ap-source-date-'   + id)?.value || '';
+    if (!manualVal) {
+      prevHarvest.textContent = sourceVal ? new Date(sourceVal + 'T00:00:00').toLocaleDateString('en-PH', opts) : '—';
+      prevExpiry.textContent = '—'; prevDays.textContent = '—';
+      prevBar.style.width = '0%'; prevBar.className = 'shelf-fill';
+      prevNote.textContent = 'Enter the best before date from the package.';
+      prevMethod.textContent = '📋 Method: Manual (from package label)';
+      return;
+    }
+    const expDate   = new Date(manualVal + 'T00:00:00');
+    const days      = daysLeft(expDate);
+    const srcDate   = sourceVal ? new Date(sourceVal + 'T00:00:00') : null;
+    const totalDays = srcDate ? Math.ceil((expDate - srcDate) / 86400000) : 14;
+    const pct       = Math.max(0, Math.min(100, Math.round((days / totalDays) * 100)));
+ 
+    prevHarvest.textContent = srcDate ? srcDate.toLocaleDateString('en-PH', opts) : '—';
+    prevExpiry.textContent  = expDate.toLocaleDateString('en-PH', opts);
+    prevMethod.textContent  = '📋 Method: Manual entry (dairy/package label)';
+    setDaysDisplay(prevDays, prevBar, prevNote, days, pct);
+ 
+  } else {
+    // Calculated — harvest/processing date + shelf life
+    const sourceVal = document.getElementById('ap-source-date-' + id)?.value || '';
+    const shelfDays = parseInt(document.getElementById('ap-shelf-' + id)?.value) || 0;
+ 
+    if (!sourceVal || !shelfDays) {
+      prevHarvest.textContent = sourceVal ? new Date(sourceVal + 'T00:00:00').toLocaleDateString('en-PH', opts) : '—';
+      prevExpiry.textContent = '—'; prevDays.textContent = '—';
+      prevBar.style.width = '0%'; prevBar.className = 'shelf-fill';
+      prevNote.textContent = 'Fill in the date and shelf life to see the expiry preview.';
+      const isProc = PROCESSING_CATS.includes(cat);
+      prevMethod.textContent = isProc ? '⚙️ Method: Processing date + shelf life' : '🌱 Method: Harvest date + shelf life days';
+      return;
+    }
+ 
+    const srcDate = new Date(sourceVal + 'T00:00:00');
+    const expDate = calcExpiryDate(sourceVal, shelfDays);
+    const days    = daysLeft(expDate);
+    const pct     = Math.max(0, Math.min(100, Math.round((days / shelfDays) * 100)));
+ 
+    prevHarvest.textContent = srcDate.toLocaleDateString('en-PH', opts);
+    prevExpiry.textContent  = expDate.toLocaleDateString('en-PH', opts);
+ 
+    const isProc = PROCESSING_CATS.includes(cat);
+    prevMethod.textContent = isProc
+      ? `⚙️ Method: Processing date + ${shelfDays} days shelf life`
+      : `🌱 Method: Harvest date + ${shelfDays} days shelf life`;
+ 
+    setDaysDisplay(prevDays, prevBar, prevNote, days, pct);
+  }
+}
+ 
+function setDaysDisplay(prevDays, prevBar, prevNote, days, pct) {
+  prevBar.className = 'shelf-fill';
+  prevDays.style.color = '';
+  if (days <= 0) {
+    prevDays.textContent = '❌ Already passed best before'; prevDays.style.color = '#dc2626';
+    prevBar.classList.add('shelf-fill-danger'); prevBar.style.width = '4%';
+    prevNote.textContent = '⚠️ This product has already passed its best before date — do not list it.';
+  } else if (days <= 3) {
+    prevDays.textContent = days + ' day' + (days > 1 ? 's' : '') + ' left ⚠️'; prevDays.style.color = '#dc2626';
+    prevBar.classList.add('shelf-fill-danger'); prevBar.style.width = pct + '%';
+    prevNote.textContent = '🔴 Critical: best before is very soon. Same-day delivery only.';
+  } else if (days <= 7) {
+    prevDays.textContent = days + ' days left ⚠️'; prevDays.style.color = '#ca8a04';
+    prevBar.classList.add('shelf-fill-warn'); prevBar.style.width = pct + '%';
+    prevNote.textContent = '⚠️ Short shelf life. Communicate the best before date clearly to buyers.';
+  } else {
+    prevDays.textContent = days + ' days left ✅'; prevDays.style.color = '#16a34a';
+    prevBar.classList.add('shelf-fill-ok'); prevBar.style.width = pct + '%';
+    prevNote.textContent = '✅ Good shelf life. Buyers will see this product as fresh.';
+  }
+}
+ 
+/* ── Unit checkbox logic ── */
 function apHandleUnitCheck(cb, id) {
   const checked = Array.from(document.querySelectorAll('#ap-units-' + id + ' input[type="checkbox"]:checked'));
-  const wrap    = document.getElementById('ap-unit-primary-wrap-' + id);
-  const summary = document.getElementById('ap-unit-summary-' + id);
-  const select  = document.getElementById('ap-unit-primary-select-' + id);
-  const pills   = document.getElementById('ap-unit-pills-' + id);
-
+ 
+  // Highlight checked cards
   document.querySelectorAll('#ap-units-' + id + ' .unit-check-card').forEach(card => {
-    const inp = card.querySelector('input[type="checkbox"]');
-    card.classList.toggle('unit-checked', inp.checked);
+    card.classList.toggle('unit-checked', card.querySelector('input').checked);
   });
-
-  if (checked.length === 0) {
-    wrap.style.display = 'none';
-    summary.style.display = 'none';
-    return;
-  }
-
-  const currentPrimary = select.value;
-  select.innerHTML = '<option value="">— choose —</option>';
-  checked.forEach(inp => {
-    const opt = document.createElement('option');
-    opt.value = inp.value;
-    opt.textContent = inp.value;
-    if (inp.value === currentPrimary) opt.selected = true;
-    select.appendChild(opt);
-  });
-  if (checked.length === 1) select.value = checked[0].value;
-
-  wrap.style.display    = 'block';
-  summary.style.display = 'flex';
+ 
+  // Show/hide primary badge (keep for visual indicator)
+  const wrap   = document.getElementById('ap-unit-primary-wrap-' + id);
+  const summary= document.getElementById('ap-unit-summary-' + id);
+  if (wrap)    wrap.style.display    = checked.length ? 'block' : 'none';
+  if (summary) summary.style.display = checked.length ? 'flex'  : 'none';
   apUpdatePrimaryBadge(id);
   apUpdateSummaryPills(id, checked);
+ 
+  // ── Per-unit price grid ──
+  const grid     = document.getElementById('ap-price-grid-'     + id);
+  const rows     = document.getElementById('ap-price-rows-'     + id);
+  const empty    = document.getElementById('ap-price-empty-'    + id);
+  const fallback = document.getElementById('ap-price-fallback-' + id);
+ 
+  if (!grid) return;
+ 
+  if (checked.length === 0) {
+    grid.style.display     = 'none';
+    fallback.style.display = 'block';
+    apCheckDone(id);
+    return;
+  }
+ 
+  grid.style.display     = 'block';
+  fallback.style.display = 'none';
+  empty.style.display    = 'none';
+ 
+  // Collect existing prices so they survive re-renders
+  const existingPrices = {};
+  grid.querySelectorAll('input[data-unit]').forEach(inp => {
+    existingPrices[inp.dataset.unit] = inp.value;
+  });
+ 
+  const unitIcons = { 'per kg':'⚖️','per 100g':'🔢','per bundle':'🌿','per piece':'🔵','per pack':'📦','per box':'🗃️','per tray':'🍱','per sack':'👜' };
+ 
+  rows.innerHTML = checked.map(inp => {
+    const unit   = inp.value;
+    const icon   = unitIcons[unit] || '📦';
+    const saved  = existingPrices[unit] || '';
+    const isPrimary = checked.length === 1; // Auto-primary if only one unit
+    return `<div style="display:flex;align-items:center;gap:.75rem;background:var(--cream);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:.6rem .9rem;${isPrimary ? 'border-color:var(--green-accent);background:var(--green-light);' : ''}">
+      <span style="font-size:1.1rem;flex-shrink:0">${icon}</span>
+      <span style="font-size:.88rem;font-weight:700;color:var(--text);min-width:90px">${unit}</span>
+      ${isPrimary ? '<span style="font-size:.65rem;font-weight:800;background:var(--green);color:white;padding:.1rem .45rem;border-radius:20px;flex-shrink:0">Primary</span>' : ''}
+      <div style="display:flex;align-items:center;gap:.3rem;margin-left:auto;background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:.3rem .7rem;">
+        <span style="font-size:.9rem;font-weight:700;color:var(--green-accent)">₱</span>
+        <input type="number" data-unit="${unit}" placeholder="0.00" min="0" step="0.01"
+          value="${saved}"
+          style="width:80px;border:none;font-size:.95rem;font-weight:700;color:var(--text);background:transparent;outline:none"
+          oninput="apCheckDone(${id})"/>
+      </div>
+    </div>`;
+  }).join('');
+ 
+  // Sync ap-price-${id} with first/primary unit price for apMarkDone compatibility
+  const firstInp = rows.querySelector('input[data-unit]');
+  if (firstInp) {
+    firstInp.addEventListener('input', () => {
+      const hidden = document.getElementById('ap-price-' + id);
+      if (hidden) hidden.value = firstInp.value;
+    });
+  }
+ 
+  apCheckDone(id);
 }
-
+ 
 function apUpdatePrimaryBadge(id) {
   const primary = document.getElementById('ap-unit-primary-select-' + id)?.value || '';
   document.querySelectorAll('#ap-units-' + id + ' .unit-primary-tag').forEach(t => t.style.display = 'none');
@@ -251,7 +428,7 @@ function apUpdatePrimaryBadge(id) {
     if (tag) tag.style.display = 'inline-block';
   }
 }
-
+ 
 function apUpdateSummaryPills(id, checked) {
   const pills   = document.getElementById('ap-unit-pills-' + id);
   const primary = document.getElementById('ap-unit-primary-select-' + id)?.value || '';
@@ -263,58 +440,7 @@ function apUpdateSummaryPills(id, checked) {
     pills.appendChild(pill);
   });
 }
-
-/* ── Live expiry preview (per-card) ── */
-function apUpdateExpiry(id) {
-  const harvestVal = document.getElementById('ap-harvest-' + id)?.value || '';
-  const shelfDays  = parseInt(document.getElementById('ap-shelf-' + id)?.value) || 0;
-
-  const prevHarvest = document.getElementById('ap-prev-harvest-' + id);
-  const prevExpiry  = document.getElementById('ap-prev-expiry-'  + id);
-  const prevDays    = document.getElementById('ap-prev-days-'    + id);
-  const prevBar     = document.getElementById('ap-prev-bar-'     + id);
-  const prevNote    = document.getElementById('ap-prev-note-'    + id);
-
-  if (!harvestVal || !shelfDays) {
-    prevHarvest.textContent = '—'; prevExpiry.textContent = '—';
-    prevDays.textContent = '—'; prevBar.style.width = '0%';
-    prevNote.textContent = 'Set harvest date and shelf life to see preview.';
-    return;
-  }
-
-  const harvest  = new Date(harvestVal);
-  const expiry   = new Date(harvest);
-  expiry.setDate(expiry.getDate() + shelfDays);
-  const today    = new Date(); today.setHours(0,0,0,0);
-  const daysLeft = Math.ceil((expiry - today) / 86400000);
-  const pct      = Math.max(0, Math.min(100, Math.round((daysLeft / shelfDays) * 100)));
-  const opts     = { year:'numeric', month:'short', day:'numeric' };
-
-  prevHarvest.textContent = harvest.toLocaleDateString('en-PH', opts);
-  prevExpiry.textContent  = expiry.toLocaleDateString('en-PH', opts);
-  prevBar.className = 'shelf-fill';
-  prevDays.style.color = '';
-
-  if (daysLeft <= 0) {
-    prevDays.textContent = '❌ Already expired'; prevDays.style.color = '#dc2626';
-    prevBar.classList.add('shelf-fill-danger'); prevBar.style.width = '5%';
-    prevNote.textContent = '⚠️ This product has already passed its shelf life.';
-  } else if (daysLeft <= 3) {
-    prevDays.textContent = daysLeft + ' day' + (daysLeft > 1 ? 's' : '') + ' left ⚠️'; prevDays.style.color = '#dc2626';
-    prevBar.classList.add('shelf-fill-danger'); prevBar.style.width = pct + '%';
-    prevNote.textContent = '🔴 Critical: expires very soon. Consider same-day delivery only.';
-  } else if (daysLeft <= 7) {
-    prevDays.textContent = daysLeft + ' days left ⚠️'; prevDays.style.color = '#ca8a04';
-    prevBar.classList.add('shelf-fill-warn'); prevBar.style.width = pct + '%';
-    prevNote.textContent = '⚠️ Short shelf life. Communicate the expiry date clearly to buyers.';
-  } else {
-    prevDays.textContent = daysLeft + ' days left ✅'; prevDays.style.color = '#16a34a';
-    prevBar.classList.add('shelf-fill-ok'); prevBar.style.width = pct + '%';
-    prevNote.textContent = '✅ Good shelf life. Buyers will see this product as fresh.';
-  }
-}
-
-/* ── Toggle a completed card open/closed ── */
+ 
 function apToggleCard(id) {
   const body = document.getElementById('ap-body-' + id);
   const chev = document.getElementById('ap-chev-' + id);
@@ -322,8 +448,8 @@ function apToggleCard(id) {
   body.style.display   = open ? 'none' : 'block';
   chev.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
 }
-
-/* ── Build one product card's HTML ── */
+ 
+/* ── Build card HTML ── */
 function apBuildCard(id) {
   const unitDefs = [
     { val:'per kg',     icon:'⚖️', label:'per kg',     sub:'Kilogram',       key:'kg'     },
@@ -335,8 +461,8 @@ function apBuildCard(id) {
     { val:'per tray',   icon:'🍱', label:'per tray',   sub:'Tray / Punnet',   key:'tray'   },
     { val:'per sack',   icon:'👜', label:'per sack',   sub:'Sack / Bayong',   key:'sack'   },
   ];
-
-  const unitCards = unitDefs.map(u => `
+ 
+  const unitCards   = unitDefs.map(u => `
     <label class="unit-check-card" id="ap-ucard-${id}-${u.key}">
       <input type="checkbox" value="${u.val}" onchange="apHandleUnitCheck(this,${id})"/>
       <div class="unit-check-icon">${u.icon}</div>
@@ -344,58 +470,54 @@ function apBuildCard(id) {
       <div class="unit-check-sub">${u.sub}</div>
       <span class="unit-primary-tag" id="ap-utag-${id}-${u.key}">Primary</span>
     </label>`).join('');
-
   const unitOptions = unitDefs.map(u => `<option value="${u.val}">${u.val}</option>`).join('');
-
+ 
+  // Today's date for default
+  const todayStr = new Date().toISOString().split('T')[0];
+ 
   return `
   <div class="ap-card section-card" id="ap-card-${id}">
-
-    <!-- Collapsed header (shown after Mark Done) -->
+ 
+    <!-- Collapsed header -->
     <div class="ap-card-header" id="ap-header-${id}" style="display:none;" onclick="apToggleCard(${id})">
-      <div class="section-card-head" style="cursor:pointer; user-select:none; justify-content:space-between;">
-        <div style="display:flex; align-items:center; gap:0.75rem;">
+      <div class="section-card-head" style="cursor:pointer;user-select:none;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:.75rem;">
           <span class="sc-icon" id="ap-thumb-${id}">📦</span>
           <div>
             <div class="sc-title" id="ap-sname-${id}">—</div>
-            <div style="font-size:0.78rem; color:var(--text-light); margin-top:2px;" id="ap-ssub-${id}">—</div>
+            <div style="font-size:.78rem;color:var(--text-light);margin-top:2px" id="ap-ssub-${id}">—</div>
           </div>
         </div>
-        <div style="display:flex; align-items:center; gap:0.75rem;">
+        <div style="display:flex;align-items:center;gap:.75rem;">
           <span class="badge b-g">✓ Done</span>
-          <svg id="ap-chev-${id}" width="18" height="18" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2.5"
-               style="flex-shrink:0; transition:transform .25s; color:var(--text-light);">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
+          <svg id="ap-chev-${id}" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;transition:transform .25s;color:var(--text-light)"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
       </div>
     </div>
-
+ 
     <!-- Form body -->
     <div id="ap-body-${id}">
       <div class="section-card-head">
         <span class="sc-icon">📝</span>
         <span class="sc-title">Product #${id}</span>
-        <span style="font-size:0.78rem; color:var(--text-light); margin-left:0.5rem;">Fill in the details below</span>
+        <span style="font-size:.78rem;color:var(--text-light);margin-left:.5rem">Fill in the details below</span>
       </div>
       <div class="section-card-body">
-
-        <!-- ── Photos ── -->
-        <div style="margin-bottom:1.3rem;">
-          <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.9rem;">
-            <span style="font-size:1.1rem;">📸</span>
-            <span style="font-family:var(--font-display); font-size:0.97rem; font-weight:700;">Product Photos</span>
+ 
+        <!-- Photos -->
+        <div style="margin-bottom:1.3rem">
+          <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.9rem">
+            <span style="font-size:1.1rem">📸</span>
+            <span style="font-family:var(--font-display);font-size:.97rem;font-weight:700">Product Photos</span>
           </div>
-          <div class="form-group" style="margin-bottom:10px"><label>Main Photo *</label><span class="hint">First photo customers will see.</span></div>
           <div class="file-upload-box">
             <input type="file" accept="image/*"/>
             <div class="upload-icon">📷</div>
             <div class="upload-title">Upload Main Photo</div>
             <div class="upload-sub">Drag &amp; drop or <span>click to browse</span></div>
-            <div class="upload-sub" style="margin-top:4px">JPG, PNG, WEBP · Max 5MB</div>
           </div>
           <div style="margin-top:14px">
-            <label style="font-size:12.5px;font-weight:700;color:#374151;display:block;margin-bottom:8px">Additional Photos <span style="font-weight:400;color:#9ca3af">(optional — up to 4 more)</span></label>
+            <label style="font-size:12.5px;font-weight:700;color:#374151;display:block;margin-bottom:8px">Additional Photos <span style="font-weight:400;color:#9ca3af">(optional)</span></label>
             <div class="photo-slots">
               <div class="photo-slot"><input type="file" accept="image/*"/><span class="photo-slot-icon">＋</span><span>Photo 2</span></div>
               <div class="photo-slot"><input type="file" accept="image/*"/><span class="photo-slot-icon">＋</span><span>Photo 3</span></div>
@@ -403,296 +525,293 @@ function apBuildCard(id) {
               <div class="photo-slot"><input type="file" accept="image/*"/><span class="photo-slot-icon">＋</span><span>Photo 5</span></div>
             </div>
           </div>
-          <div class="tip-box">💡 <b>Tip:</b> Good product photos increase sales by up to 3x. Use natural light and a clean background.</div>
         </div>
-
-        <hr style="border:none; border-top:1.5px solid var(--border); margin:1.3rem 0;">
-
-        <!-- ── Basic Info ── -->
-        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;">
-          <span style="font-size:1.1rem;">📝</span>
-          <span style="font-family:var(--font-display); font-size:0.97rem; font-weight:700;">Basic Information</span>
+ 
+        <hr style="border:none;border-top:1.5px solid var(--border);margin:1.3rem 0">
+ 
+        <!-- Basic Info -->
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem">
+          <span style="font-size:1.1rem">📝</span>
+          <span style="font-family:var(--font-display);font-size:.97rem;font-weight:700">Basic Information</span>
         </div>
-
+ 
         <div class="form-group">
           <label>Product Name *</label>
-          <input type="text" id="ap-name-${id}" placeholder="e.g. Fresh Tomatoes, Organic Carrots…"
-                 oninput="apCheckDone(${id})"/>
+          <input type="text" id="ap-name-${id}" placeholder="e.g. Fresh Tomatoes, Organic Carrots…" oninput="apCheckDone(${id})"/>
         </div>
-
+ 
         <div class="form-group">
           <label>Category *</label>
-          <select id="ap-cat-${id}" onchange="apCheckDone(${id})">
+          <select id="ap-cat-${id}" onchange="apOnCategoryChange(${id})">
             <option value="" disabled selected>Select a category</option>
-            <option>Vegetables</option><option>Fruits</option><option>Dairy</option>
-            <option>Grains</option><option>Meat</option><option>Others</option>
+            <option>Vegetables</option>
+            <option>Fruits</option>
+            <option>Dairy</option>
+            <option>Grains</option>
+            <option>Meat</option>
+            <option>Others</option>
           </select>
         </div>
-
-        <!-- Unit of measurement -->
+ 
+        <!-- Unit of Measurement -->
         <div class="form-group" style="margin-bottom:0">
           <label>Unit of Measurement *</label>
           <span class="hint" style="display:block;margin-bottom:10px">Check all units this product can be sold in.</span>
           <div class="unit-checkbox-grid" id="ap-units-${id}">${unitCards}</div>
-
           <div class="unit-primary-selector" id="ap-unit-primary-wrap-${id}" style="display:none;">
-            <span class="unit-primary-label">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              Set primary unit for pricing:
-            </span>
-            <select id="ap-unit-primary-select-${id}" onchange="apUpdatePrimaryBadge(${id}); apUpdateSummaryPills(${id}, Array.from(document.querySelectorAll('#ap-units-${id} input:checked')))">
+            <span class="unit-primary-label">Primary unit (first selected is primary):</span>
+            <select id="ap-unit-primary-select-${id}" style="display:none">
               <option value="">— choose —</option>${unitOptions}
             </select>
-            <span class="hint" style="margin-top:4px;display:block">Buyers will see the price in this unit.</span>
           </div>
-
           <div class="unit-selected-summary" id="ap-unit-summary-${id}" style="display:none;">
             <span class="unit-summary-label">Selected units:</span>
             <div class="unit-pills" id="ap-unit-pills-${id}"></div>
           </div>
         </div>
-
-        <div class="form-group" style="margin-bottom:0; margin-top:1rem;">
+ 
+        <div class="form-group" style="margin-bottom:0;margin-top:1rem">
           <label>Description</label>
-          <textarea placeholder="Describe your product — freshness, how it's grown, best uses, tips for buyers…"></textarea>
-          <span class="hint">A good description builds trust and increases sales.</span>
+          <textarea placeholder="Describe your product — freshness, how it's grown, best uses…"></textarea>
         </div>
-
-        <hr style="border:none; border-top:1.5px solid var(--border); margin:1.3rem 0;">
-
-        <!-- ── Pricing & Stock ── -->
-        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;">
-          <span style="font-size:1.1rem;">💰</span>
-          <span style="font-family:var(--font-display); font-size:0.97rem; font-weight:700;">Pricing &amp; Stock</span>
+ 
+        <hr style="border:none;border-top:1.5px solid var(--border);margin:1.3rem 0">
+ 
+        <!-- Pricing & Stock (Initial Batch) -->
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem">
+          <span style="font-size:1.1rem">💰</span>
+          <span style="font-family:var(--font-display);font-size:.97rem;font-weight:700">Pricing &amp; Initial Stock Batch</span>
         </div>
-        <div class="form-row-3">
-          <div class="form-group">
-            <label>Price (₱) *</label>
-            <input type="number" id="ap-price-${id}" placeholder="0.00" min="0" step="0.01" oninput="apCheckDone(${id})"/>
-            <span class="hint">Price per unit selected above.</span>
+        <div class="tip-box" style="margin-bottom:1.2rem">
+          📦 <b>Batch-based stock:</b> This creates your <b>first stock batch</b>. You can add more batches later in Stock Update, each with their own best before date. Set a price for each unit you selected above.
+        </div>
+ 
+        <!-- Per-unit price grid — populated dynamically when units are checked -->
+        <div id="ap-price-grid-${id}" style="display:none;margin-bottom:1rem">
+          <label style="font-size:.78rem;font-weight:700;color:var(--text-mid);display:block;margin-bottom:.6rem">Price per Unit * <span style="font-weight:400;color:var(--text-light)">(set a price for each unit you selected)</span></label>
+          <div id="ap-price-rows-${id}" style="display:flex;flex-direction:column;gap:.5rem"></div>
+          <div id="ap-price-empty-${id}" style="font-size:.82rem;color:var(--text-light);padding:.6rem .8rem;background:var(--cream-dark);border-radius:var(--radius-sm);border:1px solid var(--border)">
+            ← Select units above to set prices here.
           </div>
+        </div>
+        <!-- Fallback price shown when no units selected yet -->
+        <div id="ap-price-fallback-${id}">
           <div class="form-group">
-            <label>Stock Quantity *</label>
-            <input type="number" placeholder="0" min="0"/>
-            <span class="hint">How many units available now.</span>
+            <label>Price (₱) * <span style="font-weight:400;color:var(--text-light)">— select units above first</span></label>
+            <input type="number" id="ap-price-${id}" placeholder="0.00" min="0" step="0.01" oninput="apCheckDone(${id})" disabled style="opacity:.5;cursor:not-allowed"/>
+            <span class="hint">Select a unit of measurement above to unlock pricing.</span>
+          </div>
+        </div>
+ 
+        <div class="form-row-2" style="margin-top:.3rem">
+          <div class="form-group">
+            <label>Batch Quantity *</label>
+            <input type="number" id="ap-qty-${id}" placeholder="0" min="0"/>
+            <span class="hint">Units in this first batch.</span>
           </div>
           <div class="form-group">
             <label>Low Stock Alert at</label>
             <input type="number" placeholder="e.g. 5" min="0"/>
-            <span class="hint">Warn me when stock drops below this.</span>
+            <span class="hint">Warn when stock drops below.</span>
           </div>
         </div>
-
-        <hr style="border:none; border-top:1.5px solid var(--border); margin:1.3rem 0;">
-
-        <!-- ── Shipping ── -->
-        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;">
-          <span style="font-size:1.1rem;">🚚</span>
-          <span style="font-family:var(--font-display); font-size:0.97rem; font-weight:700;">Shipping Details</span>
+ 
+        <hr style="border:none;border-top:1.5px solid var(--border);margin:1.3rem 0">
+ 
+        <!-- Shipping -->
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem">
+          <span style="font-size:1.1rem">🚚</span>
+          <span style="font-family:var(--font-display);font-size:.97rem;font-weight:700">Shipping Details</span>
         </div>
         <div class="form-row-2">
           <div class="form-group">
             <label>Estimated Prep Time</label>
             <select><option selected>Same day</option><option>1 day</option><option>2 days</option><option>3 days</option></select>
-            <span class="hint">How long before item is ready to ship.</span>
           </div>
           <div class="form-group">
             <label>Product Weight (approx.)</label>
             <input type="text" placeholder="e.g. 0.5 kg, 200g"/>
-            <span class="hint">Used to estimate shipping fees.</span>
           </div>
         </div>
         <div class="form-group" style="margin-bottom:0">
           <label>Special Handling Notes</label>
-          <input type="text" placeholder="e.g. Keep refrigerated, Handle with care, Fragile…"/>
+          <input type="text" placeholder="e.g. Keep refrigerated, Handle with care…"/>
         </div>
-
-        <hr style="border:none; border-top:1.5px solid var(--border); margin:1.3rem 0;">
-
-        <!-- ── Freshness & Shelf Life ── -->
-        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.8rem;">
-          <span style="font-size:1.1rem;">🕐</span>
-          <span style="font-family:var(--font-display); font-size:0.97rem; font-weight:700;">Freshness &amp; Shelf Life</span>
+ 
+        <hr style="border:none;border-top:1.5px solid var(--border);margin:1.3rem 0">
+ 
+        <!-- ════ FRESHNESS & SHELF LIFE ════ -->
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.8rem">
+          <span style="font-size:1.1rem">🕐</span>
+          <span style="font-family:var(--font-display);font-size:.97rem;font-weight:700">Freshness &amp; Best Before</span>
         </div>
-        <div class="tip-box" style="margin-bottom:1.2rem;">
-          🥦 <b>Important for perishable products:</b> Let buyers know when your produce was harvested and how long it stays fresh.
+ 
+        <!-- Category tip — updates dynamically -->
+        <div class="tip-box" style="margin-bottom:1.2rem" id="ap-bestbefore-tip-${id}">
+          🥦 Select a category above to see the correct expiry method.
         </div>
+ 
         <div class="form-row-2">
+          <!-- Source date: harvest / processing / pack date depending on category -->
           <div class="form-group">
-            <label>Harvest Date *</label>
-            <input type="date" id="ap-harvest-${id}" onchange="apUpdateExpiry(${id})"/>
-            <span class="hint">When was this batch harvested?</span>
+            <label id="ap-date-label-${id}">Harvest Date *</label>
+            <input type="date" id="ap-source-date-${id}" value="${todayStr}" onchange="apUpdateExpiry(${id})"/>
+            <span class="hint" id="ap-date-hint-${id}">When was this batch harvested?</span>
           </div>
-          <div class="form-group">
-            <label>Shelf Life (days) *</label>
-            <select id="ap-shelf-${id}" onchange="apUpdateExpiry(${id})">
-              <option value="" disabled selected>Select shelf life</option>
-              <optgroup label="Very Perishable (1–3 days)">
-                <option value="1">1 day — e.g. Fresh-cut herbs, sprouts</option>
-                <option value="2">2 days — e.g. Strawberries, fresh basil</option>
-                <option value="3">3 days — e.g. Leafy greens, lettuce</option>
-              </optgroup>
-              <optgroup label="Short (4–7 days)">
-                <option value="4">4 days — e.g. Tomatoes, mushrooms</option>
-                <option value="5">5 days — e.g. Bell peppers, eggplant</option>
-                <option value="7">7 days — e.g. Corn, broccoli, cucumbers</option>
-              </optgroup>
-              <optgroup label="Moderate (8–21 days)">
-                <option value="10">10 days — e.g. Cabbage, okra</option>
-                <option value="14">14 days — e.g. Carrots, beets, radish</option>
-                <option value="21">21 days — e.g. Sweet potato, squash</option>
-              </optgroup>
-              <optgroup label="Long (30+ days)">
-                <option value="30">30 days — e.g. Onions, garlic</option>
-                <option value="60">60 days — e.g. Potatoes, pumpkin</option>
-              </optgroup>
-            </select>
-            <span class="hint">Estimated days product stays fresh from harvest.</span>
+ 
+          <!-- Shelf life (hidden for Dairy) -->
+          <div id="ap-shelf-wrap-${id}">
+            <div class="form-group">
+              <label>Shelf Life (days) *</label>
+              <select id="ap-shelf-${id}" onchange="apUpdateExpiry(${id})">
+                <option value="" disabled selected>Select shelf life</option>
+                <optgroup label="Very Perishable (1–3 days)">
+                  <option value="1">1 day — Fresh-cut herbs, sprouts</option>
+                  <option value="2">2 days — Strawberries, fresh basil</option>
+                  <option value="3">3 days — Leafy greens, meat</option>
+                </optgroup>
+                <optgroup label="Short (4–7 days)">
+                  <option value="4">4 days — Tomatoes, mushrooms</option>
+                  <option value="5">5 days — Bell peppers, eggplant</option>
+                  <option value="7">7 days — Corn, broccoli, cucumbers</option>
+                </optgroup>
+                <optgroup label="Moderate (8–21 days)">
+                  <option value="10">10 days — Cabbage, okra</option>
+                  <option value="14">14 days — Carrots, beets, radish</option>
+                  <option value="21">21 days — Sweet potato, squash</option>
+                </optgroup>
+                <optgroup label="Long (30+ days)">
+                  <option value="30">30 days — Onions, garlic</option>
+                  <option value="60">60 days — Potatoes, pumpkin</option>
+                  <option value="180">180 days — Dried grains, rice</option>
+                </optgroup>
+              </select>
+              <span class="hint">Days this batch stays fresh from source date.</span>
+            </div>
           </div>
-        </div>
-        <div class="form-row-2">
-          <div class="form-group">
-            <label>Storage Instructions</label>
-            <select>
-              <option selected>Room temperature</option>
-              <option>Refrigerate (2–8°C)</option>
-              <option>Cool &amp; dry place</option>
-              <option>Keep away from sunlight</option>
-              <option>Store in water (e.g. fresh herbs)</option>
-            </select>
-            <span class="hint">Helps buyers store correctly to extend freshness.</span>
-          </div>
-          <div class="form-group">
-            <label>Freshness Guarantee</label>
-            <select>
-              <option selected>Harvested same day as delivery</option>
-              <option>Harvested within 24 hours</option>
-              <option>Harvested within 2 days</option>
-              <option>No guarantee specified</option>
-            </select>
-            <span class="hint">What freshness promise do you make to buyers?</span>
+ 
+          <!-- Manual expiry (shown for Dairy) -->
+          <div id="ap-manual-wrap-${id}" style="display:none">
+            <div class="form-group">
+              <label>Best Before Date (from package) *</label>
+              <input type="date" id="ap-expiry-manual-${id}" onchange="apUpdateExpiry(${id})"/>
+              <span class="hint">Enter the best before date from the dairy packaging.</span>
+            </div>
           </div>
         </div>
-
-        <!-- Expiry preview -->
+ 
+        <!-- Expiry Preview -->
         <div class="expiry-preview">
-          <div class="expiry-preview-head">📅 Expiry Preview</div>
+          <div class="expiry-preview-head">📅 Best Before Preview</div>
           <div class="expiry-preview-body">
-            <div class="expiry-row"><span class="expiry-lbl">Harvest Date</span><span class="expiry-val" id="ap-prev-harvest-${id}">—</span></div>
-            <div class="expiry-row"><span class="expiry-lbl">Estimated Expiry</span><span class="expiry-val" id="ap-prev-expiry-${id}">—</span></div>
+            <div style="font-size:.75rem;color:var(--text-light);margin-bottom:.6rem" id="ap-prev-method-${id}">🌱 Method: Select a category to see the expiry calculation method.</div>
+            <div class="expiry-row"><span class="expiry-lbl">Source Date</span><span class="expiry-val" id="ap-prev-harvest-${id}">—</span></div>
+            <div class="expiry-row"><span class="expiry-lbl">Best Before</span><span class="expiry-val" id="ap-prev-expiry-${id}">—</span></div>
             <div class="expiry-row"><span class="expiry-lbl">Days Remaining</span><span class="expiry-val" id="ap-prev-days-${id}">—</span></div>
-            <div class="shelf-track" style="margin-top:8px;height:8px;">
+            <div class="shelf-track" style="margin-top:8px;height:8px">
               <div class="shelf-fill shelf-fill-ok" id="ap-prev-bar-${id}" style="width:0%"></div>
             </div>
-            <div style="font-size:0.72rem;color:var(--text-light);margin-top:4px" id="ap-prev-note-${id}">Set harvest date and shelf life to see preview.</div>
+            <div style="font-size:.72rem;color:var(--text-light);margin-top:4px" id="ap-prev-note-${id}">Select a category and fill in the fields above.</div>
           </div>
         </div>
-
-        <!-- ── Mark as Done footer ── -->
+ 
+        <div class="form-group" style="margin-top:1rem">
+          <label>Storage Instructions</label>
+          <select>
+            <option selected>Room temperature</option>
+            <option>Refrigerate (2–8°C)</option>
+            <option>Cool &amp; dry place</option>
+            <option>Keep away from sunlight</option>
+            <option>Store in water (e.g. fresh herbs)</option>
+          </select>
+        </div>
+ 
+        <!-- Mark Done footer -->
         <div class="ap-form-footer">
-          <span style="font-size:0.78rem; color:var(--text-light);"><span style="color:#ef5350">*</span> Required fields</span>
-          <button type="button" class="btn-save ap-btn-done" id="ap-done-btn-${id}"
-                  onclick="apMarkDone(${id})" disabled>
+          <span style="font-size:.78rem;color:var(--text-light)"><span style="color:#ef5350">*</span> Required fields</span>
+          <button type="button" class="btn-save ap-btn-done" id="ap-done-btn-${id}" onclick="apMarkDone(${id})" disabled>
             ✓ Mark as Done
           </button>
         </div>
-
-      </div><!-- /section-card-body -->
-    </div><!-- /ap-body -->
-  </div><!-- /ap-card -->`;
+ 
+      </div>
+    </div>
+  </div>`;
 }
-
-/* ── Mark a product done → collapse → show prompt ── */
+ 
+/* ── Mark done ── */
 function apMarkDone(id) {
-  const name  = (document.getElementById('ap-name-'  + id)?.value || '').trim();
-  const cat   = (document.getElementById('ap-cat-'   + id)?.value || '').trim();
-  const price = (document.getElementById('ap-price-' + id)?.value || '').trim();
-  const primary = document.getElementById('ap-unit-primary-select-' + id)?.value || '';
-
-  // Populate collapsed header
+  const name = (document.getElementById('ap-name-' + id)?.value || '').trim();
+  const cat  = (document.getElementById('ap-cat-'  + id)?.value || '').trim();
+ 
+  // Collect all unit prices from the dynamic grid
+  const priceInputs = document.querySelectorAll('#ap-price-rows-' + id + ' input[data-unit]');
+  const unitPrices  = Array.from(priceInputs)
+    .filter(inp => parseFloat(inp.value) > 0)
+    .map(inp => '₱' + parseFloat(inp.value).toLocaleString() + ' ' + inp.dataset.unit);
+ 
   document.getElementById('ap-sname-' + id).textContent = name;
   const subParts = [];
-  if (cat)     subParts.push((CAT_EMOJI[cat] || '') + ' ' + cat);
-  if (price)   subParts.push('₱' + parseFloat(price).toLocaleString() + (primary ? ' ' + primary : ''));
+  if (cat) subParts.push((CAT_EMOJI[cat] || '') + ' ' + cat);
+  if (unitPrices.length) subParts.push(unitPrices.join(' · '));
+ 
+  const prevBestBefore = document.getElementById('ap-prev-expiry-' + id)?.textContent;
+  if (prevBestBefore && prevBestBefore !== '—') subParts.push('Best Before: ' + prevBestBefore);
+ 
   document.getElementById('ap-ssub-'  + id).textContent = subParts.join(' · ');
   document.getElementById('ap-thumb-' + id).textContent = CAT_EMOJI[cat] || '📦';
-
-  // Hide body, show collapsed header
+ 
   document.getElementById('ap-body-'   + id).style.display = 'none';
   document.getElementById('ap-header-' + id).style.display = 'block';
-
-  // Style card as done
-  const card = document.getElementById('ap-card-' + id);
-  card.classList.add('ap-card-done');
-
-  // Store
-  apProducts.push({ id, name, cat, price, primary });
+  document.getElementById('ap-card-'   + id).classList.add('ap-card-done');
+ 
+  const firstPrice = priceInputs.length ? priceInputs[0].value : '';
+  const primary    = priceInputs.length ? priceInputs[0].dataset.unit : '';
+  apProducts.push({ id, name, cat, price: firstPrice, primary });
   apUpdateCounter();
-
-  // Show prompt
-  document.getElementById('ap-save-bar').style.display      = 'none';
+ 
+  document.getElementById('ap-save-bar').style.display       = 'none';
   document.getElementById('ap-another-prompt').style.display = 'flex';
   document.getElementById('ap-another-prompt').scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
-
-/* ── Add another product card ── */
+ 
 function apAddAnother() {
   document.getElementById('ap-another-prompt').style.display = 'none';
   document.getElementById('ap-save-bar').style.display       = 'none';
-
   apCardCount++;
   const stack = document.getElementById('ap-stack');
   const div   = document.createElement('div');
   div.innerHTML = apBuildCard(apCardCount);
   stack.appendChild(div.firstElementChild);
-
-  document.getElementById('ap-card-' + apCardCount)
-          .scrollIntoView({ behavior:'smooth', block:'start' });
-  setTimeout(() => {
-    document.getElementById('ap-name-' + apCardCount)?.focus();
-  }, 400);
+  document.getElementById('ap-card-' + apCardCount).scrollIntoView({ behavior:'smooth', block:'start' });
+  setTimeout(() => document.getElementById('ap-name-' + apCardCount)?.focus(), 400);
 }
-
-/* ── Show save bar ── */
+ 
 function apShowSaveBar() {
   document.getElementById('ap-another-prompt').style.display = 'none';
-  const n     = apProducts.length;
-  const names = apProducts.map(p => p.name).join(', ');
-  document.getElementById('ap-save-label').textContent =
-    n + ' product' + (n !== 1 ? 's' : '') + ' ready to save: ' + names + '.';
+  const n = apProducts.length;
+  document.getElementById('ap-save-label').textContent = n + ' product' + (n !== 1 ? 's' : '') + ' ready to save: ' + apProducts.map(p => p.name).join(', ') + '.';
   const bar = document.getElementById('ap-save-bar');
   bar.style.display = 'flex';
   bar.scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
-
-/* ── Save all ── */
+ 
 function apSaveAll() {
-  const n     = apProducts.length;
-  const names = apProducts.map(p => p.name).join(', ');
-
+  const n = apProducts.length;
   document.getElementById('ap-save-bar').style.display = 'none';
-  document.getElementById('ap-stack').innerHTML        = '';
-
-  document.getElementById('ap-success-title').textContent =
-    n + ' Product' + (n !== 1 ? 's' : '') + ' Saved!';
-  document.getElementById('ap-success-sub').textContent =
-    names + (n !== 1 ? ' are' : ' is') + ' now live on your store.';
-
+  document.getElementById('ap-stack').innerHTML = '';
+  document.getElementById('ap-success-title').textContent = n + ' Product' + (n !== 1 ? 's' : '') + ' Saved!';
+  document.getElementById('ap-success-sub').textContent = apProducts.map(p => p.name).join(', ') + (n !== 1 ? ' are' : ' is') + ' now live on your store.';
   document.getElementById('ap-success').style.display = 'flex';
   document.getElementById('ap-success').scrollIntoView({ behavior:'smooth', block:'start' });
-
-  apProducts  = [];
-  apCardCount = 0;
-  apUpdateCounter();
+  apProducts = []; apCardCount = 0; apUpdateCounter();
 }
-
-/* ── Reset to start fresh ── */
+ 
 function apReset() {
   document.getElementById('ap-success').style.display = 'none';
   apAddAnother();
 }
-
-/* ── Bootstrap: open first card ── */
+ 
 apAddAnother();
 </script>
 </body>
