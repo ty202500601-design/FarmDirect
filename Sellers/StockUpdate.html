@@ -4,118 +4,181 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Update Stock – FarmDirect</title>
-  <link rel="stylesheet" href="StockUpdate.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    /* ── BATCH TABLE ── */
-    .batch-table { width:100%; border-collapse:collapse; font-size:.85rem; }
-    .batch-table th { font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--text-light); padding:.55rem 1rem; text-align:left; background:var(--cream); border-bottom:1.5px solid var(--border); }
-    .batch-table td { padding:.75rem 1rem; border-bottom:1px solid var(--border); vertical-align:middle; }
-    .batch-table tbody tr:last-child td { border-bottom:none; }
-    .batch-table tbody tr:hover td { background:var(--cream); }
-    .batch-fifo-tag { font-size:.65rem; font-weight:800; background:var(--info-bg); color:var(--info); padding:.12rem .5rem; border-radius:20px; margin-left:.4rem; vertical-align:middle; }
-    .batch-expired-row td { background:#fff5f5; color:var(--text-light); }
- 
-    /* ── QTY INPUT — HIGHLY VISIBLE ── */
-    .batch-qty-input {
-      width: 84px;
-      padding: .45rem .6rem;
-      border: 2px solid var(--green-accent);
-      border-radius: var(--radius-sm);
-      font-size: 1rem;
-      font-weight: 800;
-      text-align: center;
-      outline: none;
-      color: var(--green);
-      background: var(--green-light);
-      transition: border-color .15s, background .15s, box-shadow .15s;
-      font-family: var(--font-display);
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #3d6840; --green-accent: #5a9a5e; --green-light: #e8f0e9;
+      --cream: #f7f5f0; --cream-dark: #ede9e0; --white: #ffffff;
+      --text: #1a1a1a; --text-mid: #4a4a4a; --text-light: #888;
+      --border: #d8d4cc; --radius: 12px; --radius-sm: 8px;
+      --success: #2e7d32; --success-bg: #e8f5e9;
+      --warn: #c17600; --warn-bg: #fff8e1;
+      --danger: #c62828; --danger-bg: #ffebee;
+      --info: #1565c0; --info-bg: #e3f2fd;
     }
-    .batch-qty-input:focus {
-      border-color: var(--green);
-      background: #fff;
-      box-shadow: 0 0 0 3px rgba(61,104,64,.18);
-    }
-    .batch-qty-input::-webkit-inner-spin-button,
-    .batch-qty-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+    body { font-family: system-ui, sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
  
-    .remove-batch-btn { font-size:.75rem; font-weight:600; color:var(--danger); background:var(--danger-bg); border:1px solid rgba(220,38,38,.2); padding:.28rem .7rem; border-radius:var(--radius-sm); cursor:pointer; transition:background .18s; }
-    .remove-batch-btn:hover { background:#fecaca; }
+    /* NAV */
+    .navbar { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 1.5rem; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 56px; max-width: 1100px; margin: 0 auto; }
+    .logo { display: flex; align-items: center; gap: 8px; font-size: 1.2rem; font-weight: 700; color: var(--green); text-decoration: none; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-link { text-decoration: none; font-size: .9rem; color: var(--text-mid); font-weight: 500; }
+    .nav-link:hover, .nav-link.active { color: var(--green); }
  
-    /* ── ADD BATCH FORM ── */
-    .add-batch-box { background:var(--green-light); border:1.5px solid rgba(26,46,30,.15); border-radius:var(--radius); padding:1.2rem 1.3rem; margin-top:.8rem; }
-    .add-batch-box-title { font-size:.82rem; font-weight:700; color:var(--green); margin-bottom:.9rem; display:flex; align-items:center; gap:.5rem; }
-    .expiry-method-note { font-size:.78rem; padding:.5rem .8rem; border-radius:var(--radius-sm); margin-bottom:.9rem; font-weight:600; }
-    .expiry-method-veg  { background:#e8f5e9; color:#2e7d32; border:1px solid #a5d6a7; }
-    .expiry-method-meat { background:#fff3e0; color:#e65100; border:1px solid #ffcc80; }
-    .expiry-method-dairy{ background:#e3f2fd; color:#1565c0; border:1px solid #90caf9; }
-    .expiry-method-grain{ background:#f3e5f5; color:#6a1b9a; border:1px solid #ce93d8; }
-    .expiry-method-other{ background:var(--cream-dark); color:var(--text-mid); border:1px solid var(--border); }
+    /* PAGE */
+    .page-wrap { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; }
+    .breadcrumb { font-size: .82rem; color: var(--text-light); margin-bottom: 1.2rem; }
+    .breadcrumb a { color: var(--text-light); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--green); }
+    .bc-sep { margin: 0 .4rem; }
+    .page-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+    .page-title { font-size: 1.4rem; font-weight: 700; }
+    .page-sub { font-size: .88rem; color: var(--text-mid); margin-top: 4px; }
+    .back-btn { font-size: .85rem; padding: .5rem 1rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--white); color: var(--text-mid); text-decoration: none; white-space: nowrap; }
+    .back-btn:hover { background: var(--cream); }
  
-    /* form inputs inside add-batch */
-    .add-batch-box input[type="date"],
-    .add-batch-box input[type="number"] {
-      width: 100%;
-      padding: .48rem .7rem;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: .88rem;
-      font-weight: 600;
-      color: var(--text);
-      background: var(--white);
-      outline: none;
-      margin-top: .25rem;
-      transition: border-color .15s;
-    }
-    .add-batch-box input:focus { border-color: var(--green-accent); }
-    .add-batch-box label {
-      font-size: .73rem;
-      font-weight: 700;
-      color: var(--text-mid);
-      text-transform: uppercase;
-      letter-spacing: .04em;
-      display: block;
-    }
+    .alert-banner { display: none; background: var(--warn-bg); border: 1px solid #ffc107; border-radius: var(--radius-sm); padding: .7rem 1rem; margin-bottom: 1rem; font-size: .85rem; color: var(--warn); gap: .5rem; align-items: flex-start; }
+    .how-stock-note { display: flex; gap: .8rem; background: var(--info-bg); border: 1px solid #90caf9; border-radius: var(--radius-sm); padding: .9rem 1rem; margin-bottom: 1.2rem; font-size: .85rem; color: #1a3c6e; }
  
-    /* ── FIFO SIMULATOR ── */
-    .fifo-box { background:var(--cream); border:1.5px solid var(--border); border-radius:var(--radius); padding:1.2rem 1.3rem; margin-top:.8rem; }
-    .fifo-box-title { font-size:.82rem; font-weight:700; color:var(--text); margin-bottom:.8rem; }
-    .fifo-result { display:flex; flex-direction:column; gap:.35rem; }
-    .fifo-row { display:flex; align-items:center; gap:.7rem; padding:.4rem .6rem; border-radius:var(--radius-sm); font-size:.8rem; background:var(--white); border:1px solid var(--border); }
-    .fifo-row.deducting { border-color:var(--success); background:var(--success-bg); }
-    .fifo-row.partial   { border-color:var(--warn);    background:var(--warn-bg); }
-    .fifo-row.skipped   { opacity:.45; }
-    .fifo-deduct-amt { margin-left:auto; font-weight:800; color:var(--danger); }
-    .fifo-remain-amt { margin-left:auto; font-weight:600; color:var(--success); }
-    .fifo-summary-box { margin-top:.7rem; padding:.65rem .9rem; border-radius:var(--radius-sm); font-size:.85rem; font-weight:700; }
-    .fifo-ok    { background:var(--success-bg); color:var(--success); }
-    .fifo-short { background:var(--danger-bg);  color:var(--danger); }
-    .fifo-qty-inp {
-      width: 160px; padding: .5rem .8rem;
-      border: 1.5px solid var(--border); border-radius: var(--radius-sm);
-      font-size: .88rem; outline: none; color: var(--text);
-      background: var(--white); transition: border-color .15s;
-    }
+    /* CARD */
+    .stock-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+    .stock-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+ 
+    /* CARD HEADER */
+    .card-header { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); background: var(--cream); }
+    .card-img { width: 88px; height: 80px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--border); flex-shrink: 0; }
+    .card-pname { font-size: 1.1rem; font-weight: 700; }
+    .card-pmeta { display: flex; gap: 6px; margin-top: 5px; flex-wrap: wrap; }
+    .tag { font-size: .72rem; padding: 2px 8px; border-radius: 20px; background: var(--cream-dark); color: var(--text-mid); font-weight: 600; }
+    .tag-danger { background: var(--danger-bg); color: var(--danger); }
+    .tag-warn { background: var(--warn-bg); color: var(--warn); }
+    .unit-totals { font-size: .78rem; color: var(--text-light); margin-top: 6px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .unit-totals b { color: var(--green); }
+ 
+    /* UNIT TABS */
+    .unit-tabs { display: flex; border-bottom: 1px solid var(--border); background: var(--cream); overflow-x: auto; }
+    .unit-tab { padding: .65rem 1.3rem; font-size: .85rem; font-weight: 600; color: var(--text-mid); cursor: pointer; border: none; border-bottom: 2.5px solid transparent; background: none; white-space: nowrap; transition: all .15s; }
+    .unit-tab:hover { color: var(--green); background: var(--green-light); }
+    .unit-tab.active { color: var(--green); border-bottom-color: var(--green); background: var(--white); }
+ 
+    /* UNIT PANEL */
+    .unit-panel { display: none; padding: 1.2rem; }
+    .unit-panel.active { display: block; }
+ 
+    /* SUMMARY */
+    .unit-summary { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 1rem; }
+    .unit-stock-lbl { font-size: .72rem; color: var(--text-light); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 2px; }
+    .unit-stock-num { font-size: 2rem; font-weight: 700; line-height: 1; }
+    .unit-stock-sub { font-size: .72rem; color: var(--text-light); margin-top: 2px; }
+    .badge { font-size: .75rem; font-weight: 700; padding: .3rem .85rem; border-radius: 20px; }
+    .badge-ok { background: var(--success-bg); color: var(--success); }
+    .badge-warn { background: var(--warn-bg); color: var(--warn); }
+    .badge-bad { background: var(--danger-bg); color: var(--danger); }
+ 
+    /* SHELF BAR */
+    .shelf-bar { margin-bottom: 1rem; }
+    .shelf-label { display: flex; justify-content: space-between; font-size: .75rem; color: var(--text-light); margin-bottom: 3px; }
+    .shelf-days-ok { color: var(--success); font-weight: 700; }
+    .shelf-days-warn { color: var(--warn); font-weight: 700; }
+    .shelf-days-bad { color: var(--danger); font-weight: 700; }
+    .shelf-track { height: 5px; background: var(--cream-dark); border-radius: 3px; overflow: hidden; }
+    .shelf-fill-ok { height: 100%; border-radius: 3px; background: var(--success); }
+    .shelf-fill-warn { height: 100%; border-radius: 3px; background: var(--warn); }
+    .shelf-fill-bad { height: 100%; border-radius: 3px; background: var(--danger); }
+    .shelf-hint { font-size: .7rem; color: var(--text-light); margin-top: 3px; }
+ 
+    /* BATCH TABLE */
+    .batch-table { width: 100%; border-collapse: collapse; font-size: .84rem; margin-bottom: .5rem; }
+    .batch-table th { font-size: .67rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-light); padding: .5rem .8rem; text-align: left; background: var(--cream); border-bottom: 1.5px solid var(--border); }
+    .batch-table td { padding: .65rem .8rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    .batch-table tbody tr:last-child td { border-bottom: none; }
+    .batch-table tbody tr:hover td { background: var(--cream); }
+    .batch-table tr.exp-row td { background: #fff5f5; color: var(--text-light); }
+    .fifo-pill { font-size: .63rem; font-weight: 800; background: var(--info-bg); color: var(--info); padding: .1rem .45rem; border-radius: 20px; margin-left: .35rem; }
+    .exp-pill { font-size: .63rem; font-weight: 800; background: var(--danger-bg); color: var(--danger); padding: .1rem .45rem; border-radius: 20px; margin-left: .35rem; }
+ 
+    /* FRESHNESS CHIPS */
+    .fs-chip { display: inline-flex; align-items: center; padding: .18rem .55rem; border-radius: 20px; font-size: .7rem; font-weight: 800; }
+    .fs-fresh { background: var(--success-bg); color: var(--success); }
+    .fs-near  { background: var(--warn-bg);    color: var(--warn);    }
+    .fs-expired{ background: var(--danger-bg); color: var(--danger);  }
+    .fs-today  { background: #fce4ec;           color: #c62828;        }
+ 
+    /* QTY INPUT */
+    .batch-qty-input { width: 84px; padding: .44rem .55rem; border: 2px solid var(--green-accent); border-radius: var(--radius-sm); font-size: 1rem; font-weight: 800; text-align: center; outline: none; color: var(--green); background: var(--green-light); transition: border-color .15s, background .15s, box-shadow .15s; }
+    .batch-qty-input:focus { border-color: var(--green); background: var(--white); box-shadow: 0 0 0 3px rgba(61,104,64,.18); }
+    .batch-qty-input::-webkit-inner-spin-button, .batch-qty-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+ 
+    .rm-btn { font-size: .73rem; font-weight: 600; color: var(--danger); background: var(--danger-bg); border: 1px solid rgba(220,38,38,.2); padding: .25rem .65rem; border-radius: var(--radius-sm); cursor: pointer; }
+    .rm-btn:hover { background: #fecaca; }
+ 
+    /* ADD BATCH */
+    .add-batch-box { background: var(--green-light); border: 1.5px solid rgba(26,46,30,.15); border-radius: var(--radius); padding: 1rem 1.1rem; margin-top: .85rem; }
+    .add-batch-title { font-size: .82rem; font-weight: 700; color: var(--green); margin-bottom: .7rem; }
+    .expiry-note { font-size: .77rem; padding: .45rem .75rem; border-radius: var(--radius-sm); margin-bottom: .7rem; font-weight: 600; }
+    .expiry-veg   { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+    .expiry-grain { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+    .expiry-other { background: var(--cream-dark); color: var(--text-mid); border: 1px solid var(--border); }
+    .add-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .75rem; align-items: end; }
+    .fld label { font-size: .71rem; font-weight: 700; color: var(--text-mid); text-transform: uppercase; letter-spacing: .04em; display: block; margin-bottom: 3px; }
+    .fld input { width: 100%; padding: .44rem .65rem; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: .87rem; font-weight: 600; color: var(--text); background: var(--white); outline: none; }
+    .fld input:focus { border-color: var(--green-accent); }
+    .fld .hint { font-size: .67rem; color: var(--text-light); margin-top: 2px; display: block; }
+    .add-btn { margin-top: .75rem; padding: .55rem 1.2rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--white); color: var(--green); font-size: .87rem; font-weight: 700; cursor: pointer; }
+    .add-btn:hover { background: var(--cream); }
+ 
+    /* FIFO BOX */
+    .fifo-box { background: var(--cream); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; margin-top: .85rem; }
+    .fifo-box-title { font-size: .82rem; font-weight: 700; color: var(--text); margin-bottom: .65rem; }
+    .fifo-qty-inp { width: 160px; padding: .48rem .75rem; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: .87rem; outline: none; color: var(--text); background: var(--white); }
     .fifo-qty-inp:focus { border-color: var(--green-accent); }
+    .fifo-result { display: flex; flex-direction: column; gap: .28rem; margin-top: .5rem; }
+    .fifo-row { display: flex; align-items: center; gap: .55rem; padding: .38rem .65rem; border-radius: var(--radius-sm); font-size: .79rem; background: var(--white); border: 1px solid var(--border); flex-wrap: wrap; }
+    .fifo-row.deducting { border-color: var(--success); background: var(--success-bg); }
+    .fifo-row.partial   { border-color: var(--warn);    background: var(--warn-bg); }
+    .fifo-num { font-size: .66rem; font-weight: 800; background: var(--border); color: var(--text-mid); padding: .08rem .38rem; border-radius: 20px; }
+    .fifo-deduct { margin-left: auto; font-weight: 800; color: var(--danger); }
+    .fifo-remain { font-weight: 600; color: var(--success); }
+    .fifo-summary { margin-top: .55rem; padding: .55rem .85rem; border-radius: var(--radius-sm); font-size: .84rem; font-weight: 700; }
+    .fifo-ok    { background: var(--success-bg); color: var(--success); }
+    .fifo-short { background: var(--danger-bg);  color: var(--danger);  }
  
-    /* ── FRESHNESS STATUS CHIP ── */
-    .fs-chip { display:inline-flex; align-items:center; padding:.2rem .6rem; border-radius:20px; font-size:.7rem; font-weight:800; }
-    .fs-fresh   { background:var(--success-bg); color:var(--success); }
-    .fs-near    { background:var(--warn-bg); color:var(--warn); }
-    .fs-expired { background:var(--danger-bg); color:var(--danger); }
-    .fs-today   { background:#fce4ec; color:#c62828; }
+    /* STATUS ROW */
+    .status-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .8rem; margin-top: 1rem; padding-top: .9rem; border-top: 1px solid var(--border); }
+    .status-pills { display: flex; gap: .4rem; flex-wrap: wrap; }
+    .spill { font-size: .78rem; padding: .3rem .8rem; border-radius: 20px; border: 1px solid var(--border); cursor: pointer; background: var(--cream); color: var(--text-mid); font-weight: 600; }
+    .spill.act-g { background: var(--success-bg); color: var(--success); border-color: var(--success); }
+    .spill.act-y { background: var(--warn-bg);    color: var(--warn);    border-color: var(--warn); }
+    .spill.act-r { background: var(--danger-bg);  color: var(--danger);  border-color: var(--danger); }
+    .save-btn { padding: .6rem 1.4rem; border-radius: var(--radius-sm); border: none; background: var(--green); color: var(--white); font-size: .88rem; font-weight: 700; cursor: pointer; }
+    .save-btn:hover { background: #2e5430; }
  
-    /* qty column header highlight */
-    .batch-table th.qty-col { color: var(--green); font-weight:800; }
-    .batch-table td.qty-col { background: rgba(227,235,228,.35); }
+    /* SAVE ALL */
+    .save-all-bar { display: flex; align-items: center; justify-content: space-between; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: .9rem 1.2rem; margin-top: 1.2rem; flex-wrap: wrap; gap: .8rem; }
+    .save-all-btn { padding: .65rem 1.6rem; border-radius: var(--radius-sm); border: none; background: var(--green); color: var(--white); font-size: .9rem; font-weight: 700; cursor: pointer; }
+    .save-all-btn:hover { background: #2e5430; }
+ 
+    /* TOAST */
+    .stock-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px); background: var(--green); color: var(--white); padding: .6rem 1.4rem; border-radius: var(--radius-sm); font-size: .88rem; font-weight: 600; opacity: 0; transition: all .3s; pointer-events: none; z-index: 999; white-space: nowrap; }
+    .stock-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+ 
+    /* FOOTER */
+    .footer { background: #1a1a1a; color: #ccc; padding: 2rem 1.5rem 1.2rem; margin-top: 3rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-bottom { text-align: center; font-size: .78rem; color: #555; margin-top: 1.5rem; border-top: 1px solid #333; padding-top: 1rem; max-width: 1100px; margin-left: auto; margin-right: auto; }
+ 
+    @media(max-width: 640px) {
+      .add-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
   </style>
 </head>
 <body>
  
 <nav class="navbar">
-  <input type="checkbox" id="menu-check" class="menu-checkbox">
   <div class="nav-inner">
-    <a href="../index.html" class="logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></a>
+    <a href="../index.html" class="logo">🌾 <span>FarmDirect</span></a>
     <div class="nav-links">
       <a href="../index.html"   class="nav-link">Home</a>
       <a href="Dashboard.html" class="nav-link">Dashboard</a>
@@ -124,486 +187,474 @@
       <a href="Reviews.html"   class="nav-link">Reviews</a>
       <a href="Settings.html"  class="nav-link">Settings</a>
     </div>
-    <div class="nav-actions">
-      <div class="notif-wrap">
-        <button class="notif-btn" tabindex="0" aria-label="Notifications">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-          </svg>
-          <span class="notif-badge"></span>
-        </button>
-        <div class="notif-dropdown">
-          <div class="notif-header"><h4>Notifications</h4></div>
-          <div class="notif-list">
-            <div class="notif-item"><div class="notif-content"><strong>New Order</strong><p>🛒 ORD-00242 received</p></div><span class="notif-time">5 min ago</span></div>
-            <div class="notif-item"><div class="notif-content"><strong>⚠️ Low Stock</strong><p>Fresh Tomatoes — only 4 kg left</p></div><span class="notif-time">1 hr ago</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="notif-wrap">
-        <button class="notif-btn avatar-badge-btn" tabindex="0" aria-label="Profile">JD</button>
-        <div class="notif-dropdown" style="min-width:180px;">
-          <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
-          <div class="notif-list">
-            <div class="notif-item"><div class="notif-content"><a href="Dashboard.html">📊 Management</a></div></div>
-            <div class="notif-item"><div class="notif-content"><a href="Profile.html">👤 Profile</a></div></div>
-            <div class="notif-item"><div class="notif-content"><a href="Settings.html">⚙️ Settings</a></div></div>
-            <div class="notif-item"><div class="notif-content"><a href="../index.html">🚪 Logout</a></div></div>
-          </div>
-        </div>
-      </div>
-      <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
-    </div>
-  </div>
-  <label for="menu-check" class="menu-overlay"></label>
-  <div class="menu-panel">
-    <div class="menu-section">
-      <h3>Navigation</h3>
-      <a href="../index.html"   class="menu-item">Home</a>
-      <a href="Dashboard.html" class="menu-item">Dashboard</a>
-      <a href="Products.html"  class="menu-item">Products</a>
-      <a href="Orders.html"    class="menu-item">Orders</a>
-      <a href="Reviews.html"   class="menu-item">Reviews</a>
-      <a href="Settings.html"  class="menu-item">Settings</a>
-    </div>
-    <a href="../index.html" class="menu-cta">Logout</a>
   </div>
 </nav>
  
 <div class="page-wrap">
-  <div class="breadcrumb-bar">
-    <div class="container">
-      <nav class="breadcrumb">
-        <a href="Dashboard.html">Dashboard</a><span class="bc-sep">›</span>
-        <a href="Products.html">My Products</a><span class="bc-sep">›</span>
-        <span class="bc-current">Update Stock</span>
-      </nav>
+  <nav class="breadcrumb">
+    <a href="Dashboard.html">Dashboard</a><span class="bc-sep">›</span>
+    <a href="Products.html">My Products</a><span class="bc-sep">›</span>
+    <span>Update Stock</span>
+  </nav>
+ 
+  <div class="page-header">
+    <div>
+      <div class="page-title">📥 Batch Stock Management</div>
+      <p class="page-sub">Each product has <b>3 unit types</b> (Per Kg, Per Bundle, Per Box) — each with its own independent batches tracked via <b>FIFO</b>.</p>
+    </div>
+    <a href="Products.html" class="back-btn">← Back to Products</a>
+  </div>
+ 
+  <div class="alert-banner" id="alert-banner">
+    <span>⚠️</span>
+    <div id="alert-banner-text"></div>
+  </div>
+ 
+  <div class="how-stock-note">
+    <div>ℹ️</div>
+    <div>
+      <strong>How batch stock &amp; expiry works on FarmDirect:</strong><br>
+      • Each product tracks <em>Per Kg, Per Bundle, and Per Box</em> independently — each unit type has its own batches and FIFO queue.<br>
+      • When a customer buys, <em>the batch with the earliest expiry is deducted first</em>. Use the simulator to preview deductions.
     </div>
   </div>
  
-  <div class="container">
-    <div class="page-header">
-      <div>
-        <div class="page-title">📥 Batch Stock Management</div>
-        <p class="page-sub">Each product uses <b>batch-based stock</b>. Expiry is tracked per batch. When customers buy, stock is deducted using <b>FIFO</b> — oldest batch first.</p>
-      </div>
-      <a href="Products.html" class="back-btn">← Back to Products</a>
-    </div>
+  <div class="stock-grid" id="stock-grid"></div>
  
-    <div class="alert-banner" id="alert-banner" style="display:none">
-      <span class="alert-icon">⚠️</span>
-      <div id="alert-banner-text"></div>
-    </div>
- 
-    <div class="how-stock-note">
-      <div class="hsn-icon">ℹ️</div>
-      <div class="hsn-body">
-        <strong>How batch stock &amp; expiry works on FarmDirect:</strong>
-        <br>• <em>Vegetables &amp; Fruits:</em> Expiry = Harvest date + Shelf life days
-        <br>• When a customer buys, <em>the batch with the earliest expiry is deducted first</em> (FIFO). Use the simulator below to preview.
-      </div>
-    </div>
- 
-    <div class="stock-grid" id="stock-grid"></div>
- 
-    <div class="save-all-bar">
-      <div class="save-all-left">
-        <span class="save-all-icon">💡</span>
-        <span>All changes are saved per-product independently.</span>
-      </div>
-      <button class="save-all-btn" onclick="saveAll()">💾 Save All Stock Changes</button>
-    </div>
+  <div class="save-all-bar">
+    <div style="font-size:.88rem;color:var(--text-mid)">💡 All changes are saved per-product independently.</div>
+    <button class="save-all-btn" onclick="saveAll()">💾 Save All Stock Changes</button>
   </div>
 </div>
  
 <div class="stock-toast" id="stock-toast"></div>
  
 <footer class="footer">
-  <div class="footer-container">
-    <div class="footer-main">
-      <div class="footer-brand">
-        <div class="footer-logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></div>
-        <p class="footer-desc">Connecting Zamboanga farmers to your table. Fresh, local, and delivered with care.</p>
+  <div class="footer-inner">
+    <div>
+      <div style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.4rem">🌾 FarmDirect</div>
+      <p style="font-size:.82rem;color:#aaa;max-width:240px">Connecting Zamboanga farmers to your table. Fresh, local, and delivered with care.</p>
+    </div>
+    <div style="display:flex;gap:2rem;font-size:.85rem;flex-wrap:wrap">
+      <div>
+        <div style="color:#fff;font-weight:600;margin-bottom:.5rem">Quick Links</div>
+        <div style="display:flex;flex-direction:column;gap:.3rem">
+          <a href="../index.html"   style="color:#aaa;text-decoration:none">Home</a>
+          <a href="Products.html"  style="color:#aaa;text-decoration:none">My Products</a>
+          <a href="Dashboard.html" style="color:#aaa;text-decoration:none">Dashboard</a>
+          <a href="Orders.html"    style="color:#aaa;text-decoration:none">Orders</a>
+        </div>
       </div>
-      <div class="footer-links">
-        <div class="footer-col"><h4>Quick Links</h4><a href="../index.html">Home</a><a href="Products.html">My Products</a><a href="Dashboard.html">Dashboard</a><a href="Orders.html">Orders</a></div>
-        <div class="footer-col"><h4>Contact</h4><a href="tel:+639123456789">+63 912 345 6789</a><p>Mon-Sat: 6AM - 8PM</p><p>Zamboanga City, PH</p></div>
+      <div>
+        <div style="color:#fff;font-weight:600;margin-bottom:.5rem">Contact</div>
+        <div style="color:#aaa">+63 912 345 6789<br>Mon–Sat: 6AM–8PM<br>Zamboanga City, PH</div>
       </div>
     </div>
-    <div class="footer-bottom"><p>© 2026 FarmDirect Zamboanga. All rights reserved.</p></div>
   </div>
+  <div class="footer-bottom">© 2026 FarmDirect Zamboanga. All rights reserved.</div>
 </footer>
  
 <script>
-lucide.createIcons();
- 
 const TODAY = new Date(); TODAY.setHours(0,0,0,0);
-const DEFAULT_SHELF = { Vegetables:7, Fruits:5, Meat:3, Dairy:14, Grains:180, Others:7 };
-let nextBatchId = 100;
+const DEFAULT_SHELF = { Vegetables:7, Fruits:5, 'Leafy Greens':5, Grains:180, Meat:3, Dairy:14, Others:7 };
+let nextBatchId = 300;
  
-// ── ONLY the 5 products from Products.html ──
 let products = [
   {
-    id:'tomatoes', name:'Fresh Tomatoes', category:'Vegetables', price:35, unit:'per kg', emoji:'🍅',
+    id:'tomatoes', name:'Fresh Tomatoes', category:'Vegetables', em:'🍅',
     img:'IMG/Tomatoes.jpg',
     imgFallback:'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400',
-    batches:[
-      { id:1, qty:4,  sourceDate:'2026-03-27', expiry:'2026-04-03', addedOn:'2026-03-27' },
-    ], alertAt:5
+    unitTypes:[
+      { key:'kg',     label:'Per Kg',     price:35,  alertAt:5, status:'live',
+        batches:[{ id:1, qty:4,  sourceDate:'2026-03-27', expiry:'2026-04-03', addedOn:'2026-03-27' }] },
+      { key:'bundle', label:'Per Bundle', price:80,  alertAt:5, status:'live',
+        batches:[{ id:2, qty:8,  sourceDate:'2026-03-26', expiry:'2026-04-04', addedOn:'2026-03-26' }] },
+      { key:'box',    label:'Per Box',    price:150, alertAt:3, status:'live',
+        batches:[{ id:3, qty:3,  sourceDate:'2026-03-28', expiry:'2026-04-05', addedOn:'2026-03-28' }] },
+    ]
   },
   {
-    id:'carrots', name:'Organic Carrots', category:'Vegetables', price:30, unit:'per bundle', emoji:'🥕',
+    id:'carrots', name:'Organic Carrots', category:'Vegetables', em:'🥕',
     img:'IMG/Carrots.jpg',
     imgFallback:'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400',
-    batches:[
-      { id:3, qty:12, sourceDate:'2026-03-25', expiry:'2026-04-18', addedOn:'2026-03-25' },
-    ], alertAt:10
+    unitTypes:[
+      { key:'kg',     label:'Per Kg',     price:30,  alertAt:10, status:'live',
+        batches:[{ id:10, qty:12, sourceDate:'2026-03-25', expiry:'2026-04-18', addedOn:'2026-03-25' }] },
+      { key:'bundle', label:'Per Bundle', price:60,  alertAt:5,  status:'live',
+        batches:[{ id:11, qty:6,  sourceDate:'2026-03-26', expiry:'2026-04-19', addedOn:'2026-03-26' }] },
+      { key:'box',    label:'Per Box',    price:120, alertAt:3,  status:'live',
+        batches:[{ id:12, qty:4,  sourceDate:'2026-03-27', expiry:'2026-04-20', addedOn:'2026-03-27' }] },
+    ]
   },
   {
-    id:'lettuce', name:'Fresh Lettuce', category:'Leafy Greens', price:25, unit:'per bundle', emoji:'🥬',
+    id:'lettuce', name:'Fresh Lettuce', category:'Leafy Greens', em:'🥬',
     img:'IMG/Lettuce.jpg',
-    imgFallback:'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400',
-    batches:[
-      { id:5, qty:30, sourceDate:'2026-03-29', expiry:'2026-04-02', addedOn:'2026-03-29' },
-    ], alertAt:10
+    imgFallback:'https://images.unsplash.com/photo-1601648764658-cf37e8c89b70?w=400',
+    unitTypes:[
+      { key:'kg',     label:'Per Kg',     price:25,  alertAt:10, status:'live',
+        batches:[{ id:20, qty:30, sourceDate:'2026-03-29', expiry:'2026-04-02', addedOn:'2026-03-29' }] },
+      { key:'bundle', label:'Per Bundle', price:50,  alertAt:5,  status:'live',
+        batches:[{ id:21, qty:15, sourceDate:'2026-03-28', expiry:'2026-04-03', addedOn:'2026-03-28' }] },
+      { key:'box',    label:'Per Box',    price:100, alertAt:3,  status:'live',
+        batches:[{ id:22, qty:5,  sourceDate:'2026-03-27', expiry:'2026-04-04', addedOn:'2026-03-27' }] },
+    ]
   },
   {
-    id:'corn', name:'Sweet Corn', category:'Grains', price:20, unit:'per piece', emoji:'🌽',
+    id:'corn', name:'Sweet Corn', category:'Grains', em:'🌽',
     img:'IMG/Corn.jpg',
     imgFallback:'https://images.unsplash.com/photo-1603048297172-c92544798d5a?w=400',
-    batches:[
-      { id:6, qty:55, sourceDate:'2026-03-28', expiry:'2026-04-07', addedOn:'2026-03-28' },
-    ], alertAt:15
+    unitTypes:[
+      { key:'kg',     label:'Per Kg',     price:20,  alertAt:15, status:'live',
+        batches:[{ id:30, qty:55, sourceDate:'2026-03-28', expiry:'2026-04-07', addedOn:'2026-03-28' }] },
+      { key:'bundle', label:'Per Bundle', price:45,  alertAt:10, status:'live',
+        batches:[{ id:31, qty:20, sourceDate:'2026-03-27', expiry:'2026-04-08', addedOn:'2026-03-27' }] },
+      { key:'box',    label:'Per Box',    price:90,  alertAt:5,  status:'live',
+        batches:[{ id:32, qty:8,  sourceDate:'2026-03-26', expiry:'2026-04-09', addedOn:'2026-03-26' }] },
+    ]
   },
   {
-    id:'strawberries', name:'Strawberries', category:'Fruits', price:90, unit:'per box', emoji:'🍓',
+    id:'strawberries', name:'Strawberries', category:'Fruits', em:'🍓',
     img:'IMG/Strawberries.jpg',
-    imgFallback:'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400',
-    batches:[
-      { id:7, qty:6,  sourceDate:'2026-03-30', expiry:'2026-04-01', addedOn:'2026-03-30' },
-    ], alertAt:5
+    imgFallback:'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=400',
+    unitTypes:[
+      { key:'kg',     label:'Per Kg',     price:90,  alertAt:5, status:'live',
+        batches:[{ id:40, qty:6,  sourceDate:'2026-03-30', expiry:'2026-04-01', addedOn:'2026-03-30' }] },
+      { key:'bundle', label:'Per Bundle', price:180, alertAt:3,  status:'live',
+        batches:[{ id:41, qty:4,  sourceDate:'2026-03-29', expiry:'2026-04-02', addedOn:'2026-03-29' }] },
+      { key:'box',    label:'Per Box',    price:320, alertAt:2,  status:'live',
+        batches:[{ id:42, qty:2,  sourceDate:'2026-03-28', expiry:'2026-04-03', addedOn:'2026-03-28' }] },
+    ]
   },
 ];
  
-function parseDate(s) { const d = new Date(s+'T00:00:00'); d.setHours(0,0,0,0); return d; }
-function fmt(s) { if(!s) return '—'; return parseDate(s).toLocaleDateString('en-PH',{month:'short',day:'numeric',year:'numeric'}); }
-function daysUntil(expiry) { return Math.floor((parseDate(expiry)-TODAY)/86400000); }
-function calcExpiry(sourceDate,shelfDays) { const d=parseDate(sourceDate); d.setDate(d.getDate()+parseInt(shelfDays)); return d.toISOString().split('T')[0]; }
+/* ── HELPERS ── */
+function pd(s){ const d=new Date(s+'T00:00:00'); d.setHours(0,0,0,0); return d; }
+function du(exp){ return Math.floor((pd(exp)-TODAY)/86400000); }
+function fmtD(s){ if(!s) return '—'; return pd(s).toLocaleDateString('en-PH',{month:'short',day:'numeric',year:'numeric'}); }
+function calcExp(src,days){ const d=pd(src); d.setDate(d.getDate()+parseInt(days)); return d.toISOString().split('T')[0]; }
  
-function aliveBatches(p) {
-  return p.batches.filter(b=>daysUntil(b.expiry)>=0&&b.qty>0).sort((a,b)=>parseDate(a.expiry)-parseDate(b.expiry));
+function aliveB(ut){ return ut.batches.filter(b=>du(b.expiry)>=0&&b.qty>0).sort((a,b)=>pd(a.expiry)-pd(b.expiry)); }
+function expiredB(ut){ return ut.batches.filter(b=>du(b.expiry)<0&&b.qty>0); }
+function totalStock(ut){ return aliveB(ut).reduce((s,b)=>s+b.qty,0); }
+function nearestExp(ut){ const a=aliveB(ut); return a.length?a[0].expiry:null; }
+function utStatus(ut){
+  const ne=nearestExp(ut); if(!ne) return totalStock(ut)===0?'out':'expired';
+  const d=du(ne); if(d===0) return 'today'; if(d<=3) return 'near'; return 'fresh';
 }
-function expiredBatches(p) { return p.batches.filter(b=>daysUntil(b.expiry)<0&&b.qty>0); }
-function totalStock(p) { return aliveBatches(p).reduce((s,b)=>s+b.qty,0); }
-function nearestExpiry(p) { const alive=aliveBatches(p); return alive.length?alive[0].expiry:null; }
-function productStatus(p) {
-  const ne=nearestExpiry(p);
-  if(!ne) return totalStock(p)===0?'out':'expired';
-  const d=daysUntil(ne);
-  if(d===0) return 'today';
-  if(d<=3)  return 'near';
-  return 'fresh';
-}
-function statusChip(expiry) {
+function chipHtml(expiry){
   if(!expiry) return '';
-  const d=daysUntil(expiry);
-  if(d<0)   return `<span class="fs-chip fs-expired">Expired</span>`;
-  if(d===0) return `<span class="fs-chip fs-today">Expires Today</span>`;
-  if(d<=3)  return `<span class="fs-chip fs-near">Near Expiry (${d}d)</span>`;
-  return    `<span class="fs-chip fs-fresh">Fresh (${d}d)</span>`;
+  const d=du(expiry);
+  if(d<0)  return `<span class="fs-chip fs-expired">Expired</span>`;
+  if(d===0)return `<span class="fs-chip fs-today">Expires Today</span>`;
+  if(d<=3) return `<span class="fs-chip fs-near">Near (${d}d)</span>`;
+  return   `<span class="fs-chip fs-fresh">Fresh (${d}d)</span>`;
 }
-function shelfClass(p) {
-  const s=productStatus(p);
-  if(s==='near'||s==='today') return 'shelf-fill-warn';
-  if(s==='expired'||s==='out') return 'shelf-fill-danger';
-  return 'shelf-fill-ok';
-}
-function shelfPct(p) {
-  const ne=nearestExpiry(p);
-  if(!ne) return 0;
-  const d=daysUntil(ne);
-  const def=DEFAULT_SHELF[p.category]||7;
+function shelfPct(ut){
+  const ne=nearestExp(ut); if(!ne) return 0;
+  const d=du(ne); const def=7;
   return Math.max(3,Math.min(100,Math.round((d/def)*100)));
 }
-function expiryMethodNote(cat) {
-  const cls={Vegetables:'expiry-method-veg',Fruits:'expiry-method-veg','Leafy Greens':'expiry-method-veg',Meat:'expiry-method-meat',Dairy:'expiry-method-dairy',Grains:'expiry-method-grain',Others:'expiry-method-other'};
-  const txt={Vegetables:'🌱 Expiry = Harvest date + shelf life days',Fruits:'🍎 Expiry = Harvest date + shelf life days','Leafy Greens':'🥬 Expiry = Harvest date + shelf life days (leafy greens spoil quickly)',Grains:'🌽 Expiry = Harvest date + shelf life days',Others:'📦 Expiry = Source date + shelf life days'};
-  return `<div class="expiry-method-note ${cls[cat]||'expiry-method-other'}">${txt[cat]||txt['Others']}</div>`;
+function shelfFillCls(ut){
+  const s=utStatus(ut);
+  if(s==='near'||s==='today') return 'shelf-fill-warn';
+  if(s==='expired'||s==='out') return 'shelf-fill-bad';
+  return 'shelf-fill-ok';
+}
+function shelfDayCls(ut){
+  const s=utStatus(ut);
+  if(s==='near'||s==='today') return 'shelf-days-warn';
+  if(s==='expired'||s==='out') return 'shelf-days-bad';
+  return 'shelf-days-ok';
+}
+function expiryNote(cat){
+  const cls={Vegetables:'expiry-veg',Fruits:'expiry-veg','Leafy Greens':'expiry-veg',Grains:'expiry-grain'};
+  const txt={Vegetables:'🌱 Expiry = Harvest date + shelf life days',Fruits:'🍎 Expiry = Harvest date + shelf life days','Leafy Greens':'🥬 Expiry = Harvest date + shelf life days (leafy greens spoil quickly)',Grains:'🌽 Expiry = Harvest date + shelf life days'};
+  return `<div class="expiry-note ${cls[cat]||'expiry-other'}">${txt[cat]||'📦 Expiry = Source date + shelf life days'}</div>`;
 }
  
-function fifoSimulate(pid,qty) {
-  const p=products.find(x=>x.id===pid);
-  if(!p||!qty||qty<=0) return null;
-  const alive=aliveBatches(p);
-  let remaining=qty; const steps=[];
+/* ── FIFO ── */
+function fifoSim(ut,qty){
+  const alive=aliveB(ut); let rem=qty; const steps=[];
   for(const b of alive){
-    if(remaining<=0){ steps.push({batch:b,deduct:0,action:'skip'}); }
-    else if(b.qty>=remaining){ steps.push({batch:b,deduct:remaining,leftInBatch:b.qty-remaining,action:'partial'}); remaining=0; }
-    else{ steps.push({batch:b,deduct:b.qty,leftInBatch:0,action:'deplete'}); remaining-=b.qty; }
+    if(rem<=0){ steps.push({b,deduct:0,left:b.qty,act:'skip'}); }
+    else if(b.qty>=rem){ steps.push({b,deduct:rem,left:b.qty-rem,act:'partial'}); rem=0; }
+    else { steps.push({b,deduct:b.qty,left:0,act:'deplete'}); rem-=b.qty; }
   }
-  return {steps,shortfall:remaining,total:qty};
+  return {steps,shortfall:rem};
 }
- 
-function renderFIFO(pid) {
-  const p=products.find(x=>x.id===pid);
-  const qty=parseInt(document.getElementById('fifo-qty-'+pid)?.value)||0;
-  const out=document.getElementById('fifo-out-'+pid);
-  if(!out) return;
+function renderFIFO(pid,utKey){
+  const p=products.find(x=>x.id===pid); if(!p) return;
+  const ut=p.unitTypes.find(x=>x.key===utKey); if(!ut) return;
+  const qty=parseInt(document.getElementById(`fifo-qty-${pid}-${utKey}`)?.value)||0;
+  const out=document.getElementById(`fifo-out-${pid}-${utKey}`); if(!out) return;
   if(!qty||qty<=0){out.innerHTML='';return;}
-  const sim=fifoSimulate(pid,qty);
-  if(!sim){out.innerHTML='';return;}
-  let html=`<div class="fifo-result">`;
-  let order=1;
-  for(const step of sim.steps){
-    if(step.action==='skip') continue;
-    const cls=step.action==='deplete'?'deducting':'partial';
+  const sim=fifoSim(ut,qty);
+  let html=`<div class="fifo-result">`;let ord=1;
+  for(const st of sim.steps){
+    if(st.act==='skip') continue;
+    const cls=st.act==='deplete'?'deducting':'partial';
     html+=`<div class="fifo-row ${cls}">
-      <span style="font-size:.7rem;font-weight:800;background:var(--border);color:var(--text-mid);padding:.1rem .4rem;border-radius:20px">FIFO #${order++}</span>
-      ${statusChip(step.batch.expiry)}
-      <span style="color:var(--text-mid)">Exp ${fmt(step.batch.expiry)} · ${step.batch.qty} in batch</span>
-      <span class="fifo-deduct-amt">−${step.deduct}</span>
-      <span class="fifo-remain-amt">${step.leftInBatch} left</span>
+      <span class="fifo-num">FIFO #${ord++}</span>
+      ${chipHtml(st.b.expiry)}
+      <span style="color:var(--text-light)">Exp ${fmtD(st.b.expiry)} · ${st.b.qty} in batch</span>
+      <span class="fifo-deduct">−${st.deduct}</span>
+      <span class="fifo-remain">${st.left} left</span>
     </div>`;
   }
+  const tot=totalStock(ut);
   if(sim.shortfall>0){
-    html+=`</div><div class="fifo-summary-box fifo-short">⚠️ Short by ${sim.shortfall} units — only ${totalStock(p)} available.</div>`;
+    html+=`</div><div class="fifo-summary fifo-short">⚠️ Short by ${sim.shortfall} — only ${tot} available.</div>`;
   } else {
-    const cost=(qty*p.price).toFixed(2);
-    html+=`</div><div class="fifo-summary-box fifo-ok">✅ Can fulfill ${qty} units · Total value: ₱${cost} · ${sim.steps.filter(s=>s.action!=='skip').length} batch(es) used</div>`;
+    const cost=(qty*ut.price).toFixed(2);
+    html+=`</div><div class="fifo-summary fifo-ok">✅ Can fulfill ${qty} units · ₱${cost} · ${sim.steps.filter(s=>s.act!=='skip').length} batch(es) used</div>`;
   }
   out.innerHTML=html;
 }
  
-function addBatch(pid) {
-  const p=products.find(x=>x.id===pid);
-  if(!p) return;
-  const qty=parseInt(document.getElementById('nb-qty-'+pid)?.value)||0;
-  const srcDate=document.getElementById('nb-date-'+pid)?.value;
-  if(!qty||qty<=0) return showToast('Enter a valid quantity.','error');
-  if(!srcDate) return showToast('Enter the harvest date.','error');
-  const shelf=parseInt(document.getElementById('nb-shelf-'+pid)?.value)||DEFAULT_SHELF[p.category]||7;
-  const expiry=calcExpiry(srcDate,shelf);
-  p.batches.push({id:nextBatchId++,qty,sourceDate:srcDate,expiry,addedOn:srcDate});
-  p.batches.sort((a,b)=>parseDate(a.expiry)-parseDate(b.expiry));
-  showToast(`✅ Added ${qty} units to ${p.name} — expiry: ${fmt(expiry)}`);
-  renderCard(pid); renderAlerts();
+/* ── MUTATIONS ── */
+function updateQty(pid,utKey,batchId,val){
+  const p=products.find(x=>x.id===pid); if(!p) return;
+  const ut=p.unitTypes.find(x=>x.key===utKey); if(!ut) return;
+  const b=ut.batches.find(x=>x.id===batchId);
+  if(b) b.qty=Math.max(0,parseInt(val)||0);
 }
- 
-function removeBatch(pid,batchId) {
-  const p=products.find(x=>x.id===pid);
-  if(!p) return;
-  const b=p.batches.find(x=>x.id===batchId);
-  if(!b) return;
-  if(confirm(`Remove batch (${b.qty} units, exp ${fmt(b.expiry)})? This cannot be undone.`)){
-    p.batches=p.batches.filter(x=>x.id!==batchId);
-    showToast(`Batch removed from ${p.name}.`,'warn');
-    renderCard(pid); renderAlerts();
-  }
+function addBatch(pid,utKey){
+  const p=products.find(x=>x.id===pid); if(!p) return;
+  const ut=p.unitTypes.find(x=>x.key===utKey); if(!ut) return;
+  const qty=parseInt(document.getElementById(`nb-qty-${pid}-${utKey}`)?.value)||0;
+  const src=document.getElementById(`nb-date-${pid}-${utKey}`)?.value;
+  if(!qty||qty<=0) return showToast('Enter a valid quantity.');
+  if(!src) return showToast('Enter the harvest date.');
+  const shelf=parseInt(document.getElementById(`nb-shelf-${pid}-${utKey}`)?.value)||DEFAULT_SHELF[p.category]||7;
+  const expiry=calcExp(src,shelf);
+  ut.batches.push({id:nextBatchId++,qty,sourceDate:src,expiry,addedOn:src});
+  ut.batches.sort((a,b)=>pd(a.expiry)-pd(b.expiry));
+  showToast(`✅ Added ${qty} units (${ut.label}) to ${p.name} — expiry: ${fmtD(expiry)}`);
+  renderCard(pid,utKey); renderAlerts();
 }
- 
-function updateBatchQty(pid,batchId,newQty) {
-  const p=products.find(x=>x.id===pid);
-  if(!p) return;
-  const b=p.batches.find(x=>x.id===batchId);
-  if(b) b.qty=Math.max(0,parseInt(newQty)||0);
+function removeBatch(pid,utKey,batchId){
+  const p=products.find(x=>x.id===pid); if(!p) return;
+  const ut=p.unitTypes.find(x=>x.key===utKey); if(!ut) return;
+  const b=ut.batches.find(x=>x.id===batchId); if(!b) return;
+  if(!confirm(`Remove batch (${b.qty} units, exp ${fmtD(b.expiry)})? Cannot be undone.`)) return;
+  ut.batches=ut.batches.filter(x=>x.id!==batchId);
+  showToast(`Batch removed from ${p.name} (${ut.label}).`);
+  renderCard(pid,utKey); renderAlerts();
 }
- 
-function saveProduct(pid) {
-  const p=products.find(x=>x.id===pid);
-  if(!p) return;
-  p.batches.forEach(b=>{
-    const inp=document.getElementById('bqty-'+pid+'-'+b.id);
-    if(inp) b.qty=Math.max(0,parseInt(inp.value)||0);
-  });
-  showToast(`✅ ${p.name} saved — ${totalStock(p)} units across ${aliveBatches(p).length} active batch(es).`);
-  renderCard(pid);
+function setStatus(pid,utKey,s){
+  const p=products.find(x=>x.id===pid); if(!p) return;
+  const ut=p.unitTypes.find(x=>x.key===utKey); if(!ut) return;
+  ut.status=s; renderCard(pid,utKey);
 }
- 
-function saveAll() {
-  products.forEach(p=>{
-    p.batches.forEach(b=>{
-      const inp=document.getElementById('bqty-'+p.id+'-'+b.id);
+function saveProduct(pid){
+  const p=products.find(x=>x.id===pid); if(!p) return;
+  p.unitTypes.forEach(ut=>{
+    ut.batches.forEach(b=>{
+      const inp=document.getElementById(`bqty-${pid}-${ut.key}-${b.id}`);
       if(inp) b.qty=Math.max(0,parseInt(inp.value)||0);
     });
   });
+  showToast(`✅ ${p.name} saved.`);
+  renderCard(pid,null);
+}
+function saveAll(){
+  products.forEach(p=>{
+    p.unitTypes.forEach(ut=>{
+      ut.batches.forEach(b=>{
+        const inp=document.getElementById(`bqty-${p.id}-${ut.key}-${b.id}`);
+        if(inp) b.qty=Math.max(0,parseInt(inp.value)||0);
+      });
+    });
+  });
   showToast('✅ All stock saved!');
-  renderAll();
+  renderAll(); renderAlerts();
 }
  
-function renderCard(pid) {
-  const p=products.find(x=>x.id===pid);
-  const el=document.getElementById('sc-'+pid);
-  if(!p||!el) return;
-  el.outerHTML=buildCard(p);
+/* ── TAB SWITCH ── */
+function switchTab(pid,utKey){
+  document.querySelectorAll(`.panel-${pid}`).forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll(`.tab-${pid}`).forEach(el=>el.classList.remove('active'));
+  const panel=document.getElementById(`panel-${pid}-${utKey}`);
+  const tab=document.getElementById(`tab-${pid}-${utKey}`);
+  if(panel) panel.classList.add('active');
+  if(tab) tab.classList.add('active');
 }
  
-function buildCard(p) {
-  const alive=aliveBatches(p);
-  const expired=expiredBatches(p);
-  const stock=totalStock(p);
-  const ne=nearestExpiry(p);
-  const status=productStatus(p);
+/* ── BUILD UNIT PANEL ── */
+function buildUnitPanel(p,ut,isFirst){
+  const alive=aliveB(ut), exp=expiredB(ut), stock=totalStock(ut), ne=nearestExp(ut);
+  const shelfDef=DEFAULT_SHELF[p.category]||7;
   const today=new Date().toISOString().split('T')[0];
-  const shelfDefault=DEFAULT_SHELF[p.category]||7;
+  const bdgCls=stock===0?'badge-bad':stock<=ut.alertAt?'badge-warn':'badge-ok';
+  const bdgLbl=stock===0?'🔴 Out of Stock':stock<=ut.alertAt?'⚠️ Low Stock':'✅ In Stock';
+  const pct=shelfPct(ut), fillCls=shelfFillCls(ut), dayCls=shelfDayCls(ut);
  
-  const stockBadgeClass=stock===0?'stock-badge-low':stock<=(p.alertAt||5)?'stock-badge-warn':'stock-badge-ok';
-  const stockBadgeLabel=stock===0?'🔴 Out of Stock':stock<=(p.alertAt||5)?'⚠️ Low Stock':'✅ In Stock';
-  const barPct=shelfPct(p);
-  const barClass=shelfClass(p);
-  const shelfLabelClass=status==='fresh'?'shelf-ok':status==='near'||status==='today'?'shelf-warn':'shelf-danger';
- 
-  const batchRows=p.batches.map((b,i)=>{
-    const d=daysUntil(b.expiry);
-    const isFirst=alive.length>0&&alive[0].id===b.id;
-    const rowClass=d<0?'batch-expired-row':'';
-    return `<tr class="${rowClass}" id="brow-${p.id}-${b.id}">
+  const bRows=ut.batches.map((b,i)=>{
+    const d=du(b.expiry);
+    const isFirstBatch=alive.length>0&&alive[0].id===b.id;
+    const rCls=d<0?'exp-row':'';
+    return `<tr class="${rCls}">
+      <td>Batch ${i+1}${isFirstBatch&&d>=0?'<span class="fifo-pill">FIFO Next</span>':''}${d<0?'<span class="exp-pill">Expired</span>':''}</td>
+      <td>${fmtD(b.addedOn)}</td>
+      <td>${fmtD(b.expiry)}</td>
+      <td>${chipHtml(b.expiry)}</td>
       <td>
-        Batch ${i+1}
-        ${isFirst&&d>=0?`<span class="batch-fifo-tag">FIFO Next</span>`:''}
-        ${d<0?`<span class="batch-fifo-tag" style="background:var(--danger-bg);color:var(--danger)">Expired</span>`:''}
-      </td>
-      <td>${fmt(b.addedOn)}</td>
-      <td>${fmt(b.expiry)}</td>
-      <td>${statusChip(b.expiry)}</td>
-      <td class="qty-col">
         <input class="batch-qty-input" type="number" value="${b.qty}" min="0"
-          id="bqty-${p.id}-${b.id}"
-          onchange="updateBatchQty('${p.id}',${b.id},this.value)"/>
+          id="bqty-${p.id}-${ut.key}-${b.id}"
+          onchange="updateQty('${p.id}','${ut.key}',${b.id},this.value)"
+          oninput="updateQty('${p.id}','${ut.key}',${b.id},this.value)"/>
       </td>
-      <td><button class="remove-batch-btn" onclick="removeBatch('${p.id}',${b.id})">Remove</button></td>
+      <td><button class="rm-btn" onclick="removeBatch('${p.id}','${ut.key}',${b.id})">Remove</button></td>
     </tr>`;
   }).join('');
  
-  const addBatchForm=`
-    <div class="add-batch-box">
-      <div class="add-batch-box-title">📦 Add New Stock Batch to ${p.name}</div>
-      ${expiryMethodNote(p.category)}
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8rem;align-items:end">
-        <div>
-          <label>Harvest Date *</label>
-          <input type="date" id="nb-date-${p.id}" value="${today}"/>
-        </div>
-        <div>
-          <label>Shelf Life (days) *</label>
-          <input type="number" id="nb-shelf-${p.id}" value="${shelfDefault}" min="1" placeholder="${shelfDefault}"/>
-          <span style="font-size:.68rem;color:var(--text-light);margin-top:2px;display:block">Expiry = date + shelf life</span>
-        </div>
-        <div>
-          <label>Quantity *</label>
-          <input type="number" id="nb-qty-${p.id}" placeholder="e.g. 50" min="1"/>
-        </div>
-      </div>
-      <div style="margin-top:.9rem">
-        <button class="save-stock-btn" onclick="addBatch('${p.id}')">+ Add Batch</button>
-      </div>
-    </div>`;
+  const sL=ut.status==='live', sP=ut.status==='paused', sS=ut.status==='sold_out';
  
-  const fifoSimulator=`
-    <div class="fifo-box">
-      <div class="fifo-box-title">🔄 FIFO Deduction Simulator — Preview what happens when a customer buys</div>
-      <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.7rem">
-        <input type="number" class="fifo-qty-inp" id="fifo-qty-${p.id}" placeholder="Enter qty to buy" min="1"
-          oninput="renderFIFO('${p.id}')"/>
-        <span style="font-size:.82rem;color:var(--text-light)">Available: <b>${stock}</b> units · <b>${alive.length}</b> batch${alive.length!==1?'es':''}</span>
+  return `<div class="unit-panel panel-${p.id}${isFirst?' active':''}" id="panel-${p.id}-${ut.key}">
+    <div class="unit-summary">
+      <div>
+        <div class="unit-stock-lbl">Total Available — ${ut.label}</div>
+        <div class="unit-stock-num">${stock}</div>
+        <div class="unit-stock-sub">${alive.length} active batch${alive.length!==1?'es':''} · ${exp.length} expired &nbsp;|&nbsp; <b>₱${ut.price}</b> ${ut.label.toLowerCase()}</div>
       </div>
-      <div id="fifo-out-${p.id}"></div>
-    </div>`;
- 
-  return `
-  <div class="stock-card" id="sc-${p.id}">
-    <div class="stock-card-top">
-      <img src="${p.img}" alt="${p.name}" onerror="this.src='${p.imgFallback}'" style="flex-shrink:0;width:88px;height:80px;object-fit:cover;border-radius:var(--radius-sm);border:1px solid var(--border);display:block;"/>
-      <div class="stock-card-info">
-        <div class="stock-name">${p.name}</div>
-        <div class="stock-meta-row">
-          <span class="stock-cat-tag">${p.category}</span>
-          <span class="stock-price-tag">₱${p.price} ${p.unit}</span>
-          ${expired.length>0?`<span class="stock-cat-tag" style="background:var(--danger-bg);color:var(--danger)">${expired.length} expired batch${expired.length>1?'es':''}</span>`:''}
-        </div>
-        <div class="shelf-bar" style="margin-top:6px">
-          <div class="shelf-label">
-            <span>🕐 Nearest Expiry</span>
-            <span class="shelf-days ${shelfLabelClass}">${ne?daysUntil(ne)+' days left':'No active batches'}</span>
-          </div>
-          <div class="shelf-track"><div class="shelf-fill ${barClass}" style="width:${barPct}%"></div></div>
-          <div class="shelf-hint">${ne?'Nearest expiry: '+fmt(ne):'Add a batch to begin tracking'}</div>
-        </div>
-      </div>
+      <span class="badge ${bdgCls}">${bdgLbl}</span>
     </div>
  
-    <div class="stock-card-body">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem">
-        <div>
-          <div class="stock-qty-label">Total Available Stock</div>
-          <div style="font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:var(--text);line-height:1">${stock}</div>
-          <div style="font-size:.75rem;color:var(--text-light)">${alive.length} active batch${alive.length!==1?'es':''} · ${expired.length} expired</div>
+    <div class="shelf-bar">
+      <div class="shelf-label">
+        <span>🕐 Nearest Expiry</span>
+        <span class="${dayCls}">${ne?du(ne)+' days left':'No active batches'}</span>
+      </div>
+      <div class="shelf-track"><div class="${fillCls}" style="width:${pct}%"></div></div>
+      <div class="shelf-hint">${ne?'Nearest expiry: '+fmtD(ne):'Add a batch to begin tracking'}</div>
+    </div>
+ 
+    <div style="overflow-x:auto">
+      <table class="batch-table">
+        <thead>
+          <tr><th>Batch</th><th>Added On</th><th>Expiry Date</th><th>Status</th><th>Quantity</th><th></th></tr>
+        </thead>
+        <tbody>${bRows||`<tr><td colspan="6" style="text-align:center;color:var(--text-light);padding:1.4rem">No batches yet — add one below.</td></tr>`}</tbody>
+      </table>
+    </div>
+ 
+    <div class="add-batch-box">
+      <div class="add-batch-title">📦 Add New Batch — ${p.name} (${ut.label})</div>
+      ${expiryNote(p.category)}
+      <div class="add-grid">
+        <div class="fld">
+          <label>Harvest Date *</label>
+          <input type="date" id="nb-date-${p.id}-${ut.key}" value="${today}"/>
         </div>
-        <span class="stock-badge ${stockBadgeClass}">${stockBadgeLabel}</span>
-      </div>
- 
-      <div style="overflow-x:auto;margin-bottom:.2rem">
-        <table class="batch-table">
-          <thead>
-            <tr>
-              <th>Batch</th>
-              <th>Added On</th>
-              <th>Expiry Date</th>
-              <th>Status</th>
-              <th class="qty-col">Quantity</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>${batchRows||`<tr><td colspan="6" style="text-align:center;color:var(--text-light);padding:1.5rem">No batches yet — add one below.</td></tr>`}</tbody>
-        </table>
-      </div>
- 
-      ${addBatchForm}
-      ${fifoSimulator}
- 
-      <div class="stock-divider" style="margin:.8rem 0"></div>
- 
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem">
-        <div class="stock-status-row">
-          <span class="stock-status-label">Listing status</span>
-          <div class="status-pills">
-            <label class="spill spill-g"><input type="radio" name="s-${p.id}" value="live" checked/> 🟢 Live</label>
-            <label class="spill spill-y"><input type="radio" name="s-${p.id}" value="paused"/> ⏸ Paused</label>
-            <label class="spill spill-r"><input type="radio" name="s-${p.id}" value="sold_out"/> 🔴 Sold Out</label>
-          </div>
+        <div class="fld">
+          <label>Shelf Life (days) *</label>
+          <input type="number" id="nb-shelf-${p.id}-${ut.key}" value="${shelfDef}" min="1"/>
+          <span class="hint">Expiry = date + shelf life</span>
         </div>
-        <button class="save-stock-btn" style="width:auto;padding:.7rem 1.6rem" onclick="saveProduct('${p.id}')">💾 Save ${p.name}</button>
+        <div class="fld">
+          <label>Quantity *</label>
+          <input type="number" id="nb-qty-${p.id}-${ut.key}" placeholder="e.g. 20" min="1"/>
+        </div>
       </div>
+      <button class="add-btn" onclick="addBatch('${p.id}','${ut.key}')">+ Add Batch</button>
+    </div>
+ 
+    <div class="fifo-box">
+      <div class="fifo-box-title">🔄 FIFO Deduction Simulator — Preview what happens when a customer buys</div>
+      <div style="display:flex;align-items:center;gap:.8rem">
+        <input type="number" class="fifo-qty-inp" id="fifo-qty-${p.id}-${ut.key}" placeholder="Enter qty to buy" min="1"
+          oninput="renderFIFO('${p.id}','${ut.key}')"/>
+        <span style="font-size:.82rem;color:var(--text-light)">Available: <b>${stock}</b> · <b>${alive.length}</b> batch${alive.length!==1?'es':''}</span>
+      </div>
+      <div id="fifo-out-${p.id}-${ut.key}"></div>
+    </div>
+ 
+    <div class="status-row">
+      <div style="display:flex;align-items:center;gap:.7rem;flex-wrap:wrap">
+        <span style="font-size:.78rem;color:var(--text-light);font-weight:600">Listing status (${ut.label})</span>
+        <div class="status-pills">
+          <button class="spill${sL?' act-g':''}" onclick="setStatus('${p.id}','${ut.key}','live')">🟢 Live</button>
+          <button class="spill${sP?' act-y':''}" onclick="setStatus('${p.id}','${ut.key}','paused')">⏸ Paused</button>
+          <button class="spill${sS?' act-r':''}" onclick="setStatus('${p.id}','${ut.key}','sold_out')">🔴 Sold Out</button>
+        </div>
+      </div>
+      <button class="save-btn" onclick="saveProduct('${p.id}')">💾 Save ${p.name}</button>
     </div>
   </div>`;
 }
  
-function renderAll() {
-  document.getElementById('stock-grid').innerHTML = products.map(p=>buildCard(p)).join('');
+/* ── BUILD CARD ── */
+function buildCard(p){
+  const tabs=p.unitTypes.map((ut,i)=>{
+    const stock=totalStock(ut);
+    const hasAlert=expiredB(ut).length>0||aliveB(ut).some(b=>du(b.expiry)<=3);
+    return `<button class="unit-tab tab-${p.id}${i===0?' active':''}" id="tab-${p.id}-${ut.key}"
+      onclick="switchTab('${p.id}','${ut.key}')">
+      ${ut.label}
+      <span style="font-size:.7rem;margin-left:4px;opacity:.75">₱${ut.price} · ${stock} units${hasAlert?' ⚠️':''}</span>
+    </button>`;
+  }).join('');
+ 
+  const panels=p.unitTypes.map((ut,i)=>buildUnitPanel(p,ut,i===0)).join('');
+ 
+  const totalExpired=p.unitTypes.reduce((s,ut)=>s+expiredB(ut).length,0);
+  const totalNear=p.unitTypes.reduce((s,ut)=>s+aliveB(ut).filter(b=>du(b.expiry)<=3).length,0);
+ 
+  return `<div class="stock-card" id="sc-${p.id}">
+    <div class="card-header">
+      <img class="card-img" src="${p.img}" alt="${p.name}" onerror="this.src='${p.imgFallback}'"/>
+      <div style="flex:1;min-width:0">
+        <div class="card-pname">${p.em} ${p.name}</div>
+        <div class="card-pmeta">
+          <span class="tag">${p.category}</span>
+          ${totalExpired>0?`<span class="tag tag-danger">${totalExpired} expired batch${totalExpired>1?'es':''}</span>`:''}
+          ${totalNear>0?`<span class="tag tag-warn">${totalNear} near expiry</span>`:''}
+        </div>
+        <div class="unit-totals">
+          ${p.unitTypes.map(ut=>`<span><b>${totalStock(ut)}</b> ${ut.label.toLowerCase()}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+    <div class="unit-tabs">${tabs}</div>
+    ${panels}
+  </div>`;
 }
  
-function renderAlerts() {
+/* ── RENDER ── */
+function renderCard(pid, activeKey){
+  const el=document.getElementById('sc-'+pid);
+  const p=products.find(x=>x.id===pid);
+  if(!p||!el) return;
+  // capture active tab before replacing
+  const currentActive=activeKey || (document.querySelector(`.tab-${pid}.active`)?.id?.split('-').pop()) || p.unitTypes[0].key;
+  el.outerHTML=buildCard(p);
+  switchTab(pid, currentActive);
+}
+function renderAll(){
+  document.getElementById('stock-grid').innerHTML=products.map(buildCard).join('');
+}
+function renderAlerts(){
   const banner=document.getElementById('alert-banner');
   const text=document.getElementById('alert-banner-text');
-  const alerts=[];
+  const msgs=[];
   for(const p of products){
-    const exp=expiredBatches(p);
-    if(exp.length) alerts.push(`<b>${p.name}</b> has ${exp.length} expired batch${exp.length>1?'es':''} — remove or discount.`);
-    const near=aliveBatches(p).filter(b=>daysUntil(b.expiry)<=3);
-    if(near.length) alerts.push(`<b>${p.name}</b>: ${near.reduce((s,b)=>s+b.qty,0)} units expire within 3 days.`);
+    for(const ut of p.unitTypes){
+      const ex=expiredB(ut);
+      if(ex.length) msgs.push(`<b>${p.name} (${ut.label})</b>: ${ex.length} expired batch${ex.length>1?'es':''}`);
+      const near=aliveB(ut).filter(b=>du(b.expiry)<=3);
+      if(near.length) msgs.push(`<b>${p.name} (${ut.label})</b>: ${near.reduce((s,b)=>s+b.qty,0)} units expire within 3 days`);
+    }
   }
-  if(alerts.length){
-    text.innerHTML='<strong>⚠️ Freshness Alerts:</strong> '+alerts.join(' &nbsp;·&nbsp; ');
+  if(msgs.length){
+    text.innerHTML='<strong>⚠️ Freshness Alerts:</strong> '+msgs.join(' &nbsp;·&nbsp; ');
     banner.style.display='flex';
   } else {
     banner.style.display='none';
   }
 }
- 
-function showToast(msg,type=''){
+function showToast(msg){
   const t=document.getElementById('stock-toast');
-  t.textContent=msg;
-  t.className='stock-toast show'+(type?' '+type:'');
+  t.textContent=msg; t.className='stock-toast show';
   setTimeout(()=>t.classList.remove('show'),3500);
 }
  

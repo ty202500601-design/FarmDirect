@@ -139,21 +139,12 @@ lucide.createIcons();
    EXPIRY LOGIC — category-aware rules
    ═══════════════════════════════════════════════════════════ */
  
-// Categories where expiry = source date + shelf life (calculated)
-const CALC_EXPIRY_CATS = ['Vegetables', 'Fruits', 'Grains', 'Others'];
-// Categories using processing date instead of harvest date
-const PROCESSING_CATS  = ['Meat'];
-// Categories where expiry is manually entered from package
+const CALC_EXPIRY_CATS   = ['Vegetables', 'Fruits', 'Grains', 'Others'];
+const PROCESSING_CATS    = ['Meat'];
 const MANUAL_EXPIRY_CATS = ['Dairy'];
  
-// Default shelf life suggestions per category (days)
 const DEFAULT_SHELF = {
-  Vegetables: 7,
-  Fruits: 5,
-  Dairy: 14,
-  Grains: 180,
-  Meat: 3,
-  Others: 7
+  Vegetables: 7, Fruits: 5, Dairy: 14, Grains: 180, Meat: 3, Others: 7
 };
  
 const CAT_EMOJI = {
@@ -161,7 +152,6 @@ const CAT_EMOJI = {
   Grains:'🌾', Meat:'🥩', Others:'📦'
 };
  
-// Labels shown on the date field based on category
 const DATE_LABEL = {
   Meat: 'Processing Date *',
   Dairy: 'Processing / Pack Date',
@@ -187,24 +177,23 @@ let apProducts  = [];
 let apCardCount = 0;
  
 function apUpdateCounter() {
-  const badge = document.getElementById('ap-counter-badge');
+  const badge  = document.getElementById('ap-counter-badge');
   const topBtn = document.getElementById('top-save-btn');
   const n = apProducts.length;
   if (n > 0) {
-    badge.textContent = n + ' product' + (n !== 1 ? 's' : '') + ' added';
-    badge.style.display = 'inline-flex';
+    badge.textContent  = n + ' product' + (n !== 1 ? 's' : '') + ' added';
+    badge.style.display  = 'inline-flex';
     topBtn.style.display = 'inline-flex';
   } else {
-    badge.style.display = 'none';
+    badge.style.display  = 'none';
     topBtn.style.display = 'none';
   }
 }
  
 function apCheckDone(id) {
-  const name  = (document.getElementById('ap-name-'  + id)?.value || '').trim();
-  const cat   = (document.getElementById('ap-cat-'   + id)?.value || '').trim();
+  const name  = (document.getElementById('ap-name-' + id)?.value || '').trim();
+  const cat   = (document.getElementById('ap-cat-'  + id)?.value || '').trim();
  
-  // Price is valid if at least one unit price row has a value > 0
   const priceInputs = document.querySelectorAll('#ap-price-rows-' + id + ' input[data-unit]');
   const hasPrice    = priceInputs.length > 0
     ? Array.from(priceInputs).some(inp => parseFloat(inp.value) > 0)
@@ -214,7 +203,6 @@ function apCheckDone(id) {
   if (btn) btn.disabled = !(name && cat && hasPrice);
 }
  
-/* ── Update freshness section based on category ── */
 function apOnCategoryChange(id) {
   apCheckDone(id);
   const cat = document.getElementById('ap-cat-' + id)?.value || '';
@@ -222,18 +210,15 @@ function apOnCategoryChange(id) {
   const isManual     = MANUAL_EXPIRY_CATS.includes(cat);
   const isProcessing = PROCESSING_CATS.includes(cat);
  
-  // Toggle shelf life vs manual expiry
-  const shelfWrap  = document.getElementById('ap-shelf-wrap-' + id);
+  const shelfWrap  = document.getElementById('ap-shelf-wrap-'  + id);
   const manualWrap = document.getElementById('ap-manual-wrap-' + id);
   shelfWrap.style.display  = isManual ? 'none' : '';
   manualWrap.style.display = isManual ? ''     : 'none';
  
-  // Update date field label
   const dateLabel = document.getElementById('ap-date-label-' + id);
   dateLabel.textContent = DATE_LABEL[cat] || DATE_LABEL.default;
  
-  // Category-specific tip
-  const tip = document.getElementById('ap-bestbefore-tip-' + id);
+  const tip  = document.getElementById('ap-bestbefore-tip-' + id);
   const tips = {
     Vegetables: '🥦 <b>Vegetables:</b> Enter harvest date + shelf life. Expiry is auto-calculated.',
     Fruits:     '🍎 <b>Fruits:</b> Enter harvest date + shelf life. Expiry is auto-calculated.',
@@ -244,7 +229,6 @@ function apOnCategoryChange(id) {
   };
   tip.innerHTML = tips[cat] || tips['Others'];
  
-  // Pre-fill default shelf life
   if (!isManual) {
     const shelfSel = document.getElementById('ap-shelf-' + id);
     if (shelfSel && DEFAULT_SHELF[cat]) shelfSel.value = DEFAULT_SHELF[cat];
@@ -253,7 +237,6 @@ function apOnCategoryChange(id) {
   apUpdateExpiry(id);
 }
  
-/* ── Live expiry preview ── */
 function apUpdateExpiry(id) {
   const cat      = document.getElementById('ap-cat-' + id)?.value || '';
   const isManual = MANUAL_EXPIRY_CATS.includes(cat);
@@ -268,7 +251,6 @@ function apUpdateExpiry(id) {
   const opts = { year:'numeric', month:'short', day:'numeric' };
  
   if (isManual) {
-    // Dairy — use manually entered best before date
     const manualVal = document.getElementById('ap-expiry-manual-' + id)?.value || '';
     const sourceVal = document.getElementById('ap-source-date-'   + id)?.value || '';
     if (!manualVal) {
@@ -291,7 +273,6 @@ function apUpdateExpiry(id) {
     setDaysDisplay(prevDays, prevBar, prevNote, days, pct);
  
   } else {
-    // Calculated — harvest/processing date + shelf life
     const sourceVal = document.getElementById('ap-source-date-' + id)?.value || '';
     const shelfDays = parseInt(document.getElementById('ap-shelf-' + id)?.value) || 0;
  
@@ -344,24 +325,20 @@ function setDaysDisplay(prevDays, prevBar, prevNote, days, pct) {
   }
 }
  
-/* ── Unit checkbox logic ── */
 function apHandleUnitCheck(cb, id) {
   const checked = Array.from(document.querySelectorAll('#ap-units-' + id + ' input[type="checkbox"]:checked'));
  
-  // Highlight checked cards
   document.querySelectorAll('#ap-units-' + id + ' .unit-check-card').forEach(card => {
     card.classList.toggle('unit-checked', card.querySelector('input').checked);
   });
  
-  // Show/hide primary badge (keep for visual indicator)
-  const wrap   = document.getElementById('ap-unit-primary-wrap-' + id);
-  const summary= document.getElementById('ap-unit-summary-' + id);
+  const wrap    = document.getElementById('ap-unit-primary-wrap-' + id);
+  const summary = document.getElementById('ap-unit-summary-'      + id);
   if (wrap)    wrap.style.display    = checked.length ? 'block' : 'none';
   if (summary) summary.style.display = checked.length ? 'flex'  : 'none';
   apUpdatePrimaryBadge(id);
   apUpdateSummaryPills(id, checked);
  
-  // ── Per-unit price grid ──
   const grid     = document.getElementById('ap-price-grid-'     + id);
   const rows     = document.getElementById('ap-price-rows-'     + id);
   const empty    = document.getElementById('ap-price-empty-'    + id);
@@ -380,7 +357,6 @@ function apHandleUnitCheck(cb, id) {
   fallback.style.display = 'none';
   empty.style.display    = 'none';
  
-  // Collect existing prices so they survive re-renders
   const existingPrices = {};
   grid.querySelectorAll('input[data-unit]').forEach(inp => {
     existingPrices[inp.dataset.unit] = inp.value;
@@ -389,10 +365,10 @@ function apHandleUnitCheck(cb, id) {
   const unitIcons = { 'per kg':'⚖️','per 100g':'🔢','per bundle':'🌿','per piece':'🔵','per pack':'📦','per box':'🗃️','per tray':'🍱','per sack':'👜' };
  
   rows.innerHTML = checked.map(inp => {
-    const unit   = inp.value;
-    const icon   = unitIcons[unit] || '📦';
-    const saved  = existingPrices[unit] || '';
-    const isPrimary = checked.length === 1; // Auto-primary if only one unit
+    const unit      = inp.value;
+    const icon      = unitIcons[unit] || '📦';
+    const saved     = existingPrices[unit] || '';
+    const isPrimary = checked.length === 1;
     return `<div style="display:flex;align-items:center;gap:.75rem;background:var(--cream);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:.6rem .9rem;${isPrimary ? 'border-color:var(--green-accent);background:var(--green-light);' : ''}">
       <span style="font-size:1.1rem;flex-shrink:0">${icon}</span>
       <span style="font-size:.88rem;font-weight:700;color:var(--text);min-width:90px">${unit}</span>
@@ -407,7 +383,6 @@ function apHandleUnitCheck(cb, id) {
     </div>`;
   }).join('');
  
-  // Sync ap-price-${id} with first/primary unit price for apMarkDone compatibility
   const firstInp = rows.querySelector('input[data-unit]');
   if (firstInp) {
     firstInp.addEventListener('input', () => {
@@ -430,7 +405,7 @@ function apUpdatePrimaryBadge(id) {
 }
  
 function apUpdateSummaryPills(id, checked) {
-  const pills   = document.getElementById('ap-unit-pills-' + id);
+  const pills   = document.getElementById('ap-unit-pills-'           + id);
   const primary = document.getElementById('ap-unit-primary-select-' + id)?.value || '';
   pills.innerHTML = '';
   checked.forEach(inp => {
@@ -449,11 +424,10 @@ function apToggleCard(id) {
   chev.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
 }
  
-/* ── Build card HTML ── */
 function apBuildCard(id) {
   const unitDefs = [
-    { val:'per kg',     icon:'⚖️', label:'per kg',     sub:'Kilogram',       key:'kg'     },
-    { val:'per 100g',   icon:'🔢', label:'per 100g',   sub:'100 Grams',      key:'100g'   },
+    { val:'per kg',     icon:'⚖️', label:'per kg',     sub:'Kilogram',        key:'kg'     },
+    { val:'per 100g',   icon:'🔢', label:'per 100g',   sub:'100 Grams',       key:'100g'   },
     { val:'per bundle', icon:'🌿', label:'per bundle', sub:'Bundle / Bunch',  key:'bundle' },
     { val:'per piece',  icon:'🔵', label:'per piece',  sub:'Individual Item', key:'piece'  },
     { val:'per pack',   icon:'📦', label:'per pack',   sub:'Sealed Pack',     key:'pack'   },
@@ -472,7 +446,6 @@ function apBuildCard(id) {
     </label>`).join('');
   const unitOptions = unitDefs.map(u => `<option value="${u.val}">${u.val}</option>`).join('');
  
-  // Today's date for default
   const todayStr = new Date().toISOString().split('T')[0];
  
   return `
@@ -511,7 +484,7 @@ function apBuildCard(id) {
             <span style="font-family:var(--font-display);font-size:.97rem;font-weight:700">Product Photos</span>
           </div>
           <div class="file-upload-box">
-            <input type="file" accept="image/*"/>
+            <input type="file" accept="image/*" id="ap-img-${id}"/>
             <div class="upload-icon">📷</div>
             <div class="upload-title">Upload Main Photo</div>
             <div class="upload-sub">Drag &amp; drop or <span>click to browse</span></div>
@@ -572,12 +545,12 @@ function apBuildCard(id) {
  
         <div class="form-group" style="margin-bottom:0;margin-top:1rem">
           <label>Description</label>
-          <textarea placeholder="Describe your product — freshness, how it's grown, best uses…"></textarea>
+          <textarea id="ap-desc-${id}" placeholder="Describe your product — freshness, how it's grown, best uses…"></textarea>
         </div>
  
         <hr style="border:none;border-top:1.5px solid var(--border);margin:1.3rem 0">
  
-        <!-- Pricing & Stock (Initial Batch) -->
+        <!-- Pricing & Stock -->
         <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem">
           <span style="font-size:1.1rem">💰</span>
           <span style="font-family:var(--font-display);font-size:.97rem;font-weight:700">Pricing &amp; Initial Stock Batch</span>
@@ -586,7 +559,6 @@ function apBuildCard(id) {
           📦 <b>Batch-based stock:</b> This creates your <b>first stock batch</b>. You can add more batches later in Stock Update, each with their own best before date. Set a price for each unit you selected above.
         </div>
  
-        <!-- Per-unit price grid — populated dynamically when units are checked -->
         <div id="ap-price-grid-${id}" style="display:none;margin-bottom:1rem">
           <label style="font-size:.78rem;font-weight:700;color:var(--text-mid);display:block;margin-bottom:.6rem">Price per Unit * <span style="font-weight:400;color:var(--text-light)">(set a price for each unit you selected)</span></label>
           <div id="ap-price-rows-${id}" style="display:flex;flex-direction:column;gap:.5rem"></div>
@@ -594,7 +566,6 @@ function apBuildCard(id) {
             ← Select units above to set prices here.
           </div>
         </div>
-        <!-- Fallback price shown when no units selected yet -->
         <div id="ap-price-fallback-${id}">
           <div class="form-group">
             <label>Price (₱) * <span style="font-weight:400;color:var(--text-light)">— select units above first</span></label>
@@ -611,7 +582,7 @@ function apBuildCard(id) {
           </div>
           <div class="form-group">
             <label>Low Stock Alert at</label>
-            <input type="number" placeholder="e.g. 5" min="0"/>
+            <input type="number" id="ap-alert-${id}" placeholder="e.g. 5" min="0"/>
             <span class="hint">Warn when stock drops below.</span>
           </div>
         </div>
@@ -640,26 +611,23 @@ function apBuildCard(id) {
  
         <hr style="border:none;border-top:1.5px solid var(--border);margin:1.3rem 0">
  
-        <!-- ════ FRESHNESS & SHELF LIFE ════ -->
+        <!-- Freshness & Best Before -->
         <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.8rem">
           <span style="font-size:1.1rem">🕐</span>
           <span style="font-family:var(--font-display);font-size:.97rem;font-weight:700">Freshness &amp; Best Before</span>
         </div>
  
-        <!-- Category tip — updates dynamically -->
         <div class="tip-box" style="margin-bottom:1.2rem" id="ap-bestbefore-tip-${id}">
           🥦 Select a category above to see the correct expiry method.
         </div>
  
         <div class="form-row-2">
-          <!-- Source date: harvest / processing / pack date depending on category -->
           <div class="form-group">
             <label id="ap-date-label-${id}">Harvest Date *</label>
             <input type="date" id="ap-source-date-${id}" value="${todayStr}" onchange="apUpdateExpiry(${id})"/>
             <span class="hint" id="ap-date-hint-${id}">When was this batch harvested?</span>
           </div>
  
-          <!-- Shelf life (hidden for Dairy) -->
           <div id="ap-shelf-wrap-${id}">
             <div class="form-group">
               <label>Shelf Life (days) *</label>
@@ -690,7 +658,6 @@ function apBuildCard(id) {
             </div>
           </div>
  
-          <!-- Manual expiry (shown for Dairy) -->
           <div id="ap-manual-wrap-${id}" style="display:none">
             <div class="form-group">
               <label>Best Before Date (from package) *</label>
@@ -744,7 +711,6 @@ function apMarkDone(id) {
   const name = (document.getElementById('ap-name-' + id)?.value || '').trim();
   const cat  = (document.getElementById('ap-cat-'  + id)?.value || '').trim();
  
-  // Collect all unit prices from the dynamic grid
   const priceInputs = document.querySelectorAll('#ap-price-rows-' + id + ' input[data-unit]');
   const unitPrices  = Array.from(priceInputs)
     .filter(inp => parseFloat(inp.value) > 0)
@@ -767,7 +733,23 @@ function apMarkDone(id) {
  
   const firstPrice = priceInputs.length ? priceInputs[0].value : '';
   const primary    = priceInputs.length ? priceInputs[0].dataset.unit : '';
-  apProducts.push({ id, name, cat, price: firstPrice, primary });
+ 
+  // Collect ALL unit prices for localStorage
+  const allUnitPrices = Array.from(priceInputs)
+    .filter(inp => parseFloat(inp.value) > 0)
+    .map(inp => ({ unit: inp.dataset.unit, price: parseFloat(inp.value) }));
+ 
+  apProducts.push({
+    id,
+    name,
+    cat,
+    price:      firstPrice,
+    primary,
+    allUnits:   allUnitPrices,
+    stock:      parseInt(document.getElementById('ap-qty-'    + id)?.value) || 0,
+    alertAt:    parseInt(document.getElementById('ap-alert-'  + id)?.value) || 5,
+    bestBefore: prevBestBefore && prevBestBefore !== '—' ? prevBestBefore : '',
+  });
   apUpdateCounter();
  
   document.getElementById('ap-save-bar').style.display       = 'none';
@@ -796,12 +778,33 @@ function apShowSaveBar() {
   bar.scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
  
+/* ── SAVE ALL — now writes to localStorage ── */
 function apSaveAll() {
   const n = apProducts.length;
+ 
+  // ── Save to localStorage ──
+  const existing = JSON.parse(localStorage.getItem('farmdirect_products') || '[]');
+  const newProds = apProducts.map(p => ({
+    id:         'prod_' + Date.now() + '_' + p.id,
+    name:       p.name,
+    category:   p.cat,
+    emoji:      CAT_EMOJI[p.cat] || '📦',
+    price:      p.price,
+    primaryUnit:p.primary,
+    allUnits:   p.allUnits,
+    stock:      p.stock,
+    alertAt:    p.alertAt,
+    bestBefore: p.bestBefore,
+    status:     'live',
+    addedOn:    new Date().toISOString()
+  }));
+  localStorage.setItem('farmdirect_products', JSON.stringify([...existing, ...newProds]));
+  // ── End save ──
+ 
   document.getElementById('ap-save-bar').style.display = 'none';
   document.getElementById('ap-stack').innerHTML = '';
   document.getElementById('ap-success-title').textContent = n + ' Product' + (n !== 1 ? 's' : '') + ' Saved!';
-  document.getElementById('ap-success-sub').textContent = apProducts.map(p => p.name).join(', ') + (n !== 1 ? ' are' : ' is') + ' now live on your store.';
+  document.getElementById('ap-success-sub').textContent   = apProducts.map(p => p.name).join(', ') + (n !== 1 ? ' are' : ' is') + ' now live on your store.';
   document.getElementById('ap-success').style.display = 'flex';
   document.getElementById('ap-success').scrollIntoView({ behavior:'smooth', block:'start' });
   apProducts = []; apCardCount = 0; apUpdateCounter();
