@@ -20,43 +20,83 @@
     </aside>
 
     <main class="main-content">
-        <header class="top-bar">
+    <header class="content-header">
+        <div class="header-title">
             <h1>Farmer Payouts & Finances</h1>
-            <button class="btn btn-info">📊 Export Monthly Report</button>
-        </header>
-
-        <div class="card">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Farmer Name</th>
-                        <th>Account Details</th>
-                        <th>Pending Payout</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Juan Dela Cruz</td>
-                        <td>GCash: 0912****345</td>
-                        <td><strong>₱12,450.00</strong></td>
-                        <td>
-                            <button class="btn btn-success">Approve Payout</button>
-                            <button class="btn btn-outline">View Invoice</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Maria Clara</td>
-                        <td>BPI: 1234-****-89</td>
-                        <td><strong>₱8,200.00</strong></td>
-                        <td>
-                            <button class="btn btn-success">Approve Payout</button>
-                            <button class="btn btn-outline">View Invoice</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <p>Monitor platform revenue and approve vendor withdrawals.</p>
         </div>
-    </main>
+        <button class="btn btn-export">
+            <i class="icon-export"></i> Export Monthly Report
+        </button>
+    </header>
+
+    <section class="finance-overview">
+        <div class="stat-card">
+            <span class="label">Total Platform Revenue</span>
+            <span class="value">₱142,500.00</span>
+            <span class="trend positive">+12% from last month</span>
+        </div>
+        <div class="stat-card">
+            <span class="label">Pending Payouts</span>
+            <span class="value text-warning">₱20,650.00</span>
+            <span class="sub-label">3 Farmers waiting</span>
+        </div>
+        <div class="stat-card">
+            <span class="label">Completed Payouts</span>
+            <span class="value text-green">₱121,850.00</span>
+            <span class="sub-label">This Month</span>
+        </div>
+    </section>
+
+    <section class="table-container shadow-sm">
+        <div class="table-header">
+            <h3>Pending Approval</h3>
+        </div>
+        <table class="finance-table">
+            <thead>
+                <tr>
+                    <th>Farmer Name</th>
+                    <th>Account Details</th>
+                    <th>Pending Payout</th>
+                    <th>Status</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="user-info">
+                            <div class="avatar">JD</div>
+                            <strong>Juan Dela Cruz</strong>
+                        </div>
+                    </td>
+                    <td><code class="bank-code">GCash: 0912****345</code></td>
+                    <td class="amount">₱12,450.00</td>
+                    <td><span class="status-pill pending">Pending</span></td>
+                    <td class="text-right">
+                        <button class="btn btn-primary">Approve Payout</button>
+                        <button class="btn btn-secondary">View Invoice</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="user-info">
+                            <div class="avatar">MC</div>
+                            <strong>Maria Clara</strong>
+                        </div>
+                    </td>
+                    <td><code class="bank-code">BPI: 1234-****-89</code></td>
+                    <td class="amount">₱8,200.00</td>
+                    <td><span class="status-pill pending">Pending</span></td>
+                    <td class="text-right">
+                        <button class="btn btn-primary">Approve Payout</button>
+                        <button class="btn btn-secondary">View Invoice</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
 </body>
 </html>

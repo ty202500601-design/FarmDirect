@@ -19,47 +19,89 @@
         </nav>
     </aside>
 
-    <main class="main-content">
-        <header class="top-bar">
-            <h1>Product Catalog Moderation</h1>
-            <div class="search-bar"><input type="text" placeholder="Search products..."></div>
-        </header>
+<main class="main-content">
+    <header class="content-header">
+        <h1>Product Moderation</h1>
+        <p>Manage verification requests and customer reports.</p>
+    </header>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;">
-            <div class="card">
-                <div style="height:180px; background:#e9ecef; border-radius:6px; display:flex; align-items:center; justify-content:center; margin-bottom:15px; color:#adb5bd;">
-                    [Rice Grain Image]
+    <section class="top-metrics">
+    <div class="stats-card hero-card">
+        <div class="card-top border-gold">
+            <h3>★ Best Selling Products of the Week</h3>
+            <span class="badge badge-success">April 21 - 28</span>
+        </div>
+        <div class="card-body best-seller-display">
+            <div class="seller-item">
+                <div class="rank">#1</div>
+                <div class="seller-details">
+                    <span class="product-name">Carabao Mangoes</span>
+                    <span class="vendor-name">Davao Fruit Collective</span>
                 </div>
-                <div style="display:flex; justify-content:space-between; align-items:start;">
-                    <div>
-                        <h3 style="font-size:1.1rem;">Organic Dinorado</h3>
-                        <p style="color:var(--text-muted); font-size:0.85rem;">Farmer: Juan D.</p>
-                    </div>
-                    <span class="badge bg-yellow">Pending</span>
-                </div>
-                <div style="margin-top:20px; display:flex; gap:10px;">
-                    <button class="btn btn-success" style="flex:1;">Approve</button>
-                    <button class="btn btn-outline" style="flex:1;">Edit</button>
+                <div class="seller-stats">
+                    <span class="stat-value">240 kg</span>
+                    <span class="stat-label">Sold</span>
                 </div>
             </div>
-
-            <div class="card">
-                <div style="height:180px; background:#e9ecef; border-radius:6px; display:flex; align-items:center; justify-content:center; margin-bottom:15px; color:#adb5bd;">
-                    [Cabbage Image]
+            <div class="seller-item">
+                <div class="rank">#2</div>
+                <div class="seller-details">
+                    <span class="product-name">Organic Dinorado Rice</span>
+                    <span class="vendor-name">Zamboanga Plains Farm</span>
                 </div>
-                <div style="display:flex; justify-content:space-between; align-items:start;">
-                    <div>
-                        <h3 style="font-size:1.1rem;">Fresh Cabbage</h3>
-                        <p style="color:var(--text-muted); font-size:0.85rem;">Farmer: Maria C.</p>
-                    </div>
-                    <span class="badge bg-green">Live</span>
-                </div>
-                <div style="margin-top:20px; display:flex; gap:10px;">
-                    <button class="btn btn-danger" style="flex:1;">Take Down</button>
-                    <button class="btn btn-outline" style="flex:1;">Edit</button>
+                <div class="seller-stats">
+                    <span class="stat-value">185 kg</span>
+                    <span class="stat-label">Sold</span>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+</section>
+
+    <section class="admin-grid">
+        <div class="stats-card">
+            <div class="card-top border-green">
+                <h3>Product Verification</h3>
+                <span class="badge badge-pending">5 Pending</span>
+            </div>
+            <div class="card-body">
+                <div class="list-item">
+                    <div class="item-info">
+                        <span class="product-name">Native Eggplant</span>
+                        <span class="vendor-name">Juan's Farm</span>
+                    </div>
+                    <button class="btn btn-outline">Review Details</button>
+                </div>
+                <div class="list-item">
+                    <div class="item-info">
+                        <span class="product-name">Fresh Ginger</span>
+                        <span class="vendor-name">Zambo Growers</span>
+                    </div>
+                    <button class="btn btn-outline">Review Details</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-card">
+            <div class="card-top border-red">
+                <h3>Reports & Complaints</h3>
+                <span class="badge badge-urgent">1 New</span>
+            </div>
+            <div class="card-body">
+                <div class="report-box">
+                    <div class="report-header">
+                        <strong>Organic Pechay</strong>
+                        <span class="report-reason">"Not Fresh"</span>
+                    </div>
+                    <div class="report-actions">
+                        <button class="btn btn-text">View Evidence</button>
+                        <button class="btn btn-danger">Flag Vendor</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
 </body>
 </html>
