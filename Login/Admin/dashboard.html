@@ -22,14 +22,98 @@
     <main class="main-content">
         <header class="top-bar">
             <h1>Platform Overview</h1>
+            <div class="search-bar">
+                <input type="text" placeholder="Search orders, farmers...">
+            </div>
         </header>
 
-        <div class="stats-grid">
+        <section class="stats-grid">
+            <div class="card">
+                <span class="label">Total Sales (Today)</span>
+                <span class="value">₱12,450</span>
+                <span class="badge bg-green">+12% vs yesterday</span>
             </div>
-        
-        <div class="card">
-            <h3>Recent Platform Activity</h3>
+            <div class="card">
+                <span class="label">Active Orders</span>
+                <span class="value">24</span>
+                <span class="badge bg-yellow">8 Out for delivery</span>
             </div>
+            <div class="card">
+                <span class="label">Farmer Requests</span>
+                <span class="value">07</span>
+                <span class="badge bg-red">Urgent verification</span>
+            </div>
+            <div class="card">
+                <span class="label">Top Product</span>
+                <span class="value">Organic Tomatoes</span>
+                <span class="label">120kg sold this week</span>
+            </div>
+        </section>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 30px;">
+            <div class="card">
+                <h3>Recent Platform Activity</h3>
+                <table style="margin-top: 15px; box-shadow: none;">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Event</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>09:24 PM</td>
+                            <td>Farmer 'Juan' uploaded 20kg Mangoes</td>
+                            <td><span class="badge bg-green">Inventory</span></td>
+                        </tr>
+                        <tr>
+                            <td>08:15 PM</td>
+                            <td>New Order #1204 by Xandrea</td>
+                            <td><span class="badge bg-yellow">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>06:00 PM</td>
+                            <td>Payout processed for 'Green Valley'</td>
+                            <td><span class="badge bg-green">Completed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Weekly Sales Trend</h3>
+                <div class="chart-placeholder" style="height: 200px; display: flex; align-items: flex-end; gap: 10px; padding: 20px 0;">
+                    <div style="height: 40%; width: 20%; background: var(--accent-green); border-radius: 4px;"></div>
+                    <div style="height: 60%; width: 20%; background: var(--accent-green); border-radius: 4px;"></div>
+                    <div style="height: 90%; width: 20%; background: var(--primary-green); border-radius: 4px;"></div>
+                    <div style="height: 50%; width: 20%; background: var(--accent-green); border-radius: 4px;"></div>
+                    <div style="height: 75%; width: 20%; background: var(--accent-green); border-radius: 4px;"></div>
+                </div>
+                <p class="text-muted" style="text-align: center; font-size: 0.8rem;">Mon - Fri Revenue</p>
+            </div>
+        </div>
+
+        <section class="card">
+            <h3>Logistics Quick-View</h3>
+            <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                <div style="flex: 1;">
+                    <p><strong>Pending Pickups:</strong></p>
+                    <ul style="list-style: none; padding-top: 10px; font-size: 0.9rem;">
+                        <li>📍 San Jose - 50kg Rice (Farmer: Pedro)</li>
+                        <li>📍 Santa Maria - 10kg Calamansi (Farmer: Maria)</li>
+                    </ul>
+                </div>
+                <div style="flex: 1; text-align: right;">
+                    <p><strong>Today's Delivery Progress:</strong></p>
+                    <div style="background: #eee; height: 10px; border-radius: 5px; margin-top: 10px;">
+                        <div style="background: var(--accent-green); width: 75%; height: 100%; border-radius: 5px;"></div>
+                    </div>
+                    <p class="label">15 of 20 Delivered</p>
+                </div>
+            </div>
+        </section>
     </main>
+
 </body>
 </html>
