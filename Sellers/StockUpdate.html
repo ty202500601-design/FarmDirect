@@ -3,29 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="StockUpdate.css">
   <title>Update Stock – FarmDirect</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --green: #3d6840; --green-accent: #5a9a5e; --green-light: #e8f0e9;
-      --cream: #f7f5f0; --cream-dark: #ede9e0; --white: #ffffff;
-      --text: #1a1a1a; --text-mid: #4a4a4a; --text-light: #888;
-      --border: #d8d4cc; --radius: 12px; --radius-sm: 8px;
-      --success: #2e7d32; --success-bg: #e8f5e9;
-      --warn: #c17600; --warn-bg: #fff8e1;
-      --danger: #c62828; --danger-bg: #ffebee;
-      --info: #1565c0; --info-bg: #e3f2fd;
-    }
-    body { font-family: system-ui, sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
- 
-    /* NAV */
-    .navbar { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 1.5rem; position: sticky; top: 0; z-index: 100; }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 56px; max-width: 1100px; margin: 0 auto; }
-    .logo { display: flex; align-items: center; gap: 8px; font-size: 1.2rem; font-weight: 700; color: var(--green); text-decoration: none; }
-    .nav-links { display: flex; gap: 1.5rem; }
-    .nav-link { text-decoration: none; font-size: .9rem; color: var(--text-mid); font-weight: 500; }
-    .nav-link:hover, .nav-link.active { color: var(--green); }
- 
     /* PAGE */
     .page-wrap { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; }
     .breadcrumb { font-size: .82rem; color: var(--text-light); margin-bottom: 1.2rem; }
@@ -177,8 +157,9 @@
 <body>
  
 <nav class="navbar">
+  <input type="checkbox" id="menu-check" class="menu-checkbox"/>
   <div class="nav-inner">
-    <a href="../index.html" class="logo">🌾 <span>FarmDirect</span></a>
+    <a href="../index.html" class="logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></a>
     <div class="nav-links">
       <a href="../index.html"   class="nav-link">Home</a>
       <a href="Dashboard.html" class="nav-link">Dashboard</a>
@@ -187,6 +168,60 @@
       <a href="Reviews.html"   class="nav-link">Reviews</a>
       <a href="Settings.html"  class="nav-link">Settings</a>
     </div>
+    <div class="nav-actions">
+      <div class="notif-wrap">
+        <button class="notif-btn" tabindex="0" aria-label="Notifications">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <span class="notif-badge"></span>
+        </button>
+        <div class="notif-dropdown">
+          <div class="notif-header"><h4>Notifications</h4></div>
+          <div class="notif-list">
+            <div class="notif-item">
+              <div class="notif-content"><strong>New Order</strong><p>🛒 New order received — ORD-00242</p></div>
+              <span class="notif-time">5 min ago</span>
+            </div>
+            <div class="notif-item">
+              <div class="notif-content"><strong>Order Delivered</strong><p>✅ Order #00241 has been delivered.</p></div>
+              <span class="notif-time">1 hr ago</span>
+            </div>
+            <div class="notif-item">
+              <div class="notif-content"><strong>Message</strong><p>Maria: Is the corn available?</p></div>
+              <span class="notif-time">2 hrs ago</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="notif-wrap">
+        <button class="notif-btn avatar-badge-btn" tabindex="0" aria-label="Profile">JD</button>
+        <div class="notif-dropdown" style="min-width:180px">
+          <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
+          <div class="notif-list">
+            <div class="notif-item"><div class="notif-content"><a href="Dashboard.html">📊 Management</a></div></div>
+            <div class="notif-item"><div class="notif-content"><a href="Profile.html">👤 Profile</a></div></div>
+            <div class="notif-item"><div class="notif-content"><a href="Settings.html">⚙️ Settings</a></div></div>
+            <div class="notif-item"><div class="notif-content"><a href="../index.html">🚪 Logout</a></div></div>
+          </div>
+        </div>
+      </div>
+      <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
+    </div>
+  </div>
+  <label for="menu-check" class="menu-overlay"></label>
+  <div class="menu-panel">
+    <div class="menu-section">
+      <h3>Navigation</h3>
+      <a href="../index.html"   class="menu-item">Home</a>
+      <a href="Dashboard.html" class="menu-item">Dashboard</a>
+      <a href="Products.html"  class="menu-item">Products</a>
+      <a href="Orders.html"    class="menu-item">Orders</a>
+      <a href="Reviews.html"   class="menu-item">Reviews</a>
+      <a href="Settings.html"  class="menu-item">Settings</a>
+    </div>
+    <a href="../index.html" class="menu-cta">Logout</a>
   </div>
 </nav>
  
