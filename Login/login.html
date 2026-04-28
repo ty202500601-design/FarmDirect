@@ -5,6 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farm Direct - Login</title>
     <link rel="stylesheet" href="login.css">
+    <style>
+
+        /* --- Fade-in animation for the card --- */
+        .auth-card {
+            animation: fadeSlideUp 0.4s ease;
+        }
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Shake animation for wrong password --- */
+        @keyframes shake {
+            0%   { transform: translateX(0); }
+            20%  { transform: translateX(-8px); }
+            40%  { transform: translateX(8px); }
+            60%  { transform: translateX(-6px); }
+            80%  { transform: translateX(6px); }
+            100% { transform: translateX(0); }
+        }
+        .shake {
+            animation: shake 0.4s ease;
+        }
+
+        /* --- Error message box --- */
+        .error-msg {
+            display: none;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 13px;
+            margin-bottom: 14px;
+            text-align: center;
+        }
+        .error-msg.visible {
+            display: block;
+        }
+
+        /* --- Input floating label effect --- */
+        .form-input {
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+        .form-input:focus {
+            background: #f0fdf4;
+        }
+
+        /* --- Button loading state --- */
+        .btn-primary {
+            transition: background 0.2s, transform 0.1s;
+            position: relative;
+        }
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+        .btn-primary.loading {
+            background: #6b7280;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* --- Social buttons hover animation --- */
+        .btn-outline {
+            transition: background 0.2s, border-color 0.2s, transform 0.15s;
+        }
+        .btn-outline:hover {
+            transform: translateY(-1px);
+        }
+
+    </style>
 </head>
 
 <body>
@@ -16,7 +87,7 @@
     </header>
 
     <main class="auth-wrapper">
-        <div class="auth-card">
+        <div class="auth-card" id="login_card">
             <div class="auth-title">Welcome to FarmDirect</div>
             <div class="auth-sub">Sign in to your account to continue.</div>
 
@@ -25,30 +96,152 @@
                 <a href="register-buyer.html" class="tab">Register</a>
             </div>
 
-            <form action="../USER/Dashboard.html" method="get">
+            <!-- Error message (hidden until login fails) -->
+            <div class="error-msg" id="error_msg">
+                ❌ Incorrect email or password. Please try again.
+            </div>
+
+            <form id="login_form" onsubmit="handleLogin(event)">
                 <div class="form-group">
                     <label class="form-label">Email Address</label>
-                    <input type="email" class="form-input" placeholder="you@email.com" name="email" required>
+                    <input type="email" class="form-input" placeholder="you@email.com"
+                           id="input_email" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-input" placeholder="••••••••" name="password" required minlength="8">
+                    <input type="password" class="form-input" placeholder="••••••••"
+                           id="input_password" required minlength="8">
                 </div>
                 <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
-                <button type="submit" class="btn-primary">Sign In</button>
+                <button type="submit" class="btn-primary" id="login_btn">Sign In</button>
             </form>
 
             <div class="divider">or sign in with</div>
             <a href="#" class="btn-outline">
-                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"> Continue with Google
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
+                Continue with Google
             </a>
             <a href="#" class="btn-outline">
-                <img src="https://www.svgrepo.com/show/448224/facebook.svg" alt="Facebook"> Continue with Facebook
+                <img src="https://www.svgrepo.com/show/448224/facebook.svg" alt="Facebook">
+                Continue with Facebook
             </a>
         </div>
     </main>
 
-    <footer>© 2026 FarmDirect. All rights reserved. <a href="login-farmer.html" style="color:#d1d5db; font-size:11px;">Farmer</a> · <a href="login-admin.html" style="color:#d1d5db; font-size:11px;">Admin</a></footer>
+    <footer>© 2026 FarmDirect. All rights reserved.</footer>
+
+    <script>
+
+        // ─────────────────────────────────────────────
+        //  BUILT-IN SYSTEM ACCOUNTS
+        //  (These are always available, like hardcoded
+        //  staff/admin accounts. Regular users are
+        //  saved when they register.)
+        // ─────────────────────────────────────────────
+        var systemAccounts = [
+            {
+                email:    "admin@farmdirect.com",
+                password: "admin1234",
+                name:     "FarmDirect Admin",
+                role:     "admin"
+            },
+            {
+              email:    "juandelacruz@gmail.com",
+                password: "password123",
+                name:     "Juan Dela Cruz",
+                role:     "user"
+            },
+            {
+              email:    "juandelacruz@farmdirect.com",
+                password: "password123",
+                name:     "Juan Dela Cruz",
+                role:     "seller"
+            }
+        ];
+
+        // Where each role goes after login
+        var redirectMap = {
+            "user":           "../USER/Dashboard.html",
+            "seller":         "../Sellers/Dashboard.html",
+            "seller-pending": "../USER/Dashboard.html",
+            "admin":          "Admin/dashboard.html"
+        };
+
+
+        // ─────────────────────────────────────────────
+        //  LOGIN HANDLER
+        // ─────────────────────────────────────────────
+        function handleLogin(event) {
+            event.preventDefault();
+
+            var email    = document.getElementById('input_email').value.trim().toLowerCase();
+            var password = document.getElementById('input_password').value;
+            var btn      = document.getElementById('login_btn');
+            var errorBox = document.getElementById('error_msg');
+            var card     = document.getElementById('login_card');
+
+            // Show loading state on button
+            btn.textContent = "Signing in...";
+            btn.classList.add('loading');
+
+            // Small delay to simulate checking (makes it feel real, easy to explain)
+            setTimeout(function() {
+
+                // Get accounts saved from register page
+                var savedAccounts = JSON.parse(localStorage.getItem('fd_accounts') || '[]');
+
+                // Combine system accounts + registered accounts
+                var allAccounts = systemAccounts.concat(savedAccounts);
+
+                // Find a matching account
+                var found = null;
+                for (var i = 0; i < allAccounts.length; i++) {
+                    if (allAccounts[i].email === email && allAccounts[i].password === password) {
+                        found = allAccounts[i];
+                        break;
+                    }
+                }
+
+                // Check if admin approved a seller-pending account
+                var approvals = JSON.parse(localStorage.getItem('fd_approvals') || '{}');
+
+                if (!found) {
+                    // Wrong credentials — show error + shake
+                    errorBox.classList.add('visible');
+                    card.classList.add('shake');
+
+                    // Remove shake class after animation so it can replay
+                    setTimeout(function() {
+                        card.classList.remove('shake');
+                    }, 400);
+
+                    // Reset button
+                    btn.textContent = "Sign In";
+                    btn.classList.remove('loading');
+
+                } else {
+                    // Hide any old error
+                    errorBox.classList.remove('visible');
+
+                    // Check if role was upgraded by admin
+                    var role = approvals[found.email] || found.role;
+
+                    // Save session so dashboards know who is logged in
+                    localStorage.setItem('fd_session', JSON.stringify({
+                        email: found.email,
+                        name:  found.name,
+                        role:  role
+                    }));
+
+                    // Go to the right dashboard
+                    var destination = redirectMap[role] || redirectMap["user"];
+                    window.location.href = destination;
+                }
+
+            }, 800); // 0.8s delay
+        }
+        
+    </script>
 
 </body>
 </html>

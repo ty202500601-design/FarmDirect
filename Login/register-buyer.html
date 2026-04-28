@@ -52,7 +52,7 @@
                 <a href="register-buyer.html" class="tab active">Register</a>
             </div>
 
-            <form action="../USER/Dashboard.html" method="get">
+            <form id="register_form" onsubmit="handleRegister(event)">
 
                 <!-- NAME -->
                 <div class="form-group">
@@ -170,6 +170,43 @@
                 note.style.display = 'none';
                 label.innerHTML = 'Upload Government ID <span class="req">*</span>';
             }
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+
+            // Collect form values
+            var newAccount = {
+                email:    document.querySelector('[name="email"]').value.trim().toLowerCase(),
+                password: document.querySelector('[name="password"]').value,
+                name:     document.querySelector('[name="first_name"]').value + " " + document.querySelector('[name="last_name"]').value,
+                role:     "user"
+            };
+
+            // Get existing saved accounts (or empty array if none yet)
+            var existing = JSON.parse(localStorage.getItem('fd_accounts') || '[]');
+
+            // Check if email already exists
+            for (var i = 0; i < existing.length; i++) {
+                if (existing[i].email === newAccount.email) {
+                    alert("That email is already registered. Please sign in or use a different email.");
+                    return;
+                }
+            }
+
+            // Save new account
+            existing.push(newAccount);
+            localStorage.setItem('fd_accounts', JSON.stringify(existing));
+
+            // Save session so the dashboard knows who is logged in
+            localStorage.setItem('fd_session', JSON.stringify({
+                email: newAccount.email,
+                name:  newAccount.name,
+                role:  newAccount.role
+            }));
+
+            // Redirect to User Dashboard
+            window.location.href = "../USER/Dashboard.html";
         }
     </script>
 
