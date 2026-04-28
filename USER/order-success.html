@@ -5,6 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Order Placed! – FarmDirect</title>
 <link rel="stylesheet" href="style.css">
+<style>
+/* Cancel order modal */
+.cancel-modal-overlay { display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center; }
+.cancel-modal-overlay.open { display:flex; }
+.cancel-modal { background:var(--white);border-radius:var(--radius);padding:2rem;max-width:460px;width:90%;box-shadow:var(--shadow-lg); }
+.cancel-modal h3 { font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.5rem;color:var(--red); }
+.cancel-modal p { font-size:0.88rem;color:var(--text-mid);margin-bottom:1rem;line-height:1.5; }
+.cancel-reason-select { width:100%;padding:0.7rem 0.9rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;background:var(--cream);margin-bottom:1rem; }
+.cancel-reason-select:focus { border-color:var(--red); }
+.cancel-modal-btns { display:flex;gap:0.8rem; }
+.cancel-confirm-btn { flex:1;background:var(--red);color:#fff;border:none;border-radius:10px;padding:0.7rem;font-size:0.9rem;font-weight:700;cursor:pointer;transition:opacity 0.2s; }
+.cancel-confirm-btn:hover { opacity:0.85; }
+.cancel-back-btn { flex:1;background:var(--white);border:2px solid var(--border);border-radius:10px;padding:0.7rem;font-size:0.9rem;font-weight:600;cursor:pointer;transition:border-color 0.2s; }
+.cancel-back-btn:hover { border-color:var(--green);color:var(--green); }
+
+/* Cancel countdown bar */
+.cancel-countdown-bar { background:var(--orange-light);border:1.5px solid var(--orange);border-radius:var(--radius-sm);padding:0.75rem 1.1rem;margin-top:1.2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem; }
+.cancel-countdown-bar.expired { background:var(--cream-dark);border-color:var(--border); }
+.cancel-countdown-text { font-size:0.86rem;color:var(--orange);font-weight:600; }
+.cancel-countdown-text.expired { color:var(--text-light); }
+.cancel-order-btn { background:var(--red);color:#fff;border:none;border-radius:8px;padding:0.5rem 1rem;font-size:0.83rem;font-weight:700;cursor:pointer;transition:opacity 0.2s; }
+.cancel-order-btn:hover { opacity:0.85; }
+.cancel-order-btn:disabled { background:var(--border);color:var(--text-light);cursor:not-allowed; }
+</style>
 </head>
 <body>
 
@@ -33,7 +57,7 @@
               <div class="notif-icon">✅</div>
               <div class="notif-content">
                 <strong>Order Confirmed!</strong>
-                <p>Order #FD-482617 has been placed. Farmer has been notified.</p>
+                <p id="notif-order-text">Your order has been placed. Farmer has been notified.</p>
                 <span class="notif-time">Just now</span>
               </div>
             </div>
@@ -60,55 +84,77 @@
   </div>
 </nav>
 
-<!-- Centered success card on a full-height page -->
 <div class="success-page">
   <div class="success-card-wide">
 
-    <!-- Big checkmark icon -->
     <div class="success-icon">✅</div>
     <h1>Order Placed!</h1>
     <p>Salamat sa iyong order! Your fresh produce from Zamboanga farms is being prepared for delivery.</p>
 
-    <!-- Order number badge -->
-    <div class="order-num">Order #FD-482617</div>
+    <div class="order-num" id="order-num">Order #—</div>
 
-    <!-- Summary of order details in a cream box -->
-    <div class="order-details-box">
-      <div class="order-details-row"><span>Date</span><strong>March 26, 2026 · 2:34 PM</strong></div>
-      <div class="order-details-row"><span>Courier</span><strong>🚕 Grab</strong></div>
+    <div class="order-details-box" id="order-details">
+      <!-- Populated by JS -->
+      <div class="order-details-row"><span>Date</span><strong id="order-date">—</strong></div>
+      <div class="order-details-row"><span>Courier</span><strong id="order-courier">🚕 Grab</strong></div>
       <div class="order-details-row"><span>Est. Delivery</span><strong>2–4 hours</strong></div>
-      <div class="order-details-row"><span>Payment</span><strong>💵 Cash on Delivery</strong></div>
-      <!-- Divider before totals -->
+      <div class="order-details-row"><span>Payment</span><strong id="order-payment">Cash on Delivery</strong></div>
       <div class="order-details-row order-details-divider order-details-total">
-        <span>Total Paid</span><strong>₱1,139</strong>
+        <span>Total Paid (VAT incl.)</span><strong id="order-total">₱0.00</strong>
       </div>
-      <div class="order-details-row order-details-saved">
-        <span>🎉 You saved</span><strong>₱171</strong>
+      <div class="order-details-row order-details-saved" id="order-saved-row" style="display:none">
+        <span>🎉 You saved</span><strong id="order-saved">₱0</strong>
       </div>
     </div>
 
-    <!-- Voucher reward for completing the order -->
+    <!-- Cancel countdown — only visible within the cancellation window -->
+    <div class="cancel-countdown-bar" id="cancel-bar">
+      <div>
+        <div class="cancel-countdown-text" id="cancel-text">⏱ You can cancel within <span id="cancel-timer">30:00</span></div>
+        <div style="font-size:0.76rem;color:var(--text-light);margin-top:0.2rem;">After this window closes, cancellations are no longer possible.</div>
+      </div>
+      <button class="cancel-order-btn" id="cancel-btn" onclick="openCancelModal()">Cancel Order</button>
+    </div>
+
     <div class="voucher-earned">
       <h4>🎁 You earned a voucher!</h4>
       <p>Thanks for your order! Use <code>THANKYOU30</code> on your next purchase for ₱30 off. Valid for 7 days.</p>
     </div>
 
-    <!-- Quick star rating before full review after delivery -->
-    <div class="review-prompt">
-      <h4>⭐ Rate your experience</h4>
-      <p class="review-prompt-sub">How was your order so far? You can write a full review after delivery.</p>
-      <div class="star-input">
-        <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
-      </div>
+    <!-- ⭐ Review prompt REMOVED — reviews are only allowed after delivery.
+         See Order_tracking.html for the post-delivery review form. -->
+    <div style="background:var(--cream-dark);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:1rem 1.2rem;font-size:0.87rem;color:var(--text-mid);text-align:center;">
+      ⭐ <strong>Review available after delivery.</strong><br>
+      You'll be able to rate and review your order once it's been delivered to you.
     </div>
 
-    <!-- Action buttons: track order, continue shopping, dashboard -->
     <div class="success-actions">
-      <a href="Order_tracking.html" class="add-cart-btn">📦 Track Your Order</a>
+      <a href="Order_tracking.html" class="add-cart-btn" id="track-btn">📦 Track Your Order</a>
       <a href="products.html" class="outline-btn">Continue Shopping</a>
       <a href="Dashboard.html" class="outline-btn">Go to Dashboard</a>
     </div>
 
+  </div>
+</div>
+
+<!-- Cancel Order Modal -->
+<div class="cancel-modal-overlay" id="cancel-modal">
+  <div class="cancel-modal">
+    <h3>Cancel Order</h3>
+    <p>Please select a reason for cancellation. Cancellations can only be made within <strong>30 minutes</strong> of placing an order.</p>
+    <select class="cancel-reason-select" id="cancel-reason">
+      <option value="">— Select a reason —</option>
+      <option value="changed_mind">I changed my mind</option>
+      <option value="wrong_items">I ordered the wrong items</option>
+      <option value="wrong_address">Incorrect delivery address</option>
+      <option value="found_cheaper">Found a better price elsewhere</option>
+      <option value="too_long">Delivery taking too long</option>
+      <option value="other">Other reason</option>
+    </select>
+    <div class="cancel-modal-btns">
+      <button class="cancel-back-btn" onclick="closeCancelModal()">Go Back</button>
+      <button class="cancel-confirm-btn" onclick="confirmCancel()">Confirm Cancellation</button>
+    </div>
   </div>
 </div>
 
@@ -144,5 +190,108 @@
     <div class="footer-bottom"><p>© 2026 FarmDirect Zamboanga. All rights reserved.</p></div>
   </div>
 </footer>
+
+<script src="farmdirect.js"></script>
+<script>
+const pmLabel = { cod:'💵 Cash on Delivery', gcash:'📱 GCash', bank:'🏦 Bank Transfer' };
+let currentOrderId = null;
+let countdownInterval = null;
+
+function loadOrder() {
+  const id    = localStorage.getItem('fd_last_order');
+  const order = id ? FD.Orders.get(id) : null;
+
+  if (!order) {
+    document.getElementById('order-num').textContent = 'Order #FD-DEMO';
+    return;
+  }
+
+  currentOrderId = order.id;
+  document.getElementById('order-num').textContent   = 'Order #' + order.id;
+  document.getElementById('order-date').textContent  = FD.fmt.date(order.placedAt);
+  document.getElementById('order-payment').textContent = pmLabel[order.paymentMethod] || '💵 Cash on Delivery';
+  document.getElementById('order-total').textContent = FD.fmt.peso(order.pricing?.total || 0);
+  document.getElementById('notif-order-text').textContent = `Order #${order.id} has been placed. Farmer has been notified.`;
+
+  // Track link
+  document.getElementById('track-btn').href = 'Order_tracking.html?order=' + order.id;
+
+  // Savings
+  const savings = order.pricing?.disc || 0;
+  if (savings > 0) {
+    document.getElementById('order-saved-row').style.display = '';
+    document.getElementById('order-saved').textContent = FD.fmt.peso(savings);
+  }
+
+  // Cancel countdown
+  if (order.cancelled) {
+    showCancelExpired('Order has been cancelled.');
+    return;
+  }
+
+  startCancelCountdown(order);
+}
+
+function startCancelCountdown(order) {
+  function tick() {
+    const timeLeft = FD.fmt.timeLeft(order.cancelDeadline);
+    if (!timeLeft || !FD.Orders.canCancel(order)) {
+      clearInterval(countdownInterval);
+      showCancelExpired('Cancellation window has closed.');
+      return;
+    }
+    document.getElementById('cancel-timer').textContent = timeLeft;
+  }
+  tick();
+  countdownInterval = setInterval(tick, 1000);
+}
+
+function showCancelExpired(msg) {
+  const bar = document.getElementById('cancel-bar');
+  const txt = document.getElementById('cancel-text');
+  const btn = document.getElementById('cancel-btn');
+  bar.classList.add('expired');
+  txt.textContent = msg;
+  txt.classList.add('expired');
+  btn.disabled = true;
+  btn.textContent = 'Cannot Cancel';
+}
+
+function openCancelModal() {
+  const order = FD.Orders.get(currentOrderId);
+  if (!order || !FD.Orders.canCancel(order)) {
+    alert('Sorry, the cancellation window for this order has passed.');
+    return;
+  }
+  document.getElementById('cancel-modal').classList.add('open');
+}
+
+function closeCancelModal() {
+  document.getElementById('cancel-modal').classList.remove('open');
+}
+
+function confirmCancel() {
+  const reason = document.getElementById('cancel-reason').value;
+  if (!reason) { alert('Please select a reason for cancellation.'); return; }
+
+  const success = FD.Orders.cancel(currentOrderId, reason);
+  closeCancelModal();
+
+  if (success) {
+    clearInterval(countdownInterval);
+    showCancelExpired('Order cancelled successfully.');
+    document.getElementById('order-num').textContent = 'Order #' + currentOrderId + ' · CANCELLED';
+    document.getElementById('order-num').style.background = '#ffebee';
+    document.getElementById('order-num').style.color = 'var(--red)';
+    // Update notification
+    document.getElementById('notif-order-text').textContent = `Order #${currentOrderId} has been cancelled.`;
+    alert('Your order has been cancelled. A refund (if applicable) will be processed within 3–5 business days.');
+  } else {
+    alert('Unable to cancel order. The cancellation window may have passed.');
+  }
+}
+
+loadOrder();
+</script>
 </body>
 </html>
