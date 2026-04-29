@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>FarmDirect | Product Moderation</title>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="admin.js" defer></script>
     <style>
         .admin-navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: #1a2e1e; border-bottom: 1px solid #0f1c12; box-shadow: 0 2px 20px rgba(0,0,0,.15); }
         .admin-nav-inner { width: 100%; padding: 0 1.2rem; height: 56px; display: flex; align-items: center; justify-content: space-between; }
@@ -274,14 +275,6 @@
     <script>
         let currentCard = null;
         let currentTab = 'pending';
-
-        function showToast(msg, type='success') {
-            const t = document.getElementById('toast');
-            t.textContent = msg;
-            t.className = 'toast ' + type;
-            t.classList.add('show');
-            setTimeout(() => t.classList.remove('show'), 3000);
-        }
 
         function showTab(tab) {
             currentTab = tab;

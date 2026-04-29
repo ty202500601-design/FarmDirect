@@ -5,101 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>FarmDirect | Dashboard</title>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-         .admin-navbar {
-             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-             background: #1a2e1e; border-bottom: 1px solid #0f1c12;
-             box-shadow: 0 2px 20px rgba(0,0,0,.15);
-         }
-         .admin-nav-inner {
-             max-width: 100%; padding: 0 1.2rem;
-             height: 56px; display: flex; align-items: center; justify-content: space-between;
-         }
-         .admin-nav-logo {
-             font-size: 1.2rem; font-weight: 700;
-             color: #fff; text-decoration: none; flex-shrink: 0;
-             margin-right: 1.5rem;
-         }
-         .admin-nav-logo span { color: #a7f185; }
-         .admin-nav-actions { display: flex; align-items: center; gap: .5rem; }
-         
-         .notif-wrap { position: relative; }
-         .notif-btn {
-             width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
-             border-radius: 50%; color: #fff !important; background: transparent !important;
-             border: none !important; cursor: pointer; position: relative;
-             flex-shrink: 0; outline: none; transition: background .2s;
-         }
-         .notif-btn svg, .notif-btn svg path, .notif-btn svg circle { stroke: #fff !important; }
-         .notif-btn:hover { background: rgba(255,255,255,.2) !important; }
-         .notif-badge {
-             position: absolute; top: 7px; right: 7px; width: 9px; height: 9px;
-             background: #ef5350; border-radius: 50%; pointer-events: none; border: 2px solid #1a2e1e;
-         }
-         .notif-dropdown {
-             position: absolute; top: 100%; right: 0;
-             width: 320px; background: #fff; border-radius: 8px;
-             box-shadow: 0 4px 20px rgba(0,0,0,.15); display: none; overflow: hidden;
-         }
-         .notif-wrap:hover .notif-dropdown { display: block; }
-         .notif-dropdown-header {
-             background: #1a2e1e; color: white; padding: .85rem 1.2rem;
-             font-weight: 700; font-size: .9rem;
-         }
-         .notif-dropdown-list { max-height: 300px; overflow-y: auto; }
-         .notif-dropdown-item {
-             display: flex; gap: .9rem; padding: .9rem 1.1rem;
-             border-bottom: 1px solid #eee; transition: background .18s;
-         }
-         .notif-dropdown-item:hover { background: #f9f9f9; }
-         .notif-dropdown-item strong { display: block; color: #333; font-size: .9rem; }
-         .notif-dropdown-item p { margin: 4px 0 0; color: #666; font-size: .8rem; }
-         .notif-dropdown-item span { color: #999; font-size: .75rem; }
-         
-         .profile-wrap { position: relative; }
-         .profile-btn {
-             background: #a7f185; border: none; color: #1a2e1e;
-             width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
-             font-weight: 700; font-size: 13px; transition: .2s;
-             border: 2px solid rgba(255,255,255,.3); display: flex; align-items: center; justify-content: center;
-         }
-         .profile-btn:hover { background: #85e065; }
-         .profile-dropdown {
-             position: absolute; top: 100%; right: 0; width: 200px;
-             background: #fff; border-radius: 8px;
-             box-shadow: 0 4px 20px rgba(0,0,0,.15); display: none; overflow: hidden;
-         }
-         .profile-wrap:hover .profile-dropdown { display: block; }
-         .profile-dropdown-item {
-             display: flex; align-items: center; gap: 10px; padding: 12px 16px;
-             color: #333; text-decoration: none; transition: background .2s;
-         }
-         .profile-dropdown-item:hover { background: #f5f5f5; }
-         .profile-dropdown-item.logout { color: #f44336; }
-         .sidebar { top: 56px; height: calc(100vh - 56px); }
-         .main-content { margin-top: 56px; }
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #333;
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 9999;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-        .toast.show { transform: translateY(0); opacity: 1; }
-        .toast.success { background: var(--accent-green); }
-        .toast.error { background: #f44336; }
-        .sidebar nav ul li a { color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; }
-        .sidebar nav ul li a svg { flex-shrink: 0; opacity: 0.7; }
-        .sidebar nav ul li a:hover svg, .sidebar nav ul li.active a svg { opacity: 1; }
-    </style>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="dashboard.js" defer></script>
 </head>
 <body>
     <nav class="admin-navbar">
@@ -261,44 +168,5 @@
     </main>
 
     <div id="toast" class="toast"></div>
-
-    <script>
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = 'toast ' + type;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-
-        // Search functionality
-        const searchInput = document.querySelector('.search-bar input');
-        searchInput.addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') {
-                const query = this.value.toLowerCase();
-                if (query) {
-                    showToast('Searching for: ' + query);
-                }
-            }
-        });
-
-        // Stats card click feedback
-        document.querySelectorAll('.stats-grid .card').forEach(card => {
-            card.style.cursor = 'pointer';
-            card.addEventListener('click', function() {
-                const label = this.querySelector('.label').textContent;
-                showToast('Viewing ' + label + ' details');
-            });
-        });
-
-        // Notification click
-        document.querySelectorAll('.notif-dropdown-item').forEach(item => {
-            item.addEventListener('click', function() {
-                showToast('Notification opened');
-            });
-        });
-
-        lucide.createIcons();
-    </script>
 </body>
 </html>

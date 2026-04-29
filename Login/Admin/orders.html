@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>FarmDirect | Logistics</title>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="admin.js" defer></script>
     <style>
          .admin-navbar {
              position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
@@ -250,14 +251,6 @@
     <div id="toast" class="toast"></div>
 
     <script>
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = 'toast ' + type;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-
         // Track buttons
         document.querySelectorAll('.btn-outline').forEach(btn => {
             if (btn.textContent.includes('Track')) {
@@ -271,8 +264,6 @@
                 });
             }
         });
-
-        lucide.createIcons();
     </script>
 </body>
 </html>

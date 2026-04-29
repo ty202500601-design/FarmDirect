@@ -710,3 +710,61 @@ tbody td {
     cursor: pointer;
     transition: all 0.3s ease;
 }
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-radius: 6px;
+}
+
+.btn-success {
+    background: var(--accent-green);
+    color: white;
+    border: none;
+}
+
+.invoice-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.invoice-modal.active {
+    display: flex;
+}
+
+.invoice-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.invoice-header {
+    border-bottom: 2px solid var(--accent-green);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.invoice-header h2 {
+    color: var(--accent-green);
+    margin-bottom: 5px;
+}
+
+.invoice-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.invoice-total {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-green);
+    margin-top: 15px;
+}
