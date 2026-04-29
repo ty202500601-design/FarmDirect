@@ -285,9 +285,9 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Maria Santos</strong></td>
-                        <td>Zambowood</td>
-                        <td><span class="text-muted">ID_Proof.pdf</span></td>
+                        <td><strong>Roberto Lee</strong></td>
+                        <td>Divisoria</td>
+                        <td><span class="text-muted">Business_Permit.pdf</span></td>
                         <td>
                             <div class="action-buttons">
                                 <button class="btn btn-primary">Approve</button>
@@ -352,7 +352,7 @@
                             <td>
                                 <div class="action-buttons">
                                     <button class="btn btn-outline">View</button>
-                                    <button class="btn btn-danger">Suspend</button>
+                                    <button class="btn btn-danger btn-suspend" data-warnings="3">Suspend</button>
                                 </div>
                             </td>
                         </tr>
@@ -362,7 +362,7 @@
                             <td>
                                 <div class="action-buttons">
                                     <button class="btn btn-outline">View</button>
-                                    <button class="btn btn-danger">Suspend</button>
+                                    <button class="btn btn-danger btn-suspend" data-warnings="1">Suspend</button>
                                 </div>
                             </td>
                         </tr>
@@ -372,7 +372,7 @@
                             <td>
                                 <div class="action-buttons">
                                     <button class="btn btn-outline">View</button>
-                                    <button class="btn btn-danger">Suspend</button>
+                                    <button class="btn btn-danger btn-suspend" data-warnings="2">Suspend</button>
                                 </div>
                             </td>
                         </tr>
@@ -382,7 +382,7 @@
                             <td>
                                 <div class="action-buttons">
                                     <button class="btn btn-outline">View</button>
-                                    <button class="btn btn-danger">Suspend</button>
+                                    <button class="btn btn-danger btn-suspend" data-warnings="0">Suspend</button>
                                 </div>
                             </td>
                         </tr>
@@ -392,7 +392,7 @@
                             <td>
                                 <div class="action-buttons">
                                     <button class="btn btn-outline">View</button>
-                                    <button class="btn btn-danger">Suspend</button>
+                                    <button class="btn btn-danger btn-suspend" data-warnings="3">Suspend</button>
                                 </div>
                             </td>
                         </tr>
@@ -419,7 +419,7 @@
                             <td>
                                 <div class="action-buttons">
                                     <button class="btn btn-outline">View</button>
-                                    <button class="btn btn-danger">Suspend</button>
+                                    <button class="btn btn-danger btn-suspend" data-warnings="2">Suspend</button>
                                 </div>
                             </td>
                         </tr>
@@ -429,7 +429,7 @@
                             <td>
                                 <div class="action-buttons">
                                     <button class="btn btn-outline">View</button>
-                                    <button class="btn btn-danger">Suspend</button>
+                                    <button class="btn btn-danger btn-suspend" data-warnings="3">Suspend</button>
                                 </div>
                             </td>
                         </tr>
@@ -439,7 +439,7 @@
                             <td>
                                 <div class="action-buttons">
                                     <button class="btn btn-outline">View</button>
-                                    <button class="btn btn-danger">Suspend</button>
+                                    <button class="btn btn-danger btn-suspend" data-warnings="0">Suspend</button>
                                 </div>
                             </td>
                         </tr>
@@ -449,7 +449,7 @@
                             <td>
                                 <div class="action-buttons">
                                     <button class="btn btn-outline">View</button>
-                                    <button class="btn btn-danger">Suspend</button>
+                                    <button class="btn btn-danger btn-suspend" data-warnings="1">Suspend</button>
                                 </div>
                             </td>
                         </tr>
@@ -459,7 +459,7 @@
                             <td>
                                 <div class="action-buttons">
                                     <button class="btn btn-outline">View</button>
-                                    <button class="btn btn-danger">Suspend</button>
+                                    <button class="btn btn-danger btn-suspend" data-warnings="2">Suspend</button>
                                 </div>
                             </td>
                         </tr>
@@ -603,18 +603,77 @@
         });
 
         // Suspend buttons
-        document.querySelectorAll('.btn-danger').forEach(btn => {
-            if (btn.textContent.includes('Suspend')) {
-                btn.addEventListener('click', function() {
-                    const row = this.closest('tr');
-                    const name = row.querySelector('td strong').textContent;
-                    if (confirm('Suspend ' + name + '?')) {
-                        row.remove();
-                        showToast('Suspended ' + name, 'error');
-                    }
-                });
+       // Dynamic Warning and Suspend Logic
+function updateSuspendButtons() {
+    document.querySelectorAll('.btn-suspend').forEach(btn => {
+        const warnings = parseInt(btn.getAttribute('data-warnings')) || 0;
+        
+        // Clear all possible warning classes first
+        btn.classList.remove('btn-warning-0', 'btn-warning-1', 'btn-warning-2', 'btn-warning-3');
+        
+        if (warnings === 0) {
+            btn.classList.add('btn-warning-0');
+            btn.textContent = 'Issue Warning';
+        } else if (warnings === 1) {
+            btn.classList.add('btn-warning-1');
+            btn.textContent = '1st Warning';
+        } else if (warnings === 2) {
+            btn.classList.add('btn-warning-2');
+            btn.textContent = '2nd Warning';
+        } else {
+            btn.classList.add('btn-warning-3');
+            btn.textContent = 'Final Warning';
+        }
+    });
+}
+
+// Attach the click event to increment warnings
+document.querySelectorAll('.btn-suspend').forEach(btn => {
+    btn.addEventListener('click', function() {
+        let warnings = parseInt(this.getAttribute('data-warnings')) || 0;
+        const name = this.closest('tr').querySelector('td strong').textContent;
+
+        if (warnings < 3) {
+            warnings++;
+            this.setAttribute('data-warnings', warnings);
+            showToast(`Warning increased for ${name}`, 'success');
+            updateSuspendButtons();
+        } else {
+            if (confirm(`Final warning reached. Suspend ${name} permanently?`)) {
+                this.closest('tr').remove();
+                showToast(`${name} has been suspended`, 'error');
             }
-        });
+        }
+    });
+});
+
+// Handle Suspend/Warning Click
+document.querySelectorAll('.btn-suspend').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const row = this.closest('tr');
+        const name = row.querySelector('td strong').textContent;
+        let warnings = parseInt(this.getAttribute('data-warnings')) || 0;
+
+        if (warnings < 3) {
+            warnings++;
+            this.setAttribute('data-warnings', warnings);
+            showToast(`Warning #${warnings} issued to ${name}`, warnings === 3 ? 'error' : 'success');
+            updateSuspendButtons();
+        } else {
+            // If they click on "Final Warning" (3 warnings already)
+            if (confirm(`Maximum warnings reached. Permanently suspend ${name}?`)) {
+                row.style.opacity = '0';
+                setTimeout(() => {
+                    row.remove();
+                    showToast(`${name} has been suspended`, 'error');
+                }, 300);
+            }
+        }
+    });
+});
+
+// Initialize button states on load
+updateSuspendButtons();
 
         // View buttons - open user detail modal
         document.querySelectorAll('table').forEach((table, tableIndex) => {
