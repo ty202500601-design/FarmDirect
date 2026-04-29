@@ -2,64 +2,358 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>FarmDirect | Product Moderation</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .admin-navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: #1a2e1e; border-bottom: 1px solid #0f1c12; box-shadow: 0 2px 20px rgba(0,0,0,.15); }
+        .admin-nav-inner { width: 100%; padding: 0 1.2rem; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+        .admin-nav-logo { font-size: 1.2rem; font-weight: 700; color: #fff; text-decoration: none; margin-right: 1.5rem; }
+        .admin-nav-logo span { color: #a7f185; }
+        .admin-nav-actions { display: flex; align-items: center; gap: .5rem; }
+.notif-wrap { position: relative; }
+.notif-btn { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #fff !important; background: transparent !important; border: none !important; cursor: pointer; transition: background .2s; }
+.notif-btn svg, .notif-btn svg path, .notif-btn svg circle { stroke: #fff !important; }
+.notif-btn:hover { background: rgba(255,255,255,.2) !important; }
+.notif-badge { position: absolute; top: 7px; right: 7px; width: 9px; height: 9px; background: #ef5350; border-radius: 50%; border: 2px solid #1a2e1e; }
+.notif-dropdown { position: absolute; top: 100%; right: 0; width: 320px; background: #fff; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,.15); display: none; }
+.notif-wrap:hover .notif-dropdown { display: block; }
+.notif-dropdown-header { background: #1a2e1e; color: white; padding: .85rem 1.2rem; font-weight: 700; font-size: .9rem; }
+.notif-dropdown-item { display: flex; gap: .9rem; padding: .9rem 1.1rem; border-bottom: 1px solid #eee; }
+.notif-dropdown-item:hover { background: #f9f9f9; }
+.notif-dropdown-item strong { display: block; color: #333; font-size: .9rem; }
+.notif-dropdown-item p { margin: 4px 0 0; color: #666; font-size: .8rem; }
+.notif-dropdown-item span { color: #999; font-size: .75rem; }
+.profile-wrap { position: relative; }
+.profile-btn { background: #a7f185; border: none; color: #1a2e1e; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-weight: 700; font-size: 13px; border: 2px solid rgba(255,255,255,.3); display: flex; align-items: center; justify-content: center; }
+.profile-btn:hover { background: #85e065; }
+.profile-dropdown { position: absolute; top: 100%; right: 0; width: 200px; background: #fff; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,.15); display: none; }
+.profile-wrap:hover .profile-dropdown { display: block; }
+.profile-dropdown-item { display: flex; align-items: center; gap: 10px; padding: 12px 16px; color: #333; text-decoration: none; }
+.profile-dropdown-item:hover { background: #f5f5f5; }
+.profile-dropdown-item.logout { color: #f44336; }
+.sidebar { position: fixed; top: 56px; left: 0; width: 240px; height: calc(100vh - 56px); background-color: #1e1e1e; color: white; padding: 20px 0; }
+        .sidebar h2 { text-align: center; color: #4caf50; margin-bottom: 30px; }
+        .sidebar nav ul { list-style: none; }
+        .sidebar nav ul li { padding: 15px 25px; transition: .3s; }
+        .sidebar nav ul li a { color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .sidebar nav ul li a svg { flex-shrink: 0; opacity: 0.7; }
+        .sidebar nav ul li a:hover svg, .sidebar nav ul li.active a svg { opacity: 1; }
+        .sidebar nav ul li:hover, .sidebar nav ul li.active { background-color: #2d5a27; }
+        .main-content { margin-left: 240px; margin-top: 56px; padding: 30px; }
+        .tab-btn { padding: 12px 24px; border: none; background: #f0f0f0; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+        .tab-btn.active { background: var(--primary-green); color: white; }
+        .badge { padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; color: white; }
+        .bg-yellow { background: #ffc107; }
+        .bg-green { background: var(--accent-green); }
+        .card { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 0; min-width: 250px; flex: 1; }
+        
+        .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 6px; }
+        .btn { padding: 10px 16px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; border: none; }
+        .btn-success { background: var(--accent-green); color: white; }
+        .btn-danger { background: #f44336; color: white; }
+        .btn-outline { background: transparent; border: 1px solid #ddd; color: #333; }
+        .toast { position: fixed; bottom: 20px; right: 20px; background: #333; color: #fff; padding: 12px 20px; border-radius: 6px; transform: translateY(100px); opacity: 0; transition: 0.3s; }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 9999; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: white; border-radius: 12px; width: 90%; max-width: 450px; overflow: hidden; }
+        .modal-header { padding: 20px 24px; color: white; }
+        .modal-header.green { background: var(--primary-green); }
+        .modal-header.red { background: #f44336; }
+        .modal-body { padding: 24px; }
+        .modal-actions { padding: 16px 24px; border-top: 1px solid #eee; display: flex; gap: 12px; justify-content: flex-end; }
+        .category-tag { display: inline-block; font-size: 0.75rem; color: #666; background: #f0f0f0; padding: 2px 8px; border-radius: 4px; margin-top: 6px; }
+    </style>
 </head>
 <body>
+    <nav class="admin-navbar">
+        <div class="admin-nav-inner">
+            <a href="dashboard.html" class="admin-nav-logo">Farm<span>Direct</span> Admin</a>
+            <div class="admin-nav-actions">
+            <div class="notif-wrap">
+                <button class="notif-btn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <span class="notif-badge"></span>
+                </button>
+                <div class="notif-dropdown">
+                    <div class="notif-dropdown-header">Notifications</div>
+                    <div class="notif-dropdown-item"><strong>New Farmer Request</strong><p>Maria Santos applied</p></div>
+                    <div class="notif-dropdown-item"><strong>Order #1204 Pending</strong><p>Requires approval</p></div>
+                </div>
+            </div>
+            <div class="profile-wrap">
+                <button class="profile-btn">A</button>
+                <div class="profile-dropdown">
+                    <a href="settings.html" class="profile-dropdown-item">⚙️ Settings</a>
+                    <a href="../login-admin.html" class="profile-dropdown-item logout">🚪 Logout</a>
+                </div>
+        </div>
+    </nav>
+
     <aside class="sidebar">
         <div class="sidebar-header"><h2>FARMDirect</h2></div>
         <nav>
             <ul>
-                <li><a href="dashboard.html">📊 Dashboard</a></li>
-                <li><a href="users.html">👥 Management</a></li>
-                <li class="active"><a href="products.html">🌽 Moderation</a></li>
-                <li><a href="orders.html">🚚 Logistics</a></li>
-                <li><a href="finance.html">💰 Financials</a></li>
+                <li><a href="dashboard.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg> Dashboard</a></li>
+                <li><a href="users.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Management</a></li>
+                <li class="active"><a href="products.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Moderation</a></li>
+                <li><a href="orders.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Logistics</a></li>
+                <li><a href="finance.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Financials</a></li>
+                <li><a href="reports.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Reports</a></li>
             </ul>
         </nav>
     </aside>
 
     <main class="main-content">
-        <header class="top-bar">
-            <h1>Product Catalog Moderation</h1>
-            <div class="search-bar"><input type="text" placeholder="Search products..."></div>
-        </header>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;">
-            <div class="card">
-                <div style="height:180px; background:#e9ecef; border-radius:6px; display:flex; align-items:center; justify-content:center; margin-bottom:15px; color:#adb5bd;">
-                    [Rice Grain Image]
-                </div>
-                <div style="display:flex; justify-content:space-between; align-items:start;">
-                    <div>
-                        <h3 style="font-size:1.1rem;">Organic Dinorado</h3>
-                        <p style="color:var(--text-muted); font-size:0.85rem;">Farmer: Juan D.</p>
+        <h1 style="margin-bottom:20px;">Product Catalog Moderation</h1>
+        
+        <div style="display:flex; gap:10px; margin-bottom:30px;">
+            <button class="tab-btn active" onclick="showTab('pending')" id="tabPending">⏳ Pending (<span id="pendingCount">4</span>)</button>
+            <button class="tab-btn" onclick="showTab('approved')" id="tabApproved">✓ Approved (<span id="approvedCount">4</span>)</button>
+</div>
+        
+        <div id="pendingTab">
+            <div style="display:flex; flex-wrap:wrap; gap:20px;">
+                <div class="card" data-category="grains">
+                    <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                    <h3>Organic Dinorado</h3>
+                    <p>Farmer: Ruben Tiu</p>
+                    <p style="color:var(--primary-green); font-weight:600;">₱55/kg</p>
+                    <div style="margin-bottom:10px;"><span class="category-tag">Grains</span> <span class="badge bg-yellow">Pending</span></div>
+                    <div style="margin-top:15px; display:flex; gap:10px;">
+                        <button class="btn btn-success" style="flex:1" onclick="showApprove(this)">✓ Approve</button>
+                        <button class="btn btn-outline" style="flex:1" onclick="showReject(this)">✕ Reject</button>
                     </div>
-                    <span class="badge bg-yellow">Pending</span>
                 </div>
-                <div style="margin-top:20px; display:flex; gap:10px;">
-                    <button class="btn btn-success" style="flex:1;">Approve</button>
-                    <button class="btn btn-outline" style="flex:1;">Edit</button>
+                <div class="card" data-category="vegetables">
+                    <img src="../../Sellers/IMG/Corn.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                    <h3>Sweet Corn</h3>
+                    <p>Farmer: Roberto Lee</p>
+                    <p style="color:var(--primary-green); font-weight:600;">₱20/piece</p>
+                    <div style="margin-bottom:10px;"><span class="category-tag">Vegetables</span> <span class="badge bg-yellow">Pending</span></div>
+                    <div style="margin-top:15px; display:flex; gap:10px;">
+                        <button class="btn btn-success" style="flex:1" onclick="showApprove(this)">✓ Approve</button>
+                        <button class="btn btn-outline" style="flex:1" onclick="showReject(this)">✕ Reject</button>
+                    </div>
+                </div>
+                <div class="card" data-category="fruits">
+                    <img src="../../Sellers/IMG/Strawberries.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                    <h3>Strawberries</h3>
+                    <p>Farmer: Ana Mae</p>
+                    <p style="color:var(--primary-green); font-weight:600;">₱90/box</p>
+                    <div style="margin-bottom:10px;"><span class="category-tag">Fruits</span> <span class="badge bg-yellow">Pending</span></div>
+                    <div style="margin-top:15px; display:flex; gap:10px;">
+                        <button class="btn btn-success" style="flex:1" onclick="showApprove(this)">✓ Approve</button>
+                        <button class="btn btn-outline" style="flex:1" onclick="showReject(this)">✕ Reject</button>
+                    </div>
+                </div>
+                <div class="card" data-category="fruits">
+                    <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                    <h3>Fresh Calamansi</h3>
+                    <p>Farmer: Lily Cheng</p>
+                    <p style="color:var(--primary-green); font-weight:600;">₱40/kg</p>
+                    <div style="margin-bottom:10px;"><span class="category-tag">Fruits</span> <span class="badge bg-yellow">Pending</span></div>
+                    <div style="margin-top:15px; display:flex; gap:10px;">
+                        <button class="btn btn-success" style="flex:1" onclick="showApprove(this)">✓ Approve</button>
+                        <button class="btn btn-outline" style="flex:1" onclick="showReject(this)">✕ Reject</button>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="card">
-                <div style="height:180px; background:#e9ecef; border-radius:6px; display:flex; align-items:center; justify-content:center; margin-bottom:15px; color:#adb5bd;">
-                    [Cabbage Image]
-                </div>
-                <div style="display:flex; justify-content:space-between; align-items:start;">
-                    <div>
-                        <h3 style="font-size:1.1rem;">Fresh Cabbage</h3>
-                        <p style="color:var(--text-muted); font-size:0.85rem;">Farmer: Maria C.</p>
+        <div id="approvedTab" style="display:none;">
+            <div style="display:flex; flex-wrap:wrap; gap:20px;">
+                <div class="card" data-category="vegetables">
+                    <img src="../../Sellers/IMG/Tomatoes.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                    <h3>Fresh Tomatoes</h3>
+                    <p>Farmer: Juan Dela Cruz</p>
+                    <p style="color:var(--primary-green); font-weight:600;">₱35/kg</p>
+                    <div style="margin-bottom:10px;"><span class="category-tag">Vegetables</span> <span class="badge bg-green">Approved</span></div>
+                    <div style="margin-top:15px;">
+                        <button class="btn btn-danger" style="width:100%" onclick="showTakeDown(this)">Take Down</button>
                     </div>
-                    <span class="badge bg-green">Live</span>
                 </div>
-                <div style="margin-top:20px; display:flex; gap:10px;">
-                    <button class="btn btn-danger" style="flex:1;">Take Down</button>
-                    <button class="btn btn-outline" style="flex:1;">Edit</button>
+                <div class="card" data-category="vegetables">
+                    <img src="../../Sellers/IMG/Lettuce.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                    <h3>Fresh Lettuce</h3>
+                    <p>Farmer: Juan Dela Cruz</p>
+                    <p style="color:var(--primary-green); font-weight:600;">₱25/bundle</p>
+                    <div style="margin-bottom:10px;"><span class="category-tag">Vegetables</span> <span class="badge bg-green">Approved</span></div>
+                    <div style="margin-top:15px;">
+                        <button class="btn btn-danger" style="width:100%" onclick="showTakeDown(this)">Take Down</button>
+                    </div>
+                </div>
+                <div class="card" data-category="vegetables">
+                    <img src="../../Sellers/IMG/Carrots.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                    <h3>Organic Carrots</h3>
+                    <p>Farmer: Maria Santos</p>
+                    <p style="color:var(--primary-green); font-weight:600;">₱85/bundle</p>
+                    <div style="margin-bottom:10px;"><span class="category-tag">Vegetables</span> <span class="badge bg-green">Approved</span></div>
+                    <div style="margin-top:15px;">
+                        <button class="btn btn-danger" style="width:100%" onclick="showTakeDown(this)">Take Down</button>
+                    </div>
+                </div>
+                <div class="card" data-category="vegetables">
+                    <img src="https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=400" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                    <h3>Fresh Cabbage</h3>
+                    <p>Farmer: Pedro Yang</p>
+                    <p style="color:var(--primary-green); font-weight:600;">₱60/piece</p>
+                    <div style="margin-bottom:10px;"><span class="category-tag">Vegetables</span> <span class="badge bg-green">Approved</span></div>
+                    <div style="margin-top:15px;">
+                        <button class="btn btn-danger" style="width:100%" onclick="showTakeDown(this)">Take Down</button>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
+
+    <div id="toast" class="toast"></div>
+
+    <!-- Approve Modal -->
+    <div class="modal-overlay" id="approveModal">
+        <div class="modal">
+            <div class="modal-header green">
+                <h3 style="margin:0;">✓ Approve Product</h3>
+                <p>You are about to approve this product</p>
+            </div>
+            <div class="modal-body" id="approveContent"></div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
+                <button class="btn btn-success" id="btnConfirmApprove">✓ Approve</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reject Modal -->
+    <div class="modal-overlay" id="rejectModal">
+        <div class="modal">
+            <div class="modal-header red">
+                <h3 style="margin:0;">✕ Reject Product</h3>
+                <p>Select a reason for rejection</p>
+            </div>
+            <div class="modal-body">
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="rejectReason" value="Quality issues"> Quality issues</label>
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="rejectReason" value="Incomplete information"> Incomplete information</label>
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="rejectReason" value="Prohibited item"> Prohibited item</label>
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="rejectReason" value="False claims"> False claims</label>
+                <input type="text" id="rejectOther" placeholder="Or enter custom reason..." style="width:100%; padding:10px; margin-top:15px; border:1px solid #ddd; border-radius:6px;">
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
+                <button class="btn btn-danger" id="btnConfirmReject">✕ Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Take Down Modal -->
+    <div class="modal-overlay" id="takeDownModal">
+        <div class="modal">
+            <div class="modal-header red">
+                <h3 style="margin:0;">📝 Take Down Product</h3>
+                <p>Select a reason</p>
+            </div>
+            <div class="modal-body">
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="takeDownReason" value="Quality issues"> Quality issues</label>
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="takeDownReason" value="Incorrect pricing"> Incorrect pricing</label>
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="takeDownReason" value="Misleading description"> Misleading description</label>
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="takeDownReason" value="Image issues"> Image issues</label>
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="takeDownReason" value="Violation of terms"> Violation of terms</label>
+                <input type="text" id="takeDownOther" placeholder="Or enter custom reason..." style="width:100%; padding:10px; margin-top:15px; border:1px solid #ddd; border-radius:6px;">
+            </div>
+<div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
+                <button class="btn btn-danger" id="btnConfirmTakeDown">Take Down</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentCard = null;
+        let currentTab = 'pending';
+
+        function showToast(msg, type='success') {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = 'toast ' + type;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        function showTab(tab) {
+            currentTab = tab;
+            document.getElementById('pendingTab').style.display = tab === 'pending' ? 'block' : 'none';
+            document.getElementById('approvedTab').style.display = tab === 'approved' ? 'block' : 'none';
+            document.getElementById('tabPending').classList.toggle('active', tab === 'pending');
+            document.getElementById('tabApproved').classList.toggle('active', tab === 'approved');
+        }
+
+        function closeModals() {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+            currentCard = null;
+        }
+
+        function showApprove(btn) {
+            currentCard = btn.closest('.card');
+            const name = currentCard.querySelector('h3').textContent;
+            const farmer = currentCard.querySelector('p').textContent.replace('Farmer: ', '');
+            document.getElementById('approveContent').innerHTML = `<h3>${name}</h3><p>Farmer: ${farmer}</p><p>Once approved, this product will be visible to buyers.</p>`;
+            document.getElementById('approveModal').classList.add('active');
+        }
+
+        function confirmApprove() {
+            if (!currentCard) return;
+            const name = currentCard.querySelector('h3').textContent;
+            currentCard.querySelector('.badge').className = 'badge bg-green';
+            currentCard.querySelector('.badge').textContent = 'Approved';
+            currentCard.querySelector('div:last-child').innerHTML = '<button class="btn btn-danger" style="width:100%" onclick="showTakeDown(this)">Take Down</button>';
+            
+            document.getElementById('approvedTab').querySelector('div').appendChild(currentCard);
+            document.getElementById('pendingCount').textContent = parseInt(document.getElementById('pendingCount').textContent) - 1;
+            document.getElementById('approvedCount').textContent = parseInt(document.getElementById('approvedCount').textContent) + 1;
+            
+            closeModals();
+            showToast(name + ' approved!');
+        }
+
+function showReject(btn) {
+            currentCard = btn.closest('.card');
+            document.getElementById('rejectModal').classList.add('active');
+        }
+
+        function confirmReject() {
+            if (!currentCard) return;
+            const name = currentCard.querySelector('h3').textContent;
+            const reason = document.querySelector('input[name="rejectReason"]:checked')?.value || document.getElementById('rejectOther').value;
+            currentCard.remove();
+            document.getElementById('pendingCount').textContent = parseInt(document.getElementById('pendingCount').textContent) - 1;
+            closeModals();
+            showToast(name + ' rejected!', 'error');
+        }
+
+        function showTakeDown(btn) {
+            currentCard = btn.closest('.card');
+            document.getElementById('takeDownModal').classList.add('active');
+        }
+
+        function confirmTakeDown() {
+            if (!currentCard) return;
+            const name = currentCard.querySelector('h3').textContent;
+            const reason = document.querySelector('input[name="takeDownReason"]:checked')?.value || document.getElementById('takeDownOther').value;
+            currentCard.remove();
+            document.getElementById('approvedCount').textContent = parseInt(document.getElementById('approvedCount').textContent) - 1;
+            closeModals();
+            showToast(name + ' taken down!', 'error');
+        }
+
+        // Attach confirm button handlers
+        document.getElementById('btnConfirmApprove').addEventListener('click', confirmApprove);
+        document.getElementById('btnConfirmReject').addEventListener('click', confirmReject);
+        document.getElementById('btnConfirmTakeDown').addEventListener('click', confirmTakeDown);
+    </script>
 </body>
 </html>
