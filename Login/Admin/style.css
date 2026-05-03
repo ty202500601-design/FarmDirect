@@ -915,4 +915,55 @@ tbody td {
     font-weight: 700;
     color: var(--accent-green);
     margin-top: 15px;
-}
+}        .modal-section {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .modal-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .modal-label {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .modal-value {
+            font-size: 1rem;
+            color: #333;
+            font-weight: 500;
+        }
+        .modal-value.badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        .doc-preview {
+            background: #f5f5f5;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .doc-preview svg {
+            width: 48px;
+            height: 48px;
+            color: #888;
+        }
+        .user-avatar-lg {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 0 auto 16px;
+        }
