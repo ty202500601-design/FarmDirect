@@ -811,16 +811,6 @@ tbody td {
         .review-evidence-img img { width: 80px; height: 80px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd; }
         .review-notes { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; min-height: 80px; margin-bottom: 15px; font-family: inherit; }
         .review-actions { display: flex; gap: 10px; justify-content: flex-end; }
-            background: #333;
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 9999;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
         .toast.show { transform: translateY(0); opacity: 1; }
         .toast.success { background: var(--accent-green); }
         .toast.error { background: #f44336; }
