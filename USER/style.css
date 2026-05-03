@@ -641,11 +641,6 @@ input.wishlist-check:checked + label.wishlist-btn { color: var(--red); }
 .view-all:hover { opacity: 0.7; }
 .featured-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.3rem; }
 
-/* Stars */
-.stars { display: flex; align-items: center; gap: 0.2rem; }
-.stars .s { color: var(--gold); font-size: 0.8rem; line-height: 1; }
-.stars .s.empty { color: #ddd; }
-
 /* Dashboard */
 .dashboard-wrap { padding: calc(var(--nav-h) + 2rem) 0 3rem; min-height: 100vh; }
 .stat-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1.1rem; margin-bottom: 2.2rem; }
