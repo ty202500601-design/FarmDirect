@@ -68,7 +68,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
 }
 
 .search-bar input {
@@ -183,6 +182,7 @@ h1, h3 {
     transition: all 0.2s ease;
     border: none;
     display: inline-block;
+    margin-right: 10px;
 }
 
 .btn-outline {
@@ -250,8 +250,8 @@ tbody td {
 }
 
 .management-section h3 {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
+    margin-bottom: 20px;
+    font-size: 1.25rem;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -259,8 +259,7 @@ tbody td {
 
 .management-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Split into two equal columns */
-    gap: 30px;
+    
 }
 
 /* Ensure tables inside cards don't feel too cramped */
@@ -1075,3 +1074,43 @@ tbody td {
             transition: 0.2s;
         }
         .btn-save:hover { background: var(--accent-green); }
+
+        /* Enable Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Pill Navigation Container */
+.pill-nav-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+    padding-top: 10px; /* Offset for the fixed navbar */
+}
+
+/* The Pill Buttons */
+.pill-btn {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: var(--white);
+    color: var(--primary-green);
+    border: 1px solid var(--primary-green);
+    border-radius: 50px; /* Makes it a pill shape */
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.pill-btn:hover {
+    background-color: var(--primary-green);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Section Highlight Fix */
+/* This ensures that when you jump to a section, it's not hidden behind your fixed top-nav */
+.management-section {
+    scroll-margin-top: 80px; 
+    margin-bottom: 55px;

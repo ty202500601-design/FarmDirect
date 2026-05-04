@@ -55,6 +55,7 @@
         <div style="display:flex; gap:10px; margin-bottom:30px;">
             <button class="tab-btn active" onclick="showTab('pending')" id="tabPending">⏳ Pending (<span id="pendingCount">4</span>)</button>
             <button class="tab-btn" onclick="showTab('approved')" id="tabApproved">✓ Approved (<span id="approvedCount">4</span>)</button>
+            <button class="tab-btn" onclick="showTab('approved')" id="tabApproved">✓ Rejected (<span id="approvedCount">4</span>)</button>
 </div>
         
         <div id="pendingTab">
@@ -129,7 +130,7 @@
                     </div>
                 </div>
                 <div class="card" data-category="vegetables">
-                    <img src="../../Sellers/IMG/Carrots.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                    <img src="../IMG/carrots.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
                     <h3>Organic Carrots</h3>
                     <p>Farmer: Maria Santos</p>
                     <p style="color:var(--primary-green); font-weight:600;">₱85/bundle</p>
@@ -211,6 +212,114 @@
             </div>
         </div>
     </div>
+
+    <!-- Reject Tab -->
+    <div id="rejectTab" style="display:none;">
+            <div style="display:flex; flex-wrap:wrap; gap:20px;">
+                <div class="card" data-category="vegetables">
+                    <img src="../IMG/cherry tomatoes.webp" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                    <h3>Fresh Tomatoes</h3>
+                    <p>Farmer: Juan Dela Cruz</p>
+                    <p style="color:var(--primary-green); font-weight:600;">₱35/kg</p>
+                    <div style="margin-bottom:10px;"><span class="category-tag">Vegetables</span> <span class="badge bg-green">Approved</span></div>
+                    <div style="margin-top:15px;">
+                        <button class="btn btn-danger" style="width:100%" onclick="showTakeDown(this)">Take Down</button>
+                    </div>
+                </div>
+                <div class="card" data-category="vegetables">
+                    <img src="../IMG/pechay.webp" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                    <h3>Chinese Pechay</h3>
+                    <p>Farmer: Juan Dela Cruz</p>
+                    <p style="color:var(--primary-green); font-weight:600;">₱25/bundle</p>
+                    <div style="margin-bottom:10px;"><span class="category-tag">Vegetables</span> <span class="badge bg-green">Approved</span></div>
+                    <div style="margin-top:15px;">
+                        <button class="btn btn-danger" style="width:100%" onclick="showTakeDown(this)">Take Down</button>
+                    </div>
+                </div>
+                <div class="card" data-category="vegetables">
+                    <img src="../IMG/carrots.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                    <h3>Organic Carrots</h3>
+                    <p>Farmer: Maria Santos</p>
+                    <p style="color:var(--primary-green); font-weight:600;">₱85/bundle</p>
+                    <div style="margin-bottom:10px;"><span class="category-tag">Vegetables</span> <span class="badge bg-green">Approved</span></div>
+                    <div style="margin-top:15px;">
+                        <button class="btn btn-danger" style="width:100%" onclick="showTakeDown(this)">Take Down</button>
+                    </div>
+                </div>
+                <div class="card" data-category="vegetables">
+                    <img src="https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=400" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                    <h3>Fresh Cabbage</h3>
+                    <p>Farmer: Pedro Yang</p>
+                    <p style="color:var(--primary-green); font-weight:600;">₱60/piece</p>
+                    <div style="margin-bottom:10px;"><span class="category-tag">Vegetables</span> <span class="badge bg-green">Approved</span></div>
+                    <div style="margin-top:15px;">
+                        <button class="btn btn-danger" style="width:100%" onclick="showTakeDown(this)">Take Down</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <!-- Approve Modal -->
+    <div class="modal-overlay" id="approveModal">
+        <div class="modal">
+            <div class="modal-header green">
+                <h3 style="margin:0;">✓ Approve Product</h3>
+                <p>You are about to approve this product</p>
+            </div>
+            <div class="modal-body" id="approveContent"></div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
+                <button class="btn btn-success" id="btnConfirmApprove">✓ Approve</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reject Modal -->
+    <div class="modal-overlay" id="rejectModal">
+        <div class="modal">
+            <div class="modal-header red">
+                <h3 style="margin:0;">✕ Reject Product</h3>
+                <p>Select a reason for rejection</p>
+            </div>
+            <div class="modal-body">
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="rejectReason" value="Quality issues"> Quality issues</label>
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="rejectReason" value="Incomplete information"> Incomplete information</label>
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="rejectReason" value="Prohibited item"> Prohibited item</label>
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="rejectReason" value="False claims"> False claims</label>
+                <input type="text" id="rejectOther" placeholder="Or enter custom reason..." style="width:100%; padding:10px; margin-top:15px; border:1px solid #ddd; border-radius:6px;">
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
+                <button class="btn btn-danger" id="btnConfirmReject">✕ Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Take Down Modal -->
+    <div class="modal-overlay" id="takeDownModal">
+        <div class="modal">
+            <div class="modal-header red">
+                <h3 style="margin:0;">📝 Take Down Product</h3>
+                <p>Select a reason</p>
+            </div>
+            <div class="modal-body">
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="takeDownReason" value="Quality issues"> Quality issues</label>
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="takeDownReason" value="Incorrect pricing"> Incorrect pricing</label>
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="takeDownReason" value="Misleading description"> Misleading description</label>
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="takeDownReason" value="Image issues"> Image issues</label>
+                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="takeDownReason" value="Violation of terms"> Violation of terms</label>
+                <input type="text" id="takeDownOther" placeholder="Or enter custom reason..." style="width:100%; padding:10px; margin-top:15px; border:1px solid #ddd; border-radius:6px;">
+            </div>
+<div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
+                <button class="btn btn-danger" id="btnConfirmTakeDown">Take Down</button>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 </html>

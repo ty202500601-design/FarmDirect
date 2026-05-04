@@ -72,11 +72,19 @@
     </aside>
 
     <main class="main-content">
-    <header class="top-bar">
-        <h1>User Management Portal</h1>
-    </header>
+        <header class="top-bar">
+          <h1>User Management Portal</h1>
+        </header>
 
-    <section class="management-section">
+    <div class="pill-nav-container">
+        <a href="#verification" class="pill-btn">Farmer Verification</a>
+        <a href="#farmer-mgmt" class="pill-btn">Farmer Management</a>
+        <a href="#buyer-mgmt" class="pill-btn">Buyer Management</a>
+        <a href="#suspended" class="pill-btn">Suspended Accounts</a>
+    </div>
+
+ <!-- Farmer Verification Section -->
+    <section id="verification" class="management-section">
         <h3><i class="fas fa-user-check"></i> Farmer Verification</h3>
         <div class="card table-container">
             <table>
@@ -138,8 +146,10 @@
         </div>
     </section>
 
+<!-- Farmer Management Section -->
+
     <div class="management-grid">
-        <section class="management-section">
+        <section id="farmer-mgmt" class="management-section">
             <h3><i class="fas fa-tractor"></i> Farmer Management</h3>
             <div class="card table-container">
                 <table>
@@ -206,7 +216,9 @@
             </div>
         </section>
 
-        <section class="management-section">
+<!-- Buyer Management Section -->
+
+        <section id="buyer-mgmt" class="management-section">
             <h3><i class="fas fa-shopping-bag"></i> Buyer Management</h3>
             <div class="card table-container">
                 <table>
@@ -250,7 +262,7 @@
                         </tr>
                         <tr>
                             <td><strong>David Lee</strong></td>
-                            <td><span class="badge bg-yellow">Pending</span></td>
+                            <td><span class="badge bg-green">Active</span></td>
                             <td>
                                 <div class="action-buttons">
                                     <button class="btn btn-outline">View</button>
@@ -272,8 +284,71 @@
                 </table>
             </div>
         </section>
-    </div>
-    </main>
+
+<!-- Suspended Accounts -->
+
+        <section id="suspended" class="management-section">
+            <h3><i class="fas fa-shopping-bag"></i> Suspended Accounts</h3>
+            <div class="card table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Account Name</th>
+                            <th>Role</th>
+                            <th>Reason for Suspension</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Elena Reyes</strong></td>
+                            <td><span class="text-muted">Buyer</span></td>
+                            <td><span class="badge bg-red">Excessive Cancellations</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-primary">Reinstate</button>
+                                    <button class="btn btn-outline">View History</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Marco Perez</strong></td>
+                            <td><span class="text-muted">Farmer</span></td>
+                            <td><span class="badge bg-red">Policy Violation</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-primary">Reinstate</button>
+                                    <button class="btn btn-outline">View History</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Carlos Mendoza</strong></td>
+                            <td><span class="text-muted">Farmer</span></td>
+                            <td><span class="badge bg-red">Fraudulent Listing</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-primary">Reinstate</button>
+                                    <button class="btn btn-outline">View History</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sarah Johnson</strong></td>
+                            <td><span class="text-muted">Buyer</span></td>
+                            <td><span class="badge bg-red">Unpaid Orders</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-primary">Reinstate</button>
+                                    <button class="btn btn-outline">View History</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
 
     <div id="toast" class="toast"></div>
 
