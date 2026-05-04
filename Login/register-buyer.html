@@ -19,17 +19,17 @@
         .seller-note a { color: green; font-weight: 700; text-decoration: none; }
         .seller-note a:hover { text-decoration: underline; }
         .req { color: #dc2626; margin-left: 2px; font-weight: 700; }
-        .or-row {
-            display: flex; align-items: center; gap: 10px;
-            margin: 6px 0; color: #9ca3af; font-size: 12px;
-        }
-        .or-row::before, .or-row::after { content: ''; flex: 1; height: 1px; background: #e5e7eb; }
         .address-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         @media (max-width: 520px) { .address-grid { grid-template-columns: 1fr; } }
         .field-note {
             font-size: 12px; color: #6b7280; margin-top: 6px;
             padding: 8px 12px; background: #f9fafb;
             border-radius: 6px; border: 1px solid #e5e7eb;
+        }
+        .error-note {
+            font-size: 12px; color: #dc2626; margin-top: 6px;
+            padding: 8px 12px; background: #fef2f2;
+            border-radius: 6px; border: 1px solid #fecaca;
         }
     </style>
 </head>
@@ -74,25 +74,30 @@
                     <input type="date" class="form-input" name="birthday" required>
                 </div>
 
-                <!-- EMAIL OR MOBILE -->
+                <!-- EMAIL AND MOBILE — both required, no OR -->
                 <div class="form-group">
                     <label class="form-label">Email Address <span class="req">*</span></label>
-                    <input type="email" class="form-input" placeholder="you@email.com" name="email">
+                    <input type="email" class="form-input" placeholder="you@email.com" name="email" required>
                 </div>
-                <div class="or-row">or</div>
                 <div class="form-group">
                     <label class="form-label">Mobile Number <span class="req">*</span></label>
                     <div class="phone-wrap">
                         <div class="phone-prefix">🇵🇭 +63</div>
-                        <input type="tel" class="form-input" placeholder="9XX XXX XXXX" name="phone" maxlength="10" pattern="9[0-9]{9}" title="Enter a valid PH mobile number starting with 9">
+                        <input type="tel" class="form-input" placeholder="9XX XXX XXXX" name="phone" maxlength="10" pattern="9[0-9]{9}" title="Enter a valid PH mobile number starting with 9" required>
                     </div>
-                    <div class="field-note">Please provide at least one: Email Address or Mobile Number.</div>
                 </div>
 
-                <!-- PASSWORD -->
+                <!-- PASSWORD + CONFIRM PASSWORD -->
                 <div class="form-group">
                     <label class="form-label">Password <span class="req">*</span></label>
-                    <input type="password" class="form-input" placeholder="Min. 8 characters" name="password" minlength="8" required>
+                    <input type="password" class="form-input" placeholder="Min. 8 characters" name="password" id="password" minlength="8" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Confirm Password <span class="req">*</span></label>
+                    <input type="password" class="form-input" placeholder="Re-enter your password" name="confirm_password" id="confirm_password" required>
+                    <div class="error-note" id="pw_match_note" style="display:none;">
+                        ❌ Passwords do not match.
+                    </div>
                 </div>
 
                 <!-- PROFILE PICTURE -->
@@ -101,42 +106,15 @@
                     <input type="file" class="form-input" accept=".jpg,.jpeg,.png" name="profile_pic">
                 </div>
 
-                <!-- ADDRESS CHOPPED UP -->
+                <!-- ADDRESS — reversed: Province → City → Barangay → Street → ZIP -->
                 <div class="form-group">
                     <label class="form-label">Delivery Address <span class="req">*</span></label>
                     <div class="address-grid">
-                        <input type="text" class="form-input" placeholder="House No. / Street" name="street" required>
-                        <input type="text" class="form-input" placeholder="Barangay" name="barangay" required>
-                        <input type="text" class="form-input" placeholder="City / Municipality" name="city" required>
                         <input type="text" class="form-input" placeholder="Province" name="province" required>
+                        <input type="text" class="form-input" placeholder="City / Municipality" name="city" required>
+                        <input type="text" class="form-input" placeholder="Barangay" name="barangay" required>
+                        <input type="text" class="form-input" placeholder="House No. / Street" name="street" required>
                         <input type="text" class="form-input" placeholder="ZIP Code" name="zip" required>
-                    </div>
-                </div>
-
-                <!-- ID TYPE -->
-                <div class="form-group">
-                    <label class="form-label">ID Type <span class="req">*</span></label>
-                    <select class="form-input" name="id_type" required id="id-type-select" onchange="toggleAltID(this.value)">
-                        <option value="">Select ID type...</option>
-                        <option>PhilSys / National ID</option>
-                        <option>Driver's License</option>
-                        <option>Passport</option>
-                        <option>SSS / GSIS ID</option>
-                        <option>Voter's ID</option>
-                        <option>Postal ID</option>
-                        <option>UMID</option>
-                        <option>Senior Citizen ID</option>
-                        <option>PWD ID</option>
-                        <option value="birth_cert">No valid ID — Use Birth Certificate instead</option>
-                    </select>
-                </div>
-
-                <!-- ID UPLOAD -->
-                <div class="form-group">
-                    <label class="form-label" id="id-upload-label">Upload Government ID <span class="req">*</span></label>
-                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png,.pdf" name="id_file" required>
-                    <div class="field-note" id="id-alt-note" style="display:none;">
-                        No valid ID? You may upload your <strong>Birth Certificate (PSA)</strong> instead as an alternative document.
                     </div>
                 </div>
 
@@ -160,33 +138,34 @@
     <footer>© 2026 FarmDirect. All rights reserved.</footer>
 
     <script>
-        function toggleAltID(val) {
-            var note = document.getElementById('id-alt-note');
-            var label = document.getElementById('id-upload-label');
-            if (val === 'birth_cert') {
-                note.style.display = 'block';
-                label.innerHTML = 'Upload Birth Certificate (PSA) <span class="req">*</span>';
-            } else {
-                note.style.display = 'none';
-                label.innerHTML = 'Upload Government ID <span class="req">*</span>';
-            }
-        }
+        // Live password match check
+        document.getElementById('confirm_password').addEventListener('input', function() {
+            var note = document.getElementById('pw_match_note');
+            note.style.display = (this.value && this.value !== document.getElementById('password').value) ? 'block' : 'none';
+        });
 
         function handleRegister(event) {
             event.preventDefault();
 
-            // Collect form values
+            var pw  = document.getElementById('password').value;
+            var cpw = document.getElementById('confirm_password').value;
+
+            if (pw !== cpw) {
+                document.getElementById('pw_match_note').style.display = 'block';
+                document.getElementById('confirm_password').focus();
+                return;
+            }
+
             var newAccount = {
                 email:    document.querySelector('[name="email"]').value.trim().toLowerCase(),
-                password: document.querySelector('[name="password"]').value,
+                password: pw,
                 name:     document.querySelector('[name="first_name"]').value + " " + document.querySelector('[name="last_name"]').value,
-                role:     "user"
+                role:     "user",
+                idType:   document.querySelector('[name="id_type"]') ? document.querySelector('[name="id_type"]').value : ''
             };
 
-            // Get existing saved accounts (or empty array if none yet)
             var existing = JSON.parse(localStorage.getItem('fd_accounts') || '[]');
 
-            // Check if email already exists
             for (var i = 0; i < existing.length; i++) {
                 if (existing[i].email === newAccount.email) {
                     alert("That email is already registered. Please sign in or use a different email.");
@@ -194,18 +173,14 @@
                 }
             }
 
-            // Save new account
             existing.push(newAccount);
             localStorage.setItem('fd_accounts', JSON.stringify(existing));
-
-            // Save session so the dashboard knows who is logged in
             localStorage.setItem('fd_session', JSON.stringify({
                 email: newAccount.email,
                 name:  newAccount.name,
                 role:  newAccount.role
             }));
 
-            // Redirect to User Dashboard
             window.location.href = "../USER/Dashboard.html";
         }
     </script>
