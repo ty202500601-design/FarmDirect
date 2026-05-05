@@ -1,821 +1,1407 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Farm Direct – Add Product</title>
-  <link rel="stylesheet" href="New.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body>
- 
-<nav class="navbar">
-  <input type="checkbox" id="menu-check" class="menu-checkbox">
-  <div class="nav-inner">
-    <a href="../index.html" class="logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></a>
-    <div class="nav-links">
-      <a href="../index.html" class="nav-link">Home</a>
-      <a href="Dashboard.html" class="nav-link">Dashboard</a>
-      <a href="Products.html" class="nav-link active">Products</a>
-      <a href="Orders.html" class="nav-link">Orders</a>
-      <a href="Reviews.html" class="nav-link">Reviews</a>
-      <a href="Settings.html" class="nav-link">Settings</a>
-    </div>
-    <div class="nav-actions">
-      <div class="notif-wrap">
-        <button class="notif-btn" tabindex="0" aria-label="Notifications">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <span class="notif-badge"></span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Product – FarmDirect</title>
+    <link rel="stylesheet" href="New.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <input type="checkbox" id="menu-check" class="menu-checkbox" />
+      <div class="nav-inner">
+        <a href="../index.html" class="logo"
+          ><span class="logo-icon">🌾</span><span>FarmDirect</span></a
+        >
+        <div class="nav-links">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="Dashboard.html" class="nav-link">Dashboard</a>
+          <a href="Products.html" class="nav-link active">Products</a>
+          <a href="Orders.html" class="nav-link">Orders</a>
+          <a href="Reviews.html" class="nav-link">Reviews</a>
+          <a href="Settings.html" class="nav-link">Settings</a>
+        </div>
+        <div class="nav-actions">
+          <div class="notif-wrap">
+            <button class="notif-btn" tabindex="0" aria-label="Notifications">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+              <span class="notif-badge"></span>
+            </button>
+            <div class="notif-dropdown">
+              <div class="notif-header"><h4>Notifications</h4></div>
+              <div class="notif-list">
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <strong>New Order</strong>
+                    <p>🛒 New order received</p>
+                  </div>
+                  <span class="notif-time">5 min ago</span>
+                </div>
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <strong>Order Delivered</strong>
+                    <p>✅ Order #00241 Delivered</p>
+                  </div>
+                  <span class="notif-time">1 hr ago</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="notif-wrap">
+            <button
+              class="notif-btn avatar-badge-btn"
+              tabindex="0"
+              aria-label="Profile"
+            >
+              JD
+            </button>
+            <div class="notif-dropdown" style="min-width: 180px">
+              <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
+              <div class="notif-list">
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <a href="Dashboard.html">📊 Management</a>
+                  </div>
+                </div>
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <a href="Profile.html">👤 Profile</a>
+                  </div>
+                </div>
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <a href="Settings.html">⚙️ Settings</a>
+                  </div>
+                </div>
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <a href="../index.html">🚪 Logout</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <label for="menu-check" class="menu-toggle"
+            ><span></span><span></span><span></span
+          ></label>
+        </div>
+      </div>
+      <label for="menu-check" class="menu-overlay"></label>
+      <div class="menu-panel">
+        <div class="menu-section">
+          <h3>Navigation</h3>
+          <a href="../index.html" class="menu-item">Home</a>
+          <a href="Dashboard.html" class="menu-item">Dashboard</a>
+          <a href="Products.html" class="menu-item">Products</a>
+          <a href="Orders.html" class="menu-item">Orders</a>
+          <a href="Reviews.html" class="menu-item">Reviews</a>
+          <a href="Settings.html" class="menu-item">Settings</a>
+        </div>
+        <a href="../index.html" class="menu-cta">Logout</a>
+      </div>
+    </nav>
+
+    <main class="farmers-main">
+      <div
+        style="
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 0.8rem;
+          margin-bottom: 1.5rem;
+        "
+      >
+        <div>
+          <div
+            style="
+              font-family: var(--font-display);
+              font-size: clamp(1.4rem, 3vw, 1.9rem);
+              font-weight: 700;
+              color: var(--text);
+            "
+          >
+            ➕ Add Product
+          </div>
+          <div
+            style="
+              font-size: 0.88rem;
+              color: var(--text-light);
+              margin-top: 0.3rem;
+            "
+          >
+            Profile your product, add its variants, then set units &amp;
+            pricing.
+          </div>
+        </div>
+        <a href="Products.html" class="btn-cancel">← Back to Products</a>
+      </div>
+
+      <!-- DONE PRODUCTS STACK -->
+      <div class="product-stack" id="done-stack"></div>
+
+      <!-- ACTIVE PRODUCT WIZARD -->
+      <div id="wizard-wrap">
+        <!-- STEP INDICATOR -->
+        <div class="step-bar" id="step-bar">
+          <div class="step-item active" id="step-ind-1">
+            <span class="step-num">1</span>
+            <span>Product Profile</span>
+          </div>
+          <div class="step-item" id="step-ind-2">
+            <span class="step-num">2</span>
+            <span>Units &amp; Pricing</span>
+          </div>
+        </div>
+
+        <!-- ════════════════ STEP 1 ════════════════ -->
+        <div id="step1">
+          <!-- Photos -->
+          <div class="sc">
+            <div class="sc-head">
+              <span class="sc-icon">📸</span
+              ><span class="sc-title">Product Photos</span
+              ><span class="sc-sub">— Main photo is required</span>
+            </div>
+            <div class="sc-body">
+              <div class="photo-grid">
+                <div class="photo-slot-main" id="ps-main">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onchange="previewSlot('ps-main', this)"
+                  />
+                  <img class="ps-preview" id="ps-main-img" alt="" />
+                  <button
+                    type="button"
+                    class="ps-rm"
+                    id="ps-main-rm"
+                    onclick="removeSlot('ps-main')"
+                  >
+                    ✕
+                  </button>
+                  <div class="ps-inner">
+                    <span class="ps-icon">📷</span
+                    ><span class="ps-lbl">Main Photo</span
+                    ><span class="ps-hint">Click or drag to upload</span>
+                  </div>
+                </div>
+                <div class="extra-grid">
+                  <div class="photo-slot-sm" id="ps-2">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onchange="previewSlot('ps-2', this)"
+                    /><img class="ps-preview" id="ps-2-img" alt="" /><button
+                      type="button"
+                      class="ps-rm"
+                      id="ps-2-rm"
+                      onclick="removeSlot('ps-2')"
+                    >
+                      ✕
+                    </button>
+                    <div class="ps-inner">
+                      <span class="ps-icon">＋</span
+                      ><span class="ps-lbl">Photo 2</span>
+                    </div>
+                  </div>
+                  <div class="photo-slot-sm" id="ps-3">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onchange="previewSlot('ps-3', this)"
+                    /><img class="ps-preview" id="ps-3-img" alt="" /><button
+                      type="button"
+                      class="ps-rm"
+                      id="ps-3-rm"
+                      onclick="removeSlot('ps-3')"
+                    >
+                      ✕
+                    </button>
+                    <div class="ps-inner">
+                      <span class="ps-icon">＋</span
+                      ><span class="ps-lbl">Photo 3</span>
+                    </div>
+                  </div>
+                  <div class="photo-slot-sm" id="ps-4">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onchange="previewSlot('ps-4', this)"
+                    /><img class="ps-preview" id="ps-4-img" alt="" /><button
+                      type="button"
+                      class="ps-rm"
+                      id="ps-4-rm"
+                      onclick="removeSlot('ps-4')"
+                    >
+                      ✕
+                    </button>
+                    <div class="ps-inner">
+                      <span class="ps-icon">＋</span
+                      ><span class="ps-lbl">Photo 4</span>
+                    </div>
+                  </div>
+                  <div class="photo-slot-sm" id="ps-5">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onchange="previewSlot('ps-5', this)"
+                    /><img class="ps-preview" id="ps-5-img" alt="" /><button
+                      type="button"
+                      class="ps-rm"
+                      id="ps-5-rm"
+                      onclick="removeSlot('ps-5')"
+                    >
+                      ✕
+                    </button>
+                    <div class="ps-inner">
+                      <span class="ps-icon">＋</span
+                      ><span class="ps-lbl">Photo 5</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Basic Info -->
+          <div class="sc">
+            <div class="sc-head">
+              <span class="sc-icon">📋</span
+              ><span class="sc-title">Basic Information</span
+              ><span class="sc-sub">— Shared across all variants</span>
+            </div>
+            <div class="sc-body">
+              <div class="r2">
+                <div class="fg">
+                  <label>Product Name *</label>
+                  <input
+                    type="text"
+                    id="prod-name"
+                    placeholder="e.g. Tomatoes"
+                    oninput="checkStep1()"
+                  />
+                </div>
+                <div class="fg">
+                  <label>Category *</label>
+                  <select id="prod-cat" onchange="onCatChange()">
+                    <option value="" disabled selected>Select category</option>
+                    <option>Vegetables</option>
+                    <option>Fruits</option>
+                    <option>Dairy</option>
+                    <option>Grains</option>
+                    <option>Meat</option>
+                    <option>Others</option>
+                  </select>
+                </div>
+              </div>
+              <div class="fg">
+                <label>Description</label>
+                <textarea
+                  id="prod-desc"
+                  placeholder="How it's grown, freshness, best uses, certifications…"
+                ></textarea>
+              </div>
+              <div class="fg">
+                <label>💳 Accepted Payment Methods</label>
+                <div class="pay-chips" id="pay-chips">
+                  <span class="pay-chip" onclick="togglePayChip(this, 'GCash')"
+                    ><span class="pay-check-icon">💚</span> GCash</span
+                  >
+                  <span class="pay-chip" onclick="togglePayChip(this, 'Maya')"
+                    ><span class="pay-check-icon">💜</span> Maya</span
+                  >
+                  <span class="pay-chip" onclick="togglePayChip(this, 'COD')"
+                    ><span class="pay-check-icon">💵</span> COD</span
+                  >
+                  <span
+                    class="pay-chip"
+                    onclick="togglePayChip(this, 'Bank Transfer')"
+                    ><span class="pay-check-icon">🏦</span> Bank Transfer</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Variants — names only -->
+          <div class="sc">
+            <div class="sc-head">
+              <span class="sc-icon">🏷️</span
+              ><span class="sc-title">Product Variants</span
+              ><span class="sc-sub"
+                >— Each variant needs a name and photo *</span
+              >
+            </div>
+            <div class="sc-body">
+              <div class="tip" style="margin-bottom: 1rem">
+                💡 A variant = a sub-type buyers pick from on your listing (like
+                Shopee). Add a photo and name for each — e.g.
+                <b>Regular Tomato</b>, <b>Cherry Tomato</b>,
+                <b>Green Tomato</b>. Units, prices and stock come in Step 2.
+              </div>
+              <div class="variant-name-list" id="variant-name-list"></div>
+              <div
+                id="no-variant-hint"
+                style="
+                  font-size: 0.84rem;
+                  color: var(--text-light);
+                  margin-bottom: 0.8rem;
+                "
+              >
+                No variants yet — add at least one.
+              </div>
+              <button
+                type="button"
+                class="btn-add-variant"
+                onclick="addVariantName()"
+              >
+                ＋ Add Variant
+              </button>
+            </div>
+          </div>
+
+          <div class="nav-btns">
+            <button
+              type="button"
+              class="btn-back-step"
+              onclick="cancelCurrentProduct()"
+            >
+              ← Cancel
+            </button>
+            <button
+              type="button"
+              class="btn-next-step"
+              id="btn-next"
+              onclick="goToStep2()"
+              disabled
+            >
+              Next: Units &amp; Pricing →
+            </button>
+          </div>
+        </div>
+        <!-- /step1 -->
+
+        <!-- ════════════════ STEP 2 ════════════════ -->
+        <div id="step2" style="display: none">
+          <!-- Variant detail cards -->
+          <div class="variant-detail-section" id="variant-detail-section"></div>
+
+          <!-- Buyer Preview -->
+          <div class="sc" id="preview-sc" style="display: none">
+            <div class="sc-head">
+              <span class="sc-icon">👁️</span
+              ><span class="sc-title">Buyer Preview</span
+              ><span class="sc-sub">— How buyers see this on your store</span>
+            </div>
+            <div class="sc-body">
+              <div class="preview-card">
+                <div class="preview-card-head">🛒 Live Preview</div>
+                <div class="preview-card-body">
+                  <div class="prev-img-box" id="prev-imgbox">
+                    <img id="prev-img" src="" alt="" style="display: none" />
+                    <span id="prev-emoji">📦</span>
+                  </div>
+                  <div class="prev-info">
+                    <div class="prev-name" id="prev-name">Product Name</div>
+                    <div class="prev-cat" id="prev-cat">Category</div>
+                    <div class="prev-lbl">Choose Variant:</div>
+                    <div class="prev-pills" id="prev-variants"></div>
+                    <div class="prev-lbl">Choose Unit:</div>
+                    <div class="prev-pills" id="prev-units"></div>
+                    <div class="prev-price" id="prev-price">₱—</div>
+                    <div class="prev-price-sub" id="prev-price-sub">
+                      Select a variant and unit
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav-btns">
+            <button type="button" class="btn-back-step" onclick="goToStep1()">
+              ← Back to Profile
+            </button>
+            <button
+              type="button"
+              class="btn-done-product"
+              id="btn-done"
+              onclick="markProductDone()"
+              disabled
+            >
+              ✓ Done with this Product
+            </button>
+          </div>
+        </div>
+        <!-- /step2 -->
+      </div>
+      <!-- /wizard-wrap -->
+
+      <!-- ADD ANOTHER + SAVE ALL -->
+      <div class="add-another-bar" id="add-another-bar" style="display: none">
+        <div
+          style="flex: 1; font-size: 0.88rem; color: var(--text-mid)"
+          id="add-another-msg"
+        >
+          Product saved!
+        </div>
+        <button
+          type="button"
+          class="btn-add-another"
+          onclick="addAnotherProduct()"
+        >
+          ＋ Add Another Product
         </button>
-        <div class="notif-dropdown">
-          <div class="notif-header"><h4>Notifications</h4></div>
-          <div class="notif-list">
-            <div class="notif-item"><div class="notif-content"><strong>New Order</strong><p>🛒 New order received</p></div><span class="notif-time">5 min ago</span></div>
-            <div class="notif-item"><div class="notif-content"><strong>Order Delivered</strong><p>✅ Order #00241 Delivered</p></div><span class="notif-time">1 hr ago</span></div>
-          </div>
-        </div>
+        <button type="button" class="btn-save-all" onclick="saveAll()">
+          ✅ Save All &amp; Finish
+        </button>
       </div>
-      <div class="notif-wrap">
-        <button class="notif-btn avatar-badge-btn" tabindex="0" aria-label="Profile">JD</button>
-        <div class="notif-dropdown" style="min-width:180px;">
-          <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
-          <div class="notif-list">
-            <div class="notif-item"><div class="notif-content"><a href="Dashboard.html">📊 Management</a></div></div>
-            <div class="notif-item"><div class="notif-content"><a href="Profile.html">👤 Profile</a></div></div>
-            <div class="notif-item"><div class="notif-content"><a href="Settings.html">⚙️ Settings</a></div></div>
-            <div class="notif-item"><div class="notif-content"><a href="../index.html">🚪 Logout</a></div></div>
-          </div>
-        </div>
-      </div>
-      <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
-    </div>
-  </div>
-  <label for="menu-check" class="menu-overlay"></label>
-  <div class="menu-panel">
-    <div class="menu-section">
-      <h3>Navigation</h3>
-      <a href="../index.html" class="menu-item">Home</a>
-      <a href="Dashboard.html" class="menu-item">Dashboard</a>
-      <a href="Products.html" class="menu-item">Products</a>
-      <a href="Orders.html" class="menu-item">Orders</a>
-      <a href="Reviews.html" class="menu-item">Reviews</a>
-      <a href="Settings.html" class="menu-item">Settings</a>
-    </div>
-    <a href="../index.html" class="menu-cta">Logout</a>
-  </div>
-</nav>
- 
-<main class="farmers-main">
- 
-  <!-- TOP BAR -->
-  <div class="submit-bar" id="ap-top-bar">
-    <div class="submit-bar-left">
-      <span id="ap-counter-badge" style="display:none;" class="badge b-b"></span>
-      <span>Add new products to your store — fill in details below.</span>
-    </div>
-    <div class="btn-group">
-      <a href="Products.html" class="btn-cancel">← Back to Products</a>
-      <button type="button" class="btn-save" id="top-save-btn" style="display:none;" onclick="apShowSaveBar()">💾 Save All Products</button>
-    </div>
-  </div>
- 
-  <!-- CARD STACK -->
-  <div id="ap-stack"></div>
- 
-  <!-- ADD ANOTHER PROMPT -->
-  <div class="ap-another-prompt" id="ap-another-prompt" style="display:none;">
-    <div class="ap-another-inner">
-      <span class="ap-another-label">✅ Product saved! Add another?</span>
-      <button type="button" class="btn-save ap-btn-yes" onclick="apAddAnother()">+ Add Another Product</button>
-      <button type="button" class="btn-cancel ap-btn-no" onclick="apShowSaveBar()">No, I'm Done</button>
-    </div>
-  </div>
- 
-  <!-- SAVE ALL BAR -->
-  <div class="ap-save-bar submit-bar" id="ap-save-bar" style="display:none;">
-    <div class="submit-bar-left">
-      <span id="ap-save-label">Ready to publish?</span> Click <b>Save All Products</b> to add them to your store.
-    </div>
-    <div class="btn-group">
-      <button type="button" class="btn-cancel" onclick="apAddAnother()">+ Add Another</button>
-      <button type="button" class="btn-save" onclick="apSaveAll()">✅ Save All Products</button>
-    </div>
-  </div>
- 
-  <!-- SUCCESS STATE -->
-  <div class="ap-success" id="ap-success" style="display:none;">
-    <div class="ap-success-icon">🌾</div>
-    <h2 class="ap-success-title" id="ap-success-title">Products Saved!</h2>
-    <p class="ap-success-sub" id="ap-success-sub">Your products are now live on your store.</p>
-    <div class="ap-success-actions">
-      <a href="Products.html" class="btn-save">View My Products →</a>
-      <button type="button" class="btn-cancel" onclick="apReset()">+ Add More Products</button>
-    </div>
-  </div>
- 
-</main>
- 
-<footer class="footer">
-  <div class="footer-container">
-    <div class="footer-main">
-      <div class="footer-brand">
-        <div class="footer-logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></div>
-        <p class="footer-desc">Connecting Zamboanga farmers to your table. Fresh, local, and delivered with care.</p>
-      </div>
-      <div class="footer-links">
-        <div class="footer-col"><h4>Quick Links</h4><a href="../index.html">Home</a><a href="Products.html">My Products</a><a href="Dashboard.html">Dashboard</a><a href="Orders.html">Orders</a></div>
-        <div class="footer-col"><h4>Categories</h4><a href="#">Vegetables</a><a href="#">Fruits</a><a href="#">Meats</a><a href="#">Dairy</a></div>
-        <div class="footer-col"><h4>Contact</h4><a href="tel:+639123456789">+63 912 345 6789</a><a href="mailto:hello@farmdirect.ph">hello@farmdirect.ph</a><p>Mon-Sat: 6AM - 8PM</p><p>Zamboanga City, PH</p></div>
-      </div>
-    </div>
-    <div class="footer-bottom"><p>&copy; 2026 FarmDirect Zamboanga. All rights reserved.</p></div>
-  </div>
-</footer>
- 
-<script>
-lucide.createIcons();
- 
-/* ═══════════════════════════════════════════════════════════
-   EXPIRY LOGIC — category-aware rules
-   ═══════════════════════════════════════════════════════════ */
- 
-const CALC_EXPIRY_CATS   = ['Vegetables', 'Fruits', 'Grains', 'Others'];
-const PROCESSING_CATS    = ['Meat'];
-const MANUAL_EXPIRY_CATS = ['Dairy'];
- 
-const DEFAULT_SHELF = {
-  Vegetables: 7, Fruits: 5, Dairy: 14, Grains: 180, Meat: 3, Others: 7
-};
- 
-const CAT_EMOJI = {
-  Vegetables:'🥦', Fruits:'🍑', Dairy:'🥛',
-  Grains:'🌾', Meat:'🥩', Others:'📦'
-};
- 
-const DATE_LABEL = {
-  Meat: 'Processing Date *',
-  Dairy: 'Processing / Pack Date',
-  default: 'Harvest Date *'
-};
- 
-function calcExpiryDate(sourceDate, shelfDays) {
-  const d = new Date(sourceDate + 'T00:00:00');
-  d.setDate(d.getDate() + parseInt(shelfDays));
-  return d;
-}
- 
-function daysLeft(expiryDate) {
-  const today = new Date(); today.setHours(0,0,0,0);
-  return Math.ceil((expiryDate - today) / 86400000);
-}
- 
-/* ═══════════════════════════════════════════════════════════
-   CARD BUILDER
-   ═══════════════════════════════════════════════════════════ */
- 
-let apProducts  = [];
-let apCardCount = 0;
- 
-function apUpdateCounter() {
-  const badge  = document.getElementById('ap-counter-badge');
-  const topBtn = document.getElementById('top-save-btn');
-  const n = apProducts.length;
-  if (n > 0) {
-    badge.textContent  = n + ' product' + (n !== 1 ? 's' : '') + ' added';
-    badge.style.display  = 'inline-flex';
-    topBtn.style.display = 'inline-flex';
-  } else {
-    badge.style.display  = 'none';
-    topBtn.style.display = 'none';
-  }
-}
- 
-function apCheckDone(id) {
-  const name  = (document.getElementById('ap-name-' + id)?.value || '').trim();
-  const cat   = (document.getElementById('ap-cat-'  + id)?.value || '').trim();
- 
-  const priceInputs = document.querySelectorAll('#ap-price-rows-' + id + ' input[data-unit]');
-  const hasPrice    = priceInputs.length > 0
-    ? Array.from(priceInputs).some(inp => parseFloat(inp.value) > 0)
-    : false;
- 
-  const btn = document.getElementById('ap-done-btn-' + id);
-  if (btn) btn.disabled = !(name && cat && hasPrice);
-}
- 
-function apOnCategoryChange(id) {
-  apCheckDone(id);
-  const cat = document.getElementById('ap-cat-' + id)?.value || '';
- 
-  const isManual     = MANUAL_EXPIRY_CATS.includes(cat);
-  const isProcessing = PROCESSING_CATS.includes(cat);
- 
-  const shelfWrap  = document.getElementById('ap-shelf-wrap-'  + id);
-  const manualWrap = document.getElementById('ap-manual-wrap-' + id);
-  shelfWrap.style.display  = isManual ? 'none' : '';
-  manualWrap.style.display = isManual ? ''     : 'none';
- 
-  const dateLabel = document.getElementById('ap-date-label-' + id);
-  dateLabel.textContent = DATE_LABEL[cat] || DATE_LABEL.default;
- 
-  const tip  = document.getElementById('ap-bestbefore-tip-' + id);
-  const tips = {
-    Vegetables: '🥦 <b>Vegetables:</b> Enter harvest date + shelf life. Expiry is auto-calculated.',
-    Fruits:     '🍎 <b>Fruits:</b> Enter harvest date + shelf life. Expiry is auto-calculated.',
-    Meat:       '🥩 <b>Meat:</b> Enter processing date. Shelf life is short (1–5 days). Expiry auto-calculated.',
-    Dairy:      '🥛 <b>Dairy:</b> Enter the best before date printed on the package — do not calculate from harvest.',
-    Grains:     '🌾 <b>Grains:</b> Enter milling/pack date + shelf life. Long shelf life (months).',
-    Others:     '📦 <b>Others:</b> Enter source date + estimated shelf life.'
-  };
-  tip.innerHTML = tips[cat] || tips['Others'];
- 
-  if (!isManual) {
-    const shelfSel = document.getElementById('ap-shelf-' + id);
-    if (shelfSel && DEFAULT_SHELF[cat]) shelfSel.value = DEFAULT_SHELF[cat];
-  }
- 
-  apUpdateExpiry(id);
-}
- 
-function apUpdateExpiry(id) {
-  const cat      = document.getElementById('ap-cat-' + id)?.value || '';
-  const isManual = MANUAL_EXPIRY_CATS.includes(cat);
- 
-  const prevHarvest = document.getElementById('ap-prev-harvest-' + id);
-  const prevExpiry  = document.getElementById('ap-prev-expiry-'  + id);
-  const prevDays    = document.getElementById('ap-prev-days-'    + id);
-  const prevBar     = document.getElementById('ap-prev-bar-'     + id);
-  const prevNote    = document.getElementById('ap-prev-note-'    + id);
-  const prevMethod  = document.getElementById('ap-prev-method-'  + id);
- 
-  const opts = { year:'numeric', month:'short', day:'numeric' };
- 
-  if (isManual) {
-    const manualVal = document.getElementById('ap-expiry-manual-' + id)?.value || '';
-    const sourceVal = document.getElementById('ap-source-date-'   + id)?.value || '';
-    if (!manualVal) {
-      prevHarvest.textContent = sourceVal ? new Date(sourceVal + 'T00:00:00').toLocaleDateString('en-PH', opts) : '—';
-      prevExpiry.textContent = '—'; prevDays.textContent = '—';
-      prevBar.style.width = '0%'; prevBar.className = 'shelf-fill';
-      prevNote.textContent = 'Enter the best before date from the package.';
-      prevMethod.textContent = '📋 Method: Manual (from package label)';
-      return;
-    }
-    const expDate   = new Date(manualVal + 'T00:00:00');
-    const days      = daysLeft(expDate);
-    const srcDate   = sourceVal ? new Date(sourceVal + 'T00:00:00') : null;
-    const totalDays = srcDate ? Math.ceil((expDate - srcDate) / 86400000) : 14;
-    const pct       = Math.max(0, Math.min(100, Math.round((days / totalDays) * 100)));
- 
-    prevHarvest.textContent = srcDate ? srcDate.toLocaleDateString('en-PH', opts) : '—';
-    prevExpiry.textContent  = expDate.toLocaleDateString('en-PH', opts);
-    prevMethod.textContent  = '📋 Method: Manual entry (dairy/package label)';
-    setDaysDisplay(prevDays, prevBar, prevNote, days, pct);
- 
-  } else {
-    const sourceVal = document.getElementById('ap-source-date-' + id)?.value || '';
-    const shelfDays = parseInt(document.getElementById('ap-shelf-' + id)?.value) || 0;
- 
-    if (!sourceVal || !shelfDays) {
-      prevHarvest.textContent = sourceVal ? new Date(sourceVal + 'T00:00:00').toLocaleDateString('en-PH', opts) : '—';
-      prevExpiry.textContent = '—'; prevDays.textContent = '—';
-      prevBar.style.width = '0%'; prevBar.className = 'shelf-fill';
-      prevNote.textContent = 'Fill in the date and shelf life to see the expiry preview.';
-      const isProc = PROCESSING_CATS.includes(cat);
-      prevMethod.textContent = isProc ? '⚙️ Method: Processing date + shelf life' : '🌱 Method: Harvest date + shelf life days';
-      return;
-    }
- 
-    const srcDate = new Date(sourceVal + 'T00:00:00');
-    const expDate = calcExpiryDate(sourceVal, shelfDays);
-    const days    = daysLeft(expDate);
-    const pct     = Math.max(0, Math.min(100, Math.round((days / shelfDays) * 100)));
- 
-    prevHarvest.textContent = srcDate.toLocaleDateString('en-PH', opts);
-    prevExpiry.textContent  = expDate.toLocaleDateString('en-PH', opts);
- 
-    const isProc = PROCESSING_CATS.includes(cat);
-    prevMethod.textContent = isProc
-      ? `⚙️ Method: Processing date + ${shelfDays} days shelf life`
-      : `🌱 Method: Harvest date + ${shelfDays} days shelf life`;
- 
-    setDaysDisplay(prevDays, prevBar, prevNote, days, pct);
-  }
-}
- 
-function setDaysDisplay(prevDays, prevBar, prevNote, days, pct) {
-  prevBar.className = 'shelf-fill';
-  prevDays.style.color = '';
-  if (days <= 0) {
-    prevDays.textContent = '❌ Already passed best before'; prevDays.style.color = '#dc2626';
-    prevBar.classList.add('shelf-fill-danger'); prevBar.style.width = '4%';
-    prevNote.textContent = '⚠️ This product has already passed its best before date — do not list it.';
-  } else if (days <= 3) {
-    prevDays.textContent = days + ' day' + (days > 1 ? 's' : '') + ' left ⚠️'; prevDays.style.color = '#dc2626';
-    prevBar.classList.add('shelf-fill-danger'); prevBar.style.width = pct + '%';
-    prevNote.textContent = '🔴 Critical: best before is very soon. Same-day delivery only.';
-  } else if (days <= 7) {
-    prevDays.textContent = days + ' days left ⚠️'; prevDays.style.color = '#ca8a04';
-    prevBar.classList.add('shelf-fill-warn'); prevBar.style.width = pct + '%';
-    prevNote.textContent = '⚠️ Short shelf life. Communicate the best before date clearly to buyers.';
-  } else {
-    prevDays.textContent = days + ' days left ✅'; prevDays.style.color = '#16a34a';
-    prevBar.classList.add('shelf-fill-ok'); prevBar.style.width = pct + '%';
-    prevNote.textContent = '✅ Good shelf life. Buyers will see this product as fresh.';
-  }
-}
- 
-function apHandleUnitCheck(cb, id) {
-  const checked = Array.from(document.querySelectorAll('#ap-units-' + id + ' input[type="checkbox"]:checked'));
- 
-  document.querySelectorAll('#ap-units-' + id + ' .unit-check-card').forEach(card => {
-    card.classList.toggle('unit-checked', card.querySelector('input').checked);
-  });
- 
-  const wrap    = document.getElementById('ap-unit-primary-wrap-' + id);
-  const summary = document.getElementById('ap-unit-summary-'      + id);
-  if (wrap)    wrap.style.display    = checked.length ? 'block' : 'none';
-  if (summary) summary.style.display = checked.length ? 'flex'  : 'none';
-  apUpdatePrimaryBadge(id);
-  apUpdateSummaryPills(id, checked);
- 
-  const grid     = document.getElementById('ap-price-grid-'     + id);
-  const rows     = document.getElementById('ap-price-rows-'     + id);
-  const empty    = document.getElementById('ap-price-empty-'    + id);
-  const fallback = document.getElementById('ap-price-fallback-' + id);
- 
-  if (!grid) return;
- 
-  if (checked.length === 0) {
-    grid.style.display     = 'none';
-    fallback.style.display = 'block';
-    apCheckDone(id);
-    return;
-  }
- 
-  grid.style.display     = 'block';
-  fallback.style.display = 'none';
-  empty.style.display    = 'none';
- 
-  const existingPrices = {};
-  grid.querySelectorAll('input[data-unit]').forEach(inp => {
-    existingPrices[inp.dataset.unit] = inp.value;
-  });
- 
-  const unitIcons = { 'per kg':'⚖️','per 100g':'🔢','per bundle':'🌿','per piece':'🔵','per pack':'📦','per box':'🗃️','per tray':'🍱','per sack':'👜' };
- 
-  rows.innerHTML = checked.map(inp => {
-    const unit      = inp.value;
-    const icon      = unitIcons[unit] || '📦';
-    const saved     = existingPrices[unit] || '';
-    const isPrimary = checked.length === 1;
-    return `<div style="display:flex;align-items:center;gap:.75rem;background:var(--cream);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:.6rem .9rem;${isPrimary ? 'border-color:var(--green-accent);background:var(--green-light);' : ''}">
-      <span style="font-size:1.1rem;flex-shrink:0">${icon}</span>
-      <span style="font-size:.88rem;font-weight:700;color:var(--text);min-width:90px">${unit}</span>
-      ${isPrimary ? '<span style="font-size:.65rem;font-weight:800;background:var(--green);color:white;padding:.1rem .45rem;border-radius:20px;flex-shrink:0">Primary</span>' : ''}
-      <div style="display:flex;align-items:center;gap:.3rem;margin-left:auto;background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:.3rem .7rem;">
-        <span style="font-size:.9rem;font-weight:700;color:var(--green-accent)">₱</span>
-        <input type="number" data-unit="${unit}" placeholder="0.00" min="0" step="0.01"
-          value="${saved}"
-          style="width:80px;border:none;font-size:.95rem;font-weight:700;color:var(--text);background:transparent;outline:none"
-          oninput="apCheckDone(${id})"/>
-      </div>
-    </div>`;
-  }).join('');
- 
-  const firstInp = rows.querySelector('input[data-unit]');
-  if (firstInp) {
-    firstInp.addEventListener('input', () => {
-      const hidden = document.getElementById('ap-price-' + id);
-      if (hidden) hidden.value = firstInp.value;
-    });
-  }
- 
-  apCheckDone(id);
-}
- 
-function apUpdatePrimaryBadge(id) {
-  const primary = document.getElementById('ap-unit-primary-select-' + id)?.value || '';
-  document.querySelectorAll('#ap-units-' + id + ' .unit-primary-tag').forEach(t => t.style.display = 'none');
-  if (primary) {
-    const key = primary.replace('per ', '').replace(' ', '-');
-    const tag = document.getElementById('ap-utag-' + id + '-' + key);
-    if (tag) tag.style.display = 'inline-block';
-  }
-}
- 
-function apUpdateSummaryPills(id, checked) {
-  const pills   = document.getElementById('ap-unit-pills-'           + id);
-  const primary = document.getElementById('ap-unit-primary-select-' + id)?.value || '';
-  pills.innerHTML = '';
-  checked.forEach(inp => {
-    const pill = document.createElement('span');
-    pill.className = 'unit-pill' + (inp.value === primary ? ' unit-pill-primary' : '');
-    pill.textContent = inp.value + (inp.value === primary ? ' ★' : '');
-    pills.appendChild(pill);
-  });
-}
- 
-function apToggleCard(id) {
-  const body = document.getElementById('ap-body-' + id);
-  const chev = document.getElementById('ap-chev-' + id);
-  const open = body.style.display !== 'none';
-  body.style.display   = open ? 'none' : 'block';
-  chev.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
-}
- 
-function apBuildCard(id) {
-  const unitDefs = [
-    { val:'per kg',     icon:'⚖️', label:'per kg',     sub:'Kilogram',        key:'kg'     },
-    { val:'per 100g',   icon:'🔢', label:'per 100g',   sub:'100 Grams',       key:'100g'   },
-    { val:'per bundle', icon:'🌿', label:'per bundle', sub:'Bundle / Bunch',  key:'bundle' },
-    { val:'per piece',  icon:'🔵', label:'per piece',  sub:'Individual Item', key:'piece'  },
-    { val:'per pack',   icon:'📦', label:'per pack',   sub:'Sealed Pack',     key:'pack'   },
-    { val:'per box',    icon:'🗃️', label:'per box',    sub:'Box / Crate',     key:'box'    },
-    { val:'per tray',   icon:'🍱', label:'per tray',   sub:'Tray / Punnet',   key:'tray'   },
-    { val:'per sack',   icon:'👜', label:'per sack',   sub:'Sack / Bayong',   key:'sack'   },
-  ];
- 
-  const unitCards   = unitDefs.map(u => `
-    <label class="unit-check-card" id="ap-ucard-${id}-${u.key}">
-      <input type="checkbox" value="${u.val}" onchange="apHandleUnitCheck(this,${id})"/>
-      <div class="unit-check-icon">${u.icon}</div>
-      <div class="unit-check-label">${u.label}</div>
-      <div class="unit-check-sub">${u.sub}</div>
-      <span class="unit-primary-tag" id="ap-utag-${id}-${u.key}">Primary</span>
-    </label>`).join('');
-  const unitOptions = unitDefs.map(u => `<option value="${u.val}">${u.val}</option>`).join('');
- 
-  const todayStr = new Date().toISOString().split('T')[0];
- 
-  return `
-  <div class="ap-card section-card" id="ap-card-${id}">
- 
-    <!-- Collapsed header -->
-    <div class="ap-card-header" id="ap-header-${id}" style="display:none;" onclick="apToggleCard(${id})">
-      <div class="section-card-head" style="cursor:pointer;user-select:none;justify-content:space-between;">
-        <div style="display:flex;align-items:center;gap:.75rem;">
-          <span class="sc-icon" id="ap-thumb-${id}">📦</span>
-          <div>
-            <div class="sc-title" id="ap-sname-${id}">—</div>
-            <div style="font-size:.78rem;color:var(--text-light);margin-top:2px" id="ap-ssub-${id}">—</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:.75rem;">
-          <span class="badge b-g">✓ Done</span>
-          <svg id="ap-chev-${id}" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;transition:transform .25s;color:var(--text-light)"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-      </div>
-    </div>
- 
-    <!-- Form body -->
-    <div id="ap-body-${id}">
-      <div class="section-card-head">
-        <span class="sc-icon">📝</span>
-        <span class="sc-title">Product #${id}</span>
-        <span style="font-size:.78rem;color:var(--text-light);margin-left:.5rem">Fill in the details below</span>
-      </div>
-      <div class="section-card-body">
- 
-        <!-- Photos -->
-        <div style="margin-bottom:1.3rem">
-          <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.9rem">
-            <span style="font-size:1.1rem">📸</span>
-            <span style="font-family:var(--font-display);font-size:.97rem;font-weight:700">Product Photos</span>
-          </div>
-          <div class="file-upload-box">
-            <input type="file" accept="image/*" id="ap-img-${id}"/>
-            <div class="upload-icon">📷</div>
-            <div class="upload-title">Upload Main Photo</div>
-            <div class="upload-sub">Drag &amp; drop or <span>click to browse</span></div>
-          </div>
-          <div style="margin-top:14px">
-            <label style="font-size:12.5px;font-weight:700;color:#374151;display:block;margin-bottom:8px">Additional Photos <span style="font-weight:400;color:#9ca3af">(optional)</span></label>
-            <div class="photo-slots">
-              <div class="photo-slot"><input type="file" accept="image/*"/><span class="photo-slot-icon">＋</span><span>Photo 2</span></div>
-              <div class="photo-slot"><input type="file" accept="image/*"/><span class="photo-slot-icon">＋</span><span>Photo 3</span></div>
-              <div class="photo-slot"><input type="file" accept="image/*"/><span class="photo-slot-icon">＋</span><span>Photo 4</span></div>
-              <div class="photo-slot"><input type="file" accept="image/*"/><span class="photo-slot-icon">＋</span><span>Photo 5</span></div>
-            </div>
-          </div>
-        </div>
- 
-        <hr style="border:none;border-top:1.5px solid var(--border);margin:1.3rem 0">
- 
-        <!-- Basic Info -->
-        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem">
-          <span style="font-size:1.1rem">📝</span>
-          <span style="font-family:var(--font-display);font-size:.97rem;font-weight:700">Basic Information</span>
-        </div>
- 
-        <div class="form-group">
-          <label>Product Name *</label>
-          <input type="text" id="ap-name-${id}" placeholder="e.g. Fresh Tomatoes, Organic Carrots…" oninput="apCheckDone(${id})"/>
-        </div>
- 
-        <div class="form-group">
-          <label>Category *</label>
-          <select id="ap-cat-${id}" onchange="apOnCategoryChange(${id})">
-            <option value="" disabled selected>Select a category</option>
-            <option>Vegetables</option>
-            <option>Fruits</option>
-            <option>Dairy</option>
-            <option>Grains</option>
-            <option>Meat</option>
-            <option>Others</option>
-          </select>
-        </div>
- 
-        <!-- Unit of Measurement -->
-        <div class="form-group" style="margin-bottom:0">
-          <label>Unit of Measurement *</label>
-          <span class="hint" style="display:block;margin-bottom:10px">Check all units this product can be sold in.</span>
-          <div class="unit-checkbox-grid" id="ap-units-${id}">${unitCards}</div>
-          <div class="unit-primary-selector" id="ap-unit-primary-wrap-${id}" style="display:none;">
-            <span class="unit-primary-label">Primary unit (first selected is primary):</span>
-            <select id="ap-unit-primary-select-${id}" style="display:none">
-              <option value="">— choose —</option>${unitOptions}
-            </select>
-          </div>
-          <div class="unit-selected-summary" id="ap-unit-summary-${id}" style="display:none;">
-            <span class="unit-summary-label">Selected units:</span>
-            <div class="unit-pills" id="ap-unit-pills-${id}"></div>
-          </div>
-        </div>
- 
-        <div class="form-group" style="margin-bottom:0;margin-top:1rem">
-          <label>Description</label>
-          <textarea id="ap-desc-${id}" placeholder="Describe your product — freshness, how it's grown, best uses…"></textarea>
-        </div>
- 
-        <hr style="border:none;border-top:1.5px solid var(--border);margin:1.3rem 0">
- 
-        <!-- Pricing & Stock -->
-        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem">
-          <span style="font-size:1.1rem">💰</span>
-          <span style="font-family:var(--font-display);font-size:.97rem;font-weight:700">Pricing &amp; Initial Stock Batch</span>
-        </div>
-        <div class="tip-box" style="margin-bottom:1.2rem">
-          📦 <b>Batch-based stock:</b> This creates your <b>first stock batch</b>. You can add more batches later in Stock Update, each with their own best before date. Set a price for each unit you selected above.
-        </div>
- 
-        <div id="ap-price-grid-${id}" style="display:none;margin-bottom:1rem">
-          <label style="font-size:.78rem;font-weight:700;color:var(--text-mid);display:block;margin-bottom:.6rem">Price per Unit * <span style="font-weight:400;color:var(--text-light)">(set a price for each unit you selected)</span></label>
-          <div id="ap-price-rows-${id}" style="display:flex;flex-direction:column;gap:.5rem"></div>
-          <div id="ap-price-empty-${id}" style="font-size:.82rem;color:var(--text-light);padding:.6rem .8rem;background:var(--cream-dark);border-radius:var(--radius-sm);border:1px solid var(--border)">
-            ← Select units above to set prices here.
-          </div>
-        </div>
-        <div id="ap-price-fallback-${id}">
-          <div class="form-group">
-            <label>Price (₱) * <span style="font-weight:400;color:var(--text-light)">— select units above first</span></label>
-            <input type="number" id="ap-price-${id}" placeholder="0.00" min="0" step="0.01" oninput="apCheckDone(${id})" disabled style="opacity:.5;cursor:not-allowed"/>
-            <span class="hint">Select a unit of measurement above to unlock pricing.</span>
-          </div>
-        </div>
- 
-        <div class="form-row-2" style="margin-top:.3rem">
-          <div class="form-group">
-            <label>Batch Quantity *</label>
-            <input type="number" id="ap-qty-${id}" placeholder="0" min="0"/>
-            <span class="hint">Units in this first batch.</span>
-          </div>
-          <div class="form-group">
-            <label>Low Stock Alert at</label>
-            <input type="number" id="ap-alert-${id}" placeholder="e.g. 5" min="0"/>
-            <span class="hint">Warn when stock drops below.</span>
-          </div>
-        </div>
- 
-        <hr style="border:none;border-top:1.5px solid var(--border);margin:1.3rem 0">
- 
-        <!-- Shipping -->
-        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem">
-          <span style="font-size:1.1rem">🚚</span>
-          <span style="font-family:var(--font-display);font-size:.97rem;font-weight:700">Shipping Details</span>
-        </div>
-        <div class="form-row-2">
-          <div class="form-group">
-            <label>Estimated Prep Time</label>
-            <select><option selected>Same day</option><option>1 day</option><option>2 days</option><option>3 days</option></select>
-          </div>
-          <div class="form-group">
-            <label>Product Weight (approx.)</label>
-            <input type="text" placeholder="e.g. 0.5 kg, 200g"/>
-          </div>
-        </div>
-        <div class="form-group" style="margin-bottom:0">
-          <label>Special Handling Notes</label>
-          <input type="text" placeholder="e.g. Keep refrigerated, Handle with care…"/>
-        </div>
- 
-        <hr style="border:none;border-top:1.5px solid var(--border);margin:1.3rem 0">
- 
-        <!-- Freshness & Best Before -->
-        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.8rem">
-          <span style="font-size:1.1rem">🕐</span>
-          <span style="font-family:var(--font-display);font-size:.97rem;font-weight:700">Freshness &amp; Best Before</span>
-        </div>
- 
-        <div class="tip-box" style="margin-bottom:1.2rem" id="ap-bestbefore-tip-${id}">
-          🥦 Select a category above to see the correct expiry method.
-        </div>
- 
-        <div class="form-row-2">
-          <div class="form-group">
-            <label id="ap-date-label-${id}">Harvest Date *</label>
-            <input type="date" id="ap-source-date-${id}" value="${todayStr}" onchange="apUpdateExpiry(${id})"/>
-            <span class="hint" id="ap-date-hint-${id}">When was this batch harvested?</span>
-          </div>
- 
-          <div id="ap-shelf-wrap-${id}">
-            <div class="form-group">
-              <label>Shelf Life (days) *</label>
-              <select id="ap-shelf-${id}" onchange="apUpdateExpiry(${id})">
-                <option value="" disabled selected>Select shelf life</option>
-                <optgroup label="Very Perishable (1–3 days)">
-                  <option value="1">1 day — Fresh-cut herbs, sprouts</option>
-                  <option value="2">2 days — Strawberries, fresh basil</option>
-                  <option value="3">3 days — Leafy greens, meat</option>
-                </optgroup>
-                <optgroup label="Short (4–7 days)">
-                  <option value="4">4 days — Tomatoes, mushrooms</option>
-                  <option value="5">5 days — Bell peppers, eggplant</option>
-                  <option value="7">7 days — Corn, broccoli, cucumbers</option>
-                </optgroup>
-                <optgroup label="Moderate (8–21 days)">
-                  <option value="10">10 days — Cabbage, okra</option>
-                  <option value="14">14 days — Carrots, beets, radish</option>
-                  <option value="21">21 days — Sweet potato, squash</option>
-                </optgroup>
-                <optgroup label="Long (30+ days)">
-                  <option value="30">30 days — Onions, garlic</option>
-                  <option value="60">60 days — Potatoes, pumpkin</option>
-                  <option value="180">180 days — Dried grains, rice</option>
-                </optgroup>
-              </select>
-              <span class="hint">Days this batch stays fresh from source date.</span>
-            </div>
-          </div>
- 
-          <div id="ap-manual-wrap-${id}" style="display:none">
-            <div class="form-group">
-              <label>Best Before Date (from package) *</label>
-              <input type="date" id="ap-expiry-manual-${id}" onchange="apUpdateExpiry(${id})"/>
-              <span class="hint">Enter the best before date from the dairy packaging.</span>
-            </div>
-          </div>
-        </div>
- 
-        <!-- Expiry Preview -->
-        <div class="expiry-preview">
-          <div class="expiry-preview-head">📅 Best Before Preview</div>
-          <div class="expiry-preview-body">
-            <div style="font-size:.75rem;color:var(--text-light);margin-bottom:.6rem" id="ap-prev-method-${id}">🌱 Method: Select a category to see the expiry calculation method.</div>
-            <div class="expiry-row"><span class="expiry-lbl">Source Date</span><span class="expiry-val" id="ap-prev-harvest-${id}">—</span></div>
-            <div class="expiry-row"><span class="expiry-lbl">Best Before</span><span class="expiry-val" id="ap-prev-expiry-${id}">—</span></div>
-            <div class="expiry-row"><span class="expiry-lbl">Days Remaining</span><span class="expiry-val" id="ap-prev-days-${id}">—</span></div>
-            <div class="shelf-track" style="margin-top:8px;height:8px">
-              <div class="shelf-fill shelf-fill-ok" id="ap-prev-bar-${id}" style="width:0%"></div>
-            </div>
-            <div style="font-size:.72rem;color:var(--text-light);margin-top:4px" id="ap-prev-note-${id}">Select a category and fill in the fields above.</div>
-          </div>
-        </div>
- 
-        <div class="form-group" style="margin-top:1rem">
-          <label>Storage Instructions</label>
-          <select>
-            <option selected>Room temperature</option>
-            <option>Refrigerate (2–8°C)</option>
-            <option>Cool &amp; dry place</option>
-            <option>Keep away from sunlight</option>
-            <option>Store in water (e.g. fresh herbs)</option>
-          </select>
-        </div>
- 
-        <!-- Mark Done footer -->
-        <div class="ap-form-footer">
-          <span style="font-size:.78rem;color:var(--text-light)"><span style="color:#ef5350">*</span> Required fields</span>
-          <button type="button" class="btn-save ap-btn-done" id="ap-done-btn-${id}" onclick="apMarkDone(${id})" disabled>
-            ✓ Mark as Done
+
+      <!-- SUCCESS -->
+      <div class="ap-success" id="ap-success">
+        <div class="ap-success-icon">🌾</div>
+        <h2 class="ap-success-title" id="ap-success-title">Products Saved!</h2>
+        <p class="ap-success-sub" id="ap-success-sub"></p>
+        <div class="ap-success-actions">
+          <a href="Products.html" class="btn-save">View My Products →</a>
+          <button type="button" class="btn-cancel" onclick="resetAll()">
+            + Add More
           </button>
         </div>
- 
       </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-main">
+          <div>
+            <div class="footer-logo">
+              <span class="logo-icon">🌾</span><span>FarmDirect</span>
+            </div>
+            <p class="footer-desc">
+              Connecting Zamboanga farmers to your table. Fresh, local, and
+              delivered with care.
+            </p>
+          </div>
+          <div class="footer-links">
+            <div class="footer-col">
+              <h4>Quick Links</h4>
+              <a href="../index.html">Home</a
+              ><a href="Products.html">My Products</a
+              ><a href="Dashboard.html">Dashboard</a
+              ><a href="Orders.html">Orders</a>
+            </div>
+            <div class="footer-col">
+              <h4>Categories</h4>
+              <a href="#">Vegetables</a><a href="#">Fruits</a
+              ><a href="#">Meats</a><a href="#">Dairy</a>
+            </div>
+            <div class="footer-col">
+              <h4>Contact</h4>
+              <a href="tel:+639123456789">+63 912 345 6789</a
+              ><a href="mailto:hello@farmdirect.ph">hello@farmdirect.ph</a>
+              <p>Mon–Sat: 6AM–8PM</p>
+              <p>Zamboanga City, PH</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 FarmDirect Zamboanga. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      lucide.createIcons();
+
+      /* ══ CONSTANTS ══ */
+      const CAT_EMOJI = {
+        Vegetables: "🥦",
+        Fruits: "🍑",
+        Dairy: "🥛",
+        Grains: "🌾",
+        Meat: "🥩",
+        Others: "📦",
+      };
+      const UNIT_ICONS = {
+        "per kg": "⚖️",
+        "per 100g": "🔢",
+        "per bundle": "🌿",
+        "per piece": "🔵",
+        "per pack": "📦",
+        "per box": "🗃️",
+        "per tray": "🍱",
+        "per sack": "👜",
+      };
+      const ALL_UNITS = [
+        "per kg",
+        "per 100g",
+        "per bundle",
+        "per piece",
+        "per pack",
+        "per box",
+        "per tray",
+        "per sack",
+      ];
+      const STORAGE_OPTS = [
+        "Room temperature",
+        "Refrigerate (2–8°C)",
+        "Cool & dry place",
+        "Keep away from sunlight",
+      ];
+
+      /* ══ STATE ══ */
+      let variants = []; // {id, name, storage, units:[{unit,price,stock,alertAt,weight,srcDate,shelfDays,status}]}
+      let variantIdCount = 0;
+      let selectedPayment = [];
+      let doneProducts = []; // saved product objects
+      let productCount = 0; // for numbering collapsed cards
+
+      // preview state
+      let prevSelVariant = null;
+      let prevSelUnit = null;
+
+      /* ══ PHOTO PREVIEW ══ */
+      function previewSlot(id, input) {
+        const file = input.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const slot = document.getElementById(id);
+          const img = document.getElementById(id + "-img");
+          const rm = document.getElementById(id + "-rm");
+          const inner = slot.querySelector(".ps-inner");
+          img.src = ev.target.result;
+          img.style.display = "block";
+          if (rm) rm.style.display = "flex";
+          if (inner) inner.style.display = "none";
+          slot.style.borderColor = "var(--green-accent)";
+          slot.style.borderStyle = "solid";
+          if (id === "ps-main") {
+            const pi = document.getElementById("prev-img");
+            const pe = document.getElementById("prev-emoji");
+            if (pi) {
+              pi.src = ev.target.result;
+              pi.style.display = "block";
+            }
+            if (pe) pe.style.display = "none";
+          }
+          checkStep1();
+        };
+        reader.readAsDataURL(file);
+      }
+      function removeSlot(id) {
+        const slot = document.getElementById(id);
+        const img = document.getElementById(id + "-img");
+        const rm = document.getElementById(id + "-rm");
+        const inner = slot.querySelector(".ps-inner");
+        const input = slot.querySelector("input[type=file]");
+        img.src = "";
+        img.style.display = "none";
+        if (rm) rm.style.display = "none";
+        if (inner) inner.style.display = "flex";
+        if (input) input.value = "";
+        slot.style.borderColor = "";
+        slot.style.borderStyle = "";
+        if (id === "ps-main") {
+          const pi = document.getElementById("prev-img");
+          const pe = document.getElementById("prev-emoji");
+          if (pi) {
+            pi.src = "";
+            pi.style.display = "none";
+          }
+          if (pe) pe.style.display = "block";
+        }
+        checkStep1();
+      }
+
+      /* ══ PAYMENT CHIPS ══ */
+      function togglePayChip(el, method) {
+        el.classList.toggle("selected");
+        if (el.classList.contains("selected")) {
+          if (!selectedPayment.includes(method)) selectedPayment.push(method);
+        } else {
+          selectedPayment = selectedPayment.filter((p) => p !== method);
+        }
+      }
+
+      /* ══ STEP 1: VARIANT NAMES ══ */
+      function addVariantName() {
+        variantIdCount++;
+        const vid = variantIdCount;
+        variants.push({
+          id: vid,
+          name: "",
+          storage: "Room temperature",
+          units: [],
+        });
+        renderVariantNames();
+        checkStep1();
+        setTimeout(() => {
+          const inputs = document.querySelectorAll(
+            "#variant-name-list .vn-inp",
+          );
+          if (inputs.length) inputs[inputs.length - 1].focus();
+        }, 60);
+      }
+
+      function removeVariantName(vid) {
+        variants = variants.filter((v) => v.id !== vid);
+        renderVariantNames();
+        checkStep1();
+      }
+
+      function setVariantName(vid, val) {
+        const v = variants.find((x) => x.id === vid);
+        if (!v) return;
+        v.name = val.trim();
+        checkStep1();
+      }
+
+      function renderVariantNames() {
+        const list = document.getElementById("variant-name-list");
+        const hint = document.getElementById("no-variant-hint");
+        hint.style.display = variants.length ? "none" : "block";
+        list.innerHTML = variants
+          .map(
+            (v) => `
+    <div class="variant-name-row" id="vnrow-${v.id}" style="align-items:flex-start;gap:.75rem;flex-wrap:wrap">
+      <div class="vn-dot" style="margin-top:.7rem"></div>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:.5rem">
+        <input class="vn-inp" type="text" value="${v.name}"
+          placeholder="e.g. Regular Tomato, Cherry Tomato, Green Tomato…"
+          oninput="setVariantName(${v.id},this.value)"/>
+        <div style="display:flex;align-items:center;gap:.5rem">
+          <div class="photo-slot-sm" id="vphoto-${v.id}" style="width:64px;height:64px;min-height:64px;border-radius:8px;flex-shrink:0;border-color:${v.photo ? "var(--green-accent)" : "#ef5350"};border-style:${v.photo ? "solid" : "dashed"}">
+            <input type="file" accept="image/*" onchange="previewVariantPhoto(${v.id},this)"/>
+            <img class="ps-preview" id="vphoto-${v.id}-img" alt="" ${v.photo ? `src="${v.photo}"` : ""}  style="display:${v.photo ? "block" : "none"}"/>
+            <button type="button" class="ps-rm" id="vphoto-${v.id}-rm" onclick="removeVariantPhoto(event,${v.id})" style="display:${v.photo ? "flex" : "none"}">✕</button>
+            <div class="ps-inner" id="vphoto-${v.id}-inner" style="gap:.15rem;display:${v.photo ? "none" : "flex"}"><span class="ps-icon" style="font-size:.9rem;color:#ef5350">📷</span><span class="ps-lbl" style="font-size:.6rem;color:#ef5350">Required</span></div>
+          </div>
+          <span style="font-size:.73rem;color:var(--text-light)">Optional: add a photo specific to this variant</span>
+        </div>
+      </div>
+      <button type="button" class="vn-del" style="margin-top:.6rem" onclick="removeVariantName(${v.id})">✕</button>
+    </div>`,
+          )
+          .join("");
+      }
+
+      function previewVariantPhoto(vid, input) {
+        const file = input.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const slot = document.getElementById("vphoto-" + vid);
+          const img = document.getElementById("vphoto-" + vid + "-img");
+          const rm = document.getElementById("vphoto-" + vid + "-rm");
+          const inner = document.getElementById("vphoto-" + vid + "-inner");
+          img.src = ev.target.result;
+          img.style.display = "block";
+          if (rm) rm.style.display = "flex";
+          if (inner) inner.style.display = "none";
+          slot.style.borderColor = "var(--green-accent)";
+          slot.style.borderStyle = "solid";
+          const v = variants.find((x) => x.id === vid);
+          if (v) v.photo = ev.target.result;
+          checkStep1();
+        };
+        reader.readAsDataURL(file);
+      }
+      function removeVariantPhoto(e, vid) {
+        e.stopPropagation();
+        const slot = document.getElementById("vphoto-" + vid);
+        const img = document.getElementById("vphoto-" + vid + "-img");
+        const rm = document.getElementById("vphoto-" + vid + "-rm");
+        const inner = document.getElementById("vphoto-" + vid + "-inner");
+        const input = slot.querySelector("input[type=file]");
+        img.src = "";
+        img.style.display = "none";
+        if (rm) rm.style.display = "none";
+        if (inner) {
+          inner.style.display = "flex";
+          inner.querySelector(".ps-icon").style.color = "#ef5350";
+          inner.querySelector(".ps-lbl").style.color = "#ef5350";
+          inner.querySelector(".ps-lbl").textContent = "Required";
+        }
+        if (input) input.value = "";
+        slot.style.borderColor = "#ef5350";
+        slot.style.borderStyle = "dashed";
+        const v = variants.find((x) => x.id === vid);
+        if (v) v.photo = null;
+        checkStep1();
+      }
+
+      /* ══ CATEGORY → DEFAULT SHELF LIFE ══ */
+      const CAT_SHELF = {
+        Vegetables: 7,
+        Fruits: 5,
+        Dairy: 14,
+        Grains: 180,
+        Meat: 3,
+        Others: 7,
+      };
+
+      function onCatChange() {
+        checkStep1();
+        // When category changes, set default shelf life on all existing variant units
+        const cat = document.getElementById("prod-cat")?.value;
+        const def = CAT_SHELF[cat];
+        if (!def) return;
+        variants.forEach((v) =>
+          v.units.forEach((u) => {
+            if (!u.shelfDays) u.shelfDays = String(def);
+          }),
+        );
+        // Also store default for new units
+        window._defaultShelfLife = String(def);
+      }
+
+      function checkStep1() {
+        const name = document.getElementById("prod-name")?.value.trim();
+        const cat = document.getElementById("prod-cat")?.value;
+        const hasMainPhoto =
+          document.getElementById("ps-main-img")?.src &&
+          document.getElementById("ps-main-img").style.display !== "none";
+        const hasVariants = variants.some((v) => v.name);
+        const allVarPhotos = variants
+          .filter((v) => v.name)
+          .every((v) => v.photo);
+        document.getElementById("btn-next").disabled = !(
+          name &&
+          cat &&
+          hasMainPhoto &&
+          hasVariants &&
+          allVarPhotos
+        );
+
+        // Show photo warning
+        let warn = "";
+        if (!hasMainPhoto && name) warn = "⚠️ Main product photo is required.";
+        else if (hasVariants && !allVarPhotos)
+          warn = "⚠️ Each variant needs a photo.";
+        let warnEl = document.getElementById("step1-warn");
+        if (!warnEl) {
+          warnEl = document.createElement("div");
+          warnEl.id = "step1-warn";
+          warnEl.style.cssText =
+            "font-size:.8rem;color:#dc2626;margin-top:.5rem;font-weight:600";
+          document
+            .getElementById("btn-next")
+            .parentNode.insertBefore(
+              warnEl,
+              document.getElementById("btn-next"),
+            );
+        }
+        warnEl.textContent = warn;
+      }
+
+      /* ══ CANCEL CURRENT (not done products) ══ */
+      function cancelCurrentProduct() {
+        // If there are done products, just reset the wizard — keep done products
+        if (doneProducts.length > 0) {
+          if (
+            !confirm(
+              "Cancel this product? Your already-finished products will be kept.",
+            )
+          )
+            return;
+          addAnotherProduct(); // resets wizard only
+          // hide the add-another-bar since we cancelled not finished
+          document.getElementById("add-another-bar").style.display =
+            doneProducts.length ? "flex" : "none";
+        } else {
+          // No done products — go back to Products page
+          window.location.href = "Products.html";
+        }
+      }
+
+      /* ══ STEP NAVIGATION ══ */
+      function goToStep2() {
+        document.getElementById("step1").style.display = "none";
+        document.getElementById("step2").style.display = "block";
+        setStepIndicator(2);
+        renderVariantDetails();
+        refreshPreview();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function goToStep1() {
+        document.getElementById("step2").style.display = "none";
+        document.getElementById("step1").style.display = "block";
+        setStepIndicator(1);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function setStepIndicator(active) {
+        [1, 2].forEach((n) => {
+          const el = document.getElementById("step-ind-" + n);
+          el.classList.remove("active", "done");
+          if (n < active) el.classList.add("done");
+          else if (n === active) el.classList.add("active");
+        });
+      }
+
+      /* ══ STEP 2: VARIANT DETAILS ══ */
+      function addUnitToVariant(vid) {
+        const v = variants.find((x) => x.id === vid);
+        if (!v) return;
+        const sel = document.getElementById("usel-" + vid);
+        const unit = sel?.value;
+        if (!unit) return;
+        if (v.units.find((u) => u.unit === unit)) return;
+        const defShelf = window._defaultShelfLife || "";
+        v.units.push({
+          unit,
+          price: 0,
+          stock: 0,
+          alertAt: 5,
+          weight: "",
+          srcDate: "",
+          shelfDays: defShelf,
+          status: "live",
+        });
+        renderVariantDetails();
+        refreshPreview();
+        checkStep2();
+      }
+
+      function removeUnitFromVariant(vid, unit) {
+        const v = variants.find((x) => x.id === vid);
+        if (!v) return;
+        v.units = v.units.filter((u) => u.unit !== unit);
+        renderVariantDetails();
+        refreshPreview();
+        checkStep2();
+      }
+
+      function setUnitField(vid, unit, field, val) {
+        const v = variants.find((x) => x.id === vid);
+        if (!v) return;
+        const u = v.units.find((x) => x.unit === unit);
+        if (!u) return;
+        if (field === "price") u.price = parseFloat(val) || 0;
+        else if (field === "stock") u.stock = parseInt(val) || 0;
+        else if (field === "alertAt") u.alertAt = parseInt(val) || 0;
+        else u[field] = val;
+        if (field === "price" || field === "stock") refreshPreview();
+        if (field === "srcDate" || field === "shelfDays")
+          updateExpiryPreview(vid, unit);
+        checkStep2();
+      }
+
+      function setUnitStatus(vid, unit, status) {
+        const v = variants.find((x) => x.id === vid);
+        if (!v) return;
+        const u = v.units.find((x) => x.unit === unit);
+        if (!u) return;
+        u.status = status;
+        const uk = unit.replace(/ /g, "-");
+        ["live", "paused", "sold_out"].forEach((s) => {
+          const el = document.getElementById(`sp-${vid}-${uk}-${s}`);
+          if (el) {
+            el.classList.remove("on");
+            if (s === status) el.classList.add("on");
+          }
+        });
+      }
+
+      function setVariantStorage(vid, storage, el) {
+        const v = variants.find((x) => x.id === vid);
+        if (!v) return;
+        v.storage = storage;
+        el.closest(".storage-chips")
+          .querySelectorAll(".storage-chip")
+          .forEach((c) => c.classList.remove("selected"));
+        el.classList.add("selected");
+      }
+
+      function renderVariantDetails() {
+        const sec = document.getElementById("variant-detail-section");
+        const unitOpts = ALL_UNITS.map(
+          (u) => `<option value="${u}">${UNIT_ICONS[u] || "📦"} ${u}</option>`,
+        ).join("");
+        const today = new Date().toISOString().split("T")[0];
+
+        sec.innerHTML = variants
+          .filter((v) => v.name)
+          .map((v, idx) => {
+            const uRows = v.units
+              .map((u, i) => {
+                const uk = u.unit.replace(/ /g, "-");
+                const sL = u.status === "live",
+                  sP = u.status === "paused",
+                  sS = u.status === "sold_out";
+                return `
+      <div class="unit-row${i === 0 ? " primary-row" : ""}">
+        <span class="ur-icon">${UNIT_ICONS[u.unit] || "📦"}</span>
+        <span class="ur-name">${u.unit}</span>
+        ${i === 0 ? '<span class="ur-primary">Primary</span>' : ""}
+        <div class="ur-field">
+          <span class="ur-field-sym">₱</span>
+          <input type="number" placeholder="0.00" min="0" step="0.01" value="${u.price || ""}"
+            oninput="setUnitField(${v.id},'${u.unit}','price',this.value)"/>
+        </div>
+        <div class="ur-field">
+          <span class="ur-field-lbl">Stock:</span>
+          <input type="number" placeholder="0" min="0" value="${u.stock || ""}"
+            oninput="setUnitField(${v.id},'${u.unit}','stock',this.value)"/>
+        </div>
+        <div class="ur-field">
+          <span class="ur-field-lbl">Alert at:</span>
+          <input type="number" placeholder="5" min="0" value="${u.alertAt || ""}"
+            oninput="setUnitField(${v.id},'${u.unit}','alertAt',this.value)"/>
+        </div>
+        ${
+          u.unit === "per kg" || u.unit === "per 100g"
+            ? `<div class="ur-field" style="opacity:.65">
+            <span class="ur-field-lbl">Weight:</span>
+            <span style="font-size:.88rem;font-weight:700;color:var(--text);padding:0 2px">${u.unit === "per kg" ? "1 kg" : "100 g"}</span>
+          </div>`
+            : `<div class="ur-field">
+            <span class="ur-field-lbl">Weight:</span>
+            <input type="text" placeholder="e.g. 500g" style="width:55px"
+              value="${u.weight || ""}"
+              oninput="setUnitField(${v.id},'${u.unit}','weight',this.value)"/>
+          </div>`
+        }
+        <button type="button" class="ur-del" onclick="removeUnitFromVariant(${v.id},'${u.unit}')">✕</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.5rem 0 .4rem">
+        <div class="fg" style="margin:0">
+          <label>Harvest Date</label>
+          <input type="date" value="${u.srcDate || today}"
+            onchange="setUnitField(${v.id},'${u.unit}','srcDate',this.value)"/>
+        </div>
+        <div class="fg" style="margin:0">
+          <label>Shelf Life (days)</label>
+          <select onchange="setUnitField(${v.id},'${u.unit}','shelfDays',this.value)">
+            <option value="" ${!u.shelfDays ? "selected" : ""} disabled>Select…</option>
+            <option value="1"   ${u.shelfDays == "1" ? "selected" : ""}>1 day — Fresh-cut herbs</option>
+            <option value="2"   ${u.shelfDays == "2" ? "selected" : ""}>2 days — Strawberries</option>
+            <option value="3"   ${u.shelfDays == "3" ? "selected" : ""}>3 days — Leafy greens, meat</option>
+            <option value="4"   ${u.shelfDays == "4" ? "selected" : ""}>4 days — Tomatoes, mushrooms</option>
+            <option value="5"   ${u.shelfDays == "5" ? "selected" : ""}>5 days — Bell peppers, fruits</option>
+            <option value="7"   ${u.shelfDays == "7" ? "selected" : ""}>7 days — Corn, vegetables</option>
+            <option value="10"  ${u.shelfDays == "10" ? "selected" : ""}>10 days — Cabbage, okra</option>
+            <option value="14"  ${u.shelfDays == "14" ? "selected" : ""}>14 days — Carrots, dairy</option>
+            <option value="21"  ${u.shelfDays == "21" ? "selected" : ""}>21 days — Squash, sweet potato</option>
+            <option value="30"  ${u.shelfDays == "30" ? "selected" : ""}>30 days — Onions, garlic</option>
+            <option value="60"  ${u.shelfDays == "60" ? "selected" : ""}>60 days — Potatoes, pumpkin</option>
+            <option value="180" ${u.shelfDays == "180" ? "selected" : ""}>180 days — Dried grains, rice</option>
+          </select>
+          ${u.shelfDays ? `<span class="hint" style="color:var(--green)">Auto-filled from category — you can change this.</span>` : ""}
+        </div>
+      </div>
+      <div class="expiry-preview-box" style="margin-bottom:.75rem">
+        <div class="epb-head">📅 Expiry Preview</div>
+        <div class="epb-row"><span class="epb-lbl">Harvest Date</span><span class="epb-val" id="ep-src-${v.id}-${uk}">—</span></div>
+        <div class="epb-row"><span class="epb-lbl">Best Before</span><span class="epb-val" id="ep-exp-${v.id}-${uk}">—</span></div>
+        <div class="epb-row"><span class="epb-lbl">Days Left</span><span class="epb-val" id="ep-days-${v.id}-${uk}">—</span></div>
+        <div class="shelf-track"><div class="shelf-fill" id="ep-bar-${v.id}-${uk}" style="width:0%"></div></div>
+      </div>
+      <div class="fg" style="margin-bottom:.8rem">
+        <label>Listing Status</label>
+        <div class="status-pills">
+          <span class="spill spill-g${sL ? " on" : ""}" id="sp-${v.id}-${uk}-live"     onclick="setUnitStatus(${v.id},'${u.unit}','live')">🟢 Live</span>
+          <span class="spill spill-y${sP ? " on" : ""}" id="sp-${v.id}-${uk}-paused"   onclick="setUnitStatus(${v.id},'${u.unit}','paused')">⏸ Paused</span>
+          <span class="spill spill-r${sS ? " on" : ""}" id="sp-${v.id}-${uk}-sold_out" onclick="setUnitStatus(${v.id},'${u.unit}','sold_out')">🔴 Sold Out</span>
+        </div>
+      </div>`;
+              })
+              .join("");
+
+            const storageChips = STORAGE_OPTS.map(
+              (s) =>
+                `<span class="storage-chip${v.storage === s ? " selected" : ""}" onclick="setVariantStorage(${v.id},'${s}',this)">${s}</span>`,
+            ).join("");
+
+            return `
+    <div class="vdc">
+      <div class="vdc-head">
+        <div class="vdc-num">${idx + 1}</div>
+        <div class="vdc-name">${v.name}</div>
+      </div>
+      <div class="vdc-body">
+        <div class="fg" style="margin-bottom:.75rem">
+          <label>Storage / Handling</label>
+          <div class="storage-chips">${storageChips}</div>
+        </div>
+        <div class="fg" style="margin-bottom:.5rem"><label>Units, Price &amp; Stock *</label></div>
+        <div class="tip" style="margin-bottom:.75rem;font-size:.79rem">
+          Add each unit this variant can be sold in. Set its price, stock quantity, low stock alert, product weight, harvest date and shelf life.
+        </div>
+        <div class="unit-rows-wrap">${uRows || '<div style="font-size:.82rem;color:var(--text-light);padding:.3rem 0">No units yet — add one below.</div>'}</div>
+        <div class="add-unit-row">
+          <select class="unit-select" id="usel-${v.id}">
+            <option value="" disabled selected>Choose unit to add…</option>
+            ${unitOpts}
+          </select>
+          <button type="button" class="btn-add-unit" onclick="addUnitToVariant(${v.id})">＋ Add Unit</button>
+        </div>
+      </div>
+    </div>`;
+          })
+          .join("");
+
+        // Trigger expiry re-calc
+        variants
+          .filter((v) => v.name)
+          .forEach((v) =>
+            v.units.forEach((u) => updateExpiryPreview(v.id, u.unit)),
+          );
+      }
+
+      /* ══ EXPIRY PREVIEW ══ */
+      function updateExpiryPreview(vid, unit) {
+        const v = variants.find((x) => x.id === vid);
+        if (!v) return;
+        const u = v.units.find((x) => x.unit === unit);
+        if (!u) return;
+        const uk = unit.replace(/ /g, "-");
+        const src = document.getElementById(`ep-src-${vid}-${uk}`);
+        const exp = document.getElementById(`ep-exp-${vid}-${uk}`);
+        const days = document.getElementById(`ep-days-${vid}-${uk}`);
+        const bar = document.getElementById(`ep-bar-${vid}-${uk}`);
+        if (!src) return;
+        const opts = { year: "numeric", month: "short", day: "numeric" };
+        if (!u.srcDate || !u.shelfDays) {
+          src.textContent = "—";
+          exp.textContent = "—";
+          days.textContent = "—";
+          bar.style.width = "0%";
+          bar.className = "shelf-fill";
+          return;
+        }
+        const sd = new Date(u.srcDate + "T00:00:00");
+        const ed = new Date(u.srcDate + "T00:00:00");
+        ed.setDate(ed.getDate() + parseInt(u.shelfDays));
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const d = Math.ceil((ed - today) / 86400000);
+        const pct = Math.max(
+          0,
+          Math.min(100, Math.round((d / parseInt(u.shelfDays)) * 100)),
+        );
+        src.textContent = sd.toLocaleDateString("en-PH", opts);
+        exp.textContent = ed.toLocaleDateString("en-PH", opts);
+        bar.className = "shelf-fill";
+        if (d <= 0) {
+          days.textContent = "❌ Expired";
+          days.style.color = "#dc2626";
+          bar.classList.add("shelf-fill-danger");
+          bar.style.width = "4%";
+        } else if (d <= 3) {
+          days.textContent = d + " day(s) left ⚠️";
+          days.style.color = "#dc2626";
+          bar.classList.add("shelf-fill-danger");
+          bar.style.width = pct + "%";
+        } else if (d <= 7) {
+          days.textContent = d + " days left ⚠️";
+          days.style.color = "#ca8a04";
+          bar.classList.add("shelf-fill-warn");
+          bar.style.width = pct + "%";
+        } else {
+          days.textContent = d + " days left ✅";
+          days.style.color = "#16a34a";
+          bar.classList.add("shelf-fill-ok");
+          bar.style.width = pct + "%";
+        }
+      }
+
+      /* ══ BUYER PREVIEW ══ */
+      function refreshPreview() {
+        const name = document.getElementById("prod-name")?.value.trim();
+        const cat = document.getElementById("prod-cat")?.value;
+        const sc = document.getElementById("preview-sc");
+        const namedV = variants.filter((v) => v.name && v.units.length > 0);
+        sc.style.display = namedV.length ? "block" : "none";
+        if (!namedV.length) return;
+
+        document.getElementById("prev-name").textContent =
+          name || "Product Name";
+        document.getElementById("prev-cat").textContent =
+          (CAT_EMOJI[cat] || "📦") + " " + (cat || "—");
+        document.getElementById("prev-emoji").textContent =
+          CAT_EMOJI[cat] || "📦";
+
+        if (!prevSelVariant || !namedV.find((v) => v.id === prevSelVariant))
+          prevSelVariant = namedV[0].id;
+        const selV = namedV.find((v) => v.id === prevSelVariant);
+
+        document.getElementById("prev-variants").innerHTML = namedV
+          .map(
+            (v) =>
+              `<span class="pvp${v.id === prevSelVariant ? " active" : ""}" onclick="prevPickVariant(${v.id},this)">${v.name}</span>`,
+          )
+          .join("");
+
+        if (selV) {
+          if (!prevSelUnit || !selV.units.find((u) => u.unit === prevSelUnit))
+            prevSelUnit = selV.units[0]?.unit || null;
+          document.getElementById("prev-units").innerHTML = selV.units
+            .map(
+              (u) =>
+                `<span class="pup${u.unit === prevSelUnit ? " active" : ""}" onclick="prevPickUnit('${u.unit}',this)">${UNIT_ICONS[u.unit] || "📦"} ${u.unit}</span>`,
+            )
+            .join("");
+          showPrevPrice();
+        }
+      }
+
+      function prevPickVariant(vid, el) {
+        prevSelVariant = vid;
+        prevSelUnit = null;
+        document
+          .querySelectorAll(".pvp")
+          .forEach((p) => p.classList.remove("active"));
+        el.classList.add("active");
+        refreshPreview();
+      }
+      function prevPickUnit(unit, el) {
+        prevSelUnit = unit;
+        document
+          .querySelectorAll(".pup")
+          .forEach((p) => p.classList.remove("active"));
+        el.classList.add("active");
+        showPrevPrice();
+      }
+      function showPrevPrice() {
+        const v = variants.find((x) => x.id === prevSelVariant);
+        const u = v?.units.find((x) => x.unit === prevSelUnit);
+        const pEl = document.getElementById("prev-price");
+        const sub = document.getElementById("prev-price-sub");
+        if (u && u.price > 0) {
+          pEl.textContent = "₱" + u.price.toLocaleString();
+          sub.textContent = u.unit + (u.stock ? ` · ${u.stock} in stock` : "");
+        } else {
+          pEl.textContent = "₱—";
+          sub.textContent = "Set a price above";
+        }
+      }
+
+      /* ══ STEP 2 VALIDATION ══ */
+      function checkStep2() {
+        const ok = variants
+          .filter((v) => v.name)
+          .some((v) => v.units.some((u) => u.price > 0));
+        document.getElementById("btn-done").disabled = !ok;
+      }
+
+      /* ══ MARK PRODUCT DONE (collapse) ══ */
+      function markProductDone() {
+        productCount++;
+        const name = document.getElementById("prod-name").value.trim();
+        const cat = document.getElementById("prod-cat").value;
+        const desc = document.getElementById("prod-desc").value.trim();
+        const namedV = variants.filter((v) => v.name);
+        const totalUnits = namedV.reduce((s, v) => s + v.units.length, 0);
+
+        // Build variant summary rows for the expandable body
+        const variantSummaryRows = namedV
+          .map((v) => {
+            const photoHTML = v.photo
+              ? `<img src="${v.photo}" style="width:36px;height:36px;border-radius:6px;object-fit:cover;border:1px solid var(--border);flex-shrink:0" alt=""/>`
+              : `<div style="width:36px;height:36px;border-radius:6px;background:var(--cream-dark);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">${CAT_EMOJI[cat] || "📦"}</div>`;
+            const unitList = v.units
+              .map(
+                (u) =>
+                  `<span style="font-size:.73rem;background:var(--green-light);color:var(--green);border:1px solid rgba(26,46,30,.12);padding:.15rem .5rem;border-radius:20px;font-weight:600">${UNIT_ICONS[u.unit] || "📦"} ${u.unit} — ₱${u.price}</span>`,
+              )
+              .join("");
+            return `<div style="display:flex;align-items:flex-start;gap:.7rem;padding:.6rem 0;border-bottom:1px solid var(--border)">
+      ${photoHTML}
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:700;font-size:.88rem;color:var(--text);margin-bottom:.25rem">${v.name}</div>
+        <div style="display:flex;gap:.35rem;flex-wrap:wrap">${unitList || '<span style="font-size:.72rem;color:var(--text-light)">No units set</span>'}</div>
+        <div style="font-size:.71rem;color:var(--text-light);margin-top:.2rem">📦 Storage: ${v.storage}</div>
+      </div>
+    </div>`;
+          })
+          .join("");
+
+        const payHTML = selectedPayment.length
+          ? selectedPayment.join(" · ")
+          : "—";
+
+        // Build collapsed card with expandable body
+        const stack = document.getElementById("done-stack");
+        const div = document.createElement("div");
+        div.className = "product-card done";
+        div.id = "dpc-" + productCount;
+        div.innerHTML = `
+    <div class="pc-collapsed" onclick="toggleDoneCard(${productCount})">
+      <div class="pc-num">${productCount}</div>
+      <div style="flex:1;min-width:0">
+        <div class="pc-sum-name">${CAT_EMOJI[cat] || "📦"} ${name}</div>
+        <div style="font-size:.74rem;color:var(--text-light);margin-top:1px">${namedV.length} variant(s) · ${totalUnits} unit(s) · ${cat}</div>
+      </div>
+      <span class="pc-done-badge">✓ Done</span>
+      <svg class="pc-chev" id="dpc-chev-${productCount}" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-  </div>`;
-}
- 
-/* ── Mark done ── */
-function apMarkDone(id) {
-  const name = (document.getElementById('ap-name-' + id)?.value || '').trim();
-  const cat  = (document.getElementById('ap-cat-'  + id)?.value || '').trim();
- 
-  const priceInputs = document.querySelectorAll('#ap-price-rows-' + id + ' input[data-unit]');
-  const unitPrices  = Array.from(priceInputs)
-    .filter(inp => parseFloat(inp.value) > 0)
-    .map(inp => '₱' + parseFloat(inp.value).toLocaleString() + ' ' + inp.dataset.unit);
- 
-  document.getElementById('ap-sname-' + id).textContent = name;
-  const subParts = [];
-  if (cat) subParts.push((CAT_EMOJI[cat] || '') + ' ' + cat);
-  if (unitPrices.length) subParts.push(unitPrices.join(' · '));
- 
-  const prevBestBefore = document.getElementById('ap-prev-expiry-' + id)?.textContent;
-  if (prevBestBefore && prevBestBefore !== '—') subParts.push('Best Before: ' + prevBestBefore);
- 
-  document.getElementById('ap-ssub-'  + id).textContent = subParts.join(' · ');
-  document.getElementById('ap-thumb-' + id).textContent = CAT_EMOJI[cat] || '📦';
- 
-  document.getElementById('ap-body-'   + id).style.display = 'none';
-  document.getElementById('ap-header-' + id).style.display = 'block';
-  document.getElementById('ap-card-'   + id).classList.add('ap-card-done');
- 
-  const firstPrice = priceInputs.length ? priceInputs[0].value : '';
-  const primary    = priceInputs.length ? priceInputs[0].dataset.unit : '';
- 
-  // Collect ALL unit prices for localStorage
-  const allUnitPrices = Array.from(priceInputs)
-    .filter(inp => parseFloat(inp.value) > 0)
-    .map(inp => ({ unit: inp.dataset.unit, price: parseFloat(inp.value) }));
- 
-  apProducts.push({
-    id,
-    name,
-    cat,
-    price:      firstPrice,
-    primary,
-    allUnits:   allUnitPrices,
-    stock:      parseInt(document.getElementById('ap-qty-'    + id)?.value) || 0,
-    alertAt:    parseInt(document.getElementById('ap-alert-'  + id)?.value) || 5,
-    bestBefore: prevBestBefore && prevBestBefore !== '—' ? prevBestBefore : '',
-  });
-  apUpdateCounter();
- 
-  document.getElementById('ap-save-bar').style.display       = 'none';
-  document.getElementById('ap-another-prompt').style.display = 'flex';
-  document.getElementById('ap-another-prompt').scrollIntoView({ behavior:'smooth', block:'nearest' });
-}
- 
-function apAddAnother() {
-  document.getElementById('ap-another-prompt').style.display = 'none';
-  document.getElementById('ap-save-bar').style.display       = 'none';
-  apCardCount++;
-  const stack = document.getElementById('ap-stack');
-  const div   = document.createElement('div');
-  div.innerHTML = apBuildCard(apCardCount);
-  stack.appendChild(div.firstElementChild);
-  document.getElementById('ap-card-' + apCardCount).scrollIntoView({ behavior:'smooth', block:'start' });
-  setTimeout(() => document.getElementById('ap-name-' + apCardCount)?.focus(), 400);
-}
- 
-function apShowSaveBar() {
-  document.getElementById('ap-another-prompt').style.display = 'none';
-  const n = apProducts.length;
-  document.getElementById('ap-save-label').textContent = n + ' product' + (n !== 1 ? 's' : '') + ' ready to save: ' + apProducts.map(p => p.name).join(', ') + '.';
-  const bar = document.getElementById('ap-save-bar');
-  bar.style.display = 'flex';
-  bar.scrollIntoView({ behavior:'smooth', block:'nearest' });
-}
- 
-/* ── SAVE ALL — now writes to localStorage ── */
-function apSaveAll() {
-  const n = apProducts.length;
- 
-  // ── Save to localStorage ──
-  const existing = JSON.parse(localStorage.getItem('farmdirect_products') || '[]');
-  const newProds = apProducts.map(p => ({
-    id:         'prod_' + Date.now() + '_' + p.id,
-    name:       p.name,
-    category:   p.cat,
-    emoji:      CAT_EMOJI[p.cat] || '📦',
-    price:      p.price,
-    primaryUnit:p.primary,
-    allUnits:   p.allUnits,
-    stock:      p.stock,
-    alertAt:    p.alertAt,
-    bestBefore: p.bestBefore,
-    status:     'live',
-    addedOn:    new Date().toISOString()
-  }));
-  localStorage.setItem('farmdirect_products', JSON.stringify([...existing, ...newProds]));
-  // ── End save ──
- 
-  document.getElementById('ap-save-bar').style.display = 'none';
-  document.getElementById('ap-stack').innerHTML = '';
-  document.getElementById('ap-success-title').textContent = n + ' Product' + (n !== 1 ? 's' : '') + ' Saved!';
-  document.getElementById('ap-success-sub').textContent   = apProducts.map(p => p.name).join(', ') + (n !== 1 ? ' are' : ' is') + ' now live on your store.';
-  document.getElementById('ap-success').style.display = 'flex';
-  document.getElementById('ap-success').scrollIntoView({ behavior:'smooth', block:'start' });
-  apProducts = []; apCardCount = 0; apUpdateCounter();
-}
- 
-function apReset() {
-  document.getElementById('ap-success').style.display = 'none';
-  apAddAnother();
-}
- 
-apAddAnother();
-</script>
-</body>
+    <div id="dpc-body-${productCount}" style="display:none;padding:1rem 1.3rem;border-top:1px solid #bbf7d0;background:#f9fffe">
+      ${desc ? `<div style="font-size:.84rem;color:var(--text-mid);margin-bottom:.8rem;line-height:1.6">${desc}</div>` : ""}
+      <div style="font-size:.72rem;font-weight:700;color:var(--text-mid);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.5rem">Variants</div>
+      ${variantSummaryRows}
+      <div style="font-size:.78rem;color:var(--text-mid);margin-top:.7rem">💳 Payment: ${payHTML}</div>
+    </div>`;
+        stack.appendChild(div);
+
+        // Save product data
+        const fv = namedV[0];
+        const fu = fv?.units[0];
+        doneProducts.push({
+          id: "prod_" + Date.now() + "_" + productCount,
+          name,
+          category: cat,
+          emoji: CAT_EMOJI[cat] || "📦",
+          description: desc,
+          payment: [...selectedPayment],
+          status: "live",
+          addedOn: new Date().toISOString(),
+          price: fu?.price || 0,
+          primaryUnit: fu?.unit || "",
+          allUnits:
+            fv?.units.map((u) => ({ unit: u.unit, price: u.price })) || [],
+          stock: namedV.reduce(
+            (s, v) => s + v.units.reduce((ss, u) => ss + u.stock, 0),
+            0,
+          ),
+          alertAt: fu?.alertAt || 5,
+          bestBefore: (() => {
+            const u = fv?.units[0];
+            if (!u?.srcDate || !u?.shelfDays) return "";
+            const d = new Date(u.srcDate + "T00:00:00");
+            d.setDate(d.getDate() + parseInt(u.shelfDays));
+            return d.toLocaleDateString("en-PH", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            });
+          })(),
+          variants: namedV.map((v) => ({
+            id: "var_" + Date.now() + "_" + v.id,
+            name: v.name,
+            photo: v.photo || null,
+            storage: v.storage,
+            units: v.units,
+          })),
+        });
+
+        // Show add another bar
+        const bar = document.getElementById("add-another-bar");
+        document.getElementById("add-another-msg").textContent =
+          `✅ "${name}" done! Add another product or save all.`;
+        bar.style.display = "flex";
+        bar.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      function toggleDoneCard(num) {
+        const card = document.getElementById("dpc-" + num);
+        const body = document.getElementById("dpc-body-" + num);
+        const chev = document.getElementById("dpc-chev-" + num);
+        if (!body) return;
+        const isOpen = body.style.display !== "none";
+        body.style.display = isOpen ? "none" : "block";
+        chev.classList.toggle("open", !isOpen);
+      }
+
+      /* ══ ADD ANOTHER PRODUCT ══ */
+      function addAnotherProduct() {
+        // Reset wizard state only — done products untouched
+        variants = [];
+        variantIdCount = 0;
+        selectedPayment = [];
+        prevSelVariant = null;
+        prevSelUnit = null;
+        window._defaultShelfLife = "";
+
+        // Reset form fields
+        document.getElementById("prod-name").value = "";
+        document.getElementById("prod-cat").value = "";
+        document.getElementById("prod-desc").value = "";
+        document
+          .querySelectorAll(".pay-chip")
+          .forEach((c) => c.classList.remove("selected"));
+
+        // Reset all photo slots
+        ["ps-main", "ps-2", "ps-3", "ps-4", "ps-5"].forEach((id) =>
+          removeSlot(id),
+        );
+
+        // Reset variant lists
+        renderVariantNames();
+        document.getElementById("variant-detail-section").innerHTML = "";
+        document.getElementById("preview-sc").style.display = "none";
+
+        // Reset buttons
+        document.getElementById("btn-next").disabled = true;
+        document.getElementById("btn-done").disabled = true;
+
+        // Remove step1 warning if any
+        const w = document.getElementById("step1-warn");
+        if (w) w.textContent = "";
+
+        // Keep add-another-bar hidden (user is now filling a new product)
+        document.getElementById("add-another-bar").style.display = "none";
+
+        // Go back to step 1
+        document.getElementById("step2").style.display = "none";
+        document.getElementById("step1").style.display = "block";
+        setStepIndicator(1);
+        document
+          .getElementById("wizard-wrap")
+          .scrollIntoView({ behavior: "smooth", block: "start" });
+        setTimeout(() => document.getElementById("prod-name")?.focus(), 300);
+      }
+
+      /* ══ SAVE ALL ══ */
+      function saveAll() {
+        const existing = JSON.parse(
+          localStorage.getItem("farmdirect_products") || "[]",
+        );
+        localStorage.setItem(
+          "farmdirect_products",
+          JSON.stringify([...existing, ...doneProducts]),
+        );
+        document.getElementById("ap-success-title").textContent =
+          doneProducts.length +
+          " Product" +
+          (doneProducts.length > 1 ? "s" : "") +
+          " Saved!";
+        document.getElementById("ap-success-sub").textContent =
+          doneProducts.map((p) => p.name).join(", ") +
+          " " +
+          (doneProducts.length > 1 ? "are" : "is") +
+          " now live on your store.";
+        document.getElementById("ap-success").classList.add("show");
+        document.getElementById("add-another-bar").style.display = "none";
+        document.getElementById("wizard-wrap").style.display = "none";
+        document
+          .getElementById("ap-success")
+          .scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function resetAll() {
+        document.getElementById("done-stack").innerHTML = "";
+        document.getElementById("ap-success").classList.remove("show");
+        document.getElementById("wizard-wrap").style.display = "block";
+        doneProducts = [];
+        productCount = 0;
+        addAnotherProduct();
+      }
+    </script>
+  </body>
 </html>

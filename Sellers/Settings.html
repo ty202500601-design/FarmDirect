@@ -16,7 +16,8 @@
       flex-shrink: 0; cursor: pointer; transition: opacity 0.2s;
       outline: none; -webkit-appearance: none; appearance: none;
     }
-    .avatar-badge-btn:hover { opacity: 0.85; }
+    .avatar-badge-btn:hover, .avatar-badge-btn:focus, .avatar-badge-btn:focus-within { opacity: 1; background: #8cd96a !important; box-shadow: 0 0 0 3px rgba(167, 241, 133, 0.5); transform: scale(1.05); }
+.avatar-badge-btn:active { transform: scale(0.98); }
  
     /* Location section title */
     .location-section-title {

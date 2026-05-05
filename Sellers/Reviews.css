@@ -1879,7 +1879,7 @@ input[type="date"] {
 }
 
 /* Avatar badge in nav (replaces old topbar avatar) */
-.avatar-badge {
+.avatar-badge, .avatar-badge-btn {
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -1893,3 +1893,6 @@ input[type="date"] {
   border: 2px solid rgba(255, 255, 255, 0.3);
   flex-shrink: 0;
 }
+.avatar-badge-btn { cursor: pointer; transition: all 0.2s; }
+.avatar-badge-btn:hover, .avatar-badge-btn:focus, .avatar-badge-btn:focus-within { opacity: 1; background: #8cd96a !important; box-shadow: 0 0 0 3px rgba(167, 241, 133, 0.5); transform: scale(1.05); }
+.avatar-badge-btn:active { transform: scale(0.98); }
