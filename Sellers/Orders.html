@@ -9,60 +9,108 @@
   </head>
   <body>
     <nav class="navbar">
-  <input type="checkbox" id="menu-check" class="menu-checkbox">
-  <div class="nav-inner">
-    <a href="../index.html" class="logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></a>
-    <div class="nav-links">
-      <a href="../index.html" class="nav-link">Home</a>
-      <a href="Dashboard.html" class="nav-link">Dashboard</a>
-      <a href="Products.html" class="nav-link">Products</a>
-      <a href="Orders.html" class="nav-link active">Orders</a>
-      <a href="Reviews.html" class="nav-link">Reviews</a>
-      <a href="Settings.html" class="nav-link">Settings</a>
-    </div>
-    <div class="nav-actions">
-      <div class="notif-wrap">
-        <button class="notif-btn" tabindex="0" aria-label="Notifications">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <span class="notif-badge"></span>
-        </button>
-        <div class="notif-dropdown">
-          <div class="notif-header"><h4>Notifications</h4></div>
-          <div class="notif-list">
-            <div class="notif-item"><div class="notif-content"><strong>New Order</strong><p>🛒 New order received</p></div><span class="notif-time">5 min ago</span></div>
-            <div class="notif-item"><div class="notif-content"><strong>Order Delivered</strong><p>✅ Order #00241 Delivered</p></div><span class="notif-time">1 hr ago</span></div>
+      <input type="checkbox" id="menu-check" class="menu-checkbox" />
+      <div class="nav-inner">
+        <a href="../index.html" class="logo"
+          ><span class="logo-icon">🌾</span><span>FarmDirect</span></a
+        >
+        <div class="nav-links">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="Dashboard.html" class="nav-link">Dashboard</a>
+          <a href="Products.html" class="nav-link">Products</a>
+          <a href="Orders.html" class="nav-link active">Orders</a>
+          <a href="Reviews.html" class="nav-link">Reviews</a>
+          <a href="Settings.html" class="nav-link">Settings</a>
+        </div>
+        <div class="nav-actions">
+          <div class="notif-wrap">
+            <button class="notif-btn" tabindex="0" aria-label="Notifications">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+              <span class="notif-badge"></span>
+            </button>
+            <div class="notif-dropdown">
+              <div class="notif-header"><h4>Notifications</h4></div>
+              <div class="notif-list">
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <strong>New Order</strong>
+                    <p>🛒 New order received</p>
+                  </div>
+                  <span class="notif-time">5 min ago</span>
+                </div>
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <strong>Order Delivered</strong>
+                    <p>✅ Order #00241 Delivered</p>
+                  </div>
+                  <span class="notif-time">1 hr ago</span>
+                </div>
+              </div>
+            </div>
           </div>
+          <div class="notif-wrap">
+            <button
+              class="notif-btn avatar-badge-btn"
+              tabindex="0"
+              aria-label="Profile"
+            >
+              JD
+            </button>
+            <div class="notif-dropdown" style="min-width: 180px">
+              <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
+              <div class="notif-list">
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <a href="Dashboard.html">📊 Management</a>
+                  </div>
+                </div>
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <a href="Profile.html">👤 Profile</a>
+                  </div>
+                </div>
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <a href="Settings.html">⚙️ Settings</a>
+                  </div>
+                </div>
+                <div class="notif-item">
+                  <div class="notif-content">
+                    <a href="../index.html">🚪 Logout</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <label for="menu-check" class="menu-toggle"
+            ><span></span><span></span><span></span
+          ></label>
         </div>
       </div>
-      <div class="notif-wrap">
-        <button class="notif-btn avatar-badge-btn" tabindex="0" aria-label="Profile">JD</button>
-        <div class="notif-dropdown" style="min-width:180px;">
-          <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
-          <div class="notif-list">
-            <div class="notif-item"><div class="notif-content"><a href="Dashboard.html">📊 Management</a></div></div>
-            <div class="notif-item"><div class="notif-content"><a href="Profile.html">👤 Profile</a></div></div>
-            <div class="notif-item"><div class="notif-content"><a href="Settings.html">⚙️ Settings</a></div></div>
-            <div class="notif-item"><div class="notif-content"><a href="../index.html">🚪 Logout</a></div></div>
-          </div>
+      <label for="menu-check" class="menu-overlay"></label>
+      <div class="menu-panel">
+        <div class="menu-section">
+          <h3>Navigation</h3>
+          <a href="../index.html" class="menu-item">Home</a>
+          <a href="Dashboard.html" class="menu-item">Dashboard</a>
+          <a href="Products.html" class="menu-item">Products</a>
+          <a href="Orders.html" class="menu-item">Orders</a>
+          <a href="Reviews.html" class="menu-item">Reviews</a>
+          <a href="Settings.html" class="menu-item">Settings</a>
         </div>
+        <a href="../index.html" class="menu-cta">Logout</a>
       </div>
-      <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
-    </div>
-  </div>
-  <label for="menu-check" class="menu-overlay"></label>
-  <div class="menu-panel">
-    <div class="menu-section">
-      <h3>Navigation</h3>
-      <a href="../index.html" class="menu-item">Home</a>
-      <a href="Dashboard.html" class="menu-item">Dashboard</a>
-      <a href="Products.html" class="menu-item">Products</a>
-      <a href="Orders.html" class="menu-item">Orders</a>
-      <a href="Reviews.html" class="menu-item">Reviews</a>
-      <a href="Settings.html" class="menu-item">Settings</a>
-    </div>
-    <a href="../index.html" class="menu-cta">Logout</a>
-  </div>
-</nav>
+    </nav>
 
     <main class="farmers-main">
       <div class="dash">
@@ -102,7 +150,7 @@
       <div class="card">
         <div class="card-head">
           <span class="card-title">All Orders</span>
-          <span style="font-size: 12px; color: #6b7280">8 total</span>
+          <span style="font-size: 12px; color: var(--text-light)">8 total</span>
         </div>
         <table class="tbl">
           <thead>
@@ -122,47 +170,35 @@
               <td><b>ORD-00241</b></td>
               <td>
                 <div class="cell-flex">
-                  <img
-                    src="IMG/Tomatoes.jpg"
-                    alt="Red Tomatoes"
-                    class="produce"
-                  />
+                  <img src="IMG/Tomatoes.jpg" class="produce" alt="" />
                   <div class="tbl-name">Fresh Tomatoes</div>
                 </div>
               </td>
               <td>
-                <b>Maria Santos</b><br /><span
-                  style="font-size: 11px; color: #6b7280"
+                <b>Maria Santos</b><br /><span class="tbl-num"
                   >Lunzuran, Zamboanga City</span
                 >
               </td>
-              <td><b>₱210</b></td>
+              <td><b>₱380</b></td>
               <td class="date">Mar 1, 2026</td>
               <td style="font-size: 12px">GCash</td>
               <td><span class="badge b-del">Delivered</span></td>
               <td>
-                <a
-                  href="Shipping.html"
-                  style="font-size: 12px; font-weight: 600; color: #25943f"
-                  >Track →</a
-                >
+                <button class="track-btn" onclick="openModal('ORD-00241')">
+                  Track →
+                </button>
               </td>
             </tr>
             <tr>
               <td><b>ORD-00240</b></td>
               <td>
                 <div class="cell-flex">
-                  <img
-                    src="IMG/Carrots.jpg"
-                    alt="Fresh harvest carrots"
-                    class="produce"
-                  />
+                  <img src="IMG/Carrots.jpg" class="produce" alt="" />
                   <div class="tbl-name">Organic Carrots</div>
                 </div>
               </td>
               <td>
-                <b>Juan dela Cruz</b><br /><span
-                  style="font-size: 11px; color: #6b7280"
+                <b>Juan dela Cruz</b><br /><span class="tbl-num"
                   >Culianan, Zamboanga City</span
                 >
               </td>
@@ -171,28 +207,21 @@
               <td style="font-size: 12px">COD</td>
               <td><span class="badge b-pen">Pending</span></td>
               <td>
-                <a
-                  href="Shipping.html"
-                  style="font-size: 12px; font-weight: 600; color: #25943f"
-                  >Track →</a
-                >
+                <button class="track-btn" onclick="openModal('ORD-00240')">
+                  Track →
+                </button>
               </td>
             </tr>
             <tr>
               <td><b>ORD-00239</b></td>
               <td>
                 <div class="cell-flex">
-                  <img
-                    src="IMG/Strawberries.jpg"
-                    alt="Strawberries"
-                    class="produce"
-                  />
+                  <img src="IMG/Strawberries.jpg" class="produce" alt="" />
                   <div class="tbl-name">Strawberries</div>
                 </div>
               </td>
               <td>
-                <b>Ana Reyes</b><br /><span
-                  style="font-size: 11px; color: #6b7280"
+                <b>Ana Reyes</b><br /><span class="tbl-num"
                   >Guisao, Zamboanga City</span
                 >
               </td>
@@ -201,24 +230,21 @@
               <td style="font-size: 12px">GCash</td>
               <td><span class="badge b-pro">Processing</span></td>
               <td>
-                <a
-                  href="Shipping.html"
-                  style="font-size: 12px; font-weight: 600; color: #25943f"
-                  >Track →</a
-                >
+                <button class="track-btn" onclick="openModal('ORD-00239')">
+                  Track →
+                </button>
               </td>
             </tr>
             <tr>
               <td><b>ORD-00238</b></td>
               <td>
                 <div class="cell-flex">
-                  <img src="IMG/Lettuce.jpg" alt="Lettuce" class="produce" />
+                  <img src="IMG/Lettuce.jpg" class="produce" alt="" />
                   <div class="tbl-name">Fresh Lettuce</div>
                 </div>
               </td>
               <td>
-                <b>Carlos Bautista</b><br /><span
-                  style="font-size: 11px; color: #6b7280"
+                <b>Carlos Bautista</b><br /><span class="tbl-num"
                   >Guisao, Zamboanga City</span
                 >
               </td>
@@ -227,24 +253,21 @@
               <td style="font-size: 12px">GCash</td>
               <td><span class="badge b-del">Delivered</span></td>
               <td>
-                <a
-                  href="Shipping.html"
-                  style="font-size: 12px; font-weight: 600; color: #25943f"
-                  >Track →</a
-                >
+                <button class="track-btn" onclick="openModal('ORD-00238')">
+                  Track →
+                </button>
               </td>
             </tr>
             <tr>
               <td><b>ORD-00237</b></td>
               <td>
                 <div class="cell-flex">
-                  <img src="IMG/Corn.jpg" alt="Sweet Corn" class="produce" />
+                  <img src="IMG/Corn.jpg" class="produce" alt="" />
                   <div class="tbl-name">Sweet Corn</div>
                 </div>
               </td>
               <td>
-                <b>Liza Gomez</b><br /><span
-                  style="font-size: 11px; color: #6b7280"
+                <b>Liza Gomez</b><br /><span class="tbl-num"
                   >Putik, Zamboanga City</span
                 >
               </td>
@@ -252,19 +275,22 @@
               <td class="date">Mar 3, 2026</td>
               <td style="font-size: 12px">PayMaya</td>
               <td><span class="badge b-can">Cancelled</span></td>
-              <td><span style="color: #9ca3af">—</span></td>
+              <td>
+                <button class="track-btn" onclick="openModal('ORD-00237')">
+                  Track →
+                </button>
+              </td>
             </tr>
             <tr>
               <td><b>ORD-00236</b></td>
               <td>
                 <div class="cell-flex">
-                  <img src="IMG/Lettuce.jpg" alt="Lettuce" class="produce" />
+                  <img src="IMG/Lettuce.jpg" class="produce" alt="" />
                   <div class="tbl-name">Fresh Lettuce</div>
                 </div>
               </td>
               <td>
-                <b>Bert Villanueva</b><br /><span
-                  style="font-size: 11px; color: #6b7280"
+                <b>Bert Villanueva</b><br /><span class="tbl-num"
                   >Sta. Maria, Zamboanga City</span
                 >
               </td>
@@ -273,24 +299,21 @@
               <td style="font-size: 12px">COD</td>
               <td><span class="badge b-del">Delivered</span></td>
               <td>
-                <a
-                  href="Shipping.html"
-                  style="font-size: 12px; font-weight: 600; color: #25943f"
-                  >Track →</a
-                >
+                <button class="track-btn" onclick="openModal('ORD-00236')">
+                  Track →
+                </button>
               </td>
             </tr>
             <tr>
               <td><b>ORD-00235</b></td>
               <td>
                 <div class="cell-flex">
-                  <img src="IMG/Lettuce.jpg" alt="Lettuce" class="produce" />
+                  <img src="IMG/Lettuce.jpg" class="produce" alt="" />
                   <div class="tbl-name">Fresh Lettuce</div>
                 </div>
               </td>
               <td>
-                <b>Grace Tan</b><br /><span
-                  style="font-size: 11px; color: #6b7280"
+                <b>Grace Tan</b><br /><span class="tbl-num"
                   >Ipil, Zamboanga City</span
                 >
               </td>
@@ -299,24 +322,21 @@
               <td style="font-size: 12px">GCash</td>
               <td><span class="badge b-del">Delivered</span></td>
               <td>
-                <a
-                  href="Shipping.html"
-                  style="font-size: 12px; font-weight: 600; color: #25943f"
-                  >Track →</a
-                >
+                <button class="track-btn" onclick="openModal('ORD-00235')">
+                  Track →
+                </button>
               </td>
             </tr>
             <tr>
               <td><b>ORD-00234</b></td>
               <td>
                 <div class="cell-flex">
-                  <img src="IMG/Corn.jpg" alt="Sweet Corn" class="produce" />
+                  <img src="IMG/Corn.jpg" class="produce" alt="" />
                   <div class="tbl-name">Sweet Corn</div>
                 </div>
               </td>
               <td>
-                <b>Ramon Cruz</b><br /><span
-                  style="font-size: 11px; color: #6b7280"
+                <b>Ramon Cruz</b><br /><span class="tbl-num"
                   >Cabaluay, Zamboanga City</span
                 >
               </td>
@@ -325,17 +345,35 @@
               <td style="font-size: 12px">COD</td>
               <td><span class="badge b-pen">Pending</span></td>
               <td>
-                <a
-                  href="Shipping.html"
-                  style="font-size: 12px; font-weight: 600; color: #25943f"
-                  >Track →</a
-                >
+                <button class="track-btn" onclick="openModal('ORD-00234')">
+                  Track →
+                </button>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </main>
+
+    <!-- MODAL -->
+    <div
+      class="modal-overlay"
+      id="modal-overlay"
+      onclick="closeModalOutside(event)"
+    >
+      <div class="modal-box">
+        <div class="modal-header">
+          <div class="modal-header-left">
+            <span class="modal-title">📦 Track Order</span>
+            <span class="modal-sub" id="modal-order-id">—</span>
+          </div>
+          <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-content" id="modal-content"></div>
+      </div>
+    </div>
+
+    <div class="shipping-toast" id="shipping-toast"></div>
 
     <footer class="footer">
       <div class="footer-inner">
@@ -350,8 +388,1404 @@
         </div>
       </div>
     </footer>
+
     <script>
       lucide.createIcons();
+
+      /* ═══════════════════════════════════
+   ORDER DATA
+═══════════════════════════════════ */
+      const ORDERS = {
+        "ORD-00241": {
+          status: "delivered",
+          product: "Fresh Tomatoes",
+          qty: "2 kg",
+          customer: "Maria Santos",
+          address: "Lunzuran, Zamboanga City",
+          amount: "₱380",
+          payment: "GCash ✅ Paid",
+          paymentRaw: "GCash",
+          delivery: "🚶 Self Pickup",
+          orderDate: "Mar 1, 2026 · 9:12 AM",
+          deliveredOn: "Mar 1, 2026 · 1:45 PM",
+          timeline: [
+            {
+              icon: "✅",
+              done: true,
+              title: "Order Placed",
+              time: "Mar 1, 2026 · 9:12 AM",
+              desc: "Maria Santos placed the order. GCash payment confirmed.",
+            },
+            {
+              icon: "✅",
+              done: true,
+              title: "Order Confirmed",
+              time: "Mar 1, 2026 · 9:30 AM",
+              desc: "You confirmed the order and started preparation.",
+            },
+            {
+              icon: "✅",
+              done: true,
+              title: "Preparing Order",
+              time: "Mar 1, 2026 · 10:15 AM",
+              desc: "Tomatoes harvested, sorted, and packed for pickup.",
+            },
+            {
+              icon: "✅",
+              done: true,
+              title: "Ready for Pickup",
+              time: "Mar 1, 2026 · 12:00 PM",
+              desc: "Order packed and ready. Maria Santos was notified to pick up.",
+            },
+            {
+              icon: "🏠",
+              done: true,
+              title: "Picked Up ✅",
+              time: "Mar 1, 2026 · 1:45 PM",
+              desc: "Maria Santos picked up the order. Confirmed complete.",
+              last: true,
+            },
+          ],
+          courier: {
+            type: "pickup",
+            name: "Maria Santos (Customer)",
+            meta: "Picked up in person · Mar 1, 2026 · 1:45 PM",
+            plate: "No rider needed — customer collected directly",
+            phone: "+639000000000",
+          },
+        },
+        "ORD-00240": {
+          status: "pending",
+          product: "Organic Carrots",
+          qty: "1 kg",
+          customer: "Juan dela Cruz",
+          address: "Culianan, Zamboanga City",
+          amount: "₱210",
+          payment: "COD",
+          paymentRaw: "COD",
+          delivery: "🛵 Grab",
+          orderDate: "Feb 28, 2026 · 10:45 AM",
+          estDelivery: "Feb 28, 2026 · 2:30 PM",
+          timeline: [
+            {
+              icon: "✅",
+              done: true,
+              title: "Order Placed",
+              time: "Feb 28, 2026 · 10:45 AM",
+              desc: "Juan dela Cruz placed the order. Payment: COD.",
+            },
+            {
+              icon: "⏳",
+              active: true,
+              title: "Awaiting Farmer Confirmation",
+              time: "Waiting since Feb 28, 2026 · 10:46 AM",
+              desc: "Waiting for you to review and confirm before preparation begins.",
+            },
+            {
+              icon: "📦",
+              done: false,
+              title: "Preparing Order",
+              time: "Not started yet",
+              desc: "Once confirmed, harvest and pack the produce for delivery.",
+            },
+            {
+              icon: "🛵",
+              done: false,
+              title: "Out for Delivery (Grab)",
+              time: "Not started yet",
+              desc: "Grab rider will pick up from you and deliver to Juan dela Cruz.",
+            },
+            {
+              icon: "🏠",
+              done: false,
+              title: "Delivered",
+              time: "Not yet",
+              desc: "Order will be marked delivered once customer confirms receipt.",
+              last: true,
+            },
+          ],
+        },
+        "ORD-00239": {
+          status: "processing",
+          product: "Strawberries",
+          qty: "5 boxes",
+          customer: "Ana Reyes",
+          address: "Guisao, Zamboanga City",
+          amount: "₱450",
+          payment: "GCash",
+          paymentRaw: "GCash",
+          delivery: "🏍️ Maxim",
+          orderDate: "Mar 4, 2026 · 7:30 AM",
+          estDelivery: "Mar 4, 2026 · 11:00 AM",
+          partialCancel: true,
+          timeline: [
+            {
+              icon: "✅",
+              done: true,
+              title: "Order Placed",
+              time: "Mar 4, 2026 · 7:30 AM",
+              desc: "Ana Reyes placed the order. GCash payment confirmed.",
+            },
+            {
+              icon: "✅",
+              done: true,
+              title: "Order Confirmed",
+              time: "Mar 4, 2026 · 7:45 AM",
+              desc: "You confirmed the order and selected 🏍️ Maxim for delivery.",
+            },
+            {
+              icon: "🔄",
+              active: true,
+              title: "Preparing Order",
+              time: "Started Mar 4, 2026 · 8:00 AM",
+              desc: "Harvesting and packing 5 boxes of strawberries for Ana Reyes.",
+              inProgress: true,
+            },
+            {
+              icon: "🏍️",
+              done: false,
+              title: "Out for Delivery (Maxim)",
+              time: "Waiting for handoff",
+              desc: 'Once packed, click "Hand to Rider" and the Maxim rider will pick up.',
+              id: "delivery",
+            },
+            {
+              icon: "💰",
+              done: false,
+              title: "Payment Collection",
+              time: "Pending delivery",
+              desc: "Confirm payment received once the order is delivered to Ana Reyes.",
+              id: "payment",
+            },
+            {
+              icon: "🏠",
+              done: false,
+              title: "Order Complete",
+              time: "Est. Mar 4, 2026 · 11:00 AM",
+              desc: "Order marked complete after payment is confirmed.",
+              last: true,
+              id: "done",
+            },
+          ],
+        },
+        "ORD-00238": {
+          status: "delivered",
+          product: "Fresh Lettuce",
+          qty: "5 boxes",
+          customer: "Carlos Bautista",
+          address: "Guisao, Zamboanga City",
+          amount: "₱200",
+          payment: "GCash ✅ Paid",
+          paymentRaw: "GCash",
+          delivery: "🏍️ Maxim",
+          orderDate: "Mar 5, 2026 · 8:00 AM",
+          deliveredOn: "Mar 5, 2026 · 11:30 AM",
+          timeline: [
+            {
+              icon: "✅",
+              done: true,
+              title: "Order Placed",
+              time: "Mar 5, 2026 · 8:00 AM",
+              desc: "Carlos Bautista placed the order. GCash payment confirmed.",
+            },
+            {
+              icon: "✅",
+              done: true,
+              title: "Order Confirmed",
+              time: "Mar 5, 2026 · 8:15 AM",
+              desc: "You confirmed the order and started preparation.",
+            },
+            {
+              icon: "✅",
+              done: true,
+              title: "Preparing Order",
+              time: "Mar 5, 2026 · 9:00 AM",
+              desc: "Lettuce harvested, sorted, and packed for delivery.",
+            },
+            {
+              icon: "✅",
+              done: true,
+              title: "Out for Delivery (Maxim)",
+              time: "Mar 5, 2026 · 10:00 AM",
+              desc: "Maxim rider picked up and headed to Guisao.",
+            },
+            {
+              icon: "🏠",
+              done: true,
+              title: "Delivered ✅",
+              time: "Mar 5, 2026 · 11:30 AM",
+              desc: "Carlos Bautista received the order. Delivery confirmed.",
+              last: true,
+            },
+          ],
+          courier: {
+            type: "rider",
+            service: "Maxim",
+            name: "Pedro Santos",
+            meta: "Maxim Rider · Zamboanga City",
+            plate: "ZAM-5678",
+            phone: "+639111111111",
+          },
+        },
+        "ORD-00237": {
+          status: "cancelled",
+          product: "Sweet Corn",
+          qty: "22 pieces",
+          customer: "Liza Gomez",
+          address: "Putik, Zamboanga City",
+          amount: "₱440 — Refunded",
+          payment: "PayMaya",
+          paymentRaw: "PayMaya",
+          delivery: "🛵 Grab",
+          orderDate: "Mar 3, 2026 · 10:00 AM",
+          cancelledOn: "Mar 3, 2026 · 11:15 AM",
+          cancelReason: "Customer changed their mind",
+          cancelMessage:
+            '"Sorry po, nabili na ko ng mais sa palengke kanina. I\'ll order again next time."',
+          cancelBy: "Liza Gomez (Customer)",
+          cancelStage: "Before preparation started",
+          cancelTime: "1 hour 15 minutes",
+          refundStatus: "✅ ₱440 refunded via PayMaya",
+          stockRestored: "✅ 22 pieces returned to stock",
+          timeline: [
+            {
+              icon: "✅",
+              done: true,
+              title: "Order Placed",
+              time: "Mar 3, 2026 · 10:00 AM",
+              desc: "Liza Gomez placed the order. PayMaya payment confirmed.",
+            },
+            {
+              icon: "❌",
+              cancelled: true,
+              title: "Order Cancelled",
+              time: "Mar 3, 2026 · 11:15 AM",
+              desc: "Liza Gomez cancelled the order before preparation began.",
+            },
+            {
+              icon: "📦",
+              void: true,
+              title: "Preparing Order",
+              time: "—",
+              desc: "Did not proceed.",
+            },
+            {
+              icon: "🛵",
+              void: true,
+              title: "Out for Delivery",
+              time: "—",
+              desc: "Did not proceed.",
+            },
+            {
+              icon: "🏠",
+              void: true,
+              title: "Delivered",
+              time: "—",
+              desc: "Did not proceed.",
+              last: true,
+            },
+          ],
+        },
+        "ORD-00236": {
+          status: "delivered",
+          product: "Fresh Lettuce",
+          qty: "3 bundles",
+          customer: "Bert Villanueva",
+          address: "Sta. Maria, Zamboanga City",
+          amount: "₱140",
+          payment: "COD ✅ Paid",
+          paymentRaw: "COD",
+          delivery: "🛵 Grab",
+          orderDate: "Mar 2, 2026 · 7:00 AM",
+          deliveredOn: "Mar 2, 2026 · 10:30 AM",
+          timeline: [
+            {
+              icon: "✅",
+              done: true,
+              title: "Order Placed",
+              time: "Mar 2, 2026 · 7:00 AM",
+              desc: "Bert Villanueva placed the order. Payment: COD.",
+            },
+            {
+              icon: "✅",
+              done: true,
+              title: "Order Confirmed",
+              time: "Mar 2, 2026 · 7:20 AM",
+              desc: "You confirmed the order and started preparation.",
+            },
+            {
+              icon: "✅",
+              done: true,
+              title: "Preparing Order",
+              time: "Mar 2, 2026 · 7:55 AM",
+              desc: "Lettuce harvested and packed for delivery.",
+            },
+            {
+              icon: "✅",
+              done: true,
+              title: "Out for Delivery (Grab)",
+              time: "Mar 2, 2026 · 9:00 AM",
+              desc: "Grab rider picked up and headed to Sta. Maria.",
+            },
+            {
+              icon: "🏠",
+              done: true,
+              title: "Delivered ✅",
+              time: "Mar 2, 2026 · 10:30 AM",
+              desc: "Bert Villanueva received the order. COD collected.",
+              last: true,
+            },
+          ],
+          courier: {
+            type: "rider",
+            service: "Grab",
+            name: "Ronnie Dela Peña",
+            meta: "Grab Rider · Zamboanga City",
+            plate: "ZAM-3321",
+            phone: "+639222222222",
+          },
+        },
+        "ORD-00235": {
+          status: "delivered",
+          product: "Fresh Lettuce",
+          qty: "4 bundles",
+          customer: "Grace Tan",
+          address: "Ipil, Zamboanga City",
+          amount: "₱168",
+          payment: "GCash ✅ Paid",
+          paymentRaw: "GCash",
+          delivery: "🏍️ Maxim",
+          orderDate: "Mar 1, 2026 · 6:45 AM",
+          deliveredOn: "Mar 1, 2026 · 9:30 AM",
+          timeline: [
+            {
+              icon: "✅",
+              done: true,
+              title: "Order Placed",
+              time: "Mar 1, 2026 · 6:45 AM",
+              desc: "Grace Tan placed the order. GCash payment confirmed.",
+            },
+            {
+              icon: "✅",
+              done: true,
+              title: "Order Confirmed",
+              time: "Mar 1, 2026 · 7:00 AM",
+              desc: "You confirmed the order and started preparation.",
+            },
+            {
+              icon: "✅",
+              done: true,
+              title: "Preparing Order",
+              time: "Mar 1, 2026 · 7:40 AM",
+              desc: "Lettuce harvested and packed for delivery.",
+            },
+            {
+              icon: "✅",
+              done: true,
+              title: "Out for Delivery (Maxim)",
+              time: "Mar 1, 2026 · 8:15 AM",
+              desc: "Maxim rider picked up and headed to Ipil.",
+            },
+            {
+              icon: "🏠",
+              done: true,
+              title: "Delivered ✅",
+              time: "Mar 1, 2026 · 9:30 AM",
+              desc: "Grace Tan received the order. Delivery confirmed.",
+              last: true,
+            },
+          ],
+          courier: {
+            type: "rider",
+            service: "Maxim",
+            name: "Jay Ramos",
+            meta: "Maxim Rider · Zamboanga City",
+            plate: "ZAM-8821",
+            phone: "+639333333333",
+          },
+        },
+        "ORD-00234": {
+          status: "pending",
+          product: "Sweet Corn",
+          qty: "10 pieces",
+          customer: "Ramon Cruz",
+          address: "Cabaluay, Zamboanga City",
+          amount: "₱220",
+          payment: "COD",
+          paymentRaw: "COD",
+          delivery: "🚜 Farmer Delivery",
+          orderDate: "Feb 27, 2026 · 9:00 AM",
+          estDelivery: "Feb 27, 2026 · 1:00 PM",
+          timeline: [
+            {
+              icon: "✅",
+              done: true,
+              title: "Order Placed",
+              time: "Feb 27, 2026 · 9:00 AM",
+              desc: "Ramon Cruz placed the order. Payment: COD.",
+            },
+            {
+              icon: "⏳",
+              active: true,
+              title: "Awaiting Farmer Confirmation",
+              time: "Waiting since Feb 27, 2026 · 9:01 AM",
+              desc: "Waiting for you to review and confirm.",
+            },
+            {
+              icon: "📦",
+              done: false,
+              title: "Preparing Order",
+              time: "Not started yet",
+              desc: "Once confirmed, harvest and pack the produce.",
+            },
+            {
+              icon: "🛵",
+              done: false,
+              title: "Out for Delivery (Farmer Delivery)",
+              time: "Not started yet",
+              desc: "You will personally deliver this order to Ramon Cruz.",
+            },
+            {
+              icon: "🏠",
+              done: false,
+              title: "Delivered",
+              time: "Not yet",
+              desc: "Order will be marked delivered once customer confirms receipt.",
+              last: true,
+            },
+          ],
+        },
+      };
+
+      /* ═══════════════════════════════════
+   STATE
+═══════════════════════════════════ */
+      let currentOrder = null;
+      let currentOrderId = null;
+      let handStep = 0;
+      let selectedDelivery = null;
+
+      /* ═══════════════════════════════════
+   OPEN / CLOSE MODAL
+═══════════════════════════════════ */
+      function openModal(id) {
+        currentOrder = ORDERS[id];
+        currentOrderId = id;
+        if (!currentOrder) return;
+        handStep = 0;
+        selectedDelivery = null;
+        document.getElementById("modal-order-id").textContent = id;
+        renderModal(currentOrder);
+        document.getElementById("modal-overlay").classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        document.getElementById("modal-overlay").classList.remove("open");
+        document.body.style.overflow = "";
+        currentOrder = null;
+        currentOrderId = null;
+      }
+
+      function closeModalOutside(e) {
+        if (e.target === document.getElementById("modal-overlay")) closeModal();
+      }
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeModal();
+      });
+
+      /* ═══════════════════════════════════
+   RENDER MODAL
+═══════════════════════════════════ */
+      function renderModal(o) {
+        var s = o.status;
+        var content = document.getElementById("modal-content");
+
+        /* Banner */
+        var bannerMap = {
+          pending: {
+            cls: "banner-pending",
+            icon: "⏳",
+            title: "Awaiting Confirmation",
+            sub: "This order is waiting for you to confirm and begin preparation.",
+          },
+          processing: {
+            cls: "banner-processing",
+            icon: "🔄",
+            title: "Order is Being Prepared",
+            sub: "Harvest and pack the produce, then hand it off to the rider once ready.",
+          },
+          delivered: {
+            cls: "banner-delivered",
+            icon: "✅",
+            title: "Order Successfully Delivered!",
+            sub: "The customer confirmed receipt. Payment has been settled.",
+          },
+          cancelled: {
+            cls: "banner-cancelled",
+            icon: "❌",
+            title: "Order Cancelled",
+            sub: "This order was cancelled. See the reason and details below.",
+          },
+        };
+        var b = bannerMap[s];
+
+        var bannerBtns = "";
+        if (s === "pending")
+          bannerBtns =
+            '<button class="sb-btn sb-btn-primary" onclick="confirmOrder()">✅ Confirm Order</button><button class="sb-btn sb-btn-danger" onclick="showToast(\'❌ \' + currentOrderId + \' was cancelled.\')">✕ Cancel</button>';
+        if (s === "processing") {
+          var d2 = o.delivery || "";
+          var hLabel =
+            d2.indexOf("Farmer") !== -1
+              ? "Mark as Out for Delivery →"
+              : d2.indexOf("Pickup") !== -1
+                ? "Mark as Ready for Pickup →"
+                : "Hand to Rider →";
+          bannerBtns =
+            '<button class="sb-btn sb-btn-primary" id="hand-btn" onclick="handleHandToRider()">' +
+            hLabel +
+            "</button>";
+        }
+        if (s === "delivered")
+          bannerBtns =
+            '<a href="Reviews.html" class="sb-btn sb-btn-outline">⭐ View Review</a>';
+        if (s === "cancelled")
+          bannerBtns =
+            '<button class="sb-btn sb-btn-outline-white" onclick="closeModal()">← Back to Orders</button>';
+
+        var dateLabel =
+          s === "delivered"
+            ? "Delivered On"
+            : s === "cancelled"
+              ? "Cancelled On"
+              : "Est. Delivery";
+        var dateValue = o.deliveredOn || o.cancelledOn || o.estDelivery || "—";
+        var amtStyle =
+          s === "cancelled" ? "color:var(--danger);font-weight:700;" : "";
+        var payStyle =
+          s === "delivered" ? "color:var(--success);font-weight:700;" : "";
+        var dtStyle =
+          s === "delivered"
+            ? "color:var(--success);font-weight:700;"
+            : s === "cancelled"
+              ? "color:var(--danger);font-weight:700;"
+              : "";
+        var delivDisp = o.delivery
+          ? '<span class="delivery-method-tag">' + o.delivery + "</span>"
+          : '<span style="color:var(--text-light);font-style:italic">To be selected after confirmation</span>';
+        var badgeCls = {
+          pending: "b-pen",
+          processing: "b-pro",
+          delivered: "b-del",
+          cancelled: "b-can",
+        }[s];
+        var badgeTxt = s.charAt(0).toUpperCase() + s.slice(1);
+
+        /* Timeline */
+        var tlHTML = o.timeline
+          .map(function (step) {
+            var iCls = "step-icon",
+              lCls = "step-line";
+            if (step.cancelled) {
+              iCls += " cancelled-icon";
+              lCls += " cancelled-line";
+            } else if (step.void) {
+              iCls += " void-icon";
+              lCls += " void-line";
+            } else if (step.active) {
+              iCls += " active-icon";
+            } else if (!step.done) {
+              iCls += " pending-icon";
+              lCls += " pending-line";
+            }
+            var tStyle = step.cancelled
+              ? "color:var(--danger)"
+              : step.void
+                ? "color:#d1d5db"
+                : "";
+            var dStyle = step.void ? "color:#d1d5db" : "";
+            var pulse = step.inProgress
+              ? ' <span class="pulse-tag pulse-blue">In Progress</span>'
+              : step.active
+                ? ' <span class="pulse-tag">Now</span>'
+                : "";
+            var idAttr = step.id ? 'id="step-dot-' + step.id + '"' : "";
+            return (
+              '<div class="step' +
+              (step.last ? " last-step" : "") +
+              '">' +
+              '<div class="' +
+              iCls +
+              '" ' +
+              idAttr +
+              ">" +
+              step.icon +
+              "</div>" +
+              '<div class="' +
+              lCls +
+              (step.last ? " hide" : "") +
+              '"></div>' +
+              '<div class="step-content">' +
+              '<div class="step-title" style="' +
+              tStyle +
+              '">' +
+              step.title +
+              pulse +
+              "</div>" +
+              '<div class="step-time">' +
+              step.time +
+              "</div>" +
+              '<div class="step-desc" style="' +
+              dStyle +
+              '">' +
+              step.desc +
+              "</div>" +
+              "</div></div>"
+            );
+          })
+          .join("");
+
+        /* Courier section */
+        var courierHTML = "";
+        if (s === "delivered" && o.courier) {
+          var c = o.courier;
+          var lbl =
+            c.type === "pickup"
+              ? "🚶 Self Pickup Details"
+              : "🏍️ Courier Details (" + c.service + ")";
+          var bdg = c.type === "pickup" ? "✅ Completed" : "✅ Delivered";
+          var ini = c.name
+            .split(" ")
+            .map(function (w) {
+              return w[0];
+            })
+            .slice(0, 2)
+            .join("");
+          courierHTML =
+            '<div class="card courier-card">' +
+            '<div class="card-head"><span class="card-title">' +
+            lbl +
+            '</span><span class="badge b-del">' +
+            bdg +
+            "</span></div>" +
+            '<div class="courier-body">' +
+            '<div class="courier-avatar">' +
+            ini +
+            "</div>" +
+            '<div class="courier-info">' +
+            '<div class="courier-name">' +
+            c.name +
+            "</div>" +
+            '<div class="courier-meta">' +
+            c.meta +
+            "</div>" +
+            '<div class="courier-plate">' +
+            c.plate +
+            "</div>" +
+            "</div>" +
+            '<div class="courier-actions">' +
+            '<a href="tel:' +
+            c.phone +
+            '" class="courier-btn call">📞 Call</a>' +
+            '<a href="sms:' +
+            c.phone +
+            '" class="courier-btn msg">💬 Message</a>' +
+            "</div>" +
+            "</div></div>";
+        } else if (s === "processing") {
+          courierHTML = buildProcessingCourierHTML(o);
+        } else if (s === "pending") {
+          var d = o.delivery || "";
+          var isFarmer = d.indexOf("Farmer") !== -1;
+          var isPickup = d.indexOf("Pickup") !== -1;
+          var dIcon = isFarmer
+            ? "🚜"
+            : isPickup
+              ? "🚶"
+              : d.indexOf("Maxim") !== -1
+                ? "🏍️"
+                : "🛵";
+          var dNote = isFarmer
+            ? "You will personally deliver this order once it is packed and ready."
+            : isPickup
+              ? "The customer will come pick up the order from you directly."
+              : "A rider will be assigned and notified to pick up once you confirm the order.";
+          courierHTML =
+            '<div class="card courier-card" id="pending-courier-card">' +
+            '<div class="card-head"><span class="card-title">🚚 Delivery Method</span><span class="badge b-y">⏳ Awaiting Confirmation</span></div>' +
+            '<div class="no-courier-body">' +
+            '<div class="no-courier-icon">' +
+            dIcon +
+            "</div>" +
+            '<div class="no-courier-text"><strong>' +
+            (o.delivery || "Not specified") +
+            "</strong><p>" +
+            dNote +
+            "</p></div>" +
+            "</div></div>";
+        }
+
+        /* Partial cancel */
+        var pcHTML = "";
+        if (o.partialCancel) {
+          pcHTML =
+            '<div class="partial-cancel-wrap" id="partial-cancel-section">' +
+            '<div class="pc-alert"><div class="pc-alert-icon">⚠️</div><div class="pc-alert-body">' +
+            '<div class="pc-alert-title">Customer partially cancelled this order</div>' +
+            '<div class="pc-alert-sub">' +
+            o.customer +
+            " cancelled some items. The updated order below is what you need to prepare.</div>" +
+            '<div class="pc-alert-time">Cancellation received · Mar 4, 2026 · 8:22 AM · before rider pickup</div>' +
+            "</div></div>" +
+            '<div class="pc-compare-grid">' +
+            '<div class="card pc-panel"><div class="card-head"><span class="card-title">Original order</span><span class="badge b-muted">Before cancellation</span></div>' +
+            '<div class="pc-item-list">' +
+            '<div class="pc-item pc-item-partial"><div class="pc-item-icon" style="background:#fde8e8">🍅</div><div class="pc-item-info"><div class="pc-item-name">Fresh Tomatoes</div><div class="pc-item-qty">5 boxes</div></div><span class="pc-tag pc-tag-partial">Partially cancelled</span><div class="pc-item-price pc-price-strike">₱950</div></div>' +
+            '<div class="pc-item pc-item-cancelled"><div class="pc-item-icon" style="background:#fef3e2;opacity:.5">🥕</div><div class="pc-item-info"><div class="pc-item-name pc-name-strike">Organic Carrots</div><div class="pc-item-qty">5 kg</div></div><span class="pc-tag pc-tag-cancel">Cancelled</span><div class="pc-item-price pc-price-strike">₱1,050</div></div>' +
+            '<div class="pc-item"><div class="pc-item-icon" style="background:#e8f5eb">🥬</div><div class="pc-item-info"><div class="pc-item-name">Fresh Lettuce</div><div class="pc-item-qty">5 boxes</div></div><div class="pc-item-price">₱400</div></div>' +
+            '</div><div class="pc-panel-foot"><span class="pc-foot-label">Original total</span><span class="pc-foot-total pc-total-strike">₱2,400</span></div></div>' +
+            '<div class="card pc-panel"><div class="card-head"><span class="card-title">Updated order</span><span class="badge b-del">✅ What to prepare</span></div>' +
+            '<div class="pc-item-list">' +
+            '<div class="pc-item"><div class="pc-item-icon" style="background:#fde8e8">🍅</div><div class="pc-item-info"><div class="pc-item-name">Fresh Tomatoes</div><div class="pc-item-qty">2 boxes <span class="pc-was-tag">was 5</span></div></div><div class="pc-item-price">₱380</div></div>' +
+            '<div class="pc-item"><div class="pc-item-icon" style="background:#e8f5eb">🥬</div><div class="pc-item-info"><div class="pc-item-name">Fresh Lettuce</div><div class="pc-item-qty">5 boxes</div></div><div class="pc-item-price">₱400</div></div>' +
+            '</div><div class="pc-panel-foot"><span class="pc-foot-label">New total</span><span class="pc-foot-total pc-total-new">₱780</span></div></div>' +
+            "</div>" +
+            '<div class="pc-refund-card"><div class="pc-refund-left"><div class="pc-refund-label">Refund to customer</div><div class="pc-refund-amount">₱1,620</div><div class="pc-refund-sub">via GCash · automatically processed back to ' +
+            o.customer +
+            '</div></div><div class="pc-refund-badge">Refund processing</div></div>' +
+            '<div class="pc-actions">' +
+            '<button class="pc-btn pc-btn-primary" onclick="acknowledgeCancellation()">✅ Acknowledge &amp; prepare updated order</button>' +
+            '<button class="pc-btn" onclick="showToast(\'💬 Message sent to ' +
+            o.customer +
+            ".')\">💬 Message customer</button>" +
+            "</div></div>";
+        }
+
+        /* Cancellation card */
+        var cancelHTML = "";
+        if (s === "cancelled") {
+          cancelHTML =
+            '<div class="card cancellation-card">' +
+            '<div class="card-head"><span class="card-title">❌ Cancellation Details</span><span class="badge b-can">Cancelled by Customer</span></div>' +
+            '<div class="cancellation-body">' +
+            '<div class="cancel-reason-block">' +
+            '<div class="cancel-reason-label">Reason for Cancellation</div>' +
+            '<div class="cancel-reason-tag"><span>💬</span><span>' +
+            o.cancelReason +
+            "</span></div>" +
+            '<div class="cancel-reason-message">' +
+            o.cancelMessage +
+            "</div>" +
+            "</div>" +
+            '<div class="cancel-info-grid">' +
+            '<div class="cancel-info-item"><div class="cancel-info-label">Cancelled By</div><div class="cancel-info-val">' +
+            o.cancelBy +
+            "</div></div>" +
+            '<div class="cancel-info-item"><div class="cancel-info-label">Cancelled On</div><div class="cancel-info-val">' +
+            o.cancelledOn +
+            "</div></div>" +
+            '<div class="cancel-info-item"><div class="cancel-info-label">Time After Order</div><div class="cancel-info-val">' +
+            o.cancelTime +
+            "</div></div>" +
+            '<div class="cancel-info-item"><div class="cancel-info-label">Stage at Cancellation</div><div class="cancel-info-val">' +
+            o.cancelStage +
+            "</div></div>" +
+            '<div class="cancel-info-item"><div class="cancel-info-label">Refund Status</div><div class="cancel-info-val" style="color:var(--success);font-weight:700;">' +
+            o.refundStatus +
+            "</div></div>" +
+            '<div class="cancel-info-item"><div class="cancel-info-label">Stock Restored</div><div class="cancel-info-val" style="color:var(--success);font-weight:700;">' +
+            o.stockRestored +
+            "</div></div>" +
+            "</div>" +
+            '<div class="cancel-common-reasons">' +
+            '<div class="ccr-title">📋 Common cancellation reasons on FarmDirect</div>' +
+            '<div class="ccr-list">' +
+            '<div class="ccr-item"><span class="ccr-badge ccr-badge-cust">Customer</span><span>Changed mind / found elsewhere</span></div>' +
+            '<div class="ccr-item"><span class="ccr-badge ccr-badge-cust">Customer</span><span>Ordered by mistake</span></div>' +
+            '<div class="ccr-item"><span class="ccr-badge ccr-badge-cust">Customer</span><span>Cannot receive delivery today</span></div>' +
+            '<div class="ccr-item"><span class="ccr-badge ccr-badge-farm">Farmer</span><span>Product no longer available / sold out</span></div>' +
+            '<div class="ccr-item"><span class="ccr-badge ccr-badge-farm">Farmer</span><span>Unable to deliver to the address</span></div>' +
+            '<div class="ccr-item"><span class="ccr-badge ccr-badge-farm">Farmer</span><span>Produce quality not suitable for delivery</span></div>' +
+            "</div>" +
+            "</div>" +
+            "</div></div>";
+        }
+
+        content.innerHTML =
+          '<div class="status-banner ' +
+          b.cls +
+          '">' +
+          '<span class="sb-icon">' +
+          b.icon +
+          "</span>" +
+          '<div><div class="sb-title">' +
+          b.title +
+          '</div><div class="sb-sub">' +
+          b.sub +
+          "</div></div>" +
+          '<div class="sb-actions">' +
+          bannerBtns +
+          "</div>" +
+          "</div>" +
+          '<div class="track-grid">' +
+          '<div class="card">' +
+          '<div class="card-head"><span class="card-title">Order Summary</span><span class="badge ' +
+          badgeCls +
+          '">' +
+          badgeTxt +
+          "</span></div>" +
+          '<div class="summary-body">' +
+          '<div class="summary-row"><span class="summary-label">Order ID</span><span class="summary-val"><b>' +
+          currentOrderId +
+          "</b></span></div>" +
+          '<div class="summary-row"><span class="summary-label">Product</span><span class="summary-val">' +
+          o.product +
+          "</span></div>" +
+          '<div class="summary-row"><span class="summary-label">Quantity</span><span class="summary-val">' +
+          o.qty +
+          "</span></div>" +
+          '<div class="summary-row"><span class="summary-label">Customer</span><span class="summary-val">' +
+          o.customer +
+          "</span></div>" +
+          '<div class="summary-row"><span class="summary-label">Address</span><span class="summary-val">' +
+          o.address +
+          "</span></div>" +
+          '<div class="summary-row"><span class="summary-label">Amount</span><span class="summary-val amount" style="' +
+          amtStyle +
+          '">' +
+          o.amount +
+          "</span></div>" +
+          '<div class="summary-row"><span class="summary-label">Payment</span><span class="summary-val" style="' +
+          payStyle +
+          '">' +
+          o.payment +
+          "</span></div>" +
+          '<div class="summary-row"><span class="summary-label">Delivery</span><span class="summary-val" id="delivery-val">' +
+          delivDisp +
+          "</span></div>" +
+          '<div class="summary-row"><span class="summary-label">Order Date</span><span class="summary-val">' +
+          o.orderDate +
+          "</span></div>" +
+          '<div class="summary-row"><span class="summary-label">' +
+          dateLabel +
+          '</span><span class="summary-val" style="' +
+          dtStyle +
+          '">' +
+          dateValue +
+          "</span></div>" +
+          "</div>" +
+          "</div>" +
+          '<div class="card">' +
+          '<div class="card-head"><span class="card-title">🚚 Shipment Progress</span></div>' +
+          '<div class="timeline">' +
+          tlHTML +
+          "</div>" +
+          "</div>" +
+          "</div>" +
+          pcHTML +
+          courierHTML +
+          cancelHTML;
+
+        document.getElementById("modal-content").scrollTop = 0;
+      }
+
+      /* ═══════════════════════════════════
+   BUILD PROCESSING COURIER HTML
+═══════════════════════════════════ */
+      function buildProcessingCourierHTML(o) {
+        var dLabel = o.delivery || "Grab / Maxim";
+        var isFarmer = dLabel.indexOf("Farmer") !== -1;
+        var isPickup = dLabel.indexOf("Pickup") !== -1;
+        var cardTitle = isFarmer
+          ? "🚜 Farmer Delivery"
+          : isPickup
+            ? "🚶 Self Pickup"
+            : "🏍️ Rider Details";
+        var emptyIcon = isFarmer ? "🚜" : isPickup ? "🚶" : "🏍️";
+        var emptyTitle = isFarmer
+          ? "You are delivering this order"
+          : isPickup
+            ? "Customer will pick up"
+            : "No rider details yet";
+        var emptyNote = isFarmer
+          ? "Once packed, head to " +
+            o.address +
+            " to deliver to " +
+            o.customer +
+            " personally."
+          : isPickup
+            ? "Pack the order and notify " +
+              o.customer +
+              " that the order is ready for pickup."
+            : "Book a rider on <strong>" +
+              dLabel +
+              '</strong> first, then click <strong>"Hand to Rider"</strong> above.';
+        var handBtnLabel = isFarmer
+          ? "Mark as Out for Delivery →"
+          : isPickup
+            ? "Mark as Ready for Pickup →"
+            : "Hand to Rider →";
+
+        return (
+          '<div class="card courier-card" id="pro-courier-card">' +
+          '<div class="card-head"><span class="card-title">' +
+          cardTitle +
+          '</span><span class="badge b-y" id="pro-courier-badge">⏳ Awaiting Handoff</span></div>' +
+          '<div id="pro-state-empty" class="no-courier-body">' +
+          '<div class="no-courier-icon">' +
+          emptyIcon +
+          "</div>" +
+          '<div class="no-courier-text"><strong>' +
+          emptyTitle +
+          "</strong><p>" +
+          emptyNote +
+          "</p></div>" +
+          "</div>" +
+          '<div id="pro-state-form" class="driver-form" style="display:none">' +
+          '<div class="driver-form-title">📋 Enter rider details from your ' +
+          dLabel +
+          " app</div>" +
+          '<div class="form-row">' +
+          '<div class="form-group"><label>Driver Name</label><input type="text" id="input-name" placeholder="e.g. Pedro Santos"/></div>' +
+          '<div class="form-group"><label>Plate Number</label><input type="text" id="input-plate" placeholder="e.g. ZAM-1234"/></div>' +
+          "</div>" +
+          '<div class="form-group"><label>Contact Number</label><input type="tel" id="input-phone" placeholder="e.g. 0912 345 6789"/></div>' +
+          '<div class="form-hint">ℹ️ Find these in the ' +
+          dLabel +
+          " app once the driver accepts your booking.</div>" +
+          '<button class="confirm-driver-btn" onclick="confirmDriver()">✅ Confirm &amp; Mark Out for Delivery</button>' +
+          "</div>" +
+          '<div id="pro-state-confirmed" class="courier-body" style="display:none">' +
+          '<div class="courier-avatar" id="pro-driver-avatar">?</div>' +
+          '<div class="courier-info">' +
+          '<div class="service-logo-tag">' +
+          (o.delivery || "🏍️ Rider") +
+          "</div>" +
+          '<div class="courier-name" id="pro-driver-name">—</div>' +
+          '<div class="courier-meta" id="pro-driver-meta">On the way to pick up your order</div>' +
+          '<div class="courier-plate">🛵 <span id="pro-driver-plate">—</span></div>' +
+          "</div>" +
+          '<div class="courier-actions">' +
+          '<a id="pro-driver-call" href="#" class="courier-btn call">📞 Call</a>' +
+          '<a id="pro-driver-msg"  href="#" class="courier-btn msg">💬 Message</a>' +
+          "</div>" +
+          "</div>" +
+          "</div>" +
+          '<div class="card payment-card" id="pro-payment-card" style="display:none">' +
+          '<div class="card-head"><span class="card-title">💰 Payment Collection</span><span class="badge b-pay" id="pro-pay-badge">⏳ Awaiting Payment</span></div>' +
+          '<div id="pro-pay-collect" class="payment-body">' +
+          '<div class="payment-amount">' +
+          o.amount +
+          "</div>" +
+          '<div class="payment-label">to collect from ' +
+          o.customer +
+          " via " +
+          o.paymentRaw +
+          "</div>" +
+          '<div class="payment-method-row">📱 ' +
+          o.paymentRaw +
+          " · " +
+          o.customer +
+          "</div>" +
+          '<button class="payment-collect-btn" onclick="collectPayment()">✅ I Received the Payment</button>' +
+          '<div class="payment-note">Tap this once the customer has paid and the order is delivered.</div>' +
+          "</div>" +
+          '<div id="pro-pay-done" class="payment-done-body" style="display:none">' +
+          '<div class="payment-done-icon">🎉</div>' +
+          "<div>" +
+          '<div class="payment-done-title">Payment Received!</div>' +
+          '<div class="payment-done-amount">' +
+          o.amount +
+          " via " +
+          o.paymentRaw +
+          "</div>" +
+          '<div class="payment-done-sub">Collected from ' +
+          o.customer +
+          ' · <span id="pro-pay-time">—</span></div>' +
+          "</div>" +
+          "</div>" +
+          "</div>"
+        );
+      }
+
+      /* ═══════════════════════════════════
+   CONFIRM ORDER → DELIVERY SELECTOR
+═══════════════════════════════════ */
+      function confirmOrder() {
+        var o = currentOrder;
+        var now = new Date();
+        var nowStr =
+          o.orderDate.split("·")[0].trim() +
+          " · " +
+          now.toLocaleTimeString("en-PH", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+
+        /* Derive delivery icon and step labels from the buyer-chosen method */
+        var d = o.delivery || "";
+        var isFarmer = d.indexOf("Farmer") !== -1;
+        var isPickup = d.indexOf("Pickup") !== -1;
+        var riderIcon = isFarmer
+          ? "🚜"
+          : isPickup
+            ? "🚶"
+            : d.indexOf("Maxim") !== -1
+              ? "🏍️"
+              : "🛵";
+        var delivTitle = isFarmer
+          ? "Farmer Delivery"
+          : isPickup
+            ? "Ready for Pickup"
+            : "Out for Delivery (" +
+              (d.indexOf("Maxim") !== -1 ? "Maxim" : "Grab") +
+              ")";
+        var delivDesc = isFarmer
+          ? "You will personally deliver this order to " +
+            o.customer +
+            " in " +
+            o.address.split(",")[0] +
+            "."
+          : isPickup
+            ? "Pack the order and notify " + o.customer + " to come collect it."
+            : 'Once packed, click "Hand to Rider" and the rider will pick up.';
+
+        o.status = "processing";
+        o.timeline = [
+          {
+            icon: "✅",
+            done: true,
+            title: "Order Placed",
+            time: o.orderDate,
+            desc:
+              o.customer + " placed the order. Payment: " + o.paymentRaw + ".",
+          },
+          {
+            icon: "✅",
+            done: true,
+            title: "Order Confirmed",
+            time: nowStr,
+            desc:
+              "You confirmed the order. Delivery method: " + o.delivery + ".",
+          },
+          {
+            icon: "🔄",
+            active: true,
+            title: "Preparing Order",
+            time: "Started " + nowStr,
+            desc:
+              "Harvesting and packing " +
+              o.qty +
+              " of " +
+              o.product +
+              " for " +
+              o.customer +
+              ".",
+            inProgress: true,
+          },
+          {
+            icon: riderIcon,
+            done: false,
+            title: delivTitle,
+            time: "Waiting",
+            desc: delivDesc,
+            id: "delivery",
+          },
+          {
+            icon: "💰",
+            done: false,
+            title: "Payment Collection",
+            time: "Pending delivery",
+            desc:
+              "Confirm payment received once the order is delivered to " +
+              o.customer +
+              ".",
+            id: "payment",
+          },
+          {
+            icon: "🏠",
+            done: false,
+            title: "Order Complete",
+            time: "Est. " + o.estDelivery,
+            desc: "Order marked complete after payment is confirmed.",
+            last: true,
+            id: "done",
+          },
+        ];
+
+        renderModal(o);
+        showToast(
+          "🔄 " +
+            currentOrderId +
+            " confirmed! Now preparing — " +
+            o.delivery +
+            ".",
+        );
+      }
+
+      function selectDelivery(type) {
+        /* no longer used — buyer chooses delivery */
+      }
+      function proceedToProcessing() {
+        /* no longer used — buyer chooses delivery */
+      }
+
+      /* ═══════════════════════════════════
+   HAND TO RIDER
+═══════════════════════════════════ */
+      function handleHandToRider() {
+        if (handStep === 0) {
+          handStep = 1;
+          document.getElementById("pro-state-empty").style.display = "none";
+          var form = document.getElementById("pro-state-form");
+          form.style.display = "flex";
+          form.style.flexDirection = "column";
+          var btn = document.getElementById("hand-btn");
+          if (btn) {
+            btn.textContent = "Cancel";
+            btn.classList.remove("sb-btn-primary");
+            btn.classList.add("sb-btn-danger");
+          }
+          var d3 = currentOrder.delivery || "";
+          if (d3.indexOf("Farmer") !== -1) {
+            showToast(
+              "🚜 Head out to deliver to " +
+                currentOrder.customer +
+                " in " +
+                currentOrder.address.split(",")[0] +
+                "!",
+            );
+          } else if (d3.indexOf("Pickup") !== -1) {
+            showToast(
+              "📦 Order is ready for pickup by " + currentOrder.customer + "!",
+            );
+          } else {
+            showToast(
+              "📋 Enter the rider's details from your " + d3 + " app below.",
+            );
+          }
+        } else {
+          handStep = 0;
+          document.getElementById("pro-state-empty").style.display = "flex";
+          document.getElementById("pro-state-form").style.display = "none";
+          var btn = document.getElementById("hand-btn");
+          if (btn) {
+            btn.textContent = "Hand to Rider →";
+            btn.classList.remove("sb-btn-danger");
+            btn.classList.add("sb-btn-primary");
+          }
+        }
+      }
+
+      function confirmDriver() {
+        var name = document.getElementById("input-name").value.trim();
+        var plate = document.getElementById("input-plate").value.trim();
+        var phone = document.getElementById("input-phone").value.trim();
+        if (!name || !plate || !phone) {
+          showToast("⚠️ Please fill in all rider details.");
+          return;
+        }
+        handStep = 2;
+
+        document.getElementById("pro-driver-name").textContent = name;
+        document.getElementById("pro-driver-plate").textContent =
+          plate.toUpperCase();
+        document.getElementById("pro-driver-avatar").textContent = name
+          .charAt(0)
+          .toUpperCase();
+        document.getElementById("pro-driver-call").href =
+          "tel:" + phone.replace(/\s/g, "");
+        document.getElementById("pro-driver-msg").href =
+          "sms:" + phone.replace(/\s/g, "");
+        document.getElementById("pro-state-form").style.display = "none";
+        document.getElementById("pro-state-confirmed").style.display = "flex";
+        document.getElementById("pro-courier-badge").textContent =
+          currentOrder.delivery + " · Out for Delivery";
+        document.getElementById("pro-courier-badge").className = "badge b-del";
+
+        /* Preparing step → done */
+        var activeIcon = document.querySelector(".active-icon");
+        if (activeIcon) {
+          activeIcon.className = "step-icon";
+          activeIcon.textContent = "✅";
+          var line = activeIcon.nextElementSibling;
+          if (line) line.className = "step-line";
+          var titleEl =
+            activeIcon.parentElement &&
+            activeIcon.parentElement.querySelector(".step-title");
+          if (titleEl) titleEl.innerHTML = "Preparing Order";
+        }
+
+        /* Delivery step → active */
+        var now = new Date();
+        var ts =
+          currentOrder.orderDate.split("·")[0].trim() +
+          " · " +
+          now.toLocaleTimeString("en-PH", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+        var dd = document.getElementById("step-dot-delivery");
+        if (dd) {
+          dd.className = "step-icon active-icon";
+          var dl = dd.nextElementSibling;
+          if (dl) dl.className = "step-line pending-line";
+          var dt =
+            dd.parentElement && dd.parentElement.querySelector(".step-title");
+          if (dt)
+            dt.innerHTML =
+              currentOrder.delivery +
+              ' <span class="pulse-tag pulse-blue">En Route</span>';
+          var dtm =
+            dd.parentElement && dd.parentElement.querySelector(".step-time");
+          if (dtm) dtm.textContent = ts;
+          var ddc =
+            dd.parentElement && dd.parentElement.querySelector(".step-desc");
+          if (ddc)
+            ddc.textContent =
+              name +
+              " picked up the order and is on the way to " +
+              currentOrder.customer +
+              " in " +
+              currentOrder.address.split(",")[0] +
+              ".";
+        }
+
+        /* Banner update */
+        var banner = document.querySelector(".status-banner");
+        if (banner) {
+          banner.className = "status-banner banner-delivery";
+          var ti = banner.querySelector(".sb-title");
+          if (ti)
+            ti.textContent = currentOrder.delivery + " — Order is On the Way!";
+          var su = banner.querySelector(".sb-sub");
+          if (su)
+            su.textContent =
+              name +
+              " is heading to " +
+              currentOrder.customer +
+              ". Collect payment once delivered.";
+          var ac = banner.querySelector(".sb-actions");
+          if (ac) ac.innerHTML = "";
+        }
+        document.getElementById("pro-payment-card").style.display = "block";
+        showToast(
+          "🚀 " + name + " is on the way to " + currentOrder.customer + "!",
+        );
+      }
+
+      /* ═══════════════════════════════════
+   COLLECT PAYMENT
+═══════════════════════════════════ */
+      function collectPayment() {
+        var now = new Date();
+        var ts =
+          currentOrder.orderDate.split("·")[0].trim() +
+          " · " +
+          now.toLocaleTimeString("en-PH", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+
+        document.getElementById("pro-pay-collect").style.display = "none";
+        document.getElementById("pro-pay-done").style.display = "flex";
+        document.getElementById("pro-pay-badge").textContent = "✅ Paid";
+        document.getElementById("pro-pay-badge").className = "badge b-del";
+        document.getElementById("pro-pay-time").textContent = ts;
+        document.getElementById("pro-courier-badge").textContent =
+          "✅ Delivered";
+        document.getElementById("pro-courier-badge").className = "badge b-del";
+        document.getElementById("pro-driver-meta").textContent =
+          "Order delivered · Completed";
+
+        ["delivery", "payment", "done"].forEach(function (id) {
+          var dot = document.getElementById("step-dot-" + id);
+          if (!dot) return;
+          dot.className = "step-icon";
+          dot.textContent = id === "done" ? "🏠" : "✅";
+          var line = dot.nextElementSibling;
+          if (line)
+            line.className = id === "done" ? "step-line hide" : "step-line";
+          var titleEl =
+            dot.parentElement && dot.parentElement.querySelector(".step-title");
+          var timeEl =
+            dot.parentElement && dot.parentElement.querySelector(".step-time");
+          var descEl =
+            dot.parentElement && dot.parentElement.querySelector(".step-desc");
+          if (timeEl) timeEl.textContent = ts;
+          if (id === "payment") {
+            if (titleEl) titleEl.textContent = "Payment Received";
+            if (descEl)
+              descEl.textContent =
+                currentOrder.amount +
+                " collected from " +
+                currentOrder.customer +
+                " via " +
+                currentOrder.paymentRaw +
+                ".";
+          } else if (id === "done") {
+            if (titleEl) titleEl.textContent = "Order Complete ✅";
+            if (descEl)
+              descEl.textContent =
+                "Order fully completed. Payment collected and delivery confirmed.";
+          }
+        });
+
+        var banner = document.querySelector(".status-banner");
+        if (banner) {
+          banner.className = "status-banner banner-delivered";
+          var ti = banner.querySelector(".sb-title");
+          if (ti) ti.textContent = "Order Complete!";
+          var su = banner.querySelector(".sb-sub");
+          if (su)
+            su.textContent =
+              currentOrder.amount +
+              " received from " +
+              currentOrder.customer +
+              " via " +
+              currentOrder.paymentRaw +
+              ". " +
+              currentOrderId +
+              " is fully completed.";
+        }
+        showToast(
+          "🎉 " +
+            currentOrder.amount +
+            " collected from " +
+            currentOrder.customer +
+            "! Order complete.",
+        );
+      }
+
+      /* ═══════════════════════════════════
+   ACKNOWLEDGE PARTIAL CANCEL
+═══════════════════════════════════ */
+      function acknowledgeCancellation() {
+        var s = document.getElementById("partial-cancel-section");
+        if (!s) return;
+        s.style.transition = "opacity .4s";
+        s.style.opacity = "0";
+        setTimeout(function () {
+          s.style.display = "none";
+          showToast(
+            "✅ Updated order acknowledged. Prepare the remaining items.",
+          );
+        }, 400);
+      }
+
+      /* ═══════════════════════════════════
+   TOAST
+═══════════════════════════════════ */
+      function showToast(msg) {
+        var t = document.getElementById("shipping-toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        setTimeout(function () {
+          t.classList.remove("show");
+        }, 3500);
+      }
     </script>
   </body>
 </html>

@@ -73,7 +73,7 @@
 
   <div class="profile-banner">
     <div class="profile-top">
-      <div class="profile-avatar">
+      <div class="profile-avatar" id="profileAvatar" onclick="document.getElementById('avatarInput').click()">
         J
         <div class="avatar-edit">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
@@ -81,6 +81,7 @@
           </svg>
         </div>
       </div>
+      <input type="file" id="avatarInput" accept="image/*" style="display:none">
       <div class="profile-info">
         <div class="profile-name">Juan Dela Cruz</div>
         <div class="profile-role-badge">🌾 Verified Farmer · Silver Member</div>
@@ -109,7 +110,7 @@
         <a href="Orders.html" class="pcard-link">View Purchase History ›</a>
       </div>
       <div class="purchase-steps">
-        <a href="Orders.html" class="ps-item">
+        <a href="#" class="ps-item" onclick="event.preventDefault(); openToPayModal()">
           <div class="ps-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/>
@@ -118,7 +119,7 @@
           <div class="ps-label">To Pay</div>
           <div class="ps-badge">2</div>
         </a>
-        <a href="Orders.html" class="ps-item">
+        <a href="#" class="ps-item" onclick="event.preventDefault(); openToShipModal()">
           <div class="ps-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
@@ -126,8 +127,9 @@
             </svg>
           </div>
           <div class="ps-label">To Ship</div>
+          <div class="ps-badge">3</div>
         </a>
-        <a href="Orders.html" class="ps-item">
+        <a href="#" class="ps-item" onclick="event.preventDefault(); openToReceiveModal()">
           <div class="ps-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M10 17h4V5H2v12h3m10 0h4v-7h-4v7Zm-5 0v2m4-2v2m-9-2v2"/>
@@ -136,13 +138,14 @@
           <div class="ps-label">To Receive</div>
           <div class="ps-badge">1</div>
         </a>
-        <a href="Reviews.html" class="ps-item">
+        <a href="#" class="ps-item" onclick="event.preventDefault(); openToRateModal()">
           <div class="ps-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
           </div>
           <div class="ps-label">To Rate</div>
+          <div class="ps-badge" id="toRateBadge">2</div>
         </a>
       </div>
     </div>
@@ -151,19 +154,11 @@
     <div class="pcard">
       <div class="pcard-hdr"><div class="pcard-title">My Activities</div></div>
       <div class="activities-grid">
-        <a href="#" class="act-item">
-          <div class="act-icon">❤️</div>
-          <div><div class="act-title">Wishlist</div><div class="act-sub">12 items saved</div></div>
-        </a>
-        <a href="#" class="act-item">
+        <a href="#" class="act-item" onclick="event.preventDefault(); openVoucherModal()">
           <div class="act-icon">🎟️</div>
           <div><div class="act-title">My Vouchers</div><div class="act-sub">3 new vouchers</div></div>
         </a>
-        <a href="#" class="act-item">
-          <div class="act-icon">🌱</div>
-          <div><div class="act-title">Farm Bits</div><div class="act-sub">450 points</div></div>
-        </a>
-        <a href="Reviews.html" class="act-item">
+        <a href="#" class="act-item" onclick="event.preventDefault(); openRatingsModal()">
           <div class="act-icon">⭐</div>
           <div><div class="act-title">My Ratings</div><div class="act-sub">View feedback</div></div>
         </a>
@@ -227,7 +222,6 @@
 </div>
 
 <footer class="footer">
-  <div class="footer-inner">
     <div class="footer-col">
       <div class="footer-logo">🌾 FarmDirect</div>
       <p class="footer-desc">Connecting Zamboanga farmers directly to your table.</p>
@@ -236,6 +230,478 @@
   </div>
 </footer>
 
-<script>lucide.createIcons();</script>
+<!-- MY RATINGS MODAL -->
+<div class="modal-overlay" id="ratingsModal">
+  <div class="modal-content" style="max-width:600px">
+    <div class="modal-header">
+      <h3 id="ratingsTitle">⭐ My Ratings</h3>
+      <button class="modal-close" onclick="closeRatingsModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="ratingsBody"></div>
+  </div>
+</div>
+
+<!-- VOUCHER MODAL -->
+<div class="modal-overlay" id="voucherModal">
+  <div class="modal-content" style="max-width:560px">
+    <div class="modal-header">
+      <h3>🎟️ My Vouchers (3)</h3>
+      <button class="modal-close" onclick="closeVoucherModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="voucher-card">
+        <div class="voucher-left">
+          <div class="voucher-icon">🥬</div>
+          <div class="voucher-details">
+            <div class="voucher-name">Fresh Veggie Discount</div>
+            <div class="voucher-code">FARMFRESH20</div>
+            <div class="voucher-expiry">Expires: Mar 31, 2026</div>
+          </div>
+        </div>
+        <div class="voucher-right">
+          <div class="voucher-value">20% OFF</div>
+          <div class="voucher-min">Min. ₱200</div>
+        </div>
+      </div>
+      <div class="voucher-card">
+        <div class="voucher-left">
+          <div class="voucher-icon">🚚</div>
+          <div class="voucher-details">
+            <div class="voucher-name">Free Shipping</div>
+            <div class="voucher-code">FREESHIP50</div>
+            <div class="voucher-expiry">Expires: Apr 15, 2026</div>
+          </div>
+        </div>
+        <div class="voucher-right">
+          <div class="voucher-value">FREE</div>
+          <div class="voucher-min">Min. ₱150</div>
+        </div>
+      </div>
+      <div class="voucher-card">
+        <div class="voucher-left">
+          <div class="voucher-icon">🍅</div>
+          <div class="voucher-details">
+            <div class="voucher-name">Tomato Lovers Deal</div>
+            <div class="voucher-code">TOMATO30</div>
+            <div class="voucher-expiry">Expires: Mar 20, 2026</div>
+          </div>
+        </div>
+        <div class="voucher-right">
+          <div class="voucher-value">₱30 OFF</div>
+          <div class="voucher-min">Min. ₱100</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TO RECEIVE MODAL -->
+<div class="modal-overlay" id="toReceiveModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>📬 To Receive (1 Order)</h3>
+      <button class="modal-close" onclick="closeToReceiveModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="topay-card">
+        <div class="topay-head">
+          <div class="topay-id">Order #FD-00235</div>
+          <span class="topay-status" style="background:#dcfce7;color:#16a34a">In Transit</span>
+        </div>
+        <div class="topay-items">
+          <img src="https://images.unsplash.com/photo-1566385101042-1a0aa0c12e8c?w=100" alt="Fresh Cabbage" class="topay-img">
+          <div class="topay-info">
+            <div class="topay-name">Fresh Cabbage (2 kg)</div>
+            <div class="topay-seller">Maria's Garden</div>
+            <div class="topay-qty">Qty: 1</div>
+          </div>
+        </div>
+        <div class="topay-method-badge">
+          <span class="topay-method-label">Payment:</span>
+          <span class="topay-method-val">💵 Cash on Delivery</span>
+        </div>
+        <div class="topay-footer">
+          <div class="topay-total">Total: <span>₱120.00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- TO RATE MODAL -->
+<div class="modal-overlay" id="toRateModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="toRateTitle">⭐ To Rate</h3>
+      <button class="modal-close" onclick="closeToRateModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="toRateBody"></div>
+  </div>
+</div>
+
+<!-- RATE MODAL -->
+<div class="modal-overlay" id="rateModal">
+  <div class="modal-content" style="max-width:520px">
+    <div class="modal-header">
+      <h3>⭐ Rate Order</h3>
+      <button class="modal-close" onclick="closeRateModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="rate-product">
+        <img src="" alt="" id="rate-img" class="rate-img">
+        <div class="rate-info">
+          <div class="rate-name" id="rate-name"></div>
+          <div class="rate-seller" id="rate-seller"></div>
+          <div class="rate-order-id" id="rate-order-id"></div>
+        </div>
+      </div>
+      <div class="rate-section">
+        <div class="rate-label">Your Rating</div>
+        <div class="star-rating" id="starRating">
+          <span class="star" data-val="1" onclick="setRating(1)">★</span>
+          <span class="star" data-val="2" onclick="setRating(2)">★</span>
+          <span class="star" data-val="3" onclick="setRating(3)">★</span>
+          <span class="star" data-val="4" onclick="setRating(4)">★</span>
+          <span class="star" data-val="5" onclick="setRating(5)">★</span>
+        </div>
+        <div class="rate-label-text" id="rateText">Tap a star to rate</div>
+      </div>
+      <div class="rate-section">
+        <div class="rate-label">Your Review</div>
+        <textarea class="rate-textarea" id="rateInput" placeholder="Share your experience with this product..." rows="3"></textarea>
+      </div>
+      <button class="rate-submit-btn" onclick="submitRating()">Submit Rating</button>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="toPayModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>💳 To Pay (2 Orders)</h3>
+      <button class="modal-close" onclick="closeToPayModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="topay-card">
+        <div class="topay-head">
+          <div class="topay-id">Order #FD-00251</div>
+          <span class="topay-status">Pending</span>
+        </div>
+        <div class="topay-items">
+          <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=100" alt="Fresh Carrots" class="topay-img">
+          <div class="topay-info">
+            <div class="topay-name">Fresh Carrots (1 kg)</div>
+            <div class="topay-seller">Rianne's Farm</div>
+            <div class="topay-qty">Qty: 1</div>
+          </div>
+        </div>
+        <div class="topay-method-badge">
+          <span class="topay-method-label">Payment:</span>
+          <span class="topay-method-val">💵 Cash on Delivery</span>
+        </div>
+        <div class="topay-footer">
+          <div class="topay-total">Total: <span>₱85.00</span></div>
+        </div>
+      </div>
+      <div class="topay-card">
+        <div class="topay-head">
+          <div class="topay-id">Order #FD-00248</div>
+          <span class="topay-status">Pending</span>
+        </div>
+        <div class="topay-items">
+          <img src="https://images.unsplash.com/photo-1518977676601-b53f02ac6d31?w=100" alt="Native Potatoes" class="topay-img">
+          <div class="topay-info">
+            <div class="topay-name">Native Potatoes (2 kg)</div>
+            <div class="topay-seller">Green Valley Farm</div>
+            <div class="topay-qty">Qty: 1</div>
+          </div>
+        </div>
+        <div class="topay-method-badge">
+          <span class="topay-method-label">Payment:</span>
+          <span class="topay-method-val">📱 GCash</span>
+        </div>
+        <div class="topay-footer">
+          <div class="topay-total">Total: <span>₱190.00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TO SHIP MODAL -->
+<div class="modal-overlay" id="toShipModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>📦 To Ship (3 Orders)</h3>
+      <button class="modal-close" onclick="closeToShipModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="topay-card">
+        <div class="topay-head">
+          <div class="topay-id">Order #FD-00245</div>
+          <span class="topay-status" style="background:#dbeafe;color:#2563eb">Processing</span>
+        </div>
+        <div class="topay-items">
+          <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=100" alt="Fresh Lettuce" class="topay-img">
+          <div class="topay-info">
+            <div class="topay-name">Fresh Lettuce (500g)</div>
+            <div class="topay-seller">Rianne's Farm</div>
+            <div class="topay-qty">Qty: 2</div>
+          </div>
+        </div>
+        <div class="topay-method-badge">
+          <span class="topay-method-label">Payment:</span>
+          <span class="topay-method-val">📱 GCash</span>
+        </div>
+        <div class="topay-footer">
+          <div class="topay-total">Total: <span>₱120.00</span></div>
+        </div>
+      </div>
+      <div class="topay-card">
+        <div class="topay-head">
+          <div class="topay-id">Order #FD-00243</div>
+          <span class="topay-status" style="background:#dbeafe;color:#2563eb">Processing</span>
+        </div>
+        <div class="topay-items">
+          <img src="https://images.unsplash.com/photo-1566385101042-1a0aa0c12e8c?w=100" alt="Fresh Cabbage" class="topay-img">
+          <div class="topay-info">
+            <div class="topay-name">Fresh Cabbage (1 kg)</div>
+            <div class="topay-seller">Green Valley Farm</div>
+            <div class="topay-qty">Qty: 1</div>
+          </div>
+        </div>
+        <div class="topay-method-badge">
+          <span class="topay-method-label">Payment:</span>
+          <span class="topay-method-val">💵 Cash on Delivery</span>
+        </div>
+        <div class="topay-footer">
+          <div class="topay-total">Total: <span>₱60.00</span></div>
+        </div>
+      </div>
+      <div class="topay-card">
+        <div class="topay-head">
+          <div class="topay-id">Order #FD-00240</div>
+          <span class="topay-status" style="background:#dbeafe;color:#2563eb">Processing</span>
+        </div>
+        <div class="topay-items">
+          <img src="https://images.unsplash.com/photo-1590865101275-4d99c14856cc?w=100" alt="Organic Ginger" class="topay-img">
+          <div class="topay-info">
+            <div class="topay-name">Organic Ginger (250g)</div>
+            <div class="topay-seller">Maria's Garden</div>
+            <div class="topay-qty">Qty: 1</div>
+          </div>
+        </div>
+        <div class="topay-method-badge">
+          <span class="topay-method-label">Payment:</span>
+          <span class="topay-method-val">🏦 Online Banking</span>
+        </div>
+        <div class="topay-footer">
+          <div class="topay-total">Total: <span>₱45.00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s;padding:1.5rem}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-content{background:#fff;border-radius:16px;box-shadow:0 6px 32px rgba(0,0,0,0.12);max-width:640px;width:100%;max-height:90vh;display:flex;flex-direction:column;transform:translateY(20px) scale(0.97);transition:transform 0.25s}
+.modal-overlay.open .modal-content{transform:translateY(0) scale(1)}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.8rem;border-bottom:1.5px solid #e0dbd0}
+.modal-header h3{font-size:1.15rem;font-weight:700;margin:0}
+.modal-close{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;font-size:1.5rem;cursor:pointer;border-radius:50%;color:#444;transition:background 0.15s}
+.modal-close:hover{background:#f0ece2}
+.modal-body{padding:1.5rem 1.8rem;overflow-y:auto;display:flex;flex-direction:column;gap:1.4rem}
+.topay-card{border:1.5px solid #e0dbd0;border-radius:12px;overflow:hidden}
+.topay-head{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.4rem;background:#f0ece2;font-size:0.9rem}
+.topay-id{font-weight:700}
+.topay-status{font-size:0.75rem;font-weight:800;padding:0.25rem 0.75rem;border-radius:20px;background:#fef9c3;color:#ca8a04;text-transform:uppercase}
+.topay-items{display:flex;align-items:center;gap:1.2rem;padding:1.2rem 1.4rem}
+.topay-img{width:76px;height:76px;border-radius:12px;object-fit:cover;flex-shrink:0}
+.topay-info{flex:1;min-width:0}
+.topay-name{font-weight:700;font-size:1rem;margin-bottom:4px}
+.topay-seller{font-size:0.82rem;color:#888;margin-bottom:3px}
+.topay-qty{font-size:0.82rem;color:#444}
+.topay-method-badge{display:flex;align-items:center;gap:0.6rem;padding:0.75rem 1.4rem;background:#f5f5f5;border-top:1px solid #e0dbd0;font-size:0.85rem}
+.topay-method-label{font-weight:600;color:#888}
+.topay-method-val{font-weight:700;color:#1a1a1a}
+.topay-footer{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.4rem;border-top:1px solid #e0dbd0}
+.topay-total{font-size:1rem;font-weight:700}
+.topay-total span{color:#1a2e1e;font-weight:800}
+.topay-rate-btn{display:inline-block;padding:0.5rem 1.2rem;border:none;border-radius:8px;background:#f5c518;color:#1a1a1a;font-weight:700;font-size:0.82rem;cursor:pointer;transition:background 0.15s;text-decoration:none}
+.topay-rate-btn:hover{background:#e6b400}
+.rate-product{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:#f5f5f5;border-radius:10px;margin-bottom:0.5rem}
+.rate-img{width:56px;height:56px;border-radius:10px;object-fit:cover;flex-shrink:0}
+.rate-info{flex:1;min-width:0}
+.rate-name{font-weight:700;font-size:0.95rem;margin-bottom:2px}
+.rate-seller{font-size:0.8rem;color:#888;margin-bottom:1px}
+.rate-order-id{font-size:0.75rem;color:#aaa}
+.rate-section{margin-bottom:1rem}
+.rate-label{font-size:0.78rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.5rem}
+.star-rating{display:flex;gap:0.3rem}
+.star{font-size:2.2rem;color:#ddd;cursor:pointer;transition:color 0.15s}
+.star:hover,.star.active{color:#f5c518}
+.rate-label-text{font-size:0.85rem;color:#555;margin-top:0.4rem;font-weight:600}
+.rate-textarea{width:100%;padding:0.8rem 1rem;border:1.5px solid #e0dbd0;border-radius:8px;font-size:0.9rem;font-family:inherit;resize:vertical;outline:none;transition:border-color 0.2s;color:#1a1a1a}
+.rate-textarea:focus{border-color:#1a2e1e;box-shadow:0 0 0 3px rgba(26,46,30,0.1)}
+.rate-submit-btn{width:100%;padding:0.75rem;border:none;border-radius:10px;background:#1a2e1e;color:#fff;font-weight:700;font-size:0.9rem;cursor:pointer;transition:background 0.15s;margin-top:0.3rem}
+.rate-submit-btn:hover{background:#2d5030}
+.voucher-card{border:1.5px solid #e0dbd0;border-radius:12px;overflow:hidden;display:flex;align-items:center;background:#fff}
+.voucher-card:not(:last-child){margin-bottom:1rem}
+.voucher-left{display:flex;align-items:center;gap:0.9rem;padding:1rem 1.2rem;flex:1;min-width:0}
+.voucher-icon{width:48px;height:48px;border-radius:10px;background:#f0ece2;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.voucher-details{flex:1;min-width:0}
+.voucher-name{font-weight:700;font-size:0.92rem;margin-bottom:3px}
+.voucher-code{font-family:monospace;font-size:0.82rem;color:#1a2e1e;font-weight:700;background:#f0ece2;display:inline-block;padding:0.1rem 0.45rem;border-radius:4px;margin-bottom:3px}
+.voucher-expiry{font-size:0.72rem;color:#888}
+.voucher-right{text-align:center;padding:1rem 1.2rem;border-left:1.5px dashed #e0dbd0;flex-shrink:0}
+.voucher-value{font-weight:800;font-size:0.95rem;color:#1a2e1e;margin-bottom:2px}
+.voucher-min{font-size:0.72rem;color:#888}
+.rating-item{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.2rem;border:1.5px solid #e0dbd0;border-radius:12px;background:#fff}
+.rating-item:not(:last-child){margin-bottom:1rem}
+.rating-img{width:56px;height:56px;border-radius:10px;object-fit:cover;flex-shrink:0}
+.rating-details{flex:1;min-width:0}
+.rating-name{font-weight:700;font-size:0.92rem;margin-bottom:2px}
+.rating-seller{font-size:0.78rem;color:#888;margin-bottom:4px}
+.rating-stars{color:#f5c518;font-size:0.95rem;letter-spacing:1px;margin-bottom:4px}
+.rating-text{font-size:0.82rem;color:#444;line-height:1.5;font-style:italic;margin-bottom:3px}
+.rating-date{font-size:0.7rem;color:#aaa}
+.empty-state{text-align:center;padding:3rem 1rem;color:#888}
+.empty-icon{font-size:3rem;margin-bottom:1rem}
+</style>
+
+<script>lucide.createIcons();
+
+document.getElementById('avatarInput').addEventListener('change',function(e){
+  var file=e.target.files[0];
+  if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    var avatar=document.getElementById('profileAvatar');
+    avatar.style.backgroundImage='url('+ev.target.result+')';
+    avatar.classList.add('has-image');
+  };
+  reader.readAsDataURL(file);
+});
+
+function openToPayModal(){document.getElementById('toPayModal').classList.add('open')}
+function closeToPayModal(){document.getElementById('toPayModal').classList.remove('open')}
+document.getElementById('toPayModal').addEventListener('click',function(e){if(e.target===this)closeToPayModal()});
+
+function openToShipModal(){document.getElementById('toShipModal').classList.add('open')}
+function closeToShipModal(){document.getElementById('toShipModal').classList.remove('open')}
+document.getElementById('toShipModal').addEventListener('click',function(e){if(e.target===this)closeToShipModal()});
+
+function openToReceiveModal(){document.getElementById('toReceiveModal').classList.add('open')}
+function closeToReceiveModal(){document.getElementById('toReceiveModal').classList.remove('open')}
+document.getElementById('toReceiveModal').addEventListener('click',function(e){if(e.target===this)closeToReceiveModal()});
+
+var toRateOrders=[
+  {id:'FD-00230',name:'Organic Ginger (500g)',seller:'Green Valley Farm',img:'https://images.unsplash.com/photo-1590865101275-4d99c14856cc?w=100',total:'₱45.00',delivered:'Feb 28, 2026'},
+  {id:'FD-00227',name:'Fresh Tomatoes (1 kg)',seller:"Rianne's Farm",img:'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=100',total:'₱95.00',delivered:'Feb 25, 2026'}
+];
+var myRatings=[
+  {name:'Fresh Carrots (1 kg)',seller:"Rianne's Farm",img:'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=100',stars:5,text:'Super fresh and crisp! Great quality for cooking. Will order again.',date:'Feb 15, 2026'},
+  {name:'Native Potatoes (2 kg)',seller:'Green Valley Farm',img:'https://images.unsplash.com/photo-1518977676601-b53f02ac6d31?w=100',stars:4,text:'Good quality but some were a bit small. Still fresh and tasty.',date:'Feb 10, 2026'},
+  {name:'Fresh Cabbage (1 kg)',seller:"Maria's Garden",img:'https://images.unsplash.com/photo-1566385101042-1a0aa0c12e8c?w=100',stars:5,text:'Perfect for sinigang! Very fresh and clean.',date:'Feb 5, 2026'}
+];
+var currentOrderId='';
+
+function renderToRate(){
+  var body=document.getElementById('toRateBody');
+  var title=document.getElementById('toRateTitle');
+  title.textContent='⭐ To Rate ('+toRateOrders.length+' Order'+(toRateOrders.length!==1?'s':'')+')';
+  if(!toRateOrders.length){body.innerHTML='<div class="empty-state"><div class="empty-icon">⭐</div><div>No orders to rate</div></div>';return}
+  var html='';
+  toRateOrders.forEach(function(o){
+    html+='<div class="topay-card">'+
+      '<div class="topay-head"><div class="topay-id">Order #'+o.id+'</div><span class="topay-status" style="background:#fce7f3;color:#9d174d">Delivered</span></div>'+
+      '<div class="topay-items">'+
+        '<img src="'+o.img+'" alt="'+o.name+'" class="topay-img">'+
+        '<div class="topay-info"><div class="topay-name">'+o.name+'</div><div class="topay-seller">'+o.seller+'</div><div class="topay-qty">Delivered: '+o.delivered+'</div></div>'+
+      '</div>'+
+      '<div class="topay-footer">'+
+        '<div class="topay-total">Total: <span>'+o.total+'</span></div>'+
+        '<button class="topay-rate-btn" onclick="event.preventDefault();openRateModal(\''+o.id+'\',\''+o.name.replace(/'/g,"\\'")+'\',\''+o.seller.replace(/'/g,"\\'")+'\',\''+o.img+'\')">Rate Now</button>'+
+      '</div></div>';
+  });
+  body.innerHTML=html;
+}
+
+function renderMyRatings(){
+  var body=document.getElementById('ratingsBody');
+  var title=document.getElementById('ratingsTitle');
+  title.textContent='⭐ My Ratings ('+myRatings.length+')';
+  if(!myRatings.length){body.innerHTML='<div class="empty-state"><div class="empty-icon">⭐</div><div>No ratings yet</div></div>';return}
+  var html='';
+  myRatings.forEach(function(r){
+    var stars='';for(var i=1;i<=5;i++){stars+=i<=r.star?'★':'☆'}
+    html+='<div class="rating-item">'+
+      '<img src="'+r.img+'" alt="'+r.name+'" class="rating-img">'+
+      '<div class="rating-details">'+
+        '<div class="rating-name">'+r.name+'</div>'+
+        '<div class="rating-seller">'+r.seller+'</div>'+
+        '<div class="rating-stars">'+stars+'</div>'+
+        '<div class="rating-text">"'+r.text+'"</div>'+
+        '<div class="rating-date">Rated: '+r.date+'</div>'+
+      '</div></div>';
+  });
+  body.innerHTML=html;
+}
+
+function openToRateModal(){renderToRate();document.getElementById('toRateModal').classList.add('open')}
+function closeToRateModal(){document.getElementById('toRateModal').classList.remove('open')}
+document.getElementById('toRateModal').addEventListener('click',function(e){if(e.target===this)closeToRateModal()});
+
+function openRatingsModal(){renderMyRatings();document.getElementById('ratingsModal').classList.add('open')}
+function closeRatingsModal(){document.getElementById('ratingsModal').classList.remove('open')}
+document.getElementById('ratingsModal').addEventListener('click',function(e){if(e.target===this)closeRatingsModal()});
+
+function openRateModal(id,name,seller,img){
+  currentOrderId=id;
+  document.getElementById('rate-order-id').textContent='Order #'+id;
+  document.getElementById('rate-name').textContent=name;
+  document.getElementById('rate-seller').textContent=seller;
+  document.getElementById('rate-img').src=img;
+  document.getElementById('rate-img').alt=name;
+  document.getElementById('rateInput').value='';
+  setRating(0);
+  closeToRateModal();
+  document.getElementById('rateModal').classList.add('open');
+}
+function closeRateModal(){document.getElementById('rateModal').classList.remove('open')}
+document.getElementById('rateModal').addEventListener('click',function(e){if(e.target===this)closeRateModal()});
+
+var currentRating=0;
+function setRating(val){
+  currentRating=val;
+  var stars=document.querySelectorAll('#starRating .star');
+  var labels=['','Poor','Fair','Good','Very Good','Excellent'];
+  stars.forEach(function(s,i){
+    s.classList.toggle('active',i<val);
+  });
+  document.getElementById('rateText').textContent=val?labels[val]:'Tap a star to rate';
+}
+function submitRating(){
+  if(!currentRating){alert('Please select a rating');return}
+  var txt=document.getElementById('rateInput').value.trim();
+  if(!txt){alert('Please write a review');return}
+  var now=new Date();
+  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var dateStr=months[now.getMonth()]+' '+now.getDate()+', '+now.getFullYear();
+  myRatings.unshift({
+    name:document.getElementById('rate-name').textContent,
+    seller:document.getElementById('rate-seller').textContent,
+    img:document.getElementById('rate-img').src,
+    stars:currentRating,
+    text:txt,
+    date:dateStr
+  });
+  toRateOrders=toRateOrders.filter(function(o){return o.id!==currentOrderId});
+  document.getElementById('toRateBadge').textContent=toRateOrders.length;
+  closeRateModal();
+  var starsArr=['','★','★★','★★★','★★★★','★★★★★'];
+  showToast('✅ Rating submitted! '+starsArr[currentRating]);
+}
+</script>
 </body>
 </html>
