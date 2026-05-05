@@ -45,23 +45,12 @@
       <a href="cart.html" class="cart-btn">
         <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       </a>
-      <div class="notif-wrap">
-        <button class="notif-btn" tabindex="0">
+      <a href="notifications.html" class="notif-wrap" style="text-decoration:none;">
+        <button class="notif-btn" aria-label="Notifications">
           <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <span class="notif-badge"></span>
         </button>
-        <div class="notif-dropdown">
-          <div class="notif-header"><h4>Notifications</h4></div>
-          <div class="notif-list">
-            <div class="notif-item">
-              <div class="notif-icon">✅</div>
-              <div class="notif-content">
-                <strong>Order Confirmed!</strong>
-                <p id="notif-order-text">Your order has been placed. Farmer has been notified.</p>
-                <span class="notif-time">Just now</span>
-              </div>
-            </div>
-          </div>
+      </a>
         </div>
       </div>
       <a href="../Login/login.html" class="login-btn">
@@ -107,11 +96,11 @@
       </div>
     </div>
 
-    <!-- Cancel countdown — only visible within the cancellation window -->
+    <!-- Cancel bar — visible only while seller is still preparing the order -->
     <div class="cancel-countdown-bar" id="cancel-bar">
       <div>
-        <div class="cancel-countdown-text" id="cancel-text">⏱ You can cancel within <span id="cancel-timer">30:00</span></div>
-        <div style="font-size:0.76rem;color:var(--text-light);margin-top:0.2rem;">After this window closes, cancellations are no longer possible.</div>
+        <div class="cancel-countdown-text" id="cancel-text">🧑‍🌾 Seller is still preparing your order — you can cancel now.</div>
+        <div style="font-size:0.76rem;color:var(--text-light);margin-top:0.2rem;">Once the seller has handed off your order for pickup, cancellation is no longer possible.</div>
       </div>
       <button class="cancel-order-btn" id="cancel-btn" onclick="openCancelModal()">Cancel Order</button>
     </div>
@@ -141,7 +130,7 @@
 <div class="cancel-modal-overlay" id="cancel-modal">
   <div class="cancel-modal">
     <h3>Cancel Order</h3>
-    <p>Please select a reason for cancellation. Cancellations can only be made within <strong>30 minutes</strong> of placing an order.</p>
+    <p>Please select a reason for cancellation. You can only cancel while the seller is still <strong>preparing your order</strong>. Once it has been handed off for pickup or is on the way, cancellation is no longer available.</p>
     <select class="cancel-reason-select" id="cancel-reason">
       <option value="">— Select a reason —</option>
       <option value="changed_mind">I changed my mind</option>
@@ -195,7 +184,16 @@
 <script>
 const pmLabel = { cod:'💵 Cash on Delivery', gcash:'📱 GCash', bank:'🏦 Bank Transfer' };
 let currentOrderId = null;
-let countdownInterval = null;
+
+/* Statuses where the seller has already handed off the order — cancellation not allowed */
+const NON_CANCELLABLE_STATUSES = ['picked_up', 'on_the_way', 'delivered', 'cancelled'];
+
+function canCancelByStatus(order) {
+  if (!order) return false;
+  if (order.cancelled) return false;
+  const status = (order.status || 'preparing').toLowerCase().replace(/\s+/g, '_');
+  return !NON_CANCELLABLE_STATUSES.includes(status);
+}
 
 function loadOrder() {
   const id    = localStorage.getItem('fd_last_order');
@@ -203,64 +201,70 @@ function loadOrder() {
 
   if (!order) {
     document.getElementById('order-num').textContent = 'Order #FD-DEMO';
+    /* Demo mode: show cancel bar as available (status = preparing) */
+    updateCancelBar({ status: 'preparing' });
     return;
   }
 
   currentOrderId = order.id;
-  document.getElementById('order-num').textContent   = 'Order #' + order.id;
-  document.getElementById('order-date').textContent  = FD.fmt.date(order.placedAt);
+  document.getElementById('order-num').textContent     = 'Order #' + order.id;
+  document.getElementById('order-date').textContent    = FD.fmt.date(order.placedAt);
   document.getElementById('order-payment').textContent = pmLabel[order.paymentMethod] || '💵 Cash on Delivery';
-  document.getElementById('order-total').textContent = FD.fmt.peso(order.pricing?.total || 0);
-  document.getElementById('notif-order-text').textContent = `Order #${order.id} has been placed. Farmer has been notified.`;
+  document.getElementById('order-total').textContent   = FD.fmt.peso(order.pricing?.total || 0);
 
-  // Track link
+  /* Track link */
   document.getElementById('track-btn').href = 'Order_tracking.html?order=' + order.id;
 
-  // Savings
+  /* Savings */
   const savings = order.pricing?.disc || 0;
   if (savings > 0) {
     document.getElementById('order-saved-row').style.display = '';
     document.getElementById('order-saved').textContent = FD.fmt.peso(savings);
   }
 
-  // Cancel countdown
+  /* Cancel bar — driven by order status, not a timer */
+  updateCancelBar(order);
+}
+
+function updateCancelBar(order) {
   if (order.cancelled) {
-    showCancelExpired('Order has been cancelled.');
+    showCancelLocked('Order has been cancelled.');
     return;
   }
 
-  startCancelCountdown(order);
-}
+  const status = (order.status || 'preparing').toLowerCase().replace(/\s+/g, '_');
+  const canCancel = !NON_CANCELLABLE_STATUSES.includes(status);
 
-function startCancelCountdown(order) {
-  function tick() {
-    const timeLeft = FD.fmt.timeLeft(order.cancelDeadline);
-    if (!timeLeft || !FD.Orders.canCancel(order)) {
-      clearInterval(countdownInterval);
-      showCancelExpired('Cancellation window has closed.');
-      return;
-    }
-    document.getElementById('cancel-timer').textContent = timeLeft;
+  if (canCancel) {
+    /* Seller is still preparing — cancellation is open */
+    document.getElementById('cancel-text').textContent = '🧑‍🌾 Seller is still preparing your order — you can cancel now.';
+  } else {
+    /* Order has moved past the preparation stage */
+    const statusLabel = {
+      picked_up:   'picked up by the courier',
+      on_the_way:  'on its way to you',
+      delivered:   'already delivered',
+      cancelled:   'already cancelled',
+    }[status] || 'past the preparation stage';
+    showCancelLocked(`Your order is ${statusLabel} — cancellation is no longer available.`);
   }
-  tick();
-  countdownInterval = setInterval(tick, 1000);
 }
 
-function showCancelExpired(msg) {
+function showCancelLocked(msg) {
   const bar = document.getElementById('cancel-bar');
   const txt = document.getElementById('cancel-text');
   const btn = document.getElementById('cancel-btn');
   bar.classList.add('expired');
   txt.textContent = msg;
   txt.classList.add('expired');
-  btn.disabled = true;
+  btn.disabled    = true;
   btn.textContent = 'Cannot Cancel';
 }
 
 function openCancelModal() {
-  const order = FD.Orders.get(currentOrderId);
-  if (!order || !FD.Orders.canCancel(order)) {
-    alert('Sorry, the cancellation window for this order has passed.');
+  const order = currentOrderId ? FD.Orders.get(currentOrderId) : { status: 'preparing' };
+  if (!canCancelByStatus(order)) {
+    alert('Cancellation is no longer available — the seller has already handed off your order.');
     return;
   }
   document.getElementById('cancel-modal').classList.add('open');
@@ -274,20 +278,17 @@ function confirmCancel() {
   const reason = document.getElementById('cancel-reason').value;
   if (!reason) { alert('Please select a reason for cancellation.'); return; }
 
-  const success = FD.Orders.cancel(currentOrderId, reason);
+  const success = currentOrderId ? FD.Orders.cancel(currentOrderId, reason) : true;
   closeCancelModal();
 
   if (success) {
-    clearInterval(countdownInterval);
-    showCancelExpired('Order cancelled successfully.');
-    document.getElementById('order-num').textContent = 'Order #' + currentOrderId + ' · CANCELLED';
+    showCancelLocked('Order cancelled successfully.');
+    document.getElementById('order-num').textContent   = 'Order #' + (currentOrderId || 'FD-DEMO') + ' · CANCELLED';
     document.getElementById('order-num').style.background = '#ffebee';
-    document.getElementById('order-num').style.color = 'var(--red)';
-    // Update notification
-    document.getElementById('notif-order-text').textContent = `Order #${currentOrderId} has been cancelled.`;
+    document.getElementById('order-num').style.color      = 'var(--red)';
     alert('Your order has been cancelled. A refund (if applicable) will be processed within 3–5 business days.');
   } else {
-    alert('Unable to cancel order. The cancellation window may have passed.');
+    alert('Unable to cancel. The seller may have already started preparing your order for pickup.');
   }
 }
 

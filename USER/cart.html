@@ -158,166 +158,226 @@
   <div class="container" style="max-width:700px;">
 
     <!-- SAVINGS BADGE -->
-    <div style="display:inline-flex;align-items:center;gap:0.4rem;background:var(--orange-light);border:1.5px solid var(--orange);color:var(--orange);font-size:0.8rem;font-weight:700;padding:0.38rem 0.9rem;border-radius:20px;margin-bottom:0.8rem;">
-      🎉 You're saving ₱171 on this order!
-    </div>
+    <div id="savings-badge" style="display:none;align-items:center;gap:0.4rem;background:var(--orange-light);border:1.5px solid var(--orange);color:var(--orange);font-size:0.8rem;font-weight:700;padding:0.38rem 0.9rem;border-radius:20px;margin-bottom:0.8rem;"></div>
 
-    <!-- SELECT ALL -->
+    <!-- SELECT ALL BAR -->
     <div class="cart-sel-bar">
-      <input type="checkbox" class="cbox" id="sel-all" checked>
+      <input type="checkbox" class="cbox" id="sel-all" onchange="selectAll(this.checked)">
       <label class="sel-label" for="sel-all">Select All</label>
-      <span class="del-sel">Delete</span>
+      <span class="del-sel" onclick="deleteSelected()">Delete</span>
     </div>
 
-    <!-- FARM 1: Green Valley Farm -->
-    <div class="farm-group">
-      <div class="farm-hdr">
-        <input type="checkbox" class="cbox" id="f1" checked>
-        <label for="f1" class="farm-hdr-name">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-right:3px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          Green Valley Farm, Labuan
-        </label>
-        <span class="farm-vtag">✓ Verified</span>
-        <a href="#" class="farm-chat" style="margin-left:0.5rem;">Chat</a>
-      </div>
-      <!-- Fresh Carrots -->
-      <div class="ci">
-        <input type="checkbox" class="cbox" checked style="margin-top:0.25rem;">
-        <img class="ci-img" src="https://images.unsplash.com/photo-1447175008436-054170c2e979?w=300" alt="Fresh Carrots">
-        <div class="ci-body">
-          <a href="product-detail.html" class="ci-name">Fresh Organic Carrots</a>
-          <span class="ci-farm">Green Valley Farm, Labuan</span>
-          <span class="ci-flash">🔥 Flash Sale — Limited time only!</span>
-          <div class="ci-price-row">
-            <span class="ci-price">₱195</span>
-            <span class="ci-price-orig">₱220</span>
-            <span class="ci-disc">-11%</span>
-            <span class="ci-unit">/kg</span>
-          </div>
-          <div class="ci-foot">
-            <span class="ci-remove">Remove</span>
-            <div class="qty-s"><span>−</span><span class="qv">2</span><span>+</span></div>
-          </div>
-          <div class="ci-sub">Subtotal: ₱390</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- FARM 2: Sunrise Farm -->
-    <div class="farm-group">
-      <div class="farm-hdr">
-        <input type="checkbox" class="cbox" id="f2" checked>
-        <label for="f2" class="farm-hdr-name">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-right:3px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          Sunrise Farm, Tugbungan
-        </label>
-        <span class="farm-vtag">✓ Verified</span>
-        <a href="#" class="farm-chat" style="margin-left:0.5rem;">Chat</a>
-      </div>
-      <!-- Heirloom Tomatoes -->
-      <div class="ci">
-        <input type="checkbox" class="cbox" checked style="margin-top:0.25rem;">
-        <img class="ci-img" src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=300" alt="Heirloom Tomatoes">
-        <div class="ci-body">
-          <a href="product-detail.html" class="ci-name">Heirloom Tomatoes</a>
-          <span class="ci-farm">Sunrise Farm, Tugbungan</span>
-          <span class="ci-flash">🔥 Flash Sale — 20% off today!</span>
-          <div class="ci-price-row">
-            <span class="ci-price">₱280</span>
-            <span class="ci-price-orig">₱350</span>
-            <span class="ci-disc">-20%</span>
-            <span class="ci-unit">/kg</span>
-          </div>
-          <div class="ci-foot">
-            <span class="ci-remove">Remove</span>
-            <div class="qty-s"><span>−</span><span class="qv">1</span><span>+</span></div>
-          </div>
-          <div class="ci-sub">Subtotal: ₱280</div>
-        </div>
-      </div>
-      <!-- Sweet Watermelon -->
-      <div class="ci">
-        <input type="checkbox" class="cbox" checked style="margin-top:0.25rem;">
-        <img class="ci-img" src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=300" alt="Sweet Watermelon">
-        <div class="ci-body">
-          <a href="product-detail.html" class="ci-name">Sweet Watermelon</a>
-          <span class="ci-farm">Sunrise Farm, Tugbungan</span>
-          <div class="ci-price-row">
-            <span class="ci-price" style="color:var(--green);">₱560</span>
-            <span class="ci-unit">/piece</span>
-          </div>
-          <div class="ci-foot">
-            <span class="ci-remove">Remove</span>
-            <div class="qty-s"><span>−</span><span class="qv">1</span><span>+</span></div>
-          </div>
-          <div class="ci-sub" style="color:var(--green);">Subtotal: ₱560</div>
-        </div>
-      </div>
-    </div>
+    <!-- DYNAMIC CART ITEMS -->
+    <div id="cart-items"></div>
 
     <!-- YOU MIGHT ALSO LIKE -->
     <div class="also-like">
       <h4>🌿 You Might Also Like</h4>
       <div class="al-grid">
-        <div class="al-card">
-          <img class="al-img" src="https://images.unsplash.com/photo-1474440692490-2e83ae13ba29?w=300" alt="Pechay">
-          <div class="al-body">
-            <div class="al-name">Fresh Carrots</div>
-            <div class="al-price">₱45 <span style="font-size:0.65rem;text-decoration:line-through;color:var(--text-light);font-weight:400;">₱53</span></div>
-          </div>
-          <a href="cart.html" class="al-add">+ Add</a>
-        </div>
-        <div class="al-card">
-          <img class="al-img" src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=300" alt="Ginger">
-          <div class="al-body">
-            <div class="al-name">Organic Turmeric</div>
-            <div class="al-price">₱75 <span style="font-size:0.65rem;text-decoration:line-through;color:var(--text-light);font-weight:400;">₱100</span></div>
-          </div>
-          <a href="cart.html" class="al-add">+ Add</a>
-        </div>
-        <div class="al-card">
-          <img class="al-img" src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300" alt="Milk">
-          <div class="al-body">
-            <div class="al-name">Carabao Milk</div>
-            <div class="al-price" style="color:var(--green);">₱120</div>
-          </div>
-          <a href="cart.html" class="al-add">+ Add</a>
-        </div>
-        <div class="al-card">
-          <img class="al-img" src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=300" alt="Lanzones">
-          <div class="al-body">
-            <div class="al-name">Sweet Apples</div>
-            <div class="al-price" style="color:var(--green);">₱120</div>
-          </div>
-          <a href="cart.html" class="al-add">+ Add</a>
-        </div>
+        <div class="al-card"><img class="al-img" src="https://images.unsplash.com/photo-1474440692490-2e83ae13ba29?w=300" alt="Pechay"><div class="al-body"><div class="al-name">Fresh Pechay</div><div class="al-price">₱45</div></div><button class="al-add" onclick="quickAdd({key:\'pechay_bundle\',id:\'pechay\',name:\'Fresh Pechay\',price:45,qty:1,unit:\'per bundle\',farm:\'Green Valley Farm, Labuan\',img:\'https://images.unsplash.com/photo-1474440692490-2e83ae13ba29?w=300\'})">+ Add</button></div>
+        <div class="al-card"><img class="al-img" src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=300" alt="Turmeric"><div class="al-body"><div class="al-name">Organic Turmeric</div><div class="al-price">₱75</div></div><button class="al-add" onclick="quickAdd({key:\'turmeric_250g\',id:\'turmeric\',name:\'Organic Turmeric\',price:75,qty:1,unit:\'per 250g\',farm:\'Taluksangay Spice Farm\',img:\'https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=300\'})">+ Add</button></div>
+        <div class="al-card"><img class="al-img" src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300" alt="Milk"><div class="al-body"><div class="al-name">Carabao Milk</div><div class="al-price" style="color:var(--green);">₱120</div></div><button class="al-add" onclick="quickAdd({key:\'milk_liter\',id:\'carabao-milk\',name:\'Fresh Carabao Milk\',price:120,qty:1,unit:\'per liter\',farm:\'Manenan Dairy\',img:\'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300\'})">+ Add</button></div>
+        <div class="al-card"><img class="al-img" src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=300" alt="Apples"><div class="al-body"><div class="al-name">Sweet Apples</div><div class="al-price" style="color:var(--green);">₱120</div></div><button class="al-add" onclick="quickAdd({key:\'apples_kg\',id:\'apples\',name:\'Sweet Apples\',price:120,qty:1,unit:\'per kg\',farm:\'Pasonanca Fruits\',img:\'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=300\'})">+ Add</button></div>
       </div>
     </div>
-
   </div>
 </div>
 
 <!-- STICKY BOTTOM CHECKOUT BAR -->
 <div class="checkout-bar">
   <div class="co-all-wrap">
-    <input type="checkbox" class="cbox" id="bot-all" checked>
+    <input type="checkbox" class="cbox" id="bot-all" onchange="selectAll(this.checked)">
     <label class="co-all-label" for="bot-all">All</label>
   </div>
   <div class="co-totals">
-    <div class="co-total-label">Total (3 items)</div>
-    <div class="co-total-amt">₱1,139</div>
-    <div class="co-saved">Saved ₱171 🎉</div>
+    <div class="co-total-label">Total</div>
+    <div class="co-total-amt" id="co-total-amt">₱0.00</div>
+    <div class="co-saved" id="co-saved"></div>
   </div>
-  <a href="checkout.html" class="co-btn">Check Out (3)</a>
+  <a href="checkout.html" class="co-btn" id="co-btn">Check Out</a>
 </div>
 
+<div id="fd-toast" style="position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green);color:#fff;padding:0.7rem 1.4rem;border-radius:30px;font-size:0.88rem;font-weight:700;z-index:4000;transition:transform 0.35s,opacity 0.35s;opacity:0;pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.2);"></div>
+
 <script>
-(function(){
-  var t=2*3600+14*60+33;
-  var el=document.getElementById('cd');
-  if(!el)return;
-  setInterval(function(){if(t>0){t--;var h=Math.floor(t/3600),m=Math.floor((t%3600)/60),s=t%60;el.textContent=[h,m,s].map(x=>String(x).padStart(2,'0')).join(':');}},1000);
+const CART_KEY = 'fd_cart';
+
+/* Read cart from localStorage — no hardcoded fallback so real added items always show */
+function getCart() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e) { return []; }
+}
+function saveCart(c) { localStorage.setItem(CART_KEY, JSON.stringify(c)); }
+function peso(v) { return '\u20B1' + Number(v).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+
+let checkedItems = new Set();
+
+function render() {
+  const cart = getCart();
+  /* Auto-select all items on first render */
+  if (checkedItems.size === 0) cart.forEach(i => checkedItems.add(i.key));
+
+  const farms = {};
+  cart.forEach(item => {
+    const f = item.farm || 'Farm';
+    if (!farms[f]) farms[f] = [];
+    farms[f].push(item);
+  });
+
+  const CHAT_MAP = { 'Green Valley Farm, Labuan': 'green-valley', 'Sunrise Farm, Tugbungan': 'sunrise-farm' };
+  const container = document.getElementById('cart-items');
+  container.innerHTML = '';
+
+  if (cart.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--text-light);"><div style="font-size:3rem;">🛒</div><br><b>Your cart is empty</b><br><a href="products.html" style="color:var(--green);font-weight:700;">Browse Products →</a></div>';
+    updateSummary();
+    return;
+  }
+
+  Object.entries(farms).forEach(([farmName, items]) => {
+    const chatId = CHAT_MAP[farmName] || 'green-valley';
+    const fChecked = items.every(i => checkedItems.has(i.key));
+    const g = document.createElement('div');
+    g.className = 'farm-group';
+    g.innerHTML = `<div class="farm-hdr"><input type="checkbox" class="cbox farm-check" ${fChecked ? 'checked' : ''} onchange="onFarmCheck('${farmName}',this.checked)"><label class="farm-hdr-name"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-right:3px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>${farmName}</label><span class="farm-vtag">✓ Verified</span><a href="chat.html?farm=${chatId}" class="farm-chat" style="margin-left:0.5rem;">Chat</a></div>`;
+
+    items.forEach(item => {
+      const isChk = checkedItems.has(item.key);
+      const pColor = item.discount ? 'var(--orange)' : 'var(--green)';
+
+      /* Build variety + unit line shown below the product name */
+      const unitLabel = item.unit ? item.unit : '';
+      const varietyLabel = item.variety ? item.variety : '';
+      const metaParts = [];
+      if (varietyLabel) metaParts.push(varietyLabel);
+      if (unitLabel) metaParts.push(unitLabel);
+      const metaLine = metaParts.length
+        ? `<span class="ci-unit" style="display:block;margin-top:0.1rem;">${metaParts.join(' · ')}</span>`
+        : '';
+
+      const row = document.createElement('div');
+      row.className = 'ci';
+      row.innerHTML = `
+        <input type="checkbox" class="cbox item-check" data-key="${item.key}" ${isChk ? 'checked' : ''} style="margin-top:0.25rem;" onchange="onItemCheck('${item.key}',this.checked)">
+        <img class="ci-img" src="${item.img}" alt="${item.name}">
+        <div class="ci-body">
+          <a href="product-detail.html" class="ci-name">${item.name}</a>
+          <span class="ci-farm">${item.farm}</span>
+          ${metaLine}
+          ${item.flash ? '<span class="ci-flash">🔥 Flash Sale</span>' : ''}
+          <div class="ci-price-row">
+            <span class="ci-price" style="color:${pColor};">${peso(item.price)}</span>
+            ${item.origPrice ? `<span class="ci-price-orig">${peso(item.origPrice)}</span><span class="ci-disc">-${item.discount}%</span>` : ''}
+          </div>
+          <div class="ci-foot">
+            <span class="ci-remove" onclick="removeItem('${item.key}')">Remove</span>
+            <div class="qty-s">
+              <span onclick="changeQty('${item.key}',-1)">−</span>
+              <span class="qv">${item.qty}</span>
+              <span onclick="changeQty('${item.key}',1)">+</span>
+            </div>
+          </div>
+          <div class="ci-sub" style="color:${pColor};">Subtotal: ${peso(item.price * item.qty)}</div>
+        </div>`;
+      g.appendChild(row);
+    });
+    container.appendChild(g);
+  });
+
+  updateSummary();
+  syncMaster();
+}
+
+function onItemCheck(key, checked) {
+  if (checked) checkedItems.add(key); else checkedItems.delete(key);
+  syncMaster(); updateSummary();
+}
+function onFarmCheck(farm, checked) {
+  getCart().filter(i => i.farm === farm).forEach(i => {
+    if (checked) checkedItems.add(i.key); else checkedItems.delete(i.key);
+  });
+  render();
+}
+function syncMaster() {
+  const cart = getCart();
+  const all = cart.length > 0 && cart.every(i => checkedItems.has(i.key));
+  const any = cart.some(i => checkedItems.has(i.key));
+  ['sel-all', 'bot-all'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.checked = all;
+    el.indeterminate = !all && any;
+  });
+}
+function selectAll(checked) {
+  const cart = getCart();
+  checkedItems = new Set(checked ? cart.map(i => i.key) : []);
+  render();
+}
+function deleteSelected() {
+  if (checkedItems.size === 0) { showToast('Select items first.', true); return; }
+  if (!confirm('Remove ' + checkedItems.size + ' item(s)?')) return;
+  let cart = getCart().filter(i => !checkedItems.has(i.key));
+  checkedItems = new Set();
+  saveCart(cart);
+  render();
+  showToast('✓ Items removed.');
+}
+function removeItem(key) {
+  saveCart(getCart().filter(i => i.key !== key));
+  checkedItems.delete(key);
+  render();
+  showToast('✓ Removed.');
+}
+function changeQty(key, delta) {
+  const cart = getCart();
+  const item = cart.find(i => i.key === key);
+  if (item) { item.qty = Math.max(1, Math.min(99, item.qty + delta)); saveCart(cart); render(); }
+}
+function quickAdd(item) {
+  const cart = getCart();
+  const ex = cart.find(i => i.key === item.key);
+  if (ex) ex.qty += 1; else { cart.push(item); checkedItems.add(item.key); }
+  saveCart(cart);
+  render();
+  showToast('✓ ' + item.name + ' added!');
+}
+function updateSummary() {
+  const cart = getCart();
+  const chk = cart.filter(i => checkedItems.has(i.key));
+  const sub = chk.reduce((s, i) => s + i.price * i.qty, 0);
+  const saved = chk.reduce((s, i) => s + ((i.origPrice || i.price) - i.price) * i.qty, 0);
+  const count = chk.reduce((s, i) => s + i.qty, 0);
+  const badge = document.getElementById('savings-badge');
+  if (saved > 0) { badge.style.display = 'inline-flex'; badge.textContent = '🎉 Saving ' + peso(saved) + ' on this order!'; }
+  else badge.style.display = 'none';
+  document.getElementById('co-total-amt').textContent = peso(sub);
+  document.getElementById('co-saved').textContent = saved > 0 ? 'Saved ' + peso(saved) + ' 🎉' : '';
+  document.getElementById('co-btn').textContent = count > 0 ? 'Check Out (' + count + ')' : 'Check Out';
+  document.querySelector('.cart-nav-count').textContent = '(' + cart.length + ')';
+}
+function showToast(msg, warn) {
+  const t = document.getElementById('fd-toast');
+  t.textContent = msg;
+  t.style.background = warn ? 'var(--orange)' : 'var(--green)';
+  t.style.transform = 'translateX(-50%) translateY(0)';
+  t.style.opacity = '1';
+  setTimeout(() => { t.style.transform = 'translateX(-50%) translateY(80px)'; t.style.opacity = '0'; }, 2200);
+}
+
+/* Flash sale countdown */
+(function() {
+  var t = 2 * 3600 + 14 * 60 + 33, el = document.getElementById('cd');
+  if (!el) return;
+  setInterval(function() {
+    if (t > 0) {
+      t--;
+      var h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60), s = t % 60;
+      el.textContent = [h, m, s].map(x => String(x).padStart(2, '0')).join(':');
+    }
+  }, 1000);
 })();
+
+render();
 </script>
 </body>
 </html>

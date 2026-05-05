@@ -173,36 +173,10 @@
       <div class="co-card-hdr">
         <span class="co-card-hdr-title">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-          Order Items (3)
+          Order Items <span id="order-item-count"></span>
         </span>
       </div>
-      <div class="oi">
-        <img class="oi-img" src="https://images.unsplash.com/photo-1447175008436-054170c2e979?w=200" alt="Fresh Organic Carrots">
-        <div class="oi-body">
-          <div class="oi-name">Fresh Organic Carrots</div>
-          <div class="oi-variant">Green Valley Farm · Vitali, Zamboanga</div>
-          <div class="oi-price-row"><span class="oi-price">₱195</span><span class="oi-orig">₱220</span><span class="oi-disc">-11%</span><span style="font-size:0.73rem;color:var(--text-light);">/kg</span></div>
-        </div>
-        <span class="oi-qty">x2</span>
-      </div>
-      <div class="oi">
-        <img class="oi-img" src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200" alt="Heirloom Tomatoes">
-        <div class="oi-body">
-          <div class="oi-name">Heirloom Tomatoes</div>
-          <div class="oi-variant">Sunrise Farm · Tugbungan, Zamboanga</div>
-          <div class="oi-price-row"><span class="oi-price">₱280</span><span class="oi-orig">₱350</span><span class="oi-disc">-20%</span><span style="font-size:0.73rem;color:var(--text-light);">/kg</span></div>
-        </div>
-        <span class="oi-qty">x1</span>
-      </div>
-      <div class="oi">
-        <img class="oi-img" src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=200" alt="Sweet Watermelon">
-        <div class="oi-body">
-          <div class="oi-name">Sweet Watermelon</div>
-          <div class="oi-variant">Sunrise Farm · Tugbungan, Zamboanga</div>
-          <div class="oi-price-row"><span class="oi-price" style="color:var(--green);">₱560</span><span style="font-size:0.73rem;color:var(--text-light);">/piece</span></div>
-        </div>
-        <span class="oi-qty">x1</span>
-      </div>
+      <div id="order-items-list"></div>
     </div>
 
     <!-- ④ SHIPPING OPTION -->
@@ -342,11 +316,7 @@
     NEWBUYER:   { label:'₱100 Off (New)',  type:'flat',    value:100 },
   };
 
-  const DEFAULT_ITEMS = [
-    { id:'carrots',    name:'Fresh Organic Carrots', qty:2, price:195 },
-    { id:'tomatoes',   name:'Heirloom Tomatoes',     qty:1, price:280 },
-    { id:'watermelon', name:'Sweet Watermelon',       qty:1, price:560 },
-  ];
+  const DEFAULT_ITEMS = [];   /* no hardcoded fallback — use real cart */
 
   function subtotal(items) {
     return items.reduce((s, i) => s + i.price * i.qty, 0);
@@ -417,11 +387,48 @@ let state = {
   dropoffCount: 0,
 };
 
-const ITEMS = [
-  { id:'carrots',    name:'Fresh Organic Carrots', qty:2, price:195 },
-  { id:'tomatoes',   name:'Heirloom Tomatoes',     qty:1, price:280 },
-  { id:'watermelon', name:'Sweet Watermelon',       qty:1, price:560 },
-];
+/* ── Load cart items from localStorage (set by products.html) ── */
+const CART_KEY = 'fd_cart';
+function getCartItems() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e) { return []; }
+}
+const ITEMS = getCartItems();
+
+/* ── Render order items in the checkout card ── */
+function renderOrderItems() {
+  const list = document.getElementById('order-items-list');
+  const countEl = document.getElementById('order-item-count');
+  if (!list) return;
+  countEl.textContent = '(' + ITEMS.length + ')';
+  if (ITEMS.length === 0) {
+    list.innerHTML = '<div style="padding:1.2rem 1.1rem;font-size:0.88rem;color:var(--text-light);">No items in cart. <a href="products.html" style="color:var(--green);font-weight:700;">Browse Products →</a></div>';
+    return;
+  }
+  list.innerHTML = ITEMS.map(item => {
+    const pColor = item.discount ? 'var(--orange)' : 'var(--green)';
+    /* Build variant/unit tag shown under the product name */
+    const metaParts = [];
+    if (item.farm) metaParts.push(item.farm);
+    if (item.variety) metaParts.push(item.variety);
+    if (item.unit) metaParts.push(item.unit);
+    const variantLine = metaParts.length
+      ? `<div class="oi-variant">${metaParts.join(' · ')}</div>`
+      : '';
+    return `
+      <div class="oi">
+        <img class="oi-img" src="${item.img || ''}" alt="${item.name}">
+        <div class="oi-body">
+          <div class="oi-name">${item.name}</div>
+          ${variantLine}
+          <div class="oi-price-row">
+            <span class="oi-price" style="color:${pColor};">${FD.fmt.peso(item.price)}</span>
+            ${item.origPrice ? `<span class="oi-orig">${FD.fmt.peso(item.origPrice)}</span><span class="oi-disc">-${item.discount}%</span>` : ''}
+          </div>
+        </div>
+        <span class="oi-qty">x${item.qty}</span>
+      </div>`;
+  }).join('');
+}
 
 function renderSummary() {
   const extraDropoff = state.dropoffs.length * 30;
@@ -597,6 +604,7 @@ function saveCheckoutState() {
 
 /* Load saved state */
 (function() {
+  renderOrderItems();
   const saved = FD.Checkout.get();
   if (saved.voucherCode) {
     state.voucherCode = saved.voucherCode;

@@ -107,22 +107,12 @@
         <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         <span class="cart-count">3</span>
       </a>
-      <div class="notif-wrap">
-        <button class="notif-btn" tabindex="0" aria-label="Notifications">
+      <a href="notifications.html" class="notif-wrap" style="text-decoration:none;" title="Notifications">
+        <button class="notif-btn" aria-label="Notifications">
           <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <span class="notif-badge"></span>
         </button>
-        <div class="notif-dropdown">
-          <div class="notif-header"><h4>Notifications</h4></div>
-          <div class="notif-list">
-            <div class="notif-item"><div class="notif-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="notif-content"><strong>Green Valley Farm</strong><p>Your carrots order is ready for pickup today!</p><span class="notif-time">10 min ago</span></div></div>
-            <div class="notif-item"><div class="notif-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="notif-content"><strong>Sunrise Farm</strong><p>Fresh tomatoes harvested this morning!</p><span class="notif-time">1 hour ago</span></div></div>
-            <div class="notif-item"><div class="notif-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="notif-content"><strong>Beeline Apiary</strong><p>Honey restocked! Get yours while supplies last.</p><span class="notif-time">3 hours ago</span></div></div>
-            <div class="notif-item"><div class="notif-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="notif-content"><strong>Seasonal Alert</strong><p>🥭 Mango season is here! Fresh mangoes from Vitali farms.</p><span class="notif-time">5 hours ago</span></div></div>
-            <div class="notif-item"><div class="notif-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="notif-content"><strong>Coming Soon</strong><p>Lanzones season starts in April from Culianan farms.</p><span class="notif-time">1 day ago</span></div></div>
-          </div>
-        </div>
-      </div>
+      </a>
       <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
     </div>
   </div>
@@ -182,7 +172,7 @@
             <div class="card-farmer-rating"><span class="card-farmer">Green Valley Farm, Labuan</span><span class="shop-rating"><span class="s">★</span> 4.9</span></div>
             <div class="card-price-row"><span class="card-price">₱195</span><span class="card-price-original">₱220</span><span class="card-unit">/kg</span></div>
             <div class="card-btns">
-              <a href="cart.html" class="btn-addcart">🛒 Cart</a>
+              <button class="btn-addcart" onclick="openVariantModal({id:'carrots',name:'Fresh Carrots',price:195,farm:'Green Valley Farm',varieties:[{label:'Small'},{label:'Medium'},{label:'Large'}],units:['per kg','per 100g','per bundle (0.5 kg)'],img:'https://images.unsplash.com/photo-1447175008436-054170c2e979?w=600'})">Cart</button>
               <a href="checkout.html" class="btn-buynow">Buy Now</a>
             </div>
           </div>
@@ -197,7 +187,7 @@
             <div class="card-farmer-rating"><span class="card-farmer">Sunrise Farm, Tugbungan</span><span class="shop-rating"><span class="s">★</span> 4.8</span></div>
             <div class="card-price-row"><span class="card-price">₱280</span><span class="card-price-original">₱350</span><span class="card-unit">/kg</span></div>
             <div class="card-btns">
-              <a href="cart.html" class="btn-addcart">🛒 Cart</a>
+              <button class="btn-addcart" onclick="openVariantModal({id:'tomatoes',name:'Heirloom Tomatoes',price:280,farm:'Sunrise Farm',varieties:[{label:'Small'},{label:'Medium'},{label:'Large'}],units:['per kg','per 100g','per bundle (0.5 kg)'],img:'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=600'})">Cart</button>
               <a href="checkout.html" class="btn-buynow">Buy Now</a>
             </div>
           </div>
@@ -211,7 +201,7 @@
             <div class="card-farmer-rating"><span class="card-farmer">Labuan Greens</span><span class="shop-rating"><span class="s">★</span> 4.7</span></div>
             <div class="card-price-row"><span class="card-price-nodiscount">₱150</span><span class="card-unit">/kg</span></div>
             <div class="card-btns">
-              <a href="cart.html" class="btn-addcart">🛒 Cart</a>
+              <button class="btn-addcart" onclick="openVariantModal({id:'lettuce',name:'Fresh Lettuce',price:150,farm:'Labuan Greens',varieties:[{label:'Small'},{label:'Medium'},{label:'Large'}],units:['per kg','per 100g','per bundle (0.3 kg)'],img:'https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=600'})">Cart</button>
               <a href="checkout.html" class="btn-buynow">Buy Now</a>
             </div>
           </div>
@@ -232,7 +222,7 @@
             <a href="product-detail.html" class="card-title">Saba Bananas</a>
             <div class="card-farmer-rating"><span class="card-farmer">Labuan Plantation</span><span class="shop-rating"><span class="s">★</span> 4.9</span></div>
             <div class="card-price-row"><span class="card-price-nodiscount">₱60</span><span class="card-unit">/kg</span></div>
-            <div class="card-btns"><a href="cart.html" class="btn-addcart">🛒 Cart</a><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
+            <div class="card-btns"><button class="btn-addcart" onclick="openVariantModal({id:'bananas',name:'Saba Bananas',price:60,farm:'Labuan Plantation',units:['per kg','per bundle (1 kg)','per sack (10 kg)'],img:'https://images.unsplash.com/photo-1528825871115-3581a5387919?w=600'})">Cart</button><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
           </div>
         </div>
         <div class="product-card">
@@ -241,7 +231,7 @@
             <a href="product-detail.html" class="card-title">Fresh Papayas</a>
             <div class="card-farmer-rating"><span class="card-farmer">Pasonanca Fruits</span><span class="shop-rating"><span class="s">★</span> 4.7</span></div>
             <div class="card-price-row"><span class="card-price-nodiscount">₱85</span><span class="card-unit">/kg</span></div>
-            <div class="card-btns"><a href="cart.html" class="btn-addcart">🛒 Cart</a><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
+            <div class="card-btns"><button class="btn-addcart" onclick="openVariantModal({id:'papayas',name:'Fresh Papayas',price:85,farm:'Pasonanca Fruits',units:['per kg','per piece'],img:'https://images.unsplash.com/photo-1617112848923-cc2234396a8d?w=600'})">Cart</button><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
           </div>
         </div>
         <div class="product-card">
@@ -250,7 +240,7 @@
             <a href="product-detail.html" class="card-title">Queen Pineapple</a>
             <div class="card-farmer-rating"><span class="card-farmer">Sibuco Tropicals</span><span class="shop-rating"><span class="s">★</span> 4.8</span></div>
             <div class="card-price-row"><span class="card-price-nodiscount">₱75</span><span class="card-unit">/pc</span></div>
-            <div class="card-btns"><a href="cart.html" class="btn-addcart">🛒 Cart</a><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
+            <div class="card-btns"><button class="btn-addcart" onclick="openVariantModal({id:'pineapple',name:'Queen Pineapple',price:75,farm:'Sibuco Tropicals',units:['per piece','per kg','per box (6 pcs)'],img:'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=600'})">Cart</button><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
           </div>
         </div>
       </div>
@@ -269,7 +259,7 @@
             <a href="product-detail.html" class="card-title">Grass-Fed Beef – Sirloin Cut</a>
             <div class="card-farmer-rating"><span class="card-farmer">Manenan Ranch</span><span class="shop-rating"><span class="s">★</span> 4.9</span></div>
             <div class="card-price-row"><span class="card-price-nodiscount">₱480</span><span class="card-unit">/kg</span></div>
-            <div class="card-btns"><a href="cart.html" class="btn-addcart">🛒 Cart</a><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
+            <div class="card-btns"><button class="btn-addcart" onclick="openVariantModal({id:'beef',name:'Grass-Fed Beef Sirloin',price:480,farm:'Manenan Ranch',units:['per kg','per 500g','per 250g'],img:'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600'})">Cart</button><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
           </div>
         </div>
       </div>
@@ -288,7 +278,7 @@
             <a href="product-detail.html" class="card-title">Fresh Carabao Milk</a>
             <div class="card-farmer-rating"><span class="card-farmer">Manenan Dairy</span><span class="shop-rating"><span class="s">★</span> 4.9</span></div>
             <div class="card-price-row"><span class="card-price-nodiscount">₱120</span><span class="card-unit">/liter</span></div>
-            <div class="card-btns"><a href="cart.html" class="btn-addcart">🛒 Cart</a><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
+            <div class="card-btns"><button class="btn-addcart" onclick="openVariantModal({id:'carabao-milk',name:'Fresh Carabao Milk',price:120,farm:'Manenan Dairy',units:['per liter','per 500ml'],img:'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=600'})">Cart</button><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
           </div>
         </div>
         <div class="product-card">
@@ -297,7 +287,7 @@
             <a href="product-detail.html" class="card-title">Artisan Farm Butter</a>
             <div class="card-farmer-rating"><span class="card-farmer">Manenan Dairy</span><span class="shop-rating"><span class="s">★</span> 4.9</span></div>
             <div class="card-price-row"><span class="card-price-nodiscount">₱280</span><span class="card-unit">/200g</span></div>
-            <div class="card-btns"><a href="cart.html" class="btn-addcart">🛒 Cart</a><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
+            <div class="card-btns"><button class="btn-addcart" onclick="openVariantModal({id:'butter',name:'Artisan Farm Butter',price:280,farm:'Manenan Dairy',units:['per 200g','per 100g','per pack (400g)'],img:'https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=600'})">Cart</button><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
           </div>
         </div>
         <div class="product-card">
@@ -306,7 +296,7 @@
             <a href="product-detail.html" class="card-title">Pasteurized Goat Milk</a>
             <div class="card-farmer-rating"><span class="card-farmer">Curuan Livestock Farm</span><span class="shop-rating"><span class="s">★</span> 4.6</span></div>
             <div class="card-price-row"><span class="card-price-nodiscount">₱145</span><span class="card-unit">/liter</span></div>
-            <div class="card-btns"><a href="cart.html" class="btn-addcart">🛒 Cart</a><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
+            <div class="card-btns"><button class="btn-addcart" onclick="openVariantModal({id:'goat-milk',name:'Pasteurized Goat Milk',price:145,farm:'Curuan Livestock Farm',units:['per liter','per 500ml'],img:'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=600'})">Cart</button><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
           </div>
         </div>
       </div>
@@ -325,7 +315,7 @@
             <a href="product-detail.html" class="card-title">Native Chicken Eggs</a>
             <div class="card-farmer-rating"><span class="card-farmer">Ayala Poultry</span><span class="shop-rating"><span class="s">★</span> 5.0</span></div>
             <div class="card-price-row"><span class="card-price-nodiscount">₱12</span><span class="card-unit">/pc</span></div>
-            <div class="card-btns"><a href="cart.html" class="btn-addcart">🛒 Cart</a><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
+            <div class="card-btns"><button class="btn-addcart" onclick="openVariantModal({id:'chicken-eggs',name:'Native Chicken Eggs',price:12,farm:'Ayala Poultry',units:['per piece','per tray (30 pcs)','per pack (12 pcs)'],img:'https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=600'})">Cart</button><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
           </div>
         </div>
         <div class="product-card">
@@ -334,7 +324,7 @@
             <a href="product-detail.html" class="card-title">Itik Eggs (Duck Eggs)</a>
             <div class="card-farmer-rating"><span class="card-farmer">Recodo Duck Farm</span><span class="shop-rating"><span class="s">★</span> 4.8</span></div>
             <div class="card-price-row"><span class="card-price-nodiscount">₱18</span><span class="card-unit">/pc</span></div>
-            <div class="card-btns"><a href="cart.html" class="btn-addcart">🛒 Cart</a><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
+            <div class="card-btns"><button class="btn-addcart" onclick="openVariantModal({id:'duck-eggs',name:'Itik Eggs (Duck Eggs)',price:18,farm:'Recodo Duck Farm',units:['per piece','per tray (30 pcs)','per pack (12 pcs)'],img:'https://images.unsplash.com/photo-1587486913049-53fc88980cfc?w=600'})">Cart</button><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
           </div>
         </div>
       </div>
@@ -353,7 +343,7 @@
             <a href="product-detail.html" class="card-title">Luyang Dilaw (Turmeric)</a>
             <div class="card-farmer-rating"><span class="card-farmer">Taluksangay Spice Farm</span><span class="shop-rating"><span class="s">★</span> 4.9</span></div>
             <div class="card-price-row"><span class="card-price-nodiscount">₱160</span><span class="card-unit">/250g</span></div>
-            <div class="card-btns"><a href="cart.html" class="btn-addcart">🛒 Cart</a><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
+            <div class="card-btns"><button class="btn-addcart" onclick="openVariantModal({id:'turmeric',name:'Luyang Dilaw Turmeric',price:160,farm:'Taluksangay Spice Farm',units:['per 250g','per 100g','per kg'],img:'https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=600'})">Cart</button><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
           </div>
         </div>
         <div class="product-card">
@@ -362,7 +352,7 @@
             <a href="product-detail.html" class="card-title">Sukang Tuba (Coconut Vinegar)</a>
             <div class="card-farmer-rating"><span class="card-farmer">Limpapa Coconut Farm</span><span class="shop-rating"><span class="s">★</span> 4.8</span></div>
             <div class="card-price-row"><span class="card-price-nodiscount">₱120</span><span class="card-unit">/750ml</span></div>
-            <div class="card-btns"><a href="cart.html" class="btn-addcart">🛒 Cart</a><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
+            <div class="card-btns"><button class="btn-addcart" onclick="openVariantModal({id:'vinegar',name:'Sukang Tuba (Coconut Vinegar)',price:120,farm:'Limpapa Coconut Farm',units:['per 750ml','per 500ml','per liter'],img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=600'})">Cart</button><a href="checkout.html" class="btn-buynow">Buy Now</a></div>
           </div>
         </div>
       </div>
@@ -380,5 +370,207 @@
     <div class="footer-bottom"><p>© 2026 FarmDirect Zamboanga. All rights reserved.</p></div>
   </div>
 </footer>
+<!-- ═══════════ VARIANT PICKER MODAL ═══════════ -->
+<div id="variant-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:3000;align-items:flex-end;justify-content:center;" onclick="closeVariantModal(event)">
+  <div id="variant-modal" style="background:#fff;border-radius:20px 20px 0 0;width:100%;max-width:540px;padding:1.5rem 1.4rem 2rem;transform:translateY(100%);transition:transform 0.35s cubic-bezier(.32,.72,0,1);max-height:92vh;overflow-y:auto;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+      <h2 style="font-family:var(--font-display);font-size:1.15rem;font-weight:700;">Add to Cart</h2>
+      <button onclick="closeVariantModal()" style="background:none;border:none;cursor:pointer;color:var(--text-light);font-size:1.4rem;line-height:1;">✕</button>
+    </div>
+    <!-- Product preview row -->
+    <div style="display:flex;gap:1rem;align-items:center;background:var(--cream);border-radius:12px;padding:0.9rem;margin-bottom:1.2rem;">
+      <img id="vm-img" src="" alt="" style="width:72px;height:72px;border-radius:10px;object-fit:cover;flex-shrink:0;border:1.5px solid var(--border);">
+      <div>
+        <div id="vm-name" style="font-weight:700;font-size:0.95rem;"></div>
+        <div id="vm-farm" style="font-size:0.78rem;color:var(--text-light);margin-top:0.1rem;"></div>
+        <div id="vm-price" style="font-size:1.1rem;font-weight:800;color:var(--orange);margin-top:0.3rem;"></div>
+      </div>
+    </div>
+
+    <!-- Variety (size) selector — only shown when product has varieties -->
+    <div id="vm-variety-wrap" style="display:none;margin-bottom:1.2rem;">
+      <div style="font-size:0.85rem;font-weight:700;margin-bottom:0.6rem;color:var(--text);">Variety <span style="color:var(--red);">*</span></div>
+      <div id="vm-varieties" style="display:flex;flex-wrap:wrap;gap:0.4rem;"></div>
+    </div>
+
+    <!-- Unit of Measurement -->
+    <div style="margin-bottom:1.2rem;">
+      <div style="font-size:0.85rem;font-weight:700;margin-bottom:0.6rem;color:var(--text);">Unit of Measurement <span style="color:var(--red);">*</span></div>
+      <div id="vm-units" style="display:flex;flex-wrap:wrap;gap:0.4rem;"></div>
+    </div>
+
+    <!-- Quantity -->
+    <div style="margin-bottom:1.4rem;">
+      <div style="font-size:0.85rem;font-weight:700;margin-bottom:0.6rem;color:var(--text);">Quantity</div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <div style="display:flex;align-items:center;border:2px solid var(--border);border-radius:10px;overflow:hidden;background:var(--cream);">
+          <button onclick="changeVmQty(-1)" style="width:40px;height:40px;border:none;background:none;font-size:1.2rem;font-weight:700;cursor:pointer;color:var(--text-mid);">−</button>
+          <span id="vm-qty" style="min-width:40px;text-align:center;font-size:1rem;font-weight:700;">1</span>
+          <button onclick="changeVmQty(1)" style="width:40px;height:40px;border:none;background:none;font-size:1.2rem;font-weight:700;cursor:pointer;color:var(--text-mid);">+</button>
+        </div>
+        <span style="font-size:0.83rem;color:var(--text-light);" id="vm-stock">In stock</span>
+      </div>
+    </div>
+
+    <!-- Subtotal -->
+    <div style="display:flex;align-items:center;justify-content:space-between;background:var(--green-light);border-radius:10px;padding:0.75rem 1rem;margin-bottom:1.2rem;">
+      <span style="font-size:0.88rem;font-weight:600;color:var(--green);">Subtotal</span>
+      <span id="vm-subtotal" style="font-size:1.1rem;font-weight:800;color:var(--green);">₱0.00</span>
+    </div>
+
+    <!-- Buttons -->
+    <div style="display:flex;gap:0.75rem;">
+      <button id="vm-cart-btn" onclick="confirmAddToCart()" style="flex:1;background:var(--green-light);color:var(--green);border:2px solid var(--green);border-radius:12px;padding:0.85rem;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.2s;">
+        🛒 Add to Cart
+      </button>
+      <button onclick="confirmBuyNow()" style="flex:1;background:var(--green);color:#fff;border:2px solid var(--green);border-radius:12px;padding:0.85rem;font-size:0.95rem;font-weight:700;cursor:pointer;transition:opacity 0.2s;">
+        Buy Now →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div id="toast" style="position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green);color:#fff;padding:0.75rem 1.4rem;border-radius:30px;font-size:0.9rem;font-weight:700;z-index:4000;transition:transform 0.35s,opacity 0.35s;opacity:0;pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
+  ✓ Added to cart!
+</div>
+
+<script>
+/* ── FarmDirect Cart (localStorage) ── */
+const CART_KEY = 'fd_cart';
+function getCart() { try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e) { return []; } }
+function saveCart(c) { localStorage.setItem(CART_KEY, JSON.stringify(c)); updateCartBadge(); }
+function updateCartBadge() {
+  const total = getCart().reduce((s, i) => s + (i.qty || 1), 0);
+  document.querySelectorAll('.cart-count').forEach(el => el.textContent = total || 0);
+}
+updateCartBadge();
+
+/* ── Variant Modal State ── */
+let vmProduct = null;
+let vmUnit = null;
+let vmVariety = null;
+let vmQty = 1;
+
+function openVariantModal(product) {
+  vmProduct = product;
+  vmQty = 1;
+  vmUnit = product.units[0];
+  vmVariety = product.varieties ? product.varieties[0].label : null;
+
+  document.getElementById('vm-img').src = product.img;
+  document.getElementById('vm-name').textContent = product.name;
+  document.getElementById('vm-farm').textContent = product.farm || '';
+  document.getElementById('vm-qty').textContent = 1;
+  updateVmPrice();
+
+  // Render variety chips (if product has varieties)
+  const varietyWrap = document.getElementById('vm-variety-wrap');
+  const varietyContainer = document.getElementById('vm-varieties');
+  if (product.varieties && product.varieties.length) {
+    varietyWrap.style.display = 'block';
+    varietyContainer.innerHTML = product.varieties.map((v, i) => `
+      <button class="vm-variety-btn ${i===0?'selected':''}" onclick="selectVariety(this, '${v.label}')"
+        style="border:2px solid ${i===0?'var(--green)':'var(--border)'};background:${i===0?'var(--green-light)':'var(--white)'};border-radius:8px;padding:0.35rem 0.75rem;cursor:pointer;font-size:0.78rem;font-weight:700;color:${i===0?'var(--green)':'var(--text-mid)'};font-family:var(--font-body);transition:all 0.18s;white-space:nowrap;">
+        ${v.label}${v.kg ? ' <span style="font-weight:400;font-size:0.73rem;">('+v.kg+')</span>' : ''}
+      </button>`).join('');
+  } else {
+    varietyWrap.style.display = 'none';
+    varietyContainer.innerHTML = '';
+  }
+
+  // Render unit chips — no emojis, compact pill style
+  const container = document.getElementById('vm-units');
+  container.innerHTML = product.units.map((u, i) => `
+    <button class="vm-unit-btn ${i===0?'selected':''}" onclick="selectUnit(this, '${u}')"
+      style="border:2px solid ${i===0?'var(--green)':'var(--border)'};background:${i===0?'var(--green-light)':'var(--white)'};border-radius:8px;padding:0.35rem 0.75rem;cursor:pointer;font-size:0.78rem;font-weight:700;color:${i===0?'var(--green)':'var(--text-mid)'};font-family:var(--font-body);transition:all 0.18s;white-space:nowrap;">
+      ${u}
+    </button>`).join('');
+
+  const overlay = document.getElementById('variant-overlay');
+  overlay.style.display = 'flex';
+  requestAnimationFrame(() => {
+    overlay.style.opacity = '1';
+    document.getElementById('variant-modal').style.transform = 'translateY(0)';
+  });
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVariantModal(e) {
+  if (e && e.target !== document.getElementById('variant-overlay')) return;
+  const modal = document.getElementById('variant-modal');
+  const overlay = document.getElementById('variant-overlay');
+  modal.style.transform = 'translateY(100%)';
+  setTimeout(() => { overlay.style.display = 'none'; }, 350);
+  document.body.style.overflow = '';
+}
+
+function selectVariety(btn, variety) {
+  vmVariety = variety;
+  document.querySelectorAll('.vm-variety-btn').forEach(b => {
+    b.style.borderColor = 'var(--border)';
+    b.style.background = 'var(--white)';
+    b.style.color = 'var(--text-mid)';
+    b.classList.remove('selected');
+  });
+  btn.style.borderColor = 'var(--green)';
+  btn.style.background = 'var(--green-light)';
+  btn.style.color = 'var(--green)';
+  btn.classList.add('selected');
+}
+
+function selectUnit(btn, unit) {
+  vmUnit = unit;
+  document.querySelectorAll('.vm-unit-btn').forEach(b => {
+    b.style.borderColor = 'var(--border)';
+    b.style.background = 'var(--white)';
+    b.style.color = 'var(--text-mid)';
+    b.classList.remove('selected');
+  });
+  btn.style.borderColor = 'var(--green)';
+  btn.style.background = 'var(--green-light)';
+  btn.style.color = 'var(--green)';
+  btn.classList.add('selected');
+}
+
+function changeVmQty(delta) {
+  vmQty = Math.max(1, Math.min(99, vmQty + delta));
+  document.getElementById('vm-qty').textContent = vmQty;
+  updateVmPrice();
+}
+
+function updateVmPrice() {
+  if (!vmProduct) return;
+  document.getElementById('vm-price').textContent = '₱' + vmProduct.price.toFixed(2);
+  document.getElementById('vm-subtotal').textContent = '₱' + (vmProduct.price * vmQty).toFixed(2);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.transform = 'translateX(-50%) translateY(0)';
+  t.style.opacity = '1';
+  setTimeout(() => { t.style.transform = 'translateX(-50%) translateY(80px)'; t.style.opacity = '0'; }, 2200);
+}
+
+function confirmAddToCart() {
+  if (!vmProduct || !vmUnit) { alert('Please select a unit.'); return; }
+  if (vmProduct.varieties && vmProduct.varieties.length && !vmVariety) { alert('Please select a variety.'); return; }
+  const cart = getCart();
+  const key = vmProduct.id + '_' + vmUnit + (vmVariety ? '_' + vmVariety : '');
+  const existing = cart.find(i => i.key === key);
+  const displayName = vmProduct.name + (vmVariety ? ' (' + vmVariety + ')' : '');
+  if (existing) { existing.qty += vmQty; }
+  else { cart.push({ key, id: vmProduct.id, name: displayName, price: vmProduct.price, qty: vmQty, unit: vmUnit, variety: vmVariety, farm: vmProduct.farm, img: vmProduct.img }); }
+  saveCart(cart);
+  closeVariantModal();
+  showToast('✓ ' + displayName + ' added to cart!');
+}
+
+function confirmBuyNow() {
+  confirmAddToCart();
+  setTimeout(() => window.location.href = 'cart.html', 300);
+}
+</script>
 </body>
 </html>
