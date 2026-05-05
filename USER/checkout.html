@@ -6,133 +6,106 @@
 <title>Checkout – FarmDirect Zamboanga</title>
 <link rel="stylesheet" href="style.css">
 <style>
-/* Checkout page uses same cart-style navbar */
-.cart-navbar {
-  position:fixed; top:0; left:0; right:0; z-index:1000;
-  background:var(--green); height:var(--nav-h);
-  box-shadow:0 2px 16px rgba(0,0,0,0.18);
-}
-.cart-nav-inner {
-  max-width:1200px; margin:0 auto; padding:0 1.2rem;
-  height:100%; display:flex; align-items:center; gap:0.9rem;
-}
-.cart-nav-back { color:#fff; display:flex; align-items:center; flex-shrink:0; }
-.cart-nav-title {
-  font-family:var(--font-display); font-size:1.15rem; font-weight:700;
-  color:#fff; flex:1;
-}
-
-/* Checkout body */
-.co-wrap { padding: calc(var(--nav-h) + 1rem) 0 6rem; min-height:100vh; }
-.co-inner { max-width:700px; margin:0 auto; padding:0 1.2rem; display:flex; flex-direction:column; gap:0.7rem; }
-
-/* Section card */
-.co-card { background:var(--white); border-radius:var(--radius); border:1.5px solid var(--border); overflow:hidden; }
-.co-card-hdr { display:flex; align-items:center; justify-content:space-between; padding:0.85rem 1.1rem; border-bottom:1px solid var(--border); background:var(--cream); }
-.co-card-hdr-title { font-size:0.92rem; font-weight:700; color:var(--text); display:flex; align-items:center; gap:0.5rem; }
-.co-card-hdr-action { font-size:0.8rem; color:var(--green); font-weight:700; cursor:pointer; }
-
-/* Address block */
+.cart-navbar { position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--green);height:var(--nav-h);box-shadow:0 2px 16px rgba(0,0,0,0.18); }
+.cart-nav-inner { max-width:1200px;margin:0 auto;padding:0 1.2rem;height:100%;display:flex;align-items:center;gap:0.9rem; }
+.cart-nav-back { color:#fff;display:flex;align-items:center;flex-shrink:0; }
+.cart-nav-title { font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:#fff;flex:1; }
+.co-wrap { padding:calc(var(--nav-h) + 1rem) 0 6rem;min-height:100vh; }
+.co-inner { max-width:700px;margin:0 auto;padding:0 1.2rem;display:flex;flex-direction:column;gap:0.7rem; }
+.co-card { background:var(--white);border-radius:var(--radius);border:1.5px solid var(--border);overflow:hidden; }
+.co-card-hdr { display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1.1rem;border-bottom:1px solid var(--border);background:var(--cream); }
+.co-card-hdr-title { font-size:0.92rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:0.5rem; }
+.co-card-hdr-action { font-size:0.8rem;color:var(--green);font-weight:700;cursor:pointer;background:none;border:none; }
 .addr-block { padding:1rem 1.1rem; }
-.addr-name { font-size:0.97rem; font-weight:700; margin-bottom:0.15rem; }
-.addr-phone { font-size:0.83rem; color:var(--text-mid); margin-bottom:0.2rem; }
-.addr-full { font-size:0.86rem; color:var(--text-mid); line-height:1.5; }
-.addr-tag { display:inline-block; background:var(--green-light); color:var(--green); font-size:0.67rem; font-weight:700; padding:0.1rem 0.45rem; border-radius:4px; margin-left:0.4rem; }
-
-/* Address form (shown if no address) */
-.addr-form-toggle { display:none; padding:1rem 1.1rem; }
+.addr-name { font-size:0.97rem;font-weight:700;margin-bottom:0.15rem; }
+.addr-phone { font-size:0.83rem;color:var(--text-mid);margin-bottom:0.2rem; }
+.addr-full { font-size:0.86rem;color:var(--text-mid);line-height:1.5; }
+.addr-tag { display:inline-block;background:var(--green-light);color:var(--green);font-size:0.67rem;font-weight:700;padding:0.1rem 0.45rem;border-radius:4px;margin-left:0.4rem; }
+.addr-form-toggle { display:none;padding:1rem 1.1rem; }
 .addr-form-toggle.show { display:block; }
-
-/* Order item row */
-.oi { display:flex; gap:0.75rem; padding:0.85rem 1.1rem; border-bottom:1px solid var(--border); align-items:center; }
+.addr-form-grid { display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-top:0.7rem; }
+.af-group { display:flex;flex-direction:column;gap:0.35rem; }
+.af-group.full { grid-column:1/-1; }
+.af-group label { font-size:0.83rem;font-weight:600;color:var(--text-mid); }
+.af-group input,.af-group textarea,.af-group select { padding:0.65rem 0.9rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;background:var(--cream);color:var(--text);transition:border-color 0.2s; }
+.af-group input:focus,.af-group textarea:focus { border-color:var(--green); }
+.af-save-btn { background:var(--green);color:#fff;border:none;padding:0.65rem 1.2rem;border-radius:var(--radius-sm);font-size:0.88rem;font-weight:700;cursor:pointer;margin-top:0.5rem;display:inline-block; }
+.oi { display:flex;gap:0.75rem;padding:0.85rem 1.1rem;border-bottom:1px solid var(--border);align-items:center; }
 .oi:last-child { border-bottom:none; }
-.oi-img { width:64px; height:64px; object-fit:cover; border-radius:var(--radius-sm); flex-shrink:0; border:1.5px solid var(--border); }
-.oi-body { flex:1; min-width:0; }
-.oi-name { font-size:0.88rem; font-weight:600; color:var(--text); line-height:1.3; margin-bottom:0.18rem; }
-.oi-variant { font-size:0.75rem; color:var(--text-light); }
-.oi-price-row { display:flex; align-items:center; gap:0.4rem; margin-top:0.2rem; }
-.oi-price { font-size:0.98rem; font-weight:800; color:var(--orange); }
-.oi-orig { font-size:0.73rem; color:var(--text-light); text-decoration:line-through; }
-.oi-disc { background:var(--orange); color:#fff; font-size:0.6rem; font-weight:700; padding:0.07rem 0.3rem; border-radius:3px; }
-.oi-qty { font-size:0.78rem; color:var(--text-light); flex-shrink:0; }
-
-/* Shipping option */
-.ship-opts { padding:0.6rem 1.1rem; display:flex; flex-direction:column; gap:0.5rem; }
-.ship-opt { display:flex; align-items:center; gap:0.75rem; padding:0.75rem 0.9rem; border:2px solid var(--border); border-radius:10px; cursor:pointer; transition:border-color 0.2s, background 0.2s; }
-.ship-opt.selected { border-color:var(--green); background:var(--green-light); }
-.ship-radio { width:17px; height:17px; flex-shrink:0; accent-color:var(--green); }
+.oi-img { width:64px;height:64px;object-fit:cover;border-radius:var(--radius-sm);flex-shrink:0;border:1.5px solid var(--border); }
+.oi-body { flex:1;min-width:0; }
+.oi-name { font-size:0.88rem;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:0.18rem; }
+.oi-variant { font-size:0.75rem;color:var(--text-light); }
+.oi-price-row { display:flex;align-items:center;gap:0.4rem;margin-top:0.2rem; }
+.oi-price { font-size:0.98rem;font-weight:800;color:var(--orange); }
+.oi-orig { font-size:0.73rem;color:var(--text-light);text-decoration:line-through; }
+.oi-disc { background:var(--orange);color:#fff;font-size:0.6rem;font-weight:700;padding:0.07rem 0.3rem;border-radius:3px; }
+.oi-qty { font-size:0.78rem;color:var(--text-light);flex-shrink:0; }
+.ship-opts { padding:0.6rem 1.1rem;display:flex;flex-direction:column;gap:0.5rem; }
+.ship-opt { display:flex;align-items:center;gap:0.75rem;padding:0.75rem 0.9rem;border:2px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color 0.2s,background 0.2s; }
+.ship-opt.selected { border-color:var(--green);background:var(--green-light); }
+.ship-radio { width:17px;height:17px;flex-shrink:0;accent-color:var(--green); }
 .ship-info { flex:1; }
-.ship-name { font-size:0.9rem; font-weight:700; color:var(--text); }
-.ship-desc { font-size:0.76rem; color:var(--text-light); margin-top:0.1rem; }
-.ship-price { font-size:0.95rem; font-weight:800; color:var(--green); flex-shrink:0; }
-.ship-free { color:var(--green-bright); font-weight:800; }
-
-/* Voucher section */
-.voucher-row { display:flex; align-items:center; justify-content:space-between; padding:0.9rem 1.1rem; }
-.voucher-left { display:flex; align-items:center; gap:0.6rem; }
-.voucher-icon { font-size:1.3rem; }
-.voucher-text { font-size:0.88rem; font-weight:700; color:var(--text); }
-.voucher-sub { font-size:0.75rem; color:var(--orange); font-weight:600; }
-.voucher-arrow { color:var(--text-light); }
-
-/* Payment method */
-.pay-row { display:flex; align-items:center; gap:0.75rem; padding:0.9rem 1.1rem; }
-.pay-icon-big { font-size:1.5rem; flex-shrink:0; }
+.ship-name { font-size:0.9rem;font-weight:700;color:var(--text); }
+.ship-desc { font-size:0.76rem;color:var(--text-light);margin-top:0.1rem; }
+.ship-price { font-size:0.95rem;font-weight:800;color:var(--green);flex-shrink:0; }
+.ship-free { color:var(--green-bright);font-weight:800; }
+.pay-row { display:flex;align-items:center;gap:0.75rem;padding:0.9rem 1.1rem; }
+.pay-icon-big { font-size:1.5rem;flex-shrink:0; }
 .pay-details { flex:1; }
-.pay-name { font-size:0.9rem; font-weight:700; }
-.pay-sub { font-size:0.75rem; color:var(--text-light); }
-
-/* Order summary */
+.pay-name { font-size:0.9rem;font-weight:700; }
+.pay-sub { font-size:0.75rem;color:var(--text-light); }
 .summary-rows { padding:0.5rem 1.1rem 1rem; }
-.srow { display:flex; justify-content:space-between; padding:0.45rem 0; font-size:0.88rem; color:var(--text-mid); }
-.srow.disc { color:var(--orange); font-weight:600; }
-.srow.total { font-size:1.05rem; font-weight:800; color:var(--text); border-top:2px solid var(--border); margin-top:0.4rem; padding-top:0.7rem; }
+.srow { display:flex;justify-content:space-between;padding:0.45rem 0;font-size:0.88rem;color:var(--text-mid); }
+.srow.disc { color:var(--orange);font-weight:600; }
+.srow.vat-row { color:var(--text-light);font-size:0.82rem; }
+.srow.total { font-size:1.05rem;font-weight:800;color:var(--text);border-top:2px solid var(--border);margin-top:0.4rem;padding-top:0.7rem; }
 .srow.total span:last-child { color:var(--orange); }
-
-/* Sticky place-order bar */
-.place-order-bar {
-  position:fixed; bottom:0; left:0; right:0; z-index:200;
-  background:var(--white); border-top:2px solid var(--border);
-  padding:0.75rem 1.2rem; display:flex; align-items:center; gap:1rem;
-  box-shadow:0 -4px 20px rgba(0,0,0,0.1);
-}
+.place-order-bar { position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--white);border-top:2px solid var(--border);padding:0.75rem 1.2rem;display:flex;align-items:center;gap:1rem;box-shadow:0 -4px 20px rgba(0,0,0,0.1); }
 .po-totals { flex:1; }
-.po-label { font-size:0.72rem; color:var(--text-light); }
-.po-amt { font-size:1.15rem; font-weight:800; color:var(--orange); }
-.po-saved { font-size:0.7rem; color:var(--orange); font-weight:600; }
-.po-btn {
-  background:var(--green); color:#fff; border:none; border-radius:10px;
-  padding:0.75rem 1.6rem; font-size:0.92rem; font-weight:700; cursor:pointer;
-  transition:background 0.2s; white-space:nowrap; text-decoration:none;
-  display:inline-flex; align-items:center; flex-shrink:0;
-}
+.po-label { font-size:0.72rem;color:var(--text-light); }
+.po-amt { font-size:1.15rem;font-weight:800;color:var(--orange); }
+.po-saved { font-size:0.7rem;color:var(--orange);font-weight:600; }
+.po-btn { background:var(--green);color:#fff;border:none;border-radius:10px;padding:0.75rem 1.6rem;font-size:0.92rem;font-weight:700;cursor:pointer;transition:background 0.2s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;flex-shrink:0; }
 .po-btn:hover { background:var(--green-mid); }
 
-/* Address form fields */
-.addr-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin-top:0.7rem; }
-.af-group { display:flex; flex-direction:column; gap:0.35rem; }
-.af-group.full { grid-column:1/-1; }
-.af-group label { font-size:0.83rem; font-weight:600; color:var(--text-mid); }
-.af-group input, .af-group textarea, .af-group select {
-  padding:0.65rem 0.9rem; border:2px solid var(--border); border-radius:var(--radius-sm);
-  font-size:0.9rem; background:var(--cream); color:var(--text);
-  transition:border-color 0.2s;
-}
-.af-group input:focus, .af-group textarea:focus { border-color:var(--green); }
-.af-save-btn {
-  background:var(--green); color:#fff; border:none; padding:0.65rem 1.2rem;
-  border-radius:var(--radius-sm); font-size:0.88rem; font-weight:700; cursor:pointer;
-  margin-top:0.5rem; display:inline-block;
-}
+/* Multi-dropoff */
+.dropoff-section { padding:0.8rem 1.1rem; }
+.dropoff-point { background:var(--cream);border:1.5px solid var(--border);border-radius:10px;padding:0.9rem;margin-bottom:0.7rem;position:relative; }
+.dropoff-point-label { font-size:0.78rem;font-weight:700;color:var(--green);margin-bottom:0.5rem; }
+.dropoff-remove { position:absolute;top:0.6rem;right:0.6rem;background:none;border:none;color:var(--text-light);cursor:pointer;font-size:1rem;line-height:1; }
+.dropoff-remove:hover { color:var(--red); }
+.add-dropoff-btn { display:flex;align-items:center;gap:0.5rem;background:none;border:2px dashed var(--border);border-radius:10px;padding:0.75rem 1rem;font-size:0.88rem;font-weight:600;color:var(--green);cursor:pointer;width:100%;justify-content:center;transition:border-color 0.2s,background 0.2s; }
+.add-dropoff-btn:hover { border-color:var(--green);background:var(--green-light); }
+
+/* Special discount */
+.special-disc-section { padding:0.8rem 1.1rem; }
+.special-disc-title { font-size:0.84rem;font-weight:700;color:var(--text);margin-bottom:0.6rem; }
+.special-disc-opts { display:flex;gap:0.6rem;flex-wrap:wrap; }
+.special-disc-btn { border:2px solid var(--border);border-radius:8px;padding:0.55rem 1rem;font-size:0.83rem;font-weight:600;cursor:pointer;background:var(--white);color:var(--text-mid);transition:all 0.2s; }
+.special-disc-btn.active { border-color:var(--green);background:var(--green-light);color:var(--green); }
+.special-disc-note { font-size:0.75rem;color:var(--text-light);margin-top:0.5rem; }
+.upload-id-row { display:flex;align-items:center;gap:0.6rem;margin-top:0.6rem;display:none; }
+.upload-id-row.show { display:flex; }
+.upload-id-btn { background:var(--cream-dark);border:1.5px solid var(--border);border-radius:6px;padding:0.4rem 0.8rem;font-size:0.8rem;font-weight:600;cursor:pointer; }
+
+/* Voucher */
+.voucher-input-row { display:flex;gap:0.5rem;padding:0.8rem 1.1rem;border-top:1px solid var(--border); }
+.voucher-input-row input { flex:1;padding:0.6rem 0.9rem;border:2px solid var(--border);border-radius:8px;font-size:0.88rem;background:var(--cream);transition:border-color 0.2s; }
+.voucher-input-row input:focus { border-color:var(--green); }
+.voucher-apply-btn { background:var(--green);color:#fff;border:none;border-radius:8px;padding:0.6rem 1rem;font-size:0.85rem;font-weight:700;cursor:pointer; }
+.voucher-status { padding:0 1.1rem 0.8rem;font-size:0.82rem;font-weight:600; }
+.voucher-status.ok { color:var(--green); }
+.voucher-status.err { color:var(--red); }
 
 @media(max-width:600px) {
   .addr-form-grid { grid-template-columns:1fr; }
+  .special-disc-opts { flex-direction:column; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="cart-navbar">
   <div class="cart-nav-inner">
     <a href="cart.html" class="cart-nav-back" title="Back">
@@ -142,7 +115,6 @@
   </div>
 </nav>
 
-<!-- CHECKOUT BODY -->
 <div class="co-wrap">
   <div class="co-inner">
 
@@ -153,92 +125,75 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Delivery Address
         </span>
-        <span class="co-card-hdr-action" onclick="toggleAddrForm()">Change</span>
+        <button class="co-card-hdr-action" onclick="toggleAddrForm()">Change</button>
       </div>
-
-      <!-- SAVED ADDRESS (shown by default — hide this when no address) -->
       <div class="addr-block" id="saved-addr">
         <div class="addr-name">Juan dela Cruz <span class="addr-tag">Home</span></div>
         <div class="addr-phone">+63 912 345 6789</div>
-        <div class="addr-full">123 Rizal St., Brgy. Tetuan, Zamboanga City 7000, Zamboanga del Sur</div>
+        <div class="addr-full">123 Rizal St., Brgy. Tetuan, Zamboanga City 7000</div>
       </div>
-
-      <!-- ADDRESS FORM (hidden by default, shown when no address or "Change" is tapped) -->
       <div class="addr-form-toggle" id="addr-form">
-        <p style="font-size:0.85rem;color:var(--text-mid);margin-bottom:0.3rem;">Enter your delivery address:</p>
+        <p style="font-size:0.83rem;color:var(--text-light);margin-bottom:0.6rem;">Edit your primary delivery address</p>
         <div class="addr-form-grid">
-          <div class="af-group"><label>First Name *</label><input type="text" placeholder="Juan"></div>
-          <div class="af-group"><label>Last Name *</label><input type="text" placeholder="dela Cruz"></div>
-          <div class="af-group full"><label>Phone Number *</label>
-            <div style="display:flex;border:2px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;background:var(--cream);">
-              <span style="display:flex;align-items:center;padding:0 0.7rem;background:var(--cream-dark);border-right:2px solid var(--border);font-size:0.9rem;font-weight:600;color:var(--text-mid);">+63</span>
-              <input type="tel" placeholder="912 345 6789" style="flex:1;border:none!important;background:transparent!important;padding:0.65rem 0.9rem;">
-            </div>
-          </div>
-          <div class="af-group full"><label>Street Address *</label><input type="text" placeholder="House No., Street, Barangay"></div>
-          <div class="af-group"><label>City *</label><input type="text" value="Zamboanga City"></div>
-          <div class="af-group"><label>ZIP Code</label><input type="text" placeholder="7000"></div>
-          <div class="af-group full"><label>Delivery Notes (optional)</label><textarea rows="2" placeholder="e.g. Leave at gate, call on arrival…"></textarea></div>
+          <div class="af-group"><label>Full Name</label><input id="af-name" type="text" placeholder="Juan dela Cruz"></div>
+          <div class="af-group"><label>Phone</label><input id="af-phone" type="tel" placeholder="+63 912 345 6789"></div>
+          <div class="af-group full"><label>Street Address</label><input id="af-street" type="text" placeholder="123 Rizal St."></div>
+          <div class="af-group"><label>Barangay</label><input id="af-brgy" type="text" placeholder="Brgy. Tetuan"></div>
+          <div class="af-group"><label>City / Municipality</label><input id="af-city" type="text" value="Zamboanga City"></div>
+          <div class="af-group"><label>ZIP Code</label><input id="af-zip" type="text" placeholder="7000"></div>
+          <div class="af-group full"><label>Landmark (optional)</label><input id="af-landmark" type="text" placeholder="Near SM City Zamboanga"></div>
         </div>
         <button class="af-save-btn" onclick="saveAddress()">Save Address</button>
       </div>
     </div>
 
-    <!-- ② ORDER ITEMS -->
+    <!-- ② MULTI-DROPOFF POINTS (optional) -->
     <div class="co-card">
       <div class="co-card-hdr">
         <span class="co-card-hdr-title">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          Order Items (3)
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          Multiple Drop-off Points
+          <span style="background:var(--green-light);color:var(--green);font-size:0.65rem;font-weight:700;padding:0.1rem 0.45rem;border-radius:4px;">Optional</span>
         </span>
       </div>
-      <div class="oi">
-        <img class="oi-img" src="https://images.unsplash.com/photo-1447175008436-054170c2e979?w=200" alt="Carrots">
-        <div class="oi-body">
-          <div class="oi-name">Fresh Organic Carrots</div>
-          <div class="oi-variant">Green Valley Farm, Labuan</div>
-          <div class="oi-price-row"><span class="oi-price">₱195</span><span class="oi-orig">₱220</span><span class="oi-disc">-11%</span><span style="font-size:0.73rem;color:var(--text-light);">/kg</span></div>
-        </div>
-        <span class="oi-qty">x2</span>
+      <div class="dropoff-section" id="dropoff-list">
+        <!-- Extra drop-off points rendered by JS here -->
       </div>
-      <div class="oi">
-        <img class="oi-img" src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200" alt="Tomatoes">
-        <div class="oi-body">
-          <div class="oi-name">Heirloom Tomatoes</div>
-          <div class="oi-variant">Sunrise Farm, Tugbungan</div>
-          <div class="oi-price-row"><span class="oi-price">₱280</span><span class="oi-orig">₱350</span><span class="oi-disc">-20%</span><span style="font-size:0.73rem;color:var(--text-light);">/kg</span></div>
-        </div>
-        <span class="oi-qty">x1</span>
-      </div>
-      <div class="oi">
-        <img class="oi-img" src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=200" alt="Watermelon">
-        <div class="oi-body">
-          <div class="oi-name">Sweet Watermelon</div>
-          <div class="oi-variant">Sunrise Farm, Tugbungan</div>
-          <div class="oi-price-row"><span class="oi-price" style="color:var(--green);">₱560</span><span style="font-size:0.73rem;color:var(--text-light);">/piece</span></div>
-        </div>
-        <span class="oi-qty">x1</span>
+      <div style="padding:0 1.1rem 0.9rem;">
+        <button class="add-dropoff-btn" onclick="addDropoff()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add another drop-off point
+        </button>
+        <p style="font-size:0.74rem;color:var(--text-light);margin-top:0.5rem;text-align:center;">Additional ₱30 per extra drop-off point</p>
       </div>
     </div>
 
-    <!-- ③ SHIPPING OPTION -->
+    <!-- ③ ORDER ITEMS -->
     <div class="co-card">
       <div class="co-card-hdr">
         <span class="co-card-hdr-title">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-          Shipping Option
+          Order Items <span id="order-item-count"></span>
         </span>
       </div>
+      <div id="order-items-list"></div>
+    </div>
+
+    <!-- ④ SHIPPING OPTION -->
+    <div class="co-card">
+      <div class="co-card-hdr">
+        <span class="co-card-hdr-title">🚚 Shipping Option</span>
+      </div>
       <div class="ship-opts">
-        <label class="ship-opt selected" onclick="selectShip(this,'maxim')">
+        <label class="ship-opt selected" onclick="selectShip(this, 60)">
           <input type="radio" name="ship" class="ship-radio" checked>
           <div class="ship-info">
             <div class="ship-name">🚗 Maxim</div>
-            <div class="ship-desc">Fast local delivery across Zamboanga City · Est. 1–2 hrs</div>
+            <div class="ship-desc">Fast local delivery · Est. 1–2 hrs</div>
           </div>
           <span class="ship-price">₱60</span>
         </label>
-        <label class="ship-opt" onclick="selectShip(this,'grab')">
+        <label class="ship-opt" onclick="selectShip(this, 80)">
           <input type="radio" name="ship" class="ship-radio">
           <div class="ship-info">
             <div class="ship-name">🚕 Grab</div>
@@ -246,7 +201,7 @@
           </div>
           <span class="ship-price">₱80</span>
         </label>
-        <label class="ship-opt" onclick="selectShip(this,'pickup')">
+        <label class="ship-opt" onclick="selectShip(this, 0)">
           <input type="radio" name="ship" class="ship-radio">
           <div class="ship-info">
             <div class="ship-name">🏬 Farm Pickup</div>
@@ -257,60 +212,83 @@
       </div>
     </div>
 
-    <!-- ④ VOUCHERS -->
+    <!-- ⑤ SPECIAL DISCOUNTS (SC / PWD) -->
     <div class="co-card">
       <div class="co-card-hdr">
-        <span class="co-card-hdr-title">🎫 FarmDirect Vouchers</span>
+        <span class="co-card-hdr-title">💙 Special Discounts</span>
       </div>
-      <!-- Applied voucher -->
-      <div style="padding:0.75rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
-        <div>
-          <div style="font-size:0.88rem;font-weight:700;color:var(--green);">✓ FARMSAVE50 Applied</div>
-          <div style="font-size:0.76rem;color:var(--orange);font-weight:600;">−₱50 discount</div>
+      <div class="special-disc-section">
+        <p class="special-disc-title">Do you qualify for a special discount? (20% off subtotal)</p>
+        <div class="special-disc-opts">
+          <button class="special-disc-btn" id="btn-sc" onclick="toggleSpecialDisc('SC')">
+            👴 Senior Citizen (SC)
+          </button>
+          <button class="special-disc-btn" id="btn-pwd" onclick="toggleSpecialDisc('PWD')">
+            ♿ Person with Disability (PWD)
+          </button>
+          <button class="special-disc-btn" id="btn-none" onclick="toggleSpecialDisc('')" style="border-color:transparent;color:var(--text-light);">
+            None
+          </button>
         </div>
-        <span style="font-size:0.8rem;color:var(--text-light);cursor:pointer;">Change</span>
-      </div>
-      <!-- Available vouchers -->
-      <div style="padding:0.8rem 1.1rem;display:flex;gap:0.6rem;flex-wrap:wrap;">
-        <div style="border:1px dashed var(--orange);border-radius:8px;padding:0.5rem 0.8rem;font-size:0.76rem;cursor:pointer;">
-          <div style="font-weight:800;color:var(--orange);">FRESH10</div>
-          <div style="color:var(--text-mid);">10% off veggies</div>
+        <div class="upload-id-row" id="upload-id-row">
+          <span style="font-size:0.82rem;color:var(--text-mid);">Upload your ID for verification:</span>
+          <label class="upload-id-btn">
+            📎 Attach ID
+            <input type="file" accept="image/*,.pdf" style="display:none" onchange="handleIdUpload(this)">
+          </label>
+          <span id="id-upload-name" style="font-size:0.78rem;color:var(--green);"></span>
         </div>
-        <div style="border:1px dashed var(--green);border-radius:8px;padding:0.5rem 0.8rem;font-size:0.76rem;cursor:pointer;opacity:0.55;">
-          <div style="font-weight:800;color:var(--green);">NEWBUYER</div>
-          <div style="color:var(--text-light);">New users only</div>
-        </div>
-        <div style="border:1px dashed var(--border);border-radius:8px;padding:0.5rem 0.8rem;font-size:0.76rem;display:flex;align-items:center;gap:0.4rem;cursor:pointer;background:var(--cream);">
-          <span>+ Enter code</span>
-        </div>
+        <p class="special-disc-note">SC/PWD discount is per Republic Act 9994 and RA 9442. Valid ID required for verification.</p>
       </div>
     </div>
 
-    <!-- ⑤ PAYMENT METHOD -->
+    <!-- ⑥ VOUCHERS -->
+    <div class="co-card">
+      <div class="co-card-hdr">
+        <span class="co-card-hdr-title">🎫 Vouchers</span>
+      </div>
+      <div style="padding:0.8rem 1.1rem;display:flex;gap:0.6rem;flex-wrap:wrap;" id="voucher-chips">
+        <div class="voucher-chip" data-code="FARMSAVE50" onclick="applyVoucherChip('FARMSAVE50')" style="border:1px dashed var(--orange);border-radius:8px;padding:0.5rem 0.8rem;font-size:0.76rem;cursor:pointer;">
+          <div style="font-weight:800;color:var(--orange);">FARMSAVE50</div>
+          <div style="color:var(--text-mid);">₱50 off</div>
+        </div>
+        <div class="voucher-chip" data-code="FRESH10" onclick="applyVoucherChip('FRESH10')" style="border:1px dashed var(--green);border-radius:8px;padding:0.5rem 0.8rem;font-size:0.76rem;cursor:pointer;">
+          <div style="font-weight:800;color:var(--green);">FRESH10</div>
+          <div style="color:var(--text-mid);">10% off veggies</div>
+        </div>
+        <div class="voucher-chip" data-code="NEWBUYER" onclick="applyVoucherChip('NEWBUYER')" style="border:1px dashed var(--border);border-radius:8px;padding:0.5rem 0.8rem;font-size:0.76rem;cursor:pointer;opacity:0.6;">
+          <div style="font-weight:800;color:var(--text-mid);">NEWBUYER</div>
+          <div style="color:var(--text-light);">₱100 off (new users)</div>
+        </div>
+      </div>
+      <div class="voucher-input-row">
+        <input type="text" id="voucher-input" placeholder="Enter voucher code" style="text-transform:uppercase;">
+        <button class="voucher-apply-btn" onclick="applyVoucher()">Apply</button>
+      </div>
+      <div class="voucher-status" id="voucher-status"></div>
+    </div>
+
+    <!-- ⑦ PAYMENT METHOD -->
     <div class="co-card">
       <div class="co-card-hdr">
         <span class="co-card-hdr-title">💳 Payment Method</span>
-        <span class="co-card-hdr-action">Change</span>
+        <a href="checkout-payment.html" class="co-card-hdr-action">Change</a>
       </div>
       <div class="pay-row">
-        <span class="pay-icon-big">💵</span>
+        <span class="pay-icon-big" id="pay-icon">💵</span>
         <div class="pay-details">
-          <div class="pay-name">Cash on Delivery</div>
-          <div class="pay-sub">Pay when your order arrives</div>
+          <div class="pay-name" id="pay-name">Cash on Delivery</div>
+          <div class="pay-sub" id="pay-sub">Pay when your order arrives</div>
         </div>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
     </div>
 
-    <!-- ⑥ ORDER SUMMARY -->
+    <!-- ⑧ ORDER SUMMARY (with VAT) -->
     <div class="co-card">
       <div class="co-card-hdr"><span class="co-card-hdr-title">Order Summary</span></div>
-      <div class="summary-rows">
-        <div class="srow"><span>Merchandise Subtotal</span><span>₱1,230</span></div>
-        <div class="srow disc"><span>🎉 Discount Savings</span><span>−₱121</span></div>
-        <div class="srow disc"><span>🎫 Voucher (FARMSAVE50)</span><span>−₱50</span></div>
-        <div class="srow"><span>Shipping Fee (Maxim)</span><span>₱60</span></div>
-        <div class="srow total"><span>Total Payment</span><span>₱1,119</span></div>
+      <div class="summary-rows" id="order-summary">
+        <!-- Rendered by JS -->
       </div>
     </div>
 
@@ -320,28 +298,332 @@
 <!-- STICKY PLACE ORDER BAR -->
 <div class="place-order-bar">
   <div class="po-totals">
-    <div class="po-label">Total Payment</div>
-    <div class="po-amt">₱1,119</div>
-    <div class="po-saved">You save ₱171 🎉</div>
+    <div class="po-label">Total Payment (VAT incl.)</div>
+    <div class="po-amt" id="po-amt">₱0.00</div>
+    <div class="po-saved" id="po-saved"></div>
   </div>
-  <a href="order-success.html" class="po-btn">Place Order →</a>
+  <a href="checkout-confirm.html" class="po-btn" onclick="saveCheckoutState()">Review Order →</a>
 </div>
 
 <script>
-function selectShip(el, type){
-  document.querySelectorAll('.ship-opt').forEach(function(o){ o.classList.remove('selected'); });
-  el.classList.add('selected');
+/* ── Inline FD shim (works even without farmdirect.js) ── */
+(function() {
+  const STORAGE_KEY = 'fd_checkout';
+
+  const VOUCHERS = {
+    FARMSAVE50: { label:'₱50 Off',        type:'flat',    value:50  },
+    FRESH10:    { label:'10% Off Veggies', type:'percent', value:10  },
+    NEWBUYER:   { label:'₱100 Off (New)',  type:'flat',    value:100 },
+  };
+
+  const DEFAULT_ITEMS = [];   /* no hardcoded fallback — use real cart */
+
+  function subtotal(items) {
+    return items.reduce((s, i) => s + i.price * i.qty, 0);
+  }
+  function discountAmount(sub, voucherCode, specialDisc) {
+    let d = 0;
+    if (specialDisc) d += sub * 0.20;
+    if (voucherCode && VOUCHERS[voucherCode]) {
+      const v = VOUCHERS[voucherCode];
+      d += v.type === 'flat' ? v.value : sub * (v.value / 100);
+    }
+    return d;
+  }
+  function calcPricing(items, ship, voucherCode, specialDisc) {
+    const sub  = subtotal(items);
+    const disc = discountAmount(sub, voucherCode, specialDisc);
+    const base = sub - disc;
+    const vat  = Math.round(base * 0.12 * 100) / 100;
+    return { sub, disc, shipping: ship, vat, total: base + vat + ship };
+  }
+
+  function getRaw() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch(e) { return null; }
+  }
+
+  function ensureDefaults(data) {
+    if (!data) data = {};
+    if (!data.items || data.items.length === 0) data.items = DEFAULT_ITEMS;
+    if (!data.shippingFee && data.shippingFee !== 0) data.shippingFee = 60;
+    if (!data.pricing) {
+      data.pricing = calcPricing(data.items, data.shippingFee, data.voucherCode || '', data.specialDisc || '');
+    }
+    return data;
+  }
+
+  window.FD = window.FD || {};
+  window.FD.fmt = { peso: v => '₱' + Number(v).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',') };
+  window.FD.Pricing = { VOUCHERS, subtotal, discountAmount, total: calcPricing, vat: v => Math.round(v * 0.12 * 100) / 100 };
+  window.FD.Checkout = {
+    get()     { return ensureDefaults(getRaw()); },
+    save(obj) {
+      const cur = this.get();
+      const merged = Object.assign({}, cur, obj);
+      const ship = merged.shippingFee || 60;
+      merged.pricing = calcPricing(merged.items || DEFAULT_ITEMS, ship, merged.voucherCode || '', merged.specialDisc || '');
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+    },
+    clear()   { localStorage.removeItem(STORAGE_KEY); },
+  };
+  window.FD.Orders = {
+    place(order) {
+      const id = 'FD-' + Date.now();
+      const orders = JSON.parse(localStorage.getItem('fd_orders') || '[]');
+      orders.push({ id, ...order, status:'pending', placedAt: new Date().toISOString() });
+      localStorage.setItem('fd_orders', JSON.stringify(orders));
+      return { id };
+    }
+  };
+})();
+</script>
+<script>
+/* ── CHECKOUT STATE ── */
+let state = {
+  shippingFee: 60,
+  voucherCode: '',
+  specialDisc: '',
+  dropoffs: [],
+  dropoffCount: 0,
+};
+
+/* ── Load cart items from localStorage (set by products.html) ── */
+const CART_KEY = 'fd_cart';
+function getCartItems() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e) { return []; }
 }
-function toggleAddrForm(){
-  var f = document.getElementById('addr-form');
-  var s = document.getElementById('saved-addr');
-  if(f.classList.contains('show')){ f.classList.remove('show'); s.style.display=''; }
+const ITEMS = getCartItems();
+
+/* ── Render order items in the checkout card ── */
+function renderOrderItems() {
+  const list = document.getElementById('order-items-list');
+  const countEl = document.getElementById('order-item-count');
+  if (!list) return;
+  countEl.textContent = '(' + ITEMS.length + ')';
+  if (ITEMS.length === 0) {
+    list.innerHTML = '<div style="padding:1.2rem 1.1rem;font-size:0.88rem;color:var(--text-light);">No items in cart. <a href="products.html" style="color:var(--green);font-weight:700;">Browse Products →</a></div>';
+    return;
+  }
+  list.innerHTML = ITEMS.map(item => {
+    const pColor = item.discount ? 'var(--orange)' : 'var(--green)';
+    /* Build variant/unit tag shown under the product name */
+    const metaParts = [];
+    if (item.farm) metaParts.push(item.farm);
+    if (item.variety) metaParts.push(item.variety);
+    if (item.unit) metaParts.push(item.unit);
+    const variantLine = metaParts.length
+      ? `<div class="oi-variant">${metaParts.join(' · ')}</div>`
+      : '';
+    return `
+      <div class="oi">
+        <img class="oi-img" src="${item.img || ''}" alt="${item.name}">
+        <div class="oi-body">
+          <div class="oi-name">${item.name}</div>
+          ${variantLine}
+          <div class="oi-price-row">
+            <span class="oi-price" style="color:${pColor};">${FD.fmt.peso(item.price)}</span>
+            ${item.origPrice ? `<span class="oi-orig">${FD.fmt.peso(item.origPrice)}</span><span class="oi-disc">-${item.discount}%</span>` : ''}
+          </div>
+        </div>
+        <span class="oi-qty">x${item.qty}</span>
+      </div>`;
+  }).join('');
+}
+
+function renderSummary() {
+  const extraDropoff = state.dropoffs.length * 30;
+  const ship         = state.shippingFee + extraDropoff;
+  const P            = FD.Pricing;
+  const sub          = P.subtotal(ITEMS);
+  const disc         = P.discountAmount(sub, state.voucherCode, state.specialDisc);
+  const base         = sub - disc;
+  const vat          = P.vat(base);
+  const total        = base + vat + ship;
+
+  let html = `
+    <div class="srow"><span>Merchandise Subtotal</span><span>${FD.fmt.peso(sub)}</span></div>`;
+  if (state.specialDisc) {
+    html += `<div class="srow disc"><span>💙 ${state.specialDisc} Discount (20%)</span><span>−${FD.fmt.peso(sub * 0.20)}</span></div>`;
+  }
+  if (state.voucherCode) {
+    const v = P.VOUCHERS[state.voucherCode];
+    const vAmt = v.type === 'flat' ? v.value : sub * (v.value / 100);
+    html += `<div class="srow disc"><span>🎫 ${v.label}</span><span>−${FD.fmt.peso(vAmt)}</span></div>`;
+  }
+  html += `<div class="srow"><span>Shipping Fee</span><span>${ship === 0 ? '<span class="ship-free">FREE</span>' : FD.fmt.peso(ship)}</span></div>`;
+  if (state.dropoffs.length > 0) {
+    html += `<div class="srow vat-row"><span>Extra Drop-off (×${state.dropoffs.length})</span><span>₱${extraDropoff}</span></div>`;
+  }
+  html += `<div class="srow vat-row"><span>VAT (12%)</span><span>+${FD.fmt.peso(vat)}</span></div>`;
+  html += `<div class="srow total"><span>Total Payment</span><span>${FD.fmt.peso(total)}</span></div>`;
+
+  document.getElementById('order-summary').innerHTML = html;
+  document.getElementById('po-amt').textContent = FD.fmt.peso(total);
+  const savings = disc;
+  document.getElementById('po-saved').textContent = savings > 0 ? `You save ${FD.fmt.peso(savings)} 🎉` : '';
+}
+
+function selectShip(el, fee) {
+  document.querySelectorAll('.ship-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  state.shippingFee = fee;
+  renderSummary();
+}
+
+function toggleSpecialDisc(type) {
+  state.specialDisc = (state.specialDisc === type) ? '' : type;
+  document.getElementById('btn-sc').classList.toggle('active', state.specialDisc === 'SC');
+  document.getElementById('btn-pwd').classList.toggle('active', state.specialDisc === 'PWD');
+  document.getElementById('btn-none').classList.toggle('active', state.specialDisc === '');
+  const row = document.getElementById('upload-id-row');
+  row.classList.toggle('show', state.specialDisc !== '');
+  renderSummary();
+}
+
+function handleIdUpload(input) {
+  const f = input.files[0];
+  if (f) document.getElementById('id-upload-name').textContent = '✓ ' + f.name;
+}
+
+function applyVoucherChip(code) {
+  document.getElementById('voucher-input').value = code;
+  applyVoucher();
+}
+
+function applyVoucher() {
+  const code   = document.getElementById('voucher-input').value.trim().toUpperCase();
+  const status = document.getElementById('voucher-status');
+  const P      = FD.Pricing;
+
+  if (!code) { state.voucherCode = ''; status.textContent = ''; renderSummary(); return; }
+
+  if (P.VOUCHERS[code]) {
+    state.voucherCode = code;
+    const v = P.VOUCHERS[code];
+    status.textContent = `✓ ${v.label} applied!`;
+    status.className = 'voucher-status ok';
+    // Highlight chip
+    document.querySelectorAll('.voucher-chip').forEach(c => {
+      c.style.outline = c.dataset.code === code ? '2px solid var(--green)' : '';
+    });
+  } else {
+    state.voucherCode = '';
+    status.textContent = '✗ Invalid voucher code.';
+    status.className = 'voucher-status err';
+  }
+  renderSummary();
+}
+
+/* Multi-dropoff */
+function addDropoff() {
+  state.dropoffCount++;
+  const id  = 'dp-' + state.dropoffCount;
+  state.dropoffs.push({ id });
+  const div = document.createElement('div');
+  div.className   = 'dropoff-point';
+  div.id          = id;
+  div.innerHTML   = `
+    <div class="dropoff-point-label">📍 Drop-off Point ${state.dropoffs.length + 1}</div>
+    <button class="dropoff-remove" onclick="removeDropoff('${id}')" title="Remove">✕</button>
+    <div class="addr-form-grid">
+      <div class="af-group full"><label>Street Address</label><input type="text" placeholder="e.g. 45 Mayor Jaldon St."></div>
+      <div class="af-group"><label>Barangay</label><input type="text" placeholder="Brgy. Putik"></div>
+      <div class="af-group"><label>Landmark</label><input type="text" placeholder="Near LCC Mall"></div>
+      <div class="af-group"><label>Recipient Name</label><input type="text" placeholder="Maria Santos"></div>
+      <div class="af-group"><label>Recipient Phone</label><input type="tel" placeholder="+63 917 xxx xxxx"></div>
+    </div>`;
+  document.getElementById('dropoff-list').appendChild(div);
+  renderSummary();
+}
+
+function removeDropoff(id) {
+  state.dropoffs = state.dropoffs.filter(d => d.id !== id);
+  const el = document.getElementById(id);
+  if (el) el.remove();
+  // Re-label remaining
+  document.querySelectorAll('.dropoff-point-label').forEach((l, i) => {
+    l.textContent = `📍 Drop-off Point ${i + 2}`;
+  });
+  renderSummary();
+}
+
+function toggleAddrForm() {
+  const f = document.getElementById('addr-form');
+  const s = document.getElementById('saved-addr');
+  if (f.classList.contains('show')) { f.classList.remove('show'); s.style.display=''; }
   else { f.classList.add('show'); s.style.display='none'; }
 }
-function saveAddress(){
+
+function saveAddress() {
+  const n  = document.getElementById('af-name').value.trim();
+  const ph = document.getElementById('af-phone').value.trim();
+  const st = document.getElementById('af-street').value.trim();
+  const br = document.getElementById('af-brgy').value.trim();
+  const ci = document.getElementById('af-city').value.trim();
+  const zi = document.getElementById('af-zip').value.trim();
+  if (n && st) {
+    document.querySelector('.addr-name').childNodes[0].textContent = n + ' ';
+    if (ph) document.querySelector('.addr-phone').textContent = ph;
+    if (st) document.querySelector('.addr-full').textContent = `${st}, ${br}, ${ci} ${zi}`;
+    FD.Checkout.save({ address: { name:n, phone:ph, street:st, brgy:br, city:ci, zip:zi } });
+  }
   document.getElementById('addr-form').classList.remove('show');
   document.getElementById('saved-addr').style.display='';
 }
+
+function saveCheckoutState() {
+  const extraDropoff = state.dropoffs.length * 30;
+  const ship         = state.shippingFee + extraDropoff;
+  const P            = FD.Pricing;
+  const pricing      = P.total(ITEMS, ship, state.voucherCode, state.specialDisc);
+
+  // Capture current address from DOM (use saved if already set)
+  let address = FD.Checkout.get().address || {};
+  if (!address.name) {
+    const nameEl = document.querySelector('.addr-name');
+    address = {
+      name:   nameEl ? nameEl.childNodes[0].textContent.trim() : 'Juan dela Cruz',
+      phone:  document.querySelector('.addr-phone') ? document.querySelector('.addr-phone').textContent.trim() : '+63 912 345 6789',
+      street: '123 Rizal St.',
+      brgy:   'Brgy. Tetuan',
+      city:   'Zamboanga City',
+      zip:    '7000',
+    };
+  }
+
+  FD.Checkout.save({
+    items: ITEMS,
+    shippingFee: ship,
+    voucherCode: state.voucherCode,
+    specialDisc: state.specialDisc,
+    dropoffs: state.dropoffs,
+    pricing,
+    address,
+  });
+}
+
+/* Load saved state */
+(function() {
+  renderOrderItems();
+  const saved = FD.Checkout.get();
+  if (saved.voucherCode) {
+    state.voucherCode = saved.voucherCode;
+    document.getElementById('voucher-input').value = saved.voucherCode;
+    applyVoucher();
+  }
+  if (saved.specialDisc) {
+    toggleSpecialDisc(saved.specialDisc);
+  }
+  // Load saved payment method display
+  const payInfo = { cod:['💵','Cash on Delivery','Pay when your order arrives'], gcash:['📱','GCash','Instant digital payment'], bank:['🏦','Bank Transfer','BDO, BPI, UnionBank'] };
+  const pm = saved.paymentMethod || 'cod';
+  if (payInfo[pm]) {
+    document.getElementById('pay-icon').textContent = payInfo[pm][0];
+    document.getElementById('pay-name').textContent = payInfo[pm][1];
+    document.getElementById('pay-sub').textContent  = payInfo[pm][2];
+  }
+  renderSummary();
+})();
 </script>
 </body>
 </html>

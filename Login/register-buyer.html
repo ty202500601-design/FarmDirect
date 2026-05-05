@@ -16,15 +16,23 @@
             font-size: 13px;
             color: #374151;
         }
-        .seller-note a {
-            color: green;
-            font-weight: 700;
-            text-decoration: none;
-        }
+        .seller-note a { color: green; font-weight: 700; text-decoration: none; }
         .seller-note a:hover { text-decoration: underline; }
+        .req { color: #dc2626; margin-left: 2px; font-weight: 700; }
+        .address-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        @media (max-width: 520px) { .address-grid { grid-template-columns: 1fr; } }
+        .field-note {
+            font-size: 12px; color: #6b7280; margin-top: 6px;
+            padding: 8px 12px; background: #f9fafb;
+            border-radius: 6px; border: 1px solid #e5e7eb;
+        }
+        .error-note {
+            font-size: 12px; color: #dc2626; margin-top: 6px;
+            padding: 8px 12px; background: #fef2f2;
+            border-radius: 6px; border: 1px solid #fecaca;
+        }
     </style>
 </head>
-
 <body>
 
     <header class="topbar">
@@ -44,9 +52,11 @@
                 <a href="register-buyer.html" class="tab active">Register</a>
             </div>
 
-            <form action="../USER/Dashboard.html" method="get">
+            <form id="register_form" onsubmit="handleRegister(event)">
+
+                <!-- NAME -->
                 <div class="form-group">
-                    <label class="form-label">Last Name</label>
+                    <label class="form-label">Last Name <span class="req">*</span></label>
                     <input type="text" class="form-input" placeholder="Last Name" name="last_name" required>
                 </div>
                 <div class="form-group">
@@ -54,44 +64,66 @@
                     <input type="text" class="form-input" placeholder="Middle Name" name="middle_name">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">First Name</label>
+                    <label class="form-label">First Name <span class="req">*</span></label>
                     <input type="text" class="form-input" placeholder="First Name" name="first_name" required>
                 </div>
+
+                <!-- BIRTHDAY -->
                 <div class="form-group">
-                    <label class="form-label">Email Address</label>
+                    <label class="form-label">Date of Birth <span class="req">*</span></label>
+                    <input type="date" class="form-input" name="birthday" required>
+                </div>
+
+                <!-- EMAIL AND MOBILE — both required, no OR -->
+                <div class="form-group">
+                    <label class="form-label">Email Address <span class="req">*</span></label>
                     <input type="email" class="form-input" placeholder="you@email.com" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Mobile Number</label>
+                    <label class="form-label">Mobile Number <span class="req">*</span></label>
                     <div class="phone-wrap">
                         <div class="phone-prefix">🇵🇭 +63</div>
                         <input type="tel" class="form-input" placeholder="9XX XXX XXXX" name="phone" maxlength="10" pattern="9[0-9]{9}" title="Enter a valid PH mobile number starting with 9" required>
                     </div>
                 </div>
+
+                <!-- PASSWORD + CONFIRM PASSWORD -->
                 <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-input" placeholder="Min. 8 characters" name="password" minlength="8" required>
+                    <label class="form-label">Password <span class="req">*</span></label>
+                    <input type="password" class="form-input" placeholder="Min. 8 characters" name="password" id="password" minlength="8" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Delivery Address</label>
-                    <input type="text" class="form-input" placeholder="Street, Barangay, City, Province" name="address" required>
+                    <label class="form-label">Confirm Password <span class="req">*</span></label>
+                    <input type="password" class="form-input" placeholder="Re-enter your password" name="confirm_password" id="confirm_password" required>
+                    <div class="error-note" id="pw_match_note" style="display:none;">
+                        ❌ Passwords do not match.
+                    </div>
                 </div>
+
+                <!-- PROFILE PICTURE -->
                 <div class="form-group">
-                    <label class="form-label">Upload Valid Government ID</label>
-                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png,.pdf" name="id_file" required>
+                    <label class="form-label">Profile Picture <span class="opt">(optional)</span></label>
+                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png" name="profile_pic">
                 </div>
+
+                <!-- ADDRESS — reversed: Province → City → Barangay → Street → ZIP -->
                 <div class="form-group">
-                    <label class="form-label">ID Type</label>
-                    <select class="form-input" name="id_type" required>
-                        <option value="">Select ID type...</option>
-                        <option>PhilSys / National ID</option>
-                        <option>Driver's License</option>
-                        <option>Passport</option>
-                        <option>SSS / GSIS ID</option>
-                        <option>Voter's ID</option>
-                        <option>Postal ID</option>
-                        <option>Other Type of ID</option>
-                    </select>
+                    <label class="form-label">Delivery Address <span class="req">*</span></label>
+                    <div class="address-grid">
+                        <input type="text" class="form-input" placeholder="Province" name="province" required>
+                        <input type="text" class="form-input" placeholder="City / Municipality" name="city" required>
+                        <input type="text" class="form-input" placeholder="Barangay" name="barangay" required>
+                        <input type="text" class="form-input" placeholder="House No. / Street" name="street" required>
+                        <input type="text" class="form-input" placeholder="ZIP Code" name="zip" required>
+                    </div>
+                </div>
+
+                <!-- TERMS -->
+                <div class="form-group" style="display:flex; align-items:flex-start; gap:10px;">
+                    <input type="checkbox" name="terms" id="terms" required style="margin-top:3px; accent-color:green; width:16px; height:16px; flex-shrink:0;">
+                    <label for="terms" style="font-size:13px; color:#374151; font-weight:400; text-transform:none; letter-spacing:0;">
+                        I agree to the <a href="terms.html" target="_blank" style="color:green; font-weight:600;">Terms and Conditions</a> of FarmDirect.
+                    </label>
                 </div>
                 <button type="submit" class="btn-primary">Create Account</button>
             </form>
@@ -100,11 +132,58 @@
                 🌾 Are you a farmer? <strong>Sign up as a regular user first.</strong><br>
                 You can <a href="verify-farmer.html">apply to become a verified seller</a> from your dashboard after registering.
             </div>
-
         </div>
     </main>
 
     <footer>© 2026 FarmDirect. All rights reserved.</footer>
+
+    <script>
+        // Live password match check
+        document.getElementById('confirm_password').addEventListener('input', function() {
+            var note = document.getElementById('pw_match_note');
+            note.style.display = (this.value && this.value !== document.getElementById('password').value) ? 'block' : 'none';
+        });
+
+        function handleRegister(event) {
+            event.preventDefault();
+
+            var pw  = document.getElementById('password').value;
+            var cpw = document.getElementById('confirm_password').value;
+
+            if (pw !== cpw) {
+                document.getElementById('pw_match_note').style.display = 'block';
+                document.getElementById('confirm_password').focus();
+                return;
+            }
+
+            var newAccount = {
+                email:    document.querySelector('[name="email"]').value.trim().toLowerCase(),
+                password: pw,
+                name:     document.querySelector('[name="first_name"]').value + " " + document.querySelector('[name="last_name"]').value,
+                role:     "user",
+                idType:   document.querySelector('[name="id_type"]') ? document.querySelector('[name="id_type"]').value : ''
+            };
+
+            var existing = JSON.parse(localStorage.getItem('fd_accounts') || '[]');
+
+            for (var i = 0; i < existing.length; i++) {
+                if (existing[i].email === newAccount.email) {
+                    alert("That email is already registered. Please sign in or use a different email.");
+                    return;
+                }
+            }
+
+            existing.push(newAccount);
+            localStorage.setItem('fd_accounts', JSON.stringify(existing));
+            localStorage.setItem('fd_session', JSON.stringify({
+                email: newAccount.email,
+                name:  newAccount.name,
+                role:  newAccount.role
+            }));
+
+            window.location.href = "../USER/Dashboard.html";
+        }
+    </script>
 
 </body>
 </html>

@@ -7,60 +7,62 @@
     <link rel="stylesheet" href="login.css">
     <style>
         .section-label {
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: .6px;
-            color: green;
-            margin: 24px 0 12px;
-            padding-bottom: 6px;
-            border-bottom: 2px solid #d1fae5;
+            font-size: 11px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: .6px; color: green; margin: 24px 0 12px;
+            padding-bottom: 6px; border-bottom: 2px solid #d1fae5;
         }
         .cert-note {
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 8px;
-            padding: 12px 14px;
-            font-size: 12px;
-            color: #374151;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            background: #f0fdf4; border: 1px solid #bbf7d0;
+            border-radius: 8px; padding: 12px 14px; font-size: 12px;
+            color: #374151; margin-bottom: 20px; line-height: 1.6;
         }
         .cert-note strong { color: #15803d; }
-        .required-badge {
-            display: inline-block;
-            font-size: 10px;
-            font-weight: 700;
-            color: #dc2626;
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            border-radius: 4px;
-            padding: 1px 5px;
-            margin-left: 6px;
-            vertical-align: middle;
-            text-transform: uppercase;
+        .file-hint { font-size: 11px; color: #9ca3af; margin-top: 4px; }
+        .req { color: #dc2626; margin-left: 2px; font-weight: 700; }
+        .opt-label {
+            display: inline-block; font-size: 10px; font-weight: 700;
+            color: #6b7280; background: #f3f4f6; border: 1px solid #e5e7eb;
+            border-radius: 4px; padding: 1px 5px; margin-left: 6px;
+            vertical-align: middle; text-transform: uppercase;
         }
-        .optional-badge {
-            display: inline-block;
-            font-size: 10px;
-            font-weight: 700;
-            color: #6b7280;
-            background: #f3f4f6;
-            border: 1px solid #e5e7eb;
-            border-radius: 4px;
-            padding: 1px 5px;
-            margin-left: 6px;
-            vertical-align: middle;
-            text-transform: uppercase;
+
+        /* STEP PROGRESS BAR */
+        .step-bar {
+            display: flex; align-items: center; justify-content: center;
+            gap: 8px; margin-bottom: 24px;
         }
-        .file-hint {
-            font-size: 11px;
-            color: #9ca3af;
-            margin-top: 4px;
+        .step {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 12px; font-weight: 700; color: #9ca3af;
         }
+        .step.active { color: green; }
+        .step.done { color: #9ca3af; }
+        .step-circle {
+            width: 24px; height: 24px; border-radius: 50%;
+            background: #e5e7eb; color: #9ca3af;
+            font-size: 11px; font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .step.active .step-circle { background: green; color: #fff; }
+        .step.done .step-circle { background: #d1fae5; color: #15803d; }
+        .step-line { flex: 1; height: 2px; background: #e5e7eb; max-width: 32px; }
+        .step-line.done { background: #86efac; }
+
+        /* STEP PANELS — hidden by default */
+        .step-panel { display: none; }
+        .step-panel.active { display: block; }
+
+        /* BUTTON ROW */
+        .btn-row { display: flex; gap: 10px; margin-top: 4px; }
+        .btn-back-step {
+            flex: 1; padding: 11px; background: #fff; color: #374151;
+            border: 1.5px solid #d1d5db; border-radius: 8px;
+            font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit;
+        }
+        .btn-back-step:hover { background: #f9fafb; }
+        .btn-next { flex: 2; }
     </style>
 </head>
-
 <body>
 
     <header class="topbar">
@@ -73,96 +75,251 @@
         <div class="auth-card wide">
             <a href="../USER/Dashboard.html" class="back-btn">← Back to Dashboard</a>
             <div class="auth-title">🌾 Apply as a Farmer/Seller</div>
-            <div class="auth-sub">Complete the form below. Our team will review your application within 3–5 business days.</div>
+            <div class="auth-sub" id="step_sub">Step 1 of 3 — Farm Information</div>
+
+            <!-- STEP PROGRESS BAR -->
+            <div class="step-bar" id="step_bar">
+                <div class="step active" id="s1">
+                    <div class="step-circle" id="s1c">1</div>
+                    Farm Info
+                </div>
+                <div class="step-line" id="l1"></div>
+                <div class="step" id="s2">
+                    <div class="step-circle" id="s2c">2</div>
+                    Documents
+                </div>
+                <div class="step-line" id="l2"></div>
+                <div class="step" id="s3">
+                    <div class="step-circle" id="s3c">3</div>
+                    Extras
+                </div>
+            </div>
 
             <div class="cert-note">
                 <strong>📋 Important:</strong> You must be a registered FarmDirect user before applying. Submitting false or invalid documents will result in permanent account suspension.
             </div>
 
-            <form action="verify-confirm.html" method="get">
+            <form id="verify_form" onsubmit="handleSubmit(event)">
 
-                <!-- SECTION 1: Farm Info -->
-                <div class="section-label">Farm Information</div>
+                <!-- ── STEP 1: FARM INFO ── -->
+                <div class="step-panel active" id="panel_1">
 
-                <div class="form-group">
-                    <label class="form-label">Farm / Business Name <span class="required-badge">Required</span></label>
-                    <input type="text" class="form-input" placeholder="e.g. Dela Cruz Farm" name="farm_name" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Farm Location <span class="required-badge">Required</span></label>
-                    <input type="text" class="form-input" placeholder="Barangay, Municipality, Province" name="location" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Products You Sell <span class="required-badge">Required</span></label>
-                    <input type="text" class="form-input" placeholder="e.g. Tomatoes, Carrots, Lettuce" name="produce" required>
-                </div>
+                    <div class="form-group">
+                        <label class="form-label">
+                            Farm / Business Name <span class="opt-label">Optional</span>
+                        </label>
+                        <input type="text" class="form-input" placeholder="e.g. Dela Cruz Farm" name="farm_name" id="farm_name">
+                    </div>
 
-                <!-- SECTION 2: Required Certificates -->
-                <div class="section-label">Required Verification Documents</div>
+                    <div class="form-group">
+                        <label class="form-label">Farm Location <span class="req">*</span></label>
+                        <input type="text" class="form-input" placeholder="Barangay, Municipality, Province" name="location" id="location">
+                    </div>
 
-                <div class="form-group">
-                    <label class="form-label">
-                        RSBSA Certificate (Registry System for Basic Sectors in Agriculture)
-                        <span class="required-badge">Required</span>
-                    </label>
-                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png,.pdf" name="rsbsa" required>
-                    <div class="file-hint">Your official RSBSA registration from the Department of Agriculture. JPG, PNG, or PDF.</div>
+                    <button type="button" class="btn-primary btn-next" onclick="goToStep(2)">Next →</button>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label">
-                        Barangay Certificate (as Farmer/Resident)
-                        <span class="required-badge">Required</span>
-                    </label>
-                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png,.pdf" name="barangay_cert" required>
-                    <div class="file-hint">Certifies you are a recognized farmer/resident in your barangay. JPG, PNG, or PDF.</div>
+                <!-- ── STEP 2: REQUIRED DOCUMENTS ── -->
+                <div class="step-panel" id="panel_2">
+
+                    <div class="section-label">Required Verification Documents</div>
+
+                    <div class="form-group">
+                        <label class="form-label">RSBSA Certificate <span class="req">*</span></label>
+                        <input type="file" class="form-input" accept=".jpg,.jpeg,.png,.pdf" name="rsbsa" id="rsbsa">
+                        <div class="file-hint">Your official RSBSA registration from the Department of Agriculture. JPG, PNG, or PDF.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Barangay Certificate (as Farmer/Resident) <span class="req">*</span></label>
+                        <input type="file" class="form-input" accept=".jpg,.jpeg,.png,.pdf" name="barangay_cert" id="barangay_cert">
+                        <div class="file-hint">Certifies you are a recognized farmer/resident in your barangay. JPG, PNG, or PDF.</div>
+                    </div>
+
+
+
+                    <div class="btn-row">
+                        <button type="button" class="btn-back-step" onclick="goToStep(1)">← Back</button>
+                        <button type="button" class="btn-primary btn-next" onclick="goToStep(3)">Next →</button>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label">
-                        Valid Government-Issued ID
-                        <span class="required-badge">Required</span>
-                    </label>
-                    <select class="form-input" name="id_type" required style="margin-bottom:8px;">
-                        <option value="">Select ID type...</option>
-                        <option>PhilSys / National ID</option>
-                        <option>Driver's License</option>
-                        <option>Passport</option>
-                        <option>SSS / GSIS ID</option>
-                        <option>Voter's ID</option>
-                        <option>Postal ID</option>
-                    </select>
-                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png,.pdf" name="gov_id" required>
-                    <div class="file-hint">Upload a clear photo or scan of your selected ID. JPG, PNG, or PDF.</div>
+                <!-- ── STEP 3: EXTRAS + TERMS + SUBMIT ── -->
+                <div class="step-panel" id="panel_3">
+
+                    <div class="section-label">Additional Documents (Optional but Recommended)</div>
+
+                    <div class="form-group">
+                        <label class="form-label">DTI / SEC Business Registration <span class="opt-label">Optional</span></label>
+                        <input type="file" class="form-input" accept=".jpg,.jpeg,.png,.pdf" name="dti_sec">
+                        <div class="file-hint">Required only if operating as a registered farm business. JPG, PNG, or PDF.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Farm Photo <span class="opt-label">Optional</span></label>
+                        <input type="file" class="form-input" accept=".jpg,.jpeg,.png" name="farm_photo">
+                        <div class="file-hint">A clear photo of your farm or produce. Helps speed up the verification process.</div>
+                    </div>
+
+                    <!-- TERMS -->
+                    <div class="form-group" style="display:flex; align-items:flex-start; gap:10px;">
+                        <input type="checkbox" name="terms" id="terms" required style="margin-top:3px; accent-color:green; width:16px; height:16px; flex-shrink:0;">
+                        <label for="terms" style="font-size:13px; color:#374151; font-weight:400; text-transform:none; letter-spacing:0;">
+                            I agree to the <a href="terms.html" target="_blank" style="color:green; font-weight:600;">Terms and Conditions</a> of FarmDirect.
+                        </label>
+                    </div>
+
+                    <div class="btn-row">
+                        <button type="button" class="btn-back-step" onclick="goToStep(2)">← Back</button>
+                        <button type="submit" class="btn-primary btn-next">Submit Application</button>
+                    </div>
                 </div>
 
-                <!-- SECTION 3: Optional Certificates -->
-                <div class="section-label">Additional Documents (Optional but Recommended)</div>
-
-                <div class="form-group">
-                    <label class="form-label">
-                        DTI / SEC Business Registration
-                        <span class="optional-badge">Optional</span>
-                    </label>
-                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png,.pdf" name="dti_sec">
-                    <div class="file-hint">Required only if operating as a registered farm business. JPG, PNG, or PDF.</div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">
-                        Farm Photo
-                        <span class="optional-badge">Optional</span>
-                    </label>
-                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png" name="farm_photo">
-                    <div class="file-hint">A clear photo of your farm or produce. Helps speed up the verification process.</div>
-                </div>
-
-                <button type="submit" class="btn-primary">Submit Application</button>
             </form>
         </div>
     </main>
 
     <footer>© 2026 FarmDirect. All rights reserved.</footer>
+
+    <script>
+
+        var currentStep = 1;
+
+        var subtitles = {
+            1: 'Step 1 of 3 — Farm Information',
+            2: 'Step 2 of 3 — Required Documents',
+            3: 'Step 3 of 3 — Additional Documents & Confirmation'
+        };
+
+        // ─────────────────────────────────────
+        //  GO TO A STEP
+        //  Validates required fields before
+        //  allowing the user to move forward
+        // ─────────────────────────────────────
+        function goToStep(step) {
+
+            // Validate current step before going forward
+            if (step > currentStep) {
+                if (currentStep === 1) {
+                    // Location is required on step 1
+                    var location = document.getElementById('location').value.trim();
+                    if (!location) {
+                        alert('Please enter your Farm Location before continuing.');
+                        document.getElementById('location').focus();
+                        return;
+                    }
+                }
+
+                if (currentStep === 2) {
+                    var rsbsa = document.getElementById('rsbsa').files.length;
+                    var brgyCert = document.getElementById('barangay_cert').files.length;
+
+                    if (!rsbsa) {
+                        alert('Please upload your RSBSA Certificate.');
+                        return;
+                    }
+                    if (!brgyCert) {
+                        alert('Please upload your Barangay Certificate.');
+                        return;
+                    }
+                }
+            }
+
+            // Hide current panel, show new one
+            document.getElementById('panel_' + currentStep).classList.remove('active');
+            document.getElementById('panel_' + step).classList.add('active');
+
+            // Update subtitle
+            document.getElementById('step_sub').textContent = subtitles[step];
+
+            // Update step bar
+            updateStepBar(step);
+
+            currentStep = step;
+
+            // Scroll to top of card
+            window.scrollTo(0, 0);
+        }
+
+        // ─────────────────────────────────────
+        //  UPDATE THE STEP PROGRESS BAR
+        // ─────────────────────────────────────
+        function updateStepBar(activeStep) {
+            for (var i = 1; i <= 3; i++) {
+                var stepEl = document.getElementById('s' + i);
+                var circleEl = document.getElementById('s' + i + 'c');
+                stepEl.classList.remove('active', 'done');
+                if (i < activeStep) {
+                    stepEl.classList.add('done');
+                    circleEl.textContent = '✓';
+                } else if (i === activeStep) {
+                    stepEl.classList.add('active');
+                    circleEl.textContent = i;
+                } else {
+                    circleEl.textContent = i;
+                }
+            }
+            // Update connector lines
+            for (var j = 1; j <= 2; j++) {
+                var line = document.getElementById('l' + j);
+                if (j < activeStep) {
+                    line.classList.add('done');
+                } else {
+                    line.classList.remove('done');
+                }
+            }
+        }
+
+        // ─────────────────────────────────────
+        //  FINAL SUBMIT
+        // ─────────────────────────────────────
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            var session = JSON.parse(localStorage.getItem('fd_session') || '{}');
+            var applicantEmail = session.email || 'unknown@farmdirect.com';
+            var applicantName  = session.name  || 'Unknown User';
+
+            var application = {
+                email:    applicantEmail,
+                name:     applicantName,
+                farmName: document.getElementById('farm_name').value || 'Not provided',
+                location: document.getElementById('location').value,
+                status:   'pending',
+                date:     new Date().toLocaleDateString('en-PH', { year: 'numeric', month: 'long', day: 'numeric' })
+            };
+
+            var existing = JSON.parse(localStorage.getItem('fd_farmer_applications') || '[]');
+
+            for (var i = 0; i < existing.length; i++) {
+                if (existing[i].email === applicantEmail) {
+                    alert('You have already submitted a farmer application. Please wait for admin approval.');
+                    return;
+                }
+            }
+
+            existing.push(application);
+            localStorage.setItem('fd_farmer_applications', JSON.stringify(existing));
+
+            // Update account role to seller-pending
+            var accounts = JSON.parse(localStorage.getItem('fd_accounts') || '[]');
+            for (var j = 0; j < accounts.length; j++) {
+                if (accounts[j].email === applicantEmail) {
+                    accounts[j].role = 'seller-pending';
+                    break;
+                }
+            }
+            localStorage.setItem('fd_accounts', JSON.stringify(accounts));
+
+            if (session.email) {
+                session.role = 'seller-pending';
+                localStorage.setItem('fd_session', JSON.stringify(session));
+            }
+
+            window.location.href = 'verify-confirm.html';
+        }
+
+    </script>
 
 </body>
 </html>
