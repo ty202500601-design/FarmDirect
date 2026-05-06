@@ -3,10 +3,15 @@
     --accent-green: #4caf50;
     --sidebar-dark: #1e1e1e;
     --bg-light: #f4f7f6;
+    --bg-gray: #f8f9fa;
     --white: #ffffff;
     --text-muted: #888;
+    --text-dark: #2c3e50;
     --pending-yellow: #ffc107;
     --danger-red: #f44336;
+    --accent-gold: #f1c40f;
+    --success-green: #2ecc71;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 * {
@@ -285,15 +290,6 @@ tbody td {
     background-color: var(--accent-green);
 }
 
-:root {
-    --primary-green: #2d5a27;
-    --danger-red: #e74c3c;
-    --bg-gray: #f8f9fa;
-    --text-dark: #2c3e50;
-    --text-muted: #7f8c8d;
-    --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-
 .main-content {
     padding: 40px;
     background-color: var(--bg-gray);
@@ -407,12 +403,7 @@ tbody td {
     text-decoration: underline;
 }
 
-/* Color Variable for Best Seller */
-:root {
-    --accent-gold: #f1c40f;
-    --success-green: #2ecc71;
-}
-
+/* Color Variables for Best Seller */
 .top-metrics {
     margin-bottom: 25px;
 }
