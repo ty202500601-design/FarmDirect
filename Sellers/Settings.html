@@ -6,6 +6,7 @@
   <title>FarmDirect – Settings</title>
   <link rel="stylesheet" href="Settings.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="sellers-storage.js"></script>
   <style>
     .avatar-badge-btn {
       width: 36px !important; height: 36px !important; border-radius: 50% !important;
@@ -370,11 +371,31 @@
     <div class="footer-bottom"><p>© 2026 FarmDirect Zamboanga. All rights reserved.</p></div>
   </div>
 </footer>
- 
-<script>
-lucide.createIcons();
- 
-function showToast(msg) {
+
+  <script>
+    lucide.createIcons();
+    var D = FarmDirectStorage.get();
+
+    // Load settings from localStorage
+    (function(){
+      var s = D.settings || {};
+      var fld = function(id){ return document.getElementById(id); };
+      if(fld('f-lastname')) fld('f-lastname').value = s.lastname || 'Dela Cruz';
+      if(fld('f-firstname')) fld('f-firstname').value = s.firstname || 'Juan';
+      if(fld('f-mi')) fld('f-mi').value = s.mi || 'A';
+      if(fld('f-suffix')) fld('f-suffix').value = s.suffix || '';
+      if(fld('f-email')) fld('f-email').value = s.email || 'juan@gmail.com';
+      if(fld('f-phone')) fld('f-phone').value = s.phone || '+63 912 345 6789';
+      if(fld('f-street')) fld('f-street').value = s.street || 'Purok 4, Gumamela St.';
+      if(fld('f-brgy')) fld('f-brgy').value = s.brgy || 'Cabaluay';
+      if(fld('f-city')) fld('f-city').value = s.city || 'Zamboanga City';
+      if(fld('f-province')) fld('f-province').value = s.province || 'Zamboanga del Sur';
+      if(fld('f-postal')) fld('f-postal').value = s.postal || '7000';
+      if(fld('f-storename')) fld('f-storename').value = s.storeName || "Farm Direct — Juan's Farm";
+      if(fld('f-storedesc')) fld('f-storedesc').value = s.storeDesc || 'We provide fresh, organic produce straight from our family farm in Zamboanga City. Harvested daily for maximum freshness.';
+    })();
+  
+  function showToast(msg) {
   const t = document.getElementById('settings-toast');
   t.textContent = msg;
   t.classList.add('show');
@@ -389,12 +410,29 @@ function savePersDetails() {
   const city = document.getElementById('f-city').value.trim();
   const postal = document.getElementById('f-postal').value.trim();
   if (!brgy || !city || !postal) { showToast('⚠️ Barangay, city, and postal code are required.'); return; }
+  if(!D.settings) D.settings = {};
+  D.settings.lastname = ln;
+  D.settings.firstname = fn;
+  D.settings.mi = document.getElementById('f-mi').value;
+  D.settings.suffix = document.getElementById('f-suffix').value;
+  D.settings.email = document.getElementById('f-email').value;
+  D.settings.phone = document.getElementById('f-phone').value;
+  D.settings.street = document.getElementById('f-street').value;
+  D.settings.brgy = brgy;
+  D.settings.city = city;
+  D.settings.province = document.getElementById('f-province').value;
+  D.settings.postal = postal;
+  FarmDirectStorage.save(D);
   showToast('✅ Personal details saved!');
 }
  
 function saveStore() {
   const name = document.getElementById('f-storename').value.trim();
   if (!name) { showToast('⚠️ Store name is required.'); return; }
+  if(!D.settings) D.settings = {};
+  D.settings.storeName = name;
+  D.settings.storeDesc = document.getElementById('f-storedesc').value;
+  FarmDirectStorage.save(D);
   showToast('✅ Store info saved!');
 }
  

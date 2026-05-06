@@ -6,6 +6,7 @@
   <title>FarmDirect – Farmer's Hub Dashboard</title>
   <link rel="stylesheet" href="Farmers.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="sellers-storage.js"></script>
 </head>
 <body>
  
@@ -479,9 +480,59 @@
  
 <script>
   lucide.createIcons();
+  var D = FarmDirectStorage.get();
+
+  /* ── NAVBAR: dropdown toggles ── */
+  document.querySelectorAll('.notif-wrap').forEach(function(wrap){
+    var btn=wrap.querySelector('.notif-btn');
+    var dd=wrap.querySelector('.notif-dropdown');
+    if(!btn||!dd) return;
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      document.querySelectorAll('.notif-dropdown').forEach(function(d){if(d!==dd) d.style.display='none'});
+      dd.style.display=dd.style.display==='block'?'none':'block';
+    });
+  });
+  document.addEventListener('click',function(){
+    document.querySelectorAll('.notif-dropdown').forEach(function(d){d.style.display='none'});
+  });
+  document.querySelectorAll('.menu-panel .menu-item').forEach(function(link){
+    link.addEventListener('click',function(){
+      document.getElementById('menu-check').checked=false;
+    });
+  });
+
+  /* ── PROFILE NAME from storage ── */
+  (function(){
+    var p=D.profile||{};
+    var els=document.querySelectorAll('.notif-header h4');
+    els.forEach(function(el){if(el.textContent==='Juan Dela Cruz') el.textContent=p.name||'Seller';});
+  })();
+
   const d = new Date();
   document.getElementById('dash-date-label').textContent =
     d.toLocaleDateString('en-PH', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+  // Load stats from localStorage
+  (function(){
+    // Calculate stats from D.stock and D.orders
+    if(D.stock && D.stock.length){
+      var totalRevenue = 0, totalSold = 0, totalStock = 0;
+      D.stock.forEach(function(p){
+        if(p.unitTypes) p.unitTypes.forEach(function(ut){
+          totalStock += ut.batches ? ut.batches.reduce(function(s,b){ return s + (b.qty||0); },0) : 0;
+        });
+      });
+      if(D.products) D.products.forEach(function(p){ totalRevenue += p.revenue||0; totalSold += p.sold||0; });
+      // Update stats display (best effort - labels may need exact IDs)
+      var revEl = document.querySelector('.stat-val');
+      if(revEl && totalRevenue) revEl.textContent = '₱' + totalRevenue.toLocaleString();
+      var soldEl = document.querySelectorAll('.stat-val')[1];
+      if(soldEl) soldEl.textContent = D.products ? D.products.length : '5';
+      var ordersEl = document.querySelectorAll('.stat-val')[2];
+      if(ordersEl && D.orders) ordersEl.textContent = D.orders.length;
+    }
+  })();
 </script>
 </body>
 </html>

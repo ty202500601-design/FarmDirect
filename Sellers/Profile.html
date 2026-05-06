@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="Farmers.css" />
   <link rel="stylesheet" href="Profile.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="sellers-storage.js"></script>
 </head>
 <body>
 
@@ -574,6 +575,23 @@
 </style>
 
 <script>lucide.createIcons();
+var D = FarmDirectStorage.get();
+
+/* Populate profile fields from D.profile */
+(function(){
+  var p = D.profile;
+  var nameEls = document.querySelectorAll('.profile-name, .notif-header h4');
+  nameEls.forEach(function(el){ if(el.textContent.indexOf('Juan')!==-1||el.textContent.indexOf('Dela')!==-1) el.textContent = p.name; });
+  var roleEl = document.querySelector('.profile-role-badge');
+  if(roleEl) roleEl.textContent = ' ' + p.role + ' · ' + p.member;
+  var followEls = document.querySelectorAll('.follow-item strong');
+  if(followEls[0]) followEls[0].textContent = p.following;
+  if(followEls[1]) followEls[1].textContent = p.followers;
+  var avatarEl = document.getElementById('profileAvatar');
+  if(p.avatar){ avatarEl.style.backgroundImage='url('+p.avatar+')'; avatarEl.classList.add('has-image'); }
+  var initLet = p.name.charAt(0);
+  if(avatarEl && !p.avatar) avatarEl.textContent = initLet;
+})();
 
 document.getElementById('avatarInput').addEventListener('change',function(e){
   var file=e.target.files[0];
@@ -583,6 +601,8 @@ document.getElementById('avatarInput').addEventListener('change',function(e){
     var avatar=document.getElementById('profileAvatar');
     avatar.style.backgroundImage='url('+ev.target.result+')';
     avatar.classList.add('has-image');
+    D.profile.avatar = ev.target.result;
+    FarmDirectStorage.save(D);
   };
   reader.readAsDataURL(file);
 });
@@ -599,15 +619,8 @@ function openToReceiveModal(){document.getElementById('toReceiveModal').classLis
 function closeToReceiveModal(){document.getElementById('toReceiveModal').classList.remove('open')}
 document.getElementById('toReceiveModal').addEventListener('click',function(e){if(e.target===this)closeToReceiveModal()});
 
-var toRateOrders=[
-  {id:'FD-00230',name:'Organic Ginger (500g)',seller:'Green Valley Farm',img:'https://images.unsplash.com/photo-1590865101275-4d99c14856cc?w=100',total:'₱45.00',delivered:'Feb 28, 2026'},
-  {id:'FD-00227',name:'Fresh Tomatoes (1 kg)',seller:"Rianne's Farm",img:'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=100',total:'₱95.00',delivered:'Feb 25, 2026'}
-];
-var myRatings=[
-  {name:'Fresh Carrots (1 kg)',seller:"Rianne's Farm",img:'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=100',stars:5,text:'Super fresh and crisp! Great quality for cooking. Will order again.',date:'Feb 15, 2026'},
-  {name:'Native Potatoes (2 kg)',seller:'Green Valley Farm',img:'https://images.unsplash.com/photo-1518977676601-b53f02ac6d31?w=100',stars:4,text:'Good quality but some were a bit small. Still fresh and tasty.',date:'Feb 10, 2026'},
-  {name:'Fresh Cabbage (1 kg)',seller:"Maria's Garden",img:'https://images.unsplash.com/photo-1566385101042-1a0aa0c12e8c?w=100',stars:5,text:'Perfect for sinigang! Very fresh and clean.',date:'Feb 5, 2026'}
-];
+var toRateOrders = D.toRateOrders || [];
+var myRatings = D.myRatings || [];
 var currentOrderId='';
 
 function renderToRate(){
@@ -701,6 +714,9 @@ function submitRating(){
     date:dateStr
   });
   toRateOrders=toRateOrders.filter(function(o){return o.id!==currentOrderId});
+  D.toRateOrders = toRateOrders;
+  D.myRatings = myRatings;
+  FarmDirectStorage.save(D);
   document.getElementById('toRateBadge').textContent=toRateOrders.length;
   closeRateModal();
   var starsArr=['','★','★★','★★★','★★★★','★★★★★'];

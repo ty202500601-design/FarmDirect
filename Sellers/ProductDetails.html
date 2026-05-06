@@ -6,6 +6,7 @@
     <title>Fresh Tomatoes – FarmDirect</title>
     <link rel="stylesheet" href="Products.css" />
     <link rel="stylesheet" href="ProductDetails.css" />
+    <script src="sellers-storage.js"></script>
   </head>
   <body>
  
@@ -606,48 +607,40 @@
          JAVASCRIPT
     ══════════════════════════════════════ -->
     <script>
+      var D = FarmDirectStorage.get();
+
       /* ─── CONSTANTS ─── */
       const UNIT_ICONS = {
         'per kg':'⚖️','per 100g':'🔢','per bundle':'🌿','per piece':'🔵',
         'per pack':'📦','per box':'🗃️','per tray':'🍱','per sack':'👜'
       };
       const CAT_EMOJI = { Vegetables:'🥦',Fruits:'🍑',Dairy:'🥛',Grains:'🌾',Meat:'🥩',Others:'📦' };
- 
-      /* ─── VARIANT DATA
-         stock values here are READ-ONLY display values.
-         They should only change when the farmer goes through StockUpdate.html.
-         The Edit modal does NOT expose stock fields.
-      ─── */
-      let variants = [
-        {
-          id:1, name:'Regular Tomato',
-          photo:'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200',
-          storage:'Room temperature',
-          units:[
-            { unit:'per kg',     price:35,  stock:4,  alertAt:5, status:'live' },
-            { unit:'per bundle', price:18,  stock:20, alertAt:5, status:'live' },
-            { unit:'per box',    price:160, stock:3,  alertAt:2, status:'live' }
-          ]
-        },
-        {
-          id:2, name:'Cherry Tomato',
-          photo:'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=200',
-          storage:'Room temperature',
-          units:[
-            { unit:'per kg',   price:55, stock:8,  alertAt:3, status:'live' },
-            { unit:'per pack', price:45, stock:15, alertAt:5, status:'live' }
-          ]
-        },
-        {
-          id:3, name:'Green Tomato',
-          photo:'https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?w=200',
-          storage:'Room temperature',
-          units:[
-            { unit:'per kg',     price:28, stock:10, alertAt:3, status:'live'   },
-            { unit:'per bundle', price:15, stock:6,  alertAt:2, status:'paused' }
-          ]
-        }
-      ];
+
+      /* ─── VARIANT DATA (loaded from localStorage)
+           stock values here are READ-ONLY display values.
+           They should only change when the farmer goes through StockUpdate.html.
+           The Edit modal does NOT expose stock fields.
+        ─── */
+      var variants = [];
+      if(D.stock && D.stock.length){
+        variants = D.stock.map(function(p){
+          return {
+            id: p.id,
+            name: p.name,
+            photo: p.img || '',
+            storage: 'Room temperature',
+            units: (p.unitTypes || []).map(function(ut){
+              return { unit:ut.label, price:ut.price||0, stock:0, alertAt:ut.alertAt||5, status:ut.status||'live' };
+            })
+          };
+        });
+      } else {
+        variants = [
+          { id:1, name:'Regular Tomato', photo:'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200', storage:'Room temperature', units:[{ unit:'per kg', price:35, stock:4, alertAt:5, status:'live' },{ unit:'per bundle', price:18, stock:20, alertAt:5, status:'live' },{ unit:'per box', price:160, stock:3, alertAt:2, status:'live' }] },
+          { id:2, name:'Cherry Tomato', photo:'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=200', storage:'Room temperature', units:[{ unit:'per kg', price:55, stock:8, alertAt:3, status:'live' },{ unit:'per pack', price:45, stock:15, alertAt:5, status:'live' }] },
+          { id:3, name:'Green Tomato', photo:'https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?w=200', storage:'Room temperature', units:[{ unit:'per kg', price:28, stock:10, alertAt:3, status:'live'},{ unit:'per bundle', price:15, stock:6, alertAt:2, status:'paused' }] }
+        ];
+      }
  
       let activeVariantId      = variants[0].id;
       let modalActiveVariantId = variants[0].id;

@@ -6,6 +6,7 @@
     <title>Farm Direct – Products</title>
     <link rel="stylesheet" href="Farmers.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="sellers-storage.js"></script>
   </head>
   <body>
   
@@ -359,10 +360,11 @@
     </div>
   </footer>
   
-  <script>
+<script>
   lucide.createIcons();
-  
-  /* ══ CONFIRM DIALOG ══ */
+  var D = FarmDirectStorage.get();
+
+  /* ═══ CONFIRM DIALOG ══ */
   let pendingCardId = null, pendingProdId = null, pendingType = null;
   
   function askRemove(cardId, productName, type, prodId) {
