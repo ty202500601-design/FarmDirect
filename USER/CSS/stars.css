@@ -1,0 +1,7 @@
+/* STARS */
+.stars { display: flex; align-items: center; gap: 0.25rem; }
+.stars .s { color: var(--star); font-size: 0.88rem; line-height: 1; }
+.stars .s.empty { color: #ddd; }
+.stars-label { font-size: 0.78rem; color: var(--text-light); margin-left: 0.2rem; }
+.rating-row { display: flex; align-items: center; gap: 0.5rem; margin: 0.15rem 0; }
+.rating-score { font-size: 0.85rem; font-weight: 700; color: var(--text-mid); }

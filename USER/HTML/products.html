@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Browse Products – FarmDirect Zamboanga</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Flaticon CDN (uicons – rounded solid) -->
+<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-rounded-solid/css/uicons-rounded-solid.css">
+<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-rounded-regular/css/uicons-rounded-regular.css">
+
+<!-- Page stylesheet -->
+<link rel="stylesheet" href="../CSS/products.css">
+</head>
+<body>
+
+<!-- ═══════ TOP INFO BAR ═══════ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span><i class="fi fi-rs-leaf" style="vertical-align:middle;margin-right:4px;"></i> Farm to Table — Zamboanga City</span>
+      <span class="topbar-sep">|</span>
+      <p>Follow us on Facebook</p>
+      <span class="topbar-sep">|</span>
+      
+    </div>
+    <div class="topbar-right">
+      <a href="notifications.html"><i class="fi fi-rs-bell" style="vertical-align:middle;margin-right:3px;"></i>Notifications</a>
+      <span class="topbar-sep">|</span>
+      <a href="../Login/login.html"><i class="fi fi-rs-user" style="vertical-align:middle;margin-right:3px;"></i>Sign In</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ NAVBAR ═══════ -->
+<nav class="navbar">
+  <input type="checkbox" id="menu-check" class="menu-checkbox">
+  <div class="nav-inner">
+
+    <!-- Logo -->
+    <a href="../index.html" class="logo">
+   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-vegan-icon lucide-vegan"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
+      <span>FarmDirect</span>
+    </a>
+
+    <!-- Search -->
+    <div class="nav-search">
+      <i class="fi fi-rs-search nav-search-icon"></i>
+      <input type="text" placeholder="Search Zamboanga farm produce…">
+    </div>
+
+    <!-- Nav links -->
+    <div class="nav-links">
+      <a href="../index.html" class="nav-link">
+        <i class="fi fi-rs-home" style="margin-right:4px;vertical-align:middle;"></i>Home
+      </a>
+      <a href="products.html" class="nav-link active">
+        <i class="fi fi-rs-shop" style="margin-right:4px;vertical-align:middle;"></i>Products
+      </a>
+      <a href="Dashboard.html" class="nav-link">
+        <i class="fi fi-rs-chart-histogram" style="margin-right:4px;vertical-align:middle;"></i>Dashboard
+      </a>
+    </div>
+
+    <!-- Actions -->
+    <div class="nav-actions">
+      <!-- Cart -->
+      <a href="cart.html" class="cart-btn" title="Cart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart-icon lucide-shopping-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        <i class="fi fi-rs-shopping-cart" style="font-size:1.2rem;"></i>
+        <span class="cart-count">3</span>
+      </a>
+      <!-- Notifications -->
+      <a href="notifications.html" class="notif-wrap" style="text-decoration:none;" title="Notifications">
+        <button class="notif-btn" aria-label="Notifications">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell-icon lucide-bell"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+          <i class="fi fi-rs-bell" style="font-size:1.2rem;"></i>
+          <span class="notif-badge"></span>
+        </button>
+      </a>
+      <!-- Hamburger -->
+      <label for="menu-check" class="menu-toggle">
+        <span></span><span></span><span></span>
+      </label>
+    </div>
+
+  </div><!-- end nav-inner -->
+
+  <!-- Mobile overlay & panel -->
+  <label for="menu-check" class="menu-overlay"></label>
+  <div class="menu-panel">
+    <div class="menu-section">
+      <h3>Navigation</h3>
+      <a href="../index.html" class="menu-item"><i class="fi fi-rs-home"></i>Home</a>
+      <a href="products.html" class="menu-item"><i class="fi fi-rs-shop"></i>Browse Products</a>
+      <a href="Dashboard.html" class="menu-item"><i class="fi fi-rs-chart-histogram"></i>My Dashboard</a>
+      <a href="cart.html" class="menu-item"><i class="fi fi-rs-shopping-cart"></i>Shopping Cart</a>
+    </div>
+    <div class="menu-section">
+      <h3>Categories</h3>
+      <a href="#vegetables" class="menu-item"><i class="fi fi-rs-broccoli"></i><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leafy-green-icon lucide-leafy-green"><path d="M2 22c1.25-.987 2.27-1.975 3.9-2.2a5.56 5.56 0 0 1 3.8 1.5 4 4 0 0 0 6.187-2.353 3.5 3.5 0 0 0 3.69-5.116A3.5 3.5 0 0 0 20.95 8 3.5 3.5 0 1 0 16 3.05a3.5 3.5 0 0 0-5.831 1.373 3.5 3.5 0 0 0-5.116 3.69 4 4 0 0 0-2.348 6.155C3.499 15.42 4.409 16.712 4.2 18.1 3.926 19.743 3.014 20.732 2 22"/><path d="M2 22 17 7"/></svg>Vegetables</a>
+      <a href="#fruits" class="menu-item"><i class="fi fi-rs-apple-whole"></i>Fruits</a>
+      <a href="#meats" class="menu-item"><i class="fi fi-rs-meat"></i>Meats</a>
+      <a href="#dairy" class="menu-item"><i class="fi fi-rs-milk-alt"></i>Dairy</a>
+      <a href="#eggs" class="menu-item"><i class="fi fi-rs-egg"></i>Eggs</a>
+      <a href="#pantry" class="menu-item"><i class="fi fi-rs-basket-shopping-simple"></i>Pantry</a>
+    </div>
+    <a href="cart.html" class="menu-cta">
+      <i class="fi fi-rs-shopping-cart" style="margin-right:6px;vertical-align:middle;"></i>View Cart
+    </a>
+  </div>
+</nav>
+
+<!-- ═══════ HERO BANNER ═══════ -->
+<div class="hero-banner-wrap">
+  <div class="hero-banner-inner">
+    <div class="hero-main">
+      <span class="hero-badge">
+        <i class="fi fi-rs-fire" style="vertical-align:middle;"></i> Flash Sale — Limited Time
+      </span>
+      <h1 class="hero-headline">Fresh from<br>Zamboanga Farms<br>Up to 30% Off!</h1>
+      <p class="hero-sub">14 products from 18 verified local farmers</p>
+      <a href="#vegetables" class="hero-cta">Shop Now →</a>
+    </div>
+    <div class="hero-side">
+      <div class="hero-side-card">
+        <div class="hero-side-label">
+          <i class="fi fi-rs-star"></i> Partner Promos
+        </div>
+        <div class="hero-side-value">Stack &amp; Save</div>
+        <div class="hero-side-desc">Use voucher codes for up to ₱100 off your order</div>
+        <span class="hero-side-link">Link Voucher →</span>
+      </div>
+      <div class="hero-side-card">
+        <div class="hero-side-label">
+          <i class="fi fi-rs-truck-side"></i> Free Delivery
+        </div>
+        <div class="hero-side-value">Orders ₱500+</div>
+        <div class="hero-side-desc">Same-day delivery within Zamboanga City</div>
+        <span class="hero-side-link">See Details →</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ QUICK NAV ICONS ═══════ -->
+<div class="quick-nav-wrap">
+  <div class="quick-nav-inner">
+
+    <a href="#vegetables" class="quick-nav-item">
+      <div class="quick-nav-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leafy-green-icon lucide-leafy-green"><path d="M2 22c1.25-.987 2.27-1.975 3.9-2.2a5.56 5.56 0 0 1 3.8 1.5 4 4 0 0 0 6.187-2.353 3.5 3.5 0 0 0 3.69-5.116A3.5 3.5 0 0 0 20.95 8 3.5 3.5 0 1 0 16 3.05a3.5 3.5 0 0 0-5.831 1.373 3.5 3.5 0 0 0-5.116 3.69 4 4 0 0 0-2.348 6.155C3.499 15.42 4.409 16.712 4.2 18.1 3.926 19.743 3.014 20.732 2 22"/><path d="M2 22 17 7"/></svg>
+        <i class="fi fi-rs-broccoli" style="font-size:1.3rem;color:var(--green);"></i>
+      </div>
+      <span class="quick-nav-label">Vegetables</span>
+    </a>
+
+    <a href="#fruits" class="quick-nav-item">
+      <div class="quick-nav-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-apple-icon lucide-apple"><path d="M12 6.528V3a1 1 0 0 1 1-1h0"/><path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21"/></svg>
+        <i class="fi fi-rs-apple-whole" style="font-size:1.3rem;color:#e67c22;"></i>
+      </div>
+      <span class="quick-nav-label">Fruits</span>
+    </a>
+
+    <a href="#meats" class="quick-nav-item">
+      <div class="quick-nav-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-beef-icon lucide-beef"><path d="M16.4 13.7A6.5 6.5 0 1 0 6.28 6.6c-1.1 3.13-.78 3.9-3.18 6.08A3 3 0 0 0 5 18c4 0 8.4-1.8 11.4-4.3"/><path d="m18.5 6 2.19 4.5a6.48 6.48 0 0 1-2.29 7.2C15.4 20.2 11 22 7 22a3 3 0 0 1-2.68-1.66L2.4 16.5"/><circle cx="12.5" cy="8.5" r="2.5"/></svg>
+        <i class="fi fi-rs-meat" style="font-size:1.3rem;color:#c0392b;"></i>
+      </div>
+      <span class="quick-nav-label">Meats</span>
+    </a>
+
+    <a href="#eggs" class="quick-nav-item">
+      <div class="quick-nav-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-egg-icon lucide-egg"><path d="M12 2C8 2 4 8 4 14a8 8 0 0 0 16 0c0-6-4-12-8-12"/></svg>
+        <i class="fi fi-rs-egg" style="font-size:1.3rem;color:#f39c12;"></i>
+      </div>
+      <span class="quick-nav-label">Eggs</span>
+    </a>
+
+    <a href="#pantry" class="quick-nav-item">
+      <div class="quick-nav-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-archive-icon lucide-archive"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>
+        <i class="fi fi-rs-basket-shopping-simple" style="font-size:1.3rem;color:#8e44ad;"></i>
+      </div>
+      <span class="quick-nav-label">Pantry</span>
+    </a>
+
+    <a href="Dashboard.html" class="quick-nav-item">
+      <div class="quick-nav-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap-icon lucide-zap"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+        <i class="fi fi-rs-bolt" style="font-size:1.3rem;color:#e67c22;"></i>
+      </div>
+      <span class="quick-nav-label">Flash Deals</span>
+    </a>
+
+    <a href="cart.html" class="quick-nav-item">
+      <div class="quick-nav-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart-icon lucide-shopping-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        <i class="fi fi-rs-shopping-cart" style="font-size:1.3rem;color:var(--green);"></i>
+      </div>
+      <span class="quick-nav-label">My Cart</span>
+    </a>
+
+
+  </div>
+</div>
+
+<!-- ═══════ FLASH DEALS ═══════ -->
+<div class="flash-deals-wrap">
+  <div class="flash-deals-inner">
+    <div class="section-header-row">
+      <h2>
+        <span class="flash-fire"><i class="fi fi-rs-bolt" style="color:var(--orange);"></i></span>
+        Flash Deals
+        <span class="flash-countdown">
+          <span class="countdown-block" id="cd-h">05</span>:
+          <span class="countdown-block" id="cd-m">12</span>:
+          <span class="countdown-block" id="cd-s">48</span>
+        </span>
+      </h2>
+      <a href="#daily-discover" class="see-all-link">See All &rsaquo;</a>
+    </div>
+    <div class="flash-scroll-row">
+
+      <a href="product-detail.html" class="flash-card">
+        <img class="flash-card-img" src="https://images.unsplash.com/photo-1447175008436-054170c2e979?w=400" alt="Fresh Carrots" loading="lazy">
+        <div class="flash-card-body">
+          <div class="flash-card-badge">-11%</div>
+          <div class="flash-card-name">Fresh Carrots</div>
+          <div class="flash-card-price">₱195</div>
+          <div class="flash-card-sold-bar"><div class="flash-card-sold-fill" style="width:68%"></div></div>
+          <div class="flash-card-sold-label">Selling Fast</div>
+        </div>
+      </a>
+
+      <a href="product-detail.html" class="flash-card">
+        <img class="flash-card-img" src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400" alt="Heirloom Tomatoes" loading="lazy">
+        <div class="flash-card-body">
+          <div class="flash-card-badge">-20%</div>
+          <div class="flash-card-name">Heirloom Tomatoes</div>
+          <div class="flash-card-price">₱280</div>
+          <div class="flash-card-sold-bar"><div class="flash-card-sold-fill" style="width:81%"></div></div>
+          <div class="flash-card-sold-label">81 Sold</div>
+        </div>
+      </a>
+
+      <a href="product-detail.html" class="flash-card">
+        <img class="flash-card-img" src="https://images.unsplash.com/photo-1528825871115-3581a5387919?w=400" alt="Saba Bananas" loading="lazy">
+        <div class="flash-card-body">
+          <div class="flash-card-name">Saba Bananas</div>
+          <div class="flash-card-price">₱60</div>
+          <div class="flash-card-sold-bar"><div class="flash-card-sold-fill" style="width:55%"></div></div>
+          <div class="flash-card-sold-label">Selling Fast</div>
+        </div>
+      </a>
+
+      <a href="product-detail.html" class="flash-card">
+        <img class="flash-card-img" src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=400" alt="Native Eggs" loading="lazy">
+        <div class="flash-card-body">
+          <div class="flash-card-name">Native Chicken Eggs</div>
+          <div class="flash-card-price">₱12</div>
+          <div class="flash-card-sold-bar"><div class="flash-card-sold-fill" style="width:92%"></div></div>
+          <div class="flash-card-sold-label">Almost Gone</div>
+        </div>
+      </a>
+
+      <a href="product-detail.html" class="flash-card">
+        <img class="flash-card-img" src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=400" alt="Beef Sirloin" loading="lazy">
+        <div class="flash-card-body">
+          <div class="flash-card-name">Grass-Fed Beef Sirloin</div>
+          <div class="flash-card-price">₱480</div>
+          <div class="flash-card-sold-bar"><div class="flash-card-sold-fill" style="width:40%"></div></div>
+          <div class="flash-card-sold-label">40 Sold</div>
+        </div>
+      </a>
+
+      <a href="product-detail.html" class="flash-card">
+        <img class="flash-card-img" src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=400" alt="Turmeric" loading="lazy">
+        <div class="flash-card-body">
+          <div class="flash-card-name">Luyang Dilaw (Turmeric)</div>
+          <div class="flash-card-price">₱160</div>
+          <div class="flash-card-sold-bar"><div class="flash-card-sold-fill" style="width:63%"></div></div>
+          <div class="flash-card-sold-label">63 Sold</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ CATEGORIES GRID ═══════ -->
+<div class="categories-wrap">
+  <div class="categories-inner">
+    <div class="section-header-row">
+      <h2>
+        <i class="fi fi-rs-apps" style="margin-right:6px;vertical-align:middle;color:var(--green);"></i>Categories
+      </h2>
+      <a href="#daily-discover" class="see-all-link">See All &rsaquo;</a>
+    </div>
+    <div class="categories-grid">
+
+      <a href="#vegetables" class="cat-item">
+        <div class="cat-icon" style="background:#e8f5e9;">
+          <i class="fi fi-rs-broccoli" style="font-size:1.5rem;color:#2e7d32;"></i>
+        </div>
+        <span class="cat-name">Vegetables</span>
+      </a>
+
+      <a href="#fruits" class="cat-item">
+        <div class="cat-icon" style="background:#fff8e1;">
+          <i class="fi fi-rs-apple-whole" style="font-size:1.5rem;color:#e67c22;"></i>
+        </div>
+        <span class="cat-name">Fruits</span>
+      </a>
+
+      <a href="#meats" class="cat-item">
+        <div class="cat-icon" style="background:#fce4ec;">
+          <i class="fi fi-rs-meat" style="font-size:1.5rem;color:#c62828;"></i>
+        </div>
+        <span class="cat-name">Meats</span>
+      </a>
+
+      <a href="#dairy" class="cat-item">
+        <div class="cat-icon" style="background:#e3f2fd;">
+          <i class="fi fi-rs-milk-alt" style="font-size:1.5rem;color:#1565c0;"></i>
+        </div>
+        <span class="cat-name">Dairy</span>
+      </a>
+
+      <a href="#eggs" class="cat-item">
+        <div class="cat-icon" style="background:#fffde7;">
+          <i class="fi fi-rs-egg" style="font-size:1.5rem;color:#f57f17;"></i>
+        </div>
+        <span class="cat-name">Eggs</span>
+      </a>
+
+      <a href="#pantry" class="cat-item">
+        <div class="cat-icon" style="background:#f3e5f5;">
+          <i class="fi fi-rs-basket-shopping-simple" style="font-size:1.5rem;color:#6a1b9a;"></i>
+        </div>
+        <span class="cat-name">Pantry</span>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ TOP PRODUCTS ═══════ -->
+<div class="top-products-wrap">
+  <div class="top-products-inner">
+    <div class="section-header-row">
+      <h2 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--green);">
+        <i class="fi fi-rs-trophy-star" style="margin-right:6px;vertical-align:middle;"></i>Top Products
+      </h2>
+      <a href="#daily-discover" class="see-all-link">See All &rsaquo;</a>
+    </div>
+    <div class="top-products-scroll">
+
+      <a href="product-detail.html" class="top-card">
+        <div class="top-card-img-wrap">
+          <img class="top-card-img" src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400" alt="Tomatoes" loading="lazy">
+          <span class="top-badge">TOP</span>
+          <div class="top-sold-bar">Monthly Sales 81+</div>
+        </div>
+        <div class="top-card-name">Heirloom Tomatoes</div>
+      </a>
+
+      <a href="product-detail.html" class="top-card">
+        <div class="top-card-img-wrap">
+          <img class="top-card-img" src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=400" alt="Eggs" loading="lazy">
+          <span class="top-badge">TOP</span>
+          <div class="top-sold-bar">Monthly Sales 200+</div>
+        </div>
+        <div class="top-card-name">Native Chicken Eggs</div>
+      </a>
+
+      <a href="product-detail.html" class="top-card">
+        <div class="top-card-img-wrap">
+          <img class="top-card-img" src="https://images.unsplash.com/photo-1528825871115-3581a5387919?w=400" alt="Bananas" loading="lazy">
+          <span class="top-badge">TOP</span>
+          <div class="top-sold-bar">Monthly Sales 120+</div>
+        </div>
+        <div class="top-card-name">Saba Bananas</div>
+      </a>
+
+      <a href="product-detail.html" class="top-card">
+        <div class="top-card-img-wrap">
+          <img class="top-card-img" src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400" alt="Carabao Milk" loading="lazy">
+          <span class="top-badge">TOP</span>
+          <div class="top-sold-bar">Monthly Sales 95+</div>
+        </div>
+        <div class="top-card-name">Fresh Carabao Milk</div>
+      </a>
+
+      <a href="product-detail.html" class="top-card">
+        <div class="top-card-img-wrap">
+          <img class="top-card-img" src="https://images.unsplash.com/photo-1447175008436-054170c2e979?w=400" alt="Carrots" loading="lazy">
+          <span class="top-badge">TOP</span>
+          <div class="top-sold-bar">Monthly Sales 68+</div>
+        </div>
+        <div class="top-card-name">Fresh Carrots</div>
+      </a>
+
+      <a href="product-detail.html" class="top-card">
+        <div class="top-card-img-wrap">
+          <img class="top-card-img" src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=400" alt="Turmeric" loading="lazy">
+          <span class="top-badge">TOP</span>
+          <div class="top-sold-bar">Monthly Sales 55+</div>
+        </div>
+        <div class="top-card-name">Luyang Dilaw</div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ DAILY DISCOVER / ALL PRODUCTS ═══════ -->
+<div class="daily-discover-wrap" id="daily-discover">
+  <div class="daily-discover-inner">
+    <div class="daily-section-title">Daily Discover</div>
+    <div class="daily-section-sub">Fresh picks from 18 verified Zamboanga farmers</div>
+
+    <div class="products-grid-shopee">
+
+      <!-- ─── VEGETABLES ─── -->
+      <div class="cat-section-label" id="vegetables">
+        <h3>
+          <span class="cat-icon-box" style="background:#e8f5e9;">
+            <i class="fi fi-rs-broccoli" style="font-size:1.1rem;color:#2e7d32;"></i>
+          </span>
+          Vegetables
+        </h3>
+        <div class="cat-count">3 items</div>
+        <div class="cat-section-divider"></div>
+      </div>
+
+      <!-- Fresh Carrots -->
+      <div class="product-card-shopee">
+        <div class="pc-img-wrap">
+          <a href="product-detail.html"><img class="pc-img" src="https://images.unsplash.com/photo-1447175008436-054170c2e979?w=600" alt="Fresh Carrots" loading="lazy"></a>
+          <span class="pc-discount">-11%</span>
+        </div>
+        <div class="pc-body">
+          <a href="product-detail.html" class="pc-name">Fresh Carrots</a>
+          <div class="pc-farmer">Green Valley Farm, Labuan</div>
+          <div class="pc-rating-row"><span class="pc-stars">★ 4.9</span></div>
+          <div class="pc-price-row"><span class="pc-price">₱195</span><span class="pc-price-orig">₱220</span><span class="pc-unit">/kg</span></div>
+          <div class="pc-btns">
+            <button class="pc-btn-cart" onclick="openVariantModal({id:'carrots',name:'Fresh Carrots',price:195,farm:'Green Valley Farm',varieties:[{label:'Small'},{label:'Medium'},{label:'Large'}],units:['per kg','per 100g','per bundle (0.5 kg)'],img:'https://images.unsplash.com/photo-1447175008436-054170c2e979?w=600'})">Cart</button>
+            <a href="checkout.html" class="pc-btn-buy">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Heirloom Tomatoes -->
+      <div class="product-card-shopee">
+        <div class="pc-img-wrap">
+          <a href="product-detail.html"><img class="pc-img" src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=600" alt="Heirloom Tomatoes" loading="lazy"></a>
+          <span class="pc-discount">-20%</span>
+        </div>
+        <div class="pc-body">
+          <a href="product-detail.html" class="pc-name">Heirloom Tomatoes</a>
+          <div class="pc-farmer">Sunrise Farm, Tugbungan</div>
+          <div class="pc-rating-row"><span class="pc-stars">★ 4.8</span></div>
+          <div class="pc-price-row"><span class="pc-price">₱280</span><span class="pc-price-orig">₱350</span><span class="pc-unit">/kg</span></div>
+          <div class="pc-btns">
+            <button class="pc-btn-cart" onclick="openVariantModal({id:'tomatoes',name:'Heirloom Tomatoes',price:280,farm:'Sunrise Farm',varieties:[{label:'Small'},{label:'Medium'},{label:'Large'}],units:['per kg','per 100g','per bundle (0.5 kg)'],img:'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=600'})">Cart</button>
+            <a href="checkout.html" class="pc-btn-buy">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fresh Lettuce -->
+      <div class="product-card-shopee">
+        <div class="pc-img-wrap">
+          <a href="product-detail.html"><img class="pc-img" src="https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=600" alt="Fresh Lettuce" loading="lazy"></a>
+        </div>
+        <div class="pc-body">
+          <a href="product-detail.html" class="pc-name">Fresh Lettuce</a>
+          <div class="pc-farmer">Labuan Greens</div>
+          <div class="pc-rating-row"><span class="pc-stars">★ 4.7</span></div>
+          <div class="pc-price-row"><span class="pc-price-nd">₱150</span><span class="pc-unit">/kg</span></div>
+          <div class="pc-btns">
+            <button class="pc-btn-cart" onclick="openVariantModal({id:'lettuce',name:'Fresh Lettuce',price:150,farm:'Labuan Greens',varieties:[{label:'Small'},{label:'Medium'},{label:'Large'}],units:['per kg','per 100g','per bundle (0.3 kg)'],img:'https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=600'})">Cart</button>
+            <a href="checkout.html" class="pc-btn-buy">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── FRUITS ─── -->
+      <div class="cat-section-label" id="fruits">
+        <h3>
+          <span class="cat-icon-box" style="background:#fff8e1;">
+            <i class="fi fi-rs-apple-whole" style="font-size:1.1rem;color:#e67c22;"></i>
+          </span>
+          Fruits
+        </h3>
+        <div class="cat-count">3 items</div>
+        <div class="cat-section-divider"></div>
+      </div>
+
+      <!-- Saba Bananas -->
+      <div class="product-card-shopee">
+        <div class="pc-img-wrap">
+          <a href="product-detail.html"><img class="pc-img" src="https://images.unsplash.com/photo-1528825871115-3581a5387919?w=600" alt="Saba Bananas" loading="lazy"></a>
+        </div>
+        <div class="pc-body">
+          <a href="product-detail.html" class="pc-name">Saba Bananas</a>
+          <div class="pc-farmer">Labuan Plantation</div>
+          <div class="pc-rating-row"><span class="pc-stars">★ 4.9</span></div>
+          <div class="pc-price-row"><span class="pc-price-nd">₱60</span><span class="pc-unit">/kg</span></div>
+          <div class="pc-btns">
+            <button class="pc-btn-cart" onclick="openVariantModal({id:'bananas',name:'Saba Bananas',price:60,farm:'Labuan Plantation',units:['per kg','per bundle (1 kg)','per sack (10 kg)'],img:'https://images.unsplash.com/photo-1528825871115-3581a5387919?w=600'})">Cart</button>
+            <a href="checkout.html" class="pc-btn-buy">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fresh Papayas -->
+      <div class="product-card-shopee">
+        <div class="pc-img-wrap">
+          <a href="product-detail.html"><img class="pc-img" src="https://images.unsplash.com/photo-1617112848923-cc2234396a8d?w=600" alt="Fresh Papayas" loading="lazy"></a>
+        </div>
+        <div class="pc-body">
+          <a href="product-detail.html" class="pc-name">Fresh Papayas</a>
+          <div class="pc-farmer">Pasonanca Fruits</div>
+          <div class="pc-rating-row"><span class="pc-stars">★ 4.7</span></div>
+          <div class="pc-price-row"><span class="pc-price-nd">₱85</span><span class="pc-unit">/kg</span></div>
+          <div class="pc-btns">
+            <button class="pc-btn-cart" onclick="openVariantModal({id:'papayas',name:'Fresh Papayas',price:85,farm:'Pasonanca Fruits',units:['per kg','per piece'],img:'https://images.unsplash.com/photo-1617112848923-cc2234396a8d?w=600'})">Cart</button>
+            <a href="checkout.html" class="pc-btn-buy">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Queen Pineapple -->
+      <div class="product-card-shopee">
+        <div class="pc-img-wrap">
+          <a href="product-detail.html"><img class="pc-img" src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=600" alt="Queen Pineapple" loading="lazy"></a>
+        </div>
+        <div class="pc-body">
+          <a href="product-detail.html" class="pc-name">Queen Pineapple</a>
+          <div class="pc-farmer">Sibuco Tropicals</div>
+          <div class="pc-rating-row"><span class="pc-stars">★ 4.8</span></div>
+          <div class="pc-price-row"><span class="pc-price-nd">₱75</span><span class="pc-unit">/pc</span></div>
+          <div class="pc-btns">
+            <button class="pc-btn-cart" onclick="openVariantModal({id:'pineapple',name:'Queen Pineapple',price:75,farm:'Sibuco Tropicals',units:['per piece','per kg','per box (6 pcs)'],img:'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=600'})">Cart</button>
+            <a href="checkout.html" class="pc-btn-buy">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── MEATS ─── -->
+      <div class="cat-section-label" id="meats">
+        <h3>
+          <span class="cat-icon-box" style="background:#fce4ec;">
+            <i class="fi fi-rs-meat" style="font-size:1.1rem;color:#c62828;"></i>
+          </span>
+          Meats
+        </h3>
+        <div class="cat-count">1 item</div>
+        <div class="cat-section-divider"></div>
+      </div>
+
+      <!-- Beef Sirloin -->
+      <div class="product-card-shopee">
+        <div class="pc-img-wrap">
+          <a href="product-detail.html"><img class="pc-img" src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600" alt="Beef Sirloin" loading="lazy"></a>
+        </div>
+        <div class="pc-body">
+          <a href="product-detail.html" class="pc-name">Grass-Fed Beef – Sirloin Cut</a>
+          <div class="pc-farmer">Manenan Ranch</div>
+          <div class="pc-rating-row"><span class="pc-stars">★ 4.9</span></div>
+          <div class="pc-price-row"><span class="pc-price-nd">₱480</span><span class="pc-unit">/kg</span></div>
+          <div class="pc-btns">
+            <button class="pc-btn-cart" onclick="openVariantModal({id:'beef',name:'Grass-Fed Beef Sirloin',price:480,farm:'Manenan Ranch',units:['per kg','per 500g','per 250g'],img:'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600'})">Cart</button>
+            <a href="checkout.html" class="pc-btn-buy">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── DAIRY ─── -->
+      <div class="cat-section-label" id="dairy">
+        <h3>
+          <span class="cat-icon-box" style="background:#e3f2fd;">
+            <i class="fi fi-rs-milk-alt" style="font-size:1.1rem;color:#1565c0;"></i>
+          </span>
+          Dairy
+        </h3>
+        <div class="cat-count">3 items</div>
+        <div class="cat-section-divider"></div>
+      </div>
+
+      <!-- Carabao Milk -->
+      <div class="product-card-shopee">
+        <div class="pc-img-wrap">
+          <a href="product-detail.html"><img class="pc-img" src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=600" alt="Carabao Milk" loading="lazy"></a>
+        </div>
+        <div class="pc-body">
+          <a href="product-detail.html" class="pc-name">Fresh Carabao Milk</a>
+          <div class="pc-farmer">Manenan Dairy</div>
+          <div class="pc-rating-row"><span class="pc-stars">★ 4.9</span></div>
+          <div class="pc-price-row"><span class="pc-price-nd">₱120</span><span class="pc-unit">/liter</span></div>
+          <div class="pc-btns">
+            <button class="pc-btn-cart" onclick="openVariantModal({id:'carabao-milk',name:'Fresh Carabao Milk',price:120,farm:'Manenan Dairy',units:['per liter','per 500ml'],img:'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=600'})">Cart</button>
+            <a href="checkout.html" class="pc-btn-buy">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Farm Butter -->
+      <div class="product-card-shopee">
+        <div class="pc-img-wrap">
+          <a href="product-detail.html"><img class="pc-img" src="https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=600" alt="Farm Butter" loading="lazy"></a>
+          <span class="pc-badge-low">Low Stock</span>
+        </div>
+        <div class="pc-body">
+          <a href="product-detail.html" class="pc-name">Artisan Farm Butter</a>
+          <div class="pc-farmer">Manenan Dairy</div>
+          <div class="pc-rating-row"><span class="pc-stars">★ 4.9</span></div>
+          <div class="pc-price-row"><span class="pc-price-nd">₱280</span><span class="pc-unit">/200g</span></div>
+          <div class="pc-btns">
+            <button class="pc-btn-cart" onclick="openVariantModal({id:'butter',name:'Artisan Farm Butter',price:280,farm:'Manenan Dairy',units:['per 200g','per 100g','per pack (400g)'],img:'https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=600'})">Cart</button>
+            <a href="checkout.html" class="pc-btn-buy">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Goat Milk -->
+      <div class="product-card-shopee">
+        <div class="pc-img-wrap">
+          <a href="product-detail.html"><img class="pc-img" src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=600" alt="Goat Milk" loading="lazy"></a>
+        </div>
+        <div class="pc-body">
+          <a href="product-detail.html" class="pc-name">Pasteurized Goat Milk</a>
+          <div class="pc-farmer">Curuan Livestock Farm</div>
+          <div class="pc-rating-row"><span class="pc-stars">★ 4.6</span></div>
+          <div class="pc-price-row"><span class="pc-price-nd">₱145</span><span class="pc-unit">/liter</span></div>
+          <div class="pc-btns">
+            <button class="pc-btn-cart" onclick="openVariantModal({id:'goat-milk',name:'Pasteurized Goat Milk',price:145,farm:'Curuan Livestock Farm',units:['per liter','per 500ml'],img:'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=600'})">Cart</button>
+            <a href="checkout.html" class="pc-btn-buy">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── EGGS ─── -->
+      <div class="cat-section-label" id="eggs">
+        <h3>
+          <span class="cat-icon-box" style="background:#fffde7;">
+            <i class="fi fi-rs-egg" style="font-size:1.1rem;color:#f57f17;"></i>
+          </span>
+          Eggs
+        </h3>
+        <div class="cat-count">2 items</div>
+        <div class="cat-section-divider"></div>
+      </div>
+
+      <!-- Native Chicken Eggs -->
+      <div class="product-card-shopee">
+        <div class="pc-img-wrap">
+          <a href="product-detail.html"><img class="pc-img" src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=600" alt="Chicken Eggs" loading="lazy"></a>
+        </div>
+        <div class="pc-body">
+          <a href="product-detail.html" class="pc-name">Native Chicken Eggs</a>
+          <div class="pc-farmer">Ayala Poultry</div>
+          <div class="pc-rating-row"><span class="pc-stars">★ 5.0</span></div>
+          <div class="pc-price-row"><span class="pc-price-nd">₱12</span><span class="pc-unit">/pc</span></div>
+          <div class="pc-btns">
+            <button class="pc-btn-cart" onclick="openVariantModal({id:'chicken-eggs',name:'Native Chicken Eggs',price:12,farm:'Ayala Poultry',units:['per piece','per tray (30 pcs)','per pack (12 pcs)'],img:'https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=600'})">Cart</button>
+            <a href="checkout.html" class="pc-btn-buy">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Duck Eggs -->
+      <div class="product-card-shopee">
+        <div class="pc-img-wrap">
+          <a href="product-detail.html"><img class="pc-img" src="https://images.unsplash.com/photo-1587486913049-53fc88980cfc?w=600" alt="Duck Eggs" loading="lazy"></a>
+        </div>
+        <div class="pc-body">
+          <a href="product-detail.html" class="pc-name">Itik Eggs (Duck Eggs)</a>
+          <div class="pc-farmer">Recodo Duck Farm</div>
+          <div class="pc-rating-row"><span class="pc-stars">★ 4.8</span></div>
+          <div class="pc-price-row"><span class="pc-price-nd">₱18</span><span class="pc-unit">/pc</span></div>
+          <div class="pc-btns">
+            <button class="pc-btn-cart" onclick="openVariantModal({id:'duck-eggs',name:'Itik Eggs (Duck Eggs)',price:18,farm:'Recodo Duck Farm',units:['per piece','per tray (30 pcs)','per pack (12 pcs)'],img:'https://images.unsplash.com/photo-1587486913049-53fc88980cfc?w=600'})">Cart</button>
+            <a href="checkout.html" class="pc-btn-buy">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── PANTRY ─── -->
+      <div class="cat-section-label" id="pantry">
+        <h3>
+          <span class="cat-icon-box" style="background:#f3e5f5;">
+            <i class="fi fi-rs-basket-shopping-simple" style="font-size:1.1rem;color:#6a1b9a;"></i>
+          </span>
+          Pantry
+        </h3>
+        <div class="cat-count">2 items</div>
+        <div class="cat-section-divider"></div>
+      </div>
+
+      <!-- Turmeric -->
+      <div class="product-card-shopee">
+        <div class="pc-img-wrap">
+          <a href="product-detail.html"><img class="pc-img" src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=600" alt="Turmeric" loading="lazy"></a>
+        </div>
+        <div class="pc-body">
+          <a href="product-detail.html" class="pc-name">Luyang Dilaw (Turmeric)</a>
+          <div class="pc-farmer">Taluksangay Spice Farm</div>
+          <div class="pc-rating-row"><span class="pc-stars">★ 4.9</span></div>
+          <div class="pc-price-row"><span class="pc-price-nd">₱160</span><span class="pc-unit">/250g</span></div>
+          <div class="pc-btns">
+            <button class="pc-btn-cart" onclick="openVariantModal({id:'turmeric',name:'Luyang Dilaw Turmeric',price:160,farm:'Taluksangay Spice Farm',units:['per 250g','per 100g','per kg'],img:'https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=600'})">Cart</button>
+            <a href="checkout.html" class="pc-btn-buy">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coconut Vinegar -->
+      <div class="product-card-shopee">
+        <div class="pc-img-wrap">
+          <a href="product-detail.html"><img class="pc-img" src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=600" alt="Coconut Vinegar" loading="lazy"></a>
+          <span class="pc-badge-low">Low Stock</span>
+        </div>
+        <div class="pc-body">
+          <a href="product-detail.html" class="pc-name">Sukang Tuba (Coconut Vinegar)</a>
+          <div class="pc-farmer">Limpapa Coconut Farm</div>
+          <div class="pc-rating-row"><span class="pc-stars">★ 4.8</span></div>
+          <div class="pc-price-row"><span class="pc-price-nd">₱120</span><span class="pc-unit">/750ml</span></div>
+          <div class="pc-btns">
+            <button class="pc-btn-cart" onclick="openVariantModal({id:'vinegar',name:'Sukang Tuba (Coconut Vinegar)',price:120,farm:'Limpapa Coconut Farm',units:['per 750ml','per 500ml','per liter'],img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=600'})">Cart</button>
+            <a href="checkout.html" class="pc-btn-buy">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end products-grid-shopee -->
+  </div>
+</div>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="footer-logo"><span class="logo-leaf"></span> FarmDirect</div>
+      <p class="footer-desc">Fresh from Zamboanga farms to your table. Verified. Local. Honest.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <div class="footer-links">
+        <a href="#vegetables">Vegetables</a>
+        <a href="#fruits">Fruits</a>
+        <a href="#meats">Meats</a>
+        <a href="#dairy">Dairy</a>
+        <a href="#eggs">Eggs</a>
+        <a href="#pantry">Pantry</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Account</h4>
+      <div class="footer-links">
+        <a href="../Login/login.html">Sign In</a>
+        <a href="Dashboard.html">My Dashboard</a>
+        <a href="cart.html">Shopping Cart</a>
+        <a href="Order_tracking.html">Track Order</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="footer-contact">
+        <span>Zamboanga City, Philippines</span>
+        <a href="mailto:hello@farmdirect.ph">hello@farmdirect.ph</a>
+        <a href="tel:+639001234567">+63 900 123 4567</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FarmDirect Zamboanga. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════ VARIANT MODAL ═══════ -->
+<div id="variant-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:3000;align-items:flex-end;justify-content:center;" onclick="closeVariantModal(event)">
+  <div id="variant-modal" style="background:#fff;border-radius:20px 20px 0 0;width:100%;max-width:540px;padding:1.5rem 1.4rem 2rem;transform:translateY(100%);transition:transform 0.35s cubic-bezier(.32,.72,0,1);max-height:92vh;overflow-y:auto;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+      <h2 style="font-family:var(--font-display);font-size:1.15rem;font-weight:700;">Add to Cart</h2>
+      <button onclick="closeVariantModal()" style="background:none;border:none;cursor:pointer;color:var(--text-light);font-size:1.4rem;line-height:1;">✕</button>
+    </div>
+    <div style="display:flex;gap:1rem;align-items:center;background:var(--cream);border-radius:12px;padding:0.9rem;margin-bottom:1.2rem;">
+      <img id="vm-img" src="" alt="" style="width:72px;height:72px;border-radius:10px;object-fit:cover;flex-shrink:0;border:1.5px solid var(--border);">
+      <div>
+        <div id="vm-name" style="font-weight:700;font-size:0.95rem;"></div>
+        <div id="vm-farm" style="font-size:0.78rem;color:var(--text-light);margin-top:0.1rem;"></div>
+        <div id="vm-price" style="font-size:1.1rem;font-weight:800;color:var(--orange);margin-top:0.3rem;"></div>
+      </div>
+    </div>
+    <div id="vm-variety-wrap" style="display:none;margin-bottom:1.2rem;">
+      <div style="font-size:0.85rem;font-weight:700;margin-bottom:0.6rem;color:var(--text);">Variety <span style="color:var(--red);">*</span></div>
+      <div id="vm-varieties" style="display:flex;flex-wrap:wrap;gap:0.4rem;"></div>
+    </div>
+    <div style="margin-bottom:1.2rem;">
+      <div style="font-size:0.85rem;font-weight:700;margin-bottom:0.6rem;color:var(--text);">Unit of Measurement <span style="color:var(--red);">*</span></div>
+      <div id="vm-units" style="display:flex;flex-wrap:wrap;gap:0.4rem;"></div>
+    </div>
+    <div style="margin-bottom:1.4rem;">
+      <div style="font-size:0.85rem;font-weight:700;margin-bottom:0.6rem;color:var(--text);">Quantity</div>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <div style="display:flex;align-items:center;border:2px solid var(--border);border-radius:10px;overflow:hidden;background:var(--cream);">
+          <button onclick="changeVmQty(-1)" style="width:40px;height:40px;border:none;background:none;font-size:1.2rem;font-weight:700;cursor:pointer;color:var(--text-mid);">−</button>
+          <span id="vm-qty" style="min-width:40px;text-align:center;font-size:1rem;font-weight:700;">1</span>
+          <button onclick="changeVmQty(1)" style="width:40px;height:40px;border:none;background:none;font-size:1.2rem;font-weight:700;cursor:pointer;color:var(--text-mid);">+</button>
+        </div>
+        <span style="font-size:0.83rem;color:var(--text-light);" id="vm-stock">In stock</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;background:var(--green-light);border-radius:10px;padding:0.75rem 1rem;margin-bottom:1.2rem;">
+      <span style="font-size:0.88rem;font-weight:600;color:var(--green);">Subtotal</span>
+      <span id="vm-subtotal" style="font-size:1.1rem;font-weight:800;color:var(--green);">₱0.00</span>
+    </div>
+    <div style="display:flex;gap:0.75rem;">
+      <button onclick="confirmAddToCart()" style="flex:1;background:var(--green-light);color:var(--green);border:2px solid var(--green);border-radius:12px;padding:0.85rem;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.2s;">
+        <i class="fi fi-rs-shopping-cart" style="margin-right:5px;vertical-align:middle;"></i> Add to Cart
+      </button>
+      <button onclick="confirmBuyNow()" style="flex:1;background:var(--green);color:#fff;border:2px solid var(--green);border-radius:12px;padding:0.85rem;font-size:0.95rem;font-weight:700;cursor:pointer;transition:opacity 0.2s;">
+        Buy Now →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ TOAST ═══════ -->
+<div id="toast" style="position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green);color:#fff;padding:0.75rem 1.4rem;border-radius:30px;font-size:0.9rem;font-weight:700;z-index:4000;transition:transform 0.35s,opacity 0.35s;opacity:0;pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
+  <i class="fi fi-rs-check-circle" style="margin-right:5px;vertical-align:middle;"></i> Added to cart!
+</div>
+
+<!-- ═══════ SCRIPTS ═══════ -->
+<script>
+/* ── Cart ── */
+const CART_KEY = 'fd_cart';
+function getCart() { try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e) { return []; } }
+function saveCart(c) { localStorage.setItem(CART_KEY, JSON.stringify(c)); updateCartBadge(); }
+function updateCartBadge() {
+  const total = getCart().reduce((s, i) => s + (i.qty || 1), 0);
+  document.querySelectorAll('.cart-count').forEach(el => el.textContent = total || 0);
+}
+updateCartBadge();
+
+/* ── Countdown ── */
+function runCountdown() {
+  let h = parseInt(document.getElementById('cd-h').textContent);
+  let m = parseInt(document.getElementById('cd-m').textContent);
+  let s = parseInt(document.getElementById('cd-s').textContent);
+  setInterval(() => {
+    s--;
+    if (s < 0) { s = 59; m--; }
+    if (m < 0) { m = 59; h--; }
+    if (h < 0) { h = 5; m = 59; s = 59; }
+    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+  }, 1000);
+}
+runCountdown();
+
+/* ── Variant Modal ── */
+let vmProduct = null, vmUnit = null, vmVariety = null, vmQty = 1;
+
+function openVariantModal(product) {
+  vmProduct = product; vmQty = 1; vmUnit = product.units[0];
+  vmVariety = product.varieties ? product.varieties[0].label : null;
+  document.getElementById('vm-img').src = product.img;
+  document.getElementById('vm-name').textContent = product.name;
+  document.getElementById('vm-farm').textContent = product.farm || '';
+  document.getElementById('vm-qty').textContent = 1;
+  updateVmPrice();
+  const varietyWrap = document.getElementById('vm-variety-wrap');
+  const varietyContainer = document.getElementById('vm-varieties');
+  if (product.varieties && product.varieties.length) {
+    varietyWrap.style.display = 'block';
+    varietyContainer.innerHTML = product.varieties.map((v, i) => `<button class="vm-variety-btn ${i===0?'selected':''}" onclick="selectVariety(this,'${v.label}')" style="border:2px solid ${i===0?'var(--green)':'var(--border)'};background:${i===0?'var(--green-light)':'var(--white)'};border-radius:8px;padding:0.35rem 0.75rem;cursor:pointer;font-size:0.78rem;font-weight:700;color:${i===0?'var(--green)':'var(--text-mid)'};font-family:var(--font-body);transition:all 0.18s;">${v.label}</button>`).join('');
+  } else { varietyWrap.style.display = 'none'; varietyContainer.innerHTML = ''; }
+  document.getElementById('vm-units').innerHTML = product.units.map((u, i) => `<button class="vm-unit-btn ${i===0?'selected':''}" onclick="selectUnit(this,'${u}')" style="border:2px solid ${i===0?'var(--green)':'var(--border)'};background:${i===0?'var(--green-light)':'var(--white)'};border-radius:8px;padding:0.35rem 0.75rem;cursor:pointer;font-size:0.78rem;font-weight:700;color:${i===0?'var(--green)':'var(--text-mid)'};font-family:var(--font-body);transition:all 0.18s;">${u}</button>`).join('');
+  const overlay = document.getElementById('variant-overlay');
+  overlay.style.display = 'flex';
+  requestAnimationFrame(() => { overlay.style.opacity = '1'; document.getElementById('variant-modal').style.transform = 'translateY(0)'; });
+  document.body.style.overflow = 'hidden';
+}
+function closeVariantModal(e) {
+  if (e && e.target !== document.getElementById('variant-overlay')) return;
+  const modal = document.getElementById('variant-modal');
+  const overlay = document.getElementById('variant-overlay');
+  modal.style.transform = 'translateY(100%)';
+  setTimeout(() => { overlay.style.display = 'none'; }, 350);
+  document.body.style.overflow = '';
+}
+function selectVariety(btn, variety) {
+  vmVariety = variety;
+  document.querySelectorAll('.vm-variety-btn').forEach(b => { b.style.borderColor='var(--border)'; b.style.background='var(--white)'; b.style.color='var(--text-mid)'; });
+  btn.style.borderColor='var(--green)'; btn.style.background='var(--green-light)'; btn.style.color='var(--green)';
+}
+function selectUnit(btn, unit) {
+  vmUnit = unit;
+  document.querySelectorAll('.vm-unit-btn').forEach(b => { b.style.borderColor='var(--border)'; b.style.background='var(--white)'; b.style.color='var(--text-mid)'; });
+  btn.style.borderColor='var(--green)'; btn.style.background='var(--green-light)'; btn.style.color='var(--green)';
+}
+function changeVmQty(delta) { vmQty = Math.max(1, Math.min(99, vmQty + delta)); document.getElementById('vm-qty').textContent = vmQty; updateVmPrice(); }
+function updateVmPrice() { if (!vmProduct) return; document.getElementById('vm-price').textContent = '₱' + vmProduct.price.toFixed(2); document.getElementById('vm-subtotal').textContent = '₱' + (vmProduct.price * vmQty).toFixed(2); }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.style.transform='translateX(-50%) translateY(0)'; t.style.opacity='1'; setTimeout(() => { t.style.transform='translateX(-50%) translateY(80px)'; t.style.opacity='0'; }, 2200); }
+function confirmAddToCart() {
+  if (!vmProduct || !vmUnit) { alert('Please select a unit.'); return; }
+  const cart = getCart();
+  const key = vmProduct.id + '_' + vmUnit + (vmVariety ? '_' + vmVariety : '');
+  const existing = cart.find(i => i.key === key);
+  const displayName = vmProduct.name + (vmVariety ? ' (' + vmVariety + ')' : '');
+  if (existing) { existing.qty += vmQty; } else { cart.push({ key, id: vmProduct.id, name: displayName, price: vmProduct.price, qty: vmQty, unit: vmUnit, variety: vmVariety, farm: vmProduct.farm, img: vmProduct.img }); }
+  saveCart(cart);
+  closeVariantModal();
+  showToast('✓ ' + displayName + ' added to cart!');
+}
+function confirmBuyNow() { confirmAddToCart(); setTimeout(() => window.location.href = 'cart.html', 300); }
+</script>
+</body>
+</html>

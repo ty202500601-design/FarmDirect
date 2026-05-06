@@ -4,48 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Track Order – FarmDirect</title>
-<link rel="stylesheet" href="style.css">
-<style>
-/* Return modal */
-.return-modal-overlay { display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center; }
-.return-modal-overlay.open { display:flex; }
-.return-modal { background:var(--white);border-radius:var(--radius);padding:2rem;max-width:480px;width:90%;box-shadow:var(--shadow-lg); }
-.return-modal h3 { font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.5rem;color:var(--green-dark); }
-.return-modal p { font-size:0.88rem;color:var(--text-mid);margin-bottom:1rem;line-height:1.5; }
-.return-reason-select { width:100%;padding:0.7rem 0.9rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;background:var(--cream);margin-bottom:0.8rem; }
-.return-reason-select:focus { border-color:var(--green); }
-.return-notes { width:100%;padding:0.7rem 0.9rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:0.88rem;background:var(--cream);margin-bottom:1rem;resize:vertical;font-family:inherit; }
-.return-notes:focus { border-color:var(--green); }
-.return-modal-btns { display:flex;gap:0.8rem; }
-.return-confirm-btn { flex:1;background:var(--green);color:#fff;border:none;border-radius:10px;padding:0.7rem;font-size:0.9rem;font-weight:700;cursor:pointer;transition:opacity 0.2s; }
-.return-confirm-btn:hover { opacity:0.85; }
-.return-back-btn { flex:1;background:var(--white);border:2px solid var(--border);border-radius:10px;padding:0.7rem;font-size:0.9rem;font-weight:600;cursor:pointer;transition:border-color 0.2s; }
-.return-back-btn:hover { border-color:var(--green);color:var(--green); }
-
-/* Review form — only shows when delivered */
-.review-after-box { background:var(--white);border-radius:var(--radius);border:2px solid var(--border);padding:1.8rem;margin-top:1.5rem; }
-.review-after-box h3 { font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.5rem; }
-.review-form-sub { font-size:0.85rem;color:var(--text-light);margin-bottom:1rem; }
-.review-stars-row { display:flex;gap:0.4rem;font-size:1.6rem;cursor:pointer;margin-bottom:1rem; }
-.review-stars-row span { transition:transform 0.15s; }
-.review-stars-row span:hover { transform:scale(1.2); }
-.review-stars-row span.selected { filter:none; }
-.review-stars-row span.dim { opacity:0.35; }
-.review-textarea { width:100%;padding:0.75rem 0.9rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;background:var(--cream);resize:vertical;font-family:inherit;transition:border-color 0.2s; }
-.review-textarea:focus { border-color:var(--green); }
-.review-submit-btn { background:var(--green);color:#fff;border:none;border-radius:10px;padding:0.65rem 1.4rem;font-size:0.9rem;font-weight:700;cursor:pointer;margin-top:0.75rem;transition:opacity 0.2s; }
-.review-submit-btn:hover { opacity:0.88; }
-.review-submit-btn:disabled { background:var(--border);color:var(--text-light);cursor:not-allowed; }
-.review-locked-note { font-size:0.84rem;color:var(--text-light);font-style:italic;text-align:center;padding:1rem;border:1.5px dashed var(--border);border-radius:var(--radius-sm); }
-
-/* Return button area */
-.order-action-bar { display:flex;gap:0.8rem;flex-wrap:wrap;margin:1.5rem 0; }
-.return-request-btn { display:flex;align-items:center;gap:0.5rem;background:var(--cream-dark);border:2px solid var(--border);border-radius:10px;padding:0.65rem 1.2rem;font-size:0.88rem;font-weight:600;cursor:pointer;transition:all 0.2s;color:var(--text-mid); }
-.return-request-btn:hover { border-color:var(--orange);color:var(--orange); }
-.return-request-btn:disabled { opacity:0.5;cursor:not-allowed; }
-.simulate-delivered-btn { display:flex;align-items:center;gap:0.5rem;background:var(--green-light);border:2px solid var(--green);border-radius:10px;padding:0.65rem 1.2rem;font-size:0.82rem;font-weight:600;cursor:pointer;color:var(--green);transition:opacity 0.2s; }
-.simulate-delivered-btn:hover { opacity:0.8; }
-</style>
+<link rel="stylesheet" href="../CSS/Order_tracking.css">
 </head>
 <body>
 
