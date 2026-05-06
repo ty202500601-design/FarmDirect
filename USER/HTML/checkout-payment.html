@@ -3,13 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Confirm Order – FarmDirect</title>
-<link rel="stylesheet" href="style.css">
-<style>
-.vat-note { font-size:0.78rem;color:var(--text-light);margin-top:0.3rem;font-style:italic; }
-.confirm-dropoff-list { margin-top:0.5rem; }
-.confirm-dropoff-item { background:var(--cream);border-radius:8px;padding:0.55rem 0.85rem;margin-bottom:0.4rem;font-size:0.84rem;color:var(--text-mid);border-left:3px solid var(--green-mid); }
-</style>
+<title>Payment – FarmDirect</title>
+<link rel="stylesheet" href="../CSS/checkout-payment.css">
 </head>
 <body>
 
@@ -35,7 +30,11 @@
       </a>
         </div>
       </div>
-       <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
+      <a href="../Login/login.html" class="login-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        Login
+      </a>
+      <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
     </div>
   </div>
   <label for="menu-check" class="menu-overlay"></label>
@@ -58,14 +57,88 @@
     <div class="checkout-steps">
       <div class="step done"><span class="step-num">✓</span> Delivery</div>
       <div class="step-line"></div>
-      <div class="step done"><span class="step-num">✓</span> Payment</div>
+      <div class="step active"><span class="step-num">2</span> Payment</div>
       <div class="step-line"></div>
-      <div class="step active"><span class="step-num">3</span> Confirm</div>
+      <div class="step"><span class="step-num">3</span> Confirm</div>
     </div>
 
-    <div class="confirm-layout" id="confirm-layout">
-      <!-- Rendered by JS -->
-      <p style="text-align:center;padding:3rem;color:var(--text-light);">Loading order details…</p>
+    <div class="checkout-layout">
+
+      <div class="checkout-summary-col">
+        <div class="summary-card" id="summary-card">
+          <h2>Order Summary</h2>
+          <!-- Populated by JS from localStorage -->
+          <p style="font-size:0.85rem;color:var(--text-light);">Loading summary…</p>
+        </div>
+      </div>
+
+      <div class="checkout-form-col">
+        <div class="checkout-form-wrap">
+          <h2>Payment Method</h2>
+
+          <div class="gcash-promo-banner">
+            <span class="gcash-promo-icon">💳</span>
+            <div><strong>Pay with GCash</strong> and get <strong>₱20 cashback</strong> on your next order!</div>
+          </div>
+
+          <div class="payment-options">
+
+            <input type="radio" name="payment" id="pay-cod" checked>
+            <label for="pay-cod" class="pay-label" onclick="setPayment('cod')">
+              <span class="pay-radio-dot"></span>
+              <span class="pay-icon">💵</span>
+              <div>
+                <div class="courier-name">Cash on Delivery</div>
+                <div class="courier-desc">Pay when your order arrives</div>
+              </div>
+            </label>
+
+            <input type="radio" name="payment" id="pay-gcash">
+            <label for="pay-gcash" class="pay-label" onclick="setPayment('gcash')">
+              <span class="pay-radio-dot"></span>
+              <span class="pay-icon">📱</span>
+              <div>
+                <div class="courier-name">
+                  GCash
+                  <span class="gcash-cashback-badge">+₱20 Cashback</span>
+                </div>
+                <div class="courier-desc">Instant digital payment</div>
+              </div>
+            </label>
+
+            <div class="gcash-form" id="gcash-form" style="display:none;padding:0.5rem 1rem 0.8rem;">
+              <div class="form-group">
+                <label>GCash Number</label>
+                <div class="phone-wrap">
+                  <span class="phone-prefix">+63</span>
+                  <input type="tel" id="gcash-number" placeholder="917 000 0000">
+                </div>
+              </div>
+            </div>
+
+            <input type="radio" name="payment" id="pay-bank">
+            <label for="pay-bank" class="pay-label" onclick="setPayment('bank')">
+              <span class="pay-radio-dot"></span>
+              <span class="pay-icon">🏦</span>
+              <div>
+                <div class="courier-name">Bank Transfer</div>
+                <div class="courier-desc">BDO, BPI, UnionBank</div>
+              </div>
+            </label>
+
+          </div>
+
+          <div class="pay-security">
+            🔒 Your payment information is encrypted and secure.
+          </div>
+
+          <div class="step-nav">
+            <a href="checkout.html" class="secondary-btn">← Back</a>
+            <a href="checkout-confirm.html" class="add-cart-btn checkout-next-btn" onclick="savePayment()">Review Order →</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -109,8 +182,8 @@
   const STORAGE_KEY = 'fd_checkout';
 
   const VOUCHERS = {
-    FARMSAVE50: { label:'₱50 Off',        type:'flat',    value:50  },
-    FRESH10:    { label:'10% Off Veggies', type:'percent', value:10  },
+    FARMSAVE50: { label:'₱50 Off',      type:'flat',    value:50 },
+    FRESH10:    { label:'10% Off Veggies', type:'percent', value:10 },
     NEWBUYER:   { label:'₱100 Off (New)',  type:'flat',    value:100 },
   };
 
@@ -162,6 +235,7 @@
     save(obj) {
       const cur = this.get();
       const merged = Object.assign({}, cur, obj);
+      // Recompute pricing whenever we save
       const ship = merged.shippingFee || 60;
       merged.pricing = calcPricing(merged.items || DEFAULT_ITEMS, ship, merged.voucherCode || '', merged.specialDisc || '');
       localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
@@ -180,116 +254,48 @@
 })();
 </script>
 <script>
-(function renderConfirm() {
-  const co   = FD.Checkout.get();
-  const addr = co.address || {};
-  const p    = co.pricing || {};
-  const pm   = co.paymentMethod || 'cod';
-  const pmLabel = { cod:'💵 Cash on Delivery', gcash:'📱 GCash', bank:'🏦 Bank Transfer' };
-  const dropoffs = co.dropoffs || [];
+let selectedPayment = 'cod';
 
-  // Build dropoff HTML
-  let dropoffHtml = '';
-  if (dropoffs.length > 0) {
-    dropoffHtml = `<div class="confirm-box">
-      <h3>📍 Additional Drop-off Points</h3>
-      <div class="confirm-dropoff-list">
-        ${dropoffs.map((d, i) => `<div class="confirm-dropoff-item">Drop-off ${i + 2} · +₱30</div>`).join('')}
-      </div>
-      <a href="checkout.html" class="confirm-edit-link">Edit →</a>
-    </div>`;
-  }
-
-  // Build items HTML
-  let itemsHtml = (co.items || []).map(i =>
-    `<div class="review-item"><span>${i.name} ×${i.qty}</span><span>${FD.fmt.peso(i.price * i.qty)}</span></div>`
-  ).join('');
-
-  // Discounts
-  let discHtml = '';
-  if (co.specialDisc) {
-    discHtml += `<div class="review-item savings"><span>💙 ${co.specialDisc} Discount (20%)</span><span>−${FD.fmt.peso((p.sub || 0) * 0.20)}</span></div>`;
-  }
-  if (co.voucherCode) {
-    const v = FD.Pricing.VOUCHERS[co.voucherCode];
-    if (v) {
-      const vAmt = v.type === 'flat' ? v.value : (p.sub || 0) * (v.value / 100);
-      discHtml += `<div class="review-item savings"><span>🎫 Voucher (${co.voucherCode})</span><span>−${FD.fmt.peso(vAmt)}</span></div>`;
-    }
-  }
-
-  const totalSavings = p.disc || 0;
-
-  const layout = document.getElementById('confirm-layout');
-  layout.innerHTML = `
-    <div class="confirm-box">
-      <h3>📍 Delivery Details</h3>
-      <div class="confirm-row"><span class="confirm-label">Name</span><strong>${addr.name || 'Juan dela Cruz'}</strong></div>
-      <div class="confirm-row"><span class="confirm-label">Phone</span><strong>${addr.phone || '+63 912 345 6789'}</strong></div>
-      <div class="confirm-row"><span class="confirm-label">Address</span><strong>${addr.street ? addr.street + ', ' + addr.brgy + ', ' + addr.city + ' ' + addr.zip : '123 Rizal St., Brgy. Tetuan, Zamboanga City 7000'}</strong></div>
-      <div class="confirm-row"><span class="confirm-label">Courier</span><strong>🚕 Grab · Est. 30–60 min</strong></div>
-      <a href="checkout.html" class="confirm-edit-link">Edit →</a>
-    </div>
-
-    ${dropoffHtml}
-
-    <div class="confirm-box">
-      <h3>💳 Payment Method</h3>
-      <div class="confirm-row"><span class="confirm-label">Method</span><strong>${pmLabel[pm]}</strong></div>
-      ${pm === 'gcash' && co.gcashNumber ? `<div class="confirm-row"><span class="confirm-label">GCash No.</span><strong>+63 ${co.gcashNumber}</strong></div>` : ''}
-      <a href="checkout-payment.html" class="confirm-edit-link">Edit →</a>
-    </div>
-
-    <div class="confirm-box">
-      <h3>🛍️ Order Items</h3>
-      ${itemsHtml}
-      <div class="review-item"><span>Subtotal</span><span>${FD.fmt.peso(p.sub || 1230)}</span></div>
-      ${discHtml}
-      <div class="review-item"><span>Delivery Fee</span><span>${p.shipping === 0 ? 'FREE' : FD.fmt.peso(p.shipping || 80)}</span></div>
-      <div class="review-item" style="font-size:0.82rem;color:var(--text-light);"><span>VAT (12%)</span><span>+${FD.fmt.peso(p.vat || 0)}</span></div>
-      <div class="review-item total-row"><span>Total</span><span>${FD.fmt.peso(p.total || 0)}</span></div>
-      <p class="vat-note">VAT Receipt can be requested upon delivery.</p>
-    </div>
-
-    ${totalSavings > 0 ? `
-    <div class="savings-highlight">
-      <p class="savings-highlight-title">🎉 You're saving ${FD.fmt.peso(totalSavings)} on this order!</p>
-      <p class="savings-highlight-sub">Includes all discounts and vouchers${co.specialDisc ? ' + ' + co.specialDisc + ' discount' : ''}</p>
-    </div>` : ''}
-
-    <p class="terms-note">
-      By placing your order, you agree to FarmDirect's
-      <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
-    </p>
-
-    <div class="step-nav">
-      <a href="checkout-payment.html" class="secondary-btn">← Back</a>
-      <button class="add-cart-btn place-order-btn" onclick="placeOrder()" style="border:none;cursor:pointer;">
-        Place Order — ${FD.fmt.peso(p.total || 0)} →
-      </button>
-    </div>`;
-})();
-
-function placeOrder() {
-  const co = FD.Checkout.get();
-  const order = FD.Orders.place({
-    items:         co.items || [],
-    pricing:       co.pricing || {},
-    address:       co.address || {},
-    paymentMethod: co.paymentMethod || 'cod',
-    gcashNumber:   co.gcashNumber || '',
-    shippingFee:   co.shippingFee || 80,
-    voucherCode:   co.voucherCode || '',
-    specialDisc:   co.specialDisc || '',
-    dropoffs:      co.dropoffs || [],
-    courier:       'Grab',
-    estDelivery:   '30–60 min',
-  });
-  FD.Checkout.clear();
-  // Store the new order ID for the success page
-  localStorage.setItem('fd_last_order', order.id);
-  window.location.href = 'order-success.html';
+function setPayment(type) {
+  selectedPayment = type;
+  document.getElementById('gcash-form').style.display = type === 'gcash' ? 'block' : 'none';
 }
+
+function savePayment() {
+  const gcashNum = selectedPayment === 'gcash' ? document.getElementById('gcash-number').value : '';
+  FD.Checkout.save({ paymentMethod: selectedPayment, gcashNumber: gcashNum });
+}
+
+/* Render order summary from checkout state */
+(function() {
+  const co = FD.Checkout.get();
+  const card = document.getElementById('summary-card');
+  if (!co || !co.pricing) {
+    card.innerHTML = `<h2>Order Summary</h2><p style="font-size:0.85rem;color:var(--text-light);">Add items to cart first.</p>`;
+    return;
+  }
+  const p = co.pricing;
+  let html = `<h2>Order Summary</h2>`;
+  (co.items || []).forEach(i => {
+    html += `<div class="summary-row"><span>${i.name} x${i.qty}</span><span>${FD.fmt.peso(i.price * i.qty)}</span></div>`;
+  });
+  html += `<hr class="summary-divider">`;
+  html += `<div class="summary-row"><span>Subtotal</span><span>${FD.fmt.peso(p.sub)}</span></div>`;
+  if (p.disc > 0) {
+    html += `<div class="summary-row savings"><span>🎉 Discounts</span><span>−${FD.fmt.peso(p.disc)}</span></div>`;
+  }
+  html += `<div class="summary-row"><span>Shipping</span><span>${p.shipping === 0 ? 'FREE' : FD.fmt.peso(p.shipping)}</span></div>`;
+  html += `<div class="summary-row" style="color:var(--text-light);font-size:0.82rem;"><span>VAT (12%)</span><span>+${FD.fmt.peso(p.vat)}</span></div>`;
+  html += `<div class="summary-row total-row"><span>Total</span><span>${FD.fmt.peso(p.total)}</span></div>`;
+  card.innerHTML = html;
+
+  // Restore saved payment
+  const pm = co.paymentMethod || 'cod';
+  if (pm !== 'cod') {
+    document.getElementById('pay-' + pm).checked = true;
+    setPayment(pm);
+  }
+})();
 </script>
 </body>
 </html>

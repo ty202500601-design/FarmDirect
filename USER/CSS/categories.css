@@ -1,0 +1,6 @@
+/* CATEGORIES */
+.categories-section { padding: 1.5rem 0 0.5rem; background: var(--cream); }
+.category-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; padding: 0 1.2rem; max-width: 1200px; margin: 0 auto; }
+.pill { padding: 0.5rem 1.1rem; border-radius: 50px; border: 2px solid var(--border); font-size: 0.9rem; font-weight: 500; color: var(--text-mid); background: var(--white); transition: border-color 0.2s, color 0.2s, background 0.2s; white-space: nowrap; display: inline-block; }
+.pill:hover { border-color: var(--green); color: var(--green); }
+.pill.active { background: var(--green); color: white; border-color: var(--green); }
