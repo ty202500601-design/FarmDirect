@@ -3,172 +3,443 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farm Direct - Register</title>
+    <title>Farm Direct - Sign Up</title>
     <link rel="stylesheet" href="login.css">
     <style>
-        .seller-note {
-            margin-top: 18px;
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 10px;
-            padding: 14px 16px;
-            text-align: center;
-            font-size: 13px;
-            color: #374151;
+
+        /* ── STEP PROGRESS BAR ── */
+        .signup-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 28px;
         }
-        .seller-note a { color: green; font-weight: 700; text-decoration: none; }
-        .seller-note a:hover { text-decoration: underline; }
-        .req { color: #dc2626; margin-left: 2px; font-weight: 700; }
+        .signup-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .signup-step-circle {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            color: #9ca3af;
+            font-size: 13px; font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s;
+        }
+        .signup-step.active .signup-step-circle { background: green; color: #fff; }
+        .signup-step.done   .signup-step-circle { background: green; color: #fff; }
+        .signup-step-label {
+            font-size: 10px; color: #9ca3af;
+            font-weight: 600; text-align: center; white-space: nowrap;
+        }
+        .signup-step.active .signup-step-label { color: green; }
+        .signup-step-line {
+            width: 48px; height: 2px;
+            background: #e5e7eb; margin-bottom: 18px;
+            transition: background 0.3s;
+        }
+        .signup-step-line.done { background: green; }
+
+        /* ── STEP PANELS ── */
+        .step-panel { display: none; }
+        .step-panel.active { display: block; }
+
+        /* ── OTP ── */
+        .otp-wrap {
+            display: flex; gap: 10px;
+            justify-content: center;
+            margin: 20px 0 8px;
+        }
+        .otp-input {
+            width: 44px; height: 50px;
+            text-align: center; font-size: 22px; font-weight: 700;
+            border: 1.5px solid #d1d5db; border-radius: 8px;
+            outline: none; font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .otp-input:focus { border-color: green; box-shadow: 0 0 0 3px rgba(0,128,0,.08); }
+        .otp-note { text-align: center; font-size: 13px; color: #6b7280; margin-bottom: 4px; line-height: 1.6; }
+        .otp-phone { font-weight: 700; color: #1a1a1a; }
+        .resend-note { text-align: center; font-size: 12px; color: #9ca3af; margin-bottom: 20px; }
+        .resend-note a { color: green; font-weight: 600; text-decoration: none; cursor: pointer; }
+
+        /* ── ADDRESS ── */
         .address-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         @media (max-width: 520px) { .address-grid { grid-template-columns: 1fr; } }
-        .field-note {
-            font-size: 12px; color: #6b7280; margin-top: 6px;
-            padding: 8px 12px; background: #f9fafb;
-            border-radius: 6px; border: 1px solid #e5e7eb;
-        }
+
+        /* ── MISC ── */
+        .req { color: #dc2626; margin-left: 2px; font-weight: 700; }
         .error-note {
             font-size: 12px; color: #dc2626; margin-top: 6px;
             padding: 8px 12px; background: #fef2f2;
             border-radius: 6px; border: 1px solid #fecaca;
         }
+        .seller-note {
+            margin-top: 18px; background: #f0fdf4;
+            border: 1px solid #bbf7d0; border-radius: 10px;
+            padding: 14px 16px; text-align: center;
+            font-size: 13px; color: #374151;
+        }
+        .seller-note a { color: green; font-weight: 700; text-decoration: none; }
+        .done-icon { font-size: 52px; text-align: center; margin-bottom: 12px; }
+
     </style>
 </head>
 <body>
 
     <header class="topbar">
-        <div class="logo">
-            <span class="logo-text">Farm<span>Direct</span></span>
+        <div class="topbar-inner">
+            <div class="logo">
+                <span class="logo-text">Farm<span>Direct</span></span>
+            </div>
         </div>
     </header>
 
     <main class="auth-wrapper">
-        <div class="auth-card wide">
-            <a href="login.html" class="back-btn">← Back</a>
-            <div class="auth-title">Create an Account</div>
-            <div class="auth-sub">Fill in your details to get started.</div>
+        <div class="auth-wrapper-inner">
+        <div class="auth-hero">
+            <div class="auth-hero-badge">🌾 Zamboanga's Farm Marketplace</div>
+            <div class="auth-hero-title">Join FarmDirect</div>
+            <p class="auth-hero-sub">Create your account and start shopping fresh produce from local farmers.</p>
+        </div>
+        <div class="auth-panel">
+        <div class="auth-card wide" id="signup_card">
 
-            <div class="tabs">
-                <a href="login.html" class="tab">Sign In</a>
-                <a href="register-buyer.html" class="tab active">Register</a>
+            <!-- STEP PROGRESS BAR -->
+            <div class="signup-steps">
+                <div class="signup-step active" id="step_dot_1">
+                    <div class="signup-step-circle" id="step_circle_1">1</div>
+                    <div class="signup-step-label">Verify Phone</div>
+                </div>
+                <div class="signup-step-line" id="step_line_1"></div>
+                <div class="signup-step" id="step_dot_2">
+                    <div class="signup-step-circle" id="step_circle_2">2</div>
+                    <div class="signup-step-label">Verify Code</div>
+                </div>
+                <div class="signup-step-line" id="step_line_2"></div>
+                <div class="signup-step" id="step_dot_3">
+                    <div class="signup-step-circle" id="step_circle_3">3</div>
+                    <div class="signup-step-label">Your Details</div>
+                </div>
+                <div class="signup-step-line" id="step_line_3"></div>
+                <div class="signup-step" id="step_dot_4">
+                    <div class="signup-step-circle" id="step_circle_4">✓</div>
+                    <div class="signup-step-label">Done</div>
+                </div>
             </div>
 
-            <form id="register_form" onsubmit="handleRegister(event)">
+            <!-- ── STEP 1: PHONE ── -->
+            <div class="step-panel active" id="panel_1">
+                <div class="auth-title">Sign Up</div>
+                <div class="auth-sub">Enter your mobile number to get started.</div>
 
-                <!-- NAME -->
-                <div class="form-group">
-                    <label class="form-label">Last Name <span class="req">*</span></label>
-                    <input type="text" class="form-input" placeholder="Last Name" name="last_name" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Middle Name <span class="opt">(optional)</span></label>
-                    <input type="text" class="form-input" placeholder="Middle Name" name="middle_name">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">First Name <span class="req">*</span></label>
-                    <input type="text" class="form-input" placeholder="First Name" name="first_name" required>
-                </div>
-
-                <!-- BIRTHDAY -->
-                <div class="form-group">
-                    <label class="form-label">Date of Birth <span class="req">*</span></label>
-                    <input type="date" class="form-input" name="birthday" required>
-                </div>
-
-                <!-- EMAIL AND MOBILE — both required, no OR -->
-                <div class="form-group">
-                    <label class="form-label">Email Address <span class="req">*</span></label>
-                    <input type="email" class="form-input" placeholder="you@email.com" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Mobile Number <span class="req">*</span></label>
+                <div class="form-group" style="margin-top:20px;">
                     <div class="phone-wrap">
                         <div class="phone-prefix">🇵🇭 +63</div>
-                        <input type="tel" class="form-input" placeholder="9XX XXX XXXX" name="phone" maxlength="10" pattern="9[0-9]{9}" title="Enter a valid PH mobile number starting with 9" required>
+                        <input type="tel" class="form-input" placeholder="9XX XXX XXXX"
+                               id="reg_phone" maxlength="10">
                     </div>
                 </div>
 
-                <!-- PASSWORD + CONFIRM PASSWORD -->
-                <div class="form-group">
-                    <label class="form-label">Password <span class="req">*</span></label>
-                    <input type="password" class="form-input" placeholder="Min. 8 characters" name="password" id="password" minlength="8" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Confirm Password <span class="req">*</span></label>
-                    <input type="password" class="form-input" placeholder="Re-enter your password" name="confirm_password" id="confirm_password" required>
-                    <div class="error-note" id="pw_match_note" style="display:none;">
-                        ❌ Passwords do not match.
-                    </div>
-                </div>
+                <button class="btn-primary" onclick="goStep2()">Next</button>
 
-                <!-- PROFILE PICTURE -->
-                <div class="form-group">
-                    <label class="form-label">Profile Picture <span class="opt">(optional)</span></label>
-                    <input type="file" class="form-input" accept=".jpg,.jpeg,.png" name="profile_pic">
-                </div>
-
-                <!-- ADDRESS — reversed: Province → City → Barangay → Street → ZIP -->
-                <div class="form-group">
-                    <label class="form-label">Delivery Address <span class="req">*</span></label>
-                    <div class="address-grid">
-                        <input type="text" class="form-input" placeholder="Province" name="province" required>
-                        <input type="text" class="form-input" placeholder="City / Municipality" name="city" required>
-                        <input type="text" class="form-input" placeholder="Barangay" name="barangay" required>
-                        <input type="text" class="form-input" placeholder="House No. / Street" name="street" required>
-                        <input type="text" class="form-input" placeholder="ZIP Code" name="zip" required>
-                    </div>
-                </div>
-
-                <!-- TERMS -->
-                <div class="form-group" style="display:flex; align-items:flex-start; gap:10px;">
-                    <input type="checkbox" name="terms" id="terms" required style="margin-top:3px; accent-color:green; width:16px; height:16px; flex-shrink:0;">
-                    <label for="terms" style="font-size:13px; color:#374151; font-weight:400; text-transform:none; letter-spacing:0;">
-                        I agree to the <a href="terms.html" target="_blank" style="color:green; font-weight:600;">Terms and Conditions</a> of FarmDirect.
-                    </label>
-                </div>
-                <button type="submit" class="btn-primary">Create Account</button>
-            </form>
-
-            <div class="seller-note">
-                🌾 Are you a farmer? <strong>Sign up as a regular user first.</strong><br>
-                You can <a href="verify-farmer.html">apply to become a verified seller</a> from your dashboard after registering.
+                <div class="divider">or</div>
+                <a href="#" class="btn-outline">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"> Continue with Google
+                </a>
+                <a href="#" class="btn-outline">
+                    <img src="https://www.svgrepo.com/show/448224/facebook.svg" alt="Facebook"> Continue with Facebook
+                </a>
+                <p style="text-align:center; font-size:13px; color:#6b7280; margin-top:18px;">
+                    Already have an account? <a href="login.html" style="color:green; font-weight:700;">Log In</a>
+                </p>
             </div>
+
+            <!-- ── STEP 2: OTP ── -->
+            <div class="step-panel" id="panel_2">
+                <button class="back-btn" onclick="goStep(1)">← Back</button>
+                <div class="auth-title">Enter Verification Code</div>
+                <p class="otp-note">
+                    Your verification code is sent by SMS to<br>
+                    <span class="otp-phone" id="otp_phone_display"></span>
+                </p>
+
+                <div class="otp-wrap">
+                    <input class="otp-input" type="text" maxlength="1" id="otp1" oninput="otpNext(this,'otp2')">
+                    <input class="otp-input" type="text" maxlength="1" id="otp2" oninput="otpNext(this,'otp3')">
+                    <input class="otp-input" type="text" maxlength="1" id="otp3" oninput="otpNext(this,'otp4')">
+                    <input class="otp-input" type="text" maxlength="1" id="otp4" oninput="otpNext(this,'otp5')">
+                    <input class="otp-input" type="text" maxlength="1" id="otp5" oninput="otpNext(this,'otp6')">
+                    <input class="otp-input" type="text" maxlength="1" id="otp6" oninput="otpNext(this,null)">
+                </div>
+
+                <div class="resend-note" id="resend_note">
+                    Please wait <span id="resend_timer">30</span> seconds to resend
+                </div>
+
+                <div id="otp_error" class="error-note" style="display:none; margin-bottom:12px;">
+                    ❌ Please enter a complete 6-digit code.
+                </div>
+
+                <button class="btn-primary" onclick="goStep3()">Next</button>
+            </div>
+
+            <!-- ── STEP 3: DETAILS ── -->
+            <div class="step-panel" id="panel_3">
+                <button class="back-btn" onclick="goStep(2)">← Back</button>
+                <div class="auth-title">Create Your Account</div>
+                <div class="auth-sub">Fill in your details to complete sign up.</div>
+
+                <form id="register_form" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label class="form-label">Last Name <span class="req">*</span></label>
+                        <input type="text" class="form-input" placeholder="Last Name" id="last_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Middle Name <span class="opt">(optional)</span></label>
+                        <input type="text" class="form-input" placeholder="Middle Name" id="middle_name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">First Name <span class="req">*</span></label>
+                        <input type="text" class="form-input" placeholder="First Name" id="first_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Username <span class="req">*</span></label>
+                        <input type="text" class="form-input" placeholder="e.g. juan_dela_cruz" id="username" required autocomplete="username">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date of Birth <span class="req">*</span></label>
+                        <input type="date" class="form-input" id="birthday" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address <span class="req">*</span></label>
+                        <input type="email" class="form-input" placeholder="you@email.com" id="reg_email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password <span class="req">*</span></label>
+                        <input type="password" class="form-input" placeholder="Min. 8 characters" id="password" minlength="8" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Confirm Password <span class="req">*</span></label>
+                        <input type="password" class="form-input" placeholder="Re-enter your password" id="confirm_password" required>
+                        <div class="error-note" id="pw_match_note" style="display:none;">
+                            ❌ Passwords do not match.
+                        </div>
+                    </div>
+                    <div class="form-group" style="display:flex; align-items:flex-start; gap:10px;">
+                        <input type="checkbox" id="terms" required style="margin-top:3px; accent-color:green; width:16px; height:16px; flex-shrink:0;">
+                        <label for="terms" style="font-size:13px; color:#374151; font-weight:400; text-transform:none; letter-spacing:0;">
+                            I agree to the <a href="terms.html" target="_blank" style="color:green; font-weight:600;">Terms and Conditions</a> of FarmDirect.
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-primary">Create Account</button>
+                </form>
+
+                <div class="seller-note">
+                    🌾 Are you a farmer? <strong>Sign up as a regular user first.</strong><br>
+                    You can <a href="verify-farmer.html">apply to become a verified seller</a> from your dashboard after registering.
+                </div>
+            </div>
+
+            <!-- ── STEP 4: DONE ── -->
+            <div class="step-panel" id="panel_4">
+                <div class="auth-title">Account Created!</div>
+                <div class="auth-sub" id="done_name_msg">Welcome to FarmDirect!</div>
+                <p style="text-align:center; font-size:13px; color:#6b7280; margin:16px 0 24px; line-height:1.7;">
+                    Your account has been successfully created. You can now start shopping fresh produce from local Zamboanga farmers.
+                </p>
+                <a href="../USER/HTML/Dashboard.html" class="btn-primary"
+                   style="display:block; text-align:center; text-decoration:none; padding:11px;">
+                    Go to Dashboard
+                </a>
+            </div>
+
+        </div>
+        </div>
         </div>
     </main>
 
-    <footer>© 2026 FarmDirect. All rights reserved.</footer>
+    <footer>
+  <div class="footer-container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span>🌾</span>
+          <span>FarmDirect</span>
+        </div>
+        <p class="footer-desc">Connecting Zamboanga farmers to your table. Fresh, local, and delivered with care.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link">Facebook</a>
+          <a href="#" class="social-link">Instagram</a>
+          <a href="#" class="social-link">Twitter</a>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+639123456789">+63 912 345 6789</a>
+        <a href="mailto:hello@farmdirect.com">hello@farmdirect.com</a>
+        <p>Mon-Sat: 6AM - 8PM</p>
+        <p>Zamboanga City, PH</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 FarmDirect Zamboanga. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
 
     <script>
-        // Live password match check
+
+        var currentStep = 1;
+
+        // ── UPDATE PROGRESS BAR ──
+        function updateStepBar(active) {
+            for (var i = 1; i <= 4; i++) {
+                var dot    = document.getElementById('step_dot_' + i);
+                var circle = document.getElementById('step_circle_' + i);
+                dot.classList.remove('active', 'done');
+                if (i < active) {
+                    dot.classList.add('done');
+                    circle.textContent = '✓';
+                } else if (i === active) {
+                    dot.classList.add('active');
+                    circle.textContent = (i === 4) ? '✓' : i;
+                } else {
+                    circle.textContent = (i === 4) ? '✓' : i;
+                }
+            }
+            for (var j = 1; j <= 3; j++) {
+                var line = document.getElementById('step_line_' + j);
+                if (j < active) line.classList.add('done');
+                else line.classList.remove('done');
+            }
+        }
+
+        // ── GO TO ANY STEP ──
+        function goStep(step) {
+            document.getElementById('panel_' + currentStep).classList.remove('active');
+            document.getElementById('panel_' + step).classList.add('active');
+            updateStepBar(step);
+            currentStep = step;
+            window.scrollTo(0, 0);
+        }
+
+        // ── STEP 1 → 2 ──
+        function goStep2() {
+            var phone = document.getElementById('reg_phone').value.trim();
+            if (!phone.match(/^9[0-9]{9}$/)) {
+                alert('Please enter a valid PH mobile number starting with 9.');
+                document.getElementById('reg_phone').focus();
+                return;
+            }
+            document.getElementById('otp_phone_display').textContent = '(+63) ' + phone;
+            startResendTimer();
+            goStep(2);
+            document.getElementById('otp1').focus();
+        }
+
+        // ── OTP AUTO-ADVANCE (numbers only) ──
+        function otpNext(input, nextId) {
+            input.value = input.value.replace(/[^0-9]/g, '');
+            if (input.value && nextId) {
+                document.getElementById(nextId).focus();
+            }
+        }
+
+        // ── RESEND COUNTDOWN ──
+        function startResendTimer() {
+            var secs = 30;
+            var note = document.getElementById('resend_note');
+            note.innerHTML = 'Please wait <span id="resend_timer">' + secs + '</span> seconds to resend';
+            var interval = setInterval(function() {
+                secs--;
+                var el = document.getElementById('resend_timer');
+                if (el) el.textContent = secs;
+                if (secs <= 0) {
+                    clearInterval(interval);
+                    note.innerHTML = '<a onclick="startResendTimer()">Resend Code</a>';
+                }
+            }, 1000);
+        }
+
+        // ── STEP 2 → 3 ──
+        function goStep3() {
+            var code = '';
+            for (var i = 1; i <= 6; i++) {
+                code += document.getElementById('otp' + i).value;
+            }
+            var errEl = document.getElementById('otp_error');
+            if (code.length < 6) {
+                errEl.style.display = 'block';
+                return;
+            }
+            errEl.style.display = 'none';
+            // Any 6-digit code is accepted for simulation
+            goStep(3);
+        }
+
+        // ── LIVE PASSWORD MATCH ──
         document.getElementById('confirm_password').addEventListener('input', function() {
             var note = document.getElementById('pw_match_note');
-            note.style.display = (this.value && this.value !== document.getElementById('password').value) ? 'block' : 'none';
+            note.style.display = (this.value && this.value !== document.getElementById('password').value)
+                ? 'block' : 'none';
         });
 
+        // ── STEP 3 SUBMIT ──
         function handleRegister(event) {
             event.preventDefault();
 
+            var bday = document.getElementById('birthday').value;
+            if (bday) {
+                var today = new Date();
+                var birth = new Date(bday);
+                var age = today.getFullYear() - birth.getFullYear();
+                var m = today.getMonth() - birth.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+                if (age < 18) {
+                    alert('You must be at least 18 years old to register.');
+                    document.getElementById('birthday').focus();
+                    return;
+                }
+            }
+
             var pw  = document.getElementById('password').value;
             var cpw = document.getElementById('confirm_password').value;
-
             if (pw !== cpw) {
                 document.getElementById('pw_match_note').style.display = 'block';
                 document.getElementById('confirm_password').focus();
                 return;
             }
 
+            var firstName  = document.getElementById('first_name').value.trim();
+            var middleName = document.getElementById('middle_name').value.trim();
+            var lastName   = document.getElementById('last_name').value.trim();
+            var fullName   = [firstName, middleName, lastName].filter(Boolean).join(' ');
+            var email      = document.getElementById('reg_email').value.trim().toLowerCase();
+            var username   = document.getElementById('username').value.trim();
+
             var newAccount = {
-                email:    document.querySelector('[name="email"]').value.trim().toLowerCase(),
+                email:    email,
                 password: pw,
-                name:     document.querySelector('[name="first_name"]').value + " " + document.querySelector('[name="last_name"]').value,
-                role:     "user",
-                idType:   document.querySelector('[name="id_type"]') ? document.querySelector('[name="id_type"]').value : ''
+                name:     fullName,
+                username: username,
+                phone:    document.getElementById('reg_phone').value,
+                role:     'user'
             };
 
             var existing = JSON.parse(localStorage.getItem('fd_accounts') || '[]');
-
             for (var i = 0; i < existing.length; i++) {
                 if (existing[i].email === newAccount.email) {
-                    alert("That email is already registered. Please sign in or use a different email.");
+                    alert('That email is already registered. Please sign in or use a different email.');
+                    return;
+                }
+                if (existing[i].username && existing[i].username.toLowerCase() === username.toLowerCase()) {
+                    alert('That username is already taken. Please choose another.');
+                    document.getElementById('username').focus();
                     return;
                 }
             }
@@ -181,8 +452,10 @@
                 role:  newAccount.role
             }));
 
-            window.location.href = "../USER/Dashboard.html";
+            document.getElementById('done_name_msg').textContent = 'Welcome, ' + firstName + '! 🌿';
+            goStep(4);
         }
+
     </script>
 
 </body>
