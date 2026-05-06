@@ -218,18 +218,11 @@
 </head>
 <body>
  
+<!-- NAVBAR -->
 <nav class="navbar">
   <input type="checkbox" id="menu-check" class="menu-checkbox">
   <div class="nav-inner">
     <a href="../index.html" class="logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></a>
-    <div class="nav-links">
-      <a href="../index.html" class="nav-link">Home</a>
-      <a href="Dashboard.html" class="nav-link">Dashboard</a>
-      <a href="Products.html" class="nav-link">Products</a>
-      <a href="Orders.html" class="nav-link">Orders</a>
-      <a href="Reviews.html" class="nav-link active">Reviews</a>
-      <a href="Settings.html" class="nav-link">Settings</a>
-    </div>
     <div class="nav-actions">
       <div class="notif-wrap">
         <button class="notif-btn" tabindex="0" aria-label="Notifications">
@@ -273,6 +266,18 @@
     <a href="../index.html" class="menu-cta">Logout</a>
   </div>
 </nav>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <nav class="sidebar-nav">
+    <a href="../index.html"   class="sidebar-link">🏠 <span>Home</span></a>
+    <a href="Dashboard.html" class="sidebar-link">📊 <span>Dashboard</span></a>
+    <a href="Products.html"  class="sidebar-link">📦 <span>Products</span></a>
+    <a href="Orders.html"    class="sidebar-link">🚚 <span>Orders</span></a>
+    <a href="Reviews.html"   class="sidebar-link active">⭐ <span>Reviews</span></a>
+    <a href="Settings.html"  class="sidebar-link">⚙️ <span>Settings</span></a>
+  </nav>
+</aside>
  
 <main class="farmers-main">
   <div class="dash">
@@ -751,6 +756,26 @@ function submitReport(e) {
   e.target.reset();
   showToast('🚨 Report submitted! Admin will review.');
 }
+
+/* ── NAVBAR: dropdown toggles ── */
+document.querySelectorAll('.notif-wrap').forEach(wrap=>{
+  const btn=wrap.querySelector('.notif-btn');
+  const dd=wrap.querySelector('.notif-dropdown');
+  if(!btn||!dd) return;
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    document.querySelectorAll('.notif-dropdown').forEach(d=>{if(d!==dd) d.style.display='none'});
+    dd.style.display=dd.style.display==='block'?'none':'block';
+  });
+});
+document.addEventListener('click',function(){
+  document.querySelectorAll('.notif-dropdown').forEach(d=>d.style.display='none');
+});
+document.querySelectorAll('.menu-panel .menu-item').forEach(link=>{
+  link.addEventListener('click',function(){
+    document.getElementById('menu-check').checked=false;
+  });
+});
 </script>
 </body>
 </html>

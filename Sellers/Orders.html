@@ -8,31 +8,17 @@
     <script src="https://unpkg.com/lucide@latest"></script>
   </head>
   <body>
+    <!-- NAVBAR -->
     <nav class="navbar">
       <input type="checkbox" id="menu-check" class="menu-checkbox" />
       <div class="nav-inner">
         <a href="../index.html" class="logo"
           ><span class="logo-icon">🌾</span><span>FarmDirect</span></a
         >
-        <div class="nav-links">
-          <a href="../index.html" class="nav-link">Home</a>
-          <a href="Dashboard.html" class="nav-link">Dashboard</a>
-          <a href="Products.html" class="nav-link">Products</a>
-          <a href="Orders.html" class="nav-link active">Orders</a>
-          <a href="Reviews.html" class="nav-link">Reviews</a>
-          <a href="Settings.html" class="nav-link">Settings</a>
-        </div>
         <div class="nav-actions">
           <div class="notif-wrap">
             <button class="notif-btn" tabindex="0" aria-label="Notifications">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
                 <path d="M13.73 21a2 2 0 0 1-3.46 0" />
               </svg>
@@ -41,60 +27,24 @@
             <div class="notif-dropdown">
               <div class="notif-header"><h4>Notifications</h4></div>
               <div class="notif-list">
-                <div class="notif-item">
-                  <div class="notif-content">
-                    <strong>New Order</strong>
-                    <p>🛒 New order received</p>
-                  </div>
-                  <span class="notif-time">5 min ago</span>
-                </div>
-                <div class="notif-item">
-                  <div class="notif-content">
-                    <strong>Order Delivered</strong>
-                    <p>✅ Order #00241 Delivered</p>
-                  </div>
-                  <span class="notif-time">1 hr ago</span>
-                </div>
+                <div class="notif-item"><div class="notif-content"><strong>New Order</strong><p>🛒 New order received</p></div><span class="notif-time">5 min ago</span></div>
+                <div class="notif-item"><div class="notif-content"><strong>Order Delivered</strong><p>✅ Order #00241 Delivered</p></div><span class="notif-time">1 hr ago</span></div>
               </div>
             </div>
           </div>
           <div class="notif-wrap">
-            <button
-              class="notif-btn avatar-badge-btn"
-              tabindex="0"
-              aria-label="Profile"
-            >
-              JD
-            </button>
+            <button class="notif-btn avatar-badge-btn" tabindex="0" aria-label="Profile">JD</button>
             <div class="notif-dropdown" style="min-width: 180px">
               <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
               <div class="notif-list">
-                <div class="notif-item">
-                  <div class="notif-content">
-                    <a href="Dashboard.html">📊 Management</a>
-                  </div>
-                </div>
-                <div class="notif-item">
-                  <div class="notif-content">
-                    <a href="Profile.html">👤 Profile</a>
-                  </div>
-                </div>
-                <div class="notif-item">
-                  <div class="notif-content">
-                    <a href="Settings.html">⚙️ Settings</a>
-                  </div>
-                </div>
-                <div class="notif-item">
-                  <div class="notif-content">
-                    <a href="../index.html">🚪 Logout</a>
-                  </div>
-                </div>
+                <div class="notif-item"><div class="notif-content"><a href="Dashboard.html">📊 Management</a></div></div>
+                <div class="notif-item"><div class="notif-content"><a href="Profile.html">👤 Profile</a></div></div>
+                <div class="notif-item"><div class="notif-content"><a href="Settings.html">⚙️ Settings</a></div></div>
+                <div class="notif-item"><div class="notif-content"><a href="../index.html">🚪 Logout</a></div></div>
               </div>
             </div>
           </div>
-          <label for="menu-check" class="menu-toggle"
-            ><span></span><span></span><span></span
-          ></label>
+          <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
         </div>
       </div>
       <label for="menu-check" class="menu-overlay"></label>
@@ -112,6 +62,18 @@
       </div>
     </nav>
 
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <a href="../index.html"   class="sidebar-link">🏠 <span>Home</span></a>
+        <a href="Dashboard.html" class="sidebar-link">📊 <span>Dashboard</span></a>
+        <a href="Products.html"  class="sidebar-link">📦 <span>Products</span></a>
+        <a href="Orders.html"    class="sidebar-link active">🚚 <span>Orders</span></a>
+        <a href="Reviews.html"   class="sidebar-link">⭐ <span>Reviews</span></a>
+        <a href="Settings.html"  class="sidebar-link">⚙️ <span>Settings</span></a>
+      </nav>
+    </aside>
+
     <main class="farmers-main">
       <div class="dash">
         <div>
@@ -122,25 +84,25 @@
 
       <div class="stats-grid">
         <div class="stat-card s1">
-          <div class="stat-icon ord">🛒</div>
+          <div class="stat-icon ord"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-bag-icon lucide-shopping-bag"><path d="M16 10a4 4 0 0 1-8 0"/><path d="M3.103 6.034h17.794"/><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"/></svg></div>
           <div class="stat-label">Total Orders</div>
           <div class="stat-val">236</div>
           <div class="stat-pos">▲ 10 this week</div>
         </div>
         <div class="stat-card s2">
-          <div class="stat-icon ding">⏳</div>
+          <div class="stat-icon ding"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hourglass-icon lucide-hourglass"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg></div>
           <div class="stat-label">Pending</div>
           <div class="stat-val">2</div>
           <div class="stat-pos">Needs attention</div>
         </div>
         <div class="stat-card s3">
-          <div class="stat-icon ress">🔄</div>
+          <div class="stat-icon ress"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-search-icon lucide-package-search"><path d="M12 22V12"/><path d="M20.27 18.27 22 20"/><path d="M21 10.498V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l.98-.559"/><path d="M3.29 7 12 12l8.71-5"/><path d="m7.5 4.27 8.997 5.148"/><circle cx="18.5" cy="16.5" r="2.5"/></svg></div>
           <div class="stat-label">Processing</div>
           <div class="stat-val">4</div>
           <div class="stat-pos">In progress</div>
         </div>
         <div class="stat-card s4">
-          <div class="stat-icon del">✅</div>
+          <div class="stat-icon del"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check"><path d="M20 6 9 17l-5-5"/></svg></div>
           <div class="stat-label">Delivered</div>
           <div class="stat-val">4</div>
           <div class="stat-pos">This week</div>
@@ -1786,6 +1748,26 @@
           t.classList.remove("show");
         }, 3500);
       }
+
+      /* ── NAVBAR: dropdown toggles ── */
+      document.querySelectorAll('.notif-wrap').forEach(wrap=>{
+        const btn=wrap.querySelector('.notif-btn');
+        const dd=wrap.querySelector('.notif-dropdown');
+        if(!btn||!dd) return;
+        btn.addEventListener('click',function(e){
+          e.stopPropagation();
+          document.querySelectorAll('.notif-dropdown').forEach(d=>{if(d!==dd) d.style.display='none'});
+          dd.style.display=dd.style.display==='block'?'none':'block';
+        });
+      });
+      document.addEventListener('click',function(){
+        document.querySelectorAll('.notif-dropdown').forEach(d=>d.style.display='none');
+      });
+      document.querySelectorAll('.menu-panel .menu-item').forEach(link=>{
+        link.addEventListener('click',function(){
+          document.getElementById('menu-check').checked=false;
+        });
+      });
     </script>
   </body>
 </html>
