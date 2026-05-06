@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/style.css">
-    <title>FarmDirect | Dashboard</title>
+    <title>FarmDirect | Management</title>
     <script src="https://unpkg.com/lucide@latest" defer></script>
-    <script src="../JS/dashboard.js" defer></script>
+    <script src="..//JS/admin.js" defer></script>
+    <script src="../JS/users.js" defer></script>
 </head>
 <body>
     <nav class="admin-navbar">
@@ -62,11 +63,11 @@
         <div class="sidebar-header"><h2>FARMDirect</h2></div>
         <nav>
             <ul>
-                <li class="active"><a href="dashboard.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg> Dashboard</a></li>
+                <li><a href="dashboard.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg> Dashboard</a></li>
                 <li><a href="user Management.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Management</a></li>
                 <li><a href="products.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Moderation</a></li>
                 <li><a href="reports.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Reports</a></li>
-                <li><a href="Farmer Verification.html" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Farmer Verification</a></li>
+                <li class="active"><a href="Farmer Verification.html" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Farmer Verification</a></li>
                 <li><a href="Admin Management.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Admin Management</a></li>
             </ul>
         </nav>
@@ -74,60 +75,85 @@
 
     <main class="main-content">
         <header class="top-bar">
-            <h1>Platform Overview</h1>
-            <div class="search-bar">
-            </div>
+          <h1>User Management Portal</h1>
         </header>
 
-        <section class="stats-grid">
- 
-    <div class="card">
-        <span class="label">Total Sales (Today)</span>
-        <span class="value">₱12,450</span>
-        <span class="badge bg-green">+12% vs yesterday</span>
-    </div>
-
-    <div class="card">
-        <span class="label">Total Registered Users</span>
-        <span class="value">1,284</span>
-        <div style="display: flex; gap: 5px; margin-top: 8px;">
-            <span class="badge bg-green">856 Farmers</span>
-            <span class="badge bg-yellow">428 Buyers</span>
+ <!-- Farmer Verification Section -->
+    <section id="verification" class="management-section">
+        <br>
+        <h3><i class="fas fa-user-check"></i> Farmer Verification</h3>
+        <div class="card table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Farmer Name</th>
+                        <th>Barangay</th>
+                        <th>Documents</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Roberto Lee</strong></td>
+                        <td>Divisoria</td>
+                        <td><span class="text-muted">Business_Permit.pdf</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn btn-primary">Approve</button>
+                                <button class="btn btn-outline">Review</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Roberto Lee</strong></td>
+                        <td>Divisoria</td>
+                        <td><span class="text-muted">Business_Permit.pdf</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn btn-primary">Approve</button>
+                                <button class="btn btn-outline">Review</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ana Mae Flores</strong></td>
+                        <td>Santa Maria</td>
+                        <td><span class="text-muted">Farm_Reg.pdf</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn btn-primary">Approve</button>
+                                <button class="btn btn-outline">Review</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lily Cheng</strong></td>
+                        <td>Zambowood</td>
+                        <td><span class="text-muted">ID_Card.pdf</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn btn-primary">Approve</button>
+                                <button class="btn btn-outline">Review</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </div>
-
-    <div class="card">
-        <span class="label">Visits (This Month)</span>
-        <span class="value">8,432</span>
-        <span class="badge bg-green" style="background: rgba(34, 197, 94, 0.1); color: #22c55e; border: 1px solid #22c55e;">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="margin-right: 4px;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-            15.4% increase
-        </span>
-    </div>
-
-    <div class="card">
-        <span class="label">Farmer Requests</span>
-        <span class="value">07</span>
-        <span class="badge bg-red">Urgent verification</span>
-    </div>
-
-</section>
-        </section>
-
-            <div class="card">
-                <h3>Weekly Sales Trend</h3>
-                <div class="chart-placeholder" style="height: 200px; display: flex; align-items: flex-end; gap: 10px; padding: 20px 0;">
-                    <div style="height: 40%; width: 20%; background: var(--accent-green); border-radius: 4px;"></div>
-                    <div style="height: 60%; width: 20%; background: var(--accent-green); border-radius: 4px;"></div>
-                    <div style="height: 90%; width: 20%; background: var(--primary-green); border-radius: 4px;"></div>
-                    <div style="height: 50%; width: 20%; background: var(--accent-green); border-radius: 4px;"></div>
-                    <div style="height: 75%; width: 20%; background: var(--accent-green); border-radius: 4px;"></div>
-                </div>
-                <p class="text-muted" style="text-align: center; font-size: 0.8rem;">Mon - Fri Revenue</p>
-            </div>
-        </div>
-    </main>
+    </section>
 
     <div id="toast" class="toast"></div>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">User Details</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-actions" id="modalActions"></div>
+        </div>
+    </div>
+
 </body>
 </html>
