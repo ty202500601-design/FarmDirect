@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirm Order – FarmDirect</title>
+<link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script src="farmdirect.js"></script>
+<style>
+.vat-note { font-size:0.78rem;color:var(--text-light);margin-top:0.3rem;font-style:italic; }
+.confirm-dropoff-list { margin-top:0.5rem; }
+.confirm-dropoff-item { background:var(--cream);border-radius:8px;padding:0.55rem 0.85rem;margin-bottom:0.4rem;font-size:0.84rem;color:var(--text-mid);border-left:3px solid var(--green-mid); }
+.return-item-btn { background:none;border:none;color:var(--red);font-size:0.78rem;font-weight:600;cursor:pointer;padding:0.15rem 0.4rem;border-radius:4px;transition:background 0.15s; }
+.return-item-btn:hover { background:var(--red-light); }
+.return-modal-overlay { display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center; }
+.return-modal-overlay.open { display:flex; }
+.return-modal { background:var(--white);border-radius:var(--radius);padding:2rem;max-width:480px;width:90%;box-shadow:var(--shadow-lg); }
+.return-modal h3 { font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.5rem;color:var(--green-dark); }
+.return-modal p { font-size:0.88rem;color:var(--text-mid);margin-bottom:1rem;line-height:1.5; }
+.return-reason-select { width:100%;padding:0.7rem 0.9rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;background:var(--cream);margin-bottom:0.8rem; }
+.return-reason-select:focus { border-color:var(--green); }
+.return-notes { width:100%;padding:0.7rem 0.9rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:0.88rem;background:var(--cream);margin-bottom:1rem;resize:vertical;font-family:inherit; }
+.return-notes:focus { border-color:var(--green); }
+.return-modal-btns { display:flex;gap:0.8rem; }
+.return-confirm-btn { flex:1;background:var(--orange);color:#fff;border:none;border-radius:10px;padding:0.7rem;font-size:0.9rem;font-weight:700;cursor:pointer;transition:opacity 0.2s; }
+.return-confirm-btn:hover { opacity:0.85; }
+.return-back-btn { flex:1;background:var(--white);border:2px solid var(--border);border-radius:10px;padding:0.7rem;font-size:0.9rem;font-weight:600;cursor:pointer;transition:border-color 0.2s; }
+.return-back-btn:hover { border-color:var(--green);color:var(--green); }
+.return-summary { background:var(--cream);border-radius:8px;padding:0.8rem;margin-bottom:1rem;font-size:0.85rem;color:var(--text-mid); }
+.return-summary-name { font-weight:700;color:var(--text); }
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="products.html">Seller Centre</a>
+    <span class="sep">|</span>
+    <a href="products.html">Start Selling</a>
+    <span class="sep">|</span>
+    Follow us on
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+  <div class="topbar-right">
+    <a href="Notifications.html"><i class="fa fa-bell"></i> Notifications <span class="notif-dot">3</span></a>
+    <a href="#"><i class="fa fa-circle-question"></i> Help</a>
+    <div class="user-menu">
+      <a href="Dashboard.html" class="user-link"><i class="fa fa-user-circle"></i> farmuser <i class="fa fa-chevron-down" style="font-size:0.65rem;margin-left:3px;"></i></a>
+      <div class="user-dropdown">
+        <a href="Dashboard.html"><i class="fa fa-gauge"></i> My Dashboard</a>
+        <a href="Order_tracking.html"><i class="fa fa-box"></i> My Orders</a>
+        <a href="cart.html"><i class="fa fa-basket-shopping"></i> Cart</a>
+        <a href="#"><i class="fa fa-right-from-bracket"></i> Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <a href="products.html" class="logo">
+      <div class="logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
+      </div>
+      <div class="logo-text"><span class="logo-farm">Farm</span><span class="logo-direct">Direct</span></div>
+    </a>
+    <div class="search-bar">
+      <input type="text" placeholder="Search fresh produce, meats, pantry essentials…" />
+      <button type="button"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="header-actions">
+      <a href="cart.html" class="cart-btn" title="My Cart">
+        <i class="fa fa-shopping-basket"></i>
+        <span class="cart-count">3</span>
+      </a>
+      <a href="Chat.html" class="cart-btn" title="Messages" style="position:relative;">
+        <i class="fa fa-comment"></i>
+      </a>
+    </div>
+  </div>
+  <div class="search-tags">
+    <a href="products.html">Organic Tomatoes</a>
+    <a href="products.html">Free-Range Eggs</a>
+    <a href="products.html">Grass-Fed Beef</a>
+    <a href="products.html">Sayote</a>
+    <a href="products.html">Coconut Oil</a>
+  </div>
+</header>
+
+
+
+
+
+
+
+
+<div class="checkout-wrap">
+  <div class="container">
+    <h1 class="page-title">Checkout</h1>
+
+    <div class="checkout-steps">
+      <div class="step done"><span class="step-num">✓</span> Delivery</div>
+      <div class="step-line"></div>
+      <div class="step done"><span class="step-num">✓</span> Payment</div>
+      <div class="step-line"></div>
+      <div class="step active"><span class="step-num">3</span> Confirm</div>
+    </div>
+
+    <div class="confirm-layout" id="confirm-layout">
+      <!-- Rendered by JS -->
+      <p style="text-align:center;padding:3rem;color:var(--text-light);">Loading order details…</p>
+    </div>
+  </div>
+</div>
+<script>
+(function renderConfirm() {
+  const co   = FD.Checkout.get();
+  const addr = co.address || {};
+  const p    = co.pricing || {};
+  const pm   = co.paymentMethod || 'cod';
+  const pmLabel = { cod:'💵 Cash on Delivery', gcash:'📱 GCash', bank:'🏦 Bank Transfer' };
+  const dropoffs = co.dropoffs || [];
+
+  // Build dropoff HTML
+  let dropoffHtml = '';
+  if (dropoffs.length > 0) {
+    dropoffHtml = `<div class="confirm-box">
+      <h3>📍 Additional Drop-off Points</h3>
+      <div class="confirm-dropoff-list">
+        ${dropoffs.map((d, i) => `<div class="confirm-dropoff-item">Drop-off ${i + 2} · +₱30</div>`).join('')}
+      </div>
+      <a href="checkout.html" class="confirm-edit-link">Edit →</a>
+    </div>`;
+  }
+
+  // Build items HTML
+  let itemsHtml = (co.items || []).map(i =>
+    `<div class="review-item"><span>${i.name} ×${i.qty}</span><span>${FD.fmt.peso(i.price * i.qty)}</span><button class="return-item-btn" onclick="openReturnItemModal('${i.key}','${i.name}',${i.qty},${i.price})">↩ Remove</button></div>`
+  ).join('');
+
+  // Discounts
+  let discHtml = '';
+  if (co.specialDisc) {
+    discHtml += `<div class="review-item savings"><span>💙 ${co.specialDisc} Discount (20%)</span><span>−${FD.fmt.peso((p.sub || 0) * 0.20)}</span></div>`;
+  }
+  if (co.voucherCode) {
+    const v = FD.Pricing.VOUCHERS[co.voucherCode];
+    if (v) {
+      const vAmt = v.type === 'flat' ? v.value : (p.sub || 0) * (v.value / 100);
+      discHtml += `<div class="review-item savings"><span>🎫 Voucher (${co.voucherCode})</span><span>−${FD.fmt.peso(vAmt)}</span></div>`;
+    }
+  }
+
+  const totalSavings = p.disc || 0;
+
+  const layout = document.getElementById('confirm-layout');
+  layout.innerHTML = `
+    <div class="confirm-box">
+      <h3>📍 Delivery Details</h3>
+      <div class="confirm-row"><span class="confirm-label">Name</span><strong>${addr.name || 'Juan dela Cruz'}</strong></div>
+      <div class="confirm-row"><span class="confirm-label">Phone</span><strong>${addr.phone || '+63 912 345 6789'}</strong></div>
+      <div class="confirm-row"><span class="confirm-label">Address</span><strong>${addr.street ? addr.street + ', ' + addr.brgy + ', ' + addr.city + ' ' + addr.zip : '123 Rizal St., Brgy. Tetuan, Zamboanga City 7000'}</strong></div>
+      <div class="confirm-row"><span class="confirm-label">Courier</span><strong>🚕 Grab · Est. 30–60 min</strong></div>
+      <a href="checkout.html" class="confirm-edit-link">Edit →</a>
+    </div>
+
+    ${dropoffHtml}
+
+    <div class="confirm-box">
+      <h3>💳 Payment Method</h3>
+      <div class="confirm-row"><span class="confirm-label">Method</span><strong>${pmLabel[pm]}</strong></div>
+      ${pm === 'gcash' && co.gcashNumber ? `<div class="confirm-row"><span class="confirm-label">GCash No.</span><strong>+63 ${co.gcashNumber}</strong></div>` : ''}
+      <a href="checkout-payment.html" class="confirm-edit-link">Edit →</a>
+    </div>
+
+    <div class="confirm-box">
+      <h3>🛍️ Order Items</h3>
+      ${itemsHtml}
+      <div class="review-item"><span>Subtotal</span><span>${FD.fmt.peso(p.sub || 1230)}</span></div>
+      ${discHtml}
+      <div class="review-item"><span>Delivery Fee</span><span>${p.shipping === 0 ? 'FREE' : FD.fmt.peso(p.shipping || 80)}</span></div>
+      <div class="review-item" style="font-size:0.82rem;color:var(--text-light);"><span>VAT (12%)</span><span>+${FD.fmt.peso(p.vat || 0)}</span></div>
+      <div class="review-item total-row"><span>Total</span><span>${FD.fmt.peso(p.total || 0)}</span></div>
+      <p class="vat-note">VAT Receipt can be requested upon delivery.</p>
+    </div>
+
+    ${totalSavings > 0 ? `
+    <div class="savings-highlight">
+      <p class="savings-highlight-title">🎉 You're saving ${FD.fmt.peso(totalSavings)} on this order!</p>
+      <p class="savings-highlight-sub">Includes all discounts and vouchers${co.specialDisc ? ' + ' + co.specialDisc + ' discount' : ''}</p>
+    </div>` : ''}
+
+    <p class="terms-note">
+      By placing your order, you agree to FarmDirect's
+      <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+    </p>
+
+    <div class="step-nav">
+      <a href="checkout-payment.html" class="secondary-btn">← Back</a>
+      <button class="add-cart-btn place-order-btn" onclick="placeOrder()" style="border:none;cursor:pointer;">
+        Place Order — ${FD.fmt.peso(p.total || 0)} →
+      </button>
+    </div>`;
+})();
+
+function placeOrder() {
+  const co = FD.Checkout.get();
+  const order = FD.Orders.place({
+    items:         co.items || [],
+    pricing:       co.pricing || {},
+    address:       co.address || {},
+    paymentMethod: co.paymentMethod || 'cod',
+    gcashNumber:   co.gcashNumber || '',
+    shippingFee:   co.shippingFee || 80,
+    voucherCode:   co.voucherCode || '',
+    specialDisc:   co.specialDisc || '',
+    dropoffs:      co.dropoffs || [],
+    courier:       'Grab',
+    estDelivery:   '30–60 min',
+  });
+  FD.Checkout.clear();
+  // Store the new order ID for the success page
+  localStorage.setItem('fd_last_order', order.id);
+  window.location.href = 'order-success.html';
+}
+</script>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <i class="fa fa-seedling"></i>
+      <span>FarmDirect</span>
+    </div>
+    <p>© 2026 FarmDirect Philippines. Freshness Guaranteed.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+      <a href="Dashboard.html">My Account</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Chat -->
+<a href="Chat.html" class="float-chat">
+  💬 Chat with Farmer
+  <span class="chat-badge">2</span>
+</a>
+
+<!-- Return Item Modal -->
+<div class="return-modal-overlay" id="return-item-modal">
+  <div class="return-modal">
+    <h3>↩ Remove Item from Order</h3>
+    <div class="return-summary" id="return-item-summary"></div>
+    <p>Why are you removing this item?</p>
+    <select class="return-reason-select" id="return-item-reason">
+      <option value="">— Select a reason —</option>
+      <option value="changed_mind">Changed my mind</option>
+      <option value="found_cheaper">Found cheaper elsewhere</option>
+      <option value="wrong_item">Selected wrong item</option>
+      <option value="budget">Budget constraints</option>
+      <option value="other">Other reason</option>
+    </select>
+    <textarea class="return-notes" id="return-item-notes" rows="3" placeholder="Additional details (optional)…"></textarea>
+    <div class="return-modal-btns">
+      <button class="return-back-btn" onclick="closeReturnItemModal()">Cancel</button>
+      <button class="return-confirm-btn" onclick="confirmReturnItem()">Remove Item</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let returnItemData = null;
+
+function openReturnItemModal(key, name, qty, price) {
+  returnItemData = { key, name, qty, price };
+  document.getElementById('return-item-summary').innerHTML =
+    `<span class="return-summary-name">${name}</span><br>Qty: ${qty} · ${FD.fmt.peso(price * qty)} refund to order total`;
+  document.getElementById('return-item-modal').classList.add('open');
+}
+
+function closeReturnItemModal() {
+  document.getElementById('return-item-modal').classList.remove('open');
+  returnItemData = null;
+  document.getElementById('return-item-reason').value = '';
+  document.getElementById('return-item-notes').value = '';
+}
+
+function confirmReturnItem() {
+  if (!returnItemData) return;
+  const reason = document.getElementById('return-item-reason').value;
+  if (!reason) { alert('Please select a reason.'); return; }
+
+  const co = FD.Checkout.get();
+  const updatedItems = co.items.filter(i => i.key !== returnItemData.key);
+
+  if (updatedItems.length === 0) {
+    alert('Cannot remove all items. Please go back to cancel the entire order instead.');
+    return;
+  }
+
+  const P = FD.Pricing;
+  const extraDropoff = (co.dropoffs || []).length * 30;
+  const ship = (co.shippingFee || 60) + extraDropoff;
+  const pricing = P.total(updatedItems, ship, co.voucherCode || '', co.specialDisc || '');
+
+  FD.Checkout.save({
+    items: updatedItems,
+    pricing,
+    shippingFee: ship,
+    voucherCode: co.voucherCode || '',
+    specialDisc: co.specialDisc || '',
+    dropoffs: co.dropoffs || [],
+    address: co.address || {},
+    paymentMethod: co.paymentMethod || 'cod',
+    gcashNumber: co.gcashNumber || '',
+  });
+
+  FD.Cart.remove(returnItemData.key);
+  closeReturnItemModal();
+  FD.showToast('✓ ' + returnItemData.name + ' removed from order');
+  setTimeout(() => location.reload(), 500);
+}
+</html>

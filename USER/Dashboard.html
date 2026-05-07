@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account – FarmDirect Zamboanga</title>
+<link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script src="farmdirect.js"></script>
+<style>
+/* ── DASHBOARD SPECIFIC ── */
+
+/* FIX: Ensure content starts BELOW the fixed navbar so it's not cut in half */
+.dash-wrap { 
+  padding-top: var(--header-total); 
+  padding-bottom: 5rem; 
+  min-height: 100vh; 
+  background: #f8f9fa; 
+}
+
+/* Profile hero banner */
+.profile-banner {
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+  padding: 1.8rem 1.2rem 1.5rem; 
+  position: relative; 
+  overflow: hidden;
+}
+.profile-banner::after {
+  content:''; position:absolute; top:-60px; right:-60px;
+  width:200px; height:200px;
+  background:rgba(255,255,255,0.06); border-radius:50%;
+}
+.profile-top { display:flex; align-items:center; gap:1.2rem; margin-bottom:1rem; position: relative; z-index: 2;}
+.profile-avatar {
+  width:68px; height:68px; border-radius:50%;
+  background:rgba(255,255,255,0.2); border:3px solid rgba(255,255,255,0.5);
+  display:flex; align-items:center; justify-content:center;
+  font-size:2rem; flex-shrink:0; cursor:pointer; position:relative; color: #fff;
+  font-weight: 800;
+}
+.avatar-edit {
+  position:absolute; bottom:0; right:0; width:22px; height:22px;
+  background:var(--orange); border-radius:50%; border:2px solid #fff;
+  display:flex; align-items:center; justify-content:center;
+}
+.profile-info { flex:1; min-width:0; }
+.profile-name { font-family:var(--font-display); font-size:1.3rem; font-weight:700; color:#fff; }
+.profile-tier {
+  display:inline-flex; align-items:center; gap:0.4rem;
+  background:rgba(255,255,255,0.18); color:#fff;
+  font-size:0.75rem; font-weight:700; padding:0.25rem 0.8rem; border-radius:20px;
+  margin-top:0.4rem; cursor:pointer;
+}
+.profile-follow { display:flex; gap:1.5rem; margin-top:0.6rem; }
+.follow-item { font-size:0.85rem; color:rgba(255,255,255,0.9); cursor:pointer; }
+.follow-item strong { font-weight:800; color:#fff; font-size:1.05rem; }
+.profile-settings {
+  width:42px; height:42px; border-radius:50%; background:rgba(255,255,255,0.15);
+  display:flex; align-items:center; justify-content:center; color:#fff; flex-shrink:0;
+  transition:background 0.2s; cursor:pointer;
+}
+
+/* VIP strip */
+.vip-strip {
+  display:flex; align-items:center; gap:0.8rem;
+  background:linear-gradient(135deg,#fffbf0,#fff3cd);
+  border:1.5px solid #f5d98a; border-radius:var(--radius-sm);
+  padding:0.8rem 1.1rem; cursor:pointer; margin-bottom: 0.8rem;
+}
+.vip-badge { background:var(--gold); color:#fff; font-size:0.75rem; font-weight:800; padding:0.2rem 0.6rem; border-radius:4px; }
+.vip-text { flex:1; font-size:0.9rem; font-weight:700; color:#a07000; }
+
+/* Dashboard Cards */
+.dash-card { background:var(--white); border-radius:var(--radius); border:1.5px solid var(--border); margin-bottom: 0.8rem; overflow:hidden; }
+.dash-card-hdr { display:flex; align-items:center; justify-content:space-between; padding:1.1rem 1.2rem; border-bottom:1px solid var(--border); }
+.dash-card-title { font-size:1.05rem; font-weight:700; color:var(--text); }
+.dash-card-link { font-size:0.85rem; color:var(--text-light); text-decoration: none;}
+
+/* Purchase Steps */
+.purchase-steps { display:grid; grid-template-columns:repeat(4,1fr); padding:1.3rem 0.5rem; }
+.ps-item { display:flex; flex-direction:column; align-items:center; gap:0.6rem; cursor:pointer; position:relative; text-decoration: none;}
+.ps-icon { width:52px; height:52px; border-radius:50%; border:2px solid var(--border); display:flex; align-items:center; justify-content:center; background:var(--white); color: var(--text-mid); transition: 0.2s; }
+.ps-item:hover .ps-icon { border-color: var(--green); color: var(--green); }
+.ps-label { font-size:0.8rem; font-weight:600; color:var(--text-mid); }
+.ps-badge {
+  position:absolute; top:-2px; right:calc(50% - 28px);
+  background:var(--orange); color:#fff; font-size:0.7rem; font-weight:800;
+  width:19px; height:19px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid #fff;
+}
+
+/* Start Selling - THE SPECIFIC LINK YOU REQUESTED */
+.start-selling-card {
+  display:flex; align-items:center; gap:1.1rem;
+  background: linear-gradient(135deg, #f0f7f1 0%, #ffffff 100%);
+  border: 1.5px solid var(--green-mid); border-radius:var(--radius);
+  padding: 1.3rem; cursor:pointer; margin-bottom:0.8rem;
+  text-decoration: none; transition: all 0.2s ease;
+}
+.start-selling-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--green); }
+.ss-icon { width:54px; height:54px; border-radius:14px; background:var(--green); display:flex; align-items:center; justify-content:center; flex-shrink:0; color: #fff;}
+.ss-body { flex:1; }
+.ss-title { font-size:1.1rem; font-weight:800; color:var(--green); margin-bottom:0.2rem; }
+.ss-sub { font-size:0.88rem; color:var(--text-mid); }
+
+/* Activity Grid */
+.activities-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.9rem; padding:1.1rem; }
+.act-item {
+  display:flex; align-items:center; gap:0.9rem;
+  border:1.5px solid var(--border); border-radius:14px; padding:1rem;
+  cursor:pointer; text-decoration: none; transition: 0.2s;
+}
+.act-item:hover { border-color: var(--green); background: var(--green-light); }
+.act-icon { font-size: 1.6rem; width:44px; height:44px; display:flex; align-items:center; justify-content:center; background: var(--cream); border-radius: 10px;}
+.act-title { font-size:0.95rem; font-weight:700; color:var(--text); }
+.act-sub { font-size:0.78rem; color:var(--text-light); }
+
+/* Recently Viewed */
+.recent-view-scroll { display: flex; gap: 1.2rem; overflow-x: auto; padding: 1.2rem; scroll-padding: 1.2rem; scrollbar-width: none; }
+.recent-view-scroll::-webkit-scrollbar { display: none; }
+.rv-card { flex: 0 0 145px; text-decoration: none; transition: 0.2s; }
+.rv-card:hover { opacity: 0.8; }
+.rv-img { width: 145px; height: 145px; border-radius: 14px; object-fit: cover; border: 1.5px solid var(--border); margin-bottom: 0.6rem; }
+.rv-name { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
+.rv-price { color: var(--green); font-weight: 800; font-size: 1rem; }
+
+/* Settings List */
+.acc-list { display:flex; flex-direction:column; }
+.acc-item {
+  display:flex; align-items:center; gap:1.1rem; padding:1.2rem;
+  border-bottom:1px solid var(--border); text-decoration: none; color: var(--text);
+  transition: background 0.2s;
+}
+.acc-item:hover { background: var(--cream); }
+.acc-item:last-child { border-bottom:none; }
+.acc-icon { color:var(--text-mid); width: 22px; }
+.acc-text { flex:1; font-size:1rem; font-weight:600; }
+
+.logout-container { padding: 2rem 1.2rem 4rem; }
+.logout-btn {
+  display:block; width:100%; padding:1.1rem;
+  background: #fff; border: 2.5px solid var(--border); border-radius: 14px;
+  text-align:center; color: var(--red); font-weight: 800; text-decoration: none;
+  transition: all 0.2s;
+}
+.logout-btn:hover { background: var(--red-light); border-color: var(--red); }
+
+/* Address step pills */
+.da-step-pill { flex:1;text-align:center;padding:0.45rem 0.3rem;font-size:0.73rem;font-weight:700;color:var(--text-light);background:var(--cream);transition:all 0.2s; }
+.da-step-pill.active { background:var(--green);color:#fff; }
+.da-step-pill.done { background:var(--green-light);color:var(--green); }
+
+@media (max-width: 600px) {
+  .activities-grid { grid-template-columns: 1fr; }
+  .profile-banner { padding-top: 2rem; }
+}
+
+/* ── SLIDE PANEL (bottom sheet) ── */
+.panel-overlay {
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5);
+  z-index:2000; align-items:flex-end; justify-content:center;
+}
+.panel-overlay.open { display:flex; }
+.panel {
+  background:#fff; border-radius:20px 20px 0 0; width:100%; max-width:560px;
+  max-height:88vh; overflow-y:auto; padding:1.5rem 1.4rem 2.5rem;
+  transform:translateY(100%); transition:transform 0.32s cubic-bezier(.32,.72,0,1);
+}
+.panel-overlay.open .panel { transform:translateY(0); }
+.panel-hdr {
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem;
+}
+.panel-title { font-family:var(--font-display); font-size:1.1rem; font-weight:700; }
+.panel-close {
+  background:none; border:none; cursor:pointer; color:var(--text-light);
+  font-size:1.4rem; line-height:1; padding:0.2rem;
+}
+
+/* Order cards inside panels */
+.order-card {
+  border:1.5px solid var(--border); border-radius:14px; padding:1rem;
+  margin-bottom:0.8rem; background:var(--white);
+}
+.order-card-hdr {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:0.6rem;
+}
+.order-id { font-size:0.78rem; color:var(--text-light); }
+.order-status-tag {
+  font-size:0.7rem; font-weight:700; padding:0.15rem 0.55rem; border-radius:20px;
+}
+.tag-topay    { background:#fff3e0; color:#e65c00; }
+.tag-toship   { background:#e3f2fd; color:#1565c0; }
+.tag-onway    { background:#e8f5e9; color:#2e7d32; }
+.tag-delivered{ background:#f3e5f5; color:#6a1b9a; }
+.tag-cancelled{ background:#ffebee; color:#c62828; }
+
+.order-item-row {
+  display:flex; gap:0.75rem; align-items:center;
+  padding:0.5rem 0; border-bottom:1px solid var(--border);
+}
+.order-item-row:last-of-type { border-bottom:none; }
+.order-thumb {
+  width:52px; height:52px; object-fit:cover; border-radius:8px;
+  border:1px solid var(--border); flex-shrink:0;
+}
+.order-item-info { flex:1; min-width:0; }
+.order-item-name { font-size:0.85rem; font-weight:600; color:var(--text); }
+.order-item-meta { font-size:0.73rem; color:var(--text-light); margin-top:0.1rem; }
+.order-item-qty  { font-size:0.78rem; color:var(--text-light); flex-shrink:0; }
+
+.order-total-row {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:0.7rem; padding-top:0.6rem; border-top:1.5px solid var(--border);
+}
+.order-total-label { font-size:0.83rem; color:var(--text-mid); }
+.order-total-amt   { font-size:1rem; font-weight:800; color:var(--orange); }
+
+.order-actions { display:flex; gap:0.6rem; margin-top:0.8rem; flex-wrap:wrap; }
+.btn-sm {
+  flex:1; min-width:90px; padding:0.55rem 0.8rem; border-radius:9px;
+  font-size:0.82rem; font-weight:700; cursor:pointer; text-align:center;
+  border:2px solid transparent; transition:all 0.18s; text-decoration:none;
+  display:inline-flex; align-items:center; justify-content:center;
+}
+.btn-primary { background:var(--green); color:#fff; border-color:var(--green); }
+.btn-primary:hover { background:var(--green-mid); }
+.btn-outline { background:#fff; color:var(--green); border-color:var(--green); }
+.btn-outline:hover { background:var(--green-light); }
+.btn-danger  { background:#fff; color:var(--red); border-color:var(--red); }
+.btn-danger:hover  { background:#ffebee; }
+.btn-muted   { background:var(--cream); color:var(--text-mid); border-color:var(--border); }
+
+.empty-panel { text-align:center; padding:2.5rem 1rem; color:var(--text-light); }
+.empty-panel .ep-icon { font-size:2.8rem; margin-bottom:0.6rem; }
+.empty-panel p { font-size:0.88rem; margin-bottom:1rem; }
+
+/* Star rating */
+.star-row { display:flex; gap:0.3rem; margin:0.5rem 0 0.8rem; }
+.star-btn {
+  background:none; border:none; font-size:1.8rem; cursor:pointer;
+  color:var(--border); transition:color 0.15s; line-height:1;
+}
+.star-btn.active { color:#f9a825; }
+.rating-textarea {
+  width:100%; padding:0.65rem 0.9rem; border:2px solid var(--border);
+  border-radius:10px; font-size:0.88rem; resize:none; background:var(--cream);
+  font-family:var(--font-body); margin-bottom:0.7rem;
+}
+.rating-textarea:focus { border-color:var(--green); outline:none; }
+
+/* Profile edit fields */
+.edit-field { margin-bottom:0.9rem; }
+.edit-field label { font-size:0.82rem; font-weight:600; color:var(--text-mid); display:block; margin-bottom:0.3rem; }
+.edit-field input {
+  width:100%; padding:0.65rem 0.9rem; border:2px solid var(--border);
+  border-radius:10px; font-size:0.92rem; background:var(--cream);
+  transition:border-color 0.2s; box-sizing:border-box;
+}
+.edit-field input:focus { border-color:var(--green); outline:none; }
+
+/* Voucher chip */
+.voucher-chip-dash {
+  border:1.5px dashed var(--orange); border-radius:12px;
+  padding:0.8rem 1rem; margin-bottom:0.7rem; background:#fffbf5;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.voucher-chip-dash.used { border-color:var(--border); background:var(--cream); opacity:0.6; }
+.vc-code { font-size:1rem; font-weight:800; color:var(--orange); font-family:monospace; }
+.vc-code.used { color:var(--text-light); }
+.vc-desc { font-size:0.78rem; color:var(--text-mid); margin-top:0.15rem; }
+.vc-copy {
+  background:var(--orange); color:#fff; border:none; border-radius:7px;
+  padding:0.38rem 0.8rem; font-size:0.78rem; font-weight:700; cursor:pointer;
+}
+.vc-copy:active { opacity:0.8; }
+
+/* Toast */
+.dash-toast {
+  position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(80px);
+  background:var(--green); color:#fff; padding:0.65rem 1.4rem;
+  border-radius:30px; font-size:0.88rem; font-weight:700; z-index:5000;
+  transition:transform 0.3s, opacity 0.3s; opacity:0; pointer-events:none;
+  white-space:nowrap; box-shadow:0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* Cancel confirm inside panel */
+.cancel-reason-sel {
+  width:100%; padding:0.65rem 0.9rem; border:2px solid var(--border);
+  border-radius:10px; font-size:0.88rem; background:var(--cream);
+  margin-bottom:0.8rem; box-sizing:border-box;
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="products.html">Seller Centre</a>
+    <span class="sep">|</span>
+    <a href="products.html">Start Selling</a>
+    <span class="sep">|</span>
+    Follow us on
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+  <div class="topbar-right">
+    <a href="Notifications.html"><i class="fa fa-bell"></i> Notifications <span class="notif-dot">3</span></a>
+    <a href="#"><i class="fa fa-circle-question"></i> Help</a>
+    <div class="user-menu">
+      <a href="Dashboard.html" class="user-link"><i class="fa fa-user-circle"></i> farmuser <i class="fa fa-chevron-down" style="font-size:0.65rem;margin-left:3px;"></i></a>
+      <div class="user-dropdown">
+        <a href="Dashboard.html"><i class="fa fa-gauge"></i> My Dashboard</a>
+        <a href="Order_tracking.html"><i class="fa fa-box"></i> My Orders</a>
+        <a href="cart.html"><i class="fa fa-basket-shopping"></i> Cart</a>
+        <a href="#"><i class="fa fa-right-from-bracket"></i> Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <a href="products.html" class="logo">
+      <div class="logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
+      </div>
+      <div class="logo-text"><span class="logo-farm">Farm</span><span class="logo-direct">Direct</span></div>
+    </a>
+    <div class="search-bar">
+      <input type="text" placeholder="Search fresh produce, meats, pantry essentials…" />
+      <button type="button"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="header-actions">
+      <a href="cart.html" class="cart-btn" title="My Cart">
+        <i class="fa fa-shopping-basket"></i>
+        <span class="cart-count">3</span>
+      </a>
+      <a href="Chat.html" class="cart-btn" title="Messages" style="position:relative;">
+        <i class="fa fa-comment"></i>
+      </a>
+    </div>
+  </div>
+  <div class="search-tags">
+    <a href="products.html">Organic Tomatoes</a>
+    <a href="products.html">Free-Range Eggs</a>
+    <a href="products.html">Grass-Fed Beef</a>
+    <a href="products.html">Sayote</a>
+    <a href="products.html">Coconut Oil</a>
+  </div>
+</header>
+
+
+
+
+
+
+
+
+<div class="dash-wrap">
+  <div class="profile-banner">
+    <div class="profile-top">
+      <div class="profile-avatar">
+        J
+        <div class="avatar-edit"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg></div>
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Juan Dela Cruz</div>
+        <div class="profile-tier">Member</div>
+        <div class="profile-follow">
+          <div class="follow-item"><strong>12</strong> Following</div>
+          <div class="follow-item"><strong>52</strong> Followers</div>
+        </div>
+      </div>
+      <div class="profile-settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding: 0.8rem;">
+    
+    <div class="dash-card">
+      <div class="dash-card-hdr">
+        <div class="dash-card-title">My Purchases</div>
+        <a href="#" class="dash-card-link">View Purchase History ›</a>
+      </div>
+      <div class="purchase-steps">
+        <a href="#" class="ps-item">
+          <div class="ps-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg></div>
+          <div class="ps-label">To Pay</div>
+          <div class="ps-badge">2</div>
+        </a>
+        <a href="#" class="ps-item">
+          <div class="ps-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></div>
+          <div class="ps-label">To Ship</div>
+          <div class="ps-badge">2</div>
+        </a>
+        <a href="#" class="ps-item">
+          <div class="ps-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 17h4V5H2v12h3m10 0h4v-7h-4v7Zm-5 0v2m4-2v2m-9-2v2"/></svg></div>
+          <div class="ps-label">To Receive</div>
+          <div class="ps-badge">2</div>
+        </a>
+        <a href="#" class="ps-item">
+          <div class="ps-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="ps-label">To Rate</div>
+          <div class="ps-badge">3</div>
+        </a>
+      </div>
+    </div>
+
+    <a href="../Login/verify-farmer.html" class="start-selling-card">
+      <div class="ss-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="ss-body">
+        <div class="ss-title">Start Selling on FarmDirect</div>
+        <div class="ss-sub">Register as a Zamboanga Farmer today</div>
+      </div>
+      <span style="color:var(--green); font-weight:900; font-size:1.5rem;">›</span>
+    </a>
+
+    <div class="dash-card">
+      <div class="dash-card-hdr"><div class="dash-card-title">My Activities</div></div>
+      <div class="activities-grid">
+        <a href="notifications.html" class="act-item">
+          <div class="act-icon">🔔</div>
+          <div class="act-body">
+            <div class="act-title">Notifications</div>
+            <div class="act-sub">5 unread</div>
+          </div>
+        </a>
+        <a href="#" class="act-item">
+          <div class="act-icon">🎟️</div>
+          <div class="act-body">
+            <div class="act-title">My Vouchers</div>
+            <div class="act-sub">3 new vouchers</div>
+          </div>
+        </a>
+        <a href="chat.html" class="act-item">
+          <div class="act-icon">💬</div>
+          <div class="act-body">
+            <div class="act-title">Messages</div>
+            <div class="act-sub">2 unread chats</div>
+          </div>
+        </a>
+        <a href="#" class="act-item">
+          <div class="act-icon">⭐</div>
+          <div class="act-body">
+            <div class="act-title">My Ratings</div>
+            <div class="act-sub">View feedback</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="dash-card">
+      <div class="dash-card-hdr"><div class="dash-card-title">Recently Viewed</div></div>
+      <div class="recent-view-scroll">
+        <a href="#" class="rv-card">
+          <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=300" class="rv-img">
+          <div class="rv-name">Fresh Carrots</div>
+          <div class="rv-price">₱85.00</div>
+        </a>
+        <a href="#" class="rv-card">
+          <img src="https://images.unsplash.com/photo-1518977676601-b53f02ac6d31?w=300" class="rv-img">
+          <div class="rv-name">Native Potatoes</div>
+          <div class="rv-price">₱95.00</div>
+        </a>
+        <a href="#" class="rv-card">
+          <img src="https://images.unsplash.com/photo-1566385101042-1a0aa0c12e8c?w=300" class="rv-img">
+          <div class="rv-name">Fresh Cabbage</div>
+          <div class="rv-price">₱60.00</div>
+        </a>
+        <a href="#" class="rv-card">
+          <img src="https://images.unsplash.com/photo-1590865101275-4d99c14856cc?w=300" class="rv-img">
+          <div class="rv-name">Organic Ginger</div>
+          <div class="rv-price">₱45.00</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="dash-card">
+      <div class="acc-list">
+        <a href="#" class="acc-item">
+          <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div class="acc-text">Account Information</div>
+          <span style="color:var(--border);">›</span>
+        </a>
+        <a href="#" class="acc-item">
+          <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="acc-text">My Addresses</div>
+          <span style="color:var(--border);">›</span>
+        </a>
+        <a href="#" class="acc-item">
+          <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <div class="acc-text">Privacy & Security</div>
+          <span style="color:var(--border);">›</span>
+        </a>
+        <a href="#" class="acc-item">
+          <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="acc-text">Help Center</div>
+          <span style="color:var(--border);">›</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="logout-container">
+      <a href="../Login/login.html" class="logout-btn">Log Out</a>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- ══ TOAST ══ -->
+<div class="dash-toast" id="dash-toast"></div>
+
+<!-- ══ ORDERS PANEL (shared for To Pay / To Ship / To Receive / To Rate / History) ══ -->
+<div class="panel-overlay" id="orders-panel" onclick="closePanelOnOverlay(event,'orders-panel')">
+  <div class="panel">
+    <div class="panel-hdr">
+      <span class="panel-title" id="orders-panel-title">My Orders</span>
+      <button class="panel-close" onclick="closePanel('orders-panel')">✕</button>
+    </div>
+    <div id="orders-panel-body"></div>
+  </div>
+</div>
+
+<!-- ══ CANCEL REASON SUB-PANEL ══ -->
+<div class="panel-overlay" id="cancel-panel" onclick="closePanelOnOverlay(event,'cancel-panel')">
+  <div class="panel">
+    <div class="panel-hdr">
+      <span class="panel-title">Cancel Order</span>
+      <button class="panel-close" onclick="closePanel('cancel-panel')">✕</button>
+    </div>
+    <p style="font-size:0.86rem;color:var(--text-mid);margin-bottom:1rem;">Select a reason for cancellation. You can only cancel while the seller is still preparing your order.</p>
+    <select class="cancel-reason-sel" id="cancel-reason-sel">
+      <option value="">— Select a reason —</option>
+      <option value="changed_mind">I changed my mind</option>
+      <option value="wrong_items">I ordered the wrong items</option>
+      <option value="wrong_address">Incorrect delivery address</option>
+      <option value="found_cheaper">Found a better price elsewhere</option>
+      <option value="too_long">Delivery taking too long</option>
+      <option value="other">Other reason</option>
+    </select>
+    <div style="display:flex;gap:0.6rem;">
+      <button class="btn-sm btn-muted" style="flex:1;" onclick="closePanel('cancel-panel')">Go Back</button>
+      <button class="btn-sm btn-danger" style="flex:1;" onclick="confirmCancel()">Confirm Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RATING PANEL ══ -->
+<div class="panel-overlay" id="rate-panel" onclick="closePanelOnOverlay(event,'rate-panel')">
+  <div class="panel">
+    <div class="panel-hdr">
+      <span class="panel-title">Rate Your Order</span>
+      <button class="panel-close" onclick="closePanel('rate-panel')">✕</button>
+    </div>
+    <div id="rate-panel-body"></div>
+  </div>
+</div>
+
+<!-- ══ VOUCHERS PANEL ══ -->
+<div class="panel-overlay" id="vouchers-panel" onclick="closePanelOnOverlay(event,'vouchers-panel')">
+  <div class="panel">
+    <div class="panel-hdr">
+      <span class="panel-title">My Vouchers</span>
+      <button class="panel-close" onclick="closePanel('vouchers-panel')">✕</button>
+    </div>
+    <div id="vouchers-panel-body"></div>
+  </div>
+</div>
+
+<!-- ══ RATINGS PANEL ══ -->
+<div class="panel-overlay" id="myratings-panel" onclick="closePanelOnOverlay(event,'myratings-panel')">
+  <div class="panel">
+    <div class="panel-hdr">
+      <span class="panel-title">My Ratings & Reviews</span>
+      <button class="panel-close" onclick="closePanel('myratings-panel')">✕</button>
+    </div>
+    <div id="myratings-panel-body"></div>
+  </div>
+</div>
+
+<!-- ══ PROFILE EDIT PANEL ══ -->
+<div class="panel-overlay" id="profile-panel" onclick="closePanelOnOverlay(event,'profile-panel')">
+  <div class="panel">
+    <div class="panel-hdr">
+      <span class="panel-title">Edit Profile</span>
+      <button class="panel-close" onclick="closePanel('profile-panel')">✕</button>
+    </div>
+    <div class="edit-field"><label>Full Name</label><input id="ep-name" type="text"></div>
+    <div class="edit-field"><label>Email</label><input id="ep-email" type="email"></div>
+    <div class="edit-field"><label>Phone</label><input id="ep-phone" type="tel"></div>
+    <div class="edit-field"><label>City</label><input id="ep-city" type="text" value="Zamboanga City"></div>
+    <button class="btn-sm btn-primary" style="width:100%;margin-top:0.3rem;" onclick="saveProfile()">Save Changes</button>
+  </div>
+</div>
+
+<!-- ══ SETTINGS PANEL ══ -->
+<div class="panel-overlay" id="settings-panel" onclick="closePanelOnOverlay(event,'settings-panel')">
+  <div class="panel">
+    <div class="panel-hdr">
+      <span class="panel-title">Settings</span>
+      <button class="panel-close" onclick="closePanel('settings-panel')">✕</button>
+    </div>
+    <div class="acc-list" style="margin:0 -1.4rem;">
+      <a href="#" class="acc-item" onclick="event.preventDefault();closePanel('settings-panel');setTimeout(()=>openProfilePanel(),200);">
+        <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="acc-text">Account Information</div><span style="color:var(--border);">›</span>
+      </a>
+      <a href="#" class="acc-item" onclick="event.preventDefault();closePanel('settings-panel');setTimeout(()=>openAddressPanel(),200);">
+        <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="acc-text">My Addresses</div><span style="color:var(--border);">›</span>
+      </a>
+      <a href="#" class="acc-item" onclick="event.preventDefault();closePanel('settings-panel');setTimeout(()=>openPrivacyPanel(),200);">
+        <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="acc-text">Privacy & Security</div><span style="color:var(--border);">›</span>
+      </a>
+      <a href="#" class="acc-item" onclick="event.preventDefault();closePanel('settings-panel');setTimeout(()=>openHelpPanel(),200);">
+        <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div class="acc-text">Help Center</div><span style="color:var(--border);">›</span>
+      </a>
+      <a href="#" class="acc-item" onclick="event.preventDefault();closePanel('settings-panel');setTimeout(()=>openVouchersPanel(),200);">
+        <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
+        <div class="acc-text">My Vouchers</div><span style="color:var(--border);">›</span>
+      </a>
+      <a href="#" class="acc-item" style="color:var(--red);" onclick="event.preventDefault();closePanel('settings-panel');setTimeout(()=>handleLogout(event),200);">
+        <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+        <div class="acc-text" style="color:var(--red);">Log Out</div><span style="color:var(--border);">›</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MY ADDRESSES PANEL ══ -->
+<div class="panel-overlay" id="address-panel" onclick="closePanelOnOverlay(event,'address-panel')">
+  <div class="panel">
+    <div class="panel-hdr">
+      <span class="panel-title">My Addresses</span>
+      <button class="panel-close" onclick="closePanel('address-panel')">✕</button>
+    </div>
+    <div id="address-panel-body"></div>
+    <div id="address-form-wrap" style="display:none;margin-top:0.8rem;">
+      <div style="font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:0.8rem;" id="addr-form-title">Add New Address</div>
+      <!-- Step pills -->
+      <div style="display:flex;gap:0;margin-bottom:1rem;border-radius:8px;overflow:hidden;border:1.5px solid var(--border);">
+        <div class="da-step-pill active" id="da-step-1">1 · City</div>
+        <div class="da-step-pill" id="da-step-2">2 · Barangay</div>
+        <div class="da-step-pill" id="da-step-3">3 · Details</div>
+      </div>
+      <!-- Step 1 -->
+      <div id="da-pane-1">
+        <div class="edit-field">
+          <label>City / Municipality <span style="color:var(--red);">*</span></label>
+          <select id="da-city" onchange="daOnCityChange()" style="width:100%;padding:0.65rem 0.9rem;border:2px solid var(--border);border-radius:10px;font-size:0.92rem;background:var(--cream);color:var(--text);transition:border-color 0.2s;"></select>
+        </div>
+        <div style="display:flex;gap:0.6rem;">
+          <button class="btn-sm btn-muted" style="flex:1;" onclick="closeDashAddressForm()">Cancel</button>
+          <button class="btn-sm btn-primary" style="flex:1;" id="da-next-1" disabled onclick="daGoStep(2)">Next: Barangay →</button>
+        </div>
+      </div>
+      <!-- Step 2 -->
+      <div id="da-pane-2" style="display:none;">
+        <div style="font-size:0.78rem;color:var(--text-light);margin-bottom:0.6rem;" id="da-city-label"></div>
+        <div class="edit-field">
+          <label>Barangay <span style="color:var(--red);">*</span></label>
+          <select id="da-brgy" onchange="daOnBrgyChange()" style="width:100%;padding:0.65rem 0.9rem;border:2px solid var(--border);border-radius:10px;font-size:0.92rem;background:var(--cream);color:var(--text);transition:border-color 0.2s;"></select>
+        </div>
+        <div style="display:flex;gap:0.6rem;">
+          <button class="btn-sm btn-muted" style="flex:1;" onclick="daGoStep(1)">← Back</button>
+          <button class="btn-sm btn-primary" style="flex:1;" id="da-next-2" disabled onclick="daGoStep(3)">Next: Details →</button>
+        </div>
+      </div>
+      <!-- Step 3 -->
+      <div id="da-pane-3" style="display:none;">
+        <div style="font-size:0.78rem;color:var(--text-light);margin-bottom:0.8rem;" id="da-location-label"></div>
+        <div class="edit-field"><label>Full Name <span style="color:var(--red);">*</span></label><input id="da-name" type="text" placeholder="e.g. Juan Dela Cruz"></div>
+        <div class="edit-field"><label>Phone <span style="color:var(--red);">*</span></label><input id="da-phone" type="tel" placeholder="+63 9XX XXX XXXX"></div>
+        <div class="edit-field"><label>Street / House No. <span style="color:var(--red);">*</span></label><input id="da-street" type="text" placeholder="e.g. 123 Rizal St., Purok 4"></div>
+        <div class="edit-field"><label>ZIP Code</label><input id="da-zip" type="text" placeholder="7000"></div>
+        <div class="edit-field"><label>Landmark (optional)</label><input id="da-landmark" type="text" placeholder="Near SM City Zamboanga"></div>
+        <div style="display:flex;gap:0.6rem;">
+          <button class="btn-sm btn-muted" style="flex:1;" onclick="daGoStep(2)">← Back</button>
+          <button class="btn-sm btn-primary" style="flex:1;" onclick="saveDashAddress()">Save Address</button>
+        </div>
+      </div>
+    </div>
+    <button class="btn-sm btn-outline" style="width:100%;margin-top:0.8rem;" id="addr-add-btn" onclick="openDashAddressForm(null)">+ Add New Address</button>
+  </div>
+</div>
+
+<!-- ══ PRIVACY & SECURITY PANEL ══ -->
+<div class="panel-overlay" id="privacy-panel" onclick="closePanelOnOverlay(event,'privacy-panel')">
+  <div class="panel">
+    <div class="panel-hdr">
+      <span class="panel-title">Privacy & Security</span>
+      <button class="panel-close" onclick="closePanel('privacy-panel')">✕</button>
+    </div>
+
+    <p style="font-size:0.82rem;color:var(--text-light);margin-bottom:1.2rem;">Manage your account security and data preferences.</p>
+
+    <div style="margin-bottom:1.4rem;">
+      <div style="font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:0.8rem;">🔐 Change Password</div>
+      <div class="edit-field"><label>Current Password</label><input id="prv-cur" type="password" placeholder="••••••••"></div>
+      <div class="edit-field"><label>New Password</label><input id="prv-new" type="password" placeholder="••••••••"></div>
+      <div class="edit-field"><label>Confirm New Password</label><input id="prv-cfm" type="password" placeholder="••••••••"></div>
+      <button class="btn-sm btn-primary" style="width:100%;" onclick="savePassword()">Update Password</button>
+    </div>
+
+    <div style="border-top:1.5px solid var(--border);padding-top:1.2rem;margin-bottom:1.2rem;">
+      <div style="font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:0.8rem;">📱 Two-Factor Authentication</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--cream);border-radius:10px;padding:0.85rem 1rem;">
+        <div>
+          <div style="font-size:0.88rem;font-weight:600;color:var(--text);">SMS Verification</div>
+          <div style="font-size:0.76rem;color:var(--text-light);margin-top:0.1rem;">Get a code via text when signing in</div>
+        </div>
+        <label style="position:relative;display:inline-block;width:42px;height:24px;cursor:pointer;">
+          <input type="checkbox" id="prv-2fa" style="opacity:0;width:0;height:0;" onchange="toggle2FA(this)">
+          <span id="prv-2fa-track" style="position:absolute;inset:0;background:var(--border);border-radius:24px;transition:0.2s;"></span>
+          <span id="prv-2fa-thumb" style="position:absolute;left:3px;top:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.2);"></span>
+        </label>
+      </div>
+    </div>
+
+    <div style="border-top:1.5px solid var(--border);padding-top:1.2rem;">
+      <div style="font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:0.8rem;">🔔 Notification Preferences</div>
+      <div id="prv-notifs-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ HELP CENTER PANEL ══ -->
+<div class="panel-overlay" id="help-panel" onclick="closePanelOnOverlay(event,'help-panel')">
+  <div class="panel">
+    <div class="panel-hdr">
+      <span class="panel-title">Help Center</span>
+      <button class="panel-close" onclick="closePanel('help-panel')">✕</button>
+    </div>
+
+    <div style="background:var(--green-light);border:1.5px solid var(--green-mid);border-radius:12px;padding:1rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.9rem;">
+      <div style="font-size:1.8rem;">🌿</div>
+      <div>
+        <div style="font-weight:700;font-size:0.92rem;color:var(--green);">FarmDirect Support</div>
+        <div style="font-size:0.78rem;color:var(--text-mid);margin-top:0.1rem;">Mon–Sat · 8:00 AM – 6:00 PM</div>
+      </div>
+    </div>
+
+    <div style="font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:0.7rem;">📞 Contact Us</div>
+    <div class="acc-list" style="margin:0 -1.4rem;margin-bottom:1.3rem;">
+      <a href="tel:+639001234567" class="acc-item">
+        <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.14 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 1.23h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 5.45 5.45l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div class="acc-text">+63 900 123 4567</div><span style="color:var(--border);">›</span>
+      </a>
+      <a href="mailto:hello@farmdirect.ph" class="acc-item">
+        <div class="acc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="acc-text">hello@farmdirect.ph</div><span style="color:var(--border);">›</span>
+      </a>
+    </div>
+
+    <div style="font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:0.7rem;">❓ Frequently Asked Questions</div>
+    <div id="faq-list"></div>
+  </div>
+</div>
+
+<script>
+/* ══ DATA HELPERS ══ */
+const CART_KEY   = 'fd_cart';
+const ORDERS_KEY = 'fd_orders';
+const PROFILE_KEY= 'fd_profile';
+const VOUCHERS_KEY='fd_vouchers';
+const RATINGS_KEY = 'fd_ratings';
+
+function getOrders() {
+  try { return JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]'); } catch(e){ return []; }
+}
+function saveOrders(o) { localStorage.setItem(ORDERS_KEY, JSON.stringify(o)); }
+function getProfile() {
+  const def = { name:'Juan Dela Cruz', email:'juan@email.com', phone:'+63 912 345 6789', city:'Zamboanga City' };
+  try { return Object.assign({}, def, JSON.parse(localStorage.getItem(PROFILE_KEY) || '{}')); } catch(e){ return def; }
+}
+function saveProfileData(p) { localStorage.setItem(PROFILE_KEY, JSON.stringify(p)); }
+function getVouchers() {
+  const def = [
+    { code:'FARMSAVE50', desc:'₱50 off on any order', expires:'2026-08-01', used:false },
+    { code:'FRESH10',    desc:'10% off on vegetables', expires:'2026-07-15', used:false },
+    { code:'THANKYOU30', desc:'₱30 off next purchase',  expires:'2026-06-30', used:false },
+    { code:'NEWBUYER',   desc:'₱100 off (new users)',   expires:'2026-06-01', used:true  },
+  ];
+  try { const v = JSON.parse(localStorage.getItem(VOUCHERS_KEY)); return v || def; } catch(e){ return def; }
+}
+function getRatings() {
+  try { return JSON.parse(localStorage.getItem(RATINGS_KEY) || '[]'); } catch(e){ return []; }
+}
+function saveRatings(r) { localStorage.setItem(RATINGS_KEY, JSON.stringify(r)); }
+
+/* Build demo orders in localStorage if none exist, so the panels aren't empty */
+function ensureDemoOrders() {
+  /* Bump DATA_VERSION any time you want to force-reset the browser's stored data */
+  const DATA_VERSION = 'fd_demo_v2';
+  if (localStorage.getItem('fd_data_version') !== DATA_VERSION) {
+    localStorage.removeItem('fd_orders');
+    localStorage.removeItem('fd_ratings');
+    localStorage.setItem('fd_data_version', DATA_VERSION);
+  }
+  const existing = getOrders();
+  if (existing.length > 0) return;
+  const demo = [
+    /* ── TO PAY ── */
+    {
+      id:'FD-001', status:'to_pay', placedAt: new Date(Date.now()-3600000).toISOString(),
+      paymentMethod:'gcash',
+      items:[
+        { name:'Fresh Carrots (Medium)', unit:'per kg', qty:2, price:195, img:'https://images.unsplash.com/photo-1447175008436-054170c2e979?w=200' },
+        { name:'Heirloom Tomatoes (Large)', unit:'per kg', qty:1, price:280, img:'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200' },
+        { name:'Fresh Lettuce (Medium)', unit:'per bundle (0.3 kg)', qty:2, price:150, img:'https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=200' },
+      ],
+      farm:'Green Valley Farm, Labuan', total:970,
+    },
+    {
+      id:'FD-002', status:'to_pay', placedAt: new Date(Date.now()-7200000).toISOString(),
+      paymentMethod:'cod',
+      items:[
+        { name:'Luyang Dilaw Turmeric', unit:'per 250g', qty:2, price:160, img:'https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=200' },
+        { name:'Sukang Tuba (Coconut Vinegar)', unit:'per 750ml', qty:1, price:120, img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=200' },
+      ],
+      farm:'Taluksangay Spice Farm', total:440,
+    },
+    /* ── TO SHIP ── */
+    {
+      id:'FD-003', status:'to_ship', placedAt: new Date(Date.now()-86400000).toISOString(),
+      paymentMethod:'gcash',
+      items:[
+        { name:'Native Chicken Eggs', unit:'per tray (30 pcs)', qty:2, price:360, img:'https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=200' },
+        { name:'Itik Eggs (Duck Eggs)', unit:'per tray (30 pcs)', qty:1, price:540, img:'https://images.unsplash.com/photo-1587486913049-53fc88980cfc?w=200' },
+      ],
+      farm:'Ayala Poultry', total:1260,
+    },
+    {
+      id:'FD-004', status:'to_ship', placedAt: new Date(Date.now()-108000000).toISOString(),
+      paymentMethod:'bank',
+      items:[
+        { name:'Grass-Fed Beef Sirloin', unit:'per kg', qty:1, price:480, img:'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=200' },
+        { name:'Artisan Farm Butter', unit:'per 200g', qty:2, price:280, img:'https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=200' },
+      ],
+      farm:'Manenan Ranch', total:1040,
+    },
+    /* ── TO RECEIVE ── */
+    {
+      id:'FD-005', status:'to_receive', placedAt: new Date(Date.now()-172800000).toISOString(),
+      paymentMethod:'gcash',
+      items:[
+        { name:'Queen Pineapple', unit:'per piece', qty:3, price:75, img:'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=200' },
+        { name:'Fresh Papayas', unit:'per kg', qty:2, price:85, img:'https://images.unsplash.com/photo-1617112848923-cc2234396a8d?w=200' },
+        { name:'Saba Bananas', unit:'per bundle (1 kg)', qty:2, price:60, img:'https://images.unsplash.com/photo-1528825871115-3581a5387919?w=200' },
+      ],
+      farm:'Sibuco Tropicals', total:565,
+    },
+    {
+      id:'FD-006', status:'to_receive', placedAt: new Date(Date.now()-216000000).toISOString(),
+      paymentMethod:'cod',
+      items:[
+        { name:'Fresh Carabao Milk', unit:'per liter', qty:3, price:120, img:'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200' },
+        { name:'Pasteurized Goat Milk', unit:'per 500ml', qty:2, price:72, img:'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=200' },
+      ],
+      farm:'Manenan Dairy', total:504,
+    },
+    /* ── DELIVERED (TO RATE) ── */
+    {
+      id:'FD-007', status:'delivered', placedAt: new Date(Date.now()-604800000).toISOString(),
+      paymentMethod:'gcash',
+      items:[
+        { name:'Grass-Fed Beef Sirloin', unit:'per 500g', qty:2, price:240, img:'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=200' },
+        { name:'Artisan Farm Butter', unit:'per 100g', qty:1, price:140, img:'https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=200' },
+      ],
+      farm:'Manenan Ranch', total:620,
+    },
+    {
+      id:'FD-008', status:'delivered', placedAt: new Date(Date.now()-864000000).toISOString(),
+      paymentMethod:'cod',
+      items:[
+        { name:'Luyang Dilaw Turmeric', unit:'per kg', qty:1, price:640, img:'https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=200' },
+        { name:'Sukang Tuba (Coconut Vinegar)', unit:'per liter', qty:2, price:160, img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=200' },
+      ],
+      farm:'Taluksangay Spice Farm', total:960,
+    },
+    {
+      id:'FD-009', status:'delivered', placedAt: new Date(Date.now()-1296000000).toISOString(),
+      paymentMethod:'gcash',
+      items:[
+        { name:'Queen Pineapple', unit:'per box (6 pcs)', qty:1, price:450, img:'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=200' },
+        { name:'Saba Bananas', unit:'per sack (10 kg)', qty:1, price:600, img:'https://images.unsplash.com/photo-1528825871115-3581a5387919?w=200' },
+      ],
+      farm:'Sibuco Tropicals', total:1050,
+    },
+  ];
+  saveOrders(demo);
+}
+
+/* ══ PANEL HELPERS ══ */
+function openPanel(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePanel(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closePanelOnOverlay(e, id) {
+  if (e.target === document.getElementById(id)) closePanel(id);
+}
+
+/* ══ TOAST ══ */
+function showToast(msg, warn) {
+  const t = document.getElementById('dash-toast');
+  t.textContent = msg;
+  t.style.background = warn ? 'var(--orange)' : 'var(--green)';
+  t.style.transform = 'translateX(-50%) translateY(0)';
+  t.style.opacity = '1';
+  setTimeout(() => { t.style.transform = 'translateX(-50%) translateY(80px)'; t.style.opacity = '0'; }, 2400);
+}
+
+/* ══ FORMAT HELPERS ══ */
+function peso(v) { return '₱' + Number(v).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+function fmtDate(iso) {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleDateString('en-PH', { month:'short', day:'numeric', year:'numeric' });
+}
+function statusTag(status) {
+  const map = {
+    to_pay:    ['To Pay', 'tag-topay'],
+    to_ship:   ['To Ship', 'tag-toship'],
+    to_receive:['In Transit', 'tag-onway'],
+    delivered: ['Delivered', 'tag-delivered'],
+    cancelled: ['Cancelled', 'tag-cancelled'],
+  };
+  const [label, cls] = map[status] || ['Unknown','tag-muted'];
+  return `<span class="order-status-tag ${cls}">${label}</span>`;
+}
+
+/* ══ ORDER CARD BUILDER ══ */
+function buildOrderCard(order, mode) {
+  const itemsHtml = order.items.map(it => `
+    <div class="order-item-row">
+      <img class="order-thumb" src="${it.img}" alt="${it.name}">
+      <div class="order-item-info">
+        <div class="order-item-name">${it.name}</div>
+        <div class="order-item-meta">${it.unit}</div>
+      </div>
+      <span class="order-item-qty">x${it.qty}</span>
+    </div>`).join('');
+
+  /* Action buttons depend on mode */
+  let actions = '';
+  if (mode === 'to_pay') {
+    const payLabel = order.paymentMethod === 'gcash' ? 'Pay via GCash' : order.paymentMethod === 'bank' ? 'Pay via Bank' : 'Pay Now';
+    actions = `
+      <a href="checkout.html" class="btn-sm btn-primary">${payLabel}</a>
+      <button class="btn-sm btn-danger" onclick="openCancelFlow('${order.id}')">Cancel Order</button>`;
+  } else if (mode === 'to_ship') {
+    actions = `
+      <button class="btn-sm btn-muted" style="pointer-events:none;">Awaiting Pickup</button>
+      <a href="Order_tracking.html" class="btn-sm btn-outline">View Details</a>`;
+  } else if (mode === 'to_receive') {
+    actions = `
+      <a href="Order_tracking.html" class="btn-sm btn-primary">Track Order</a>
+      <button class="btn-sm btn-outline" onclick="showToast('Order received! You can now rate this order.')">Order Received</button>`;
+  } else if (mode === 'delivered') {
+    const rated = getRatings().find(r => r.orderId === order.id);
+    actions = rated
+      ? `<button class="btn-sm btn-muted" style="pointer-events:none;">★ Rated ${rated.stars}/5</button>`
+      : `<button class="btn-sm btn-primary" onclick="openRatePanel('${order.id}')">Rate & Review</button>`;
+  } else if (mode === 'history') {
+    actions = `<a href="Order_tracking.html" class="btn-sm btn-outline">View Details</a>`;
+  }
+
+  return `
+    <div class="order-card" id="order-card-${order.id}">
+      <div class="order-card-hdr">
+        <span class="order-id">${order.id} · ${fmtDate(order.placedAt)}</span>
+        ${statusTag(order.status)}
+      </div>
+      <div style="font-size:0.76rem;color:var(--text-light);margin-bottom:0.5rem;">${order.farm || ''}</div>
+      ${itemsHtml}
+      <div class="order-total-row">
+        <span class="order-total-label">Order Total</span>
+        <span class="order-total-amt">${peso(order.total || 0)}</span>
+      </div>
+      <div class="order-actions">${actions}</div>
+    </div>`;
+}
+
+function emptyState(icon, msg, href, linkLabel) {
+  return `<div class="empty-panel">
+    <div class="ep-icon">${icon}</div>
+    <p>${msg}</p>
+    ${href ? `<a href="${href}" class="btn-sm btn-primary" style="display:inline-flex;width:auto;">${linkLabel}</a>` : ''}
+  </div>`;
+}
+
+/* ══ PURCHASE STEP PANELS ══ */
+function openOrdersPanel(mode) {
+  const titles = {
+    to_pay:'To Pay', to_ship:'To Ship', to_receive:'To Receive',
+    delivered:'To Rate', history:'Purchase History'
+  };
+  document.getElementById('orders-panel-title').textContent = titles[mode] || 'Orders';
+
+  const orders = getOrders().filter(o => {
+    if (mode === 'history') return true;
+    if (mode === 'delivered') return o.status === 'delivered' && !o.cancelled;
+    return o.status === mode && !o.cancelled;
+  });
+
+  const body = document.getElementById('orders-panel-body');
+  if (orders.length === 0) {
+    body.innerHTML = emptyState('📦', 'No orders here yet.', 'products.html', 'Browse Products');
+  } else {
+    body.innerHTML = orders.map(o => buildOrderCard(o, mode === 'history' ? 'history' : mode)).join('');
+  }
+  openPanel('orders-panel');
+}
+
+/* ══ CANCEL FLOW ══ */
+let cancelTargetId = null;
+function openCancelFlow(orderId) {
+  cancelTargetId = orderId;
+  document.getElementById('cancel-reason-sel').value = '';
+  closePanel('orders-panel');
+  setTimeout(() => openPanel('cancel-panel'), 200);
+}
+function confirmCancel() {
+  const reason = document.getElementById('cancel-reason-sel').value;
+  if (!reason) { showToast('Please select a reason.', true); return; }
+  const orders = getOrders();
+  const order = orders.find(o => o.id === cancelTargetId);
+  if (order) {
+    if (order.status !== 'to_pay' && order.status !== 'to_ship') {
+      showToast('This order can no longer be cancelled.', true);
+      closePanel('cancel-panel');
+      return;
+    }
+    order.status = 'cancelled';
+    order.cancelled = true;
+    order.cancelReason = reason;
+    saveOrders(orders);
+  }
+  closePanel('cancel-panel');
+  showToast('Order ' + cancelTargetId + ' has been cancelled.');
+  updateBadges();
+}
+
+/* ══ RATE PANEL ══ */
+let rateTargetId = null;
+let rateStars = 0;
+function openRatePanel(orderId) {
+  rateTargetId = orderId;
+  rateStars = 0;
+  const orders = getOrders();
+  const order = orders.find(o => o.id === orderId);
+  closePanel('orders-panel');
+  setTimeout(() => {
+    const body = document.getElementById('rate-panel-body');
+    body.innerHTML = `
+      <p style="font-size:0.85rem;color:var(--text-mid);margin-bottom:0.6rem;">Order ${orderId} · ${order ? order.items.map(i=>i.name).join(', ') : ''}</p>
+      <p style="font-size:0.9rem;font-weight:700;margin-bottom:0.3rem;color:var(--text);">How was your order?</p>
+      <div class="star-row" id="star-row">
+        ${[1,2,3,4,5].map(n=>`<button class="star-btn" data-star="${n}" onclick="setStars(${n})">★</button>`).join('')}
+      </div>
+      <textarea class="rating-textarea" id="rate-comment" rows="3" placeholder="Share your experience (optional)…"></textarea>
+      <button class="btn-sm btn-primary" style="width:100%;" onclick="submitRating()">Submit Review</button>`;
+    openPanel('rate-panel');
+  }, 200);
+}
+function setStars(n) {
+  rateStars = n;
+  document.querySelectorAll('.star-btn').forEach(b => {
+    b.classList.toggle('active', Number(b.dataset.star) <= n);
+  });
+}
+function submitRating() {
+  if (!rateStars) { showToast('Please select a star rating.', true); return; }
+  const comment = document.getElementById('rate-comment').value.trim();
+  const ratings = getRatings();
+  ratings.push({ orderId: rateTargetId, stars: rateStars, comment, date: new Date().toISOString() });
+  saveRatings(ratings);
+  closePanel('rate-panel');
+  showToast('Thank you for your review!');
+  updateBadges();
+}
+
+/* ══ VOUCHERS PANEL ══ */
+function openVouchersPanel() {
+  const vouchers = getVouchers();
+  const body = document.getElementById('vouchers-panel-body');
+  if (vouchers.length === 0) {
+    body.innerHTML = emptyState('🎟️', 'You have no vouchers yet.', null, null);
+  } else {
+    body.innerHTML = vouchers.map(v => `
+      <div class="voucher-chip-dash ${v.used ? 'used' : ''}">
+        <div>
+          <div class="vc-code ${v.used ? 'used' : ''}">${v.code}</div>
+          <div class="vc-desc">${v.desc} · Exp: ${v.expires}</div>
+        </div>
+        ${v.used
+          ? '<span style="font-size:0.75rem;color:var(--text-light);font-weight:600;">Used</span>'
+          : `<button class="vc-copy" onclick="copyVoucher('${v.code}')">Copy</button>`}
+      </div>`).join('');
+  }
+  openPanel('vouchers-panel');
+}
+function copyVoucher(code) {
+  navigator.clipboard.writeText(code).catch(() => {});
+  showToast('Voucher code copied: ' + code);
+}
+
+/* ══ MY RATINGS PANEL ══ */
+function openMyRatingsPanel() {
+  const ratings = getRatings();
+  const body = document.getElementById('myratings-panel-body');
+  if (ratings.length === 0) {
+    body.innerHTML = emptyState('⭐', 'You haven\'t rated any orders yet.', null, null);
+  } else {
+    body.innerHTML = ratings.map(r => `
+      <div class="order-card">
+        <div class="order-card-hdr">
+          <span class="order-id">${r.orderId} · ${fmtDate(r.date)}</span>
+          <span style="color:#f9a825;font-size:0.95rem;font-weight:700;">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</span>
+        </div>
+        <p style="font-size:0.86rem;color:var(--text-mid);margin:0;">${r.comment || '<em>No comment left.</em>'}</p>
+      </div>`).join('');
+  }
+  openPanel('myratings-panel');
+}
+
+/* ══ PROFILE EDIT ══ */
+function openProfilePanel() {
+  const p = getProfile();
+  document.getElementById('ep-name').value  = p.name;
+  document.getElementById('ep-email').value = p.email;
+  document.getElementById('ep-phone').value = p.phone;
+  document.getElementById('ep-city').value  = p.city;
+  openPanel('profile-panel');
+}
+function saveProfile() {
+  const p = {
+    name:  document.getElementById('ep-name').value.trim() || 'Juan Dela Cruz',
+    email: document.getElementById('ep-email').value.trim(),
+    phone: document.getElementById('ep-phone').value.trim(),
+    city:  document.getElementById('ep-city').value.trim(),
+  };
+  saveProfileData(p);
+  document.querySelector('.profile-name').textContent = p.name;
+  document.querySelector('.profile-avatar').childNodes[0].textContent = p.name[0].toUpperCase();
+  closePanel('profile-panel');
+  showToast('Profile updated!');
+}
+
+/* ══ LOGOUT ══ */
+function handleLogout(e) {
+  e.preventDefault();
+  if (confirm('Log out of your FarmDirect account?')) {
+    window.location.href = '../Login/login.html';
+  }
+}
+
+/* ══ BADGES — sync counts from real order data ══ */
+function updateBadges() {
+  const orders = getOrders();
+  const toPay    = orders.filter(o => o.status === 'to_pay'     && !o.cancelled).length;
+  const toShip   = orders.filter(o => o.status === 'to_ship'    && !o.cancelled).length;
+  const toRec    = orders.filter(o => o.status === 'to_receive' && !o.cancelled).length;
+  const delivered= orders.filter(o => o.status === 'delivered'  && !o.cancelled);
+  const toRate   = delivered.filter(o => !getRatings().find(r => r.orderId === o.id)).length;
+
+  const steps = document.querySelectorAll('.ps-item');
+  /* steps order: To Pay, To Ship, To Receive, To Rate */
+  [[steps[0], toPay],[steps[1], toShip],[steps[2], toRec],[steps[3], toRate]].forEach(([el, count]) => {
+    if (!el) return;
+    let badge = el.querySelector('.ps-badge');
+    if (count > 0) {
+      if (!badge) { badge = document.createElement('div'); badge.className='ps-badge'; el.appendChild(badge); }
+      badge.textContent = count;
+    } else if (badge) {
+      badge.remove();
+    }
+  });
+
+  /* Cart count */
+  const cart = JSON.parse(localStorage.getItem('fd_cart') || '[]');
+  const cartTotal = cart.reduce((s,i) => s+(i.qty||1), 0);
+  document.querySelectorAll('.cart-count').forEach(el => el.textContent = cartTotal || 0);
+}
+
+/* ══ WIRE UP ALL BUTTONS ══ */
+function init() {
+  ensureDemoOrders();
+  updateBadges();
+
+  /* Load profile name */
+  const p = getProfile();
+  document.querySelector('.profile-name').textContent = p.name;
+  document.querySelector('.profile-avatar').childNodes[0].textContent = p.name[0].toUpperCase();
+
+  /* Purchase step links */
+  const steps = document.querySelectorAll('.ps-item');
+  const modes = ['to_pay','to_ship','to_receive','delivered'];
+  steps.forEach((el, i) => {
+    el.addEventListener('click', e => { e.preventDefault(); openOrdersPanel(modes[i]); });
+  });
+
+  /* View Purchase History */
+  document.querySelector('.dash-card-link').addEventListener('click', e => {
+    e.preventDefault(); openOrdersPanel('history');
+  });
+
+  /* Activities: My Vouchers, My Ratings */
+  document.querySelectorAll('.act-item').forEach(el => {
+    const title = el.querySelector('.act-title')?.textContent?.trim();
+    if (title === 'My Vouchers') el.addEventListener('click', e => { e.preventDefault(); openVouchersPanel(); });
+    if (title === 'My Ratings')  el.addEventListener('click', e => { e.preventDefault(); openMyRatingsPanel(); });
+  });
+
+  /* Recently Viewed → products page */
+  document.querySelectorAll('.rv-card').forEach(el => { el.href = 'products.html'; });
+
+  /* Profile settings gear */
+  document.querySelector('.profile-settings').addEventListener('click', openProfilePanel);
+
+  /* Profile avatar edit */
+  document.querySelector('.profile-avatar').addEventListener('click', openProfilePanel);
+
+  /* Account settings list items */
+  document.querySelectorAll('.acc-item').forEach(el => {
+    const text = el.querySelector('.acc-text')?.textContent?.trim();
+    if (text === 'Account Information') el.addEventListener('click', e => { e.preventDefault(); openProfilePanel(); });
+    if (text === 'My Addresses')        el.addEventListener('click', e => { e.preventDefault(); openAddressPanel(); });
+    if (text === 'Privacy & Security')  el.addEventListener('click', e => { e.preventDefault(); openPrivacyPanel(); });
+    if (text === 'Help Center')         el.addEventListener('click', e => { e.preventDefault(); openHelpPanel(); });
+  });
+
+  /* Profile settings gear → Settings panel */
+  document.querySelector('.profile-settings').removeEventListener('click', openProfilePanel);
+  document.querySelector('.profile-settings').addEventListener('click', openSettingsPanel);
+
+  /* Logout */
+  document.querySelector('.logout-btn').addEventListener('click', handleLogout);
+
+  /* Profile tier / follow counts — visual feedback */
+  document.querySelector('.profile-tier')?.addEventListener('click', () => showToast('Earn more points to level up!'));
+  document.querySelectorAll('.follow-item').forEach(el => el.addEventListener('click', () => showToast('Followers & Following — coming soon!')));
+}
+
+/* ══ SETTINGS PANEL ══ */
+function openSettingsPanel() { openPanel('settings-panel'); }
+
+/* ══ MY ADDRESSES PANEL ══ */
+const ADDRESSES_KEY = 'fd_addresses';
+function getAddresses() {
+  const def = [
+    { id:'addr-1', name:'Juan Dela Cruz', phone:'+63 912 345 6789', street:'123 Rizal Street, Purok 4', brgy:'Tetuan', city:'Zamboanga City', zip:'7000', landmark:'Near Tetuan Market', isDefault:true },
+  ];
+  try { const a = JSON.parse(localStorage.getItem(ADDRESSES_KEY)); return (a && a.length) ? a : def; } catch(e){ return def; }
+}
+function saveAddresses(arr) { localStorage.setItem(ADDRESSES_KEY, JSON.stringify(arr)); }
+
+function openAddressPanel() {
+  renderAddressList();
+  closeDashAddressForm();
+  openPanel('address-panel');
+}
+function renderAddressList() {
+  const addresses = getAddresses();
+  const body = document.getElementById('address-panel-body');
+  if (addresses.length === 0) {
+    body.innerHTML = `<div class="empty-panel"><div class="ep-icon">📍</div><p>No saved addresses yet.</p></div>`;
+  } else {
+    body.innerHTML = addresses.map(a => `
+      <div class="order-card" id="addr-card-${a.id}">
+        <div class="order-card-hdr">
+          <span style="font-size:0.87rem;font-weight:700;color:var(--text);">${a.name}</span>
+          ${a.isDefault ? '<span class="order-status-tag tag-onway">Default</span>' : ''}
+        </div>
+        <div style="font-size:0.82rem;color:var(--text-mid);line-height:1.6;">
+          ${a.phone}<br>
+          ${a.street}, Brgy. ${a.brgy}<br>
+          ${a.city} ${a.zip}${a.landmark ? '<br><span style="color:var(--text-light);">Near: '+a.landmark+'</span>' : ''}
+        </div>
+        <div class="order-actions" style="margin-top:0.7rem;">
+          <button class="btn-sm btn-outline" onclick="openDashAddressForm('${a.id}')">✏️ Edit</button>
+          ${!a.isDefault ? `<button class="btn-sm btn-muted" onclick="setDefaultAddress('${a.id}')">Set Default</button>` : ''}
+          <button class="btn-sm btn-danger" onclick="deleteAddress('${a.id}')">Remove</button>
+        </div>
+      </div>`).join('');
+  }
+}
+
+/* ══ CASCADING ADDRESS DATA ══ */
+const DA_DATA = {
+  'Zamboanga City': ['Ayala','Baliwasan','Baluno','Barangay Canelar','Boalan','Buenavista','Bunguiao','Busay','Calabasa','Calarian','Camino Nuevo','Campo Islam','Capisan','Cawit','Curuan','Dita','Divisoria','Dulian','Guiwan','Kasanyangan','La Paz','Labuan','Limpapa','Lumayang','Lunzuran','Maasin','Mampang','Manalipa','Manicahan','Mariki','Mercedes','Minda','Miputak','Molinos','Monching','Motif','Muricay','Nalus','Pampanga','Pangapuyan','Panubigan','Pasilmanta','Pasonanca','Putik','Recodo','Riohondo','Salaan','San Jose Cawa-Cawa','San Roque','San Vicente','Sangali','Santo Niño','Sibulao','Sinunoc','Talon-Talon','Taluksangay','Tetuan','Tictapul','Tigbalabag','Tomas Claudio','Tumitus','Victoria','Vitali','Zambowood'],
+  'Isabela City': ['Barangay I','Barangay II','Barangay III','Barangay IV','Barangay V','Barangay VI','Barangay VII','Barangay VIII','Barangay IX','Barangay X','Barangay XI','Barangay XII','Barangay XIII','Barangay XIV','Barangay XV','Kamarangan','Marang','Sunrise Village','Sumagdang','Lanote','Balanting','Busay','Carbon','Isabela Proper'],
+  'Ipil (Zamboanga Sibugay)': ['Ipil Proper','Bacalan','Bangkerohan','Caparan','Domolog','Doña Josefa','Imelda','Lo-ok','Lumbayao','Maasin','Magdaup','Makilas','Pangi','Sanito','Tiayon','Timbangan','Titinan','Tumaga','Tungawan'],
+  'Pagadian City': ['Balangasan','Banale','Dao','Gatas','Kawit','Lenienza','Lumbia','Napilan','Nong-Nong','Oring','Palpalan','Poblacion','Poloyagan','San Francisco','San Pedro','Santa Lucia','Santiago','Tiguma','White Beach','Buenavista','Danlugan','Deborok'],
+  'Dipolog City': ['Biasong','Barra','Dicayas','Diwan','Estaka','Galas','Gulayon','Lugdungan','Miputak','Olingan','Punta','San Jose','Santa Filomena','Santa Isabel','Santo Niño','Sicayab','Sinonoc','Turno'],
+  'Dapitan City': ['Bagting','Banbanan','Barra','Biasong','Bobongan','Dawo','Guimputlan','Hilltop','Larayan','Linabo','Maasin','Mambago','Maria Uray','Napo','Opao','Owaon','Oyan','Polo','Potol','San Vicente'],
+};
+
+let _daEditId = null;
+
+function openDashAddressForm(editId) {
+  _daEditId = editId;
+  document.getElementById('addr-form-title').textContent = editId ? 'Edit Address' : 'Add New Address';
+  document.getElementById('address-form-wrap').style.display = '';
+  document.getElementById('addr-add-btn').style.display = 'none';
+
+  // Populate city dropdown
+  const cityEl = document.getElementById('da-city');
+  cityEl.innerHTML = '<option value="">— Select city / municipality —</option>' +
+    Object.keys(DA_DATA).map(c => `<option value="${c}">${c}</option>`).join('');
+  document.getElementById('da-brgy').innerHTML = '<option value="">— Select barangay —</option>';
+  document.getElementById('da-next-1').disabled = true;
+  document.getElementById('da-next-2').disabled = true;
+
+  // Pre-fill if editing
+  if (editId) {
+    const addr = getAddresses().find(a => a.id === editId);
+    if (addr) {
+      cityEl.value = addr.city;
+      daOnCityChange();
+      setTimeout(() => {
+        document.getElementById('da-brgy').value = addr.brgy;
+        daOnBrgyChange();
+        document.getElementById('da-name').value = addr.name;
+        document.getElementById('da-phone').value = addr.phone;
+        document.getElementById('da-street').value = addr.street;
+        document.getElementById('da-zip').value = addr.zip || '';
+        document.getElementById('da-landmark').value = addr.landmark || '';
+        daGoStep(3);
+      }, 50);
+    }
+  } else {
+    ['da-name','da-phone','da-street','da-zip','da-landmark'].forEach(id => document.getElementById(id).value = '');
+    daGoStep(1);
+  }
+  document.getElementById('address-form-wrap').scrollIntoView({ behavior:'smooth' });
+}
+function closeDashAddressForm() {
+  document.getElementById('address-form-wrap').style.display = 'none';
+  document.getElementById('addr-add-btn').style.display = '';
+}
+function daGoStep(n) {
+  [1,2,3].forEach(i => {
+    document.getElementById('da-pane-'+i).style.display = i===n ? '' : 'none';
+    const pill = document.getElementById('da-step-'+i);
+    pill.className = 'da-step-pill' + (i===n ? ' active' : i<n ? ' done' : '');
+  });
+}
+function daOnCityChange() {
+  const city = document.getElementById('da-city').value;
+  document.getElementById('da-next-1').disabled = !city;
+  if (city && DA_DATA[city]) {
+    document.getElementById('da-brgy').innerHTML = '<option value="">— Select barangay —</option>' +
+      DA_DATA[city].map(b => `<option value="${b}">${b}</option>`).join('');
+    document.getElementById('da-next-2').disabled = true;
+  }
+}
+function daOnBrgyChange() {
+  const brgy = document.getElementById('da-brgy').value;
+  const city = document.getElementById('da-city').value;
+  document.getElementById('da-next-2').disabled = !brgy;
+  const label = brgy ? `📍 Brgy. ${brgy}, ${city}` : '';
+  document.getElementById('da-city-label').textContent = `📍 ${city}`;
+  document.getElementById('da-location-label').textContent = label;
+}
+function saveDashAddress() {
+  const name     = document.getElementById('da-name').value.trim();
+  const phone    = document.getElementById('da-phone').value.trim();
+  const street   = document.getElementById('da-street').value.trim();
+  const city     = document.getElementById('da-city').value;
+  const brgy     = document.getElementById('da-brgy').value;
+  const zip      = document.getElementById('da-zip').value.trim();
+  const landmark = document.getElementById('da-landmark').value.trim();
+  if (!name || !phone || !street || !city || !brgy) { showToast('Please fill in all required fields.', true); return; }
+  const addresses = getAddresses();
+  if (_daEditId) {
+    const idx = addresses.findIndex(a => a.id === _daEditId);
+    if (idx > -1) addresses[idx] = { ...addresses[idx], name, phone, street, city, brgy, zip, landmark };
+  } else {
+    addresses.push({ id:'addr-'+Date.now(), name, phone, street, city, brgy, zip, landmark, isDefault: addresses.length === 0 });
+  }
+  saveAddresses(addresses);
+  closeDashAddressForm();
+  renderAddressList();
+  showToast(_daEditId ? 'Address updated!' : 'Address saved!');
+}
+function setDefaultAddress(id) {
+  saveAddresses(getAddresses().map(a => ({ ...a, isDefault: a.id === id })));
+  renderAddressList();
+  showToast('Default address updated!');
+}
+function deleteAddress(id) {
+  if (!confirm('Remove this address?')) return;
+  let addresses = getAddresses().filter(a => a.id !== id);
+  if (addresses.length > 0 && !addresses.find(a => a.isDefault)) addresses[0].isDefault = true;
+  saveAddresses(addresses);
+  renderAddressList();
+  showToast('Address removed.');
+}
+
+/* ══ PRIVACY & SECURITY PANEL ══ */
+const PRIVACY_KEY = 'fd_privacy';
+function getPrivacyPrefs() {
+  const def = { twoFA: false, notifs: { orders: true, promos: true, reviews: false, newsletter: false } };
+  try { return Object.assign({}, def, JSON.parse(localStorage.getItem(PRIVACY_KEY) || '{}')); } catch(e){ return def; }
+}
+function savePrivacyPrefs(p) { localStorage.setItem(PRIVACY_KEY, JSON.stringify(p)); }
+
+function openPrivacyPanel() {
+  const prefs = getPrivacyPrefs();
+  /* Set 2FA toggle */
+  const cb = document.getElementById('prv-2fa');
+  cb.checked = prefs.twoFA;
+  updateToggleUI(cb);
+  /* Render notification toggles */
+  const notifDefs = [
+    { key:'orders',     label:'Order Updates',      sub:'Shipping, delivery & payment alerts' },
+    { key:'promos',     label:'Promotions & Sales',  sub:'Flash sales and seasonal discounts' },
+    { key:'reviews',    label:'Review Reminders',    sub:'Remind me to rate delivered orders' },
+    { key:'newsletter', label:'Newsletter',           sub:'Weekly picks from Zamboanga farms' },
+  ];
+  document.getElementById('prv-notifs-list').innerHTML = notifDefs.map(n => `
+    <div style="display:flex;align-items:center;justify-content:space-between;background:var(--cream);border-radius:10px;padding:0.75rem 1rem;margin-bottom:0.6rem;">
+      <div>
+        <div style="font-size:0.87rem;font-weight:600;color:var(--text);">${n.label}</div>
+        <div style="font-size:0.74rem;color:var(--text-light);margin-top:0.1rem;">${n.sub}</div>
+      </div>
+      <label style="position:relative;display:inline-block;width:42px;height:24px;cursor:pointer;flex-shrink:0;">
+        <input type="checkbox" class="prv-notif-cb" data-key="${n.key}" ${prefs.notifs[n.key] ? 'checked' : ''} style="opacity:0;width:0;height:0;" onchange="toggleNotif(this)">
+        <span class="ntgl-track" style="position:absolute;inset:0;background:${prefs.notifs[n.key] ? 'var(--green)' : 'var(--border)'};border-radius:24px;transition:0.2s;"></span>
+        <span class="ntgl-thumb" style="position:absolute;left:${prefs.notifs[n.key] ? '21px' : '3px'};top:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.2);"></span>
+      </label>
+    </div>`).join('');
+  openPanel('privacy-panel');
+}
+function updateToggleUI(cb) {
+  const track = document.getElementById('prv-2fa-track');
+  const thumb = document.getElementById('prv-2fa-thumb');
+  track.style.background = cb.checked ? 'var(--green)' : 'var(--border)';
+  thumb.style.left = cb.checked ? '21px' : '3px';
+}
+function toggle2FA(cb) {
+  updateToggleUI(cb);
+  const prefs = getPrivacyPrefs();
+  prefs.twoFA = cb.checked;
+  savePrivacyPrefs(prefs);
+  showToast(cb.checked ? '2FA enabled!' : '2FA disabled.');
+}
+function toggleNotif(cb) {
+  const key = cb.dataset.key;
+  const label = cb.closest('div').querySelector('div > div:first-child').textContent;
+  const track = cb.nextElementSibling;
+  const thumb = track.nextElementSibling;
+  track.style.background = cb.checked ? 'var(--green)' : 'var(--border)';
+  thumb.style.left = cb.checked ? '21px' : '3px';
+  const prefs = getPrivacyPrefs();
+  prefs.notifs[key] = cb.checked;
+  savePrivacyPrefs(prefs);
+  showToast((cb.checked ? '🔔 ' : '🔕 ') + label + (cb.checked ? ' on' : ' off'));
+}
+function savePassword() {
+  const cur = document.getElementById('prv-cur').value;
+  const nw  = document.getElementById('prv-new').value;
+  const cfm = document.getElementById('prv-cfm').value;
+  if (!cur || !nw || !cfm) { showToast('Please fill in all password fields.', true); return; }
+  if (nw !== cfm) { showToast('New passwords do not match.', true); return; }
+  if (nw.length < 8) { showToast('Password must be at least 8 characters.', true); return; }
+  ['prv-cur','prv-new','prv-cfm'].forEach(id => document.getElementById(id).value = '');
+  showToast('Password updated successfully!');
+}
+
+/* ══ HELP CENTER PANEL ══ */
+function openHelpPanel() {
+  const faqs = [
+    { q:'How do I track my order?',           a:'Go to My Purchases → To Receive and tap "Track Order" on your active order.' },
+    { q:'Can I cancel my order?',              a:'Yes — you can cancel while the status is "To Pay" or "To Ship". Once the farmer has shipped, cancellation is no longer possible.' },
+    { q:'How do I pay via GCash?',             a:'At checkout, select GCash as your payment method. You\'ll receive a payment link or QR code to complete the transaction.' },
+    { q:'Are the products really farm-fresh?', a:'All sellers on FarmDirect are verified Zamboanga farmers. Products are harvested and shipped within 24–48 hours of your order.' },
+    { q:'How do I become a seller?',           a:'Tap "Start Selling on FarmDirect" on your dashboard and complete the farmer verification process.' },
+    { q:'What is the return policy?',          a:'If you receive damaged or incorrect items, contact us within 24 hours of delivery with photos and we will resolve it promptly.' },
+  ];
+  document.getElementById('faq-list').innerHTML = faqs.map((f, i) => `
+    <div style="border:1.5px solid var(--border);border-radius:12px;margin-bottom:0.6rem;overflow:hidden;">
+      <button onclick="toggleFaq(${i})" style="width:100%;background:none;border:none;padding:0.85rem 1rem;text-align:left;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--font-body);">
+        <span style="font-size:0.87rem;font-weight:700;color:var(--text);flex:1;text-align:left;">${f.q}</span>
+        <span id="faq-arrow-${i}" style="color:var(--text-light);font-size:1rem;transition:transform 0.2s;">▾</span>
+      </button>
+      <div id="faq-body-${i}" style="display:none;padding:0 1rem 0.9rem;font-size:0.83rem;color:var(--text-mid);line-height:1.55;">${f.a}</div>
+    </div>`).join('');
+  openPanel('help-panel');
+}
+function toggleFaq(i) {
+  const body  = document.getElementById('faq-body-'+i);
+  const arrow = document.getElementById('faq-arrow-'+i);
+  const open  = body.style.display === 'block';
+  body.style.display  = open ? 'none'    : 'block';
+  arrow.style.transform = open ? ''      : 'rotate(180deg)';
+}
+
+init();
+</script>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <i class="fa fa-seedling"></i>
+      <span>FarmDirect</span>
+    </div>
+    <p>© 2026 FarmDirect Philippines. Freshness Guaranteed.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+      <a href="Dashboard.html">My Account</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Chat -->
+<a href="Chat.html" class="float-chat">
+  💬 Chat with Farmer
+  <span class="chat-badge">2</span>
+</a>
+
+</body>
+</html>

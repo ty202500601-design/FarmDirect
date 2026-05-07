@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment – FarmDirect</title>
+<link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script src="farmdirect.js"></script>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="products.html">Seller Centre</a>
+    <span class="sep">|</span>
+    <a href="products.html">Start Selling</a>
+    <span class="sep">|</span>
+    Follow us on
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+  <div class="topbar-right">
+    <a href="Notifications.html"><i class="fa fa-bell"></i> Notifications <span class="notif-dot">3</span></a>
+    <a href="#"><i class="fa fa-circle-question"></i> Help</a>
+    <div class="user-menu">
+      <a href="Dashboard.html" class="user-link"><i class="fa fa-user-circle"></i> farmuser <i class="fa fa-chevron-down" style="font-size:0.65rem;margin-left:3px;"></i></a>
+      <div class="user-dropdown">
+        <a href="Dashboard.html"><i class="fa fa-gauge"></i> My Dashboard</a>
+        <a href="Order_tracking.html"><i class="fa fa-box"></i> My Orders</a>
+        <a href="cart.html"><i class="fa fa-basket-shopping"></i> Cart</a>
+        <a href="#"><i class="fa fa-right-from-bracket"></i> Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <a href="products.html" class="logo">
+      <div class="logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
+      </div>
+      <div class="logo-text"><span class="logo-farm">Farm</span><span class="logo-direct">Direct</span></div>
+    </a>
+    <div class="search-bar">
+      <input type="text" placeholder="Search fresh produce, meats, pantry essentials…" />
+      <button type="button"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="header-actions">
+      <a href="cart.html" class="cart-btn" title="My Cart">
+        <i class="fa fa-shopping-basket"></i>
+        <span class="cart-count">3</span>
+      </a>
+      <a href="Chat.html" class="cart-btn" title="Messages" style="position:relative;">
+        <i class="fa fa-comment"></i>
+      </a>
+    </div>
+  </div>
+  <div class="search-tags">
+    <a href="products.html">Organic Tomatoes</a>
+    <a href="products.html">Free-Range Eggs</a>
+    <a href="products.html">Grass-Fed Beef</a>
+    <a href="products.html">Sayote</a>
+    <a href="products.html">Coconut Oil</a>
+  </div>
+</header>
+
+
+
+
+
+
+
+
+<div class="checkout-wrap">
+  <div class="container">
+    <h1 class="page-title">Checkout</h1>
+
+    <div class="checkout-steps">
+      <div class="step done"><span class="step-num">✓</span> Delivery</div>
+      <div class="step-line"></div>
+      <div class="step active"><span class="step-num">2</span> Payment</div>
+      <div class="step-line"></div>
+      <div class="step"><span class="step-num">3</span> Confirm</div>
+    </div>
+
+    <div class="checkout-layout">
+
+      <div class="checkout-summary-col">
+        <div class="summary-card" id="summary-card">
+          <h2>Order Summary</h2>
+          <!-- Populated by JS from localStorage -->
+          <p style="font-size:0.85rem;color:var(--text-light);">Loading summary…</p>
+        </div>
+      </div>
+
+      <div class="checkout-form-col">
+        <div class="checkout-form-wrap">
+          <h2>Payment Method</h2>
+
+          <div class="gcash-promo-banner">
+            <span class="gcash-promo-icon">💳</span>
+            <div><strong>Pay with GCash</strong> and get <strong>₱20 cashback</strong> on your next order!</div>
+          </div>
+
+          <div class="payment-options">
+
+            <input type="radio" name="payment" id="pay-cod" checked>
+            <label for="pay-cod" class="pay-label" onclick="setPayment('cod')">
+              <span class="pay-radio-dot"></span>
+              <span class="pay-icon">💵</span>
+              <div>
+                <div class="courier-name">Cash on Delivery</div>
+                <div class="courier-desc">Pay when your order arrives</div>
+              </div>
+            </label>
+
+            <input type="radio" name="payment" id="pay-gcash">
+            <label for="pay-gcash" class="pay-label" onclick="setPayment('gcash')">
+              <span class="pay-radio-dot"></span>
+              <span class="pay-icon">📱</span>
+              <div>
+                <div class="courier-name">
+                  GCash
+                  <span class="gcash-cashback-badge">+₱20 Cashback</span>
+                </div>
+                <div class="courier-desc">Instant digital payment</div>
+              </div>
+            </label>
+
+            <div class="gcash-form" id="gcash-form" style="display:none;padding:0.5rem 1rem 0.8rem;">
+              <div class="form-group">
+                <label>GCash Number</label>
+                <div class="phone-wrap">
+                  <span class="phone-prefix">+63</span>
+                  <input type="tel" id="gcash-number" placeholder="917 000 0000">
+                </div>
+              </div>
+            </div>
+
+            <input type="radio" name="payment" id="pay-bank">
+            <label for="pay-bank" class="pay-label" onclick="setPayment('bank')">
+              <span class="pay-radio-dot"></span>
+              <span class="pay-icon">🏦</span>
+              <div>
+                <div class="courier-name">Bank Transfer</div>
+                <div class="courier-desc">BDO, BPI, UnionBank</div>
+              </div>
+            </label>
+
+          </div>
+
+          <div class="pay-security">
+            🔒 Your payment information is encrypted and secure.
+          </div>
+
+          <div class="step-nav">
+            <a href="checkout.html" class="secondary-btn">← Back</a>
+            <a href="checkout-confirm.html" class="add-cart-btn checkout-next-btn" onclick="savePayment()">Review Order →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+let selectedPayment = 'cod';
+
+function setPayment(type) {
+  selectedPayment = type;
+  document.getElementById('gcash-form').style.display = type === 'gcash' ? 'block' : 'none';
+}
+
+function savePayment() {
+  const gcashNum = selectedPayment === 'gcash' ? document.getElementById('gcash-number').value : '';
+  FD.Checkout.save({ paymentMethod: selectedPayment, gcashNumber: gcashNum });
+}
+
+/* Render order summary from checkout state */
+(function() {
+  const co = FD.Checkout.get();
+  const card = document.getElementById('summary-card');
+  if (!co || !co.pricing) {
+    card.innerHTML = `<h2>Order Summary</h2><p style="font-size:0.85rem;color:var(--text-light);">Add items to cart first.</p>`;
+    return;
+  }
+  const p = co.pricing;
+  let html = `<h2>Order Summary</h2>`;
+  (co.items || []).forEach(i => {
+    html += `<div class="summary-row"><span>${i.name} x${i.qty}</span><span>${FD.fmt.peso(i.price * i.qty)}</span></div>`;
+  });
+  html += `<hr class="summary-divider">`;
+  html += `<div class="summary-row"><span>Subtotal</span><span>${FD.fmt.peso(p.sub)}</span></div>`;
+  if (p.disc > 0) {
+    html += `<div class="summary-row savings"><span>🎉 Discounts</span><span>−${FD.fmt.peso(p.disc)}</span></div>`;
+  }
+  html += `<div class="summary-row"><span>Shipping</span><span>${p.shipping === 0 ? 'FREE' : FD.fmt.peso(p.shipping)}</span></div>`;
+  html += `<div class="summary-row" style="color:var(--text-light);font-size:0.82rem;"><span>VAT (12%)</span><span>+${FD.fmt.peso(p.vat)}</span></div>`;
+  html += `<div class="summary-row total-row"><span>Total</span><span>${FD.fmt.peso(p.total)}</span></div>`;
+  card.innerHTML = html;
+
+  // Restore saved payment
+  const pm = co.paymentMethod || 'cod';
+  if (pm !== 'cod') {
+    document.getElementById('pay-' + pm).checked = true;
+    setPayment(pm);
+  }
+})();
+</script>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <i class="fa fa-seedling"></i>
+      <span>FarmDirect</span>
+    </div>
+    <p>© 2026 FarmDirect Philippines. Freshness Guaranteed.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+      <a href="Dashboard.html">My Account</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Chat -->
+<a href="Chat.html" class="float-chat">
+  💬 Chat with Farmer
+  <span class="chat-badge">2</span>
+</a>
+
+</body>
+</html>

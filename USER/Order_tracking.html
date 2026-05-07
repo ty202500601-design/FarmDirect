@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Order – FarmDirect</title>
+<link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+/* Return modal */
+.return-modal-overlay { display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center; }
+.return-modal-overlay.open { display:flex; }
+.return-modal { background:var(--white);border-radius:var(--radius);padding:2rem;max-width:480px;width:90%;box-shadow:var(--shadow-lg); }
+.return-modal h3 { font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.5rem;color:var(--green-dark); }
+.return-modal p { font-size:0.88rem;color:var(--text-mid);margin-bottom:1rem;line-height:1.5; }
+.return-reason-select { width:100%;padding:0.7rem 0.9rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;background:var(--cream);margin-bottom:0.8rem; }
+.return-reason-select:focus { border-color:var(--green); }
+.return-notes { width:100%;padding:0.7rem 0.9rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:0.88rem;background:var(--cream);margin-bottom:1rem;resize:vertical;font-family:inherit; }
+.return-notes:focus { border-color:var(--green); }
+.return-modal-btns { display:flex;gap:0.8rem; }
+.return-confirm-btn { flex:1;background:var(--green);color:#fff;border:none;border-radius:10px;padding:0.7rem;font-size:0.9rem;font-weight:700;cursor:pointer;transition:opacity 0.2s; }
+.return-confirm-btn:hover { opacity:0.85; }
+.return-back-btn { flex:1;background:var(--white);border:2px solid var(--border);border-radius:10px;padding:0.7rem;font-size:0.9rem;font-weight:600;cursor:pointer;transition:border-color 0.2s; }
+.return-back-btn:hover { border-color:var(--green);color:var(--green); }
+
+/* Review form — only shows when delivered */
+.review-after-box { background:var(--white);border-radius:var(--radius);border:2px solid var(--border);padding:1.8rem;margin-top:1.5rem; }
+.review-after-box h3 { font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.5rem; }
+.review-form-sub { font-size:0.85rem;color:var(--text-light);margin-bottom:1rem; }
+.review-stars-row { display:flex;gap:0.4rem;font-size:1.6rem;cursor:pointer;margin-bottom:1rem; }
+.review-stars-row span { transition:transform 0.15s; }
+.review-stars-row span:hover { transform:scale(1.2); }
+.review-stars-row span.selected { filter:none; }
+.review-stars-row span.dim { opacity:0.35; }
+.review-textarea { width:100%;padding:0.75rem 0.9rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;background:var(--cream);resize:vertical;font-family:inherit;transition:border-color 0.2s; }
+.review-textarea:focus { border-color:var(--green); }
+.review-submit-btn { background:var(--green);color:#fff;border:none;border-radius:10px;padding:0.65rem 1.4rem;font-size:0.9rem;font-weight:700;cursor:pointer;margin-top:0.75rem;transition:opacity 0.2s; }
+.review-submit-btn:hover { opacity:0.88; }
+.review-submit-btn:disabled { background:var(--border);color:var(--text-light);cursor:not-allowed; }
+.review-locked-note { font-size:0.84rem;color:var(--text-light);font-style:italic;text-align:center;padding:1rem;border:1.5px dashed var(--border);border-radius:var(--radius-sm); }
+
+/* Return button area */
+.order-action-bar { display:flex;gap:0.8rem;flex-wrap:wrap;margin:1.5rem 0; }
+.return-request-btn { display:flex;align-items:center;gap:0.5rem;background:var(--cream-dark);border:2px solid var(--border);border-radius:10px;padding:0.65rem 1.2rem;font-size:0.88rem;font-weight:600;cursor:pointer;transition:all 0.2s;color:var(--text-mid); }
+.return-request-btn:hover { border-color:var(--orange);color:var(--orange); }
+.return-request-btn:disabled { opacity:0.5;cursor:not-allowed; }
+.simulate-delivered-btn { display:flex;align-items:center;gap:0.5rem;background:var(--green-light);border:2px solid var(--green);border-radius:10px;padding:0.65rem 1.2rem;font-size:0.82rem;font-weight:600;cursor:pointer;color:var(--green);transition:opacity 0.2s; }
+.simulate-delivered-btn:hover { opacity:0.8; }
+
+/* Item-level return */
+.tracking-item-row { display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0;border-bottom:1px solid var(--border); }
+.tracking-item-row:last-child { border-bottom:none; }
+.tracking-item-info { flex:1; }
+.tracking-item-name { font-size:0.88rem;font-weight:600;color:var(--text); }
+.tracking-item-qty { font-size:0.78rem;color:var(--text-light); }
+.tracking-item-price { font-size:0.88rem;font-weight:700;color:var(--orange); }
+.return-item-btn-track { background:none;border:1.5px solid var(--border);border-radius:6px;padding:0.3rem 0.6rem;font-size:0.75rem;font-weight:600;cursor:pointer;color:var(--text-light);transition:all 0.2s; }
+.return-item-btn-track:hover { border-color:var(--orange);color:var(--orange); }
+.return-item-btn-track:disabled { opacity:0.4;cursor:not-allowed; }
+.return-item-btn-track.returned { border-color:var(--red);color:var(--red); }
+.item-return-reasons { display:none;padding:0.5rem 0; }
+.item-return-reasons.show { display:block; }
+.item-return-reasons select { width:100%;padding:0.5rem 0.7rem;border:1.5px solid var(--border);border-radius:6px;font-size:0.82rem;background:var(--cream);margin-bottom:0.4rem; }
+.item-return-reasons textarea { width:100%;padding:0.5rem 0.7rem;border:1.5px solid var(--border);border-radius:6px;font-size:0.82rem;background:var(--cream);resize:vertical;font-family:inherit;margin-bottom:0.4rem; }
+.item-return-reasons .item-return-actions { display:flex;gap:0.5rem; }
+.item-return-reasons .item-confirm-btn { background:var(--orange);color:#fff;border:none;border-radius:6px;padding:0.4rem 0.8rem;font-size:0.8rem;font-weight:600;cursor:pointer; }
+.item-return-reasons .item-cancel-btn { background:var(--white);border:1.5px solid var(--border);border-radius:6px;padding:0.4rem 0.8rem;font-size:0.8rem;font-weight:600;cursor:pointer; }
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="products.html">Seller Centre</a>
+    <span class="sep">|</span>
+    <a href="products.html">Start Selling</a>
+    <span class="sep">|</span>
+    Follow us on
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+  <div class="topbar-right">
+    <a href="Notifications.html"><i class="fa fa-bell"></i> Notifications <span class="notif-dot">3</span></a>
+    <a href="#"><i class="fa fa-circle-question"></i> Help</a>
+    <div class="user-menu">
+      <a href="Dashboard.html" class="user-link"><i class="fa fa-user-circle"></i> farmuser <i class="fa fa-chevron-down" style="font-size:0.65rem;margin-left:3px;"></i></a>
+      <div class="user-dropdown">
+        <a href="Dashboard.html"><i class="fa fa-gauge"></i> My Dashboard</a>
+        <a href="Order_tracking.html"><i class="fa fa-box"></i> My Orders</a>
+        <a href="cart.html"><i class="fa fa-basket-shopping"></i> Cart</a>
+        <a href="#"><i class="fa fa-right-from-bracket"></i> Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <a href="products.html" class="logo">
+      <div class="logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
+      </div>
+      <div class="logo-text"><span class="logo-farm">Farm</span><span class="logo-direct">Direct</span></div>
+    </a>
+    <div class="search-bar">
+      <input type="text" placeholder="Search fresh produce, meats, pantry essentials…" />
+      <button type="button"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="header-actions">
+      <a href="cart.html" class="cart-btn" title="My Cart">
+        <i class="fa fa-shopping-basket"></i>
+        <span class="cart-count">3</span>
+      </a>
+      <a href="Chat.html" class="cart-btn" title="Messages" style="position:relative;">
+        <i class="fa fa-comment"></i>
+      </a>
+    </div>
+  </div>
+  <div class="search-tags">
+    <a href="products.html">Organic Tomatoes</a>
+    <a href="products.html">Free-Range Eggs</a>
+    <a href="products.html">Grass-Fed Beef</a>
+    <a href="products.html">Sayote</a>
+    <a href="products.html">Coconut Oil</a>
+  </div>
+</header>
+
+
+
+
+
+
+
+
+<div class="tracking-wrap">
+  <div class="container">
+    <a href="Dashboard.html" class="back-link">← Back to Dashboard</a>
+    <h1 class="page-title">Track Your Order</h1>
+
+    <!-- Order meta card -->
+    <div class="order-meta-card">
+      <div class="order-meta-grid" id="order-meta-grid">
+        <div class="meta-item"><span class="meta-label">Order Number</span><span class="meta-value" id="meta-id">#—</span></div>
+        <div class="meta-item"><span class="meta-label">Order Date</span><span class="meta-value" id="meta-date">—</span></div>
+        <div class="meta-item"><span class="meta-label">Delivery via</span><span class="meta-value">🚕 Grab</span></div>
+        <div class="meta-item"><span class="meta-label">Total</span><span class="meta-value green" id="meta-total">—</span></div>
+        <div class="meta-item"><span class="meta-label">You Saved</span><span class="meta-value orange" id="meta-saved" style="display:none">— 🎉</span></div>
+        <div class="meta-item"><span class="meta-label">Status</span><span class="meta-value purple" id="meta-status">—</span></div>
+      </div>
+    </div>
+
+    <!-- Action buttons: return (shows after delivery), demo button -->
+    <div class="order-action-bar" id="order-action-bar">
+      <button class="return-request-btn" id="return-btn" onclick="openReturnModal()" disabled>
+        ↩ Request Return / Refund
+      </button>
+      <!-- Dev/demo helper: simulate delivery for testing -->
+      <button class="simulate-delivered-btn" id="sim-btn" onclick="simulateDelivered()" title="Demo: mark as delivered">
+        🧪 Mark as Delivered (demo)
+      </button>
+    </div>
+
+    <!-- Fake live map -->
+    <div class="live-map" id="live-map">
+      <div>
+        <div class="map-pin">🚕</div>
+        <div class="map-label">
+          <p class="map-label-title">Driver is on the way!</p>
+          <p class="map-label-sub">Est. 10 minutes away · Tetuan, Zamboanga City</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Driver card -->
+    <div class="driver-card">
+      <div class="driver-avatar">👨</div>
+      <div class="driver-info">
+        <div class="driver-name">Rodel Santos</div>
+        <div class="driver-plate">Toyota Vios · ZC 1234 D</div>
+        <div class="driver-rating">⭐ 4.9 · 2,847 trips</div>
+      </div>
+      <div class="driver-actions">
+        <button class="driver-call-btn">📞 Call</button>
+        <label for="chat-check" class="driver-chat-btn">💬 Chat</label>
+      </div>
+    </div>
+
+    <!-- Tracking steps -->
+    <div class="tracking-steps" id="tracking-steps">
+      <div class="tracking-step completed" id="step-confirmed">
+        <div class="tracking-icon">✓</div>
+        <div class="tracking-content">
+          <h4>Order Confirmed</h4>
+          <p>Your order has been confirmed and the farmer has been notified.</p>
+          <p class="tracking-time" id="step-confirmed-time">—</p>
+        </div>
+      </div>
+      <div class="tracking-step completed" id="step-preparing">
+        <div class="tracking-icon">✓</div>
+        <div class="tracking-content">
+          <h4>Preparing Your Order</h4>
+          <p>Green Valley Farm is harvesting and packing your fresh produce.</p>
+          <p class="tracking-time">+15 min</p>
+        </div>
+      </div>
+      <div class="tracking-step active" id="step-delivery">
+        <div class="tracking-icon">🚚</div>
+        <div class="tracking-content">
+          <h4>Out for Delivery</h4>
+          <p>Your order is on its way! Grab driver Rodel Santos is heading to your address. Est. 10 minutes away.</p>
+          <p class="tracking-time" id="step-delivery-time">—</p>
+        </div>
+      </div>
+      <div class="tracking-step" id="step-delivered">
+        <div class="tracking-icon">📦</div>
+        <div class="tracking-content">
+          <h4>Delivered</h4>
+          <p id="step-delivered-text">Your fresh produce will be delivered to your doorstep. Please have exact change ready.</p>
+          <p class="tracking-time" id="step-delivered-time"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order items -->
+    <div class="tracking-items-box" id="tracking-items">
+      <h3 class="tracking-items-title">Order Items</h3>
+      <div id="tracking-items-list"></div>
+      <div class="review-item savings"><span>Discounts &amp; Vouchers</span><span id="items-disc">−₱0</span></div>
+      <div class="review-item" style="font-size:0.82rem;color:var(--text-light);"><span>VAT (12%)</span><span id="items-vat">+₱0.00</span></div>
+      <div class="review-item"><span>Delivery Fee</span><span id="items-ship">₱80</span></div>
+      <div class="review-item total-row"><span>Total</span><span id="items-total">—</span></div>
+    </div>
+
+    <!-- Review section: locked until delivered, review form after delivered -->
+    <div class="review-after-box" id="review-section">
+      <h3>⭐ Leave a Review</h3>
+      <p class="review-form-sub" id="review-sub">Reviews are available after your order has been delivered.</p>
+      <div id="review-locked">
+        <div class="review-locked-note">🔒 Review will be unlocked once your order is delivered.</div>
+      </div>
+      <div id="review-form" style="display:none;">
+        <p style="font-size:0.87rem;font-weight:600;margin-bottom:0.5rem;">How was your order?</p>
+        <div class="review-stars-row" id="star-row">
+          <span data-v="1">⭐</span>
+          <span data-v="2">⭐</span>
+          <span data-v="3">⭐</span>
+          <span data-v="4">⭐</span>
+          <span data-v="5">⭐</span>
+        </div>
+        <textarea class="review-textarea" id="review-text" rows="3" placeholder="Tell the farmer what you loved about the produce…"></textarea>
+        <button class="review-submit-btn" id="review-submit-btn" onclick="submitReview()">Submit Review</button>
+      </div>
+      <div id="review-submitted" style="display:none;text-align:center;padding:1.2rem;">
+        <div style="font-size:2rem;">🎉</div>
+        <p style="font-weight:700;margin-top:0.5rem;">Thank you for your review!</p>
+        <p style="font-size:0.85rem;color:var(--text-light);">Your feedback helps local Zamboanga farmers improve.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Return Request Modal -->
+<div class="return-modal-overlay" id="return-modal">
+  <div class="return-modal">
+    <h3>↩ Request Return / Refund</h3>
+    <p>We're sorry your order didn't meet expectations. Please describe the issue and we'll process your return within 2–3 business days.</p>
+    <select class="return-reason-select" id="return-reason">
+      <option value="">— Select a reason —</option>
+      <option value="damaged">Item arrived damaged</option>
+      <option value="wrong_item">Wrong item delivered</option>
+      <option value="poor_quality">Quality below expectation</option>
+      <option value="missing_items">Missing items in order</option>
+      <option value="expired">Product appeared spoiled / expired</option>
+      <option value="other">Other reason</option>
+    </select>
+    <textarea class="return-notes" id="return-notes" rows="3" placeholder="Additional details (optional)…"></textarea>
+    <div class="return-modal-btns">
+      <button class="return-back-btn" onclick="closeReturnModal()">Go Back</button>
+      <button class="return-confirm-btn" onclick="confirmReturn()">Submit Return Request</button>
+    </div>
+  </div>
+</div>
+
+<!-- Chat widget -->
+<input type="checkbox" id="chat-check" class="chat-checkbox">
+<label for="chat-check" class="chat-trigger">💬</label>
+<div class="chat-window">
+  <div class="chat-header">
+    <h4>Chat with Rodel (Grab Driver)</h4>
+    <label for="chat-check" class="chat-close">×</label>
+  </div>
+  <div class="chat-body">
+    <div class="chat-message seller"><p>Hello! I've picked up your order from Green Valley Farm. On my way to your address now! 🚕</p></div>
+    <div class="chat-message seller"><p>Estimated 10 minutes. Please be ready. Thank you!</p></div>
+  </div>
+  <div class="chat-input-wrap">
+    <input type="text" placeholder="Message driver…">
+    <div class="chat-send">➤</div>
+  </div>
+</div>
+
+
+
+<script src="farmdirect.js"></script>
+<script>
+const statusLabels = {
+  confirmed:        'Order Confirmed ✅',
+  preparing:        'Preparing 🌿',
+  out_for_delivery: 'Out for Delivery 🚚',
+  delivered:        'Delivered 📦',
+  reviewed:         'Delivered & Reviewed ⭐',
+  cancelled:        'Cancelled ✗',
+  return_requested: 'Return Requested ↩',
+};
+
+let currentOrderId = null;
+let selectedStars  = 0;
+let currentOrder   = null;
+
+function getOrderId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('order') || localStorage.getItem('fd_last_order');
+}
+
+function loadOrder() {
+  const id    = getOrderId();
+  const order = id ? FD.Orders.get(id) : null;
+
+  if (!order) {
+    document.getElementById('meta-id').textContent = '#FD-DEMO';
+    document.getElementById('meta-status').textContent = 'Out for Delivery 🚚';
+    document.getElementById('step-confirmed-time').textContent = FD.fmt.date(Date.now() - 3600000);
+    document.getElementById('step-delivery-time').textContent  = FD.fmt.date(Date.now() - 1800000);
+    renderReviewSection(null);
+    return;
+  }
+
+  currentOrderId = order.id;
+  currentOrder = order;
+  document.getElementById('meta-id').textContent     = '#' + order.id;
+  document.getElementById('meta-date').textContent   = FD.fmt.date(order.placedAt);
+  document.getElementById('meta-total').textContent  = FD.fmt.peso(order.pricing?.total || 0);
+  document.getElementById('meta-status').textContent = statusLabels[order.status] || order.status;
+  document.getElementById('step-confirmed-time').textContent = FD.fmt.date(order.placedAt);
+  document.getElementById('step-delivery-time').textContent  = FD.fmt.date(order.placedAt + 900000);
+
+  const savings = order.pricing?.disc || 0;
+  if (savings > 0) {
+    const savedEl = document.getElementById('meta-saved');
+    savedEl.style.display = '';
+    savedEl.textContent   = FD.fmt.peso(savings) + ' 🎉';
+  }
+
+  renderOrderItems(order);
+
+  // Items summary
+  if (order.pricing) {
+    const p = order.pricing;
+    document.getElementById('items-disc').textContent  = p.disc > 0 ? '−' + FD.fmt.peso(p.disc) : '—';
+    document.getElementById('items-vat').textContent   = '+' + FD.fmt.peso(p.vat);
+    document.getElementById('items-ship').textContent  = p.shipping === 0 ? 'FREE' : FD.fmt.peso(p.shipping);
+    document.getElementById('items-total').textContent = FD.fmt.peso(p.total);
+  }
+
+  // If delivered, show return button
+  if (FD.Orders.canReturn(order)) {
+    document.getElementById('return-btn').disabled = false;
+  }
+
+  // Update tracking steps based on status
+  renderTrackingSteps(order);
+  renderReviewSection(order);
+}
+
+function renderTrackingSteps(order) {
+  const deliveredStatuses = ['delivered', 'reviewed', 'return_requested'];
+  if (deliveredStatuses.includes(order.status)) {
+    // Mark all steps completed
+    ['step-confirmed','step-preparing','step-delivery'].forEach(id => {
+      const el = document.getElementById(id);
+      el.classList.remove('active');
+      el.classList.add('completed');
+      el.querySelector('.tracking-icon').textContent = '✓';
+    });
+    const stepDel = document.getElementById('step-delivered');
+    stepDel.classList.add('completed');
+    stepDel.querySelector('.tracking-icon').textContent = '✓';
+    document.getElementById('step-delivered-text').textContent = 'Your order has been delivered. Thank you!';
+    if (order.deliveredAt) {
+      document.getElementById('step-delivered-time').textContent = FD.fmt.date(order.deliveredAt);
+    }
+    // Hide live map once delivered
+    document.getElementById('live-map').style.display = 'none';
+  }
+}
+
+function renderReviewSection(order) {
+  const locked    = document.getElementById('review-locked');
+  const form      = document.getElementById('review-form');
+  const submitted = document.getElementById('review-submitted');
+  const sub       = document.getElementById('review-sub');
+
+  if (!order) return; // Use default locked state
+
+  if (order.review) {
+    locked.style.display    = 'none';
+    form.style.display      = 'none';
+    submitted.style.display = 'block';
+    return;
+  }
+
+  if (order.status === 'delivered') {
+    locked.style.display = 'none';
+    form.style.display   = 'block';
+    sub.textContent      = 'Your order has been delivered! How was your experience?';
+    initStarPicker();
+  } else if (['cancelled','return_requested'].includes(order.status)) {
+    locked.style.display = 'block';
+    document.querySelector('.review-locked-note').textContent = '⚠ Reviews are not available for cancelled or returned orders.';
+  }
+}
+
+function initStarPicker() {
+  const stars = document.querySelectorAll('#star-row span');
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      selectedStars = parseInt(star.dataset.v);
+      stars.forEach(s => {
+        s.classList.toggle('selected', parseInt(s.dataset.v) <= selectedStars);
+        s.classList.toggle('dim',      parseInt(s.dataset.v) >  selectedStars);
+      });
+    });
+  });
+}
+
+function submitReview() {
+  if (selectedStars < 1) { alert('Please select a star rating before submitting.'); return; }
+  const text = document.getElementById('review-text').value.trim();
+  const ok   = FD.Orders.submitReview(currentOrderId, selectedStars, text);
+  if (ok) {
+    document.getElementById('review-form').style.display      = 'none';
+    document.getElementById('review-submitted').style.display = 'block';
+    document.getElementById('meta-status').textContent        = statusLabels['reviewed'];
+  } else {
+    alert('Review submission failed. Make sure your order has been delivered.');
+  }
+}
+
+function renderOrderItems(order) {
+  const list = document.getElementById('tracking-items-list');
+  if (!list || !order.items) return;
+
+  const returnedItems = order.returnedItems || [];
+  list.innerHTML = order.items.map((item, idx) => {
+    const isReturned = returnedItems.some(r => r.itemIdx === idx);
+    const itemKey = item.key || item.id + '_' + idx;
+    return `
+      <div class="tracking-item-row" id="item-row-${idx}">
+        <div class="tracking-item-info">
+          <div class="tracking-item-name">${item.name || 'Item'}</div>
+          <div class="tracking-item-qty">×${item.qty || 1}${item.unit ? ' · ' + item.unit : ''}</div>
+        </div>
+        <div class="tracking-item-price">${FD.fmt.peso((item.price || 0) * (item.qty || 1))}</div>
+        ${isReturned
+          ? `<button class="return-item-btn-track returned" disabled>↩ Returned</button>`
+          : `<button class="return-item-btn-track" onclick="toggleItemReturn(${idx})" ${!FD.Orders.canReturn(order) ? 'disabled' : ''}>↩ Return</button>`
+        }
+      </div>
+      <div class="item-return-reasons" id="item-return-form-${idx}">
+        <select id="item-return-reason-${idx}">
+          <option value="">— Select reason —</option>
+          <option value="damaged">Item arrived damaged</option>
+          <option value="wrong_item">Wrong item delivered</option>
+          <option value="poor_quality">Quality below expectation</option>
+          <option value="missing_items">Missing items in order</option>
+          <option value="expired">Product appeared spoiled / expired</option>
+          <option value="other">Other reason</option>
+        </select>
+        <textarea id="item-return-notes-${idx}" rows="2" placeholder="Additional details (optional)…"></textarea>
+        <div class="item-return-actions">
+          <button class="item-cancel-btn" onclick="toggleItemReturn(${idx})">Cancel</button>
+          <button class="item-confirm-btn" onclick="confirmItemReturn(${idx})">Submit Return</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function toggleItemReturn(idx) {
+  const form = document.getElementById('item-return-form-' + idx);
+  form.classList.toggle('show');
+}
+
+function confirmItemReturn(idx) {
+  const reason = document.getElementById('item-return-reason-' + idx).value;
+  if (!reason) { alert('Please select a return reason.'); return; }
+  const notes = document.getElementById('item-return-notes-' + idx).value;
+
+  const ok = FD.Orders.returnItem(currentOrderId, idx, reason + (notes ? ' — ' + notes : ''));
+  if (ok) {
+    FD.showToast('✓ Item return request submitted');
+    loadOrder();
+  } else {
+    alert('Unable to process return. Orders can only return items once delivered.');
+  }
+}
+
+/* Return */
+function openReturnModal() {
+  document.getElementById('return-modal').classList.add('open');
+}
+function closeReturnModal() {
+  document.getElementById('return-modal').classList.remove('open');
+}
+function confirmReturn() {
+  const reason = document.getElementById('return-reason').value;
+  if (!reason) { alert('Please select a return reason.'); return; }
+  const notes  = document.getElementById('return-notes').value;
+  const ok = FD.Orders.requestReturn(currentOrderId, reason + (notes ? ' — ' + notes : ''));
+  closeReturnModal();
+  if (ok) {
+    document.getElementById('return-btn').disabled = true;
+    document.getElementById('return-btn').textContent = '↩ Return Requested';
+    document.getElementById('meta-status').textContent = statusLabels['return_requested'];
+    alert('Return request submitted! Our team will contact you within 24 hours to arrange pickup and refund.');
+  } else {
+    alert('Unable to process return. Orders can only be returned once delivered.');
+  }
+}
+
+/* Demo: simulate delivery for testing */
+function simulateDelivered() {
+  if (!currentOrderId) {
+    alert('No active order found. Place an order first.');
+    return;
+  }
+  FD.Orders.markDelivered(currentOrderId);
+  alert('Order marked as delivered! The review form and return button are now available.');
+  location.reload();
+}
+
+loadOrder();
+</script>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <i class="fa fa-seedling"></i>
+      <span>FarmDirect</span>
+    </div>
+    <p>© 2026 FarmDirect Philippines. Freshness Guaranteed.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+      <a href="Dashboard.html">My Account</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Chat -->
+<a href="Chat.html" class="float-chat">
+  💬 Chat with Farmer
+  <span class="chat-badge">2</span>
+</a>
+
+</body>
+</html>

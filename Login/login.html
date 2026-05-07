@@ -15,20 +15,7 @@
             from { opacity: 0; transform: translateY(20px); }
             to   { opacity: 1; transform: translateY(0); }
         }
-
-        /* --- Shake animation for wrong password --- */
-        @keyframes shake {
-            0%   { transform: translateX(0); }
-            20%  { transform: translateX(-8px); }
-            40%  { transform: translateX(8px); }
-            60%  { transform: translateX(-6px); }
-            80%  { transform: translateX(6px); }
-            100% { transform: translateX(0); }
-        }
-        .shake {
-            animation: shake 0.4s ease;
-        }
-
+        
         /* --- Error message box --- */
         .error-msg {
             display: none;
@@ -83,6 +70,8 @@
     <header class="topbar">
         <div class="topbar-inner">
             <div class="logo">
+                  <span class=></span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-vegan-icon lucide-vegan"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
                 <span class="logo-text">Farm<span>Direct</span></span>
             </div>
         </div>
@@ -91,7 +80,7 @@
     <main class="auth-wrapper">
         <div class="auth-wrapper-inner">
         <div class="auth-hero">
-            <div class="auth-hero-badge">🌾 Zamboanga's Farm Marketplace</div>
+            <div class="auth-hero-badge"> Zamboanga's Farm Marketplace</div>
             <div class="auth-hero-title">Fresh From Farm<br>to Your Table</div>
             <p class="auth-hero-sub">Sign in to shop from Zamboanga's verified local farmers.</p>
         </div>
@@ -102,7 +91,7 @@
 
             <div class="tabs">
                 <a href="login.html" class="tab active">Sign In</a>
-                <a href="register-buyer.html" class="tab">Register</a>
+                <a href="register-buyer.html" class="tab">Sign Up</a>
             </div>
 
             <!-- Error message (hidden until login fails) -->
@@ -142,7 +131,8 @@
     <div class="footer-main">
       <div class="footer-brand">
         <div class="footer-logo">
-          <span>🌾</span>
+        <span class=></span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-vegan-icon lucide-vegan"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
           <span>FarmDirect</span>
         </div>
         <p class="footer-desc">Connecting Zamboanga farmers to your table. Fresh, local, and delivered with care.</p>
@@ -202,9 +192,9 @@
 
         // Where each role goes after login
         var redirectMap = {
-            "user":           "../USER/HTML/Dashboard.html",
+            "user":           "../USER/Dashboard.html",
             "seller":         "../Sellers/Dashboard.html",
-            "seller-pending": "../USER/HTML/Dashboard.html",
+            "seller-pending": "../USER/Dashboard.html",
             "admin":          "Admin/HTML/dashboard.html"
         };
 

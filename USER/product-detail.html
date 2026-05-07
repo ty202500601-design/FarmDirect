@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Carrots – FarmDirect Zamboanga</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script src="farmdirect.js"></script>
+<style>
+/* ═══════════════════════════════════════
+   ADD-TO-CART MODAL
+═══════════════════════════════════════ */
+.atc-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55); z-index: 3000;
+  align-items: flex-end; justify-content: center;
+  backdrop-filter: blur(2px);
+}
+.atc-overlay.open { display: flex; }
+
+.atc-modal {
+  background: #fff; border-radius: 22px 22px 0 0;
+  width: 100%; max-width: 560px; padding: 0 0 2rem;
+  box-shadow: 0 -8px 48px rgba(0,0,0,0.22);
+  animation: slideUp 0.32s cubic-bezier(0.34,1.4,0.64,1) both;
+  max-height: 92vh; overflow-y: auto;
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.atc-handle {
+  width: 44px; height: 5px; background: #e0dbd0;
+  border-radius: 3px; margin: 14px auto 0;
+}
+.atc-product-row {
+  display: flex; gap: 1rem; align-items: center;
+  padding: 1.2rem 1.4rem 0.8rem;
+  border-bottom: 1.5px solid #e0dbd0;
+}
+.atc-thumb {
+  width: 72px; height: 72px; object-fit: cover;
+  border-radius: 10px; border: 1.5px solid #e0dbd0; flex-shrink: 0;
+}
+.atc-product-info { flex: 1; }
+.atc-product-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; font-weight: 700; color: #1a1a1a;
+  line-height: 1.3; margin-bottom: 0.25rem;
+}
+.atc-price-now  { font-size: 1.35rem; font-weight: 800; color: #1a3a22; }
+.atc-price-orig { font-size: 0.8rem; color: #888; text-decoration: line-through; margin-left: 0.4rem; }
+
+.atc-section { padding: 1rem 1.4rem 0; }
+.atc-section-title {
+  font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: #888; margin-bottom: 0.65rem;
+}
+.atc-chips { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+.atc-chip {
+  padding: 0.48rem 1rem; border-radius: 50px;
+  border: 2px solid #e0dbd0; font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; transition: all 0.18s; background: #faf8f3; color: #444;
+  user-select: none;
+}
+.atc-chip:hover { border-color: #2d5a3a; color: #1a3a22; }
+.atc-chip.selected { border-color: #1a3a22; background: #e4efe6; color: #1a3a22; }
+.atc-chip.variety.selected { border-color: #3a7d4f; background: #d4ebda; color: #1a3a22; }
+
+.atc-qty-row {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.4rem 0;
+}
+.atc-qty-label { font-size: 0.88rem; font-weight: 600; color: #444; flex: 1; }
+.atc-stock-note { font-size: 0.75rem; color: #888; display: block; margin-top: 0.1rem; }
+.atc-qty-ctrl {
+  display: flex; align-items: center;
+  border: 2px solid #e0dbd0; border-radius: 10px; overflow: hidden;
+}
+.atc-qty-ctrl button {
+  width: 40px; height: 40px; border: none; background: #f0ece2;
+  font-size: 1.15rem; font-weight: 700; cursor: pointer; color: #1a3a22;
+  transition: background 0.15s;
+}
+.atc-qty-ctrl button:hover { background: #e4efe6; }
+.atc-qty-ctrl .atc-qnum {
+  min-width: 46px; text-align: center;
+  font-size: 1rem; font-weight: 800; color: #1a1a1a; background: #fff;
+  line-height: 40px;
+}
+
+.atc-price-summary {
+  margin: 1rem 1.4rem 0; background: #e4efe6;
+  border-radius: 10px; padding: 0.75rem 1rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.atc-summary-label { font-size: 0.85rem; color: #2d5a3a; font-weight: 600; }
+.atc-summary-total { font-size: 1.25rem; font-weight: 800; color: #1a3a22; }
+
+.atc-actions { display: flex; gap: 0.75rem; padding: 1.1rem 1.4rem 0; }
+.atc-btn-cart {
+  flex: 1; height: 52px; background: #e4efe6; color: #1a3a22;
+  border: 2px solid #1a3a22; border-radius: 12px;
+  font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+}
+.atc-btn-cart:hover { background: #1a3a22; color: #fff; }
+.atc-btn-buy {
+  flex: 1; height: 52px; background: #1a3a22; color: #fff;
+  border: none; border-radius: 12px;
+  font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: background 0.2s;
+}
+.atc-btn-buy:hover { background: #2d5a3a; }
+
+/* Toast */
+.fd-toast {
+  position: fixed; bottom: 2rem; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #1a3a22; color: #fff;
+  padding: 0.75rem 1.6rem; border-radius: 40px;
+  font-size: 0.9rem; font-weight: 700;
+  z-index: 5000; opacity: 0; pointer-events: none;
+  transition: transform 0.3s, opacity 0.3s;
+  white-space: nowrap; box-shadow: 0 4px 20px rgba(0,0,0,0.22);
+}
+.fd-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="products.html">Seller Centre</a>
+    <span class="sep">|</span>
+    <a href="products.html">Start Selling</a>
+    <span class="sep">|</span>
+    Follow us on
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+  <div class="topbar-right">
+    <a href="Notifications.html"><i class="fa fa-bell"></i> Notifications <span class="notif-dot">3</span></a>
+    <a href="#"><i class="fa fa-circle-question"></i> Help</a>
+    <div class="user-menu">
+      <a href="Dashboard.html" class="user-link"><i class="fa fa-user-circle"></i> farmuser <i class="fa fa-chevron-down" style="font-size:0.65rem;margin-left:3px;"></i></a>
+      <div class="user-dropdown">
+        <a href="Dashboard.html"><i class="fa fa-gauge"></i> My Dashboard</a>
+        <a href="Order_tracking.html"><i class="fa fa-box"></i> My Orders</a>
+        <a href="cart.html"><i class="fa fa-basket-shopping"></i> Cart</a>
+        <a href="#"><i class="fa fa-right-from-bracket"></i> Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <a href="products.html" class="logo">
+      <div class="logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
+      </div>
+      <div class="logo-text"><span class="logo-farm">Farm</span><span class="logo-direct">Direct</span></div>
+    </a>
+    <div class="search-bar">
+      <input type="text" placeholder="Search fresh produce, meats, pantry essentials…" />
+      <button type="button"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="header-actions">
+      <a href="cart.html" class="cart-btn" title="My Cart">
+        <i class="fa fa-shopping-basket"></i>
+        <span class="cart-count">0</span>
+      </a>
+      <a href="Chat.html" class="cart-btn" title="Messages">
+        <i class="fa fa-comment"></i>
+      </a>
+    </div>
+  </div>
+  <div class="search-tags">
+    <a href="products.html">Organic Tomatoes</a>
+    <a href="products.html">Free-Range Eggs</a>
+    <a href="products.html">Grass-Fed Beef</a>
+    <a href="products.html">Sayote</a>
+    <a href="products.html">Coconut Oil</a>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════
+     ADD-TO-CART / BUY NOW MODAL
+══════════════════════════════════════ -->
+<div class="atc-overlay" id="atc-overlay" onclick="maybeCloseModal(event)">
+  <div class="atc-modal" id="atc-modal">
+    <div class="atc-handle"></div>
+
+    <!-- Product snapshot -->
+    <div class="atc-product-row">
+      <img id="atc-thumb" class="atc-thumb" src="" alt="">
+      <div class="atc-product-info">
+        <div class="atc-product-name" id="atc-pname"></div>
+        <div>
+          <span class="atc-price-now" id="atc-price-now"></span>
+          <span class="atc-price-orig" id="atc-price-orig"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unit selection -->
+    <div class="atc-section">
+      <div class="atc-section-title">📦 Select Unit / Packaging</div>
+      <div class="atc-chips" id="atc-units"></div>
+    </div>
+
+    <!-- Variety selection -->
+    <div class="atc-section" id="atc-variety-section">
+      <div class="atc-section-title">🌿 Select Variety / Grade</div>
+      <div class="atc-chips" id="atc-varieties"></div>
+    </div>
+
+    <!-- Quantity -->
+    <div class="atc-qty-row">
+      <div>
+        <div class="atc-qty-label">Quantity</div>
+        <span class="atc-stock-note" id="atc-stock"></span>
+      </div>
+      <div class="atc-qty-ctrl">
+        <button onclick="changeAtcQty(-1)">−</button>
+        <div class="atc-qnum" id="atc-qnum">1</div>
+        <button onclick="changeAtcQty(1)">+</button>
+      </div>
+    </div>
+
+    <!-- Order total -->
+    <div class="atc-price-summary">
+      <span class="atc-summary-label">Order Total</span>
+      <span class="atc-summary-total" id="atc-total">₱0.00</span>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="atc-actions">
+      <button class="atc-btn-cart" onclick="confirmAddToCart()">🛒 Add to Cart</button>
+      <button class="atc-btn-buy"  onclick="confirmBuyNow()">Buy Now →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="fd-toast" id="fd-toast"></div>
+
+<!-- ══ PAGE CONTENT ══ -->
+<div class="container detail-container">
+
+  <div class="back-nav">
+    <a href="products.html" class="btn-back">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Shop
+    </a>
+  </div>
+
+  <main class="product-main">
+
+    <div class="gallery-wrap">
+      <div class="main-img" id="main-img">
+        <img id="main-img-src"
+          src="https://images.unsplash.com/photo-1447175008436-054170c2e979?auto=format&fit=crop&w=800&q=80"
+          alt="Fresh Organic Carrots with green tops — Zamboanga">
+      </div>
+      <div class="thumb-list">
+        <div class="thumb active" onclick="switchImg(this,'https://images.unsplash.com/photo-1447175008436-054170c2e979?auto=format&fit=crop&w=800&q=80','Fresh carrots')">
+          <img src="https://images.unsplash.com/photo-1447175008436-054170c2e979?auto=format&fit=crop&w=150&q=80" alt="Carrots full view">
+        </div>
+        <div class="thumb" onclick="switchImg(this,'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=800&q=80','Carrots bundle')">
+          <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=150&q=80" alt="Carrot bundle">
+        </div>
+        <div class="thumb" onclick="switchImg(this,'https://images.unsplash.com/photo-1559181567-c3190bff6b2e?auto=format&fit=crop&w=800&q=80','Sliced carrots')">
+          <img src="https://images.unsplash.com/photo-1559181567-c3190bff6b2e?auto=format&fit=crop&w=150&q=80" alt="Sliced carrots">
+        </div>
+      </div>
+    </div>
+
+    <div class="info-col">
+
+      <div class="badge-organic">ORGANIC</div>
+
+      <h1 class="prod-title">Premium Zamboanga Carrots (Freshly Harvested)</h1>
+
+      <div class="stars">
+        <span class="s">★</span><span class="s">★</span><span class="s">★</span>
+        <span class="s">★</span><span class="s">★</span>
+        <strong>4.9</strong>
+        <span class="stars-label">128 Verified Ratings</span>
+      </div>
+
+      <div class="price-box">
+        <div class="price-row-inner">
+          <span class="price-original">₱120</span>
+          <span class="price-now">₱85.00</span>
+          <span class="badge-discount-green">-30% OFF</span>
+        </div>
+        <div style="font-size:0.78rem;color:var(--text-light);margin-top:0.4rem;">Price per kg · VAT included</div>
+      </div>
+
+      <div class="action-row">
+        <p><strong>Verified Farmer:</strong> 👨‍🌾 Green Valley Farm (Vitali, Zamboanga)</p>
+        <p style="font-size:0.85rem;color:var(--text-light);margin-top:0.35rem;">45 kg available · Harvested daily</p>
+
+        <div class="detail-card-btns" style="margin-top:1.1rem;">
+          <button class="btn-addcart-detail" id="main-cart-btn" onclick="openModal('cart')">🛒 Add to Cart</button>
+          <button class="btn-buynow-detail" onclick="openModal('buy')">Buy Now</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <section class="prod-details">
+    <h2 class="detail-section-title">Product Description</h2>
+    <p>Our Premium Carrots are harvested daily from the fertile lands of Vitali, Zamboanga City. Grown using 100% organic methods without synthetic pesticides, these carrots offer a superior crunch and natural sweetness perfect for salads, juices, or traditional Filipino dishes like Chopsuey and Pinakbet.</p>
+    <p style="margin-top:0.8rem;font-size:0.9rem;color:var(--text-mid);">🌱 No synthetic pesticides · 🌿 Freshly harvested daily · 🚚 Delivered same day</p>
+  </section>
+
+  <section class="reviews">
+    <h2 class="detail-section-title">Verified Customer Reviews</h2>
+
+    <div class="rev-card">
+      <div class="rev-card-header">
+        maria_t
+        <span class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></span>
+      </div>
+      <p class="review-text-body">Arrived very fresh! These are real organic carrots with full green tops still attached. Super crunchy and sweet — my kids love them!</p>
+      <img src="https://images.unsplash.com/photo-1447175008436-054170c2e979?auto=format&fit=crop&w=400&q=80" class="review-photo" alt="Customer photo">
+    </div>
+
+    <div class="rev-card">
+      <div class="rev-card-header">
+        juan_delacruz
+        <span class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span></span>
+      </div>
+      <p class="review-text-body">Support local farmers! These are much better than the ones in the mall supermarkets. You can taste the freshness immediately.</p>
+    </div>
+
+    <div class="rev-card">
+      <div class="rev-card-header">
+        chef_ricardo
+        <span class="stars"><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s">★</span><span class="s empty">☆</span></span>
+      </div>
+      <p class="review-text-body">Excellent quality carrots. Delivery took an extra day, but the product itself is top-tier. Used them for Chopsuey and everyone loved it.</p>
+    </div>
+  </section>
+
+  <section class="similar-products">
+    <h2 class="detail-section-title">Similar Products</h2>
+    <div class="products-grid">
+
+      <div class="product-card">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1518977676601-b53f02ac6d31?auto=format&fit=crop&w=500&q=80" alt="Native Potatoes">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Native Potatoes</h3>
+          <div class="card-price-row"><span class="card-price">₱95</span><span class="card-unit">/kg</span></div>
+          <div class="detail-card-btns">
+            <button class="btn-addcart-detail" onclick="openSimilarModal({id:'potatoes',name:'Native Potatoes',price:95,origPrice:null,img:'https://images.unsplash.com/photo-1518977676601-b53f02ac6d31?auto=format&fit=crop&w=200&q=80',farm:'Sunrise Farm, Tugbungan',stock:30,units:[{label:'per kg',multiplier:1},{label:'per 5kg sack',multiplier:5},{label:'per 10kg sack',multiplier:10}],varieties:['White Potato','Yellow Potato','Sweet Potato']},'cart')">🛒 Cart</button>
+            <button class="btn-buynow-detail" onclick="openSimilarModal({id:'potatoes',name:'Native Potatoes',price:95,origPrice:null,img:'https://images.unsplash.com/photo-1518977676601-b53f02ac6d31?auto=format&fit=crop&w=200&q=80',farm:'Sunrise Farm, Tugbungan',stock:30,units:[{label:'per kg',multiplier:1},{label:'per 5kg sack',multiplier:5},{label:'per 10kg sack',multiplier:10}],varieties:['White Potato','Yellow Potato','Sweet Potato']},'buy')">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=500&q=80" alt="Fresh Cabbage">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Fresh Cabbage</h3>
+          <div class="card-price-row"><span class="card-price">₱60</span><span class="card-unit">/pc</span></div>
+          <div class="detail-card-btns">
+            <button class="btn-addcart-detail" onclick="openSimilarModal({id:'cabbage',name:'Fresh Cabbage',price:60,origPrice:null,img:'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=200&q=80',farm:'Green Valley Farm, Labuan',stock:25,units:[{label:'per pc',multiplier:1},{label:'per bundle (3pcs)',multiplier:3},{label:'per 5pcs',multiplier:5}],varieties:['Round Cabbage','Savoy Cabbage','Napa Cabbage']},'cart')">🛒 Cart</button>
+            <button class="btn-buynow-detail" onclick="openSimilarModal({id:'cabbage',name:'Fresh Cabbage',price:60,origPrice:null,img:'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=200&q=80',farm:'Green Valley Farm, Labuan',stock:25,units:[{label:'per pc',multiplier:1},{label:'per bundle (3pcs)',multiplier:3},{label:'per 5pcs',multiplier:5}],varieties:['Round Cabbage','Savoy Cabbage','Napa Cabbage']},'buy')">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <i class="fa fa-seedling"></i>
+      <span>FarmDirect</span>
+    </div>
+    <p>© 2026 FarmDirect Philippines. Freshness Guaranteed.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+      <a href="Dashboard.html">My Account</a>
+    </div>
+  </div>
+</footer>
+
+<a href="Chat.html" class="float-chat">
+  💬 Chat with Farmer
+  <span class="chat-badge">2</span>
+</a>
+
+
+<script>
+/* ═══════════════════════════════════════════
+   MAIN PRODUCT DATA
+═══════════════════════════════════════════ */
+const MAIN_PRODUCT = {
+  id:        'carrots',
+  name:      'Premium Zamboanga Carrots',
+  price:     85,
+  origPrice: 120,
+  img:       'https://images.unsplash.com/photo-1447175008436-054170c2e979?auto=format&fit=crop&w=200&q=80',
+  farm:      'Green Valley Farm, Vitali',
+  stock:     45,
+  units: [
+    { label: 'per kg',        multiplier: 1   },
+    { label: 'per 3kg pack',  multiplier: 3   },
+    { label: 'per 5kg pack',  multiplier: 5   },
+    { label: 'per bundle',    multiplier: 1.5 },
+    { label: 'per 10kg sack', multiplier: 10  },
+  ],
+  varieties: ['Regular', 'Premium Grade A', 'Organic Select', 'Baby Carrots'],
+};
+
+/* ═══════════════════════════════════════════
+   MODAL STATE
+═══════════════════════════════════════════ */
+let modalProduct = null;
+let selectedUnit = null;
+let selectedVar  = null;
+let atcQty       = 1;
+
+function openModal(intent) {
+  loadModal(MAIN_PRODUCT, intent);
+}
+
+function openSimilarModal(product, intent) {
+  loadModal(product, intent);
+}
+
+function loadModal(product, intent) {
+  modalProduct = product;
+  atcQty       = 1;
+  selectedUnit = product.units[0];
+  selectedVar  = (product.varieties && product.varieties.length) ? product.varieties[0] : null;
+
+  document.getElementById('atc-thumb').src         = product.img;
+  document.getElementById('atc-thumb').alt         = product.name;
+  document.getElementById('atc-pname').textContent = product.name;
+  document.getElementById('atc-price-now').textContent =
+    '₱' + Number(product.price * selectedUnit.multiplier).toFixed(2);
+  document.getElementById('atc-price-orig').textContent =
+    product.origPrice
+      ? '₱' + Number(product.origPrice * selectedUnit.multiplier).toFixed(2)
+      : '';
+
+  /* Build unit chips */
+  const unitsEl = document.getElementById('atc-units');
+  unitsEl.innerHTML = '';
+  product.units.forEach((u, i) => {
+    const c = document.createElement('div');
+    c.className = 'atc-chip' + (i === 0 ? ' selected' : '');
+    c.textContent = u.label;
+    c.onclick = () => selectUnit(u, c);
+    unitsEl.appendChild(c);
+  });
+
+  /* Build variety chips */
+  const varSec = document.getElementById('atc-variety-section');
+  const varEl  = document.getElementById('atc-varieties');
+  varEl.innerHTML = '';
+  if (product.varieties && product.varieties.length) {
+    varSec.style.display = '';
+    product.varieties.forEach((v, i) => {
+      const c = document.createElement('div');
+      c.className = 'atc-chip variety' + (i === 0 ? ' selected' : '');
+      c.textContent = v;
+      c.onclick = () => selectVariety(v, c);
+      varEl.appendChild(c);
+    });
+  } else {
+    varSec.style.display = 'none';
+  }
+
+  /* Store intent on buttons */
+  document.querySelector('.atc-btn-buy').textContent =
+    intent === 'buy' ? 'Buy Now →' : 'Buy Now →';
+
+  renderAtcSummary();
+  document.getElementById('atc-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function maybeCloseModal(e) {
+  if (e.target === document.getElementById('atc-overlay')) closeModal();
+}
+function closeModal() {
+  document.getElementById('atc-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function selectUnit(unit, el) {
+  selectedUnit = unit;
+  document.querySelectorAll('#atc-units .atc-chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  renderAtcSummary();
+}
+function selectVariety(v, el) {
+  selectedVar = v;
+  document.querySelectorAll('#atc-varieties .atc-chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function changeAtcQty(delta) {
+  const mult = selectedUnit ? selectedUnit.multiplier : 1;
+  const max  = Math.max(1, Math.floor((modalProduct.stock || 99) / mult));
+  atcQty = Math.max(1, Math.min(max, atcQty + delta));
+  renderAtcSummary();
+}
+function renderAtcSummary() {
+  document.getElementById('atc-qnum').textContent = atcQty;
+  const mult = selectedUnit ? selectedUnit.multiplier : 1;
+  const unit_stock = Math.max(1, Math.floor((modalProduct.stock || 99) / mult));
+  document.getElementById('atc-stock').textContent =
+    unit_stock + ' ' + (selectedUnit ? selectedUnit.label.replace('per ','') : 'units') + ' available';
+  const total = modalProduct.price * mult * atcQty;
+  document.getElementById('atc-total').textContent =
+    '₱' + total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+/* ─── Confirm: Add to Cart ─── */
+function confirmAddToCart() {
+  if (!modalProduct) return;
+  const mult    = selectedUnit ? selectedUnit.multiplier : 1;
+  const uLabel  = selectedUnit ? selectedUnit.label : 'per unit';
+  const cartKey = modalProduct.id + '_' + uLabel.replace(/\s+/g,'_') +
+                  (selectedVar ? '_' + selectedVar.replace(/\s+/g,'_') : '');
+
+  FD.Cart.add({
+    key:       cartKey,
+    id:        modalProduct.id,
+    name:      modalProduct.name,
+    price:     parseFloat((modalProduct.price * mult).toFixed(2)),
+    origPrice: modalProduct.origPrice
+                 ? parseFloat((modalProduct.origPrice * mult).toFixed(2))
+                 : null,
+    qty:       atcQty,
+    unit:      uLabel,
+    variety:   selectedVar || '',
+    farm:      modalProduct.farm,
+    img:       modalProduct.img,
+  });
+
+  closeModal();
+  showToast('✓ ' + atcQty + ' × ' + uLabel + ' added to cart!');
+
+  /* Flash the main button if it's the main product */
+  const btn = document.getElementById('main-cart-btn');
+  if (btn && modalProduct.id === MAIN_PRODUCT.id) {
+    btn.textContent = '✓ Added!';
+    btn.style.cssText = 'background:var(--green);color:#fff;border-color:var(--green);';
+    setTimeout(() => { btn.textContent = '🛒 Add to Cart'; btn.style.cssText = ''; }, 2200);
+  }
+}
+
+/* ─── Confirm: Buy Now ─── */
+function confirmBuyNow() {
+  confirmAddToCart();
+  setTimeout(() => { window.location.href = 'checkout.html'; }, 350);
+}
+
+/* ─── Toast ─── */
+function showToast(msg) {
+  const t = document.getElementById('fd-toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+/* ─── Gallery ─── */
+function switchImg(thumb, url, alt) {
+  document.getElementById('main-img-src').src = url;
+  document.getElementById('main-img-src').alt = alt;
+  document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+  thumb.classList.add('active');
+}
+
+/* ─── Escape key ─── */
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
