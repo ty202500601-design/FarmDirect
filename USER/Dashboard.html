@@ -327,11 +327,11 @@
       <div class="logo-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
       </div>
-      <div class="logo-text"><span class="logo-farm">Farm</span><span class="logo-direct">Direct</span></div>
+      <div class="logo-text"><span class="logo-farm">FarmDirect</span></div>
     </a>
     <div class="search-bar">
-      <input type="text" placeholder="Search fresh produce, meats, pantry essentials…" />
-      <button type="button"><i class="fa fa-search"></i></button>
+      <input type="text" id="global-search" placeholder="Search fresh produce, meats, pantry essentials…" onkeydown="if(event.key==='Enter')doSearch()" />
+      <button type="button" onclick="doSearch()"><i class="fa fa-search"></i></button>
     </div>
     <div class="header-actions">
       <a href="cart.html" class="cart-btn" title="My Cart">
@@ -1520,7 +1520,7 @@ init();
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-logo">
-      <i class="fa fa-seedling"></i>
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-vegan-icon lucide-vegan"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
       <span>FarmDirect</span>
     </div>
     <p>© 2026 FarmDirect Philippines. Freshness Guaranteed.</p>
@@ -1532,12 +1532,6 @@ init();
     </div>
   </div>
 </footer>
-
-<!-- Floating Chat -->
-<a href="Chat.html" class="float-chat">
-  💬 Chat with Farmer
-  <span class="chat-badge">2</span>
-</a>
 
 </body>
 </html>
