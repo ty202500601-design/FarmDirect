@@ -6,6 +6,7 @@
   <title>Farm Direct – Reviews</title>
   <link rel="stylesheet" href="Reviews.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="sellers-storage.js"></script>
   <style>
     /* ── FILTER BAR ── */
     .filter-bar {
@@ -218,18 +219,11 @@
 </head>
 <body>
  
+<!-- NAVBAR -->
 <nav class="navbar">
   <input type="checkbox" id="menu-check" class="menu-checkbox">
   <div class="nav-inner">
     <a href="../index.html" class="logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></a>
-    <div class="nav-links">
-      <a href="../index.html" class="nav-link">Home</a>
-      <a href="Dashboard.html" class="nav-link">Dashboard</a>
-      <a href="Products.html" class="nav-link">Products</a>
-      <a href="Orders.html" class="nav-link">Orders</a>
-      <a href="Reviews.html" class="nav-link active">Reviews</a>
-      <a href="Settings.html" class="nav-link">Settings</a>
-    </div>
     <div class="nav-actions">
       <div class="notif-wrap">
         <button class="notif-btn" tabindex="0" aria-label="Notifications">
@@ -273,6 +267,18 @@
     <a href="../index.html" class="menu-cta">Logout</a>
   </div>
 </nav>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <nav class="sidebar-nav">
+    <a href="../index.html"   class="sidebar-link">🏠 <span>Home</span></a>
+    <a href="Dashboard.html" class="sidebar-link">📊 <span>Dashboard</span></a>
+    <a href="Products.html"  class="sidebar-link">📦 <span>Products</span></a>
+    <a href="Orders.html"    class="sidebar-link">🚚 <span>Orders</span></a>
+    <a href="Reviews.html"   class="sidebar-link active">⭐ <span>Reviews</span></a>
+    <a href="Settings.html"  class="sidebar-link">⚙️ <span>Settings</span></a>
+  </nav>
+</aside>
  
 <main class="farmers-main">
   <div class="dash">
@@ -581,15 +587,23 @@
  
 <script>
 lucide.createIcons();
- 
+var D = FarmDirectStorage.get();
+
 // ── STATE ──
 // Track which reviews have replies
-const replyState = {
-  1: { hasReply: true },
-  2: { hasReply: true },
-  3: { hasReply: true },
-  4: { hasReply: false },
-};
+var replyState = {};
+// Initialize replyState from D.reviews
+if(D.reviews && D.reviews.length){
+  D.reviews.forEach(function(r){
+    replyState[r.id] = { hasReply: r.replied };
+    // Restore reply text to DOM if exists
+    var textEl = document.getElementById('reply-text-' + r.id);
+    var bubble = document.getElementById('reply-bubble-' + r.id);
+    if(r.reply && textEl){ textEl.innerHTML = '<b>Juan (You):</b> ' + escHtml(r.reply); if(bubble) bubble.style.display = ''; }
+  });
+} else {
+  replyState = { 1:{hasReply:true}, 2:{hasReply:true}, 3:{hasReply:true}, 4:{hasReply:false} };
+}
  
 // ── FILTER ──
 let currentFilter = 'all';
@@ -645,34 +659,42 @@ function saveReply(id) {
   const textarea = document.getElementById('reply-input-' + id);
   const text = textarea.value.trim();
   if (!text) { showToast('Please write a reply first.'); return; }
- 
+
   // Save text
   const span = document.getElementById('reply-text-' + id);
   span.innerHTML = '<b>Juan (You):</b> ' + escHtml(text);
   span.dataset.saved = text;
   textarea.dataset.saved = text;
- 
+
+  // Persist to localStorage
+  if(!D.reviews) D.reviews = [];
+  var rev = D.reviews.find(function(r){ return r.id === id });
+  if(!rev){ rev = {id:id}; D.reviews.push(rev); }
+  rev.reply = text;
+  rev.replied = true;
+  FarmDirectStorage.save(D);
+
   // Show bubble
   const bubble = document.getElementById('reply-bubble-' + id);
   bubble.style.display = '';
- 
+
   // Close area
   document.getElementById('reply-area-' + id).classList.remove('open');
- 
+
   // Mark as responded
   const item = bubble.closest('.review-item');
   item.dataset.responded = 'true';
   replyState[id].hasReply = true;
- 
+
   // Update badge
   const badge = document.getElementById('badge-' + id);
   badge.className = 'respond-badge rb-responded';
   badge.textContent = '✅ Responded';
- 
+
   // Update action button
   const actions = item.querySelector('.review-actions');
   actions.innerHTML = `<button class="rev-action-btn primary" onclick="openEdit(${id})">✏️ Edit Reply</button>`;
- 
+
   updateStats();
   showToast('✅ Reply saved!');
 }
@@ -751,6 +773,26 @@ function submitReport(e) {
   e.target.reset();
   showToast('🚨 Report submitted! Admin will review.');
 }
+
+/* ── NAVBAR: dropdown toggles ── */
+document.querySelectorAll('.notif-wrap').forEach(wrap=>{
+  const btn=wrap.querySelector('.notif-btn');
+  const dd=wrap.querySelector('.notif-dropdown');
+  if(!btn||!dd) return;
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    document.querySelectorAll('.notif-dropdown').forEach(d=>{if(d!==dd) d.style.display='none'});
+    dd.style.display=dd.style.display==='block'?'none':'block';
+  });
+});
+document.addEventListener('click',function(){
+  document.querySelectorAll('.notif-dropdown').forEach(d=>d.style.display='none');
+});
+document.querySelectorAll('.menu-panel .menu-item').forEach(link=>{
+  link.addEventListener('click',function(){
+    document.getElementById('menu-check').checked=false;
+  });
+});
 </script>
 </body>
 </html>

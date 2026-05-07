@@ -28,8 +28,9 @@
   --font-display: "Georgia", "Times New Roman", serif;
   --font-body: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   --nav-h: 70px;
+  --sidebar-w: 210px;
 }
-
+ 
 *,
 *::before,
 *::after {
@@ -65,7 +66,7 @@ button {
   border: none;
   cursor: pointer;
 }
-
+ 
 /* ── NAVBAR ── */
 .navbar {
   position: fixed;
@@ -234,7 +235,7 @@ button {
 .menu-cta:hover {
   opacity: 0.9;
 }
-
+ 
 /* ── NOTIFICATION ── */
 .notif-wrap {
   position: relative;
@@ -377,7 +378,7 @@ button {
   flex-shrink: 0;
   margin-top: 0.1rem;
 }
-
+ 
 /* JD avatar button */
 .avatar-badge-btn {
   width: 36px !important;
@@ -409,7 +410,7 @@ button {
 .avatar-badge-btn:active {
   transform: scale(0.98);
 }
-
+ 
 /* ── MAIN LAYOUT ── */
 .farmers-main {
   max-width: 1200px;
@@ -461,7 +462,7 @@ button {
   transform: translateY(-1px);
   box-shadow: 0 4px 14px rgba(26, 46, 30, 0.3);
 }
-
+ 
 /* ── SECTION LABEL ── */
 .section-label {
   font-size: 0.72rem;
@@ -473,7 +474,7 @@ button {
   padding-bottom: 0.5rem;
   border-bottom: 1.5px solid var(--border);
 }
-
+ 
 /* ── DATE CHIP ── */
 .dash-date {
   display: flex;
@@ -491,7 +492,7 @@ button {
 .dash-date-icon {
   font-size: 1rem;
 }
-
+ 
 /* ── STAT CARDS ── */
 .stats-grid {
   display: grid;
@@ -578,7 +579,7 @@ button {
   font-weight: 600;
   color: var(--danger);
 }
-
+ 
 /* ── CARDS ── */
 .card {
   background: var(--white);
@@ -621,7 +622,7 @@ button {
   background: var(--green);
   color: white;
 }
-
+ 
 /* ── TABLE ── */
 .tbl {
   width: 100%;
@@ -706,7 +707,7 @@ button {
   background: var(--danger-bg);
   color: var(--danger);
 }
-
+ 
 /* ── 2-COL GRID ── */
 .g2 {
   display: grid;
@@ -714,7 +715,7 @@ button {
   gap: 1.3rem;
   align-items: start;
 }
-
+ 
 /* ── TOP PRODUCTS ── */
 .tp-item {
   display: flex;
@@ -801,7 +802,7 @@ button {
   font-size: 0.68rem;
   color: var(--text-light);
 }
-
+ 
 /* ── INSIGHTS GRID (Dashboard) ── */
 .insights-grid {
   display: grid;
@@ -820,7 +821,7 @@ button {
 .insight-body {
   padding: 1.1rem 1.3rem 1.3rem;
 }
-
+ 
 /* Revenue card */
 .rev-summary {
   margin-bottom: 1rem;
@@ -840,7 +841,7 @@ button {
 .text-green {
   color: var(--success);
 }
-
+ 
 /* Mini bar chart */
 .mini-bar-chart {
   display: flex;
@@ -878,7 +879,7 @@ button {
   color: var(--text-light);
   font-weight: 600;
 }
-
+ 
 .insight-row-list {
   display: flex;
   flex-direction: column;
@@ -899,7 +900,7 @@ button {
 .insight-row-item b {
   color: var(--text);
 }
-
+ 
 /* Donut chart */
 .donut-wrap {
   position: relative;
@@ -956,7 +957,7 @@ button {
   border-radius: 50%;
   flex-shrink: 0;
 }
-
+ 
 /* Inventory health */
 .inventory-list {
   display: flex;
@@ -1018,7 +1019,7 @@ button {
   padding: 0.5rem 0.75rem;
   font-weight: 600;
 }
-
+ 
 /* Freshness alerts */
 .freshness-list {
   display: flex;
@@ -1092,7 +1093,7 @@ button {
   background: var(--success-bg);
   color: var(--success);
 }
-
+ 
 /* Quick actions */
 .quick-actions-grid {
   display: grid;
@@ -1136,7 +1137,7 @@ button {
   font-weight: 700;
   color: var(--text-mid);
 }
-
+ 
 /* ── FOOTER ── */
 .footer {
   background: var(--green);
@@ -1176,7 +1177,7 @@ button {
   color: #567a5a;
   margin-top: 1rem;
 }
-
+ 
 /* ── BADGES ── */
 .badge {
   display: inline-flex;
@@ -1203,7 +1204,7 @@ button {
   background: var(--info-bg);
   color: var(--info);
 }
-
+ 
 /* ── PRODUCTS GRID ── */
 .prod-grid {
   display: grid;
@@ -1279,7 +1280,7 @@ button {
   color: var(--text-light);
   margin-top: 0.1rem;
 }
-
+ 
 /* Shelf bar (product cards) */
 .shelf-bar {
   margin-top: 0.6rem;
@@ -1341,7 +1342,7 @@ button {
   color: var(--text-light);
   margin-top: 2px;
 }
-
+ 
 /* Edit / Stock buttons on product cards */
 .edit,
 .stock {
@@ -1377,7 +1378,7 @@ button {
   background: var(--green-mid);
   transform: translateY(-1px);
 }
-
+ 
 /* Remove button */
 .prod-remove-btn {
   flex-shrink: 0;
@@ -1394,7 +1395,7 @@ button {
 .prod-remove-btn:hover {
   background: #fecaca;
 }
-
+ 
 /* ── CONFIRM DIALOG ── */
 .confirm-overlay {
   position: fixed;
@@ -1475,7 +1476,7 @@ button {
 .confirm-btn-remove:hover {
   background: #b91c1c;
 }
-
+ 
 /* ── PRODUCT EDIT MODAL (Products.html) ── */
 .prod-edit-modal-overlay {
   position: fixed;
@@ -1708,7 +1709,7 @@ button {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
-
+ 
 /* edit btn active state on card */
 .edit.editing {
   background: #e8f0e9;
@@ -1716,7 +1717,7 @@ button {
   border-color: #5a9a5e;
   font-weight: 700;
 }
-
+ 
 /* saved flash on card */
 @keyframes flashGreen {
   0% {
@@ -1729,7 +1730,7 @@ button {
 .prod-card.saved {
   animation: flashGreen 0.6s ease;
 }
-
+ 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp {
   from {
@@ -1741,7 +1742,7 @@ button {
     transform: translateY(0);
   }
 }
-
+ 
 /* ── RESPONSIVE ── */
 @media (max-width: 1100px) {
   .stats-grid-6 {
@@ -1841,5 +1842,91 @@ button {
   }
   .dash-title {
     font-size: 1.4rem;
+  }
+}
+ 
+/* ═══════════════════════════════════════════
+   SIDEBAR — added styles (Dashboard only)
+   Everything below is new; nothing above was changed.
+   ═══════════════════════════════════════════ */
+ 
+.sidebar {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  width: var(--sidebar-w);
+  height: calc(100vh - var(--nav-h));
+  background: var(--green);
+  border-right: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem 0.7rem;
+  overflow-y: auto;
+}
+ 
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+ 
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  transition: background 0.18s, color 0.18s;
+  white-space: nowrap;
+}
+ 
+.sidebar-link:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+ 
+.sidebar-link.active {
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  font-weight: 700;
+}
+ 
+/* Push main content to the right of the sidebar */
+.farmers-main {
+  margin-left: var(--sidebar-w);
+}
+ 
+/* Fix footer — offset it the same as main content so it isn't hidden behind the sidebar */
+.footer {
+  margin-left: var(--sidebar-w);
+}
+ 
+/* Fix JD avatar dropdown — cap width and don't let it stretch on mobile */
+.notif-wrap .notif-dropdown[style*="min-width:180px"],
+.notif-wrap .notif-dropdown[style*="min-width: 180px"] {
+  width: 180px !important;
+  max-width: 180px !important;
+}
+ 
+/* On mobile (≤900px): hide sidebar, keep hamburger menu-panel */
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+  .farmers-main {
+    margin-left: 0;
+  }
+  .footer {
+    margin-left: 0;
+  }
+  /* JD dropdown — keep it compact and right-aligned on mobile */
+  .notif-dropdown {
+    width: 220px !important;
+    right: 0 !important;
   }
 }

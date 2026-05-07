@@ -34,19 +34,30 @@
     </header>
 
     <main class="auth-wrapper">
+                <div class="auth-hero">
+            <div class="auth-hero-badge">🌾 Zamboanga's Farm Marketplace</div>
+            <div class="auth-hero-title">Sell Your Harvest<br>Direct to Buyers</div>
+            <p class="auth-hero-sub">Access your seller dashboard and manage your farm listings.</p>
+        </div>
+                <div class="auth-hero">
+            <div class="auth-hero-badge">🌾 Zamboanga's Farm Marketplace</div>
+            <div class="auth-hero-title">Sell Your Harvest<br>Direct to Buyers</div>
+            <p class="auth-hero-sub">Access your seller dashboard and manage your farm listings.</p>
+        </div>
+        <div class="auth-panel">
         <div class="auth-card">
             <a href="login.html" class="back-btn">← Back</a>
             <div class="auth-title">🌾 Farmer Sign In</div>
             <div class="auth-sub">Welcome back, Farmer! Sign in to access your seller dashboard.</div>
 
-            <form action="../Sellers/Dashboard.html" method="get">
+            <form id="loginForm">
                 <div class="form-group">
                     <label class="form-label">Email Address</label>
-                    <input type="email" class="form-input" placeholder="you@email.com" name="email" required>
+                    <input type="email" class="form-input" placeholder="you@email.com" id="loginEmail" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-input" placeholder="••••••••" name="password" required minlength="8">
+                    <input type="password" class="form-input" placeholder="••••••••" id="loginPassword" required minlength="8">
                 </div>
                 <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
                 <button type="submit" class="btn-primary">Sign In</button>
@@ -65,9 +76,55 @@
                 <a href="register-buyer.html">Register as a regular user first</a> and apply for farmer verification from your dashboard.
             </div>
         </div>
+            </div>
     </main>
 
-    <footer>© 2026 FarmDirect. All rights reserved.</footer>
+    <footer>
+  <div class="footer-container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span>🌾</span>
+          <span>FarmDirect</span>
+        </div>
+        <p class="footer-desc">Connecting Zamboanga farmers to your table. Fresh, local, and delivered with care.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link">Facebook</a>
+          <a href="#" class="social-link">Instagram</a>
+          <a href="#" class="social-link">Twitter</a>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+639123456789">+63 912 345 6789</a>
+        <a href="mailto:hello@farmdirect.com">hello@farmdirect.com</a>
+        <p>Mon-Sat: 6AM - 8PM</p>
+        <p>Zamboanga City, PH</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 FarmDirect Zamboanga. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+    <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var email = document.getElementById('loginEmail').value.trim().toLowerCase();
+        if (!email) return;
+        var username = email.replace(/[^a-z0-9]/g, '_');
+        localStorage.setItem('farmdirect_current_user', username);
+        localStorage.setItem('farmdirect_current_email', email);
+        /* Initialize user data if first login */
+        if (!localStorage.getItem('farmdirect_sellers_' + username)) {
+            var def = { profile:{name:'New Seller',avatar:null,role:'New Farmer',member:'Bronze Member',followers:0,following:0}, settings:{firstname:'',lastname:'',suffix:'',brgy:'',city:'',province:'',postal:'',storeName:'New Store',storeDesc:'',phone:'',email:email,fbPage:'',tiktok:''}, toRateOrders:[], myRatings:[], vouchers:[], stock:[], products:[], reports:[], nextBatchId:300 };
+            localStorage.setItem('farmdirect_sellers_' + username, JSON.stringify(def));
+        }
+        window.location.href = '../Sellers/Dashboard.html';
+    });
+    </script>
 
 </body>
 </html>

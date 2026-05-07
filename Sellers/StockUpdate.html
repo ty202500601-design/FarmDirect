@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="StockUpdate.css" />
+    <script src="sellers-storage.js"></script>
     <title>Update Stock – FarmDirect</title>
     <style>
       /* PAGE */
@@ -935,6 +936,7 @@
     </footer>
 
     <script>
+      var D = FarmDirectStorage.get();
       const TODAY = new Date();
       TODAY.setHours(0, 0, 0, 0);
       const DEFAULT_SHELF = {
@@ -946,9 +948,9 @@
         Dairy: 14,
         Others: 7,
       };
-      let nextBatchId = 300;
+      let nextBatchId = D.nextBatchId || 300;
 
-      let products = [
+      var products = D.stock && D.stock.length ? D.stock : [
         {
           id: "tomatoes",
           name: "Fresh Tomatoes",
@@ -1486,6 +1488,9 @@
             });
           });
         });
+        D.stock = products;
+        D.nextBatchId = nextBatchId;
+        FarmDirectStorage.save(D);
         showToast("✅ All stock saved!");
         renderAll();
         renderAlerts();
