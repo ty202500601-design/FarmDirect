@@ -3,251 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/style.css">
     <title>FarmDirect | Reports</title>
-    <script src="https://unpkg.com/lucide@latest" defer></script>
-    <script src="../JS/admin.js" defer></script>
-    <script src="../JS/reports.js" defer></script>
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body>
-    <nav class="admin-navbar">
-        <div class="admin-nav-inner">
-            <a href="dashboard.html" class="admin-nav-logo">Farm<span>Direct</span> Admin</a>
-            <div class="admin-nav-actions">
-                <div class="notif-wrap">
-                    <button class="notif-btn">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-                        </svg>
-                        <span class="notif-badge"></span>
-                    </button>
-                    <div class="notif-dropdown">
-                        <div class="notif-dropdown-header">Notifications</div>
+
+<!-- TOP NAVBAR -->
+<nav class="admin-navbar">
+    <div class="admin-nav-inner">
+        <a href="dashboard.html" class="admin-nav-logo">Farm<span>Direct</span> Admin</a>
+        <div class="admin-nav-actions">
+            <div class="notif-wrap">
+                <button class="notif-btn" onclick="toggleDropdown('notifDropdown', event)">
+                    🔔
+                    <span class="notif-badge"></span>
+                </button>
+                <div class="notif-dropdown" id="notifDropdown">
+                    <div class="notif-dropdown-header">🔔 Notifications</div>
+                    <div class="notif-dropdown-list">
                         <div class="notif-dropdown-item">
                             <strong>New Report</strong>
-                            <p>Buyer reported seller</p>
+                            <p>Buyer reported seller for rotten goods.</p>
                             <span>10 min ago</span>
+                        </div>
+                        <div class="notif-dropdown-item">
+                            <strong>Case Resolved</strong>
+                            <p>Case #R-004 has been marked resolved.</p>
+                            <span>1 hour ago</span>
                         </div>
                     </div>
                 </div>
-                <div class="profile-wrap">
-                    <button class="profile-btn">A</button>
-                    <div class="profile-dropdown">
-                        <a href="settings.html" class="profile-dropdown-item">⚙️ Settings</a>
-                        <a href="../login-admin.html" class="profile-dropdown-item logout">🚪 Logout</a>
-                    </div>
+            </div>
+            <div class="profile-wrap">
+                <button class="profile-btn" onclick="toggleDropdown('profileDropdown', event)">A</button>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <a href="settings.html" class="profile-dropdown-item">⚙️ Settings</a>
+                    <a href="../login-admin.html" class="profile-dropdown-item logout">🚪 Logout</a>
                 </div>
             </div>
         </div>
+    </div>
+</nav>
+
+<!-- SIDEBAR — original structure untouched -->
+<aside class="sidebar">
+    <h2>FARMDirect</h2>
+    <nav>
+        <ul>
+            <li><a href="dashboard.html">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+                Dashboard
+            </a></li>
+            <li><a href="user Management.html">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                User Management
+            </a></li>
+                           
+            <li><a href="products.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-salad-icon lucide-salad"><path d="M7 21h10"/><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M11.38 12a2.4 2.4 0 0 1-.4-4.77 2.4 2.4 0 0 1 3.2-2.77 2.4 2.4 0 0 1 3.47-.63 2.4 2.4 0 0 1 3.37 3.37 2.4 2.4 0 0 1-1.1 3.7 2.51 2.51 0 0 1 .03 1.1"/><path d="m13 12 4-4"/><path d="M10.9 7.25A3.99 3.99 0 0 0 4 10c0 .73.2 1.41.54 2"/></svg>Product Moderation</a></li>                
+
+            <li class="active"><a href="reports.html">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Reports
+            </a></li>
+            <li><a href="Farmer Verification.html">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                Farmer Verification
+            </a></li>
+        </ul>
     </nav>
+</aside>
 
-    <aside class="sidebar">
-        <div class="sidebar-header"><h2>FARMDirect</h2></div>
-        <nav>
-            <ul>
-                <li><a href="dashboard.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg> Dashboard</a></li>
-                <li><a href="user Management.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Management</a></li>
-                <li><a href="products.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Moderation</a></li>
-                <li class="active"><a href="reports.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Reports</a></li>
-                <li><a href="Farmer Verification.html" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Farmer Verification</a></li>
-                <li><a href="Admin Management.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Admin Management</a></li>
-            </ul>
-        </nav>
-    </aside>
+<!-- MAIN CONTENT -->
+<main class="main-content">
 
-    <main class="main-content">
-        <header class="page-header">
-            <h1>Reports & Complaints</h1>
-            <p>Manage reports between buyers and sellers</p>
-        </header>
-
-        <div class="tabs">
-            <button class="tab active" onclick="showTab('all')">All Reports</button>
-            <button class="tab" onclick="showTab('buyers')">Buyer Reports</button>
-            <button class="tab" onclick="showTab('sellers')">Seller Reports</button>
-            <button class="tab" onclick="showTab('resolved')">Resolved</button>
+    <!-- Page Header -->
+    <div class="rp-header">
+        <div class="rp-header-left">
+            <h1>Reports &amp; Complaints</h1>
+            <p>Review, investigate, and resolve disputes between buyers and farmers.</p>
         </div>
-
-        <div class="card">
-            <h3>⚠️ Reported Issues (8)</h3>
-            
-            <div class="report-card" data-case="R-008">
-                <div class="report-icon buyer">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
-                </div>
-                <div class="report-content">
-                    <span class="type buyer">Buyer reported Seller</span>
-                    <strong>Ana Mae</strong>
-                    <p>Seller sold rotten vegetables and refused refund.</p>
-                    <div class="date">Reported 2 hours ago • Case #R-008</div>
-                </div>
-                <span class="report-status pending">Pending</span>
-                <div class="report-actions" data-case="R-008">
-                    <button class="btn-action btn-resolve" onclick="resolveFromButton(this)">Resolve</button>
-                    <button class="btn-action btn-reject" onclick="rejectFromButton(this)">Reject</button>
-                </div>
+        <div class="rp-header-stats">
+            <div class="rp-hstat rp-hstat--yellow">
+                <span class="rp-hstat-num" id="statPending">0</span>
+                <span class="rp-hstat-lbl">Pending</span>
             </div>
-
-            <div class="report-card" data-case="R-007">
-                <div class="report-icon seller">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
-                </div>
-                <div class="report-content">
-                    <span class="type seller">Seller reported Buyer</span>
-                    <strong>Juan Perez</strong>
-                    <p>Buyer refused delivery unfairly.</p>
-                    <div class="date">Reported 5 hours ago • Case #R-007</div>
-                </div>
-                <span class="report-status reviewing">Reviewing</span>
-                <div class="report-actions" data-case="R-007">
-                    <button class="btn-action btn-resolve" onclick="resolveFromButton(this)">Resolve</button>
-                    <button class="btn-action btn-reject" onclick="rejectFromButton(this)">Reject</button>
-                </div>
+            <div class="rp-hstat rp-hstat--blue">
+                <span class="rp-hstat-num" id="statReviewing">0</span>
+                <span class="rp-hstat-lbl">Reviewing</span>
             </div>
-
-            <div class="report-card" data-case="R-006">
-                <div class="report-icon buyer">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
-                </div>
-                <div class="report-content">
-                    <span class="type buyer">Buyer reported Seller</span>
-                    <strong>Lily Cheng</strong>
-                    <p>Seller gave wrong weight.</p>
-                    <div class="date">Reported yesterday • Case #R-006</div>
-                </div>
-                <span class="report-status reviewing">Reviewing</span>
-                <div class="report-actions" data-case="R-006">
-                    <button class="btn-action btn-resolve" onclick="resolveFromButton(this)">Resolve</button>
-                    <button class="btn-action btn-reject" onclick="rejectFromButton(this)">Reject</button>
-                </div>
+            <div class="rp-hstat rp-hstat--green">
+                <span class="rp-hstat-num" id="statResolved">0</span>
+                <span class="rp-hstat-lbl">Resolved</span>
             </div>
-
-            <div class="report-card" data-case="R-005">
-                <div class="report-icon seller">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
-                </div>
-                <div class="report-content">
-                    <span class="type seller">Seller reported Buyer</span>
-                    <strong>Maria Santos</strong>
-                    <p>Buyer harassment with fake reviews.</p>
-                    <div class="date">Reported 2 days ago • Case #R-005</div>
-                </div>
-                <span class="report-status resolved">Resolved</span>
-                <div class="report-actions" data-case="R-005">
-                    <button class="btn-action btn-pending" onclick="reopenReport(this)">Reopen</button>
-                </div>
-            </div>
-
-            <div class="report-card" data-case="R-004">
-                <div class="report-icon buyer">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
-                </div>
-                <div class="report-content">
-                    <span class="type buyer">Buyer reported Seller</span>
-                    <strong>Roberto Lee</strong>
-                    <p>Seller uses fake organic labels.</p>
-                    <div class="date">Reported 3 days ago • Case #R-004</div>
-                </div>
-                <span class="report-status resolved">Resolved</span>
-                <div class="report-actions" data-case="R-004">
-                    <button class="btn-action btn-pending" onclick="reopenReport(this)">Reopen</button>
-                </div>
-            </div>
-
-            <div class="report-card" data-case="R-003">
-                <div class="report-icon seller">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
-                </div>
-                <div class="report-content">
-                    <span class="type seller">Seller reported Buyer</span>
-                    <strong>Rose Flores</strong>
-                    <p>Buyer threatened for free products.</p>
-                    <div class="date">Reported 4 days ago • Case #R-003</div>
-                </div>
-                <span class="report-status rejected">Rejected</span>
-                <div class="report-actions" data-case="R-003">
-                    <button class="btn-action btn-pending" onclick="reopenReport(this)">Reopen</button>
-                </div>
-            </div>
-
-            <div class="report-card" data-case="R-002">
-                <div class="report-icon buyer">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
-                </div>
-                <div class="report-content">
-                    <span class="type buyer">Buyer reported Seller</span>
-                    <strong>Pedro Yang</strong>
-                    <p>Delivery 3 days late, produce spoiled.</p>
-                    <div class="date">Reported 5 days ago • Case #R-002</div>
-                </div>
-                <span class="report-status resolved">Resolved</span>
-                <div class="report-actions" data-case="R-002">
-                    <button class="btn-action btn-pending" onclick="reopenReport(this)">Reopen</button>
-                </div>
-            </div>
-
-            <div class="report-card" data-case="R-001">
-                <div class="report-icon seller">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
-                </div>
-                <div class="report-content">
-                    <span class="type seller">Seller reported Buyer</span>
-                    <strong>Claire Torres</strong>
-                    <p>Buyer continuously cancels orders.</p>
-                    <div class="date">Reported 1 week ago • Case #R-001</div>
-                </div>
-                <span class="report-status resolved">Resolved</span>
-                <div class="report-actions" data-case="R-001">
-                    <button class="btn-action btn-pending" onclick="reopenReport(this)">Reopen</button>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <div id="toast" class="toast"></div>
-
-    <div id="reviewModal" class="review-modal">
-        <div class="review-box">
-            <div class="review-header">
-                <h3 id="reviewTitle">Case Review</h3>
-                <button class="review-close" onclick="closeReview()">&times;</button>
-            </div>
-            <div class="review-detail">
-                <label>Case Number</label>
-                <p id="reviewCase">#R-000</p>
-            </div>
-            <div class="review-detail">
-                <label>Type</label>
-                <p id="reviewType">Buyer reported Seller</p>
-            </div>
-            <div class="review-detail">
-                <label>Reported Party</label>
-                <p id="reviewParty">Name</p>
-            </div>
-            <div class="review-detail">
-                <label>Complaint</label>
-                <p id="reviewComplaint">Description here...</p>
-            </div>
-            <div class="review-detail">
-                <label>Report Date</label>
-                <p id="reviewDate">Date</p>
-            </div>
-            <div class="review-evidence">
-                <label>Evidence Photos</label>
-                <div class="review-evidence-img" id="reviewEvidence"></div>
-            </div>
-            <div class="review-detail">
-                <label>Admin Notes</label>
-                <textarea class="review-notes" placeholder="Enter notes about this case..."></textarea>
-            </div>
-            <div class="review-actions">
-                <button class="btn-action btn-pending" onclick="closeReview()">Cancel</button>
-                <button class="btn-action btn-resolve" id="btnResolve" onclick="resolveFromReview()">Resolve</button>
-                <button class="btn-action btn-reject" id="btnReject" onclick="rejectFromReview()">Reject</button>
+            <div class="rp-hstat rp-hstat--red">
+                <span class="rp-hstat-num" id="statRejected">0</span>
+                <span class="rp-hstat-lbl">Rejected</span>
             </div>
         </div>
     </div>
 
+    <!-- Tab Bar -->
+    <div class="rp-tabs">
+        <button class="tab active" data-tab="all"    onclick="switchTab(this)">All Reports</button>
+        <button class="tab"        data-tab="buyers"  onclick="switchTab(this)">🛒 Buyer Reports</button>
+        <button class="tab"        data-tab="sellers" onclick="switchTab(this)">🌾 Seller Reports</button>
+        <button class="tab"        data-tab="resolved" onclick="switchTab(this)">✅ Resolved</button>
+        <button class="tab"        data-tab="rejected" onclick="switchTab(this)">❌ Rejected</button>
+        <div class="rp-tab-search">
+            <span class="rp-search-ico">🔍</span>
+            <input type="text" id="reportSearch" placeholder="Search cases…" oninput="renderReports()">
+        </div>
+    </div>
+
+    <!-- Report list -->
+    <div class="card rp-list-card">
+        <div class="rp-list-header">
+            <h3>⚠️ Reported Issues (<span id="caseCount">0</span>)</h3>
+            <div class="rp-bulk-actions" id="bulkActions" style="display:none;">
+                <button class="btn btn-sm btn-success" onclick="bulkResolve()">✅ Resolve Selected</button>
+                <button class="btn btn-sm btn-danger"  onclick="bulkReject()">❌ Reject Selected</button>
+                <button class="btn btn-sm btn-outline" onclick="clearSelection()">Clear</button>
+            </div>
+        </div>
+
+        <div id="reportList"><!-- injected by JS --></div>
+
+        <div class="rp-empty" id="rp-empty" style="display:none;">
+            <div style="font-size:2.5rem;margin-bottom:10px;">📋</div>
+            <p>No reports match this filter.</p>
+        </div>
+    </div>
+
+</main>
+
+<!-- ══ REVIEW MODAL ═══════════════════════════════════════ -->
+<div class="modal-overlay" id="reviewModal">
+    <div class="modal rp-modal">
+        <div class="modal-header green" id="reviewModalHeader">
+            <div style="display:flex;align-items:center;gap:12px;">
+                <span id="reviewModalIcon" style="font-size:1.4rem;">⚠️</span>
+                <div>
+                    <h2 id="reviewTitle">Case Review</h2>
+                    <div id="reviewCaseNum" style="font-size:0.78rem;opacity:0.75;margin-top:2px;">#R-000</div>
+                </div>
+            </div>
+            <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="rp-review-grid">
+                <div class="rp-review-item">
+                    <label>Reported By</label>
+                    <span id="rvReportedBy">—</span>
+                </div>
+                <div class="rp-review-item">
+                    <label>Against</label>
+                    <span id="rvAgainst">—</span>
+                </div>
+                <div class="rp-review-item">
+                    <label>Type</label>
+                    <span id="rvType">—</span>
+                </div>
+                <div class="rp-review-item">
+                    <label>Date Filed</label>
+                    <span id="rvDate">—</span>
+                </div>
+                <div class="rp-review-item rp-review-item--full">
+                    <label>Complaint</label>
+                    <span id="rvComplaint">—</span>
+                </div>
+                <div class="rp-review-item rp-review-item--full">
+                    <label>Current Status</label>
+                    <span id="rvStatus">—</span>
+                </div>
+            </div>
+            <div class="form-group" style="margin-top:16px;">
+                <label class="form-label">Admin Notes <span style="color:#aaa;font-weight:400;">(optional)</span></label>
+                <textarea class="form-input rp-notes" id="reviewNotes" rows="3" placeholder="Enter your assessment or action notes…"></textarea>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button class="btn rp-btn-reopen"  id="rvBtnReopen"  onclick="actionFromModal('pending')"   style="display:none;">🔄 Reopen</button>
+            <button class="btn rp-btn-review"  id="rvBtnReview"  onclick="actionFromModal('reviewing')" style="display:none;">🔍 Mark Reviewing</button>
+            <button class="btn btn-danger"     id="rvBtnReject"  onclick="actionFromModal('rejected')"  style="display:none;">❌ Reject</button>
+            <button class="btn btn-success"    id="rvBtnResolve" onclick="actionFromModal('resolved')"  style="display:none;">✅ Resolve</button>
+        </div>
+    </div>
+</div>
+
+<!-- ══ CONFIRM MODAL ══════════════════════════════════════ -->
+<div class="modal-overlay" id="confirmModal">
+    <div class="modal rp-confirm-modal">
+        <div class="modal-header" id="confirmModalHeader">
+            <h2 id="confirmTitle">Confirm</h2>
+            <button class="modal-close" onclick="closeConfirm()">✕</button>
+        </div>
+        <div class="modal-body">
+            <p id="confirmMsg" style="color:#444;font-size:0.95rem;line-height:1.7;"></p>
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-outline" onclick="closeConfirm()">Cancel</button>
+            <button class="btn" id="confirmBtn" onclick="executeConfirm()">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="reports.js"></script>
 </body>
 </html>

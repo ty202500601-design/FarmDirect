@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../CSS/style.css">
     <title>FarmDirect | Product Moderation</title>
-    <script src="https://unpkg.com/lucide@latest" defer></script>
-    <script src="../JS/admin.js" defer></script>
-    <script src="../JS/products.js" defer></script>
 </head>
 <body>
-    <nav class="admin-navbar">
-        <div class="admin-nav-inner">
-            <a href="dashboard.html" class="admin-nav-logo">Farm<span>Direct</span> Admin</a>
-            <div class="admin-nav-actions">
+
+<nav class="admin-navbar">
+    <div class="admin-nav-inner">
+        <a href="dashboard.html" class="admin-nav-logo">Farm<span>Direct</span> Admin</a>
+        <div class="admin-nav-actions">
             <div class="notif-wrap">
                 <button class="notif-btn">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -24,263 +23,834 @@
                 </button>
                 <div class="notif-dropdown">
                     <div class="notif-dropdown-header">Notifications</div>
-                    <div class="notif-dropdown-item"><strong>New Farmer Request</strong><p>Maria Santos applied</p><span>5 min ago</span></div>
-                    <div class="notif-dropdown-item"><strong>Order #1204 Pending</strong><p>Requires approval</p><span>12 min ago</span></div>
+                    <div class="notif-dropdown-list">
+                        <div class="notif-dropdown-item"><strong>New Farmer Request</strong><p>Maria Santos applied</p><span>5 min ago</span></div>
+                        <div class="notif-dropdown-item"><strong>Order #1204 Pending</strong><p>Requires approval</p><span>12 min ago</span></div>
+                    </div>
                 </div>
             </div>
             <div class="profile-wrap">
                 <button class="profile-btn">A</button>
                 <div class="profile-dropdown">
-                    <a href="settings.html" class="profile-dropdown-item">⚙️ Settings</a>
-                    <a href="../login-admin.html" class="profile-dropdown-item logout">🚪 Logout</a>
+                    <a href="settings.html" class="profile-dropdown-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                        Settings
+                    </a>
+                    <a href="../login-admin.html" class="profile-dropdown-item logout">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        Logout
+                    </a>
                 </div>
+            </div>
         </div>
+    </div>
+</nav>
+
+<aside class="sidebar">
+    <div class="sidebar-header"><h2>FARMDirect</h2></div>
+    <nav>
+        <ul>
+            <li><a href="dashboard.html">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+                Dashboard
+            </a></li>
+            <li><a href="user Management.html">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                User Management
+            </a></li>
+            
+            <li class="active"><a href="products.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-salad-icon lucide-salad"><path d="M7 21h10"/><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M11.38 12a2.4 2.4 0 0 1-.4-4.77 2.4 2.4 0 0 1 3.2-2.77 2.4 2.4 0 0 1 3.47-.63 2.4 2.4 0 0 1 3.37 3.37 2.4 2.4 0 0 1-1.1 3.7 2.51 2.51 0 0 1 .03 1.1"/><path d="m13 12 4-4"/><path d="M10.9 7.25A3.99 3.99 0 0 0 4 10c0 .73.2 1.41.54 2"/></svg>Product Moderation</a></li>              
+
+            <li><a href="reports.html">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Reports
+            </a></li>
+            <li><a href="Farmer Verification.html">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                Farmer Verification
+            </a></li>
+        </ul>
     </nav>
+</aside>
 
-    <aside class="sidebar">
-        <div class="sidebar-header"><h2>FARMDirect</h2></div>
-        <nav>
-            <ul>
-                <li><a href="dashboard.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg> Dashboard</a></li>
-                <li><a href="user Management.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Management</a></li>
-                <li class="active"><a href="products.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Moderation</a></li>
-                <li><a href="reports.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Reports</a></li>
-                <li><a href="Farmer Verification.html" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Farmer Verification</a></li>
-                <li><a href="Admin Management.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Admin Management</a></li>
-        </nav>
-    </aside>
+<!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+<main class="main-content">
 
-    <main class="main-content">
-        <h1 style="margin-bottom:20px;">Product Catalog Moderation</h1>
-        
-        <div style="display:flex; gap:10px; margin-bottom:30px;">
-            <button class="tab-btn active" onclick="showTab('pending')" id="tabPending">⏳ Pending (<span id="pendingCount">4</span>)</button>
-            <button class="tab-btn" onclick="showTab('approved')" id="tabApproved">✓ Approved (<span id="approvedCount">4</span>)</button>
-            <button class="tab-btn" onclick="showTab('rejected')" id="tabRejected">✕ Rejected (<span id="rejectedCount">4</span>)</button>
-</div>
-        
-<!-- Pending Tab -->
-        <div id="pendingTab">
-            <div style="display:flex; flex-wrap:wrap; gap:20px;">
-                <div class="card" data-category="grains">
-                    <img src="../IMG/brown rice.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
-                    <h3>Brown Rice</h3>
-                    <p>Farmer: Ruben Tiu</p>
-                    <p style="color:var(--primary-green); font-weight:600;">₱55/kg</p>
-                    <div style="margin-bottom:10px;"><span class="category-tag">Grains</span> <span class="badge bg-yellow">Pending</span></div>
-                    <div style="margin-top:15px; display:flex; gap:10px;">
-                        <button class="btn btn-success" style="flex:1" onclick="showApprove(this)">✓ Approve</button>
-                        <button class="btn btn-outline" style="flex:1" onclick="showReject(this)">✕ Reject</button>
-                    </div>
-                </div>
-                <div class="card" data-category="vegetables">
-                    <img src="../IMG/sweet corn.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
-                    <h3>Sweet Corn</h3>
-                    <p>Farmer: Roberto Lee</p>
-                    <p style="color:var(--primary-green); font-weight:600;">₱20/piece</p>
-                    <div style="margin-bottom:10px;"><span class="category-tag">Vegetables</span> <span class="badge bg-yellow">Pending</span></div>
-                    <div style="margin-top:15px; display:flex; gap:10px;">
-                        <button class="btn btn-success" style="flex:1" onclick="showApprove(this)">✓ Approve</button>
-                        <button class="btn btn-outline" style="flex:1" onclick="showReject(this)">✕ Reject</button>
-                    </div>
-                </div>
-                <div class="card" data-category="fruits">
-                    <img src="../IMG/strawberries.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
-                    <h3>Strawberries</h3>
-                    <p>Farmer: Ana Mae</p>
-                    <p style="color:var(--primary-green); font-weight:600;">₱90/box</p>
-                    <div style="margin-bottom:10px;"><span class="category-tag">Fruits</span> <span class="badge bg-yellow">Pending</span></div>
-                    <div style="margin-top:15px; display:flex; gap:10px;">
-                        <button class="btn btn-success" style="flex:1" onclick="showApprove(this)">✓ Approve</button>
-                        <button class="btn btn-outline" style="flex:1" onclick="showReject(this)">✕ Reject</button>
-                    </div>
-                </div>
-                <div class="card" data-category="fruits">
-                    <img src="../IMG/calamansi.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
-                    <h3>Fresh Calamansi</h3>
-                    <p>Farmer: Lily Cheng</p>
-                    <p style="color:var(--primary-green); font-weight:600;">₱40/kg</p>
-                    <div style="margin-bottom:10px;"><span class="category-tag">Fruits</span> <span class="badge bg-yellow">Pending</span></div>
-                    <div style="margin-top:15px; display:flex; gap:10px;">
-                        <button class="btn btn-success" style="flex:1" onclick="showApprove(this)">✓ Approve</button>
-                        <button class="btn btn-outline" style="flex:1" onclick="showReject(this)">✕ Reject</button>
-                    </div>
-                </div>
+    <!-- Page header -->
+    <header class="top-bar">
+            <div>
+                <h1>Product Catalog Moderation</h1>
+                <br>
             </div>
+        </header>
+
+    <!-- Tab bar -->
+    <div class="pm-tabs">
+        <button class="pm-tab active" id="tabPending" onclick="showTab('pending')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Pending <span class="pm-tab-count" id="countPending">5</span>
+        </button>
+        <button class="pm-tab" id="tabApproved" onclick="showTab('approved')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Approved <span class="pm-tab-count pm-tab-count--green" id="countApproved">6</span>
+        </button>
+        <button class="pm-tab" id="tabRejected" onclick="showTab('rejected')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Rejected <span class="pm-tab-count pm-tab-count--red" id="countRejected">4</span>
+        </button>
+
+        <!-- Search -->
+        <div class="pm-tab-search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="searchInput" placeholder="Search products or farmers..." oninput="filterCards()">
         </div>
+    </div>
 
-<!-- Approved Tab -->
-        <div id="approvedTab" style="display:none;">
-            <div style="display:flex; flex-wrap:wrap; gap:20px;">
-                <div class="card" data-category="vegetables">
-                    <img src="../IMG/cherry tomatoes.webp" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
-                    <h3>Fresh Tomatoes</h3>
-                    <p>Farmer: Juan Dela Cruz</p>
-                    <p style="color:var(--primary-green); font-weight:600;">₱35/kg</p>
-                    <div style="margin-bottom:10px;"><span class="category-tag">Vegetables</span> <span class="badge bg-green">Approved</span></div>
-                    <div style="margin-top:15px;">
-                        <button class="btn btn-danger" style="width:100%" onclick="showTakeDown(this)">Take Down</button>
-                    </div>
+    <!-- ── PENDING TAB ── -->
+    <div id="pendingTab" class="pm-tab-panel">
+        <div class="pm-grid" id="pendingGrid">
+
+            <!-- Card 1 -->
+            <div class="pm-card" data-search="brown rice ruben tiu grains">
+                <div class="pm-card-img-wrap">
+                    <img src="../../IMG/brown rice.jpg" alt="Brown Rice" class="pm-card-img">
+                    <span class="pm-card-cat-badge">Grains</span>
                 </div>
-                <div class="card" data-category="vegetables">
-                    <img src="../IMG/pechay.webp" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
-                    <h3>Chinese Pechay</h3>
-                    <p>Farmer: Juan Dela Cruz</p>
-                    <p style="color:var(--primary-green); font-weight:600;">₱25/bundle</p>
-                    <div style="margin-bottom:10px;"><span class="category-tag">Vegetables</span> <span class="badge bg-green">Approved</span></div>
-                    <div style="margin-top:15px;">
-                        <button class="btn btn-danger" style="width:100%" onclick="showTakeDown(this)">Take Down</button>
+                <div class="pm-card-body">
+                    <h3 class="pm-card-title">Brown Rice</h3>
+                    <p class="pm-card-farmer">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Ruben Tiu
+                    </p>
+                    <div class="pm-card-meta">
+                        <span class="pm-price">&#8369;55<small>/kg</small></span>
+                        <span class="badge bg-yellow">Pending</span>
                     </div>
-                </div>
-                <div class="card" data-category="vegetables">
-                    <img src="../IMG/carrots.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
-                    <h3>Organic Carrots</h3>
-                    <p>Farmer: Maria Santos</p>
-                    <p style="color:var(--primary-green); font-weight:600;">₱85/bundle</p>
-                    <div style="margin-bottom:10px;"><span class="category-tag">Vegetables</span> <span class="badge bg-green">Approved</span></div>
-                    <div style="margin-top:15px;">
-                        <button class="btn btn-danger" style="width:100%" onclick="showTakeDown(this)">Take Down</button>
+                    <div class="pm-card-details-row">
+                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> 200kg stock</span>
+                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Davao City</span>
                     </div>
-                </div>
-                <div class="card" data-category="vegetables">
-                    <img src="https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=400" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
-                    <h3>Fresh Cabbage</h3>
-                    <p>Farmer: Pedro Yang</p>
-                    <p style="color:var(--primary-green); font-weight:600;">₱60/piece</p>
-                    <div style="margin-bottom:10px;"><span class="category-tag">Vegetables</span> <span class="badge bg-green">Approved</span></div>
-                    <div style="margin-top:15px;">
-                        <button class="btn btn-danger" style="width:100%" onclick="showTakeDown(this)">Take Down</button>
+                    <div class="pm-card-actions">
+                        <button class="pm-btn-approve" onclick="openApprove(this,
+                            'Brown Rice','Ruben Tiu','Grains','&#8369;55/kg','200kg','Davao City',
+                            'Premium quality brown rice, sun-dried and stone-milled. Rich in fiber and natural nutrients.',
+                            'GCash, COD','Room temperature','https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600&q=80',
+                            ['per kg — &#8369;55','per sack (50kg) — &#8369;2,600'])">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Approve
+                        </button>
+                        <button class="pm-btn-reject" onclick="openReject(this, 'Brown Rice')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            Reject
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
 
-<!-- Rejected Tab -->
-<div id="rejectedTab" style="display:none;">
-    <div style="display:flex; flex-wrap:wrap; gap:20px;">
-    
-        <div class="card" data-category="fruits">
-            <img src="../IMG/banana.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
-            <h3>Overripe Bananas</h3>
-            <p>Farmer: Jose Rizal</p>
-            <p style="color:var(--primary-green); font-weight:600;">₱30/bundle</p>
-            <div style="margin-bottom:10px;">
-                <span class="category-tag">Fruits</span> 
-                <span class="badge bg-red" style="background-color: #ff4d4d; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">Rejected</span>
+            <!-- Card 2 -->
+            <div class="pm-card" data-search="sweet corn roberto lee vegetables">
+                <div class="pm-card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=400&q=80" alt="Sweet Corn" class="pm-card-img">
+                    <span class="pm-card-cat-badge">Vegetables</span>
+                </div>
+                <div class="pm-card-body">
+                    <h3 class="pm-card-title">Sweet Corn</h3>
+                    <p class="pm-card-farmer">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Roberto Lee
+                    </p>
+                    <div class="pm-card-meta">
+                        <span class="pm-price">&#8369;20<small>/piece</small></span>
+                        <span class="badge bg-yellow">Pending</span>
+                    </div>
+                    <div class="pm-card-details-row">
+                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> 500pcs stock</span>
+                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Bukidnon</span>
+                    </div>
+                    <div class="pm-card-actions">
+                        <button class="pm-btn-approve" onclick="openApprove(this,
+                            'Sweet Corn','Roberto Lee','Vegetables','&#8369;20/piece','500pcs','Bukidnon',
+                            'Freshly harvested sweet corn, non-GMO. Best grilled or boiled. Harvested daily from our highland farm.',
+                            'GCash, Maya, COD','Cool &amp; dry place','https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=600&q=80',
+                            ['per piece — &#8369;20','per bundle (10pcs) — &#8369;180','per sack — &#8369;800'])">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Approve
+                        </button>
+                        <button class="pm-btn-reject" onclick="openReject(this, 'Sweet Corn')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            Reject
+                        </button>
+                    </div>
+                </div>
             </div>
-            <p style="font-size: 0.85rem; color: #666;"><strong>Reason:</strong> Quality issues</p>
-            <div style="margin-top:15px;">
-                <button class="btn btn-outline" style="width:100%" onclick="restoreProduct(this)">Restore to Pending</button>
-            </div>
-        </div>
 
-        <div class="card" data-category="vegetables">
-            <img src="../IMG/eggplant.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
-            <h3>Long Eggplant</h3>
-            <p>Farmer: Maria Makiling</p>
-            <p style="color:var(--primary-green); font-weight:600;">₱45/kg</p>
-            <div style="margin-bottom:10px;">
-                <span class="category-tag">Vegetables</span> 
-                <span class="badge bg-red" style="background-color: #ff4d4d; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">Rejected</span>
+            <!-- Card 3 -->
+            <div class="pm-card" data-search="strawberries ana mae fruits">
+                <div class="pm-card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=400&q=80" alt="Strawberries" class="pm-card-img">
+                    <span class="pm-card-cat-badge">Fruits</span>
+                </div>
+                <div class="pm-card-body">
+                    <h3 class="pm-card-title">Strawberries</h3>
+                    <p class="pm-card-farmer">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Ana Mae
+                    </p>
+                    <div class="pm-card-meta">
+                        <span class="pm-price">&#8369;90<small>/box</small></span>
+                        <span class="badge bg-yellow">Pending</span>
+                    </div>
+                    <div class="pm-card-details-row">
+                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> 150 boxes</span>
+                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> La Trinidad, Benguet</span>
+                    </div>
+                    <div class="pm-card-actions">
+                        <button class="pm-btn-approve" onclick="openApprove(this,
+                            'Strawberries','Ana Mae','Fruits','&#8369;90/box','150 boxes','La Trinidad, Benguet',
+                            'Sweet and tangy highland strawberries. Picked fresh daily. Each box contains approximately 250g of premium strawberries.',
+                            'GCash, Bank Transfer','Refrigerate (2–8°C)','https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=600&q=80',
+                            ['per box (250g) — &#8369;90','per tray (500g) — &#8369;170','per kg — &#8369;320'])">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Approve
+                        </button>
+                        <button class="pm-btn-reject" onclick="openReject(this, 'Strawberries')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            Reject
+                        </button>
+                    </div>
+                </div>
             </div>
-            <p style="font-size: 0.85rem; color: #666;"><strong>Reason:</strong> Blurred images</p>
-            <div style="margin-top:15px;">
-                <button class="btn btn-outline" style="width:100%" onclick="restoreProduct(this)">Restore to Pending</button>
-            </div>
-        </div>
 
-        <div class="card" data-category="grains">
-            <img src="../IMG/white-rice.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
-            <h3>Premium White Rice</h3>
-            <p>Farmer: Antonio Luna</p>
-            <p style="color:var(--primary-green); font-weight:600;">₱50/kg</p>
-            <div style="margin-bottom:10px;">
-                <span class="category-tag">Grains</span> 
-                <span class="badge bg-red" style="background-color: #ff4d4d; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">Rejected</span>
+            <!-- Card 4 -->
+            <div class="pm-card" data-search="calamansi lily cheng fruits">
+                <div class="pm-card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1587398409612-de6c2ac10af3?w=400&q=80" alt="Fresh Calamansi" class="pm-card-img">
+                    <span class="pm-card-cat-badge">Fruits</span>
+                </div>
+                <div class="pm-card-body">
+                    <h3 class="pm-card-title">Fresh Calamansi</h3>
+                    <p class="pm-card-farmer">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Lily Cheng
+                    </p>
+                    <div class="pm-card-meta">
+                        <span class="pm-price">&#8369;40<small>/kg</small></span>
+                        <span class="badge bg-yellow">Pending</span>
+                    </div>
+                    <div class="pm-card-details-row">
+                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> 80kg stock</span>
+                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Cagayan de Oro</span>
+                    </div>
+                    <div class="pm-card-actions">
+                        <button class="pm-btn-approve" onclick="openApprove(this,
+                            'Fresh Calamansi','Lily Cheng','Fruits','&#8369;40/kg','80kg','Cagayan de Oro',
+                            'Freshly picked calamansi, sour and fragrant. Perfect for juicing, cooking, and flavoring. Naturally grown without pesticides.',
+                            'GCash, COD','Room temperature','https://images.unsplash.com/photo-1587398409612-de6c2ac10af3?w=600&q=80',
+                            ['per kg — &#8369;40','per 500g — &#8369;22','per pack (100g) — &#8369;15'])">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Approve
+                        </button>
+                        <button class="pm-btn-reject" onclick="openReject(this, 'Fresh Calamansi')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            Reject
+                        </button>
+                    </div>
+                </div>
             </div>
-            <p style="font-size: 0.85rem; color: #666;"><strong>Reason:</strong> Incorrect pricing</p>
-            <div style="margin-top:15px;">
-                <button class="btn btn-outline" style="width:100%" onclick="restoreProduct(this)">Restore to Pending</button>
-            </div>
-        </div>
 
-        <div class="card" data-category="fruits">
-            <img src="../IMG/mango.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
-            <h3>Guimaras Mangoes</h3>
-            <p>Farmer: Emilio Aguinaldo</p>
-            <p style="color:var(--primary-green); font-weight:600;">₱150/kg</p>
-            <div style="margin-bottom:10px;">
-                <span class="category-tag">Fruits</span> 
-                <span class="badge bg-red" style="background-color: #ff4d4d; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">Rejected</span>
+            <!-- Card 5 -->
+            <div class="pm-card" data-search="organic eggplant carlo reyes vegetables">
+                <div class="pm-card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1638362894855-77838de60a9b?w=400&q=80" alt="Eggplant" class="pm-card-img">
+                    <span class="pm-card-cat-badge">Vegetables</span>
+                </div>
+                <div class="pm-card-body">
+                    <h3 class="pm-card-title">Organic Eggplant</h3>
+                    <p class="pm-card-farmer">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Carlo Reyes
+                    </p>
+                    <div class="pm-card-meta">
+                        <span class="pm-price">&#8369;45<small>/kg</small></span>
+                        <span class="badge bg-yellow">Pending</span>
+                    </div>
+                    <div class="pm-card-details-row">
+                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> 120kg stock</span>
+                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Davao del Sur</span>
+                    </div>
+                    <div class="pm-card-actions">
+                        <button class="pm-btn-approve" onclick="openApprove(this,
+                            'Organic Eggplant','Carlo Reyes','Vegetables','&#8369;45/kg','120kg','Davao del Sur',
+                            'Long purple eggplant grown using organic methods. Tender flesh, great for adobo, pinakbet, and grilling. Harvested fresh every morning.',
+                            'COD, Bank Transfer','Cool &amp; dry place','https://images.unsplash.com/photo-1638362894855-77838de60a9b?w=600&q=80',
+                            ['per kg — &#8369;45','per bundle (5pcs) — &#8369;55','per sack — &#8369;750'])">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            Approve
+                        </button>
+                        <button class="pm-btn-reject" onclick="openReject(this, 'Organic Eggplant')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            Reject
+                        </button>
+                    </div>
+                </div>
             </div>
-            <p style="font-size: 0.85rem; color: #666;"><strong>Reason:</strong> Prohibited item</p>
-            <div style="margin-top:15px;">
-                <button class="btn btn-outline" style="width:100%" onclick="restoreProduct(this)">Restore to Pending</button>
+
+        </div><!-- end pendingGrid -->
+    </div>
+
+    <!-- ── APPROVED TAB ── -->
+    <div id="approvedTab" class="pm-tab-panel" style="display:none;">
+        <div class="pm-grid" id="approvedGrid">
+
+            <!-- Approved 1 -->
+            <div class="pm-card pm-card--approved" data-search="fresh tomatoes juan dela cruz vegetables">
+                <div class="pm-card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400&q=80" alt="Fresh Tomatoes" class="pm-card-img">
+                    <span class="pm-card-cat-badge pm-card-cat-badge--approved">Vegetables</span>
+                    <div class="pm-approved-ribbon">&#10003; Approved</div>
+                </div>
+                <div class="pm-card-body">
+                    <h3 class="pm-card-title">Fresh Tomatoes</h3>
+                    <p class="pm-card-farmer">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Juan Dela Cruz
+                    </p>
+                    <div class="pm-card-meta">
+                        <span class="pm-price">&#8369;35<small>/kg</small></span>
+                        <span class="badge bg-green">Approved</span>
+                    </div>
+                    <div class="pm-card-details-row">
+                        <span>&#10003; Live on marketplace</span>
+                    </div>
+                    <div class="pm-card-actions">
+                        <button class="pm-btn-takedown" onclick="openTakeDown(this, 'Fresh Tomatoes')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                            Take Down
+                        </button>
+                    </div>
+                </div>
             </div>
+
+            <!-- Approved 2 -->
+            <div class="pm-card pm-card--approved" data-search="chinese pechay juan dela cruz vegetables">
+                <div class="pm-card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1618503028820-a7d5a8e7c4b3?w=400&q=80" alt="Chinese Pechay" class="pm-card-img">
+                    <span class="pm-card-cat-badge pm-card-cat-badge--approved">Vegetables</span>
+                    <div class="pm-approved-ribbon">&#10003; Approved</div>
+                </div>
+                <div class="pm-card-body">
+                    <h3 class="pm-card-title">Chinese Pechay</h3>
+                    <p class="pm-card-farmer">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Juan Dela Cruz
+                    </p>
+                    <div class="pm-card-meta">
+                        <span class="pm-price">&#8369;25<small>/bundle</small></span>
+                        <span class="badge bg-green">Approved</span>
+                    </div>
+                    <div class="pm-card-details-row"><span>&#10003; Live on marketplace</span></div>
+                    <div class="pm-card-actions">
+                        <button class="pm-btn-takedown" onclick="openTakeDown(this, 'Chinese Pechay')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                            Take Down
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Approved 3 -->
+            <div class="pm-card pm-card--approved" data-search="organic carrots maria santos vegetables">
+                <div class="pm-card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400&q=80" alt="Organic Carrots" class="pm-card-img">
+                    <span class="pm-card-cat-badge pm-card-cat-badge--approved">Vegetables</span>
+                    <div class="pm-approved-ribbon">&#10003; Approved</div>
+                </div>
+                <div class="pm-card-body">
+                    <h3 class="pm-card-title">Organic Carrots</h3>
+                    <p class="pm-card-farmer">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Maria Santos
+                    </p>
+                    <div class="pm-card-meta">
+                        <span class="pm-price">&#8369;85<small>/bundle</small></span>
+                        <span class="badge bg-green">Approved</span>
+                    </div>
+                    <div class="pm-card-details-row"><span>&#10003; Live on marketplace</span></div>
+                    <div class="pm-card-actions">
+                        <button class="pm-btn-takedown" onclick="openTakeDown(this, 'Organic Carrots')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                            Take Down
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Approved 4 -->
+            <div class="pm-card pm-card--approved" data-search="fresh cabbage pedro yang vegetables">
+                <div class="pm-card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=400&q=80" alt="Fresh Cabbage" class="pm-card-img">
+                    <span class="pm-card-cat-badge pm-card-cat-badge--approved">Vegetables</span>
+                    <div class="pm-approved-ribbon">&#10003; Approved</div>
+                </div>
+                <div class="pm-card-body">
+                    <h3 class="pm-card-title">Fresh Cabbage</h3>
+                    <p class="pm-card-farmer">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Pedro Yang
+                    </p>
+                    <div class="pm-card-meta">
+                        <span class="pm-price">&#8369;60<small>/piece</small></span>
+                        <span class="badge bg-green">Approved</span>
+                    </div>
+                    <div class="pm-card-details-row"><span>&#10003; Live on marketplace</span></div>
+                    <div class="pm-card-actions">
+                        <button class="pm-btn-takedown" onclick="openTakeDown(this, 'Fresh Cabbage')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                            Take Down
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Approved 5 -->
+            <div class="pm-card pm-card--approved" data-search="cavendish bananas jose garcia fruits">
+                <div class="pm-card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&q=80" alt="Cavendish Bananas" class="pm-card-img">
+                    <span class="pm-card-cat-badge pm-card-cat-badge--approved">Fruits</span>
+                    <div class="pm-approved-ribbon">&#10003; Approved</div>
+                </div>
+                <div class="pm-card-body">
+                    <h3 class="pm-card-title">Cavendish Bananas</h3>
+                    <p class="pm-card-farmer">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Jose Garcia
+                    </p>
+                    <div class="pm-card-meta">
+                        <span class="pm-price">&#8369;50<small>/kg</small></span>
+                        <span class="badge bg-green">Approved</span>
+                    </div>
+                    <div class="pm-card-details-row"><span>&#10003; Live on marketplace</span></div>
+                    <div class="pm-card-actions">
+                        <button class="pm-btn-takedown" onclick="openTakeDown(this, 'Cavendish Bananas')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                            Take Down
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Approved 6 -->
+            <div class="pm-card pm-card--approved" data-search="sweet potato camote liza flores root crops">
+                <div class="pm-card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1596097635121-14b63b7a0c19?w=400&q=80" alt="Sweet Potato" class="pm-card-img">
+                    <span class="pm-card-cat-badge pm-card-cat-badge--approved">Root Crops</span>
+                    <div class="pm-approved-ribbon">&#10003; Approved</div>
+                </div>
+                <div class="pm-card-body">
+                    <h3 class="pm-card-title">Sweet Potato (Kamote)</h3>
+                    <p class="pm-card-farmer">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Liza Flores
+                    </p>
+                    <div class="pm-card-meta">
+                        <span class="pm-price">&#8369;38<small>/kg</small></span>
+                        <span class="badge bg-green">Approved</span>
+                    </div>
+                    <div class="pm-card-details-row"><span>&#10003; Live on marketplace</span></div>
+                    <div class="pm-card-actions">
+                        <button class="pm-btn-takedown" onclick="openTakeDown(this, 'Sweet Potato')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                            Take Down
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end approvedGrid -->
+    </div>
+
+    <!-- ── REJECTED TAB ── -->
+    <div id="rejectedTab" class="pm-tab-panel" style="display:none;">
+        <div class="pm-grid" id="rejectedGrid">
+
+            <!-- Rejected 1 -->
+            <div class="pm-card pm-card--rejected" data-search="overripe bananas jose rizal fruits">
+                <div class="pm-card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?w=400&q=80" alt="Bananas" class="pm-card-img">
+                    <span class="pm-card-cat-badge pm-card-cat-badge--rejected">Fruits</span>
+                </div>
+                <div class="pm-card-body">
+                    <h3 class="pm-card-title">Overripe Bananas</h3>
+                    <p class="pm-card-farmer">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Jose Rizal
+                    </p>
+                    <div class="pm-card-meta">
+                        <span class="pm-price">&#8369;30<small>/bundle</small></span>
+                        <span class="badge bg-red">Rejected</span>
+                    </div>
+                    <div class="pm-reject-reason">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Reason: Quality issues
+                    </div>
+                    <div class="pm-card-actions">
+                        <button class="pm-btn-restore" onclick="restoreProduct(this, 'Overripe Bananas')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.71"/></svg>
+                            Restore to Pending
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rejected 2 -->
+            <div class="pm-card pm-card--rejected" data-search="long eggplant maria makiling vegetables">
+                <div class="pm-card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1568584711271-6b97b8f8db88?w=400&q=80" alt="Eggplant" class="pm-card-img">
+                    <span class="pm-card-cat-badge pm-card-cat-badge--rejected">Vegetables</span>
+                </div>
+                <div class="pm-card-body">
+                    <h3 class="pm-card-title">Long Eggplant</h3>
+                    <p class="pm-card-farmer">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Maria Makiling
+                    </p>
+                    <div class="pm-card-meta">
+                        <span class="pm-price">&#8369;45<small>/kg</small></span>
+                        <span class="badge bg-red">Rejected</span>
+                    </div>
+                    <div class="pm-reject-reason">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Reason: Blurred images
+                    </div>
+                    <div class="pm-card-actions">
+                        <button class="pm-btn-restore" onclick="restoreProduct(this, 'Long Eggplant')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.71"/></svg>
+                            Restore to Pending
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rejected 3 -->
+            <div class="pm-card pm-card--rejected" data-search="premium white rice antonio luna grains">
+                <div class="pm-card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1536304993881-ff86e0c9dd39?w=400&q=80" alt="White Rice" class="pm-card-img">
+                    <span class="pm-card-cat-badge pm-card-cat-badge--rejected">Grains</span>
+                </div>
+                <div class="pm-card-body">
+                    <h3 class="pm-card-title">Premium White Rice</h3>
+                    <p class="pm-card-farmer">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Antonio Luna
+                    </p>
+                    <div class="pm-card-meta">
+                        <span class="pm-price">&#8369;50<small>/kg</small></span>
+                        <span class="badge bg-red">Rejected</span>
+                    </div>
+                    <div class="pm-reject-reason">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Reason: Incorrect pricing
+                    </div>
+                    <div class="pm-card-actions">
+                        <button class="pm-btn-restore" onclick="restoreProduct(this, 'Premium White Rice')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.71"/></svg>
+                            Restore to Pending
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rejected 4 -->
+            <div class="pm-card pm-card--rejected" data-search="guimaras mangoes emilio aguinaldo fruits">
+                <div class="pm-card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1601493700631-2851bdac43b0?w=400&q=80" alt="Mangoes" class="pm-card-img">
+                    <span class="pm-card-cat-badge pm-card-cat-badge--rejected">Fruits</span>
+                </div>
+                <div class="pm-card-body">
+                    <h3 class="pm-card-title">Guimaras Mangoes</h3>
+                    <p class="pm-card-farmer">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Emilio Aguinaldo
+                    </p>
+                    <div class="pm-card-meta">
+                        <span class="pm-price">&#8369;150<small>/kg</small></span>
+                        <span class="badge bg-red">Rejected</span>
+                    </div>
+                    <div class="pm-reject-reason">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Reason: Prohibited item
+                    </div>
+                    <div class="pm-card-actions">
+                        <button class="pm-btn-restore" onclick="restoreProduct(this, 'Guimaras Mangoes')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.71"/></svg>
+                            Restore to Pending
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end rejectedGrid -->
+    </div>
+
+</main>
+
+<!-- ═══════════════ APPROVE MODAL ═══════════════ -->
+<div class="modal-overlay" id="approveModal">
+    <div class="modal pm-approve-modal">
+        <div class="modal-header green">
+            <div>
+                <h2>Approve Product</h2>
+                <p style="font-size:0.82rem;opacity:0.85;margin-top:2px;">Review listing details before approving</p>
+            </div>
+            <button class="modal-close" onclick="closeModals()">&#10005;</button>
+        </div>
+        <div class="modal-body" id="approveModalBody" style="padding:0;max-height:70vh;overflow-y:auto;">
+            <!-- Injected by JS -->
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
+            <button class="btn btn-success" id="btnConfirmApprove" onclick="confirmApprove()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                Approve
+            </button>
         </div>
     </div>
 </div>
-    </main>
 
-    <div id="toast" class="toast"></div>
-
-    <!-- Approve Modal -->
-    <div class="modal-overlay" id="approveModal">
-        <div class="modal">
-            <div class="modal-header green">
-                <h3 style="margin:0;">✓ Approve Product</h3>
-                <p>You are about to approve this product</p>
+<!-- ═══════════════ REJECT MODAL ═══════════════ -->
+<div class="modal-overlay" id="rejectModal">
+    <div class="modal">
+        <div class="modal-header red">
+            <div>
+                <h2>Reject Product</h2>
+                <p style="font-size:0.82rem;opacity:0.85;margin-top:2px;" id="rejectModalSubtitle">Select a reason for rejection</p>
             </div>
-            <div class="modal-body" id="approveContent"></div>
-            <div class="modal-actions">
-                <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
-                <button class="btn btn-success" id="btnConfirmApprove">✓ Approve</button>
+            <button class="modal-close" onclick="closeModals()">&#10005;</button>
+        </div>
+        <div class="modal-body">
+            <div class="pm-reason-list">
+                <label class="pm-reason-item"><input type="radio" name="rejectReason" value="Quality issues"> <span>Quality issues</span></label>
+                <label class="pm-reason-item"><input type="radio" name="rejectReason" value="Incomplete information"> <span>Incomplete information</span></label>
+                <label class="pm-reason-item"><input type="radio" name="rejectReason" value="Prohibited item"> <span>Prohibited item</span></label>
+                <label class="pm-reason-item"><input type="radio" name="rejectReason" value="False claims"> <span>False claims</span></label>
+                <label class="pm-reason-item"><input type="radio" name="rejectReason" value="Blurred images"> <span>Blurred images</span></label>
+                <label class="pm-reason-item"><input type="radio" name="rejectReason" value="Incorrect pricing"> <span>Incorrect pricing</span></label>
             </div>
+            <input type="text" id="rejectOther" placeholder="Or enter a custom reason..." class="pm-custom-input">
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
+            <button class="btn btn-danger" onclick="confirmReject()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                Reject
+            </button>
         </div>
     </div>
+</div>
 
-    <!-- Reject Modal -->
-    <div class="modal-overlay" id="rejectModal">
-        <div class="modal">
-            <div class="modal-header red">
-                <h3 style="margin:0;">✕ Reject Product</h3>
-                <p>Select a reason for rejection</p>
+<!-- ═══════════════ TAKE DOWN MODAL ═══════════════ -->
+<div class="modal-overlay" id="takeDownModal">
+    <div class="modal">
+        <div class="modal-header red">
+            <div>
+                <h2>Take Down Product</h2>
+                <p style="font-size:0.82rem;opacity:0.85;margin-top:2px;" id="takeDownModalSubtitle">Select a reason</p>
             </div>
-            <div class="modal-body">
-                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="rejectReason" value="Quality issues"> Quality issues</label>
-                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="rejectReason" value="Incomplete information"> Incomplete information</label>
-                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="rejectReason" value="Prohibited item"> Prohibited item</label>
-                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="rejectReason" value="False claims"> False claims</label>
-                <input type="text" id="rejectOther" placeholder="Or enter custom reason..." style="width:100%; padding:10px; margin-top:15px; border:1px solid #ddd; border-radius:6px;">
+            <button class="modal-close" onclick="closeModals()">&#10005;</button>
+        </div>
+        <div class="modal-body">
+            <div class="pm-reason-list">
+                <label class="pm-reason-item"><input type="radio" name="takeDownReason" value="Quality issues"> <span>Quality issues</span></label>
+                <label class="pm-reason-item"><input type="radio" name="takeDownReason" value="Incorrect pricing"> <span>Incorrect pricing</span></label>
+                <label class="pm-reason-item"><input type="radio" name="takeDownReason" value="Misleading description"> <span>Misleading description</span></label>
+                <label class="pm-reason-item"><input type="radio" name="takeDownReason" value="Image issues"> <span>Image issues</span></label>
+                <label class="pm-reason-item"><input type="radio" name="takeDownReason" value="Violation of terms"> <span>Violation of terms</span></label>
             </div>
-            <div class="modal-actions">
-                <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
-                <button class="btn btn-danger" id="btnConfirmReject">✕ Reject</button>
-            </div>
+            <input type="text" id="takeDownOther" placeholder="Or enter a custom reason..." class="pm-custom-input">
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
+            <button class="btn btn-danger" onclick="confirmTakeDown()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>
+                Take Down
+            </button>
         </div>
     </div>
+</div>
 
-    <!-- Take Down Modal -->
-    <div class="modal-overlay" id="takeDownModal">
-        <div class="modal">
-            <div class="modal-header red">
-                <h3 style="margin:0;">📝 Take Down Product</h3>
-                <p>Select a reason</p>
-            </div>
-            <div class="modal-body">
-                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="takeDownReason" value="Quality issues"> Quality issues</label>
-                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="takeDownReason" value="Incorrect pricing"> Incorrect pricing</label>
-                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="takeDownReason" value="Misleading description"> Misleading description</label>
-                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="takeDownReason" value="Image issues"> Image issues</label>
-                <label style="display:block; margin:10px 0; cursor:pointer;"><input type="radio" name="takeDownReason" value="Violation of terms"> Violation of terms</label>
-                <input type="text" id="takeDownOther" placeholder="Or enter custom reason..." style="width:100%; padding:10px; margin-top:15px; border:1px solid #ddd; border-radius:6px;">
-            </div>
-<div class="modal-actions">
-                <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
-                <button class="btn btn-danger" id="btnConfirmTakeDown">Take Down</button>
+<div id="toast" class="toast"></div>
+
+<!-- ═══════════════ JS (no external scripts) ═══════════════ -->
+<script>
+// ── State ──────────────────────────────────────────────
+let activeCard = null;
+let pendingCount = 5, approvedCount = 6, rejectedCount = 4;
+
+// ── Tabs ───────────────────────────────────────────────
+function showTab(tab) {
+    ['pending','approved','rejected'].forEach(t => {
+        document.getElementById(t + 'Tab').style.display = t === tab ? '' : 'none';
+        document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1)).classList.toggle('active', t === tab);
+    });
+    document.getElementById('searchInput').value = '';
+    filterCards();
+}
+
+// ── Search ─────────────────────────────────────────────
+function filterCards() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    document.querySelectorAll('.pm-card').forEach(card => {
+        const visible = !q || card.dataset.search.includes(q);
+        card.style.display = visible ? '' : 'none';
+    });
+}
+
+// ── Toast ──────────────────────────────────────────────
+function showToast(msg, type = '') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (type ? ' ' + type : '');
+    setTimeout(() => { t.className = 'toast'; }, 3200);
+}
+
+// ── Update header stats ────────────────────────────────
+function updateStats() {
+    document.getElementById('hstatPending').textContent  = pendingCount;
+    document.getElementById('hstatApproved').textContent = approvedCount;
+    document.getElementById('hstatRejected').textContent = rejectedCount;
+    document.getElementById('countPending').textContent  = pendingCount;
+    document.getElementById('countApproved').textContent = approvedCount;
+    document.getElementById('countRejected').textContent = rejectedCount;
+}
+
+// ── Close all modals ───────────────────────────────────
+function closeModals() {
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+    document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+    ['rejectOther','takeDownOther'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+}
+
+// ── Approve ────────────────────────────────────────────
+function openApprove(btn, name, farmer, category, price, stock, location, description, payment, storage, imgUrl, units) {
+    activeCard = btn.closest('.pm-card');
+    const unitsHTML = units.map(u =>
+        `<div class="pm-unit-row"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> ${u}</div>`
+    ).join('');
+
+    document.getElementById('approveModalBody').innerHTML = `
+        <div class="pm-approve-preview">
+            <img src="${imgUrl}" alt="${name}" class="pm-approve-img">
+            <div class="pm-approve-badge-row">
+                <span class="pm-approve-cat">${category}</span>
+                <span class="pm-approve-price">${price}</span>
             </div>
         </div>
-    </div>
+        <div class="pm-approve-details">
+            <div class="pm-approve-section">
+                <div class="pm-ads-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    Basic Information
+                </div>
+                <div class="pm-ads-grid">
+                    <div class="pm-ads-item"><span class="pm-ads-lbl">Product Name</span><span class="pm-ads-val">${name}</span></div>
+                    <div class="pm-ads-item"><span class="pm-ads-lbl">Farmer</span><span class="pm-ads-val">${farmer}</span></div>
+                    <div class="pm-ads-item"><span class="pm-ads-lbl">Category</span><span class="pm-ads-val">${category}</span></div>
+                    <div class="pm-ads-item"><span class="pm-ads-lbl">Location</span><span class="pm-ads-val">${location}</span></div>
+                    <div class="pm-ads-item pm-ads-item--full"><span class="pm-ads-lbl">Description</span><span class="pm-ads-val">${description}</span></div>
+                </div>
+            </div>
+            <div class="pm-approve-section">
+                <div class="pm-ads-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    Units &amp; Pricing
+                </div>
+                <div class="pm-units-list">${unitsHTML}</div>
+                <div class="pm-ads-grid" style="margin-top:10px;">
+                    <div class="pm-ads-item"><span class="pm-ads-lbl">Stock</span><span class="pm-ads-val">${stock}</span></div>
+                    <div class="pm-ads-item"><span class="pm-ads-lbl">Storage</span><span class="pm-ads-val">${storage}</span></div>
+                    <div class="pm-ads-item pm-ads-item--full"><span class="pm-ads-lbl">Payment Methods</span><span class="pm-ads-val">${payment}</span></div>
+                </div>
+            </div>
+        </div>
+    `;
+    document.getElementById('approveModal').classList.add('active');
+}
+
+function confirmApprove() {
+    if (!activeCard) return;
+    const name = activeCard.querySelector('.pm-card-title').textContent;
+    activeCard.remove();
+    pendingCount = Math.max(0, pendingCount - 1);
+    approvedCount++;
+    updateStats();
+    closeModals();
+    showToast('✓ ' + name + ' has been approved.', 'success');
+}
+
+// ── Reject ─────────────────────────────────────────────
+function openReject(btn, name) {
+    activeCard = btn.closest('.pm-card');
+    document.getElementById('rejectModalSubtitle').textContent = 'Rejecting: ' + name;
+    document.getElementById('rejectModal').classList.add('active');
+}
+
+function confirmReject() {
+    const checked = document.querySelector('input[name=rejectReason]:checked');
+    const custom = document.getElementById('rejectOther').value.trim();
+    const reason = checked ? checked.value : custom;
+    if (!reason) { showToast('Please select or enter a reason.', 'error'); return; }
+    if (!activeCard) return;
+    const name = activeCard.querySelector('.pm-card-title').textContent;
+    activeCard.remove();
+    pendingCount = Math.max(0, pendingCount - 1);
+    rejectedCount++;
+    updateStats();
+    closeModals();
+    showToast('✕ ' + name + ' rejected: ' + reason, 'error');
+}
+
+// ── Take Down ──────────────────────────────────────────
+function openTakeDown(btn, name) {
+    activeCard = btn.closest('.pm-card');
+    document.getElementById('takeDownModalSubtitle').textContent = 'Taking down: ' + name;
+    document.getElementById('takeDownModal').classList.add('active');
+}
+
+function confirmTakeDown() {
+    const checked = document.querySelector('input[name=takeDownReason]:checked');
+    const custom = document.getElementById('takeDownOther').value.trim();
+    const reason = checked ? checked.value : custom;
+    if (!reason) { showToast('Please select or enter a reason.', 'error'); return; }
+    if (!activeCard) return;
+    const name = activeCard.querySelector('.pm-card-title').textContent;
+    activeCard.remove();
+    approvedCount = Math.max(0, approvedCount - 1);
+    rejectedCount++;
+    updateStats();
+    closeModals();
+    showToast('⚠ ' + name + ' taken down: ' + reason, 'error');
+}
+
+// ── Restore ────────────────────────────────────────────
+function restoreProduct(btn, name) {
+    const card = btn.closest('.pm-card');
+    card.remove();
+    rejectedCount = Math.max(0, rejectedCount - 1);
+    pendingCount++;
+    updateStats();
+    showToast('↩ ' + name + ' restored to pending.', '');
+}
+
+// ── Close modal on backdrop click ──────────────────────
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', function(e) {
+        if (e.target === this) closeModals();
+    });
+});
+</script>
 
 </body>
 </html>
