@@ -64,16 +64,18 @@
         <nav>
             <ul>
                 <li><a href="dashboard.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg> Dashboard</a></li>
-                <li><a href="user Management.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> User Management</a></li>
-                <li><a href="products.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-salad-icon lucide-salad"><path d="M7 21h10"/><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M11.38 12a2.4 2.4 0 0 1-.4-4.77 2.4 2.4 0 0 1 3.2-2.77 2.4 2.4 0 0 1 3.47-.63 2.4 2.4 0 0 1 3.37 3.37 2.4 2.4 0 0 1-1.1 3.7 2.51 2.51 0 0 1 .03 1.1"/><path d="m13 12 4-4"/><path d="M10.9 7.25A3.99 3.99 0 0 0 4 10c0 .73.2 1.41.54 2"/></svg>Product Moderation</a></li>              
+                <li><a href="user Management.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Management</a></li>
+                <li><a href="products.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Moderation</a></li>
                 <li><a href="reports.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Reports</a></li>
-                <li class="active"><a href="Farmer Verification.html" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Farmer Verification</a></li>            </ul>
+                <li class="active"><a href="Farmer Verification.html" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Farmer Verification</a></li>
+                <li><a href="Admin Management.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Admin Management</a></li>
+            </ul>
         </nav>
     </aside>
 
     <main class="main-content">
         <header class="top-bar">
-          <h1>Farmer Verification</h1>
+          <h1>User Management Portal</h1>
         </header>
 
 
@@ -84,12 +86,12 @@
         .badge-rejected { background:#fee2e2; color:#991b1b; }
 
         /* Toolbar — matches User Management page */
-        .vf-toolbar { display:flex; align-items:center; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
-        .vf-search-wrap { position:relative; flex:1; min-width:200px; }
+        .vf-toolbar { display:flex; align-items:center; gap:8px; margin-bottom:14px; flex-wrap:nowrap; }
+        .vf-search-wrap { position:relative; width:280px; flex-shrink:0; margin-left:auto; }
         .vf-search-wrap svg { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:#9ca3af; pointer-events:none; }
         .vf-search { width:100%; padding:8px 12px 8px 34px; border:1.5px solid #d1d5db; border-radius:8px; font-size:13px; outline:none; box-sizing:border-box; }
         .vf-search:focus { border-color:#2d6a3f; }
-        .vf-pills { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+        .vf-pills { display:flex; align-items:center; gap:6px; flex-wrap:nowrap; flex-shrink:0; }
         .vf-pill { padding:6px 14px; border:1.5px solid #d1d5db; border-radius:20px; font-size:12px; font-weight:600; background:#fff; color:#374151; cursor:pointer; transition:all .15s; }
         .vf-pill:hover { border-color:#2d6a3f; color:#2d6a3f; }
         .vf-pill.active { background:#2d6a3f; color:#fff; border-color:#2d6a3f; }
@@ -109,17 +111,18 @@
 
     <section id="verification" class="management-section">
         <br>
+        <h3><i class="fas fa-user-check"></i> Farmer Verification</h3>
 
         <div class="vf-toolbar">
-            <div class="vf-search-wrap">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <input class="vf-search" id="vf_search" type="text" placeholder="Search by name, email, or location..." oninput="vfFilter()">
-            </div>
             <div class="vf-pills">
                 <button class="vf-pill" onclick="vfSetStatus('all',this)">All</button>
                 <button class="vf-pill active" id="pill-pending" onclick="vfSetStatus('pending',this)">Pending <span class="pill-count" id="count-pending"></span></button>
                 <button class="vf-pill" id="pill-approved" onclick="vfSetStatus('approved',this)">Approved <span class="pill-count" id="count-approved"></span></button>
                 <button class="vf-pill" id="pill-rejected" onclick="vfSetStatus('rejected',this)">Rejected <span class="pill-count" id="count-rejected"></span></button>
+            </div>
+            <div class="vf-search-wrap">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input class="vf-search" id="vf_search" type="text" placeholder="Search by name, email, or location..." oninput="vfFilter()">
             </div>
         </div>
 
@@ -131,10 +134,11 @@
                         <th>Barangay</th>
                         <th>Documents</th>
                         <th>Status</th>
-                        <th>Actions</th>
+                        <th style="width:280px">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="vf_tbody">
+                    <!-- HARDCODED ROWS -->
                     <tr data-name="roberto lee" data-barangay="divisoria" data-status="pending">
                         <td><strong>Roberto Lee</strong></td>
                         <td>Divisoria</td>
@@ -142,7 +146,7 @@
                         <td><span class="badge badge-pending" id="badge_hc_0">Pending</span></td>
                         <td><div class="action-buttons" id="actions_hc_0">
                             <button class="btn btn-primary" onclick="vfApproveDirect(null,'badge_hc_0')">Approve</button>
-                            <button class="btn btn-danger"  onclick="openRejectDirect(null,'badge_hc_0')">Reject</button>
+                            <button class="btn btn-danger" onclick="openRejectDirect(null,'badge_hc_0')">Reject</button>
                             <button class="btn btn-outline" onclick="openReview('Roberto Lee','Divisoria','Business_Permit.pdf','April 20, 2026','First-time farmer applicant. All documents appear valid and complete.',null,'badge_hc_0')">Review</button>
                         </div></td>
                     </tr>
@@ -153,7 +157,7 @@
                         <td><span class="badge badge-pending" id="badge_hc_1">Pending</span></td>
                         <td><div class="action-buttons" id="actions_hc_1">
                             <button class="btn btn-primary" onclick="vfApproveDirect(null,'badge_hc_1')">Approve</button>
-                            <button class="btn btn-danger"  onclick="openRejectDirect(null,'badge_hc_1')">Reject</button>
+                            <button class="btn btn-danger" onclick="openRejectDirect(null,'badge_hc_1')">Reject</button>
                             <button class="btn btn-outline" onclick="openReview('Ana Mae Flores','Santa Maria','Farm_Reg.pdf','April 22, 2026','Documents verified. Farm registration appears legitimate.',null,'badge_hc_1')">Review</button>
                         </div></td>
                     </tr>
@@ -164,8 +168,166 @@
                         <td><span class="badge badge-pending" id="badge_hc_2">Pending</span></td>
                         <td><div class="action-buttons" id="actions_hc_2">
                             <button class="btn btn-primary" onclick="vfApproveDirect(null,'badge_hc_2')">Approve</button>
-                            <button class="btn btn-danger"  onclick="openRejectDirect(null,'badge_hc_2')">Reject</button>
+                            <button class="btn btn-danger" onclick="openRejectDirect(null,'badge_hc_2')">Reject</button>
                             <button class="btn btn-outline" onclick="openReview('Lily Cheng','Zambowood','ID_Card.pdf','April 23, 2026','Pending secondary document submission.',null,'badge_hc_2')">Review</button>
+                        </div></td>
+                    </tr>
+                    <tr data-name="mario santos" data-barangay="putik" data-status="approved">
+                        <td><strong>Mario Santos</strong></td>
+                        <td>Putik</td>
+                        <td><span class="text-muted">RSBSA_Cert.pdf</span></td>
+                        <td><span class="badge badge-approved" id="badge_hc_3">Approved</span></td>
+                        <td><div class="action-buttons" id="actions_hc_3">
+                            <button class="btn btn-status-done" disabled>&#10003; Approved</button>
+                            <button class="btn btn-outline btn-secondary-action" onclick="vfRevokeHc('badge_hc_3')">Revoke</button>
+                        </div></td>
+                    </tr>
+                    <tr data-name="grace tumaliuan" data-barangay="baliwasan" data-status="pending">
+                        <td><strong>Grace Tumaliuan</strong></td>
+                        <td>Baliwasan</td>
+                        <td><span class="text-muted">Farm_Photo.jpg</span></td>
+                        <td><span class="badge badge-pending" id="badge_hc_4">Pending</span></td>
+                        <td><div class="action-buttons" id="actions_hc_4">
+                            <button class="btn btn-primary" onclick="vfApproveDirect(null,'badge_hc_4')">Approve</button>
+                            <button class="btn btn-danger" onclick="openRejectDirect(null,'badge_hc_4')">Reject</button>
+                            <button class="btn btn-outline" onclick="openReview('Grace Tumaliuan','Baliwasan','Farm_Photo.jpg','April 24, 2026','New applicant. Farm photo submitted, awaiting RSBSA cert.',null,'badge_hc_4')">Review</button>
+                        </div></td>
+                    </tr>
+                    <tr data-name="jose reyes" data-barangay="canelar" data-status="rejected">
+                        <td><strong>Jose Reyes</strong></td>
+                        <td>Canelar</td>
+                        <td><span class="text-muted">Barangay_Cert.pdf</span></td>
+                        <td><span class="badge badge-rejected" id="badge_hc_5">Rejected</span></td>
+                        <td><div class="action-buttons" id="actions_hc_5">
+                            <button class="btn btn-status-done btn-status-rejected" disabled>&#10007; Rejected</button>
+                            <button class="btn btn-outline btn-secondary-action" onclick="vfReopenHc('badge_hc_5')">Reopen</button>
+                        </div></td>
+                    </tr>
+                    <tr data-name="lorna dela cruz" data-barangay="ayala" data-status="pending">
+                        <td><strong>Lorna Dela Cruz</strong></td>
+                        <td>Ayala</td>
+                        <td><span class="text-muted">DTI_Permit.pdf</span></td>
+                        <td><span class="badge badge-pending" id="badge_hc_6">Pending</span></td>
+                        <td><div class="action-buttons" id="actions_hc_6">
+                            <button class="btn btn-primary" onclick="vfApproveDirect(null,'badge_hc_6')">Approve</button>
+                            <button class="btn btn-danger" onclick="openRejectDirect(null,'badge_hc_6')">Reject</button>
+                            <button class="btn btn-outline" onclick="openReview('Lorna Dela Cruz','Ayala','DTI_Permit.pdf','April 25, 2026','DTI permit submitted. Registered small farm business.',null,'badge_hc_6')">Review</button>
+                        </div></td>
+                    </tr>
+                    <tr data-name="ferdinand uy" data-barangay="tetuan" data-status="approved">
+                        <td><strong>Ferdinand Uy</strong></td>
+                        <td>Tetuan</td>
+                        <td><span class="text-muted">RSBSA_Cert.pdf</span></td>
+                        <td><span class="badge badge-approved" id="badge_hc_7">Approved</span></td>
+                        <td><div class="action-buttons" id="actions_hc_7">
+                            <button class="btn btn-status-done" disabled>&#10003; Approved</button>
+                            <button class="btn btn-outline btn-secondary-action" onclick="vfRevokeHc('badge_hc_7')">Revoke</button>
+                        </div></td>
+                    </tr>
+                    <tr data-name="remedios tan" data-barangay="tumaga" data-status="pending">
+                        <td><strong>Remedios Tan</strong></td>
+                        <td>Tumaga</td>
+                        <td><span class="text-muted">Barangay_Cert.pdf</span></td>
+                        <td><span class="badge badge-pending" id="badge_hc_8">Pending</span></td>
+                        <td><div class="action-buttons" id="actions_hc_8">
+                            <button class="btn btn-primary" onclick="vfApproveDirect(null,'badge_hc_8')">Approve</button>
+                            <button class="btn btn-danger" onclick="openRejectDirect(null,'badge_hc_8')">Reject</button>
+                            <button class="btn btn-outline" onclick="openReview('Remedios Tan','Tumaga','Barangay_Cert.pdf','April 26, 2026','Barangay cert verified. Awaiting RSBSA confirmation.',null,'badge_hc_8')">Review</button>
+                        </div></td>
+                    </tr>
+                    <tr data-name="danilo villareal" data-barangay="guiwan" data-status="rejected">
+                        <td><strong>Danilo Villareal</strong></td>
+                        <td>Guiwan</td>
+                        <td><span class="text-muted">ID_Card.pdf</span></td>
+                        <td><span class="badge badge-rejected" id="badge_hc_9">Rejected</span></td>
+                        <td><div class="action-buttons" id="actions_hc_9">
+                            <button class="btn btn-status-done btn-status-rejected" disabled>&#10007; Rejected</button>
+                            <button class="btn btn-outline btn-secondary-action" onclick="vfReopenHc('badge_hc_9')">Reopen</button>
+                        </div></td>
+                    </tr>
+                    <tr data-name="cristina manuel" data-barangay="pasonanca" data-status="pending">
+                        <td><strong>Cristina Manuel</strong></td>
+                        <td>Pasonanca</td>
+                        <td><span class="text-muted">Farm_Reg.pdf</span></td>
+                        <td><span class="badge badge-pending" id="badge_hc_10">Pending</span></td>
+                        <td><div class="action-buttons" id="actions_hc_10">
+                            <button class="btn btn-primary" onclick="vfApproveDirect(null,'badge_hc_10')">Approve</button>
+                            <button class="btn btn-danger" onclick="openRejectDirect(null,'badge_hc_10')">Reject</button>
+                            <button class="btn btn-outline" onclick="openReview('Cristina Manuel','Pasonanca','Farm_Reg.pdf','April 27, 2026','Farm registration complete. Documents appear in order.',null,'badge_hc_10')">Review</button>
+                        </div></td>
+                    </tr>
+                    <tr data-name="edgar magno" data-barangay="sta. barbara" data-status="approved">
+                        <td><strong>Edgar Magno</strong></td>
+                        <td>Sta. Barbara</td>
+                        <td><span class="text-muted">RSBSA_Cert.pdf</span></td>
+                        <td><span class="badge badge-approved" id="badge_hc_11">Approved</span></td>
+                        <td><div class="action-buttons" id="actions_hc_11">
+                            <button class="btn btn-status-done" disabled>&#10003; Approved</button>
+                            <button class="btn btn-outline btn-secondary-action" onclick="vfRevokeHc('badge_hc_11')">Revoke</button>
+                        </div></td>
+                    </tr>
+                    <tr data-name="nilda mercado" data-barangay="talon-talon" data-status="pending">
+                        <td><strong>Nilda Mercado</strong></td>
+                        <td>Talon-Talon</td>
+                        <td><span class="text-muted">Barangay_Cert.pdf</span></td>
+                        <td><span class="badge badge-pending" id="badge_hc_12">Pending</span></td>
+                        <td><div class="action-buttons" id="actions_hc_12">
+                            <button class="btn btn-primary" onclick="vfApproveDirect(null,'badge_hc_12')">Approve</button>
+                            <button class="btn btn-danger" onclick="openRejectDirect(null,'badge_hc_12')">Reject</button>
+                            <button class="btn btn-outline" onclick="openReview('Nilda Mercado','Talon-Talon','Barangay_Cert.pdf','April 28, 2026','First submission. Barangay cert looks valid.',null,'badge_hc_12')">Review</button>
+                        </div></td>
+                    </tr>
+                    <tr data-name="rodrigo bustamante" data-barangay="recodo" data-status="pending">
+                        <td><strong>Rodrigo Bustamante</strong></td>
+                        <td>Recodo</td>
+                        <td><span class="text-muted">DTI_Permit.pdf</span></td>
+                        <td><span class="badge badge-pending" id="badge_hc_13">Pending</span></td>
+                        <td><div class="action-buttons" id="actions_hc_13">
+                            <button class="btn btn-primary" onclick="vfApproveDirect(null,'badge_hc_13')">Approve</button>
+                            <button class="btn btn-danger" onclick="openRejectDirect(null,'badge_hc_13')">Reject</button>
+                            <button class="btn btn-outline" onclick="openReview('Rodrigo Bustamante','Recodo','DTI_Permit.pdf','April 29, 2026','Registered business permit attached. Awaiting farm photo.',null,'badge_hc_13')">Review</button>
+                        </div></td>
+                    </tr>
+                    <tr data-name="maribel fuentes" data-barangay="lunzuran" data-status="rejected">
+                        <td><strong>Maribel Fuentes</strong></td>
+                        <td>Lunzuran</td>
+                        <td><span class="text-muted">ID_Card.pdf</span></td>
+                        <td><span class="badge badge-rejected" id="badge_hc_14">Rejected</span></td>
+                        <td><div class="action-buttons" id="actions_hc_14">
+                            <button class="btn btn-status-done btn-status-rejected" disabled>&#10007; Rejected</button>
+                            <button class="btn btn-outline btn-secondary-action" onclick="vfReopenHc('badge_hc_14')">Reopen</button>
+                        </div></td>
+                    </tr>
+                    <tr data-name="victor paglinawan" data-barangay="sinubung" data-status="pending">
+                        <td><strong>Victor Paglinawan</strong></td>
+                        <td>Sinubung</td>
+                        <td><span class="text-muted">RSBSA_Cert.pdf</span></td>
+                        <td><span class="badge badge-pending" id="badge_hc_15">Pending</span></td>
+                        <td><div class="action-buttons" id="actions_hc_15">
+                            <button class="btn btn-primary" onclick="vfApproveDirect(null,'badge_hc_15')">Approve</button>
+                            <button class="btn btn-danger" onclick="openRejectDirect(null,'badge_hc_15')">Reject</button>
+                            <button class="btn btn-outline" onclick="openReview('Victor Paglinawan','Sinubung','RSBSA_Cert.pdf','April 30, 2026','RSBSA certificate provided. Looks complete.',null,'badge_hc_15')">Review</button>
+                        </div></td>
+                    </tr>
+                    <tr data-name="teresita gomez" data-barangay="camino nuevo" data-status="approved">
+                        <td><strong>Teresita Gomez</strong></td>
+                        <td>Camino Nuevo</td>
+                        <td><span class="text-muted">Farm_Reg.pdf</span></td>
+                        <td><span class="badge badge-approved" id="badge_hc_16">Approved</span></td>
+                        <td><div class="action-buttons" id="actions_hc_16">
+                            <button class="btn btn-status-done" disabled>&#10003; Approved</button>
+                            <button class="btn btn-outline btn-secondary-action" onclick="vfRevokeHc('badge_hc_16')">Revoke</button>
+                        </div></td>
+                    </tr>
+                    <tr data-name="alvin labrador" data-barangay="mampang" data-status="pending">
+                        <td><strong>Alvin Labrador</strong></td>
+                        <td>Mampang</td>
+                        <td><span class="text-muted">Barangay_Cert.pdf</span></td>
+                        <td><span class="badge badge-pending" id="badge_hc_17">Pending</span></td>
+                        <td><div class="action-buttons" id="actions_hc_17">
+                            <button class="btn btn-primary" onclick="vfApproveDirect(null,'badge_hc_17')">Approve</button>
+                            <button class="btn btn-danger" onclick="openRejectDirect(null,'badge_hc_17')">Reject</button>
+                            <button class="btn btn-outline" onclick="openReview('Alvin Labrador','Mampang','Barangay_Cert.pdf','May 1, 2026','New applicant from Mampang. Documents pending secondary review.',null,'badge_hc_17')">Review</button>
                         </div></td>
                     </tr>
                     <!-- Dynamic rows injected by JS -->
@@ -495,13 +657,28 @@
             updatePillCounts(); vfFilter();
         }
         function _restorePendingButtons(actionsDiv, badgeId) {
-            var idx = badgeId.replace('badge_hc_','');
+            var idx = parseInt(badgeId.replace('badge_hc_',''));
             var rows = [
-                { name:'Roberto Lee',  brgy:'Divisoria',  doc:'Business_Permit.pdf', date:'April 20, 2026', notes:'First-time farmer applicant. All documents appear valid and complete.' },
-                { name:'Ana Mae Flores', brgy:'Santa Maria', doc:'Farm_Reg.pdf',       date:'April 22, 2026', notes:'Documents verified. Farm registration appears legitimate.' },
-                { name:'Lily Cheng',   brgy:'Zambowood',  doc:'ID_Card.pdf',          date:'April 23, 2026', notes:'Pending secondary document submission.' }
+                { name:'Roberto Lee',       brgy:'Divisoria',    doc:'Business_Permit.pdf', date:'April 20, 2026', notes:'First-time farmer applicant. All documents appear valid and complete.' },
+                { name:'Ana Mae Flores',    brgy:'Santa Maria',  doc:'Farm_Reg.pdf',        date:'April 22, 2026', notes:'Documents verified. Farm registration appears legitimate.' },
+                { name:'Lily Cheng',        brgy:'Zambowood',    doc:'ID_Card.pdf',         date:'April 23, 2026', notes:'Pending secondary document submission.' },
+                { name:'Mario Santos',      brgy:'Putik',        doc:'RSBSA_Cert.pdf',      date:'April 23, 2026', notes:'RSBSA certificate complete and verified.' },
+                { name:'Grace Tumaliuan',   brgy:'Baliwasan',    doc:'Farm_Photo.jpg',      date:'April 24, 2026', notes:'New applicant. Farm photo submitted, awaiting RSBSA cert.' },
+                { name:'Jose Reyes',        brgy:'Canelar',      doc:'Barangay_Cert.pdf',   date:'April 24, 2026', notes:'Barangay cert submitted but incomplete details.' },
+                { name:'Lorna Dela Cruz',   brgy:'Ayala',        doc:'DTI_Permit.pdf',      date:'April 25, 2026', notes:'DTI permit submitted. Registered small farm business.' },
+                { name:'Ferdinand Uy',      brgy:'Tetuan',       doc:'RSBSA_Cert.pdf',      date:'April 25, 2026', notes:'All documents complete. Verified farmer.' },
+                { name:'Remedios Tan',      brgy:'Tumaga',       doc:'Barangay_Cert.pdf',   date:'April 26, 2026', notes:'Barangay cert verified. Awaiting RSBSA confirmation.' },
+                { name:'Danilo Villareal',  brgy:'Guiwan',       doc:'ID_Card.pdf',         date:'April 26, 2026', notes:'ID submitted but documents appear incomplete.' },
+                { name:'Cristina Manuel',   brgy:'Pasonanca',    doc:'Farm_Reg.pdf',        date:'April 27, 2026', notes:'Farm registration complete. Documents appear in order.' },
+                { name:'Edgar Magno',       brgy:'Sta. Barbara', doc:'RSBSA_Cert.pdf',      date:'April 27, 2026', notes:'RSBSA verified. Approved farmer.' },
+                { name:'Nilda Mercado',     brgy:'Talon-Talon',  doc:'Barangay_Cert.pdf',   date:'April 28, 2026', notes:'First submission. Barangay cert looks valid.' },
+                { name:'Rodrigo Bustamante',brgy:'Recodo',       doc:'DTI_Permit.pdf',      date:'April 29, 2026', notes:'Registered business permit attached. Awaiting farm photo.' },
+                { name:'Maribel Fuentes',   brgy:'Lunzuran',     doc:'ID_Card.pdf',         date:'April 29, 2026', notes:'ID card only. Insufficient documentation.' },
+                { name:'Victor Paglinawan', brgy:'Sinubung',     doc:'RSBSA_Cert.pdf',      date:'April 30, 2026', notes:'RSBSA certificate provided. Looks complete.' },
+                { name:'Teresita Gomez',    brgy:'Camino Nuevo', doc:'Farm_Reg.pdf',        date:'April 30, 2026', notes:'Farm registration verified. All good.' },
+                { name:'Alvin Labrador',    brgy:'Mampang',      doc:'Barangay_Cert.pdf',   date:'May 1, 2026',    notes:'New applicant from Mampang. Documents pending secondary review.' }
             ];
-            var r = rows[parseInt(idx)];
+            var r = rows[idx];
             if (!r) return;
             actionsDiv.innerHTML =
                 '<button class="btn btn-primary" onclick="vfApproveDirect(null,\'' + badgeId + '\')">Approve</button>'
