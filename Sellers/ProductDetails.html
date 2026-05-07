@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fresh Tomatoes – FarmDirect</title>
     <link rel="stylesheet" href="ProductDetails.css" />
+    <script src="sellers-storage.js"></script>
   </head>
   <body>
     <!-- ══ EDIT MODAL ══ -->
@@ -462,7 +463,6 @@ Our Fresh Tomatoes are grown on the fertile fields of Tugbungan, Zamboanga City.
 
             <div class="product-tags" id="display-tags">
               <span class="tag tag-organic">🌿 Organic</span>
-              <span class="tag tag-fresh">🌅 Harvested Daily</span>
               <span class="tag tag-local">📍 Tugbungan</span>
               <span class="tag tag-cat">🥦 Vegetables</span>
             </div>
@@ -1166,7 +1166,7 @@ Our Fresh Tomatoes are grown on the fertile fields of Tugbungan, Zamboanga City.
       // Photos array: each entry is { src: string|null, label: string }
       let photos = [
         {
-          src: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=800",
+          src: "IMG/Tomatoes.jpg",
           label: "Main",
         },
         {
@@ -1178,7 +1178,7 @@ Our Fresh Tomatoes are grown on the fertile fields of Tugbungan, Zamboanga City.
           label: "Photo 3",
         },
         {
-          src: "https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?w=200",
+          src: null,
           label: "Photo 4",
         },
         { src: null, label: "Photo 5" },
@@ -1656,8 +1656,73 @@ Our Fresh Tomatoes are grown on the fertile fields of Tugbungan, Zamboanga City.
         setVal("price-box", priceBox);
         updateRevenue();
 
+        // ══ SAVE TO STORAGE ══
+        const currentProductId = getProductIdFromUrl();
+        if (currentProductId) {
+          // Get photos array (only src values)
+          const photoSources = photos.filter(p => p.src).map(p => p.src);
+
+          const updatedData = {
+            name: name,
+            category: cat,
+            desc: desc,
+            tags: tags,
+            status: modalStatus,
+            photos: photoSources
+          };
+
+          // Update main product image if photos exist
+          if (photoSources.length > 0) {
+            updatedData.img = photoSources[0];
+          }
+
+          // Update farmdirect_products (dynamic products)
+          const stored = JSON.parse(localStorage.getItem('farmdirect_products') || '[]');
+          const idx = stored.findIndex(p => p.id === currentProductId);
+          if (idx !== -1) {
+            stored[idx] = { ...stored[idx], ...updatedData };
+            stored[idx].price = priceKg;
+            if (stored[idx].allUnits) {
+              stored[idx].allUnits.forEach(u => {
+                if (u.unit === 'kg' || u.unit === 'Per Kg') u.price = priceKg;
+                if (u.unit === 'bundle' || u.unit === 'Per Bundle') u.price = priceBun;
+                if (u.unit === 'box' || u.unit === 'Per Box') u.price = priceBox;
+              });
+            }
+            localStorage.setItem('farmdirect_products', JSON.stringify(stored));
+          }
+
+          // Update FarmDirectStorage (hardcoded products)
+          if (window.FarmDirectStorage) {
+            const data = FarmDirectStorage.get();
+            let product = null;
+
+            // Check products array
+            if (data.products) {
+              product = data.products.find(p => p.id === currentProductId);
+            }
+            // Check stock array
+            if (!product && data.stock) {
+              product = data.stock.find(p => p.id === currentProductId);
+            }
+
+            if (product) {
+              Object.assign(product, updatedData);
+              // Update pricing in unitTypes
+              if (product.unitTypes) {
+                product.unitTypes.forEach(u => {
+                  if (u.key === 'kg') u.price = priceKg;
+                  if (u.key === 'bundle') u.price = priceBun;
+                  if (u.key === 'box') u.price = priceBox;
+                });
+              }
+              FarmDirectStorage.save(data);
+            }
+          }
+        }
+
         closeEditModal();
-        showToast("✅ Product updated successfully!");
+        alert("✅ Product updated successfully!");
       }
 
       // ══════════════════════════════════════════════
@@ -1715,7 +1780,90 @@ Our Fresh Tomatoes are grown on the fertile fields of Tugbungan, Zamboanga City.
         });
       });
 
+      // ══ PRODUCT ID & LOAD ══
+      let currentProductId = null;
+
+      function getProductIdFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('id');
+      }
+
+      function loadProductData() {
+        const productId = getProductIdFromUrl();
+        if (!productId) return;
+
+        currentProductId = productId;
+
+        // Try FarmDirectStorage first (from sellers-storage.js)
+        if (window.FarmDirectStorage) {
+          const data = FarmDirectStorage.get();
+          // Check in products array
+          let product = data.products ? data.products.find(p => p.id === productId) : null;
+          // Check in stock array if not found
+          if (!product && data.stock) {
+            product = data.stock.find(p => p.id === productId);
+          }
+          if (product) {
+            populateForm(product);
+          }
+        }
+
+        // Also try farmdirect_products (localStorage for dynamic products)
+        const stored = JSON.parse(localStorage.getItem('farmdirect_products') || '[]');
+        const product = stored.find(p => p.id === productId);
+        if (product) {
+          populateForm(product);
+        }
+      }
+
+      function populateForm(product) {
+        if (product.name) {
+          document.getElementById('em-name').value = product.name;
+        }
+        if (product.category) {
+          document.getElementById('em-cat').value = product.category;
+        }
+        if (product.desc) {
+          document.getElementById('em-desc').value = product.desc;
+        }
+        if (product.tags) {
+          document.getElementById('em-tags').value = product.tags;
+        }
+        // Handle pricing from unitTypes or direct price
+        if (product.unitTypes && product.unitTypes.length > 0) {
+          const kgUnit = product.unitTypes.find(u => u.key === 'kg');
+          const bundleUnit = product.unitTypes.find(u => u.key === 'bundle');
+          const boxUnit = product.unitTypes.find(u => u.key === 'box');
+          if (kgUnit) document.getElementById('em-price-kg').value = kgUnit.price;
+          if (bundleUnit) document.getElementById('em-price-bundle').value = bundleUnit.price;
+          if (boxUnit) document.getElementById('em-price-box').value = boxUnit.price;
+        } else if (product.price) {
+          document.getElementById('em-price-kg').value = product.price;
+        }
+        if (product.status) {
+          setModalStatus(product.status);
+        }
+        // Load photos from product data
+        if (product.photos && Array.isArray(product.photos)) {
+          photos = product.photos.map((src, i) => ({
+            src: src,
+            label: i === 0 ? 'Main' : `Photo ${i + 1}`
+          }));
+          // Ensure we have 5 slots
+          while (photos.length < 5) {
+            photos.push({ src: null, label: `Photo ${photos.length + 1}` });
+          }
+          buildModalPhotoGrid();
+          buildGalleryThumbs();
+          // Update main image if first photo exists
+          if (photos.length > 0 && photos[0].src) {
+            document.getElementById('main-img').src = photos[0].src;
+          }
+        }
+      }
+
       // ══ INIT ══
+      loadProductData();
       buildGalleryThumbs();
       renderReviews();
       updateRevenue();

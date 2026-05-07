@@ -324,12 +324,12 @@
  
       <!-- ── Tomatoes ── -->
       <div class="prod-card" id="hcard-tomatoes">
-        <a href="ProductDetails.html">
+        <a href="ProductDetails.html?id=tomatoes">
           <img src="IMG/Tomatoes.jpg" alt="Fresh Tomatoes" class="prod-img"/>
         </a>
         <div class="prod-body">
           <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem">
-            <a href="ProductDetails.html" class="prod-name" id="hname-tomatoes">Fresh Tomatoes</a>
+            <a href="ProductDetails.html?id=tomatoes" class="prod-name" id="hname-tomatoes">Fresh Tomatoes</a>
             <button class="prod-remove-btn" onclick="askRemove('hcard-tomatoes','Fresh Tomatoes','hardcoded')">✕ Remove</button>
           </div>
           <div class="prod-cat" id="hcat-tomatoes">Vegetables</div>
@@ -353,12 +353,12 @@
  
       <!-- ── Carrots ── -->
       <div class="prod-card" id="hcard-carrots">
-        <a href="ProductDetail.html">
+        <a href="ProductDetails.html?id=carrots">
           <img src="IMG/Carrots.jpg" alt="Fresh harvest carrots" class="prod-img"/>
         </a>
         <div class="prod-body">
           <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem">
-            <a href="ProductDetail.html" class="prod-name" id="hname-carrots">Organic Carrots</a>
+            <a href="ProductDetails.html?id=carrots" class="prod-name" id="hname-carrots">Organic Carrots</a>
             <button class="prod-remove-btn" onclick="askRemove('hcard-carrots','Organic Carrots','hardcoded')">✕ Remove</button>
           </div>
           <div class="prod-cat" id="hcat-carrots">Root Crops</div>
@@ -379,12 +379,12 @@
  
       <!-- ── Lettuce ── -->
       <div class="prod-card" id="hcard-lettuce">
-        <a href="ProductDetail.html">
+        <a href="ProductDetails.html?id=lettuce">
           <img src="IMG/Lettuce.jpg" alt="Fresh Lettuce" class="prod-img"/>
         </a>
         <div class="prod-body">
           <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem">
-            <a href="ProductDetail.html" class="prod-name" id="hname-lettuce">Fresh Lettuce</a>
+            <a href="ProductDetails.html?id=lettuce" class="prod-name" id="hname-lettuce">Fresh Lettuce</a>
             <button class="prod-remove-btn" onclick="askRemove('hcard-lettuce','Fresh Lettuce','hardcoded')">✕ Remove</button>
           </div>
           <div class="prod-cat" id="hcat-lettuce">Leafy Greens</div>
@@ -408,12 +408,12 @@
  
       <!-- ── Corn ── -->
       <div class="prod-card" id="hcard-corn">
-        <a href="ProductDetail.html">
+        <a href="ProductDetails.html?id=corn">
           <img src="IMG/Corn.jpg" alt="Yellow Sweet Corn" class="prod-img"/>
         </a>
         <div class="prod-body">
           <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem">
-            <a href="ProductDetail.html" class="prod-name" id="hname-corn">Sweet Corn</a>
+            <a href="ProductDetails.html?id=corn" class="prod-name" id="hname-corn">Sweet Corn</a>
             <button class="prod-remove-btn" onclick="askRemove('hcard-corn','Sweet Corn','hardcoded')">✕ Remove</button>
           </div>
           <div class="prod-cat" id="hcat-corn">Grains</div>
@@ -434,12 +434,12 @@
  
       <!-- ── Strawberries ── -->
       <div class="prod-card" id="hcard-strawberries">
-        <a href="ProductDetail.html">
+        <a href="ProductDetails.html?id=strawberries">
           <img src="IMG/Strawberries.jpg" alt="Strawberries" class="prod-img"/>
         </a>
         <div class="prod-body">
           <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem">
-            <a href="ProductDetail.html" class="prod-name" id="hname-strawberries">Strawberries</a>
+            <a href="ProductDetails.html?id=strawberries" class="prod-name" id="hname-strawberries">Strawberries</a>
             <button class="prod-remove-btn" onclick="askRemove('hcard-strawberries','Strawberries','hardcoded')">✕ Remove</button>
           </div>
           <div class="prod-cat" id="hcat-strawberries">Fruits</div>
@@ -644,7 +644,7 @@ stored.forEach(p => {
   card.innerHTML = `
     <div class="prod-body" style="padding-top:1rem">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem">
-        <div class="prod-name" id="dname-${safeKey}">${p.emoji || '📦'} ${p.name}</div>
+        <a href="ProductDetails.html?id=${p.id}" class="prod-name" id="dname-${safeKey}">${p.emoji || '📦'} ${p.name}</a>
         <button class="prod-remove-btn"
           onclick="askRemove('${cardElemId}','${p.name.replace(/'/g,"\\'")}','dynamic','${p.id}')">
           ✕ Remove
@@ -909,7 +909,7 @@ function apmSaveProduct(){
   const card=document.createElement('div');card.className='prod-card';card.id=cardId;
   card.innerHTML=`<div class="prod-body" style="padding-top:1rem">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem">
-      <div class="prod-name">${product.emoji} ${product.name}</div>
+      <a href="ProductDetails.html?id=${product.id}" class="prod-name">${product.emoji} ${product.name}</a>
       <button class="prod-remove-btn" onclick="askRemove('${cardId}','${product.name.replace(/'/g,"\\'")}','dynamic','${product.id}')">✕ Remove</button>
     </div>
     <div class="prod-cat">${product.category}</div>
