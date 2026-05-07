@@ -44,14 +44,16 @@
 /* Flash banner */
 .flash-strip {
   position: sticky; top: var(--header-total); z-index: 90;
-  background: linear-gradient(135deg, #e65c00 0%, #f9a825 100%);
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
   color:#fff; padding: 0.5rem 1.2rem; display:flex; justify-content:center; align-items:center;
   gap:0.7rem; font-size:0.85rem; font-weight:700;
 }
 .flash-strip a { color:#fff; text-decoration:underline; text-underline-offset:2px; }
 
 /* CART BODY */
-.cart-wrap { padding: calc(var(--header-total) + 0.5rem) 0 5.5rem; min-height: 100vh; }
+.cart-wrap { padding: 0.5rem 0 5.5rem; min-height: 100vh; }
+.cart-back-btn { display:inline-flex;align-items:center;gap:0.45rem;font-size:0.88rem;font-weight:600;color:var(--text-mid);text-decoration:none;padding:0.4rem 0;margin-bottom:0.5rem;transition:color 0.2s; }
+.cart-back-btn:hover { color:var(--green); }
 
 /* Select-all bar */
 .cart-sel-bar {
@@ -78,11 +80,11 @@
 .ci-name { font-size:0.88rem; font-weight:600; color:var(--text); line-height:1.3; }
 .ci-name:hover { color:var(--green); }
 .ci-farm { font-size:0.73rem; color:var(--text-light); }
-.ci-flash { font-size:0.7rem; color:var(--orange); font-weight:700; }
+.ci-flash { font-size:0.7rem; color:var(--green-bright); font-weight:700; }
 .ci-price-row { display:flex; align-items:center; gap:0.4rem; margin-top:0.15rem; flex-wrap:wrap; }
-.ci-price { font-size:1rem; font-weight:800; color:var(--orange); }
+.ci-price { font-size:1rem; font-weight:800; color:var(--green-bright); }
 .ci-price-orig { font-size:0.73rem; color:var(--text-light); text-decoration:line-through; }
-.ci-disc { background:var(--orange); color:#fff; font-size:0.6rem; font-weight:700; padding:0.07rem 0.3rem; border-radius:3px; }
+.ci-disc { background:var(--green-bright); color:#fff; font-size:0.6rem; font-weight:700; padding:0.07rem 0.3rem; border-radius:3px; }
 .ci-unit { font-size:0.73rem; color:var(--text-light); }
 .ci-foot { display:flex; align-items:center; justify-content:space-between; margin-top:0.35rem; }
 .ci-remove { font-size:0.74rem; color:var(--red); font-weight:600; cursor:pointer; }
@@ -90,7 +92,7 @@
 .qty-s span { width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-size:0.95rem; font-weight:700; cursor:pointer; color:var(--text-mid); transition:background 0.15s; }
 .qty-s span:hover { background:var(--border); }
 .qty-s .qv { min-width:26px; text-align:center; font-size:0.88rem; font-weight:700; color:var(--text); border-left:1.5px solid var(--border); border-right:1.5px solid var(--border); }
-.ci-sub { font-size:0.76rem; font-weight:800; color:var(--orange); margin-top:0.25rem; }
+.ci-sub { font-size:0.76rem; font-weight:800; color:var(--green-bright); margin-top:0.25rem; }
 
 /* Also like */
 .also-like { background:var(--white); border-radius:var(--radius); border:1.5px solid var(--border); padding:1.1rem; margin-top:0.6rem; }
@@ -100,7 +102,7 @@
 .al-img { width:100%; aspect-ratio:1; object-fit:cover; display:block; }
 .al-body { padding:0.45rem 0.55rem; }
 .al-name { font-size:0.77rem; font-weight:600; line-height:1.3; margin-bottom:0.18rem; color:var(--text); }
-.al-price { font-size:0.85rem; font-weight:800; color:var(--orange); }
+.al-price { font-size:0.85rem; font-weight:800; color:var(--green); }
 .al-add { display:block; text-align:center; background:var(--green); color:#fff; font-size:0.72rem; font-weight:700; padding:0.35rem; margin:0.4rem 0.5rem 0.5rem; border-radius:6px; transition:opacity 0.2s; }
 .al-add:hover { opacity:0.85; }
 
@@ -116,8 +118,8 @@
 .co-all-label { font-size:0.83rem; font-weight:600; cursor:pointer; }
 .co-totals { flex:1; text-align:right; }
 .co-total-label { font-size:0.72rem; color:var(--text-light); }
-.co-total-amt { font-size:1.1rem; font-weight:800; color:var(--orange); line-height:1.1; }
-.co-saved { font-size:0.7rem; color:var(--orange); font-weight:600; }
+.co-total-amt { font-size:1.1rem; font-weight:800; color:var(--green); line-height:1.1; }
+.co-saved { font-size:0.7rem; color:var(--green-bright); font-weight:600; }
 .co-btn {
   background:var(--green); color:#fff; border:none; border-radius:10px;
   padding:0.7rem 1.2rem; font-size:0.88rem; font-weight:700; cursor:pointer;
@@ -152,7 +154,6 @@
       <div class="user-dropdown">
         <a href="Dashboard.html"><i class="fa fa-gauge"></i> My Dashboard</a>
         <a href="Order_tracking.html"><i class="fa fa-box"></i> My Orders</a>
-        <a href="cart.html"><i class="fa fa-basket-shopping"></i> Cart</a>
         <a href="#"><i class="fa fa-right-from-bracket"></i> Logout</a>
       </div>
     </div>
@@ -166,17 +167,13 @@
       <div class="logo-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
       </div>
-      <div class="logo-text"><span class="logo-farm">Farm</span><span class="logo-direct">Direct</span></div>
+      <div class="logo-text"><span class="logo-farm">FarmDirect</span></div>
     </a>
     <div class="search-bar">
-      <input type="text" placeholder="Search fresh produce, meats, pantry essentials…" />
-      <button type="button"><i class="fa fa-search"></i></button>
+      <input type="text" id="global-search" placeholder="Search fresh produce, meats, pantry essentials…" onkeydown="if(event.key==='Enter')doSearch()" />
+      <button type="button" onclick="doSearch()"><i class="fa fa-search"></i></button>
     </div>
     <div class="header-actions">
-      <a href="cart.html" class="cart-btn" title="My Cart">
-        <i class="fa fa-shopping-basket"></i>
-        <span class="cart-count">3</span>
-      </a>
       <a href="Chat.html" class="cart-btn" title="Messages" style="position:relative;">
         <i class="fa fa-comment"></i>
       </a>
@@ -191,14 +188,6 @@
   </div>
 </header>
 
-
-
-
-
-
-<!-- CART NAVBAR: title + Edit + Message icon only -->
-
-
 <!-- FLASH SALE STRIP -->
 <div class="flash-strip">
   🔥 Flash Sale ends in <strong id="cd">02:14:33</strong> &nbsp;—&nbsp; Up to 30% off!
@@ -207,10 +196,16 @@
 
 <!-- CART CONTENT -->
 <div class="cart-wrap">
-  <div class="container" style="max-width:700px;">
+  <div class="container" style="max-width:1140px;">
+
+    <!-- BACK BUTTON -->
+    <a href="products.html" class="cart-back-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Continue Shopping
+    </a>
 
     <!-- SAVINGS BADGE -->
-    <div id="savings-badge" style="display:none;align-items:center;gap:0.4rem;background:var(--orange-light);border:1.5px solid var(--orange);color:var(--orange);font-size:0.8rem;font-weight:700;padding:0.38rem 0.9rem;border-radius:20px;margin-bottom:0.8rem;"></div>
+    <div id="savings-badge" style="display:none;align-items:center;gap:0.4rem;background:var(--green-light);border:1.5px solid var(--green);color:var(--green);font-size:0.8rem;font-weight:700;padding:0.38rem 0.9rem;border-radius:20px;margin-bottom:0.8rem;"></div>
 
     <!-- SELECT ALL BAR -->
     <div class="cart-sel-bar">
@@ -301,7 +296,7 @@ function render() {
 
     items.forEach(item => {
       const isChk = checkedItems.has(item.key);
-      const pColor = item.discount ? 'var(--orange)' : 'var(--green)';
+      const pColor = item.discount ? 'var(--green-bright)' : 'var(--green)';
 
       /* Build variety + unit line shown below the product name */
       const unitLabel = item.unit ? item.unit : '';
@@ -459,7 +454,7 @@ render();
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-logo">
-      <i class="fa fa-seedling"></i>
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-vegan-icon lucide-vegan"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
       <span>FarmDirect</span>
     </div>
     <p>© 2026 FarmDirect Philippines. Freshness Guaranteed.</p>
