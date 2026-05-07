@@ -44,6 +44,10 @@
 .oi-orig { font-size:0.73rem;color:var(--text-light);text-decoration:line-through; }
 .oi-disc { background:var(--orange);color:#fff;font-size:0.6rem;font-weight:700;padding:0.07rem 0.3rem;border-radius:3px; }
 .oi-qty { font-size:0.78rem;color:var(--text-light);flex-shrink:0; }
+.oi-dropoff-select { margin-top:0.4rem;display:flex;align-items:center;gap:0.4rem; }
+.oi-dropoff-label { font-size:0.72rem;color:var(--text-light);font-weight:600; }
+.oi-dropoff-select select { padding:0.3rem 0.5rem;border:1.5px solid var(--border);border-radius:6px;font-size:0.78rem;background:var(--cream);color:var(--text);cursor:pointer; }
+.oi-dropoff-select select:focus { border-color:var(--green); }
 .ship-opts { padding:0.6rem 1.1rem;display:flex;flex-direction:column;gap:0.5rem; }
 .ship-opt { display:flex;align-items:center;gap:0.75rem;padding:0.75rem 0.9rem;border:2px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color 0.2s,background 0.2s; }
 .ship-opt.selected { border-color:var(--green);background:var(--green-light); }
@@ -371,6 +375,7 @@ let state = {
   specialDisc: '',
   dropoffs: [],
   dropoffCount: 0,
+  itemDropoffs: {},
 };
 
 /* ── Load cart items from localStorage (set by products.html) ── */
@@ -392,7 +397,6 @@ function renderOrderItems() {
   }
   list.innerHTML = ITEMS.map(item => {
     const pColor = item.discount ? 'var(--orange)' : 'var(--green)';
-    /* Build variant/unit tag shown under the product name */
     const metaParts = [];
     if (item.farm) metaParts.push(item.farm);
     if (item.variety) metaParts.push(item.variety);
@@ -400,6 +404,8 @@ function renderOrderItems() {
     const variantLine = metaParts.length
       ? `<div class="oi-variant">${metaParts.join(' · ')}</div>`
       : '';
+    const currentDropoff = state.itemDropoffs[item.key] || 'main';
+    const dropoffOptions = getDropoffOptions(currentDropoff, item.key);
     return `
       <div class="oi">
         <img class="oi-img" src="${item.img || ''}" alt="${item.name}">
@@ -410,10 +416,29 @@ function renderOrderItems() {
             <span class="oi-price" style="color:${pColor};">${FD.fmt.peso(item.price)}</span>
             ${item.origPrice ? `<span class="oi-orig">${FD.fmt.peso(item.origPrice)}</span><span class="oi-disc">-${item.discount}%</span>` : ''}
           </div>
+          <div class="oi-dropoff-select">
+            <span class="oi-dropoff-label">📍 Deliver to:</span>
+            <select onchange="assignItemToDropoff('${item.key}', this.value)">
+              ${dropoffOptions}
+            </select>
+          </div>
         </div>
         <span class="oi-qty">x${item.qty}</span>
       </div>`;
   }).join('');
+}
+
+function getDropoffOptions(selected, itemKey) {
+  let opts = `<option value="main" ${selected === 'main' ? 'selected' : ''}>Main Address</option>`;
+  state.dropoffs.forEach((dp, i) => {
+    opts += `<option value="${dp.id}" ${selected === dp.id ? 'selected' : ''}>Drop-off Point ${i + 2}</option>`;
+  });
+  return opts;
+}
+
+function assignItemToDropoff(itemKey, dropoffId) {
+  state.itemDropoffs[itemKey] = dropoffId;
+  renderDropoffItemSummary();
 }
 
 function renderSummary() {
@@ -517,20 +542,46 @@ function addDropoff() {
       <div class="af-group"><label>Landmark</label><input type="text" placeholder="Near LCC Mall"></div>
       <div class="af-group"><label>Recipient Name</label><input type="text" placeholder="Maria Santos"></div>
       <div class="af-group"><label>Recipient Phone</label><input type="tel" placeholder="+63 917 xxx xxxx"></div>
-    </div>`;
+    </div>
+    <div class="dropoff-items-summary" id="${id}-items"></div>`;
   document.getElementById('dropoff-list').appendChild(div);
+  renderOrderItems();
+  renderDropoffItemSummary();
   renderSummary();
 }
 
 function removeDropoff(id) {
+  const itemsAtDropoff = ITEMS.filter(i => state.itemDropoffs[i.key] === id);
+  if (itemsAtDropoff.length > 0) {
+    if (!confirm(`Remove this drop-off point? ${itemsAtDropoff.length} item(s) will be moved to Main Address.`)) return;
+    itemsAtDropoff.forEach(i => { state.itemDropoffs[i.key] = 'main'; });
+  }
   state.dropoffs = state.dropoffs.filter(d => d.id !== id);
   const el = document.getElementById(id);
   if (el) el.remove();
-  // Re-label remaining
   document.querySelectorAll('.dropoff-point-label').forEach((l, i) => {
     l.textContent = `📍 Drop-off Point ${i + 2}`;
   });
+  renderOrderItems();
+  renderDropoffItemSummary();
   renderSummary();
+}
+
+function renderDropoffItemSummary() {
+  const allDropoffs = ['main', ...state.dropoffs.map(d => d.id)];
+  allDropoffs.forEach(dpId => {
+    const itemsAtDp = ITEMS.filter(i => state.itemDropoffs[i.key] === dpId);
+    if (dpId === 'main') return;
+    const container = document.getElementById(dpId + '-items');
+    if (!container) return;
+    if (itemsAtDp.length === 0) {
+      container.innerHTML = '<div style="font-size:0.75rem;color:var(--text-light);margin-top:0.5rem;">No items assigned to this drop-off</div>';
+    } else {
+      container.innerHTML = '<div style="margin-top:0.5rem;padding-top:0.5rem;border-top:1px solid var(--border);">' +
+        itemsAtDp.map(i => `<div style="font-size:0.78rem;color:var(--text-mid);padding:0.15rem 0;">• ${i.name} (x${i.qty})</div>`).join('') +
+        '</div>';
+    }
+  });
 }
 
 function toggleAddrForm() {
@@ -563,7 +614,6 @@ function saveCheckoutState() {
   const P            = FD.Pricing;
   const pricing      = P.total(ITEMS, ship, state.voucherCode, state.specialDisc);
 
-  // Capture current address from DOM (use saved if already set)
   let address = FD.Checkout.get().address || {};
   if (!address.name) {
     const nameEl = document.querySelector('.addr-name');
@@ -577,12 +627,30 @@ function saveCheckoutState() {
     };
   }
 
+  const dropoffDetails = state.dropoffs.map(dp => {
+    const el = document.getElementById(dp.id);
+    const inputs = el ? el.querySelectorAll('input') : [];
+    return {
+      id: dp.id,
+      street: inputs[0]?.value || '',
+      brgy: inputs[1]?.value || '',
+      landmark: inputs[2]?.value || '',
+      recipientName: inputs[3]?.value || '',
+      recipientPhone: inputs[4]?.value || '',
+      items: ITEMS.filter(i => state.itemDropoffs[i.key] === dp.id).map(i => ({ key: i.key, name: i.name, qty: i.qty })),
+    };
+  });
+
+  const mainAddressItems = ITEMS.filter(i => state.itemDropoffs[i.key] === 'main').map(i => ({ key: i.key, name: i.name, qty: i.qty }));
+
   FD.Checkout.save({
     items: ITEMS,
     shippingFee: ship,
     voucherCode: state.voucherCode,
     specialDisc: state.specialDisc,
-    dropoffs: state.dropoffs,
+    dropoffs: dropoffDetails,
+    mainAddressItems,
+    itemDropoffs: state.itemDropoffs,
     pricing,
     address,
   });
@@ -590,8 +658,17 @@ function saveCheckoutState() {
 
 /* Load saved state */
 (function() {
+  ITEMS.forEach(item => {
+    if (!state.itemDropoffs[item.key]) {
+      state.itemDropoffs[item.key] = 'main';
+    }
+  });
   renderOrderItems();
   const saved = FD.Checkout.get();
+  if (saved.itemDropoffs) {
+    state.itemDropoffs = saved.itemDropoffs;
+    renderOrderItems();
+  }
   if (saved.voucherCode) {
     state.voucherCode = saved.voucherCode;
     document.getElementById('voucher-input').value = saved.voucherCode;
@@ -600,7 +677,6 @@ function saveCheckoutState() {
   if (saved.specialDisc) {
     toggleSpecialDisc(saved.specialDisc);
   }
-  // Load saved payment method display
   const payInfo = { cod:['💵','Cash on Delivery','Pay when your order arrives'], gcash:['📱','GCash','Instant digital payment'], bank:['🏦','Bank Transfer','BDO, BPI, UnionBank'] };
   const pm = saved.paymentMethod || 'cod';
   if (payInfo[pm]) {

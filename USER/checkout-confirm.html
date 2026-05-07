@@ -12,6 +12,24 @@
 .vat-note { font-size:0.78rem;color:var(--text-light);margin-top:0.3rem;font-style:italic; }
 .confirm-dropoff-list { margin-top:0.5rem; }
 .confirm-dropoff-item { background:var(--cream);border-radius:8px;padding:0.55rem 0.85rem;margin-bottom:0.4rem;font-size:0.84rem;color:var(--text-mid);border-left:3px solid var(--green-mid); }
+.return-item-btn { background:none;border:none;color:var(--red);font-size:0.78rem;font-weight:600;cursor:pointer;padding:0.15rem 0.4rem;border-radius:4px;transition:background 0.15s; }
+.return-item-btn:hover { background:var(--red-light); }
+.return-modal-overlay { display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center; }
+.return-modal-overlay.open { display:flex; }
+.return-modal { background:var(--white);border-radius:var(--radius);padding:2rem;max-width:480px;width:90%;box-shadow:var(--shadow-lg); }
+.return-modal h3 { font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.5rem;color:var(--green-dark); }
+.return-modal p { font-size:0.88rem;color:var(--text-mid);margin-bottom:1rem;line-height:1.5; }
+.return-reason-select { width:100%;padding:0.7rem 0.9rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;background:var(--cream);margin-bottom:0.8rem; }
+.return-reason-select:focus { border-color:var(--green); }
+.return-notes { width:100%;padding:0.7rem 0.9rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:0.88rem;background:var(--cream);margin-bottom:1rem;resize:vertical;font-family:inherit; }
+.return-notes:focus { border-color:var(--green); }
+.return-modal-btns { display:flex;gap:0.8rem; }
+.return-confirm-btn { flex:1;background:var(--orange);color:#fff;border:none;border-radius:10px;padding:0.7rem;font-size:0.9rem;font-weight:700;cursor:pointer;transition:opacity 0.2s; }
+.return-confirm-btn:hover { opacity:0.85; }
+.return-back-btn { flex:1;background:var(--white);border:2px solid var(--border);border-radius:10px;padding:0.7rem;font-size:0.9rem;font-weight:600;cursor:pointer;transition:border-color 0.2s; }
+.return-back-btn:hover { border-color:var(--green);color:var(--green); }
+.return-summary { background:var(--cream);border-radius:8px;padding:0.8rem;margin-bottom:1rem;font-size:0.85rem;color:var(--text-mid); }
+.return-summary-name { font-weight:700;color:var(--text); }
 </style>
 </head>
 <body>
@@ -122,7 +140,7 @@
 
   // Build items HTML
   let itemsHtml = (co.items || []).map(i =>
-    `<div class="review-item"><span>${i.name} ×${i.qty}</span><span>${FD.fmt.peso(i.price * i.qty)}</span></div>`
+    `<div class="review-item"><span>${i.name} ×${i.qty}</span><span>${FD.fmt.peso(i.price * i.qty)}</span><button class="return-item-btn" onclick="openReturnItemModal('${i.key}','${i.name}',${i.qty},${i.price})">↩ Remove</button></div>`
   ).join('');
 
   // Discounts
@@ -235,5 +253,78 @@ function placeOrder() {
   <span class="chat-badge">2</span>
 </a>
 
-</body>
+<!-- Return Item Modal -->
+<div class="return-modal-overlay" id="return-item-modal">
+  <div class="return-modal">
+    <h3>↩ Remove Item from Order</h3>
+    <div class="return-summary" id="return-item-summary"></div>
+    <p>Why are you removing this item?</p>
+    <select class="return-reason-select" id="return-item-reason">
+      <option value="">— Select a reason —</option>
+      <option value="changed_mind">Changed my mind</option>
+      <option value="found_cheaper">Found cheaper elsewhere</option>
+      <option value="wrong_item">Selected wrong item</option>
+      <option value="budget">Budget constraints</option>
+      <option value="other">Other reason</option>
+    </select>
+    <textarea class="return-notes" id="return-item-notes" rows="3" placeholder="Additional details (optional)…"></textarea>
+    <div class="return-modal-btns">
+      <button class="return-back-btn" onclick="closeReturnItemModal()">Cancel</button>
+      <button class="return-confirm-btn" onclick="confirmReturnItem()">Remove Item</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let returnItemData = null;
+
+function openReturnItemModal(key, name, qty, price) {
+  returnItemData = { key, name, qty, price };
+  document.getElementById('return-item-summary').innerHTML =
+    `<span class="return-summary-name">${name}</span><br>Qty: ${qty} · ${FD.fmt.peso(price * qty)} refund to order total`;
+  document.getElementById('return-item-modal').classList.add('open');
+}
+
+function closeReturnItemModal() {
+  document.getElementById('return-item-modal').classList.remove('open');
+  returnItemData = null;
+  document.getElementById('return-item-reason').value = '';
+  document.getElementById('return-item-notes').value = '';
+}
+
+function confirmReturnItem() {
+  if (!returnItemData) return;
+  const reason = document.getElementById('return-item-reason').value;
+  if (!reason) { alert('Please select a reason.'); return; }
+
+  const co = FD.Checkout.get();
+  const updatedItems = co.items.filter(i => i.key !== returnItemData.key);
+
+  if (updatedItems.length === 0) {
+    alert('Cannot remove all items. Please go back to cancel the entire order instead.');
+    return;
+  }
+
+  const P = FD.Pricing;
+  const extraDropoff = (co.dropoffs || []).length * 30;
+  const ship = (co.shippingFee || 60) + extraDropoff;
+  const pricing = P.total(updatedItems, ship, co.voucherCode || '', co.specialDisc || '');
+
+  FD.Checkout.save({
+    items: updatedItems,
+    pricing,
+    shippingFee: ship,
+    voucherCode: co.voucherCode || '',
+    specialDisc: co.specialDisc || '',
+    dropoffs: co.dropoffs || [],
+    address: co.address || {},
+    paymentMethod: co.paymentMethod || 'cod',
+    gcashNumber: co.gcashNumber || '',
+  });
+
+  FD.Cart.remove(returnItemData.key);
+  closeReturnItemModal();
+  FD.showToast('✓ ' + returnItemData.name + ' removed from order');
+  setTimeout(() => location.reload(), 500);
+}
 </html>

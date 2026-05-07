@@ -47,6 +47,25 @@
 .return-request-btn:disabled { opacity:0.5;cursor:not-allowed; }
 .simulate-delivered-btn { display:flex;align-items:center;gap:0.5rem;background:var(--green-light);border:2px solid var(--green);border-radius:10px;padding:0.65rem 1.2rem;font-size:0.82rem;font-weight:600;cursor:pointer;color:var(--green);transition:opacity 0.2s; }
 .simulate-delivered-btn:hover { opacity:0.8; }
+
+/* Item-level return */
+.tracking-item-row { display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0;border-bottom:1px solid var(--border); }
+.tracking-item-row:last-child { border-bottom:none; }
+.tracking-item-info { flex:1; }
+.tracking-item-name { font-size:0.88rem;font-weight:600;color:var(--text); }
+.tracking-item-qty { font-size:0.78rem;color:var(--text-light); }
+.tracking-item-price { font-size:0.88rem;font-weight:700;color:var(--orange); }
+.return-item-btn-track { background:none;border:1.5px solid var(--border);border-radius:6px;padding:0.3rem 0.6rem;font-size:0.75rem;font-weight:600;cursor:pointer;color:var(--text-light);transition:all 0.2s; }
+.return-item-btn-track:hover { border-color:var(--orange);color:var(--orange); }
+.return-item-btn-track:disabled { opacity:0.4;cursor:not-allowed; }
+.return-item-btn-track.returned { border-color:var(--red);color:var(--red); }
+.item-return-reasons { display:none;padding:0.5rem 0; }
+.item-return-reasons.show { display:block; }
+.item-return-reasons select { width:100%;padding:0.5rem 0.7rem;border:1.5px solid var(--border);border-radius:6px;font-size:0.82rem;background:var(--cream);margin-bottom:0.4rem; }
+.item-return-reasons textarea { width:100%;padding:0.5rem 0.7rem;border:1.5px solid var(--border);border-radius:6px;font-size:0.82rem;background:var(--cream);resize:vertical;font-family:inherit;margin-bottom:0.4rem; }
+.item-return-reasons .item-return-actions { display:flex;gap:0.5rem; }
+.item-return-reasons .item-confirm-btn { background:var(--orange);color:#fff;border:none;border-radius:6px;padding:0.4rem 0.8rem;font-size:0.8rem;font-weight:600;cursor:pointer; }
+.item-return-reasons .item-cancel-btn { background:var(--white);border:1.5px solid var(--border);border-radius:6px;padding:0.4rem 0.8rem;font-size:0.8rem;font-weight:600;cursor:pointer; }
 </style>
 </head>
 <body>
@@ -208,10 +227,7 @@
     <!-- Order items -->
     <div class="tracking-items-box" id="tracking-items">
       <h3 class="tracking-items-title">Order Items</h3>
-      <!-- Populated by JS or fallback below -->
-      <div class="review-item"><span>Fresh Organic Carrots ×2</span><span>₱390</span></div>
-      <div class="review-item"><span>Heirloom Tomatoes ×1</span><span>₱280</span></div>
-      <div class="review-item"><span>Sweet Watermelon ×1</span><span>₱560</span></div>
+      <div id="tracking-items-list"></div>
       <div class="review-item savings"><span>Discounts &amp; Vouchers</span><span id="items-disc">−₱0</span></div>
       <div class="review-item" style="font-size:0.82rem;color:var(--text-light);"><span>VAT (12%)</span><span id="items-vat">+₱0.00</span></div>
       <div class="review-item"><span>Delivery Fee</span><span id="items-ship">₱80</span></div>
@@ -303,6 +319,7 @@ const statusLabels = {
 
 let currentOrderId = null;
 let selectedStars  = 0;
+let currentOrder   = null;
 
 function getOrderId() {
   const params = new URLSearchParams(window.location.search);
@@ -323,6 +340,7 @@ function loadOrder() {
   }
 
   currentOrderId = order.id;
+  currentOrder = order;
   document.getElementById('meta-id').textContent     = '#' + order.id;
   document.getElementById('meta-date').textContent   = FD.fmt.date(order.placedAt);
   document.getElementById('meta-total').textContent  = FD.fmt.peso(order.pricing?.total || 0);
@@ -336,6 +354,8 @@ function loadOrder() {
     savedEl.style.display = '';
     savedEl.textContent   = FD.fmt.peso(savings) + ' 🎉';
   }
+
+  renderOrderItems(order);
 
   // Items summary
   if (order.pricing) {
@@ -427,6 +447,64 @@ function submitReview() {
     document.getElementById('meta-status').textContent        = statusLabels['reviewed'];
   } else {
     alert('Review submission failed. Make sure your order has been delivered.');
+  }
+}
+
+function renderOrderItems(order) {
+  const list = document.getElementById('tracking-items-list');
+  if (!list || !order.items) return;
+
+  const returnedItems = order.returnedItems || [];
+  list.innerHTML = order.items.map((item, idx) => {
+    const isReturned = returnedItems.some(r => r.itemIdx === idx);
+    const itemKey = item.key || item.id + '_' + idx;
+    return `
+      <div class="tracking-item-row" id="item-row-${idx}">
+        <div class="tracking-item-info">
+          <div class="tracking-item-name">${item.name || 'Item'}</div>
+          <div class="tracking-item-qty">×${item.qty || 1}${item.unit ? ' · ' + item.unit : ''}</div>
+        </div>
+        <div class="tracking-item-price">${FD.fmt.peso((item.price || 0) * (item.qty || 1))}</div>
+        ${isReturned
+          ? `<button class="return-item-btn-track returned" disabled>↩ Returned</button>`
+          : `<button class="return-item-btn-track" onclick="toggleItemReturn(${idx})" ${!FD.Orders.canReturn(order) ? 'disabled' : ''}>↩ Return</button>`
+        }
+      </div>
+      <div class="item-return-reasons" id="item-return-form-${idx}">
+        <select id="item-return-reason-${idx}">
+          <option value="">— Select reason —</option>
+          <option value="damaged">Item arrived damaged</option>
+          <option value="wrong_item">Wrong item delivered</option>
+          <option value="poor_quality">Quality below expectation</option>
+          <option value="missing_items">Missing items in order</option>
+          <option value="expired">Product appeared spoiled / expired</option>
+          <option value="other">Other reason</option>
+        </select>
+        <textarea id="item-return-notes-${idx}" rows="2" placeholder="Additional details (optional)…"></textarea>
+        <div class="item-return-actions">
+          <button class="item-cancel-btn" onclick="toggleItemReturn(${idx})">Cancel</button>
+          <button class="item-confirm-btn" onclick="confirmItemReturn(${idx})">Submit Return</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function toggleItemReturn(idx) {
+  const form = document.getElementById('item-return-form-' + idx);
+  form.classList.toggle('show');
+}
+
+function confirmItemReturn(idx) {
+  const reason = document.getElementById('item-return-reason-' + idx).value;
+  if (!reason) { alert('Please select a return reason.'); return; }
+  const notes = document.getElementById('item-return-notes-' + idx).value;
+
+  const ok = FD.Orders.returnItem(currentOrderId, idx, reason + (notes ? ' — ' + notes : ''));
+  if (ok) {
+    FD.showToast('✓ Item return request submitted');
+    loadOrder();
+  } else {
+    alert('Unable to process return. Orders can only return items once delivered.');
   }
 }
 

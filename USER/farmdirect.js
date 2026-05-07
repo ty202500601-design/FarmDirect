@@ -325,6 +325,25 @@
       return !NON_CANCELLABLE.includes(status);
     },
 
+    returnItem(id, itemIdx, reason) {
+      const orders = this.getAll();
+      const order  = orders.find(o => o.id === id);
+      if (!order || !FD.Orders.canReturn(order)) return false;
+      if (!order.returnedItems) order.returnedItems = [];
+      if (order.returnedItems.some(r => r.itemIdx === itemIdx)) return false;
+      const item = order.items[itemIdx];
+      if (!item) return false;
+      order.returnedItems.push({
+        itemIdx,
+        itemName: item.name,
+        reason: reason || '',
+        requestedAt: new Date().toISOString(),
+        status: 'pending',
+      });
+      this.saveAll(orders);
+      return true;
+    },
+
     getLastOrder() {
       const id = localStorage.getItem(KEYS.LAST_ORDER);
       return id ? this.get(id) : null;
