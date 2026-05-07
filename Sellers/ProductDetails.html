@@ -7,53 +7,38 @@
     <link rel="stylesheet" href="Products.css" />
     <link rel="stylesheet" href="ProductDetails.css" />
     <style>
-      /* Quick fix for gallery layout */
-      .gallery-col {
-        position: sticky;
-        top: 70px;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-      .gallery-main {
-        position: relative;
-        border-radius: 14px;
-        overflow: hidden;
-        border: 1.5px solid #e0dbd0;
-        background: #f0ece2;
-        width: 100%;
-        aspect-ratio: 1/1;
-      }
-      .gallery-main img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-      .gallery-thumbs {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 0.5rem;
-        width: 100%;
-        margin-top: 0.75rem;
-      }
-      .thumb {
-        border-radius: 8px;
-        overflow: hidden;
-        border: 2px solid #e0dbd0;
-        aspect-ratio: 1/1;
-        cursor: pointer;
-        width: 100%;
-        background: #f0ece2;
-      }
-      .thumb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
+       .variant-selector-section { margin-bottom: 1.2rem; padding: 1rem; background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+       .variant-selector-label {
+         font-size: 0.75rem; font-weight: 800; color: var(--green);
+         text-transform: uppercase; letter-spacing: 0.08em;
+         display: block; margin-bottom: 0.65rem;
+       }
+       .variant-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+       .variant-pill {
+         display: inline-flex; align-items: center; gap: 0.6rem;
+         padding: 0.5rem 0.75rem 0.5rem 0.5rem; border: 2px solid var(--border);
+         border-radius: 10px; cursor: pointer; background: var(--white);
+         font-size: 0.82rem; font-weight: 600; color: var(--text-mid);
+         transition: all 0.25s ease; user-select: none;
+         box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+       }
+       .variant-pill:hover { border-color: var(--green-accent); background: var(--green-light); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(61,104,64,0.15); }
+       .variant-pill.active { border-color: var(--green); background: linear-gradient(135deg, var(--green-light), #d1fae5); color: var(--green); box-shadow: 0 0 0 2px rgba(26,46,30,0.2); transform: translateY(-1px); }
+      .variant-pill-thumb { width: 38px; height: 38px; border-radius: 8px; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); background: var(--cream-dark); }
+      .variant-pill-emoji { font-size: 1.2rem; flex-shrink: 0; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; background: var(--cream-dark); border-radius: 8px; }
+       .hidden { display: none !important; }
+
+      .variant-detail-panel {
+         display: flex; align-items: center; gap: 0.85rem;
+         padding: 0.75rem 1rem; background: linear-gradient(135deg, var(--green-light), #f0fdf4); border: 2px solid rgba(26,46,30,0.15);
+         border-radius: var(--radius); margin-bottom: 1rem;
+         transition: all 0.3s ease;
+       }
+       .vdp-img { width: 56px; height: 56px; border-radius: 10px; object-fit: cover; border: 2px solid rgba(26,46,30,0.2); flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+       .vdp-emoji { font-size: 2rem; flex-shrink: 0; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; background: var(--cream-dark); border-radius: 10px; }
+       .vdp-name { font-size: 0.95rem; font-weight: 700; color: var(--green-dark); line-height: 1.3; }
+       .vdp-storage { font-size: 0.72rem; color: var(--text-mid); margin-top: 0.15rem; }
     </style>
-    <script src="sellers-storage.js"></script>
   </head>
   <body>
  
@@ -170,7 +155,7 @@
     <nav class="navbar">
       <input type="checkbox" id="menu-check" class="menu-checkbox" />
       <div class="nav-inner">
-        <a href="../index.html" class="logo"><span class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-vegan-icon lucide-vegan"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg></span><span>FarmDirect</span></a>
+        <a href="../index.html" class="logo"><span class="logo-icon">🌾</span><span>FarmDirect</span></a>
         <div class="nav-links">
           <a href="../index.html"  class="nav-link">Home</a>
           <a href="Dashboard.html" class="nav-link">Dashboard</a>
@@ -207,10 +192,10 @@
             <div class="notif-dropdown" style="min-width:180px">
               <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
               <div class="notif-list">
-                <div class="notif-item"><div class="notif-content"><a href="Dashboard.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-chart-column-increasing-icon lucide-file-chart-column-increasing"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M8 18v-2"/><path d="M12 18v-4"/><path d="M16 18v-6"/></svg> Management</a></div></div>
-                <div class="notif-item"><div class="notif-content"><a href="Profile.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Profile</a></div></div>
-                <div class="notif-item"><div class="notif-content"><a href="Settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-icon lucide-settings"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg> Settings</a></div></div>
-                <div class="notif-item"><div class="notif-content"><a href="../index.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg> Logout</a></div></div>
+                <div class="notif-item"><div class="notif-content"><a href="Dashboard.html">📊 Management</a></div></div>
+                <div class="notif-item"><div class="notif-content"><a href="Profile.html">👤 Profile</a></div></div>
+                <div class="notif-item"><div class="notif-content"><a href="Settings.html">⚙️ Settings</a></div></div>
+                <div class="notif-item"><div class="notif-content"><a href="../index.html">🚪 Logout</a></div></div>
               </div>
             </div>
           </div>
@@ -225,8 +210,6 @@
           <a href="Dashboard.html" class="menu-item">Dashboard</a>
           <a href="Products.html"  class="menu-item">Products</a>
           <a href="Orders.html"    class="menu-item">Orders</a>
-          <a href="Notifications.html" class="menu-item">Notifications</a>
-          <a href="Chat.html"      class="menu-item">Messages</a>
           <a href="Reviews.html"   class="menu-item">Reviews</a>
           <a href="Settings.html"  class="menu-item">Settings</a>
         </div>
@@ -347,7 +330,7 @@
  
             <!-- Variant Selector -->
             <div class="variant-selector-section">
-              <span class="variant-selector-label">Choose Variant:</span>
+              <span class="variant-selector-label">Variant:</span>
               <div class="variant-pills" id="variant-pills"></div>
             </div>
  
@@ -366,6 +349,7 @@
             <!-- Tags -->
             <div class="product-tags" id="display-tags">
               <span class="tag tag-organic">🌿 Organic</span>
+              <span class="tag tag-fresh">🌅 Harvested Daily</span>
               <span class="tag tag-local">📍 Tugbungan</span>
               <span class="tag tag-cat">🥦 Vegetables</span>
             </div>
@@ -618,7 +602,7 @@
       <div class="footer-container">
         <div class="footer-main">
           <div>
-            <div class="footer-logo"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-vegan-icon lucide-vegan"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg> FarmDirect</div>
+            <div class="footer-logo">🌾 FarmDirect</div>
             <p class="footer-desc">Connecting Zamboanga farmers to your table. Fresh, local, and delivered with care.</p>
             <div class="footer-social">
               <a href="#" class="social-link">Facebook</a>
@@ -655,40 +639,48 @@
          JAVASCRIPT
     ══════════════════════════════════════ -->
     <script>
-      var D = FarmDirectStorage.get();
-
       /* ─── CONSTANTS ─── */
       const UNIT_ICONS = {
         'per kg':'⚖️','per 100g':'🔢','per bundle':'🌿','per piece':'🔵',
         'per pack':'📦','per box':'🗃️','per tray':'🍱','per sack':'👜'
       };
       const CAT_EMOJI = { Vegetables:'🥦',Fruits:'🍑',Dairy:'🥛',Grains:'🌾',Meat:'🥩',Others:'📦' };
-
-      /* ─── VARIANT DATA (loaded from localStorage)
-           stock values here are READ-ONLY display values.
-           They should only change when the farmer goes through StockUpdate.html.
-           The Edit modal does NOT expose stock fields.
-        ─── */
-      var variants = [];
-      if(D.stock && D.stock.length){
-        variants = D.stock.map(function(p){
-          return {
-            id: p.id,
-            name: p.name,
-            photo: p.img || '',
-            storage: 'Room temperature',
-            units: (p.unitTypes || []).map(function(ut){
-              return { unit:ut.label, price:ut.price||0, stock:0, alertAt:ut.alertAt||5, status:ut.status||'live' };
-            })
-          };
-        });
-      } else {
-        variants = [
-          { id:1, name:'Regular Tomato', photo:'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200', storage:'Room temperature', units:[{ unit:'per kg', price:35, stock:4, alertAt:5, status:'live' },{ unit:'per bundle', price:18, stock:20, alertAt:5, status:'live' },{ unit:'per box', price:160, stock:3, alertAt:2, status:'live' }] },
-          { id:2, name:'Cherry Tomato', photo:'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=200', storage:'Room temperature', units:[{ unit:'per kg', price:55, stock:8, alertAt:3, status:'live' },{ unit:'per pack', price:45, stock:15, alertAt:5, status:'live' }] },
-          { id:3, name:'Green Tomato', photo:'https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?w=200', storage:'Room temperature', units:[{ unit:'per kg', price:28, stock:10, alertAt:3, status:'live'},{ unit:'per bundle', price:15, stock:6, alertAt:2, status:'paused' }] }
-        ];
-      }
+ 
+      /* ─── VARIANT DATA
+         stock values here are READ-ONLY display values.
+         They should only change when the farmer goes through StockUpdate.html.
+         The Edit modal does NOT expose stock fields.
+      ─── */
+      let variants = [
+        {
+          id:1, name:'Regular Tomato',
+          photo:'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200',
+          storage:'Room temperature',
+          units:[
+            { unit:'per kg',     price:35,  stock:4,  alertAt:5, status:'live' },
+            { unit:'per bundle', price:18,  stock:20, alertAt:5, status:'live' },
+            { unit:'per box',    price:160, stock:3,  alertAt:2, status:'live' }
+          ]
+        },
+        {
+          id:2, name:'Cherry Tomato',
+          photo:'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=200',
+          storage:'Room temperature',
+          units:[
+            { unit:'per kg',   price:55, stock:8,  alertAt:3, status:'live' },
+            { unit:'per pack', price:45, stock:15, alertAt:5, status:'live' }
+          ]
+        },
+        {
+          id:3, name:'Green Tomato',
+          photo:'https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?w=200',
+          storage:'Room temperature',
+          units:[
+            { unit:'per kg',     price:28, stock:10, alertAt:3, status:'live'   },
+            { unit:'per bundle', price:15, stock:6,  alertAt:2, status:'paused' }
+          ]
+        }
+      ];
  
       let activeVariantId      = variants[0].id;
       let modalActiveVariantId = variants[0].id;
@@ -728,6 +720,550 @@
         r.readAsDataURL(file);
       }
       function removeModalPhoto(i) { photos[i].src = null; buildModalPhotoGrid(); }
+ 
+      function buildGalleryThumbs() {
+        const container = document.getElementById('gallery-thumbs');
+        container.innerHTML = '';
+        const active = photos.filter(p => p.src);
+        if (!active.length) return;
+        active.forEach((p, i) => {
+          const thumb = document.createElement('div');
+          thumb.className = 'thumb' + (i === activeThumbIdx ? ' active' : '');
+          thumb.innerHTML = `<img src="${p.src}" alt="${p.label}"/>`;
+          thumb.addEventListener('click', () => {
+            activeThumbIdx = i;
+            document.getElementById('main-img').src = p.src;
+            container.querySelectorAll('.thumb').forEach((t, j) => t.classList.toggle('active', j === i));
+          });
+          container.appendChild(thumb);
+        });
+        const cur = active[Math.min(activeThumbIdx, active.length - 1)];
+        if (cur) document.getElementById('main-img').src = cur.src;
+        activeThumbIdx = Math.min(activeThumbIdx, active.length - 1);
+      }
+ 
+      /* ─── VARIANT PILLS ─── */
+      function buildVariantPills() {
+        const container = document.getElementById('variant-pills');
+        container.innerHTML = '';
+        variants.forEach(v => {
+          const pill = document.createElement('div');
+          pill.className = 'variant-pill' + (v.id === activeVariantId ? ' active' : '');
+          pill.dataset.id = v.id;
+          const thumb = v.photo
+            ? `<img class="variant-pill-thumb" src="${v.photo}" alt="${v.name}"/>`
+            : `<span class="variant-pill-emoji">🍅</span>`;
+          pill.innerHTML = `${thumb}<span>${v.name}</span>`;
+          pill.addEventListener('click', () => selectVariant(v.id));
+          container.appendChild(pill);
+        });
+      }
+ 
+      function selectVariant(vid) {
+        activeVariantId = vid;
+        document.querySelectorAll('.variant-pill').forEach(p =>
+          p.classList.toggle('active', parseInt(p.dataset.id) === vid));
+        const v = variants.find(x => x.id === vid);
+        if (v && v.photo) document.getElementById('main-img').src = v.photo;
+        updateVariantDetailPanel();
+        updateVariantUstockDisplay();
+        updateRevenue();
+      }
+ 
+      function updateVariantDetailPanel() {
+        const v = variants.find(x => x.id === activeVariantId);
+        if (!v) return;
+        const imgHtml = v.photo
+          ? `<img class="vdp-img" src="${v.photo}" alt="${v.name}"/>`
+          : `<span class="vdp-emoji">🍅</span>`;
+        const chips = v.units.filter(u => u.status === 'live').map(u =>
+          `<span style="font-size:.72rem;font-weight:700;background:var(--green-light);color:var(--green);border:1px solid rgba(26,46,30,.12);padding:.1rem .45rem;border-radius:20px">
+            ${UNIT_ICONS[u.unit]||'📦'} ${u.unit} ₱${u.price}
+          </span>`).join('');
+        document.getElementById('variant-detail-panel').innerHTML = `
+          ${imgHtml}
+          <div style="flex:1;min-width:0">
+            <div class="vdp-name">${v.name}</div>
+            <div class="vdp-storage">📦 ${v.storage}</div>
+            <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.35rem">
+              ${chips || '<span style="font-size:.72rem;color:var(--text-light)">No live units</span>'}
+            </div>
+          </div>`;
+      }
+ 
+      /* ─── USTOCK SECTIONS (read-only stock) ─── */
+      function buildVariantUstockSections() {
+        const wrap = document.getElementById('all-variant-ustock-sections');
+        wrap.innerHTML = '';
+        variants.forEach(v => {
+          const sec = document.createElement('div');
+          sec.className = 'variant-ustock-section ustock-grid' + (v.id === activeVariantId ? ' active' : '');
+          sec.id = 'ustock-sec-' + v.id;
+          sec.innerHTML = buildUstockRowsHtml(v);
+          wrap.appendChild(sec);
+        });
+      }
+ 
+      function buildUstockRowsHtml(v) {
+        if (!v.units.length)
+          return '<div style="font-size:.82rem;color:var(--text-light);padding:.4rem 0">No units configured for this variant.</div>';
+ 
+        return v.units.map((u, i) => {
+          const isPrimary = i === 0;
+          const qtyClass  = u.stock <= u.alertAt      ? 'ustock-qty-low'
+                          : u.stock <= u.alertAt * 2  ? 'ustock-qty-warn'
+                          : 'ustock-qty-ok';
+          const qtyLabel  = u.stock <= u.alertAt      ? `${u.stock} · 🔴 Low`
+                          : u.stock <= u.alertAt * 2  ? `${u.stock} · ⚠️ Low`
+                          : `${u.stock} · ✅ Good`;
+          const stBg  = u.status==='live'    ? 'var(--success-bg)' : u.status==='paused' ? 'var(--warn-bg)'    : 'var(--danger-bg)';
+          const stCol = u.status==='live'    ? 'var(--success)'    : u.status==='paused' ? 'var(--warn)'       : 'var(--danger)';
+          const stLbl = { live:'🟢 Live', paused:'⏸ Paused', sold_out:'🔴 Sold Out' }[u.status] || '🟢 Live';
+ 
+          return `
+            <div class="ustock-row${isPrimary ? ' ustock-primary' : ''}">
+              <div class="ustock-left">
+                <span class="ustock-icon">${UNIT_ICONS[u.unit]||'📦'}</span>
+                <div class="ustock-info">
+                  <span class="ustock-unit">${u.unit}</span>
+                  <!-- Stock count is static — only StockUpdate.html changes this -->
+                  <span class="ustock-qty-tag ${qtyClass}">${qtyLabel}</span>
+                </div>
+                ${isPrimary ? '<span class="ustock-primary-star">★ Primary</span>' : ''}
+                <span style="font-size:.65rem;font-weight:700;padding:.1rem .4rem;border-radius:20px;background:${stBg};color:${stCol}">${stLbl}</span>
+              </div>
+              <!-- Price is editable; stock is shown as plain text only -->
+              <div class="ustock-price-wrap">
+                <span class="ustock-currency">₱</span>
+                <input type="number" value="${u.price}" min="0" class="ustock-price-input"
+                  oninput="updateVariantUnitPrice(${v.id},'${u.unit}',this.value)"/>
+                <span class="ustock-per">${u.unit}</span>
+              </div>
+            </div>`;
+        }).join('');
+      }
+ 
+      function updateVariantUstockDisplay() {
+        variants.forEach(v => {
+          const sec = document.getElementById('ustock-sec-' + v.id);
+          if (sec) sec.classList.toggle('active', v.id === activeVariantId);
+        });
+        /* Rebuild HTML for the active section so price edits on the page stay in sync */
+        const v   = variants.find(x => x.id === activeVariantId);
+        const sec = document.getElementById('ustock-sec-' + activeVariantId);
+        if (v && sec) sec.innerHTML = buildUstockRowsHtml(v);
+      }
+ 
+      function updateVariantUnitPrice(vid, unit, val) {
+        const v = variants.find(x => x.id === vid);
+        if (!v) return;
+        const u = v.units.find(x => x.unit === unit);
+        if (u) { u.price = parseFloat(val) || 0; updateRevenue(); }
+      }
+ 
+      /* ─── REVENUE (uses static stock × current price) ─── */
+      function updateRevenue() {
+        const v = variants.find(x => x.id === activeVariantId);
+        if (!v) return;
+        let total = 0, chips = '';
+        v.units.forEach((u, i) => {
+          const rev = u.price * u.stock;  // stock never changes here
+          total += rev;
+          if (i > 0) chips += `<span class="ustock-rev-plus">+</span>`;
+          chips += `<span class="ustock-rev-chip">₱${rev.toLocaleString()} <span>${u.unit}</span></span>`;
+        });
+        chips += `<span class="ustock-rev-total">= <b>₱${total.toLocaleString()}</b></span>`;
+        document.getElementById('rev-breakdown').innerHTML = chips;
+        const ni = document.getElementById('rev-note-inline');
+        if (ni) ni.textContent = '₱' + total.toLocaleString();
+        const primary = v.units[0];
+        if (primary) {
+          document.getElementById('display-price').textContent      = '₱' + primary.price;
+          document.getElementById('display-price-unit').textContent = primary.unit;
+        }
+      }
+ 
+      /* ─── DESCRIPTION TAB — variant list ─── */
+      function buildDescVariantList() {
+        const wrap = document.getElementById('desc-variant-list');
+        if (!wrap) return;
+        wrap.innerHTML = variants.map(v => {
+          const unitList = v.units.map(u =>
+            `<span style="font-size:.72rem;background:var(--green-light);color:var(--green);border:1px solid rgba(26,46,30,.12);padding:.12rem .45rem;border-radius:20px;font-weight:600">
+              ${UNIT_ICONS[u.unit]||'📦'} ${u.unit} — ₱${u.price}
+            </span>`).join('');
+          const imgHtml = v.photo
+            ? `<img src="${v.photo}" style="width:44px;height:44px;border-radius:8px;object-fit:cover;border:1px solid var(--border);flex-shrink:0" alt=""/>`
+            : `<div style="width:44px;height:44px;border-radius:8px;background:var(--cream-dark);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">🍅</div>`;
+          return `
+            <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.6rem;background:var(--cream);border:1.5px solid var(--border);border-radius:var(--radius-sm)">
+              ${imgHtml}
+              <div style="flex:1;min-width:0">
+                <div style="font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.25rem">${v.name}</div>
+                <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.2rem">${unitList}</div>
+                <div style="font-size:.71rem;color:var(--text-light)">📦 ${v.storage}</div>
+              </div>
+            </div>`;
+        }).join('');
+      }
+ 
+      /* ─── EDIT MODAL — VARIANT TABS ─── */
+      function buildModalVariantTabs() {
+        const tabsEl = document.getElementById('em-variant-tabs');
+        tabsEl.innerHTML = '';
+        variants.forEach(v => {
+          const btn = document.createElement('button');
+          btn.className = 'em-variant-tab' + (v.id === modalActiveVariantId ? ' active' : '');
+          btn.dataset.id = v.id;
+          const img = v.photo ? `<img src="${v.photo}" alt=""/>` : `<span style="font-size:.9rem">🍅</span>`;
+          btn.innerHTML = `${img}<span style="overflow:hidden;text-overflow:ellipsis">${v.name}</span>`;
+          btn.addEventListener('click', () => switchModalVariant(v.id));
+          tabsEl.appendChild(btn);
+        });
+        buildModalVariantPanels();
+      }
+ 
+      function switchModalVariant(vid) {
+        modalActiveVariantId = vid;
+        document.querySelectorAll('.em-variant-tab').forEach(t =>
+          t.classList.toggle('active', parseInt(t.dataset.id) === vid));
+        document.querySelectorAll('.em-variant-panel').forEach(p =>
+          p.classList.toggle('active', parseInt(p.dataset.id) === vid));
+      }
+ 
+      function buildModalVariantPanels() {
+        const wrap = document.getElementById('em-variant-panels');
+        wrap.innerHTML = '';
+        const storageOpts = ['Room temperature','Refrigerate (2–8°C)','Cool & dry place','Keep away from sunlight'];
+ 
+        variants.forEach(v => {
+          const panel = document.createElement('div');
+          panel.className = 'em-variant-panel' + (v.id === modalActiveVariantId ? ' active' : '');
+          panel.dataset.id = v.id;
+ 
+          const soHtml = storageOpts.map(s => `<option${v.storage===s?' selected':''}>${s}</option>`).join('');
+ 
+          /* Unit rows — price is editable, stock is READ-ONLY (shown as plain text with lock icon) */
+          const unitRowsHtml = v.units.map((u, i) => `
+            <div class="em-variant-unit-row${i===0?' primary-unit':''}">
+              <span class="evu-icon">${UNIT_ICONS[u.unit]||'📦'}</span>
+              <span class="evu-name">${u.unit}</span>
+              ${i===0 ? '<span class="evu-primary-badge">Primary</span>' : ''}
+              <!-- Price: editable -->
+              <div class="evu-price-wrap">
+                <span class="evu-sym">₱</span>
+                <input class="evu-inp" type="number" value="${u.price}" min="0" step="0.01"
+                  oninput="setModalVariantUnitPrice(${v.id},'${u.unit}',this.value)"/>
+                <span class="evu-per">${u.unit}</span>
+              </div>
+              <!-- Stock: read-only display -->
+              <div class="evu-stock-wrap" style="opacity:.7;cursor:not-allowed"
+                   title="Stock can only be changed via Update Stock page">
+                <span class="evu-stock-lbl">Stock:</span>
+                <span style="font-size:.88rem;font-weight:700;color:var(--text);padding:0 2px;min-width:28px;text-align:right">${u.stock}</span>
+                <span style="font-size:.65rem;color:var(--text-light)">🔒</span>
+              </div>
+            </div>`).join('');
+ 
+          panel.innerHTML = `
+            <div class="em-variant-photo-row">
+              <div class="em-variant-photo-slot${v.photo?' has-img':''}" id="mvslot-${v.id}">
+                <img class="vslot-preview" alt="${v.name}" ${v.photo?`src="${v.photo}"`:''} />
+                <input type="file" accept="image/*"/>
+                <button class="em-vrm-btn" type="button">✕</button>
+                <div class="vs-icon">📷</div>
+                <div class="vs-lbl">Photo</div>
+              </div>
+              <div class="em-variant-photo-hint">
+                <strong>${v.name}</strong>
+                This photo appears on the variant selector. A clear, distinct photo helps buyers choose.
+              </div>
+            </div>
+            <div class="em-row-2" style="margin-bottom:.75rem">
+              <div class="em-group" style="margin:0">
+                <label>Variant Name</label>
+                <input type="text" value="${v.name}" oninput="setModalVariantName(${v.id},this.value)"/>
+              </div>
+              <div class="em-group" style="margin:0">
+                <label>Storage / Handling</label>
+                <select id="em-vstorage-${v.id}" onchange="setModalVariantStorage(${v.id},this.value)">${soHtml}</select>
+              </div>
+            </div>
+            <div class="em-section-title" style="margin-top:.25rem">💰 Price per Unit
+              <span style="font-size:.65rem;font-weight:600;color:var(--text-light);text-transform:none;letter-spacing:0;margin-left:.4rem">
+                🔒 Stock is read-only — use <a href="StockUpdate.html" style="color:var(--green);font-weight:700">Update Stock</a> to change quantities
+              </span>
+            </div>
+            <div class="em-variant-unit-rows">
+              ${unitRowsHtml || '<p style="font-size:.82rem;color:var(--text-light)">No units for this variant.</p>'}
+            </div>`;
+ 
+          /* Photo slot events */
+          const slot  = panel.querySelector('.em-variant-photo-slot');
+          const input = slot.querySelector('input[type="file"]');
+          const rmBtn = slot.querySelector('.em-vrm-btn');
+          input.addEventListener('change', e => handleModalVariantPhotoChange(e, v.id));
+          rmBtn.addEventListener('click',  e => { e.stopPropagation(); removeModalVariantPhoto(v.id); });
+ 
+          wrap.appendChild(panel);
+        });
+      }
+ 
+      function handleModalVariantPhotoChange(e, vid) {
+        const file = e.target.files[0]; if (!file) return;
+        const r = new FileReader();
+        r.onload = ev => {
+          const v = variants.find(x => x.id === vid);
+          if (v) v.photo = ev.target.result;
+          buildModalVariantTabs(); switchModalVariant(vid);
+        };
+        r.readAsDataURL(file);
+      }
+      function removeModalVariantPhoto(vid) {
+        const v = variants.find(x => x.id === vid);
+        if (v) v.photo = null;
+        buildModalVariantTabs(); switchModalVariant(vid);
+      }
+      function setModalVariantName(vid, val) {
+        const v = variants.find(x => x.id === vid);
+        if (v) { v.name = val; buildModalVariantTabs(); switchModalVariant(vid); }
+      }
+      function setModalVariantStorage(vid, val) {
+        const v = variants.find(x => x.id === vid);
+        if (v) v.storage = val;
+      }
+      /* Only price is settable from the modal — not stock */
+      function setModalVariantUnitPrice(vid, unit, val) {
+        const v = variants.find(x => x.id === vid);
+        if (!v) return;
+        const u = v.units.find(x => x.unit === unit);
+        if (u) u.price = parseFloat(val) || 0;
+      }
+ 
+      /* ─── MODAL OPEN / CLOSE / SAVE ─── */
+      function openEditModal() {
+        buildModalPhotoGrid();
+        modalActiveVariantId = activeVariantId;
+        buildModalVariantTabs();
+        document.getElementById('editModalOverlay').classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeEditModal() {
+        document.getElementById('editModalOverlay').classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      document.getElementById('editModalOverlay').addEventListener('click', function(e) {
+        if (e.target === this) closeEditModal();
+      });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeEditModal(); });
+ 
+      function setModalStatus(val) {
+        modalStatus = val;
+        const map = { live:'active-live', paused:'active-paused', sold_out:'active-sold' };
+        document.querySelectorAll('.em-status-pill').forEach(p =>
+          p.classList.remove('active-live','active-paused','active-sold'));
+        document.querySelector(`.em-status-pill[data-val="${val}"]`)?.classList.add(map[val]);
+      }
+ 
+      function saveEditModal() {
+        const name  = document.getElementById('em-name').value.trim();
+        const cat   = document.getElementById('em-cat').value;
+        const desc  = document.getElementById('em-desc').value.trim();
+        const origP = document.getElementById('em-original-price').value;
+        const disc  = document.getElementById('em-discount-label').value;
+        const tags  = document.getElementById('em-tags').value;
+        const cert  = document.getElementById('em-cert').value;
+ 
+        buildGalleryThumbs();
+ 
+        if (name) {
+          document.getElementById('display-name').textContent     = name;
+          document.getElementById('bc-product-name').textContent  = name;
+          document.getElementById('spec-name').textContent        = name;
+          document.getElementById('modal-title-name').textContent = name;
+          document.title = name + ' – FarmDirect';
+        }
+        if (desc)  document.getElementById('display-desc').textContent     = desc;
+        if (origP) document.getElementById('display-original').textContent = '₱' + origP;
+        if (disc)  document.getElementById('display-discount').textContent = disc;
+        if (cert)  document.getElementById('spec-cert').textContent        = cert;
+        if (cat)   document.getElementById('spec-cat').textContent         = cat;
+ 
+        if (tags) {
+          const icons = { Organic:'🌿','Harvested Daily':'🌅',Tugbungan:'📍',Vegetables:'🥦',Fruits:'🍎',Grains:'🌾',Meat:'🥩',Dairy:'🥛' };
+          document.getElementById('display-tags').innerHTML = tags.split(',')
+            .map(t => t.trim()).filter(Boolean)
+            .map(t => `<span class="tag">${icons[t]||'🏷️'} ${t}</span>`).join('');
+        }
+ 
+        const statusLabels  = { live:'🟢 Live', paused:'⏸ Paused', sold_out:'🔴 Sold Out' };
+        const statusClasses = { live:'status-live-pill', paused:'status-paused-pill', sold_out:'status-sold-pill' };
+        const pill  = document.getElementById('display-status-pill');
+        const badge = document.getElementById('control-live-badge');
+        pill.textContent = statusLabels[modalStatus]  || '🟢 Live';
+        pill.className   = statusClasses[modalStatus] || 'status-live-pill';
+        if (badge) badge.textContent = statusLabels[modalStatus] || '🟢 Live';
+ 
+        /* Rebuild variant-driven UI with updated prices (stock unchanged) */
+        buildVariantPills();
+        buildVariantUstockSections();
+        updateVariantDetailPanel();
+        updateVariantUstockDisplay();
+        updateRevenue();
+        buildDescVariantList();
+ 
+        /* Specs */
+        document.getElementById('spec-variants').textContent = variants.length + ' variants';
+        const totalStock = variants.flatMap(v => v.units).reduce((s, u) => s + u.stock, 0);
+        document.getElementById('spec-stock').textContent = totalStock + ' units across all variants';
+        document.getElementById('stat-stock-val').textContent = totalStock + ' units';
+        if (document.getElementById('analytics-stock-val'))
+          document.getElementById('analytics-stock-val').textContent = totalStock + ' units';
+ 
+        const pricingText = variants.map(v => {
+          const p = v.units[0];
+          return p ? `${v.name}: ₱${p.price}/${p.unit}` : null;
+        }).filter(Boolean).join(' · ');
+        document.getElementById('spec-pricing').textContent = pricingText;
+ 
+        closeEditModal();
+        showToast('✅ Product updated successfully!');
+      }
+ 
+      /* ─── REVIEWS ─── */
+      let reviews = [
+        { id:1, initials:'MS', name:'Maria Santos',   date:'March 5, 2026',  stars:5, verified:true,
+          variant:'Regular Tomato · 2 kg · GCash · ORD-00241',
+          text:'"Super fresh and juicy! These tomatoes are so much better than what you get at the palengke. Sweet, rich, and no mushy parts. Will definitely order again!"',
+          photos:['https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=150','https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?w=150'],
+          reply:'Thank you so much, Maria! We harvest every morning to make sure they reach you at peak freshness. See you on your next order! 🍅',
+          replyEditing:false, replyDraft:'' },
+        { id:2, initials:'JE', name:'Juan Enriquez',  date:'March 3, 2026',  stars:4, verified:true,
+          variant:'Cherry Tomato · 1 kg · COD · ORD-00240',
+          text:'"Good quality tomatoes. A bit smaller than the photos but still fresh and flavorful. Delivery was on time. Would order again."',
+          photos:[], reply:"Thanks for the feedback! We'll make sure to better represent size in our photos next time.",
+          replyEditing:false, replyDraft:'' },
+        { id:3, initials:'AR', name:'Ana Reyes',      date:'March 1, 2026',  stars:5, verified:true,
+          variant:'Regular Tomato · 5 kg · GCash · ORD-00239',
+          text:'"I run a small carenderia and these tomatoes are now a staple! My customers always comment on how fresh the sauce tastes. Highly recommend!"',
+          photos:[], reply:null, replyEditing:false, replyDraft:'' },
+        { id:4, initials:'CB', name:'Carlos Bautista', date:'Feb 28, 2026', stars:5, verified:true,
+          variant:'Green Tomato · 2 kg · PayMaya · ORD-00238',
+          text:'"Arrived in perfect condition. Each tomato individually wrapped. Fresh smell, vibrant color, excellent taste. Farm-to-table done right."',
+          photos:[], reply:'So happy to hear that, Carlos! Careful packing is something we take very seriously. Hope to see you again!',
+          replyEditing:false, replyDraft:'' }
+      ];
+ 
+      function starsHtml(n) { let s=''; for(let i=1;i<=5;i++) s += i<=n?'★':'☆'; return s; }
+ 
+      function renderReviews() {
+        const list = document.getElementById('reviews-list');
+        list.innerHTML = '';
+        reviews.forEach(r => {
+          const card = document.createElement('div');
+          const needsReply = !r.reply;
+          card.className = 'review-card' + (needsReply ? ' review-card-unreplied' : '');
+          let html = '';
+          if (needsReply) html += `<div class="unreplied-tag">💬 Needs Your Reply</div>`;
+          html += `
+            <div class="reviewer-row">
+              <div class="rev-avatar">${r.initials}</div>
+              <div class="rev-info">
+                <div class="rev-name">${r.name}</div>
+                <div class="rev-date">${r.date}</div>
+              </div>
+              <div class="rev-stars">${starsHtml(r.stars)}</div>
+              ${r.verified ? '<span class="rev-verified-badge">✓ Verified Purchase</span>' : ''}
+            </div>
+            <div class="rev-variant">${r.variant}</div>
+            <p class="rev-text">${r.text}</p>`;
+          if (r.photos?.length)
+            html += `<div class="rev-photos">${r.photos.map(s=>`<img src="${s}" alt=""/>`).join('')}</div>`;
+          if (r.reply && !r.replyEditing)
+            html += `<div class="seller-reply">
+              <div class="reply-header">
+                <span>🌾 Your Reply (Sunrise Farm)</span>
+                <button onclick="startEditReply(${r.id})" style="background:none;border:none;font-size:.78rem;color:var(--green);font-weight:700;cursor:pointer;text-decoration:underline;">✏️ Edit</button>
+              </div>
+              <p class="reply-text">${r.reply}</p></div>`;
+          if (r.replyEditing)
+            html += `<div class="reply-edit-wrap open">
+              <textarea class="reply-textarea" id="reply-textarea-${r.id}">${r.replyDraft||r.reply||''}</textarea>
+              <div class="reply-compose-actions">
+                <button class="reply-cancel-btn" onclick="cancelEditReply(${r.id})">Cancel</button>
+                <button class="reply-send-btn"   onclick="saveReply(${r.id})">💾 Save Reply</button>
+              </div></div>`;
+          if (!r.reply && !r.replyEditing)
+            html += `<div class="reply-compose">
+              <textarea class="reply-textarea" id="reply-textarea-${r.id}" placeholder="Write your reply to ${r.name}…">${r.replyDraft||''}</textarea>
+              <div class="reply-compose-actions">
+                <button class="reply-send-btn" onclick="saveReply(${r.id})">✅ Send Reply</button>
+              </div></div>`;
+          html += `<div class="rev-actions-farmer">`;
+          if (r.reply && !r.replyEditing) {
+            html += `<button class="rev-act-btn" onclick="startEditReply(${r.id})">✏️ Edit Reply</button>`;
+            html += `<button class="rev-act-btn" onclick="deleteReply(${r.id})" style="color:#dc2626;border-color:#fecaca;">🗑️ Delete Reply</button>`;
+          }
+          html += `<a href="#" class="rev-act-btn">📦 View Order</a></div>`;
+          card.innerHTML = html;
+          list.appendChild(card);
+        });
+      }
+ 
+      function startEditReply(id) {
+        const r = reviews.find(x => x.id===id); if (!r) return;
+        r.replyEditing=true; r.replyDraft=r.reply||'';
+        renderReviews();
+        setTimeout(()=>{ const ta=document.getElementById('reply-textarea-'+id); if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);} },50);
+      }
+      function cancelEditReply(id) {
+        const r=reviews.find(x=>x.id===id); if(r){r.replyEditing=false;r.replyDraft='';renderReviews();}
+      }
+      function saveReply(id) {
+        const r=reviews.find(x=>x.id===id); if(!r) return;
+        const ta=document.getElementById('reply-textarea-'+id);
+        const val=ta?ta.value.trim():''; if(!val){ta?.focus();return;}
+        r.reply=val; r.replyEditing=false; r.replyDraft='';
+        renderReviews(); showToast('✅ Reply saved!');
+      }
+      function deleteReply(id) {
+        const r=reviews.find(x=>x.id===id);
+        if(!r||!confirm('Delete your reply to '+r.name+'?')) return;
+        r.reply=null; r.replyEditing=false; r.replyDraft='';
+        renderReviews(); showToast('🗑️ Reply deleted');
+      }
+ 
+      /* ─── HELPERS ─── */
+      function showToast(msg) {
+        const t=document.getElementById('modal-saved-toast');
+        t.textContent=msg; t.classList.add('show');
+        setTimeout(()=>t.classList.remove('show'),2800);
+      }
+      function switchTab(btn,id) {
+        document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(id).classList.add('active');
+      }
+      document.querySelectorAll('.rfbtn').forEach(b=>{
+        b.addEventListener('click',function(){
+          document.querySelectorAll('.rfbtn').forEach(x=>x.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+ 
+      /* ─── INIT ─── */
+      buildGalleryThumbs();
+      buildVariantPills();
+      buildVariantUstockSections();
+      updateVariantDetailPanel();
+      updateRevenue();
+      buildDescVariantList();
+      renderReviews();
+    </script>
+ 
+  </body>
+</html>otos[i].src = null; buildModalPhotoGrid(); }
  
       function buildGalleryThumbs() {
         const container = document.getElementById('gallery-thumbs');
@@ -1306,31 +1842,79 @@
       buildDescVariantList();
       renderReviews();
 
-      /* ─── POPULATE EDIT MODAL FROM LOCALSTORAGE ─── */
-      (function initModalFields() {
-        const D = FarmDirectStorage.get();
-        if (!D) return;
+       /* ─── POPULATE EDIT MODAL FROM LOCALSTORAGE ─── */
+       (function initModalFields() {
+         const D = FarmDirectStorage.get();
+         if (!D) return;
 
-        /* Get current product data */
-        const prod = D.products?.find(p => p.id === 'tomatoes');
-        if (prod) {
-          if (prod.name)        document.getElementById('em-name').value = prod.name;
-          if (prod.desc)         document.getElementById('em-desc').value = prod.desc;
-          if (prod.tags)         document.getElementById('em-tags').value = prod.tags;
-          if (prod.status)       modalStatus = prod.status;
-        }
+         /* Get current product data */
+         const prod = D.products?.find(p => p.id === 'tomatoes');
+         if (prod) {
+           if (prod.name)        document.getElementById('em-name').value = prod.name;
+           if (prod.desc)         document.getElementById('em-desc').value = prod.desc;
+           if (prod.tags)         document.getElementById('em-tags').value = prod.tags;
+           if (prod.status)       modalStatus = prod.status;
+         }
 
-        /* Get farm info from settings */
-        if (D.settings) {
-          const farmName = D.settings.storeName || 'Sunrise Farm';
-          const location = D.settings.brgy + ', ' + D.settings.city;
-          document.getElementById('em-farm').value = farmName + ' · ' + location;
-        }
+         /* Get farm info from settings */
+         if (D.settings) {
+           const farmName = D.settings.storeName || 'Sunrise Farm';
+           const location = D.settings.brgy + ', ' + D.settings.city;
+           document.getElementById('em-farm').value = farmName + ' · ' + location;
+         }
 
-        /* Set status pills */
-        setModalStatus(modalStatus);
-      })();
-    </script>
+         /* Set status pills */
+         setModalStatus(modalStatus);
+       })();
+
+       /* ─── IMAGE ERROR HANDLING ─── */
+       function handleImageError(imgEl, fallbackText) {
+         imgEl.style.display = 'none';
+         const parent = imgEl.parentNode;
+         let emoji = parent.querySelector('.img-fallback');
+         if (!emoji) {
+           emoji = document.createElement('span');
+           emoji.className = 'img-fallback variant-pill-emoji';
+           emoji.textContent = fallbackText || '🍅';
+           emoji.style.position = 'absolute';
+           emoji.style.inset = '0';
+           emoji.style.display = 'flex';
+           emoji.style.alignItems = 'center';
+           emoji.style.justifyContent = 'center';
+           parent.style.position = 'relative';
+           parent.appendChild(emoji);
+         }
+         emoji.style.display = 'flex';
+       }
+
+       /* Add error handlers to all variant images after build */
+       function addVariantImageErrorHandlers() {
+         document.querySelectorAll('.variant-pill-thumb, .vdp-img').forEach(img => {
+           img.onerror = function() { handleImageError(this, '🍅'); };
+         });
+       }
+
+       /* Enhance selectVariant to handle image errors */
+       const originalSelectVariant = selectVariant;
+       selectVariant = function(vid) {
+         activeVariantId = vid;
+         document.querySelectorAll('.variant-pill').forEach(p =>
+           p.classList.toggle('active', parseInt(p.dataset.id) === vid));
+         const v = variants.find(x => x.id === vid);
+         const mainImg = document.getElementById('main-img');
+         if (v && v.photo) {
+           mainImg.src = v.photo;
+           mainImg.onerror = function() {
+             this.src = 'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=800';
+             this.onerror = null;
+           };
+         }
+         updateVariantDetailPanel();
+         updateVariantUstockDisplay();
+         updateRevenue();
+         addVariantImageErrorHandlers();
+       };
+     </script>
  
   </body>
 </html>
