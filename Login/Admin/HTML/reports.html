@@ -3,213 +3,555 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FarmDirect | Reports</title>
+    <title>FarmDirect | Reports & Complaints</title>
     <link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body>
 
-<!-- TOP NAVBAR -->
+<!-- Top Navbar -->
 <nav class="admin-navbar">
     <div class="admin-nav-inner">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">
+            <span></span><span></span><span></span>
+        </button>
         <a href="dashboard.html" class="admin-nav-logo">Farm<span>Direct</span> Admin</a>
         <div class="admin-nav-actions">
             <div class="notif-wrap">
-                <button class="notif-btn" onclick="toggleDropdown('notifDropdown', event)">
-                    🔔
-                    <span class="notif-badge"></span>
+                <button class="notif-btn" id="notifBtn" aria-label="Notifications">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <span class="notif-badge">2</span>
                 </button>
                 <div class="notif-dropdown" id="notifDropdown">
-                    <div class="notif-dropdown-header">🔔 Notifications</div>
+                    <div class="notif-dropdown-header">Notifications</div>
                     <div class="notif-dropdown-list">
                         <div class="notif-dropdown-item">
-                            <strong>New Report</strong>
-                            <p>Buyer reported seller for rotten goods.</p>
+                            <strong>New Report Filed</strong>
+                            <p>Buyer reported a seller for fraud</p>
                             <span>10 min ago</span>
                         </div>
                         <div class="notif-dropdown-item">
-                            <strong>Case Resolved</strong>
-                            <p>Case #R-004 has been marked resolved.</p>
-                            <span>1 hour ago</span>
+                            <strong>Case #R-018 Updated</strong>
+                            <p>Admin marked as reviewing</p>
+                            <span>1 hr ago</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="profile-wrap">
-                <button class="profile-btn" onclick="toggleDropdown('profileDropdown', event)">A</button>
+                <button class="profile-btn" id="profileBtn">A</button>
                 <div class="profile-dropdown" id="profileDropdown">
-                    <a href="settings.html" class="profile-dropdown-item">⚙️ Settings</a>
-                    <a href="../login-admin.html" class="profile-dropdown-item logout">🚪 Logout</a>
+                    <a href="settings.html" class="profile-dropdown-item">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                        Settings
+                    </a>
+                    <a href="../login-admin.html" class="profile-dropdown-item logout">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        Logout
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </nav>
 
-<!-- SIDEBAR — original structure untouched -->
-<aside class="sidebar">
-    <h2>FARMDirect</h2>
+<!-- Sidebar overlay for mobile -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <h2>FARM<span>Direct</span></h2>
+    </div>
     <nav>
         <ul>
-            <li><a href="dashboard.html">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
-                Dashboard
-            </a></li>
-            <li><a href="user Management.html">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-                User Management
-            </a></li>
-                           
-            <li><a href="products.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-salad-icon lucide-salad"><path d="M7 21h10"/><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M11.38 12a2.4 2.4 0 0 1-.4-4.77 2.4 2.4 0 0 1 3.2-2.77 2.4 2.4 0 0 1 3.47-.63 2.4 2.4 0 0 1 3.37 3.37 2.4 2.4 0 0 1-1.1 3.7 2.51 2.51 0 0 1 .03 1.1"/><path d="m13 12 4-4"/><path d="M10.9 7.25A3.99 3.99 0 0 0 4 10c0 .73.2 1.41.54 2"/></svg>Product Moderation</a></li>                
-
-            <li class="active"><a href="reports.html">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                Reports
-            </a></li>
-            <li><a href="Farmer Verification.html">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                Farmer Verification
-            </a></li>
+            <li>
+                <a href="dashboard.html">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="user Management.html">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                    <span>User Management</span>
+                </a>
+            </li>
+            <li>
+                <a href="products.html">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    <span>Product Moderation</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="reports.html">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <span>Reports</span>
+                </a>
+            </li>
+            <li>
+                <a href="Farmer Verification.html">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                    <span>Farmer Verification</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </aside>
 
-<!-- MAIN CONTENT -->
+<!-- Main Content -->
 <main class="main-content">
 
     <!-- Page Header -->
-    <div class="rp-header">
-        <div class="rp-header-left">
+    <header class="top-bar">
+        <div class="top-bar-left">
             <h1>Reports &amp; Complaints</h1>
-            <p>Review, investigate, and resolve disputes between buyers and farmers.</p>
+            <p class="top-bar-sub">Manage and resolve reported issues from buyers and sellers</p>
         </div>
-        <div class="rp-header-stats">
-            <div class="rp-hstat rp-hstat--yellow">
-                <span class="rp-hstat-num" id="statPending">0</span>
-                <span class="rp-hstat-lbl">Pending</span>
+        <div class="top-bar-stats" id="headerStats">
+            <div class="hstat hstat--orange">
+                <span class="hstat-num" id="hPending">0</span>
+                <span class="hstat-lbl">Pending</span>
             </div>
-            <div class="rp-hstat rp-hstat--blue">
-                <span class="rp-hstat-num" id="statReviewing">0</span>
-                <span class="rp-hstat-lbl">Reviewing</span>
+            <div class="hstat hstat--blue">
+                <span class="hstat-num" id="hReviewing">0</span>
+                <span class="hstat-lbl">Reviewing</span>
             </div>
-            <div class="rp-hstat rp-hstat--green">
-                <span class="rp-hstat-num" id="statResolved">0</span>
-                <span class="rp-hstat-lbl">Resolved</span>
+            <div class="hstat hstat--green">
+                <span class="hstat-num" id="hResolved">0</span>
+                <span class="hstat-lbl">Resolved</span>
             </div>
-            <div class="rp-hstat rp-hstat--red">
-                <span class="rp-hstat-num" id="statRejected">0</span>
-                <span class="rp-hstat-lbl">Rejected</span>
+            <div class="hstat hstat--red">
+                <span class="hstat-num" id="hRejected">0</span>
+                <span class="hstat-lbl">Rejected</span>
             </div>
+        </div>
+    </header>
+
+    <!-- Toolbar -->
+    <div class="rp-toolbar">
+        <div class="rp-tabs">
+            <button class="rp-tab active" onclick="filterTab('all', this)">
+                All Reports <span class="rp-tab-count" id="cAll">0</span>
+            </button>
+            <button class="rp-tab" onclick="filterTab('buyer', this)">
+                Buyer Reports <span class="rp-tab-count rp-tc--blue" id="cBuyer">0</span>
+            </button>
+            <button class="rp-tab" onclick="filterTab('seller', this)">
+                Seller Reports <span class="rp-tab-count rp-tc--green" id="cSeller">0</span>
+            </button>
+            <button class="rp-tab" onclick="filterTab('resolved', this)">
+                Resolved <span class="rp-tab-count rp-tc--green" id="cResolved">0</span>
+            </button>
+        </div>
+        <div class="rp-search-wrap">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="searchInput" placeholder="Search name or case number..." oninput="applySearch()">
         </div>
     </div>
 
-    <!-- Tab Bar -->
-    <div class="rp-tabs">
-        <button class="tab active" data-tab="all"    onclick="switchTab(this)">All Reports</button>
-        <button class="tab"        data-tab="buyers"  onclick="switchTab(this)">🛒 Buyer Reports</button>
-        <button class="tab"        data-tab="sellers" onclick="switchTab(this)">🌾 Seller Reports</button>
-        <button class="tab"        data-tab="resolved" onclick="switchTab(this)">✅ Resolved</button>
-        <button class="tab"        data-tab="rejected" onclick="switchTab(this)">❌ Rejected</button>
-        <div class="rp-tab-search">
-            <span class="rp-search-ico">🔍</span>
-            <input type="text" id="reportSearch" placeholder="Search cases…" oninput="renderReports()">
+    <!-- Report List Card -->
+    <div class="rp-card">
+        <div class="rp-card-header">
+            <span class="rp-card-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Reported Issues <span id="issueCount">(0)</span>
+            </span>
+            <span class="rp-card-note">Click a row to review full case details</span>
         </div>
-    </div>
-
-    <!-- Report list -->
-    <div class="card rp-list-card">
-        <div class="rp-list-header">
-            <h3>⚠️ Reported Issues (<span id="caseCount">0</span>)</h3>
-            <div class="rp-bulk-actions" id="bulkActions" style="display:none;">
-                <button class="btn btn-sm btn-success" onclick="bulkResolve()">✅ Resolve Selected</button>
-                <button class="btn btn-sm btn-danger"  onclick="bulkReject()">❌ Reject Selected</button>
-                <button class="btn btn-sm btn-outline" onclick="clearSelection()">Clear</button>
-            </div>
+        <div id="reportList"></div>
+        <div class="rp-empty" id="emptyState" style="display:none;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            <p>No reports match your filter.</p>
         </div>
-
-        <div id="reportList"><!-- injected by JS --></div>
-
-        <div class="rp-empty" id="rp-empty" style="display:none;">
-            <div style="font-size:2.5rem;margin-bottom:10px;">📋</div>
-            <p>No reports match this filter.</p>
-        </div>
+        <div class="rp-footer" id="rpFooter">Showing all reports</div>
     </div>
 
 </main>
 
-<!-- ══ REVIEW MODAL ═══════════════════════════════════════ -->
-<div class="modal-overlay" id="reviewModal">
-    <div class="modal rp-modal">
-        <div class="modal-header green" id="reviewModalHeader">
-            <div style="display:flex;align-items:center;gap:12px;">
-                <span id="reviewModalIcon" style="font-size:1.4rem;">⚠️</span>
-                <div>
-                    <h2 id="reviewTitle">Case Review</h2>
-                    <div id="reviewCaseNum" style="font-size:0.78rem;opacity:0.75;margin-top:2px;">#R-000</div>
-                </div>
+<!-- ═══════════ REVIEW MODAL ═══════════ -->
+<div class="rp-modal-overlay" id="reviewModal">
+    <div class="rp-modal">
+        <div class="rp-modal-header" id="reviewModalHeader">
+            <div>
+                <div class="rp-modal-case" id="reviewCase">Case #R-000</div>
+                <div class="rp-modal-title" id="reviewTitle">Case Review</div>
             </div>
-            <button class="modal-close" onclick="closeModal()">✕</button>
+            <button class="rp-modal-close" onclick="closeModal()">&#10005;</button>
         </div>
-        <div class="modal-body">
-            <div class="rp-review-grid">
-                <div class="rp-review-item">
-                    <label>Reported By</label>
-                    <span id="rvReportedBy">—</span>
+        <div class="rp-modal-body">
+            <div class="rp-modal-grid">
+                <div class="rp-minfo">
+                    <span class="rp-mlbl">Type</span>
+                    <span class="rp-mval" id="reviewType">—</span>
                 </div>
-                <div class="rp-review-item">
-                    <label>Against</label>
-                    <span id="rvAgainst">—</span>
+                <div class="rp-minfo">
+                    <span class="rp-mlbl">Reported Party</span>
+                    <span class="rp-mval" id="reviewParty">—</span>
                 </div>
-                <div class="rp-review-item">
-                    <label>Type</label>
-                    <span id="rvType">—</span>
+                <div class="rp-minfo">
+                    <span class="rp-mlbl">Status</span>
+                    <span class="rp-mval" id="reviewStatus">—</span>
                 </div>
-                <div class="rp-review-item">
-                    <label>Date Filed</label>
-                    <span id="rvDate">—</span>
+                <div class="rp-minfo">
+                    <span class="rp-mlbl">Date Filed</span>
+                    <span class="rp-mval" id="reviewDate">—</span>
                 </div>
-                <div class="rp-review-item rp-review-item--full">
-                    <label>Complaint</label>
-                    <span id="rvComplaint">—</span>
-                </div>
-                <div class="rp-review-item rp-review-item--full">
-                    <label>Current Status</label>
-                    <span id="rvStatus">—</span>
+                <div class="rp-minfo rp-minfo--full">
+                    <span class="rp-mlbl">Complaint</span>
+                    <span class="rp-mval" id="reviewComplaint">—</span>
                 </div>
             </div>
-            <div class="form-group" style="margin-top:16px;">
-                <label class="form-label">Admin Notes <span style="color:#aaa;font-weight:400;">(optional)</span></label>
-                <textarea class="form-input rp-notes" id="reviewNotes" rows="3" placeholder="Enter your assessment or action notes…"></textarea>
-            </div>
+            <div class="rp-modal-divider"></div>
+            <label class="rp-notes-lbl">Admin Notes</label>
+            <textarea class="rp-notes" id="adminNotes" placeholder="Enter notes or action taken for this case..."></textarea>
         </div>
-        <div class="modal-actions">
-            <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
-            <button class="btn rp-btn-reopen"  id="rvBtnReopen"  onclick="actionFromModal('pending')"   style="display:none;">🔄 Reopen</button>
-            <button class="btn rp-btn-review"  id="rvBtnReview"  onclick="actionFromModal('reviewing')" style="display:none;">🔍 Mark Reviewing</button>
-            <button class="btn btn-danger"     id="rvBtnReject"  onclick="actionFromModal('rejected')"  style="display:none;">❌ Reject</button>
-            <button class="btn btn-success"    id="rvBtnResolve" onclick="actionFromModal('resolved')"  style="display:none;">✅ Resolve</button>
+        <div class="rp-modal-actions">
+            <button class="rp-btn rp-btn--ghost" onclick="closeModal()">Cancel</button>
+            <button class="rp-btn rp-btn--reopen" id="btnReopen" onclick="confirmAction('reopen')" style="display:none;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.71"/></svg>
+                Reopen
+            </button>
+            <button class="rp-btn rp-btn--reject" id="btnReject" onclick="confirmAction('reject')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                Reject
+            </button>
+            <button class="rp-btn rp-btn--resolve" id="btnResolve" onclick="confirmAction('resolve')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                Resolve
+            </button>
         </div>
     </div>
 </div>
 
-<!-- ══ CONFIRM MODAL ══════════════════════════════════════ -->
-<div class="modal-overlay" id="confirmModal">
-    <div class="modal rp-confirm-modal">
-        <div class="modal-header" id="confirmModalHeader">
-            <h2 id="confirmTitle">Confirm</h2>
-            <button class="modal-close" onclick="closeConfirm()">✕</button>
-        </div>
-        <div class="modal-body">
-            <p id="confirmMsg" style="color:#444;font-size:0.95rem;line-height:1.7;"></p>
-        </div>
-        <div class="modal-actions">
-            <button class="btn btn-outline" onclick="closeConfirm()">Cancel</button>
-            <button class="btn" id="confirmBtn" onclick="executeConfirm()">Confirm</button>
+<!-- ═══════════ CONFIRMATION MODAL ═══════════ -->
+<div class="confirm-overlay" id="confirmModal">
+    <div class="confirm-box">
+        <div class="confirm-icon" id="confirmIcon"></div>
+        <h3 class="confirm-title" id="confirmTitle">Confirm Action</h3>
+        <p class="confirm-msg" id="confirmMsg">Are you sure you want to proceed?</p>
+        <div class="confirm-actions">
+            <button class="rp-btn rp-btn--ghost" onclick="closeConfirm()">Cancel</button>
+            <button class="rp-btn" id="confirmOkBtn" onclick="executeAction()">Confirm</button>
         </div>
     </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div id="toast" class="toast"></div>
 
-<script src="reports.js"></script>
+<script>
+// ── Data ───
+const REPORTS = [
+    { id:'R-020', role:'buyer',  name:'Ana Mae',          complaint:'Seller sold rotten vegetables and refused refund.',        date:'2 hours ago',  status:'pending'   },
+    { id:'R-019', role:'seller', name:'Juan Perez',        complaint:'Buyer refused delivery without valid reason.',             date:'5 hours ago',  status:'pending'   },
+    { id:'R-018', role:'buyer',  name:'Lily Cheng',        complaint:'Seller gave incorrect weight on produce.',                 date:'Yesterday',    status:'reviewing' },
+    { id:'R-017', role:'seller', name:'Carlo Reyes',       complaint:'Buyer left false 1-star reviews repeatedly.',             date:'Yesterday',    status:'reviewing' },
+    { id:'R-016', role:'buyer',  name:'Rosa Dela Cruz',    complaint:'Product arrived 4 days late and was already spoiled.',    date:'2 days ago',   status:'pending'   },
+    { id:'R-015', role:'seller', name:'Pedro Yang',        complaint:'Buyer threatened seller via chat for discounts.',         date:'2 days ago',   status:'pending'   },
+    { id:'R-014', role:'buyer',  name:'Emilio Santos',     complaint:'Seller used fake organic certification labels.',          date:'3 days ago',   status:'reviewing' },
+    { id:'R-013', role:'seller', name:'Grace Tan',         complaint:'Buyer continuously cancels confirmed orders.',            date:'3 days ago',   status:'pending'   },
+    { id:'R-012', role:'buyer',  name:'Roberto Lee',       complaint:'Seller sent half the quantity ordered but charged full.', date:'4 days ago',   status:'reviewing' },
+    { id:'R-011', role:'seller', name:'Marites Cruz',      complaint:'Buyer refuses to pay after receiving goods.',             date:'4 days ago',   status:'reviewing' },
+    { id:'R-010', role:'buyer',  name:'Claire Torres',     complaint:'Seller was unresponsive after payment was made.',        date:'5 days ago',   status:'pending'   },
+    { id:'R-009', role:'seller', name:'Fernando Basa',     complaint:'Buyer filed fraudulent refund claim.',                   date:'5 days ago',   status:'pending'   },
+    { id:'R-008', role:'buyer',  name:'Maria Santos',      complaint:'Buyer harassment with repeated fake reviews.',           date:'6 days ago',   status:'resolved'  },
+    { id:'R-007', role:'buyer',  name:'Jose Rizal Jr.',    complaint:'Seller misrepresented product quality in listing.',      date:'6 days ago',   status:'resolved'  },
+    { id:'R-006', role:'seller', name:'Liza Macaraeg',     complaint:'Buyer shared private seller info publicly.',             date:'1 week ago',   status:'resolved'  },
+    { id:'R-005', role:'buyer',  name:'Ramon Bautista',    complaint:'Seller did not honor promised delivery schedule.',       date:'1 week ago',   status:'rejected'  },
+    { id:'R-004', role:'seller', name:'Rose Flores',       complaint:'Buyer threatened legal action for minor issues.',        date:'1 week ago',   status:'rejected'  },
+    { id:'R-003', role:'buyer',  name:'Kevin Go',          complaint:'Seller account appears to be fake/duplicate.',           date:'2 weeks ago',  status:'resolved'  },
+    { id:'R-002', role:'seller', name:'Aling Nena',        complaint:'Buyer uses multiple accounts to abuse promos.',          date:'2 weeks ago',  status:'resolved'  },
+    { id:'R-001', role:'buyer',  name:'Diego Ramirez',     complaint:'Seller blocked buyer after payment without delivery.',   date:'3 weeks ago',  status:'resolved'  },
+    { id:'R-021', role:'buyer',  name:'Patricia Gomez',    complaint:'Seller listed expired produce as fresh.',                date:'3 weeks ago',  status:'rejected'  },
+    { id:'R-022', role:'seller', name:'Emmanuel Cruz',     complaint:'Buyer left threatening messages after order was late.',  date:'3 weeks ago',  status:'resolved'  },
+    { id:'R-023', role:'buyer',  name:'Sofia Villanueva',  complaint:'Seller refused to process refund for damaged items.',    date:'4 weeks ago',  status:'pending'   },
+    { id:'R-024', role:'seller', name:'Marco Castillo',    complaint:'Buyer opened multiple false dispute claims.',            date:'4 weeks ago',  status:'reviewing' },
+    { id:'R-025', role:'buyer',  name:'Isabella Reyes',    complaint:'Seller changed product price after order confirmation.', date:'4 weeks ago',  status:'resolved'  },
+];
+
+let currentFilter = 'all';
+let activeIndex   = null;
+let pendingAction = null;
+let pendingSource = null; // 'modal' or 'inline'
+
+// ── Render ────────────────────────────────────────────────────
+function renderList(data) {
+    const list   = document.getElementById('reportList');
+    const empty  = document.getElementById('emptyState');
+    const footer = document.getElementById('rpFooter');
+    const count  = document.getElementById('issueCount');
+
+    if (!data.length) {
+        list.innerHTML = '';
+        empty.style.display = 'flex';
+        footer.textContent  = 'No reports to show.';
+        count.textContent   = '(0)';
+        return;
+    }
+
+    empty.style.display = 'none';
+    count.textContent   = `(${data.length})`;
+    footer.textContent  = `Showing ${data.length} report${data.length !== 1 ? 's' : ''}`;
+
+    list.innerHTML = data.map((r) => {
+        const isBuyer   = r.role === 'buyer';
+        const roleLabel = isBuyer ? 'Buyer reported Seller' : 'Seller reported Buyer';
+        const roleClass = isBuyer ? 'buyer' : 'seller';
+        const isActive  = r.status === 'pending' || r.status === 'reviewing';
+        const idx       = REPORTS.indexOf(r);
+
+        const actionBtns = isActive
+            ? `<button class="rp-action-btn rp-action-btn--resolve" onclick="quickConfirm(event,'resolve',${idx})">
+                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                   Resolve
+               </button>
+               <button class="rp-action-btn rp-action-btn--reject" onclick="quickConfirm(event,'reject',${idx})">
+                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                   Reject
+               </button>`
+            : `<button class="rp-action-btn rp-action-btn--reopen" onclick="quickConfirm(event,'reopen',${idx})">
+                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.71"/></svg>
+                   Reopen
+               </button>`;
+
+        return `
+        <div class="rp-row ${r.status === 'resolved' ? 'rp-row--resolved' : ''} ${r.status === 'rejected' ? 'rp-row--rejected' : ''}"
+             data-role="${r.role}" data-status="${r.status}"
+             onclick="openModal(${idx})">
+            <div class="rp-row-icon rp-row-icon--${roleClass}">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                </svg>
+            </div>
+            <div class="rp-row-content">
+                <span class="rp-row-type rp-row-type--${roleClass}">${roleLabel}</span>
+                <strong class="rp-row-name">${r.name}</strong>
+                <p class="rp-row-complaint">${r.complaint}</p>
+                <span class="rp-row-date">${r.date} &bull; Case #${r.id}</span>
+            </div>
+            <span class="rp-status rp-status--${r.status}">${capitalize(r.status)}</span>
+            <div class="rp-row-actions" onclick="event.stopPropagation()">
+                ${actionBtns}
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+function getFiltered() {
+    const q = document.getElementById('searchInput').value.toLowerCase().trim();
+    return REPORTS.filter(r => {
+        const tabMatch =
+            currentFilter === 'all' ||
+            (currentFilter === 'buyer'    && r.role === 'buyer')   ||
+            (currentFilter === 'seller'   && r.role === 'seller')  ||
+            (currentFilter === 'resolved' && (r.status === 'resolved' || r.status === 'rejected'));
+        const searchMatch = !q ||
+            r.name.toLowerCase().includes(q) ||
+            r.id.toLowerCase().includes(q)   ||
+            r.complaint.toLowerCase().includes(q);
+        return tabMatch && searchMatch;
+    });
+}
+
+function filterTab(tab, btn) {
+    currentFilter = tab;
+    document.querySelectorAll('.rp-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderList(getFiltered());
+}
+
+function applySearch() { renderList(getFiltered()); }
+
+function updateStats() {
+    document.getElementById('hPending').textContent   = REPORTS.filter(r => r.status === 'pending').length;
+    document.getElementById('hReviewing').textContent = REPORTS.filter(r => r.status === 'reviewing').length;
+    document.getElementById('hResolved').textContent  = REPORTS.filter(r => r.status === 'resolved').length;
+    document.getElementById('hRejected').textContent  = REPORTS.filter(r => r.status === 'rejected').length;
+    document.getElementById('cAll').textContent       = REPORTS.length;
+    document.getElementById('cBuyer').textContent     = REPORTS.filter(r => r.role === 'buyer').length;
+    document.getElementById('cSeller').textContent    = REPORTS.filter(r => r.role === 'seller').length;
+    document.getElementById('cResolved').textContent  = REPORTS.filter(r => r.status === 'resolved' || r.status === 'rejected').length;
+}
+
+// ── Toast ──
+function showToast(msg, type = '') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className   = 'toast show' + (type ? ' ' + type : '');
+    setTimeout(() => { t.className = 'toast'; }, 3200);
+}
+
+// ── Confirmation Dialog ───
+const confirmConfig = {
+    resolve: {
+        title: 'Resolve Case',
+        msg:   'Mark this case as resolved? This action will notify the reported party.',
+        icon:  '✔',
+        cls:   'confirm-icon--green',
+        btnCls:'rp-btn--resolve'
+    },
+    reject: {
+        title: 'Reject Case',
+        msg:   'Reject this case? The report will be closed without further action.',
+        icon:  '✕',
+        cls:   'confirm-icon--red',
+        btnCls:'rp-btn--reject'
+    },
+    reopen: {
+        title: 'Reopen Case',
+        msg:   'Reopen this case for further review?',
+        icon:  '↩',
+        cls:   'confirm-icon--gray',
+        btnCls:'rp-btn--reopen'
+    }
+};
+
+function showConfirm(action, idx, source) {
+    pendingAction = action;
+    activeIndex   = idx;
+    pendingSource = source;
+
+    const cfg = confirmConfig[action];
+    const r   = REPORTS[idx];
+
+    document.getElementById('confirmTitle').textContent = cfg.title;
+    document.getElementById('confirmMsg').textContent   = `${cfg.msg}\n\nCase: #${r.id} — ${r.name}`;
+    const iconEl = document.getElementById('confirmIcon');
+    iconEl.textContent = cfg.icon;
+    iconEl.className   = 'confirm-icon ' + cfg.cls;
+    const okBtn = document.getElementById('confirmOkBtn');
+    okBtn.className    = 'rp-btn ' + cfg.btnCls;
+    okBtn.textContent  = capitalize(action);
+
+    document.getElementById('confirmModal').classList.add('active');
+}
+
+function closeConfirm() {
+    document.getElementById('confirmModal').classList.remove('active');
+}
+
+function executeAction() {
+    if (activeIndex === null || !pendingAction) return;
+    const r = REPORTS[activeIndex];
+
+    if (pendingAction === 'resolve') {
+        r.status = 'resolved';
+        showToast('✓ Case #' + r.id + ' resolved.', 'success');
+    } else if (pendingAction === 'reject') {
+        r.status = 'rejected';
+        showToast('✕ Case #' + r.id + ' rejected.', 'error');
+    } else if (pendingAction === 'reopen') {
+        r.status = 'pending';
+        showToast('↩ Case #' + r.id + ' reopened.');
+    }
+
+    closeConfirm();
+    if (pendingSource === 'modal') closeModal();
+    updateStats();
+    renderList(getFiltered());
+    pendingAction = null;
+    pendingSource = null;
+}
+
+// ── Quick action (inline buttons) ───
+function quickConfirm(e, action, idx) {
+    e.stopPropagation();
+    showConfirm(action, idx, 'inline');
+}
+
+// ── Confirm from modal ───
+function confirmAction(action) {
+    showConfirm(action, activeIndex, 'modal');
+}
+
+// ── Modal ───
+function openModal(idx) {
+    activeIndex = idx;
+    const r      = REPORTS[idx];
+    const isBuyer = r.role === 'buyer';
+
+    document.getElementById('reviewCase').textContent     = 'Case #' + r.id;
+    document.getElementById('reviewTitle').textContent    = r.name + ' — ' + (isBuyer ? 'Buyer Report' : 'Seller Report');
+    document.getElementById('reviewType').textContent     = isBuyer ? 'Buyer reported Seller' : 'Seller reported Buyer';
+    document.getElementById('reviewParty').textContent    = r.name;
+    document.getElementById('reviewDate').textContent     = r.date;
+    document.getElementById('reviewComplaint').textContent = r.complaint;
+    document.getElementById('adminNotes').value           = '';
+
+    const statusEl = document.getElementById('reviewStatus');
+    statusEl.innerHTML = `<span class="rp-status rp-status--${r.status}">${capitalize(r.status)}</span>`;
+
+    const header = document.getElementById('reviewModalHeader');
+    header.className = 'rp-modal-header rp-modal-header--' + r.role;
+
+    const isActive = r.status === 'pending' || r.status === 'reviewing';
+    document.getElementById('btnResolve').style.display = isActive ? '' : 'none';
+    document.getElementById('btnReject').style.display  = isActive ? '' : 'none';
+    document.getElementById('btnReopen').style.display  = isActive ? 'none' : '';
+
+    document.getElementById('reviewModal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('reviewModal').classList.remove('active');
+    activeIndex = null;
+}
+
+// ── Dropdowns ────
+document.getElementById('notifBtn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    const d = document.getElementById('notifDropdown');
+    d.classList.toggle('open');
+    document.getElementById('profileDropdown').classList.remove('open');
+});
+
+document.getElementById('profileBtn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    const d = document.getElementById('profileDropdown');
+    d.classList.toggle('open');
+    document.getElementById('notifDropdown').classList.remove('open');
+});
+
+document.addEventListener('click', function() {
+    document.getElementById('notifDropdown').classList.remove('open');
+    document.getElementById('profileDropdown').classList.remove('open');
+});
+
+// ── Sidebar toggle (mobile) ───────────────────────────────────
+document.getElementById('sidebarToggle').addEventListener('click', function() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('active');
+});
+
+document.getElementById('sidebarOverlay').addEventListener('click', function() {
+    document.getElementById('sidebar').classList.remove('open');
+    this.classList.remove('active');
+});
+
+document.getElementById('reviewModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+});
+
+document.getElementById('confirmModal').addEventListener('click', function(e) {
+    if (e.target === this) closeConfirm();
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeConfirm();
+        closeModal();
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebarOverlay').classList.remove('active');
+    }
+});
+
+updateStats();
+renderList(REPORTS);
+</script>
+
 </body>
 </html>
