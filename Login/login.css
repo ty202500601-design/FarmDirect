@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -224,7 +224,7 @@ footer {
   display: block;
   font-size: 0.87rem;
   margin-bottom: 0.55rem;
-  transition: color 0.2s;
+
   color: #8aab8e;
 }
 .footer-col a:hover { color: white; }

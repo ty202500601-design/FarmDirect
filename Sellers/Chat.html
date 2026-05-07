@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Messages – FarmDirect Seller</title>
+    <link rel="stylesheet" href="Chat.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="sellers-storage.js"></script>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <input type="checkbox" id="menu-check" class="menu-checkbox" />
+      <div class="nav-inner">
+        <a href="../index.html" class="logo"
+          ><span class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-vegan-icon lucide-vegan"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg></span><span>FarmDirect</span></a
+        >
+        <div class="nav-actions">
+          <div class="notif-wrap">
+            <button class="notif-btn" tabindex="0" aria-label="Notifications">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+              <span class="notif-badge"></span>
+            </button>
+            <div class="notif-dropdown">
+              <div class="notif-header"><h4>Notifications</h4></div>
+              <div class="notif-list">
+                <div class="notif-item"><div class="notif-content"><strong>New Order</strong><p>🛒 Order #00242 received</p></div><span class="notif-time">2 min ago</span></div>
+                <div class="notif-item"><div class="notif-content"><strong>New Message</strong><p>💬 Maria Santos messaged you</p></div><span class="notif-time">15 min ago</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="notif-wrap">
+            <button class="notif-btn avatar-badge-btn" tabindex="0" aria-label="Profile">JD</button>
+            <div class="notif-dropdown" style="min-width: 180px">
+              <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
+              <div class="notif-list">
+                <div class="notif-item"><div class="notif-content"><a href="Dashboard.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-chart-column-increasing-icon lucide-file-chart-column-increasing"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M8 18v-2"/><path d="M12 18v-4"/><path d="M16 18v-6"/></svg> Management</a></div></div>
+                <div class="notif-item"><div class="notif-content"><a href="Profile.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Profile</a></div></div>
+                <div class="notif-item"><div class="notif-content"><a href="Settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-icon lucide-settings"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg> Settings</a></div></div>
+                <div class="notif-item"><div class="notif-content"><a href="../index.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg> Logout</a></div></div>
+              </div>
+            </div>
+          </div>
+          <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
+        </div>
+      </div>
+      <label for="menu-check" class="menu-overlay"></label>
+      <div class="menu-panel">
+        <div class="menu-section">
+          <h3>Navigation</h3>
+          <a href="../index.html" class="menu-item">Home</a>
+          <a href="Dashboard.html" class="menu-item">Dashboard</a>
+          <a href="Products.html" class="menu-item">Products</a>
+          <a href="Orders.html" class="menu-item">Orders</a>
+          <a href="Notifications.html" class="menu-item">Notifications</a>
+          <a href="Chat.html" class="menu-item">Messages</a>
+          <a href="Reviews.html" class="menu-item">Reviews</a>
+          <a href="Settings.html" class="menu-item">Settings</a>
+        </div>
+        <a href="../index.html" class="menu-cta">Logout</a>
+      </div>
+    </nav>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <a href="../index.html"       class="sidebar-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> <span>Home</span></a>
+        <a href="Dashboard.html"     class="sidebar-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard-icon lucide-layout-dashboard"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg> <span>Dashboard</span></a>
+        <a href="Products.html"      class="sidebar-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-search-icon lucide-package-search"><path d="M12 22V12"/><path d="M20.27 18.27 22 20"/><path d="M21 10.498V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l.98-.559"/><path d="M3.29 7 12 12l8.71-5"/><path d="m7.5 4.27 8.997 5.148"/><circle cx="18.5" cy="16.5" r="2.5"/></svg> <span>Products</span></a>
+        <a href="Orders.html"        class="sidebar-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-truck-icon lucide-truck"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg> <span>Orders</span></a>
+        <a href="Notifications.html" class="sidebar-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell-icon lucide-bell"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg> <span>Notifications</span></a>
+        <a href="Chat.html"          class="sidebar-link active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-icon lucide-message-square"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/></svg>   <span>Messages</span></a>
+        <a href="Reviews.html"       class="sidebar-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star-icon lucide-star"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg> <span>Reviews</span></a>
+        <a href="Settings.html"      class="sidebar-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-icon lucide-settings"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg> <span>Settings</span></a>
+      </nav>
+    </aside>
+
+    <!-- Active chat header -->
+    <div class="chat-nav">
+      <a href="Dashboard.html" class="chat-back">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </a>
+      <div class="chat-farm-avatar" id="chat-avatar">M</div>
+      <div class="chat-farm-info">
+        <div class="chat-farm-name" id="chat-name">Maria Santos</div>
+        <div class="chat-farm-status"><span class="status-dot"></span> Online</div>
+      </div>
+      <button class="chat-options-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      </button>
+    </div>
+
+    <div class="chat-layout">
+      <!-- Sidebar: thread list -->
+      <div class="chat-sidebar">
+        <div style="padding:0.8rem 1rem;font-size:0.78rem;font-weight:800;text-transform:uppercase;color:var(--text-light);letter-spacing:0.06em;">Buyers</div>
+        <div class="thread-item active" onclick="loadChat('maria-santos', this)">
+          <div class="thread-avatar">M</div>
+          <div class="thread-body">
+            <div class="thread-name">Maria Santos</div>
+            <div class="thread-preview">Do you have organic carrots available?</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem;">
+            <div class="thread-time">15m</div>
+            <div class="thread-unread"></div>
+          </div>
+        </div>
+        <div class="thread-item" onclick="loadChat('juan-rivera', this)">
+          <div class="thread-avatar" style="background:#e65c00;">J</div>
+          <div class="thread-body">
+            <div class="thread-name">Juan Rivera</div>
+            <div class="thread-preview">Salamat for the quick delivery!</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem;">
+            <div class="thread-time">1h</div>
+            <div class="thread-unread"></div>
+          </div>
+        </div>
+        <div class="thread-item" onclick="loadChat('ana-cruz', this)">
+          <div class="thread-avatar" style="background:#9c27b0;">A</div>
+          <div class="thread-body">
+            <div class="thread-name">Ana Cruz</div>
+            <div class="thread-preview">Thank you! The watermelon was sweet.</div>
+          </div>
+          <div class="thread-time">Yesterday</div>
+        </div>
+        <div class="thread-item" onclick="loadChat('pedro-garcia', this)">
+          <div class="thread-avatar" style="background:#2196f3;">P</div>
+          <div class="thread-body">
+            <div class="thread-name">Pedro Garcia</div>
+            <div class="thread-preview">When will the tomatoes be restocked?</div>
+          </div>
+          <div class="thread-time">2 days ago</div>
+        </div>
+      </div>
+
+      <!-- Chat messages -->
+      <div class="chat-main">
+        <div class="chat-messages" id="chat-messages">
+          <div class="msg-date-divider">Today</div>
+          <div class="msg-row">
+            <div class="msg-avatar" id="msg-avatar">M</div>
+            <div>
+              <div class="msg-bubble">Hi! Do you have organic carrots available today? I need 3kg for my restaurant. 🥕</div>
+              <div class="msg-time">10:15 AM</div>
+            </div>
+          </div>
+          <div class="msg-row mine">
+            <div>
+              <div class="msg-bubble">Hi Maria! Yes, we have fresh organic carrots harvested this morning. 3kg is available. Would you like me to reserve it for you?</div>
+              <div class="msg-time">10:20 AM ✓✓</div>
+            </div>
+          </div>
+          <div class="msg-row">
+            <div class="msg-avatar">M</div>
+            <div>
+              <div class="msg-bubble">Yes please! Can you also add 2kg of heirloom tomatoes? And do you deliver to Pasonica?</div>
+              <div class="msg-time">10:25 AM</div>
+            </div>
+          </div>
+          <div class="msg-row mine">
+            <div>
+              <div class="msg-bubble">Sure! I'll prepare your order: 3kg Organic Carrots + 2kg Heirloom Tomatoes. Yes, we deliver to Pasonica via Grab. Estimated delivery: 1–2 hours.</div>
+              <div class="chat-product-card">
+                <div>
+                  <div class="chat-product-name">Organic Carrots × 3kg + Heirloom Tomatoes × 2kg</div>
+                  <div class="chat-product-price">₱685.00</div>
+                </div>
+              </div>
+              <div class="msg-time">10:30 AM ✓✓</div>
+            </div>
+          </div>
+          <div class="msg-row">
+            <div class="msg-avatar">M</div>
+            <div>
+              <div class="msg-bubble">Perfect! I'll place the order now. Salamat! 😊</div>
+              <div class="msg-time">10:32 AM</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Input bar -->
+        <div class="chat-input-bar">
+          <button class="chat-attach-btn" title="Attach file">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+          </button>
+          <textarea class="chat-input" id="msg-input" placeholder="Type a message…" rows="1" onkeydown="handleKey(event)"></textarea>
+          <button class="chat-send-btn" onclick="sendMessage()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+const BUYERS = {
+  'maria-santos': { name:'Maria Santos', avatar:'M', color:'#1a3a22' },
+  'juan-rivera': { name:'Juan Rivera', avatar:'J', color:'#e65c00' },
+  'ana-cruz': { name:'Ana Cruz', avatar:'A', color:'#9c27b0' },
+  'pedro-garcia': { name:'Pedro Garcia', avatar:'P', color:'#2196f3' },
+};
+
+function loadChat(buyerId, el) {
+  const buyer = BUYERS[buyerId] || BUYERS['maria-santos'];
+  document.getElementById('chat-name').textContent = buyer.name;
+  document.getElementById('chat-avatar').textContent = buyer.avatar;
+  document.getElementById('chat-avatar').style.background = buyer.color;
+  document.querySelectorAll('.thread-item').forEach(t => t.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderMessages(buyerId);
+}
+
+function getMessages(buyerId) {
+  const key = 'fd_seller_chat_' + buyerId;
+  return JSON.parse(localStorage.getItem(key) || 'null');
+}
+
+function renderMessages(buyerId) {
+  const msgs = getMessages(buyerId);
+  if (!msgs) return;
+  const container = document.getElementById('chat-messages');
+  container.innerHTML = '<div class="msg-date-divider">Today</div>';
+  msgs.forEach((m, index) => {
+    const row = document.createElement('div');
+    row.className = 'msg-row' + (m.mine ? ' mine' : '');
+    if (m.mine) {
+      row.innerHTML = `
+        <div class="msg-bubble-wrap">
+          <div class="msg-bubble">${m.text}</div>
+          <button class="delete-msg-btn" onclick="confirmDeleteSeller('${buyerId}', ${index})" title="Delete message">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+            </svg>
+          </button>
+        </div>
+        <div class="msg-time">${m.time} ✓✓</div>
+      `;
+    } else {
+      row.innerHTML = `<div class="msg-avatar" style="background:${BUYERS[buyerId]?.color||'#1a3a22'}">${BUYERS[buyerId]?.avatar||'B'}</div><div><div class="msg-bubble">${m.text}</div><div class="msg-time">${m.time}</div></div>`;
+    }
+    container.appendChild(row);
+  });
+  container.scrollTop = container.scrollHeight;
+}
+
+function confirmDeleteSeller(buyerId, index) {
+  if (confirm('Delete this message?')) {
+    const key = 'fd_seller_chat_' + buyerId;
+    const msgs = JSON.parse(localStorage.getItem(key) || '[]');
+    if (index >= 0 && index < msgs.length) {
+      msgs.splice(index, 1);
+      localStorage.setItem(key, JSON.stringify(msgs));
+      renderMessages(buyerId);
+    }
+  }
+}
+
+function sendMessage() {
+  const input = document.getElementById('msg-input');
+  const text = input.value.trim();
+  if (!text) return;
+  const params = new URLSearchParams(window.location.search);
+  const buyerId = params.get('buyer') || 'maria-santos';
+  const now = new Date();
+  const time = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+  const container = document.getElementById('chat-messages');
+  const row = document.createElement('div');
+  row.className = 'msg-row mine';
+  row.innerHTML = `<div><div class="msg-bubble">${text}</div><div class="msg-time">${time} ✓</div></div>`;
+  container.appendChild(row);
+  container.scrollTop = container.scrollHeight;
+  input.value = '';
+  input.style.height = 'auto';
+  const key = 'fd_seller_chat_' + buyerId;
+  const msgs = JSON.parse(localStorage.getItem(key) || '[]');
+  msgs.push({ text, time, mine: true });
+  localStorage.setItem(key, JSON.stringify(msgs));
+  setTimeout(() => {
+    const replies = ['Thank you! I appreciate the quick response. 🙏', 'Got it! I\'ll place the order now.', 'Salamat! See you soon!', 'Perfect, looking forward to receiving the produce!'];
+    const reply = replies[Math.floor(Math.random() * replies.length)];
+    const buyer = BUYERS[buyerId] || BUYERS['maria-santos'];
+    const replyRow = document.createElement('div');
+    replyRow.className = 'msg-row';
+    const replyTime = new Date();
+    const rt = replyTime.getHours().toString().padStart(2,'0') + ':' + replyTime.getMinutes().toString().padStart(2,'0');
+    replyRow.innerHTML = `<div class="msg-avatar" style="background:${buyer.color}">${buyer.avatar}</div><div><div class="msg-bubble">${reply}</div><div class="msg-time">${rt}</div></div>`;
+    container.appendChild(replyRow);
+    container.scrollTop = container.scrollHeight;
+  }, 1500 + Math.random() * 1000);
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  e.target.style.height = 'auto';
+  e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px';
+}
+
+(function init() {
+  const params = new URLSearchParams(window.location.search);
+  const buyerId = params.get('buyer') || 'maria-santos';
+  const buyer = BUYERS[buyerId];
+  if (buyer) {
+    document.getElementById('chat-name').textContent = buyer.name;
+    document.getElementById('chat-avatar').textContent = buyer.avatar;
+    document.getElementById('chat-avatar').style.background = buyer.color;
+    document.querySelectorAll('.msg-avatar').forEach(a => {
+      a.textContent = buyer.avatar;
+      a.style.background = buyer.color;
+    });
+    // Reset chat to new pre-existing messages between you and Maria
+    const defaultMessages = {
+      'maria-santos': [
+        { text: 'Hi Juan! Do you have fresh lettuce available this week? 🥬', time: '9:00 AM', mine: false },
+        { text: 'Hi Maria! Yes, we have Romaine and Iceberg lettuce, harvested this morning. How much do you need?', time: '9:05 AM', mine: true },
+        { text: 'I need 2kg of Romaine lettuce for my salad bar. Do you offer bulk discounts?', time: '9:07 AM', mine: false },
+        { text: 'For 2kg, it\'s ₱180 per kg, but if you order 5kg or more, it\'s ₱160 per kg. Would you like to add more?', time: '9:10 AM', mine: true },
+        { text: 'Let\'s stick to 2kg for now. Can you deliver to my restaurant in Tetuan tomorrow morning?', time: '9:12 AM', mine: false },
+        { text: 'Sure! Delivery is free for orders over ₱300. Your total is ₱360, so it\'s covered. I\'ll schedule delivery for 8 AM tomorrow.', time: '9:15 AM', mine: true },
+        { text: 'Perfect! Salamat, Juan. See you tomorrow. 😊', time: '9:16 AM', mine: false },
+        { text: 'You\'re welcome, Maria! See you tomorrow. 🚜', time: '9:17 AM', mine: true }
+      ],
+      'juan-rivera': [
+        { text: 'Hi Juan! Your order #00238 is ready for pickup.', time: '9:00 AM', mine: true },
+        { text: 'Salamat for the quick delivery!', time: '1:00 PM', mine: false }
+      ],
+      'ana-cruz': [
+        { text: 'Your order #00240 has been delivered.', time: '11:00 AM', mine: true },
+        { text: 'Thank you! The watermelon was sweet.', time: '2:00 PM', mine: false }
+      ],
+      'pedro-garcia': [
+        { text: 'When will the tomatoes be restocked?', time: '3:00 PM', mine: false }
+      ]
+    };
+    const msgs = defaultMessages[buyerId] || [];
+    localStorage.setItem('fd_seller_chat_' + buyerId, JSON.stringify(msgs));
+    renderMessages(buyerId);
+  }
+  document.getElementById('chat-messages').scrollTop = 9999;
+})();
+
+document.querySelectorAll('.menu-panel .menu-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const cb = document.getElementById('menu-check');
+    if (cb) cb.checked = false;
+  });
+});
+    </script>
+  </body>
+</html>

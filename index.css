@@ -1,4 +1,4 @@
-/* ═══════════════════════════════════════════
+﻿/* ═══════════════════════════════════════════
    FarmDirect — index.css
    ═══════════════════════════════════════════ */
 :root {
@@ -66,7 +66,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  transition: opacity 0.2s;
+
 }
 .logo:hover { opacity: 0.85; }
 .logo-icon { font-size: 26px; }
@@ -89,7 +89,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   font-size: 0.95rem;
   font-weight: 500;
   color: rgba(255,255,255,0.85);
-  transition: background 0.2s, color 0.2s;
+
 }
 .nav-link:hover, .nav-link.active {
   background: rgba(255,255,255,0.18);
@@ -107,7 +107,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   align-items: center; justify-content: center;
   border-radius: 50%;
   color: #fff;
-  transition: background 0.2s, transform 0.2s;
+
 }
 .cart-btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.08); }
 .login-btn {
@@ -121,7 +121,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   font-size: 0.9rem;
   font-weight: 600;
   border: 1.5px solid rgba(255,255,255,0.35);
-  transition: background 0.2s;
+
 }
 .login-btn:hover { background: rgba(255,255,255,0.3); }
 
@@ -134,14 +134,14 @@ button { font-family: inherit; border: none; cursor: pointer; }
   gap: 5px;
   cursor: pointer;
   border-radius: var(--radius-sm);
-  transition: background 0.2s;
+
 }
 .menu-toggle:hover { background: rgba(255,255,255,0.2); }
 .menu-toggle span {
   width: 24px; height: 2.5px;
   background: #fff;
   border-radius: 2px;
-  transition: all 0.3s;
+
 }
 .menu-checkbox { display: none; }
 .menu-overlay {
@@ -150,7 +150,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   background: rgba(0,0,0,0.5);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s;
+
   z-index: 999;
 }
 .menu-panel {
@@ -161,7 +161,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   height: calc(100vh - var(--nav-h));
   background: var(--white);
   box-shadow: -4px 0 20px rgba(0,0,0,0.15);
-  transition: right 0.3s ease;
+
   z-index: 1000;
   overflow-y: auto;
   padding: 1.5rem;
@@ -190,7 +190,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   color: var(--text);
   font-size: 0.95rem;
   border-bottom: 1px solid var(--border);
-  transition: color 0.2s, padding-left 0.2s;
+
 }
 .menu-item:hover { color: var(--green); padding-left: 0.5rem; }
 .menu-cta {
@@ -202,7 +202,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   border-radius: var(--radius-sm);
   font-weight: 600;
   margin-top: 1rem;
-  transition: opacity 0.2s;
+
 }
 .menu-cta:hover { opacity: 0.9; }
 
@@ -276,7 +276,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   border-radius: var(--radius-sm);
   font-size: 0.97rem;
   font-weight: 700;
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+
 }
 .btn-primary:hover {
   background: white;
@@ -294,7 +294,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   font-weight: 600;
   border: 1.5px solid rgba(255,255,255,0.35);
   backdrop-filter: blur(8px);
-  transition: background 0.2s, border-color 0.2s;
+
 }
 .btn-secondary:hover {
   background: rgba(255,255,255,0.12);
@@ -316,7 +316,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   padding: 0.9rem 0.8rem;
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.18);
-  transition: background 0.2s;
+
 }
 .stat-card:hover { background: rgba(255,255,255,0.18); }
 .stat-icon { font-size: 22px; flex-shrink: 0; }
@@ -336,7 +336,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .hero-visual {
   position: relative;
   height: 480px;
-  animation: fadeUp 0.7s 0.18s ease both;
+
 }
 .visual-card {
   position: absolute;
@@ -410,8 +410,8 @@ button { font-family: inherit; border: none; cursor: pointer; }
   border-radius: var(--radius);
   text-align: center;
   text-decoration: none;
-  transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
-  animation: fadeUp 0.45s ease both;
+
+
   position: relative;
   overflow: hidden;
 }
@@ -437,7 +437,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: transform 0.2s;
+
 }
 .home-pill:hover .home-pill-icon {
   transform: scale(1.1) rotate(-3deg);
@@ -449,7 +449,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   font-weight: 700;
   color: var(--text);
   letter-spacing: 0.01em;
-  transition: color 0.2s;
+
 }
 .home-pill:hover .home-pill-label { color: var(--green); }
 
@@ -473,7 +473,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   font-weight: 600;
   border-bottom: 2px solid transparent;
   padding-bottom: 1px;
-  transition: border-color 0.2s, gap 0.2s;
+
 }
 .categories-browse-link:hover {
   border-color: var(--green);
@@ -504,8 +504,8 @@ button { font-family: inherit; border: none; cursor: pointer; }
   gap: 0.7rem;
   position: relative;
   overflow: hidden;
-  transition: border-color 0.22s, transform 0.22s, box-shadow 0.22s, background 0.22s;
-  animation: fadeUp 0.5s ease both;
+
+
 }
 .category-card::after {
   content: '';
@@ -515,7 +515,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   background: var(--green);
   transform: scaleX(0);
   transform-origin: center;
-  transition: transform 0.25s ease;
+
   border-radius: 0 0 2px 2px;
 }
 .category-card:hover::after { transform: scaleX(1); }
@@ -529,7 +529,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   width: 52px; height: 52px;
   border-radius: 14px;
   display: flex; align-items: center; justify-content: center;
-  transition: transform 0.22s, box-shadow 0.22s;
+
   flex-shrink: 0;
 }
 .category-card:hover .category-icon-wrap {
@@ -584,7 +584,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   background: var(--white);
   border: 2px solid var(--border);
   border-radius: var(--radius);
-  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+
 }
 .how-card:hover {
   border-color: var(--green);
@@ -643,7 +643,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   color: var(--green);
   font-weight: 600;
   font-size: 0.9rem;
-  transition: gap 0.2s, opacity 0.2s;
+
 }
 .view-all-link:hover { gap: 0.7rem; opacity: 0.75; }
 
@@ -660,8 +660,8 @@ button { font-family: inherit; border: none; cursor: pointer; }
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s;
-  animation: fadeUp 0.5s ease both;
+
+
 }
 .product-card:hover {
   transform: translateY(-5px);
@@ -677,7 +677,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .product-image img {
   width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+
 }
 .product-card:hover .product-image img { transform: scale(1.06); }
 .product-badges {
@@ -715,7 +715,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   font-weight: 600;
   color: var(--text);
   line-height: 1.3;
-  transition: color 0.2s;
+
 }
 .product-card:hover .product-name { color: var(--green); }
 .product-farmer {
@@ -756,7 +756,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   border-radius: 50%;
   display: flex;
   align-items: center; justify-content: center;
-  transition: background 0.2s, transform 0.18s;
+
   flex-shrink: 0;
 }
 .btn-add-cart:hover { background: var(--green-mid); transform: scale(1.1); }
@@ -781,7 +781,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   background: var(--cream);
   border: 1.5px solid var(--border);
   border-radius: var(--radius);
-  transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s;
+
 }
 .benefit-card:hover {
   border-color: var(--green);
@@ -828,7 +828,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   border-radius: var(--radius-sm);
   font-size: 1rem;
   font-weight: 700;
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+
 }
 .btn-cta:hover {
   background: white;
@@ -885,7 +885,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   display: block;
   font-size: 0.88rem;
   margin-bottom: 0.6rem;
-  transition: color 0.2s;
+
   color: #8aab8e;
 }
 .footer-col a:hover { color: white; }
@@ -898,14 +898,8 @@ button { font-family: inherit; border: none; cursor: pointer; }
 }
 
 /* ═══ ANIMATIONS ═══ */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(22px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-9px); }
-}
+
+
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 1100px) {

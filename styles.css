@@ -1,4 +1,4 @@
-/* ══════════════════════════════════════════════
+﻿/* ══════════════════════════════════════════════
    FarmDirect – Style Sheet  (pure CSS, no JS)
    ══════════════════════════════════════════════ */
 :root {
@@ -225,10 +225,7 @@ input, textarea, select { font-family: inherit; outline: none; }
 .footer-copy { font-size: 0.8rem; color: #567a5a; margin-top: 1rem; }
 
 /* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+
 
 /* RESPONSIVE */
 @media (max-width: 900px) {

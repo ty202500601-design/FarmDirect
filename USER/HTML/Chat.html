@@ -165,14 +165,39 @@ function renderMessages(farmId) {
   if (!msgs) return; // keep default for green-valley
   const container = document.getElementById('chat-messages');
   container.innerHTML = '<div class="msg-date-divider">Today</div>';
-  msgs.forEach(m => {
+  msgs.forEach((m, index) => {
     const row = document.createElement('div');
     row.className = 'msg-row' + (m.mine ? ' mine' : '');
-    row.innerHTML = m.mine ? `<div><div class="msg-bubble">${m.text}</div><div class="msg-time">${m.time} ✓✓</div></div>`
-      : `<div class="msg-avatar" style="background:${FARMS[farmId]?.color||'#1a3a22'}">${FARMS[farmId]?.avatar||'F'}</div><div><div class="msg-bubble">${m.text}</div><div class="msg-time">${m.time}</div></div>`;
+    if (m.mine) {
+      row.innerHTML = `
+        <div class="msg-bubble-wrap">
+          <div class="msg-bubble">${m.text}</div>
+          <button class="delete-msg-btn" onclick="confirmDeleteBuyer('${farmId}', ${index})" title="Delete message">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+            </svg>
+          </button>
+        </div>
+        <div class="msg-time">${m.time} ✓✓</div>
+      `;
+    } else {
+      row.innerHTML = `<div class="msg-avatar" style="background:${FARMS[farmId]?.color||'#1a3a22'}">${FARMS[farmId]?.avatar||'F'}</div><div><div class="msg-bubble">${m.text}</div><div class="msg-time">${m.time}</div></div>`;
+    }
     container.appendChild(row);
   });
   container.scrollTop = container.scrollHeight;
+}
+
+function confirmDeleteBuyer(farmId, index) {
+  if (confirm('Delete this message?')) {
+    const key = 'fd_chat_' + farmId;
+    const msgs = JSON.parse(localStorage.getItem(key) || '[]');
+    if (index >= 0 && index < msgs.length) {
+      msgs.splice(index, 1);
+      localStorage.setItem(key, JSON.stringify(msgs));
+      renderMessages(farmId);
+    }
+  }
 }
 
 function sendMessage() {
@@ -231,6 +256,27 @@ function handleKey(e) {
       a.textContent = farm.avatar;
       a.style.background = farm.color;
     });
+    // Reset chat to new pre-existing messages between you and Maria
+    const defaultBuyerMessages = {
+      'green-valley': [
+        { text: 'Hi Juan! Do you have fresh lettuce available this week? 🥬', time: '9:00 AM', mine: true },
+        { text: 'Hi Maria! Yes, we have Romaine and Iceberg lettuce, harvested this morning. How much do you need?', time: '9:05 AM', mine: false },
+        { text: 'I need 2kg of Romaine lettuce for my salad bar. Do you offer bulk discounts?', time: '9:07 AM', mine: true },
+        { text: 'For 2kg, it\'s ₱180 per kg, but if you order 5kg or more, it\'s ₱160 per kg. Would you like to add more?', time: '9:10 AM', mine: false },
+        { text: 'Let\'s stick to 2kg for now. Can you deliver to my restaurant in Tetuan tomorrow morning?', time: '9:12 AM', mine: true },
+        { text: 'Sure! Delivery is free for orders over ₱300. Your total is ₱360, so it\'s covered. I\'ll schedule delivery for 8 AM tomorrow.', time: '9:15 AM', mine: false },
+        { text: 'Perfect! Salamat, Juan. See you tomorrow. 😊', time: '9:16 AM', mine: true },
+        { text: 'You\'re welcome, Maria! See you tomorrow. 🚜', time: '9:17 AM', mine: false }
+      ],
+      'sunrise-farm': [
+        { text: 'Fresh tomatoes available now!', time: '1:00 PM', mine: false }
+      ],
+      'beeline': [
+        { text: 'Thank you for your order!', time: 'Yesterday', mine: false }
+      ]
+    };
+    const msgs = defaultBuyerMessages[farmId] || [];
+    localStorage.setItem('fd_chat_' + farmId, JSON.stringify(msgs));
     renderMessages(farmId);
   }
   document.getElementById('chat-messages').scrollTop = 9999;
