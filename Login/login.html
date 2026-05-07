@@ -157,7 +157,24 @@
   </div>
 </footer>
 
-    <script>
+        <script>
+        // PANEL EXIT TRANSITION
+        document.addEventListener('click', function(e) {
+            var link = e.target.closest('a[href]');
+            if (!link) return;
+            var href = link.getAttribute('href');
+            if (!href || href === '#' || href.startsWith('mailto:') || href.startsWith('tel:') || link.target === '_blank') return;
+            var panel = document.querySelector('.auth-panel');
+            var hero  = document.querySelector('.auth-hero');
+            if (!panel) { window.location.href = href; return; }
+            e.preventDefault();
+            panel.classList.add('panel-exit');
+            if (hero) hero.classList.add('panel-exit');
+            setTimeout(function() { window.location.href = href; }, 220);
+        });
+    </script>
+
+<script>
 
         // ─────────────────────────────────────────────
         //  BUILT-IN SYSTEM ACCOUNTS
