@@ -13,9 +13,26 @@
 .cart-nav-inner { max-width:1200px;margin:0 auto;padding:0 1.2rem;height:100%;display:flex;align-items:center;gap:0.9rem; }
 .cart-nav-back { color:#fff;display:flex;align-items:center;flex-shrink:0; }
 .cart-nav-title { font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:#fff;flex:1; }
-.co-wrap { padding:calc(var(--header-total) + 1rem) 0 6rem;min-height:100vh; }
-.co-inner { max-width:700px;margin:0 auto;padding:0 1.2rem;display:flex;flex-direction:column;gap:0.7rem; }
+.co-wrap { padding:0 0 6rem;min-height:100vh; }
+.co-back-btn { display:inline-flex;align-items:center;gap:0.45rem;font-size:0.88rem;font-weight:600;color:var(--text-mid);text-decoration:none;padding:0.4rem 0;margin-bottom:0.2rem;transition:color 0.2s; }
+.co-back-btn:hover { color:var(--green); }
+.co-two-col { display:flex;gap:1.6rem;align-items:flex-start;max-width:1140px;margin:0 auto;padding:0 1.2rem; }
+.co-col-left { flex:1;min-width:0;display:flex;flex-direction:column;gap:0.7rem; }
+.co-col-right { flex:0 0 340px; }
 .co-card { background:var(--white);border-radius:var(--radius);border:1.5px solid var(--border);overflow:hidden; }
+.co-summary-card { background:var(--white);border-radius:var(--radius);border:2px solid var(--border);padding:1.2rem 1.3rem;align-self:flex-start; }
+.co-summary-card h3 { font-family:var(--font-display);font-size:1.05rem;font-weight:700;margin-bottom:0.6rem;padding-bottom:0.4rem;border-bottom:2px solid var(--border); }
+.summary-item { display:flex;justify-content:space-between;padding:0.45rem 0;font-size:0.85rem;color:var(--text-mid); }
+.summary-item-name { max-width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.summary-divider { border:none;height:1px;background:var(--border);margin:0.4rem 0; }
+.summary-row { display:flex;justify-content:space-between;padding:0.4rem 0;font-size:0.88rem;color:var(--text-mid); }
+.summary-row.disc { color:var(--green-bright);font-weight:600; }
+.summary-row.vat-row { color:var(--text-light);font-size:0.82rem; }
+.summary-row.total-row { font-size:1.05rem;font-weight:800;color:var(--text);border-top:2px solid var(--border);margin-top:0.4rem;padding-top:0.7rem; }
+.summary-row.total-row span:last-child { color:var(--green); }
+.summary-place-btn { display:block;width:100%;background:var(--green);color:#fff;border:none;border-radius:10px;padding:0.8rem 1.2rem;font-size:0.92rem;font-weight:700;cursor:pointer;transition:background 0.2s;margin-top:1rem;text-align:center;text-decoration:none; }
+.summary-place-btn:hover { background:var(--green-mid); }
+.summary-saved { font-size:0.75rem;color:var(--green-bright);font-weight:600;text-align:center;margin-top:0.4rem; }
 .co-card-hdr { display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1.1rem;border-bottom:1px solid var(--border);background:var(--cream); }
 .co-card-hdr-title { font-size:0.92rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:0.5rem; }
 .co-card-hdr-action { font-size:0.8rem;color:var(--green);font-weight:700;cursor:pointer;background:none;border:none; }
@@ -40,15 +57,28 @@
 .oi-name { font-size:0.88rem;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:0.18rem; }
 .oi-variant { font-size:0.75rem;color:var(--text-light); }
 .oi-price-row { display:flex;align-items:center;gap:0.4rem;margin-top:0.2rem; }
-.oi-price { font-size:0.98rem;font-weight:800;color:var(--orange); }
+.oi-price { font-size:0.98rem;font-weight:800;color:var(--green-bright); }
 .oi-orig { font-size:0.73rem;color:var(--text-light);text-decoration:line-through; }
-.oi-disc { background:var(--orange);color:#fff;font-size:0.6rem;font-weight:700;padding:0.07rem 0.3rem;border-radius:3px; }
+.oi-disc { background:var(--green-bright);color:#fff;font-size:0.6rem;font-weight:700;padding:0.07rem 0.3rem;border-radius:3px; }
 .oi-qty { font-size:0.78rem;color:var(--text-light);flex-shrink:0; }
+.oi-qty-ctrl { display:flex;align-items:center;gap:0;background:var(--cream);border:1.5px solid var(--border);border-radius:8px;overflow:hidden;flex-shrink:0; }
+.oi-qty-btn { width:30px;height:30px;border:none;background:transparent;font-size:1rem;font-weight:700;cursor:pointer;color:var(--green);display:flex;align-items:center;justify-content:center;transition:background 0.15s; }
+.oi-qty-btn:hover { background:var(--green-light); }
+.oi-qty-btn:disabled { opacity:0.3;cursor:not-allowed; }
+.oi-qty-val { min-width:28px;text-align:center;font-size:0.85rem;font-weight:700;color:var(--text);line-height:30px; }
+.oi-delete { background:none;border:none;color:var(--text-light);cursor:pointer;font-size:1.05rem;padding:0.35rem;flex-shrink:0;transition:color 0.15s; }
+.oi-delete:hover { color:var(--red); }
 .oi-dropoff-select { margin-top:0.4rem;display:flex;align-items:center;gap:0.4rem; }
 .oi-dropoff-label { font-size:0.72rem;color:var(--text-light);font-weight:600; }
 .oi-dropoff-select select { padding:0.3rem 0.5rem;border:1.5px solid var(--border);border-radius:6px;font-size:0.78rem;background:var(--cream);color:var(--text);cursor:pointer; }
 .oi-dropoff-select select:focus { border-color:var(--green); }
 .ship-opts { padding:0.6rem 1.1rem;display:flex;flex-direction:column;gap:0.5rem; }
+.ship-distance-row { display:flex;align-items:center;gap:0.5rem;padding:0.7rem 1.1rem 0.3rem;font-size:0.84rem;font-weight:600;color:var(--text-mid); }
+.ship-distance-row svg { color:var(--green);flex-shrink:0; }
+.ship-dist-input { display:flex;align-items:center;gap:0.3rem;margin-left:auto; }
+.ship-dist-input input { width:60px;padding:0.35rem 0.5rem;border:2px solid var(--border);border-radius:6px;font-size:0.88rem;text-align:center;background:var(--cream); }
+.ship-dist-input input:focus { border-color:var(--green); }
+.ship-dist-input span { font-size:0.82rem;font-weight:700;color:var(--text-mid); }
 .ship-opt { display:flex;align-items:center;gap:0.75rem;padding:0.75rem 0.9rem;border:2px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color 0.2s,background 0.2s; }
 .ship-opt.selected { border-color:var(--green);background:var(--green-light); }
 .ship-radio { width:17px;height:17px;flex-shrink:0;accent-color:var(--green); }
@@ -71,8 +101,8 @@
 .place-order-bar { position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--white);border-top:2px solid var(--border);padding:0.75rem 1.2rem;display:flex;align-items:center;gap:1rem;box-shadow:0 -4px 20px rgba(0,0,0,0.1); }
 .po-totals { flex:1; }
 .po-label { font-size:0.72rem;color:var(--text-light); }
-.po-amt { font-size:1.15rem;font-weight:800;color:var(--orange); }
-.po-saved { font-size:0.7rem;color:var(--orange);font-weight:600; }
+.po-amt { font-size:1.15rem;font-weight:800;color:var(--green); }
+.po-saved { font-size:0.7rem;color:var(--green-bright);font-weight:600; }
 .po-btn { background:var(--green);color:#fff;border:none;border-radius:10px;padding:0.75rem 1.6rem;font-size:0.92rem;font-weight:700;cursor:pointer;transition:background 0.2s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;flex-shrink:0; }
 .po-btn:hover { background:var(--green-mid); }
 
@@ -108,6 +138,11 @@
 @media(max-width:600px) {
   .addr-form-grid { grid-template-columns:1fr; }
   .special-disc-opts { flex-direction:column; }
+}
+@media(max-width:760px) {
+  .co-two-col { flex-direction:column-reverse; }
+  .co-col-right { flex:none;width:100%; }
+  .co-summary-card { position:static; }
 }
 </style>
 </head>
@@ -146,11 +181,11 @@
       <div class="logo-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
       </div>
-      <div class="logo-text"><span class="logo-farm">Farm</span><span class="logo-direct">Direct</span></div>
+      <div class="logo-text"><span class="logo-farm">FarmDirect</span></div>
     </a>
     <div class="search-bar">
-      <input type="text" placeholder="Search fresh produce, meats, pantry essentials…" />
-      <button type="button"><i class="fa fa-search"></i></button>
+      <input type="text" id="global-search" placeholder="Search fresh produce, meats, pantry essentials…" onkeydown="if(event.key==='Enter')doSearch()" />
+      <button type="button" onclick="doSearch()"><i class="fa fa-search"></i></button>
     </div>
     <div class="header-actions">
       <a href="cart.html" class="cart-btn" title="My Cart">
@@ -171,15 +206,16 @@
   </div>
 </header>
 
-
-
-
-
-
-
-
 <div class="co-wrap">
-  <div class="co-inner">
+  <div class="co-two-col">
+
+    <!-- LEFT: Delivery, Items, Shipping, Discounts, Vouchers, Payment -->
+    <div class="co-col-left">
+
+    <a href="cart.html" class="co-back-btn" style="margin-bottom:0;padding:0.2rem 0;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Cart
+    </a>
 
     <!-- ① DELIVERY ADDRESS -->
     <div class="co-card">
@@ -247,24 +283,32 @@
       <div class="co-card-hdr">
         <span class="co-card-hdr-title">🚚 Shipping Option</span>
       </div>
+      <div class="ship-distance-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Distance from farm</span>
+        <div class="ship-dist-input">
+          <input type="number" id="ship-dist" value="5" min="0" max="100" step="0.5" oninput="recalcShip()">
+          <span>km</span>
+        </div>
+      </div>
       <div class="ship-opts">
-        <label class="ship-opt selected" onclick="selectShip(this, 60)">
+        <label class="ship-opt selected" onclick="selectShip(this, 'maxim')">
           <input type="radio" name="ship" class="ship-radio" checked>
           <div class="ship-info">
             <div class="ship-name">🚗 Maxim</div>
             <div class="ship-desc">Fast local delivery · Est. 1–2 hrs</div>
           </div>
-          <span class="ship-price">₱60</span>
+          <span class="ship-price" id="ship-maxim-price">₱85</span>
         </label>
-        <label class="ship-opt" onclick="selectShip(this, 80)">
+        <label class="ship-opt" onclick="selectShip(this, 'grab')">
           <input type="radio" name="ship" class="ship-radio">
           <div class="ship-info">
             <div class="ship-name">🚕 Grab</div>
             <div class="ship-desc">Reliable delivery with live tracking · Est. 30–60 min</div>
           </div>
-          <span class="ship-price">₱80</span>
+          <span class="ship-price" id="ship-grab-price">₱105</span>
         </label>
-        <label class="ship-opt" onclick="selectShip(this, 0)">
+        <label class="ship-opt" onclick="selectShip(this, 'pickup')">
           <input type="radio" name="ship" class="ship-radio">
           <div class="ship-info">
             <div class="ship-name">🏬 Farm Pickup</div>
@@ -347,11 +391,15 @@
       </div>
     </div>
 
-    <!-- ⑧ ORDER SUMMARY (with VAT) -->
-    <div class="co-card">
-      <div class="co-card-hdr"><span class="co-card-hdr-title">Order Summary</span></div>
-      <div class="summary-rows" id="order-summary">
-        <!-- Rendered by JS -->
+    </div>
+
+    <!-- RIGHT: Sticky Order Summary -->
+    <div class="co-col-right">
+      <div class="co-summary-card" id="summary-card">
+        <h3>Order Summary</h3>
+        <div id="summary-items"></div>
+        <hr style="border:none;height:1px;background:var(--border);margin:0.6rem 0;">
+        <div id="summary-pricing"></div>
       </div>
     </div>
 
@@ -370,13 +418,37 @@
 <script>
 /* ── CHECKOUT STATE ── */
 let state = {
-  shippingFee: 60,
+  shipMethod: 'maxim',
+  shipDistance: 5,
   voucherCode: '',
   specialDisc: '',
   dropoffs: [],
   dropoffCount: 0,
   itemDropoffs: {},
 };
+
+const SHIP_RATES = {
+  maxim:  { base: 10, perKm: 15 },
+  grab:   { base: 55, perKm: 10 },
+  pickup: { base: 0,  perKm: 0  },
+};
+
+function calcShipFee(method, dist) {
+  const r = SHIP_RATES[method] || SHIP_RATES.maxim;
+  return r.base + r.perKm * dist;
+}
+
+function getShipFee() {
+  return calcShipFee(state.shipMethod, state.shipDistance);
+}
+
+function recalcShip() {
+  const dist = parseFloat(document.getElementById('ship-dist').value) || 0;
+  state.shipDistance = Math.max(0, dist);
+  document.getElementById('ship-maxim-price').textContent = FD.fmt.peso(calcShipFee('maxim', state.shipDistance));
+  document.getElementById('ship-grab-price').textContent = FD.fmt.peso(calcShipFee('grab', state.shipDistance));
+  renderSummary();
+}
 
 /* ── Load cart items from localStorage (set by products.html) ── */
 const CART_KEY = 'fd_cart';
@@ -407,7 +479,7 @@ function renderOrderItems() {
     const currentDropoff = state.itemDropoffs[item.key] || 'main';
     const dropoffOptions = getDropoffOptions(currentDropoff, item.key);
     return `
-      <div class="oi">
+      <div class="oi" data-key="${item.key}">
         <img class="oi-img" src="${item.img || ''}" alt="${item.name}">
         <div class="oi-body">
           <div class="oi-name">${item.name}</div>
@@ -423,7 +495,14 @@ function renderOrderItems() {
             </select>
           </div>
         </div>
-        <span class="oi-qty">x${item.qty}</span>
+        <div class="oi-qty-ctrl">
+          <button class="oi-qty-btn" onclick="changeItemQty('${item.key}', -1)" ${item.qty <= 1 ? 'disabled' : ''}>−</button>
+          <span class="oi-qty-val">${item.qty}</span>
+          <button class="oi-qty-btn" onclick="changeItemQty('${item.key}', 1)" ${item.qty >= 99 ? 'disabled' : ''}>+</button>
+        </div>
+        <button class="oi-delete" onclick="removeItem('${item.key}')" title="Remove item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        </button>
       </div>`;
   }).join('');
 }
@@ -441,9 +520,33 @@ function assignItemToDropoff(itemKey, dropoffId) {
   renderDropoffItemSummary();
 }
 
+function changeItemQty(key, delta) {
+  const idx = ITEMS.findIndex(i => i.key === key);
+  if (idx === -1) return;
+  ITEMS[idx].qty = Math.max(1, Math.min(99, ITEMS[idx].qty + delta));
+  FD.Cart.updateQty(key, ITEMS[idx].qty);
+  renderOrderItems();
+  renderDropoffItemSummary();
+  renderSummary();
+  FD.syncCartBadge();
+}
+
+function removeItem(key) {
+  const idx = ITEMS.findIndex(i => i.key === key);
+  if (idx === -1) return;
+  ITEMS.splice(idx, 1);
+  FD.Cart.remove(key);
+  delete state.itemDropoffs[key];
+  renderOrderItems();
+  renderDropoffItemSummary();
+  renderSummary();
+  FD.syncCartBadge();
+}
+
 function renderSummary() {
   const extraDropoff = state.dropoffs.length * 30;
-  const ship         = state.shippingFee + extraDropoff;
+  const shipBase     = getShipFee();
+  const ship         = shipBase + extraDropoff;
   const P            = FD.Pricing;
   const sub          = P.subtotal(ITEMS);
   const disc         = P.discountAmount(sub, state.voucherCode, state.specialDisc);
@@ -451,33 +554,52 @@ function renderSummary() {
   const vat          = P.vat(base);
   const total        = base + vat + ship;
 
-  let html = `
-    <div class="srow"><span>Merchandise Subtotal</span><span>${FD.fmt.peso(sub)}</span></div>`;
+  /* Item list in summary */
+  let itemsHtml = '';
+  (ITEMS || []).forEach(i => {
+    itemsHtml += `<div class="summary-item"><span class="summary-item-name">${i.name} ×${i.qty}</span><span>${FD.fmt.peso(i.price * i.qty)}</span></div>`;
+  });
+  const itemsEl = document.getElementById('summary-items');
+  if (itemsEl) itemsEl.innerHTML = itemsHtml;
+
+  /* Pricing rows in summary */
+  let html = `<div class="summary-row"><span>Merchandise Subtotal</span><span>${FD.fmt.peso(sub)}</span></div>`;
   if (state.specialDisc) {
-    html += `<div class="srow disc"><span>💙 ${state.specialDisc} Discount (20%)</span><span>−${FD.fmt.peso(sub * 0.20)}</span></div>`;
+    html += `<div class="summary-row disc"><span>💙 ${state.specialDisc} (20%)</span><span>−${FD.fmt.peso(sub * 0.20)}</span></div>`;
   }
   if (state.voucherCode) {
     const v = P.VOUCHERS[state.voucherCode];
     const vAmt = v.type === 'flat' ? v.value : sub * (v.value / 100);
-    html += `<div class="srow disc"><span>🎫 ${v.label}</span><span>−${FD.fmt.peso(vAmt)}</span></div>`;
+    html += `<div class="summary-row disc"><span>🎫 ${v.label}</span><span>−${FD.fmt.peso(vAmt)}</span></div>`;
   }
-  html += `<div class="srow"><span>Shipping Fee</span><span>${ship === 0 ? '<span class="ship-free">FREE</span>' : FD.fmt.peso(ship)}</span></div>`;
+  const r = SHIP_RATES[state.shipMethod];
+  if (shipBase === 0) {
+    html += `<div class="summary-row"><span>Shipping</span><span class="ship-free">FREE</span></div>`;
+  } else {
+    html += `<div class="summary-row"><span>Shipping (${state.shipDistance} km)</span><span>${FD.fmt.peso(shipBase)}</span></div>`;
+    html += `<div class="summary-row vat-row"><span>Base</span><span>₱${r.base}</span></div>`;
+    html += `<div class="summary-row vat-row"><span>Per km (${r.perKm} × ${state.shipDistance})</span><span>₱${r.perKm * state.shipDistance}</span></div>`;
+  }
   if (state.dropoffs.length > 0) {
-    html += `<div class="srow vat-row"><span>Extra Drop-off (×${state.dropoffs.length})</span><span>₱${extraDropoff}</span></div>`;
+    html += `<div class="summary-row vat-row"><span>Extra Drop-off (×${state.dropoffs.length})</span><span>₱${extraDropoff}</span></div>`;
   }
-  html += `<div class="srow vat-row"><span>VAT (12%)</span><span>+${FD.fmt.peso(vat)}</span></div>`;
-  html += `<div class="srow total"><span>Total Payment</span><span>${FD.fmt.peso(total)}</span></div>`;
-
-  document.getElementById('order-summary').innerHTML = html;
-  document.getElementById('po-amt').textContent = FD.fmt.peso(total);
+  html += `<div class="summary-row vat-row"><span>VAT (12%)</span><span>+${FD.fmt.peso(vat)}</span></div>`;
+  html += `<div class="summary-row total-row"><span>Total</span><span>${FD.fmt.peso(total)}</span></div>`;
+  html += `<a href="checkout-payment.html" class="summary-place-btn" onclick="saveCheckoutState()">Continue to Payment →</a>`;
   const savings = disc;
+  if (savings > 0) html += `<div class="summary-saved">You save ${FD.fmt.peso(savings)} 🎉</div>`;
+  const pricingEl = document.getElementById('summary-pricing');
+  if (pricingEl) pricingEl.innerHTML = html;
+
+  /* Also update bottom bar */
+  document.getElementById('po-amt').textContent = FD.fmt.peso(total);
   document.getElementById('po-saved').textContent = savings > 0 ? `You save ${FD.fmt.peso(savings)} 🎉` : '';
 }
 
-function selectShip(el, fee) {
+function selectShip(el, method) {
   document.querySelectorAll('.ship-opt').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
-  state.shippingFee = fee;
+  state.shipMethod = method;
   renderSummary();
 }
 
@@ -610,7 +732,8 @@ function saveAddress() {
 
 function saveCheckoutState() {
   const extraDropoff = state.dropoffs.length * 30;
-  const ship         = state.shippingFee + extraDropoff;
+  const shipBase     = getShipFee();
+  const ship         = shipBase + extraDropoff;
   const P            = FD.Pricing;
   const pricing      = P.total(ITEMS, ship, state.voucherCode, state.specialDisc);
 
@@ -646,6 +769,8 @@ function saveCheckoutState() {
   FD.Checkout.save({
     items: ITEMS,
     shippingFee: ship,
+    shipMethod: state.shipMethod,
+    shipDistance: state.shipDistance,
     voucherCode: state.voucherCode,
     specialDisc: state.specialDisc,
     dropoffs: dropoffDetails,
@@ -677,6 +802,19 @@ function saveCheckoutState() {
   if (saved.specialDisc) {
     toggleSpecialDisc(saved.specialDisc);
   }
+  if (saved.shipMethod) {
+    state.shipMethod = saved.shipMethod;
+    const opts = document.querySelectorAll('.ship-opt');
+    opts.forEach(o => o.classList.remove('selected'));
+    const methodIdx = { maxim:0, grab:1, pickup:2 };
+    const idx = methodIdx[saved.shipMethod] ?? 0;
+    opts[idx]?.classList.add('selected');
+    opts[idx]?.querySelector('.ship-radio') && (opts[idx].querySelector('.ship-radio').checked = true);
+  }
+  if (saved.shipDistance !== undefined) {
+    state.shipDistance = saved.shipDistance;
+    document.getElementById('ship-dist').value = saved.shipDistance;
+  }
   const payInfo = { cod:['💵','Cash on Delivery','Pay when your order arrives'], gcash:['📱','GCash','Instant digital payment'], bank:['🏦','Bank Transfer','BDO, BPI, UnionBank'] };
   const pm = saved.paymentMethod || 'cod';
   if (payInfo[pm]) {
@@ -692,7 +830,7 @@ function saveCheckoutState() {
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-logo">
-      <i class="fa fa-seedling"></i>
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-vegan-icon lucide-vegan"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
       <span>FarmDirect</span>
     </div>
     <p>© 2026 FarmDirect Philippines. Freshness Guaranteed.</p>
@@ -705,11 +843,7 @@ function saveCheckoutState() {
   </div>
 </footer>
 
-<!-- Floating Chat -->
-<a href="Chat.html" class="float-chat">
-  💬 Chat with Farmer
-  <span class="chat-badge">2</span>
-</a>
+
 
 </body>
 </html>

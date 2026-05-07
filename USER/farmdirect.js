@@ -1,20 +1,9 @@
-/**
- * farmdirect.js — Shared data & utility library for FarmDirect
- * Covers: Cart, Checkout, Orders, Profile, Addresses, Vouchers,
- *         Ratings, Notifications, Privacy, and UI helpers.
- *
- * Every page that needs persistent state should load this script FIRST,
- * before any page-specific inline scripts.
- *
- * Usage:  <script src="farmdirect.js"></script>
- */
+
 
 (function (global) {
   'use strict';
 
-  /* ══════════════════════════════════════════════════
-     STORAGE KEYS
-  ══════════════════════════════════════════════════ */
+  /* STORAGE KEYS*/
   const KEYS = {
     CART:        'fd_cart',
     CHECKOUT:    'fd_checkout',
@@ -31,8 +20,230 @@
 
   const DATA_VERSION = 'fd_v4';   // bump when demo data schema changes
 
+  /* PRODUCT CATALOG*/
+  const PRODUCTS = { 
+    // Vegetables
+    broccoli: {
+      id: 'broccoli', name: 'Organic Broccoli 500g', price: 49, origPrice: 70,
+      img: 'IMG/broccoli.jpeg', farm: 'Green Valley Farm, Vitali', stock: 120,
+      badge: 'ORGANIC', rating: 4.8, ratingCount: 2100, tag: 'Preferred',
+      desc: 'Fresh organic broccoli harvested daily from the highlands of Vitali. Rich in vitamins C and K, perfect for steaming, stir-frying, or adding to salads.',
+      units: [{label:'per 500g',multiplier:1},{label:'per 1kg',multiplier:2},{label:'per 3kg bundle',multiplier:6}],
+      varieties: ['Regular','Premium','Organic Select'],
+    },
+    corn: {
+      id: 'corn', name: 'Sweet Corn 3pcs', price: 35, origPrice: 47,
+      img: 'IMG/corn.jpeg', farm: 'Sunrise Farm, Tugbungan', stock: 200,
+      badge: 'ORGANIC', rating: 4.7, ratingCount: 1800, tag: 'Sulit Deal',
+      desc: 'Sweet, juicy corn cobs freshly harvested. Perfect for boiling, grilling, or adding to soups and salads.',
+      units: [{label:'per 3pcs',multiplier:1},{label:'per 6pcs',multiplier:2},{label:'per dozen',multiplier:4}],
+      varieties: ['White Corn','Yellow Corn','Bi-color'],
+    },
+    tomatoes: {
+      id: 'tomatoes', name: 'Tomatoes 1kg Pack', price: 55, origPrice: 92,
+      img: 'IMG/tomatoes.jpg', farm: 'Green Valley Farm, Labuan', stock: 150,
+      badge: 'ORGANIC', rating: 4.9, ratingCount: 3200, tag: 'Flash Deal',
+      desc: 'Ripe, juicy tomatoes perfect for salads, sauces, and Filipino dishes like sinigang and ensalada. Grown without synthetic pesticides.',
+      units: [{label:'per 1kg',multiplier:1},{label:'per 2kg',multiplier:2},{label:'per 5kg sack',multiplier:5}],
+      varieties: ['Regular','Cherry Tomatoes','Heirloom'],
+    },
+    potatoes: {
+      id: 'potatoes', name: 'Benguet Potatoes 1kg', price: 79, origPrice: 96,
+      img: 'IMG/potatoes-fresh-wooden-basket-33186647 copy.webp', farm: 'Benguet Highland Farm', stock: 300,
+      badge: 'ORGANIC', rating: 4.6, ratingCount: 987, tag: 'Preferred',
+      desc: 'Premium Benguet potatoes, perfect for sinigang, afritada, or making french fries. Firm texture and excellent flavor.',
+      units: [{label:'per 1kg',multiplier:1},{label:'per 3kg',multiplier:3},{label:'per 5kg sack',multiplier:5}],
+      varieties: ['White Potato','Yellow Potato','Sweet Potato'],
+    },
+    pechay: {
+      id: 'pechay', name: 'Fresh Pechay 250g', price: 29, origPrice: 37,
+      img: 'IMG/pechay.jpeg', farm: 'Green Valley Farm, Vitali', stock: 180,
+      badge: 'ORGANIC', rating: 4.5, ratingCount: 1500, tag: 'Farm Fresh',
+      desc: 'Crisp, fresh pechay harvested early morning. Perfect for stir-fry, soups, and noodle dishes.',
+      units: [{label:'per 250g',multiplier:1},{label:'per 500g',multiplier:2},{label:'per 1kg',multiplier:4}],
+      varieties: ['Regular','Baby Pechay','Organic'],
+    },
+    // Fruits
+    mango: {
+      id: 'mango', name: 'Carabao Mango 1kg', price: 120, origPrice: 185,
+      img: 'https://images.unsplash.com/photo-1553279768-865429fa0178?q=80&w=400&auto=format&fit=crop', farm: 'Guimaras Fruit Growers', stock: 80,
+      badge: 'ORGANIC', rating: 4.8, ratingCount: 4100, tag: 'Preferred',
+      desc: 'Sweet, golden Carabao mangoes from Guimaras — voted the sweetest mangoes in the world. Perfect for desserts, smoothies, or eating fresh.',
+      units: [{label:'per 1kg',multiplier:1},{label:'per 2kg',multiplier:2},{label:'per 5kg box',multiplier:5}],
+      varieties: ['Regular','Premium Grade A','Export Quality'],
+    },
+    banana: {
+      id: 'banana', name: 'Lakatan Banana 1kg', price: 65, origPrice: 81,
+      img: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?q=80&w=400&auto=format&fit=crop', farm: 'Davao Banana Co-op', stock: 250,
+      badge: 'ORGANIC', rating: 4.7, ratingCount: 2600, tag: 'Sulit Deal',
+      desc: 'Sweet, creamy Lakatan bananas — the premium Philippine banana variety. Rich in potassium, perfect for snacks or turon.',
+      units: [{label:'per 1kg',multiplier:1},{label:'per 2kg',multiplier:2},{label:'per 5kg bunch',multiplier:5}],
+      varieties: ['Lakatan','Latundan','Saba'],
+    },
+    pineapple: {
+      id: 'pineapple', name: 'Sweet Pineapple 1pc', price: 85, origPrice: 155,
+      img: 'IMG/pineapple.jpeg', farm: 'Sibuco Tropicals', stock: 60,
+      badge: 'ORGANIC', rating: 4.9, ratingCount: 5000, tag: 'Flash Deal',
+      desc: 'Extra sweet pineapple from Sibuco. Perfect for juices, desserts, or grilling. Hand-selected for optimal ripeness.',
+      units: [{label:'per 1pc',multiplier:1},{label:'per 3pcs',multiplier:3},{label:'per 6pcs box',multiplier:6}],
+      varieties: ['Queen Pineapple','Smooth Cayenne','MD2'],
+    },
+    grapes: {
+      id: 'grapes', name: 'Purple Grapes 500g', price: 199, origPrice: 234,
+      img: 'https://images.unsplash.com/photo-1537640538966-79f369143f8f?q=80&w=400&auto=format&fit=crop', farm: 'La Union Vineyards', stock: 40,
+      badge: 'ORGANIC', rating: 4.6, ratingCount: 732, tag: 'Preferred',
+      desc: 'Plump, juicy purple grapes from La Union vineyards. Perfect for snacking, wine-making, or adding to fruit salads.',
+      units: [{label:'per 500g',multiplier:1},{label:'per 1kg',multiplier:2},{label:'per 2kg',multiplier:4}],
+      varieties: ['Red Globe','Black Beauty','Crimson Seedless'],
+    },
+    dalandan: {
+      id: 'dalandan', name: 'Dalandan 6pcs', price: 89, origPrice: 124,
+      img: 'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?q=80&w=400&auto=format&fit=crop', farm: 'Batangas Citrus Farm', stock: 150,
+      badge: 'ORGANIC', rating: 4.5, ratingCount: 1200, tag: 'Farm Fresh',
+      desc: 'Fresh, juicy dalandan oranges perfect for making calamansi juice, marinades, or adding to beverages.',
+      units: [{label:'per 6pcs',multiplier:1},{label:'per 12pcs',multiplier:2},{label:'per 24pcs box',multiplier:4}],
+      varieties: ['Dalandan','Calamansi','Navel Orange'],
+    },
+    // Meats
+    beef: {
+      id: 'beef', name: 'Grass-Fed Beef Sirloin 500g', price: 349, origPrice: 436,
+      img: 'https://images.unsplash.com/photo-1603048297172-c92544798d5a?q=80&w=400&auto=format&fit=crop', farm: 'Manenan Ranch', stock: 25,
+      badge: 'PREMIUM', rating: 4.8, ratingCount: 3800, tag: 'Preferred',
+      desc: 'Premium grass-fed beef sirloin from Manenan Ranch. Tender, flavorful, and perfect for grilling, steak, or bulalo.',
+      units: [{label:'per 500g',multiplier:1},{label:'per 1kg',multiplier:2},{label:'per 2kg',multiplier:4}],
+      varieties: ['Sirloin','Ribeye','Tenderloin'],
+    },
+    pork: {
+      id: 'pork', name: 'Pork Liempo 1kg', price: 279, origPrice: 328,
+      img: 'https://images.unsplash.com/photo-1432139509613-5c4255a1d197?q=80&w=400&auto=format&fit=crop', farm: 'Manenan Ranch', stock: 40,
+      badge: 'FRESH', rating: 4.7, ratingCount: 890, tag: 'Sulit Deal',
+      desc: 'Fresh pork liempo (belly) — perfect for inihaw, lechon kawali, or adobo. Locally raised, hormone-free.',
+      units: [{label:'per 1kg',multiplier:1},{label:'per 2kg',multiplier:2},{label:'per 3kg',multiplier:3}],
+      varieties: ['Liempo','Kasim','Pork Chop'],
+    },
+    chicken: {
+      id: 'chicken', name: 'Free-Range Chicken Whole', price: 299, origPrice: 427,
+      img: 'IMG/chicken.jpg', farm: 'Ayala Poultry', stock: 35,
+      badge: 'FREE-RANGE', rating: 4.9, ratingCount: 2900, tag: 'Flash Deal',
+      desc: 'Whole free-range chicken, raised naturally without hormones. Perfect for tinola, adobo, or roasted chicken.',
+      units: [{label:'per whole',multiplier:1},{label:'per half',multiplier:0.5},{label:'per 2 whole',multiplier:2}],
+      varieties: ['Whole Chicken','Chicken Thighs','Chicken Breast'],
+    },
+    bangus: {
+      id: 'bangus', name: 'Fresh Bangus 1kg', price: 189, origPrice: 252,
+      img: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=400&auto=format&fit=crop', farm: 'Zamboanga Fish Farms', stock: 50,
+      badge: 'FRESH', rating: 4.6, ratingCount: 1100, tag: 'Farm Fresh',
+      desc: 'Fresh bangus (milkfish) — the Philippine national fish. Perfect for sinigang, daing, or escabeche.',
+      units: [{label:'per 1kg',multiplier:1},{label:'per 2kg',multiplier:2},{label:'per 3kg',multiplier:3}],
+      varieties: ['Whole Bangus','Bangus Belly','De-boned'],
+    },
+    shrimp: {
+      id: 'shrimp', name: 'Sugpo Shrimp 500g', price: 399, origPrice: 487,
+      img: 'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?q=80&w=400&auto=format&fit=crop', farm: 'Bangued Aquaculture', stock: 30,
+      badge: 'PREMIUM', rating: 4.5, ratingCount: 650, tag: 'Preferred',
+      desc: 'Jumbo sugpo (giant tiger prawn) — perfect for grilling, sinigang, or garlic butter shrimp.',
+      units: [{label:'per 500g',multiplier:1},{label:'per 1kg',multiplier:2},{label:'per 2kg',multiplier:4}],
+      varieties: ['Sugpo','Vannamei','Ulang'],
+    },
+    // Eggs
+    white_eggs: {
+      id: 'white_eggs', name: 'White Eggs 12pcs Tray', price: 129, origPrice: 143,
+      img: 'https://images.unsplash.com/photo-1506976785307-8732e854ad03?q=80&w=400&auto=format&fit=crop', farm: 'Ayala Poultry', stock: 200,
+      badge: 'FRESH', rating: 4.8, ratingCount: 1700, tag: 'Preferred',
+      desc: 'Fresh white eggs from free-range hens. Perfect for baking, frying, or making kwek-kwek.',
+      units: [{label:'per 12pcs',multiplier:1},{label:'per 24pcs',multiplier:2},{label:'per 30pcs',multiplier:2.5}],
+      varieties: ['White Eggs','Medium','Large'],
+    },
+    brown_eggs: {
+      id: 'brown_eggs', name: 'Brown Eggs 12pcs Tray', price: 149, origPrice: 169,
+      img: 'https://images.unsplash.com/photo-1587486913049-53fc88980cfc?q=80&w=400&auto=format&fit=crop', farm: 'Ayala Poultry', stock: 180,
+      badge: 'FRESH', rating: 4.7, ratingCount: 3300, tag: 'Sulit Deal',
+      desc: 'Farm-fresh brown eggs, rich in omega-3. Perfect for everyday cooking and baking.',
+      units: [{label:'per 12pcs',multiplier:1},{label:'per 24pcs',multiplier:2},{label:'per 30pcs',multiplier:2.5}],
+      varieties: ['Brown Eggs','Organic','Free-Range'],
+    },
+    free_range_eggs: {
+      id: 'free_range_eggs', name: 'Free-Range Eggs 12pcs', price: 179, origPrice: 224,
+      img: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?q=80&w=400&auto=format&fit=crop', farm: 'Ayala Poultry', stock: 90,
+      badge: 'FREE-RANGE', rating: 4.9, ratingCount: 4500, tag: 'Farm Fresh',
+      desc: 'Premium free-range eggs from pasture-raised hens. Richer yolks, better taste, higher nutrients.',
+      units: [{label:'per 12pcs',multiplier:1},{label:'per 24pcs',multiplier:2},{label:'per 30pcs',multiplier:2.5}],
+      varieties: ['Free-Range','Pasture-Raised','Heritage Breed'],
+    },
+    salted_eggs: {
+      id: 'salted_eggs', name: 'Salted Eggs 6pcs', price: 89, origPrice: 97,
+      img: 'https://images.unsplash.com/photo-1598965402089-981419774890?q=80&w=400&auto=format&fit=crop', farm: 'Pateros Salted Egg Co.', stock: 120,
+      badge: 'TRADITIONAL', rating: 4.6, ratingCount: 2000, tag: 'Preferred',
+      desc: 'Traditional Pateros-style salted eggs. Perfect for ensalada, bibingka, or as a side dish.',
+      units: [{label:'per 6pcs',multiplier:1},{label:'per 12pcs',multiplier:2},{label:'per 24pcs',multiplier:4}],
+      varieties: ['Regular','Duck Egg','Quail Egg'],
+    },
+    balut: {
+      id: 'balut', name: 'Balut Duck Eggs 6pcs', price: 75, origPrice: 88,
+      img: 'https://images.unsplash.com/photo-1569288052389-dac9b0ac9eac?q=80&w=400&auto=format&fit=crop', farm: 'Pateros Balut Makers', stock: 100,
+      badge: 'LOCAL', rating: 4.5, ratingCount: 1400, tag: 'Local Pick',
+      desc: 'Authentic Pateros balut — a Filipino delicacy. Freshly prepared daily, perfect for merienda.',
+      units: [{label:'per 6pcs',multiplier:1},{label:'per 12pcs',multiplier:2},{label:'per 18pcs',multiplier:3}],
+      varieties: ['Balut','Penoy','Premium'],
+    },
+    // Pantry
+    rice: {
+      id: 'rice', name: 'Sinandomeng Rice 5kg', price: 289, origPrice: 370,
+      img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=400&auto=format&fit=crop', farm: 'Nueva Ecija Rice Farmers', stock: 500,
+      badge: 'STAPLE', rating: 4.8, ratingCount: 8200, tag: 'Preferred',
+      desc: 'Premium Sinandomeng rice from Nueva Ecija — the rice granary of the Philippines. Perfect for everyday meals.',
+      units: [{label:'per 5kg',multiplier:1},{label:'per 10kg',multiplier:2},{label:'per 25kg sack',multiplier:5}],
+      varieties: ['Sinandomeng','Jasmine','Brown Rice'],
+    },
+    coconut_oil: {
+      id: 'coconut_oil', name: 'Virgin Coconut Oil 1L', price: 199, origPrice: 243,
+      img: 'https://images.unsplash.com/photo-1621236378699-8597faf6a176?q=80&w=400&auto=format&fit=crop', farm: 'Sulu Coconut Co-op', stock: 80,
+      badge: 'ORGANIC', rating: 4.7, ratingCount: 1900, tag: 'Organic',
+      desc: 'Pure virgin coconut oil, cold-pressed from fresh coconuts. Perfect for cooking, baking, or hair and skin care.',
+      units: [{label:'per 1L',multiplier:1},{label:'per 2L',multiplier:2},{label:'per 500ml',multiplier:0.5}],
+      varieties: ['Virgin','Refined','Organic Extra Virgin'],
+    },
+    honey: {
+      id: 'honey', name: 'Raw Wild Honey 500ml', price: 259, origPrice: 370,
+      img: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=80&w=400&auto=format&fit=crop', farm: 'Palawan Beekeepers', stock: 45,
+      badge: 'RAW', rating: 4.9, ratingCount: 2400, tag: 'Flash Deal',
+      desc: 'Pure, raw wild honey from Palawan forests. Unprocessed and unpasteurized — packed with natural enzymes and nutrients.',
+      units: [{label:'per 500ml',multiplier:1},{label:'per 1L',multiplier:2},{label:'per 250ml',multiplier:0.5}],
+      varieties: ['Wild Honey','Manuka Blend','Floral Honey'],
+    },
+    vinegar: {
+      id: 'vinegar', name: 'Sugarcane Vinegar 750ml', price: 79, origPrice: 105,
+      img: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?q=80&w=400&auto=format&fit=crop', farm: 'Taluksangay Spice Farm', stock: 100,
+      badge: 'TRADITIONAL', rating: 4.6, ratingCount: 1600, tag: 'Farm Fresh',
+      desc: 'Traditional sugarcane vinegar, naturally fermented. Perfect for adobo, sawsawan, and pickling.',
+      units: [{label:'per 750ml',multiplier:1},{label:'per 1L',multiplier:1.33},{label:'per 500ml',multiplier:0.67}],
+      varieties: ['Sugarcane','Coconut Vinegar','Palm Vinegar'],
+    },
+    garlic: {
+      id: 'garlic', name: 'Native Garlic 250g', price: 49, origPrice: 61,
+      img: 'https://images.unsplash.com/photo-1540148426977-6928ea5c4c71?q=80&w=400&auto=format&fit=crop', farm: 'Ilocos Garlic Farms', stock: 200,
+      badge: 'ORGANIC', rating: 4.5, ratingCount: 3700, tag: 'Preferred',
+      desc: 'Aromatic native garlic from Ilocos. Stronger flavor than imported varieties, essential for Filipino cooking.',
+      units: [{label:'per 250g',multiplier:1},{label:'per 500g',multiplier:2},{label:'per 1kg',multiplier:4}],
+      varieties: ['Native Garlic','Chinese Garlic','Black Garlic'],
+    },
+  };
+
+  const Catalog = {
+    getAll() { return PRODUCTS; },
+    get(id)  { return PRODUCTS[id] || null; },
+    search(q) {
+      q = (q || '').toLowerCase();
+      return Object.values(PRODUCTS).filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        p.desc.toLowerCase().includes(q) ||
+        p.farm.toLowerCase().includes(q)
+      );
+    },
+  };
+
   /* ══════════════════════════════════════════════════
-     SAFE JSON HELPERS
+      SAFE JSON HELPERS
   ══════════════════════════════════════════════════ */
   function read(key, fallback) {
     try {
@@ -72,9 +283,7 @@
     },
   };
 
-  /* ══════════════════════════════════════════════════
-     PRICING ENGINE
-  ══════════════════════════════════════════════════ */
+  /* PRICING ENGINE*/
   const VOUCHERS_DEF = {
     FARMSAVE50: { label: '₱50 Off',          type: 'flat',    value: 50  },
     FRESH10:    { label: '10% Off Veggies',   type: 'percent', value: 10  },
@@ -118,9 +327,8 @@
     },
   };
 
-  /* ══════════════════════════════════════════════════
-     CART MODULE
-  ══════════════════════════════════════════════════ */
+  /* 
+     CART MODULE */
   const Cart = {
     get()          { return read(KEYS.CART, []); },
     save(arr)      { write(KEYS.CART, arr); },
@@ -175,9 +383,7 @@
     },
   };
 
-  /* ══════════════════════════════════════════════════
-     CHECKOUT MODULE
-  ══════════════════════════════════════════════════ */
+  /* CHECKOUT MODULE */
   const DEFAULT_CHECKOUT_ITEMS = [
     { id: 'carrots',    key: 'carrots_kg',   name: 'Fresh Organic Carrots', qty: 2, price: 195, img: 'https://images.unsplash.com/photo-1447175008436-054170c2e979?w=200', farm: 'Green Valley Farm, Labuan', unit: 'per kg' },
     { id: 'tomatoes',  key: 'tomatoes_kg',  name: 'Heirloom Tomatoes',     qty: 1, price: 280, img: 'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200', farm: 'Sunrise Farm, Tugbungan',  unit: 'per kg' },
@@ -228,9 +434,7 @@
     },
   };
 
-  /* ══════════════════════════════════════════════════
-     ORDERS MODULE
-  ══════════════════════════════════════════════════ */
+  /* ORDERS MODULE*/
   const NON_CANCELLABLE = ['picked_up', 'on_the_way', 'delivered', 'reviewed', 'return_requested', 'cancelled'];
 
   const Orders = {
@@ -458,9 +662,7 @@
     },
   };
 
-  /* ══════════════════════════════════════════════════
-     PROFILE MODULE
-  ══════════════════════════════════════════════════ */
+  /* PROFILE MODULE*/
   const PROFILE_DEFAULT = {
     name:   'Juan Dela Cruz',
     email:  'juan@email.com',
@@ -536,9 +738,7 @@
     },
   };
 
-  /* ══════════════════════════════════════════════════
-     VOUCHERS MODULE
-  ══════════════════════════════════════════════════ */
+  /* VOUCHERS MODULE*/
   const VOUCHERS_STORED_DEFAULT = [
     { code: 'FARMSAVE50', desc: '₱50 off on any order',         expires: '2026-08-01', used: false },
     { code: 'FRESH10',    desc: '10% off on vegetables',         expires: '2026-07-15', used: false },
@@ -565,9 +765,7 @@
     },
   };
 
-  /* ══════════════════════════════════════════════════
-     RATINGS MODULE
-  ══════════════════════════════════════════════════ */
+  /* RATINGS MODULE*/
   const Ratings = {
     get()       { return read(KEYS.RATINGS, []); },
     save(arr)   { write(KEYS.RATINGS, arr); },
@@ -583,9 +781,7 @@
     },
   };
 
-  /* ══════════════════════════════════════════════════
-     PRIVACY & NOTIFICATIONS MODULE
-  ══════════════════════════════════════════════════ */
+  /* PRIVACY & NOTIFICATIONS MODULE*/
   const Privacy = {
     _default() {
       return {
@@ -597,9 +793,7 @@
     save(obj)   { write(KEYS.PRIVACY, Object.assign(this.get(), obj)); },
   };
 
-  /* ══════════════════════════════════════════════════
-     UI HELPERS (usable on all pages)
-  ══════════════════════════════════════════════════ */
+  /* UI HELPERS (usable on all pages) */
   function _syncCartBadge() {
     const count = Cart.count();
     document.querySelectorAll('.cart-count').forEach(el => {
@@ -702,6 +896,7 @@
     Ratings,
     Privacy,
     Pricing,
+    Catalog,
 
     /* Convenience aliases kept for backward-compat with inline shims */
     fmt,

@@ -43,7 +43,7 @@
 /* Return button area */
 .order-action-bar { display:flex;gap:0.8rem;flex-wrap:wrap;margin:1.5rem 0; }
 .return-request-btn { display:flex;align-items:center;gap:0.5rem;background:var(--cream-dark);border:2px solid var(--border);border-radius:10px;padding:0.65rem 1.2rem;font-size:0.88rem;font-weight:600;cursor:pointer;transition:all 0.2s;color:var(--text-mid); }
-.return-request-btn:hover { border-color:var(--orange);color:var(--orange); }
+.return-request-btn:hover { border-color:var(--green);color:var(--green); }
 .return-request-btn:disabled { opacity:0.5;cursor:not-allowed; }
 .simulate-delivered-btn { display:flex;align-items:center;gap:0.5rem;background:var(--green-light);border:2px solid var(--green);border-radius:10px;padding:0.65rem 1.2rem;font-size:0.82rem;font-weight:600;cursor:pointer;color:var(--green);transition:opacity 0.2s; }
 .simulate-delivered-btn:hover { opacity:0.8; }
@@ -54,9 +54,9 @@
 .tracking-item-info { flex:1; }
 .tracking-item-name { font-size:0.88rem;font-weight:600;color:var(--text); }
 .tracking-item-qty { font-size:0.78rem;color:var(--text-light); }
-.tracking-item-price { font-size:0.88rem;font-weight:700;color:var(--orange); }
+.tracking-item-price { font-size:0.88rem;font-weight:700;color:var(--green-bright); }
 .return-item-btn-track { background:none;border:1.5px solid var(--border);border-radius:6px;padding:0.3rem 0.6rem;font-size:0.75rem;font-weight:600;cursor:pointer;color:var(--text-light);transition:all 0.2s; }
-.return-item-btn-track:hover { border-color:var(--orange);color:var(--orange); }
+.return-item-btn-track:hover { border-color:var(--green);color:var(--green); }
 .return-item-btn-track:disabled { opacity:0.4;cursor:not-allowed; }
 .return-item-btn-track.returned { border-color:var(--red);color:var(--red); }
 .item-return-reasons { display:none;padding:0.5rem 0; }
@@ -64,7 +64,7 @@
 .item-return-reasons select { width:100%;padding:0.5rem 0.7rem;border:1.5px solid var(--border);border-radius:6px;font-size:0.82rem;background:var(--cream);margin-bottom:0.4rem; }
 .item-return-reasons textarea { width:100%;padding:0.5rem 0.7rem;border:1.5px solid var(--border);border-radius:6px;font-size:0.82rem;background:var(--cream);resize:vertical;font-family:inherit;margin-bottom:0.4rem; }
 .item-return-reasons .item-return-actions { display:flex;gap:0.5rem; }
-.item-return-reasons .item-confirm-btn { background:var(--orange);color:#fff;border:none;border-radius:6px;padding:0.4rem 0.8rem;font-size:0.8rem;font-weight:600;cursor:pointer; }
+.item-return-reasons .item-confirm-btn { background:var(--green);color:#fff;border:none;border-radius:6px;padding:0.4rem 0.8rem;font-size:0.8rem;font-weight:600;cursor:pointer; }
 .item-return-reasons .item-cancel-btn { background:var(--white);border:1.5px solid var(--border);border-radius:6px;padding:0.4rem 0.8rem;font-size:0.8rem;font-weight:600;cursor:pointer; }
 </style>
 </head>
@@ -103,11 +103,11 @@
       <div class="logo-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
       </div>
-      <div class="logo-text"><span class="logo-farm">Farm</span><span class="logo-direct">Direct</span></div>
+      <div class="logo-text"><span class="logo-farm">FarmDirect</span></div>
     </a>
     <div class="search-bar">
-      <input type="text" placeholder="Search fresh produce, meats, pantry essentials…" />
-      <button type="button"><i class="fa fa-search"></i></button>
+      <input type="text" id="global-search" placeholder="Search fresh produce, meats, pantry essentials…" onkeydown="if(event.key==='Enter')doSearch()" />
+      <button type="button" onclick="doSearch()"><i class="fa fa-search"></i></button>
     </div>
     <div class="header-actions">
       <a href="cart.html" class="cart-btn" title="My Cart">
@@ -127,13 +127,6 @@
     <a href="products.html">Coconut Oil</a>
   </div>
 </header>
-
-
-
-
-
-
-
 
 <div class="tracking-wrap">
   <div class="container">
@@ -549,7 +542,7 @@ loadOrder();
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-logo">
-      <i class="fa fa-seedling"></i>
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-vegan-icon lucide-vegan"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
       <span>FarmDirect</span>
     </div>
     <p>© 2026 FarmDirect Philippines. Freshness Guaranteed.</p>

@@ -9,11 +9,48 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <script src="farmdirect.js"></script>
 <style>
-.vat-note { font-size:0.78rem;color:var(--text-light);margin-top:0.3rem;font-style:italic; }
-.confirm-dropoff-list { margin-top:0.5rem; }
-.confirm-dropoff-item { background:var(--cream);border-radius:8px;padding:0.55rem 0.85rem;margin-bottom:0.4rem;font-size:0.84rem;color:var(--text-mid);border-left:3px solid var(--green-mid); }
-.return-item-btn { background:none;border:none;color:var(--red);font-size:0.78rem;font-weight:600;cursor:pointer;padding:0.15rem 0.4rem;border-radius:4px;transition:background 0.15s; }
-.return-item-btn:hover { background:var(--red-light); }
+.confirm-two-col { display: flex; gap: 1.6rem; align-items: flex-start; max-width: 1140px; margin: 0 auto; padding: 0 1.2rem; }
+.confirm-col-left { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1rem; }
+.confirm-col-right { flex: 0 0 340px; display: flex; flex-direction: column; gap: 1rem; }
+.confirm-back-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 600; color: var(--text-mid); text-decoration: none; margin-bottom: 0.6rem; transition: color 0.2s; align-self: flex-start; }
+.confirm-back-link:hover { color: var(--green); }
+.confirm-box { background: var(--white); border-radius: var(--radius); border: 2px solid var(--border); padding: 1.4rem 1.5rem; animation: fadeUp 0.5s ease both; }
+.confirm-box h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.7rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 0.5rem; }
+.confirm-row { display: flex; gap: 0.8rem; font-size: 0.88rem; padding: 0.35rem 0; color: var(--text-mid); align-items: baseline; }
+.confirm-row.full-row { flex-direction: column; gap: 0.15rem; }
+.confirm-label { min-width: 80px; flex-shrink: 0; font-weight: 600; font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.02em; }
+.confirm-row strong { color: var(--text); font-weight: 600; }
+.confirm-edit-link { font-size: 0.8rem; color: var(--green); font-weight: 600; display: inline-block; margin-top: 0.5rem; transition: opacity 0.2s; }
+.confirm-edit-link:hover { opacity: 0.7; }
+.confirm-dropoff-list { margin-top: 0.5rem; }
+.confirm-dropoff-item { background: var(--cream); border-radius: 8px; padding: 0.55rem 0.85rem; margin-bottom: 0.4rem; font-size: 0.84rem; color: var(--text-mid); border-left: 3px solid var(--green-mid); }
+
+/* Right column summary */
+.summary-box { background: var(--white); border-radius: var(--radius); border: 2px solid var(--border); padding: 1.2rem 1.3rem; align-self: flex-start; }
+.summary-box h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.9rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); }
+.summary-item { display: flex; justify-content: space-between; padding: 0.5rem 0; font-size: 0.85rem; color: var(--text-mid); }
+.summary-item .item-name { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.summary-item .item-qty { color: var(--text-light); font-size: 0.78rem; margin: 0 0.4rem; flex-shrink: 0; }
+.summary-item .item-price { font-weight: 700; color: var(--text); flex-shrink: 0; margin-left: 0.5rem; }
+.summary-divider { border: none; height: 1px; background: var(--border); margin: 0.5rem 0; }
+.summary-row { display: flex; justify-content: space-between; padding: 0.4rem 0; font-size: 0.88rem; color: var(--text-mid); }
+.summary-row.disc { color: var(--green-bright); font-weight: 600; }
+.summary-row.ship-free { color: var(--green); font-weight: 700; }
+.summary-row.vat-row { color: var(--text-light); font-size: 0.82rem; }
+.summary-row.total-row { font-size: 1.1rem; font-weight: 800; color: var(--text); border-top: 2px solid var(--border); margin-top: 0.4rem; padding-top: 0.7rem; }
+.summary-row.total-row span:last-child { color: var(--green); }
+.summary-remove-btn { background: none; border: none; color: var(--red); font-size: 0.72rem; font-weight: 600; cursor: pointer; padding: 0.1rem 0.3rem; margin-left: 0.3rem; flex-shrink: 0; }
+.summary-remove-btn:hover { opacity: 0.7; }
+.savings-box { background: var(--green-light); border: 2px solid var(--green); border-radius: var(--radius); padding: 1rem 1.3rem; text-align: center; }
+.savings-box p { font-size: 0.88rem; font-weight: 700; color: var(--green); margin: 0; }
+.savings-box small { font-size: 0.76rem; color: var(--green-mid); display: block; margin-top: 0.2rem; }
+.terms-note { font-size: 0.78rem; color: var(--text-light); text-align: center; }
+.terms-note a { color: var(--green); font-weight: 600; }
+.terms-note a:hover { text-decoration: underline; }
+.place-order-btn-full { width: 100%; background: var(--green-dark); color: #fff; border: 2px solid var(--green-dark); border-radius: 10px; padding: 0.85rem; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background 0.2s; text-align: center; display: block; text-decoration: none; }
+.place-order-btn-full:hover { background: var(--green); border-color: var(--green); }
+
+/* Return modal */
 .return-modal-overlay { display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center; }
 .return-modal-overlay.open { display:flex; }
 .return-modal { background:var(--white);border-radius:var(--radius);padding:2rem;max-width:480px;width:90%;box-shadow:var(--shadow-lg); }
@@ -24,12 +61,17 @@
 .return-notes { width:100%;padding:0.7rem 0.9rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:0.88rem;background:var(--cream);margin-bottom:1rem;resize:vertical;font-family:inherit; }
 .return-notes:focus { border-color:var(--green); }
 .return-modal-btns { display:flex;gap:0.8rem; }
-.return-confirm-btn { flex:1;background:var(--orange);color:#fff;border:none;border-radius:10px;padding:0.7rem;font-size:0.9rem;font-weight:700;cursor:pointer;transition:opacity 0.2s; }
+.return-confirm-btn { flex:1;background:var(--green);color:#fff;border:none;border-radius:10px;padding:0.7rem;font-size:0.9rem;font-weight:700;cursor:pointer;transition:opacity 0.2s; }
 .return-confirm-btn:hover { opacity:0.85; }
 .return-back-btn { flex:1;background:var(--white);border:2px solid var(--border);border-radius:10px;padding:0.7rem;font-size:0.9rem;font-weight:600;cursor:pointer;transition:border-color 0.2s; }
 .return-back-btn:hover { border-color:var(--green);color:var(--green); }
 .return-summary { background:var(--cream);border-radius:8px;padding:0.8rem;margin-bottom:1rem;font-size:0.85rem;color:var(--text-mid); }
 .return-summary-name { font-weight:700;color:var(--text); }
+
+@media (max-width: 760px) {
+  .confirm-two-col { flex-direction: column-reverse; }
+  .confirm-col-right { flex: none; width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -67,11 +109,11 @@
       <div class="logo-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
       </div>
-      <div class="logo-text"><span class="logo-farm">Farm</span><span class="logo-direct">Direct</span></div>
+      <div class="logo-text"><span class="logo-farm">FarmDirect</span></div>
     </a>
     <div class="search-bar">
-      <input type="text" placeholder="Search fresh produce, meats, pantry essentials…" />
-      <button type="button"><i class="fa fa-search"></i></button>
+      <input type="text" id="global-search" placeholder="Search fresh produce, meats, pantry essentials…" onkeydown="if(event.key==='Enter')doSearch()" />
+      <button type="button" onclick="doSearch()"><i class="fa fa-search"></i></button>
     </div>
     <div class="header-actions">
       <a href="cart.html" class="cart-btn" title="My Cart">
@@ -92,166 +134,20 @@
   </div>
 </header>
 
-
-
-
-
-
-
-
 <div class="checkout-wrap">
-  <div class="container">
-    <h1 class="page-title">Checkout</h1>
-
-    <div class="checkout-steps">
+  <div style="max-width:1140px;margin:0 auto;padding:0 1.2rem;">
+    <h1 class="page-title" style="margin:0 0 0.4rem;">Checkout</h1>
+    <div class="checkout-steps" style="margin-bottom:0.4rem;">
       <div class="step done"><span class="step-num">✓</span> Delivery</div>
       <div class="step-line"></div>
       <div class="step done"><span class="step-num">✓</span> Payment</div>
       <div class="step-line"></div>
       <div class="step active"><span class="step-num">3</span> Confirm</div>
     </div>
-
-    <div class="confirm-layout" id="confirm-layout">
-      <!-- Rendered by JS -->
-      <p style="text-align:center;padding:3rem;color:var(--text-light);">Loading order details…</p>
-    </div>
   </div>
+
+  <div id="confirm-root"></div>
 </div>
-<script>
-(function renderConfirm() {
-  const co   = FD.Checkout.get();
-  const addr = co.address || {};
-  const p    = co.pricing || {};
-  const pm   = co.paymentMethod || 'cod';
-  const pmLabel = { cod:'💵 Cash on Delivery', gcash:'📱 GCash', bank:'🏦 Bank Transfer' };
-  const dropoffs = co.dropoffs || [];
-
-  // Build dropoff HTML
-  let dropoffHtml = '';
-  if (dropoffs.length > 0) {
-    dropoffHtml = `<div class="confirm-box">
-      <h3>📍 Additional Drop-off Points</h3>
-      <div class="confirm-dropoff-list">
-        ${dropoffs.map((d, i) => `<div class="confirm-dropoff-item">Drop-off ${i + 2} · +₱30</div>`).join('')}
-      </div>
-      <a href="checkout.html" class="confirm-edit-link">Edit →</a>
-    </div>`;
-  }
-
-  // Build items HTML
-  let itemsHtml = (co.items || []).map(i =>
-    `<div class="review-item"><span>${i.name} ×${i.qty}</span><span>${FD.fmt.peso(i.price * i.qty)}</span><button class="return-item-btn" onclick="openReturnItemModal('${i.key}','${i.name}',${i.qty},${i.price})">↩ Remove</button></div>`
-  ).join('');
-
-  // Discounts
-  let discHtml = '';
-  if (co.specialDisc) {
-    discHtml += `<div class="review-item savings"><span>💙 ${co.specialDisc} Discount (20%)</span><span>−${FD.fmt.peso((p.sub || 0) * 0.20)}</span></div>`;
-  }
-  if (co.voucherCode) {
-    const v = FD.Pricing.VOUCHERS[co.voucherCode];
-    if (v) {
-      const vAmt = v.type === 'flat' ? v.value : (p.sub || 0) * (v.value / 100);
-      discHtml += `<div class="review-item savings"><span>🎫 Voucher (${co.voucherCode})</span><span>−${FD.fmt.peso(vAmt)}</span></div>`;
-    }
-  }
-
-  const totalSavings = p.disc || 0;
-
-  const layout = document.getElementById('confirm-layout');
-  layout.innerHTML = `
-    <div class="confirm-box">
-      <h3>📍 Delivery Details</h3>
-      <div class="confirm-row"><span class="confirm-label">Name</span><strong>${addr.name || 'Juan dela Cruz'}</strong></div>
-      <div class="confirm-row"><span class="confirm-label">Phone</span><strong>${addr.phone || '+63 912 345 6789'}</strong></div>
-      <div class="confirm-row"><span class="confirm-label">Address</span><strong>${addr.street ? addr.street + ', ' + addr.brgy + ', ' + addr.city + ' ' + addr.zip : '123 Rizal St., Brgy. Tetuan, Zamboanga City 7000'}</strong></div>
-      <div class="confirm-row"><span class="confirm-label">Courier</span><strong>🚕 Grab · Est. 30–60 min</strong></div>
-      <a href="checkout.html" class="confirm-edit-link">Edit →</a>
-    </div>
-
-    ${dropoffHtml}
-
-    <div class="confirm-box">
-      <h3>💳 Payment Method</h3>
-      <div class="confirm-row"><span class="confirm-label">Method</span><strong>${pmLabel[pm]}</strong></div>
-      ${pm === 'gcash' && co.gcashNumber ? `<div class="confirm-row"><span class="confirm-label">GCash No.</span><strong>+63 ${co.gcashNumber}</strong></div>` : ''}
-      <a href="checkout-payment.html" class="confirm-edit-link">Edit →</a>
-    </div>
-
-    <div class="confirm-box">
-      <h3>🛍️ Order Items</h3>
-      ${itemsHtml}
-      <div class="review-item"><span>Subtotal</span><span>${FD.fmt.peso(p.sub || 1230)}</span></div>
-      ${discHtml}
-      <div class="review-item"><span>Delivery Fee</span><span>${p.shipping === 0 ? 'FREE' : FD.fmt.peso(p.shipping || 80)}</span></div>
-      <div class="review-item" style="font-size:0.82rem;color:var(--text-light);"><span>VAT (12%)</span><span>+${FD.fmt.peso(p.vat || 0)}</span></div>
-      <div class="review-item total-row"><span>Total</span><span>${FD.fmt.peso(p.total || 0)}</span></div>
-      <p class="vat-note">VAT Receipt can be requested upon delivery.</p>
-    </div>
-
-    ${totalSavings > 0 ? `
-    <div class="savings-highlight">
-      <p class="savings-highlight-title">🎉 You're saving ${FD.fmt.peso(totalSavings)} on this order!</p>
-      <p class="savings-highlight-sub">Includes all discounts and vouchers${co.specialDisc ? ' + ' + co.specialDisc + ' discount' : ''}</p>
-    </div>` : ''}
-
-    <p class="terms-note">
-      By placing your order, you agree to FarmDirect's
-      <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
-    </p>
-
-    <div class="step-nav">
-      <a href="checkout-payment.html" class="secondary-btn">← Back</a>
-      <button class="add-cart-btn place-order-btn" onclick="placeOrder()" style="border:none;cursor:pointer;">
-        Place Order — ${FD.fmt.peso(p.total || 0)} →
-      </button>
-    </div>`;
-})();
-
-function placeOrder() {
-  const co = FD.Checkout.get();
-  const order = FD.Orders.place({
-    items:         co.items || [],
-    pricing:       co.pricing || {},
-    address:       co.address || {},
-    paymentMethod: co.paymentMethod || 'cod',
-    gcashNumber:   co.gcashNumber || '',
-    shippingFee:   co.shippingFee || 80,
-    voucherCode:   co.voucherCode || '',
-    specialDisc:   co.specialDisc || '',
-    dropoffs:      co.dropoffs || [],
-    courier:       'Grab',
-    estDelivery:   '30–60 min',
-  });
-  FD.Checkout.clear();
-  // Store the new order ID for the success page
-  localStorage.setItem('fd_last_order', order.id);
-  window.location.href = 'order-success.html';
-}
-</script>
-
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-logo">
-      <i class="fa fa-seedling"></i>
-      <span>FarmDirect</span>
-    </div>
-    <p>© 2026 FarmDirect Philippines. Freshness Guaranteed.</p>
-    <div class="footer-links">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms</a>
-      <a href="#">Contact</a>
-      <a href="Dashboard.html">My Account</a>
-    </div>
-  </div>
-</footer>
-
-<!-- Floating Chat -->
-<a href="Chat.html" class="float-chat">
-  💬 Chat with Farmer
-  <span class="chat-badge">2</span>
-</a>
 
 <!-- Return Item Modal -->
 <div class="return-modal-overlay" id="return-item-modal">
@@ -274,6 +170,24 @@ function placeOrder() {
     </div>
   </div>
 </div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-vegan-icon lucide-vegan"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
+      <span>FarmDirect</span>
+    </div>
+    <p>© 2026 FarmDirect Philippines. Freshness Guaranteed.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+      <a href="Dashboard.html">My Account</a>
+    </div>
+  </div>
+</footer>
+
 
 <script>
 let returnItemData = null;
@@ -327,4 +241,139 @@ function confirmReturnItem() {
   FD.showToast('✓ ' + returnItemData.name + ' removed from order');
   setTimeout(() => location.reload(), 500);
 }
+
+function placeOrder() {
+  const co = FD.Checkout.get();
+  const order = FD.Orders.place({
+    items:         co.items || [],
+    pricing:       co.pricing || {},
+    address:       co.address || {},
+    paymentMethod: co.paymentMethod || 'cod',
+    gcashNumber:   co.gcashNumber || '',
+    shippingFee:   co.shippingFee || 80,
+    voucherCode:   co.voucherCode || '',
+    specialDisc:   co.specialDisc || '',
+    dropoffs:      co.dropoffs || [],
+    courier:       'Grab',
+    estDelivery:   '30–60 min',
+  });
+  FD.Checkout.clear();
+  localStorage.setItem('fd_last_order', order.id);
+  window.location.href = 'order-success.html';
+}
+
+/* ── RENDER ── */
+(function renderConfirm() {
+  const co   = FD.Checkout.get();
+  if (!co) { document.getElementById('confirm-root').innerHTML = '<p style="text-align:center;padding:3rem;color:var(--text-light);">Could not load checkout data.</p>'; return; }
+
+  const addr = co.address || {};
+  const p    = co.pricing || { sub: 0, disc: 0, shipping: 60, vat: 0, total: 0 };
+  const pm   = co.paymentMethod || 'cod';
+  const pmLabel = { cod:'💵 Cash on Delivery', gcash:'📱 GCash', bank:'🏦 Bank Transfer' };
+  const dropoffs = co.dropoffs || [];
+  const items = co.items || [];
+  const totalSavings = p.disc || 0;
+
+  /* LEFT COLUMN */
+  let leftHtml = `
+    <a href="checkout-payment.html" class="confirm-back-link" style="margin-bottom:0.4rem;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Payment
+    </a>
+
+    <div class="confirm-box">
+      <h3>📍 Delivery Address</h3>
+      <div class="confirm-row full-row"><span class="confirm-label">Name</span><strong>${addr.name || 'Juan dela Cruz'}</strong></div>
+      <div class="confirm-row full-row"><span class="confirm-label">Phone</span><strong>${addr.phone || '+63 912 345 6789'}</strong></div>
+      <div class="confirm-row full-row"><span class="confirm-label">Address</span><strong>${addr.street ? addr.street + ', ' + addr.brgy + ', ' + addr.city + ' ' + addr.zip : '123 Rizal St., Brgy. Tetuan, Zamboanga City 7000'}</strong></div>
+      <a href="checkout.html" class="confirm-edit-link">Change →</a>
+    </div>`;
+
+  if (dropoffs.length > 0) {
+    leftHtml += `
+    <div class="confirm-box">
+      <h3>📍 Additional Drop-off Points</h3>
+      <div class="confirm-dropoff-list">
+        ${dropoffs.map((d, i) => `<div class="confirm-dropoff-item">Drop-off ${i + 2} · +₱30</div>`).join('')}
+      </div>
+      <a href="checkout.html" class="confirm-edit-link">Change →</a>
+    </div>`;
+  }
+
+  leftHtml += `
+    <div class="confirm-box">
+      <h3>💳 Payment</h3>
+      <div class="confirm-row full-row"><span class="confirm-label">Method</span><strong>${pmLabel[pm]}</strong></div>
+      ${pm === 'gcash' && co.gcashNumber ? `<div class="confirm-row full-row"><span class="confirm-label">GCash</span><strong>+63 ${co.gcashNumber}</strong></div>` : ''}
+      <a href="checkout-payment.html" class="confirm-edit-link">Change →</a>
+    </div>
+
+    <div class="confirm-box">
+      <h3>🛍️ Items (${items.length})</h3>
+      ${items.map(i => `
+        <div class="summary-item" style="align-items:flex-start;">
+          <span class="item-name">${i.name}</span>
+          <span class="item-qty">×${i.qty}</span>
+          <span class="item-price">${FD.fmt.peso(i.price * i.qty)}</span>
+          <button class="summary-remove-btn" onclick="openReturnItemModal('${i.key}','${i.name}',${i.qty},${i.price})">✕</button>
+        </div>`).join('')}
+    </div>`;
+
+  /* RIGHT COLUMN */
+  let rightHtml = `
+    <div class="summary-box">
+      <h3>Order Summary</h3>
+      <div class="summary-row"><span>Subtotal</span><span>${FD.fmt.peso(p.sub)}</span></div>`;
+
+  if (co.specialDisc) {
+    rightHtml += `<div class="summary-row disc"><span>💙 ${co.specialDisc} (20%)</span><span>−${FD.fmt.peso((p.sub || 0) * 0.20)}</span></div>`;
+  }
+  if (co.voucherCode) {
+    const v = FD.Pricing.VOUCHERS[co.voucherCode];
+    if (v) {
+      const vAmt = v.type === 'flat' ? v.value : (p.sub || 0) * (v.value / 100);
+      rightHtml += `<div class="summary-row disc"><span>🎫 ${co.voucherCode}</span><span>−${FD.fmt.peso(vAmt)}</span></div>`;
+    }
+  }
+
+  rightHtml += `
+      <div class="summary-row"><span>Delivery Fee</span><span>${p.shipping === 0 ? 'FREE' : FD.fmt.peso(p.shipping)}</span></div>
+      <div class="summary-row vat-row"><span>Base</span><span>₱${co.shipMethod === 'maxim' ? '10' : co.shipMethod === 'grab' ? '55' : '0'}</span></div>
+      <div class="summary-row vat-row"><span>Per km (${co.shipMethod === 'maxim' ? '15' : co.shipMethod === 'grab' ? '10' : '0'} × ${co.shipDistance || 5} km)</span><span>₱${co.shipMethod === 'pickup' ? '0' : ((co.shipMethod === 'maxim' ? 15 : 10) * (co.shipDistance || 5))}</span></div>`;
+  if (dropoffs.length > 0) {
+    rightHtml += `<div class="summary-row vat-row"><span>Extra Drop-off (×${dropoffs.length})</span><span>₱${dropoffs.length * 30}</span></div>`;
+  }
+  rightHtml += `
+      <div class="summary-row vat-row"><span>VAT (12%)</span><span>+${FD.fmt.peso(p.vat)}</span></div>
+      <div class="summary-row total-row"><span>Total</span><span>${FD.fmt.peso(p.total)}</span></div>
+      <p style="font-size:0.75rem;color:var(--text-light);margin-top:0.5rem;font-style:italic;">VAT Receipt available upon delivery.</p>
+    </div>`;
+
+  if (totalSavings > 0) {
+    rightHtml += `
+    <div class="savings-box">
+      <p>🎉 You're saving ${FD.fmt.peso(totalSavings)}!</p>
+      <small>Includes all discounts and vouchers${co.specialDisc ? ' + ' + co.specialDisc : ''}</small>
+    </div>`;
+  }
+
+  rightHtml += `
+    <p class="terms-note">
+      By placing your order, you agree to FarmDirect's
+      <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.
+    </p>
+    <button class="place-order-btn-full" onclick="placeOrder()">
+      Place Order — ${FD.fmt.peso(p.total)}
+    </button>`;
+
+  document.getElementById('confirm-root').innerHTML = `
+    <div class="confirm-two-col">
+      <div class="confirm-col-left">${leftHtml}</div>
+      <div class="confirm-col-right">${rightHtml}</div>
+    </div>`;
+})();
+</script>
+
+</body>
 </html>
