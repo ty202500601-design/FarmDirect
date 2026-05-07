@@ -4,25 +4,187 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chat – FarmDirect</title>
-<link rel="stylesheet" href="../CSS/Chat.css">
+<link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script src="farmdirect.js"></script>
+<style>
+.chat-wrap {
+  display:flex; flex-direction:column; height:100vh; padding-top:var(--header-total);
+}
+.chat-nav {
+  position:fixed; top:var(--header-total); left:0; right:0; z-index:100;
+  background:var(--white); border-bottom:2px solid var(--border);
+  padding:0.8rem 1.2rem; display:flex; align-items:center; gap:0.9rem;
+  box-shadow:0 2px 10px rgba(0,0,0,0.06);
+}
+.chat-back { color:var(--green); display:flex; align-items:center; cursor:pointer; }
+.chat-farm-avatar {
+  width:44px; height:44px; border-radius:50%; background:var(--green);
+  display:flex; align-items:center; justify-content:center; font-size:1.1rem;
+  color:#fff; font-weight:800; flex-shrink:0;
+}
+.chat-farm-info { flex:1; }
+.chat-farm-name { font-weight:700; font-size:1rem; }
+.chat-farm-status { font-size:0.76rem; color:var(--green); display:flex; align-items:center; gap:0.3rem; }
+.status-dot { width:7px; height:7px; background:var(--green); border-radius:50%; }
+.chat-options-btn { color:var(--text-mid); cursor:pointer; }
+
+.chat-threads {
+  background:var(--cream); border-right:1.5px solid var(--border);
+  overflow-y:auto; flex-shrink:0;
+}
+.thread-item {
+  display:flex; gap:0.75rem; align-items:center;
+  padding:0.9rem 1.1rem; border-bottom:1px solid var(--border);
+  cursor:pointer; transition:background 0.15s;
+}
+.thread-item:hover, .thread-item.active { background:var(--green-light); }
+.thread-avatar { width:46px; height:46px; border-radius:50%; background:var(--green); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:1.1rem; flex-shrink:0; }
+.thread-body { flex:1; min-width:0; }
+.thread-name { font-size:0.9rem; font-weight:700; }
+.thread-preview { font-size:0.78rem; color:var(--text-light); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.thread-time { font-size:0.72rem; color:var(--text-light); flex-shrink:0; }
+.thread-unread { width:9px; height:9px; background:var(--orange); border-radius:50%; flex-shrink:0; }
+
+.chat-layout {
+  display:flex; flex:1; overflow:hidden;
+  margin-top:calc(var(--header-total) + 68px);
+  height:calc(100vh - var(--header-total) - 68px);
+}
+.chat-sidebar { width:280px; flex-shrink:0; overflow-y:auto; border-right:1.5px solid var(--border); background:var(--cream); }
+.chat-main { flex:1; display:flex; flex-direction:column; }
+
+.chat-messages {
+  flex:1; overflow-y:auto; padding:1.2rem;
+  display:flex; flex-direction:column; gap:0.7rem;
+  background:var(--cream);
+}
+.msg-date-divider {
+  text-align:center; font-size:0.73rem; color:var(--text-light);
+  position:relative; margin:0.5rem 0;
+}
+.msg-date-divider::before, .msg-date-divider::after {
+  content:''; position:absolute; top:50%; width:35%; height:1px; background:var(--border);
+}
+.msg-date-divider::before { left:0; }
+.msg-date-divider::after { right:0; }
+
+.msg-row { display:flex; gap:0.6rem; align-items:flex-end; max-width:80%; }
+.msg-row.mine { align-self:flex-end; flex-direction:row-reverse; }
+.msg-avatar { width:30px; height:30px; border-radius:50%; background:var(--green); display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.8rem; font-weight:800; flex-shrink:0; }
+.msg-bubble {
+  padding:0.65rem 0.9rem; border-radius:16px; font-size:0.87rem; line-height:1.45;
+  max-width:100%; word-break:break-word;
+}
+.msg-row:not(.mine) .msg-bubble { background:var(--white); border:1.5px solid var(--border); border-bottom-left-radius:4px; }
+.msg-row.mine .msg-bubble { background:var(--green); color:#fff; border-bottom-right-radius:4px; }
+.msg-time { font-size:0.67rem; color:var(--text-light); margin-top:0.2rem; text-align:right; }
+.msg-row.mine .msg-time { color:rgba(255,255,255,0.7); }
+
+.chat-input-bar {
+  background:var(--white); border-top:2px solid var(--border);
+  padding:0.8rem 1rem; display:flex; align-items:center; gap:0.6rem;
+}
+.chat-attach-btn, .chat-img-btn {
+  width:38px; height:38px; display:flex; align-items:center; justify-content:center;
+  border:none; background:none; cursor:pointer; color:var(--text-mid); border-radius:50%; transition:background 0.2s;
+}
+.chat-attach-btn:hover, .chat-img-btn:hover { background:var(--cream-dark); }
+.chat-input {
+  flex:1; border:1.5px solid var(--border); border-radius:22px;
+  padding:0.6rem 1rem; font-size:0.9rem; font-family:var(--font-body);
+  background:var(--cream); transition:border-color 0.2s; resize:none; min-height:40px; max-height:120px;
+}
+.chat-input:focus { border-color:var(--green); outline:none; }
+.chat-send-btn {
+  width:42px; height:42px; border-radius:50%; background:var(--green); border:none;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; color:#fff;
+  transition:background 0.2s; flex-shrink:0;
+}
+.chat-send-btn:hover { background:var(--green-mid); }
+
+/* Product card in chat */
+.chat-product-card {
+  background:var(--white); border:1.5px solid var(--border); border-radius:10px;
+  display:flex; gap:0.7rem; align-items:center; padding:0.6rem 0.8rem; margin-top:0.4rem;
+  max-width:260px;
+}
+.chat-product-img { width:48px; height:48px; border-radius:7px; object-fit:cover; flex-shrink:0; }
+.chat-product-name { font-size:0.82rem; font-weight:700; }
+.chat-product-price { font-size:0.8rem; color:var(--orange); font-weight:700; }
+
+@media(max-width:600px) {
+  .chat-sidebar { display:none; }
+}
+</style>
 </head>
 <body>
 
-<nav class="navbar">
-  <div class="nav-inner">
-    <a href="products.html" class="logo"><span class="logo-leaf"></span><span>FarmDirect</span></a>
-    <div class="nav-links">
-      <a href="products.html" class="nav-link">Products</a>
-      <a href="Dashboard.html" class="nav-link">Dashboard</a>
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="products.html">Seller Centre</a>
+    <span class="sep">|</span>
+    <a href="products.html">Start Selling</a>
+    <span class="sep">|</span>
+    Follow us on
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+  <div class="topbar-right">
+    <a href="Notifications.html"><i class="fa fa-bell"></i> Notifications <span class="notif-dot">3</span></a>
+    <a href="#"><i class="fa fa-circle-question"></i> Help</a>
+    <div class="user-menu">
+      <a href="Dashboard.html" class="user-link"><i class="fa fa-user-circle"></i> farmuser <i class="fa fa-chevron-down" style="font-size:0.65rem;margin-left:3px;"></i></a>
+      <div class="user-dropdown">
+        <a href="Dashboard.html"><i class="fa fa-gauge"></i> My Dashboard</a>
+        <a href="Order_tracking.html"><i class="fa fa-box"></i> My Orders</a>
+        <a href="cart.html"><i class="fa fa-basket-shopping"></i> Cart</a>
+        <a href="#"><i class="fa fa-right-from-bracket"></i> Logout</a>
+      </div>
     </div>
-    <div class="nav-actions">
-      <a href="cart.html" class="cart-btn">
-        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <a href="products.html" class="logo">
+      <div class="logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
+      </div>
+      <div class="logo-text"><span class="logo-farm">Farm</span><span class="logo-direct">Direct</span></div>
+    </a>
+    <div class="search-bar">
+      <input type="text" placeholder="Search fresh produce, meats, pantry essentials…" />
+      <button type="button"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="header-actions">
+      <a href="cart.html" class="cart-btn" title="My Cart">
+        <i class="fa fa-shopping-basket"></i>
         <span class="cart-count">3</span>
+      </a>
+      <a href="Chat.html" class="cart-btn" title="Messages" style="position:relative;">
+        <i class="fa fa-comment"></i>
       </a>
     </div>
   </div>
-</nav>
+  <div class="search-tags">
+    <a href="products.html">Organic Tomatoes</a>
+    <a href="products.html">Free-Range Eggs</a>
+    <a href="products.html">Grass-Fed Beef</a>
+    <a href="products.html">Sayote</a>
+    <a href="products.html">Coconut Oil</a>
+  </div>
+</header>
+
+
+
+
+
+
+
 
 <!-- Active chat header -->
 <div class="chat-nav">
@@ -236,5 +398,29 @@ function handleKey(e) {
   document.getElementById('chat-messages').scrollTop = 9999;
 })();
 </script>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <i class="fa fa-seedling"></i>
+      <span>FarmDirect</span>
+    </div>
+    <p>© 2026 FarmDirect Philippines. Freshness Guaranteed.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+      <a href="Dashboard.html">My Account</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Chat -->
+<a href="Chat.html" class="float-chat">
+  💬 Chat with Farmer
+  <span class="chat-badge">2</span>
+</a>
+
 </body>
 </html>

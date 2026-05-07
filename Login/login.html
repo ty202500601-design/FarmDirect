@@ -15,20 +15,7 @@
             from { opacity: 0; transform: translateY(20px); }
             to   { opacity: 1; transform: translateY(0); }
         }
-
-        /* --- Shake animation for wrong password --- */
-        @keyframes shake {
-            0%   { transform: translateX(0); }
-            20%  { transform: translateX(-8px); }
-            40%  { transform: translateX(8px); }
-            60%  { transform: translateX(-6px); }
-            80%  { transform: translateX(6px); }
-            100% { transform: translateX(0); }
-        }
-        .shake {
-            animation: shake 0.4s ease;
-        }
-
+        
         /* --- Error message box --- */
         .error-msg {
             display: none;
@@ -81,12 +68,21 @@
 <body>
 
     <header class="topbar">
-        <div class="logo">
-            <span class="logo-text">Farm<span>Direct</span></span>
+        <div class="topbar-inner">
+            <div class="logo">
+                <span class="logo-text">Farm<span>Direct</span></span>
+            </div>
         </div>
     </header>
 
     <main class="auth-wrapper">
+        <div class="auth-wrapper-inner">
+        <div class="auth-hero">
+            <div class="auth-hero-badge">🌾 Zamboanga's Farm Marketplace</div>
+            <div class="auth-hero-title">Fresh From Farm<br>to Your Table</div>
+            <p class="auth-hero-sub">Sign in to shop from Zamboanga's verified local farmers.</p>
+        </div>
+        <div class="auth-panel">
         <div class="auth-card" id="login_card">
             <div class="auth-title">Welcome to FarmDirect</div>
             <div class="auth-sub">Sign in to your account to continue.</div>
@@ -98,18 +94,16 @@
 
             <!-- Error message (hidden until login fails) -->
             <div class="error-msg" id="error_msg">
-                ❌ Incorrect email or password. Please try again.
+                ❌ Incorrect identifier or password. Please try again.
             </div>
 
             <form id="login_form" onsubmit="handleLogin(event)">
                 <div class="form-group">
-                    <label class="form-label">Email Address</label>
-                    <input type="email" class="form-input" placeholder="you@email.com"
+                    <input type="text" class="form-input" placeholder="Phone number / Username / Email"
                            id="input_email" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-input" placeholder="••••••••"
+                    <input type="password" class="form-input" placeholder="Password"
                            id="input_password" required minlength="8">
                 </div>
                 <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
@@ -126,9 +120,39 @@
                 Continue with Facebook
             </a>
         </div>
+        </div>
+        </div>
     </main>
 
-    <footer>© 2026 FarmDirect. All rights reserved.</footer>
+    <footer>
+  <div class="footer-container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span>🌾</span>
+          <span>FarmDirect</span>
+        </div>
+        <p class="footer-desc">Connecting Zamboanga farmers to your table. Fresh, local, and delivered with care.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link">Facebook</a>
+          <a href="#" class="social-link">Instagram</a>
+          <a href="#" class="social-link">Twitter</a>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+639123456789">+63 912 345 6789</a>
+        <a href="mailto:hello@farmdirect.com">hello@farmdirect.com</a>
+        <p>Mon-Sat: 6AM - 8PM</p>
+        <p>Zamboanga City, PH</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 FarmDirect Zamboanga. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
 
     <script>
 
@@ -146,15 +170,19 @@
                 role:     "admin"
             },
             {
-              email:    "juandelacruz@gmail.com",
+                email:    "juandelacruz@gmail.com",
                 password: "password123",
                 name:     "Juan Dela Cruz",
+                username: "juan_delacruz",
+                phone:    "9111111111",
                 role:     "user"
             },
             {
-              email:    "juandelacruz@farmdirect.com",
+                email:    "juandelacruz@farmdirect.com",
                 password: "password123",
                 name:     "Juan Dela Cruz",
+                username: "juan_farmer",
+                phone:    "9222222222",
                 role:     "seller"
             }
         ];
@@ -196,8 +224,13 @@
                 // Find a matching account
                 var found = null;
                 for (var i = 0; i < allAccounts.length; i++) {
-                    if (allAccounts[i].email === email && allAccounts[i].password === password) {
-                        found = allAccounts[i];
+                    var a = allAccounts[i];
+                    var isAdmin = a.role === "admin";
+                    var idMatch = a.email.toLowerCase() === email ||
+                        (!isAdmin && a.username && a.username.toLowerCase() === email) ||
+                        (!isAdmin && a.phone && a.phone.replace(/\\s/g,"") === email.replace(/\\s/g,""));
+                    if (idMatch && a.password === password) {
+                        found = a;
                         break;
                     }
                 }

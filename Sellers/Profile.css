@@ -27,6 +27,7 @@
   --font-display: "Georgia","Times New Roman",serif;
   --font-body:    "Segoe UI","Roboto","Helvetica Neue",Arial,sans-serif;
   --nav-h:        70px;
+  --sidebar-w:    210px;
 }
  
 /* ── BASE ── */
@@ -179,6 +180,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   padding-top: var(--nav-h);
   min-height: 100vh;
   background: var(--cream);
+  margin-left: var(--sidebar-w);
 }
  
 /* Banner */
@@ -334,6 +336,8 @@ button { font-family: inherit; border: none; cursor: pointer; }
  
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
+  .sidebar { display: none; }
+  .profile-page-wrap { margin-left: 0; }
   .nav-links   { display: none; }
   .menu-toggle { display: flex; }
   .footer-inner { grid-template-columns: 1fr; text-align: center; }
@@ -342,5 +346,9 @@ button { font-family: inherit; border: none; cursor: pointer; }
   .activities-grid { grid-template-columns: 1fr; }
   .purchase-steps  { grid-template-columns: repeat(2,1fr); gap: 0.5rem; }
 }
-@media (max-width: 500px) { .notif-dropdown { right: -50px; width: calc(100vw - 1.5rem); } }
+@media (max-width: 500px) {
+  .notif-dropdown { right: -50px; width: calc(100vw - 1.5rem); }
+  .notif-wrap .notif-dropdown[style*="min-width:180px"],
+  .notif-wrap .notif-dropdown[style*="min-width: 180px"] { width: 220px !important; max-width: 220px !important; }
+}
 @media (max-width: 420px) { .menu-panel { width: 100%; right: -100%; } }

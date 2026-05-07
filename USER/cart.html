@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping Cart – FarmDirect Zamboanga</title>
+<link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script src="farmdirect.js"></script>
+<style>
+/* ── CART-SPECIFIC NAVBAR ── */
+.cart-navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: var(--green); height: var(--nav-h);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+}
+.cart-nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 1.2rem;
+  height: 100%; display: flex; align-items: center; gap: 0.9rem;
+}
+.cart-nav-back { color:#fff; display:flex; align-items:center; flex-shrink:0; }
+.cart-nav-title {
+  font-family: var(--font-display); font-size: 1.15rem; font-weight: 700;
+  color: #fff; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cart-nav-count { font-size: 0.85rem; font-weight: 500; opacity: 0.75; }
+.cart-nav-edit {
+  color: rgba(255,255,255,0.88); font-size: 0.9rem; font-weight: 600;
+  padding: 0.38rem 0.75rem; border-radius: 6px;
+  border: 1.5px solid rgba(255,255,255,0.35); transition: background 0.2s; flex-shrink: 0;
+}
+.cart-nav-edit:hover { background: rgba(255,255,255,0.18); color:#fff; }
+.cart-nav-msg {
+  width: 38px; height: 38px; display:flex; align-items:center; justify-content:center;
+  border-radius: 50%; color: #fff; transition: background 0.2s; position: relative; flex-shrink:0;
+}
+.cart-nav-msg:hover { background: rgba(255,255,255,0.18); }
+.msg-dot {
+  position: absolute; top: 5px; right: 5px; width: 8px; height: 8px;
+  background: var(--orange); border-radius: 50%; border: 2px solid var(--green);
+}
+
+/* Flash banner */
+.flash-strip {
+  position: sticky; top: var(--header-total); z-index: 90;
+  background: linear-gradient(135deg, #e65c00 0%, #f9a825 100%);
+  color:#fff; padding: 0.5rem 1.2rem; display:flex; justify-content:center; align-items:center;
+  gap:0.7rem; font-size:0.85rem; font-weight:700;
+}
+.flash-strip a { color:#fff; text-decoration:underline; text-underline-offset:2px; }
+
+/* CART BODY */
+.cart-wrap { padding: calc(var(--header-total) + 0.5rem) 0 5.5rem; min-height: 100vh; }
+
+/* Select-all bar */
+.cart-sel-bar {
+  display:flex; align-items:center; gap:0.75rem;
+  background:var(--white); border:1.5px solid var(--border); border-radius:var(--radius);
+  padding:0.8rem 1rem; margin-bottom:0.6rem;
+}
+.cbox { width:18px; height:18px; accent-color:var(--green); cursor:pointer; flex-shrink:0; }
+.sel-label { font-size:0.88rem; font-weight:600; color:var(--text); cursor:pointer; flex:1; }
+.del-sel { font-size:0.8rem; color:var(--red); font-weight:600; cursor:pointer; }
+
+/* Farm group */
+.farm-group { background:var(--white); border-radius:var(--radius); border:1.5px solid var(--border); overflow:hidden; margin-bottom:0.6rem; }
+.farm-hdr { display:flex; align-items:center; gap:0.5rem; padding:0.6rem 1rem; background:var(--cream); border-bottom:1px solid var(--border); }
+.farm-hdr-name { font-size:0.83rem; font-weight:700; color:var(--text); flex:1; }
+.farm-vtag { background:var(--green-light); color:var(--green); font-size:0.66rem; font-weight:700; padding:0.12rem 0.45rem; border-radius:20px; }
+.farm-chat { font-size:0.76rem; color:var(--green); font-weight:700; }
+
+/* Item row */
+.ci { display:flex; gap:0.75rem; padding:0.9rem 1rem; border-bottom:1px solid var(--border); align-items:flex-start; }
+.ci:last-child { border-bottom:none; }
+.ci-img { width:78px; height:78px; object-fit:cover; border-radius:var(--radius-sm); flex-shrink:0; border:1.5px solid var(--border); }
+.ci-body { flex:1; display:flex; flex-direction:column; gap:0.18rem; min-width:0; }
+.ci-name { font-size:0.88rem; font-weight:600; color:var(--text); line-height:1.3; }
+.ci-name:hover { color:var(--green); }
+.ci-farm { font-size:0.73rem; color:var(--text-light); }
+.ci-flash { font-size:0.7rem; color:var(--orange); font-weight:700; }
+.ci-price-row { display:flex; align-items:center; gap:0.4rem; margin-top:0.15rem; flex-wrap:wrap; }
+.ci-price { font-size:1rem; font-weight:800; color:var(--orange); }
+.ci-price-orig { font-size:0.73rem; color:var(--text-light); text-decoration:line-through; }
+.ci-disc { background:var(--orange); color:#fff; font-size:0.6rem; font-weight:700; padding:0.07rem 0.3rem; border-radius:3px; }
+.ci-unit { font-size:0.73rem; color:var(--text-light); }
+.ci-foot { display:flex; align-items:center; justify-content:space-between; margin-top:0.35rem; }
+.ci-remove { font-size:0.74rem; color:var(--red); font-weight:600; cursor:pointer; }
+.qty-s { display:flex; align-items:center; border:1.5px solid var(--border); border-radius:6px; overflow:hidden; background:var(--cream); }
+.qty-s span { width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-size:0.95rem; font-weight:700; cursor:pointer; color:var(--text-mid); transition:background 0.15s; }
+.qty-s span:hover { background:var(--border); }
+.qty-s .qv { min-width:26px; text-align:center; font-size:0.88rem; font-weight:700; color:var(--text); border-left:1.5px solid var(--border); border-right:1.5px solid var(--border); }
+.ci-sub { font-size:0.76rem; font-weight:800; color:var(--orange); margin-top:0.25rem; }
+
+/* Also like */
+.also-like { background:var(--white); border-radius:var(--radius); border:1.5px solid var(--border); padding:1.1rem; margin-top:0.6rem; }
+.also-like h4 { font-family:var(--font-display); font-size:0.97rem; font-weight:700; margin-bottom:0.85rem; }
+.al-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:0.7rem; }
+.al-card { border-radius:var(--radius-sm); border:1.5px solid var(--border); overflow:hidden; }
+.al-img { width:100%; aspect-ratio:1; object-fit:cover; display:block; }
+.al-body { padding:0.45rem 0.55rem; }
+.al-name { font-size:0.77rem; font-weight:600; line-height:1.3; margin-bottom:0.18rem; color:var(--text); }
+.al-price { font-size:0.85rem; font-weight:800; color:var(--orange); }
+.al-add { display:block; text-align:center; background:var(--green); color:#fff; font-size:0.72rem; font-weight:700; padding:0.35rem; margin:0.4rem 0.5rem 0.5rem; border-radius:6px; transition:opacity 0.2s; }
+.al-add:hover { opacity:0.85; }
+
+/* STICKY CHECKOUT BAR */
+.checkout-bar {
+  position:fixed; bottom:0; left:0; right:0; z-index:200;
+  background:var(--white); border-top:2px solid var(--border);
+  padding:0.7rem 1.2rem; display:flex; align-items:center; gap:0.9rem;
+  box-shadow:0 -4px 20px rgba(0,0,0,0.1);
+  max-width:100%;
+}
+.co-all-wrap { display:flex; align-items:center; gap:0.45rem; flex-shrink:0; }
+.co-all-label { font-size:0.83rem; font-weight:600; cursor:pointer; }
+.co-totals { flex:1; text-align:right; }
+.co-total-label { font-size:0.72rem; color:var(--text-light); }
+.co-total-amt { font-size:1.1rem; font-weight:800; color:var(--orange); line-height:1.1; }
+.co-saved { font-size:0.7rem; color:var(--orange); font-weight:600; }
+.co-btn {
+  background:var(--green); color:#fff; border:none; border-radius:10px;
+  padding:0.7rem 1.2rem; font-size:0.88rem; font-weight:700; cursor:pointer;
+  transition:background 0.2s; white-space:nowrap; text-decoration:none;
+  display:inline-flex; align-items:center; flex-shrink:0;
+}
+.co-btn:hover { background:var(--green-mid); }
+
+@media(max-width:500px) {
+  .co-btn { padding:0.65rem 1rem; font-size:0.82rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="products.html">Seller Centre</a>
+    <span class="sep">|</span>
+    <a href="products.html">Start Selling</a>
+    <span class="sep">|</span>
+    Follow us on
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+  <div class="topbar-right">
+    <a href="Notifications.html"><i class="fa fa-bell"></i> Notifications <span class="notif-dot">3</span></a>
+    <a href="#"><i class="fa fa-circle-question"></i> Help</a>
+    <div class="user-menu">
+      <a href="Dashboard.html" class="user-link"><i class="fa fa-user-circle"></i> farmuser <i class="fa fa-chevron-down" style="font-size:0.65rem;margin-left:3px;"></i></a>
+      <div class="user-dropdown">
+        <a href="Dashboard.html"><i class="fa fa-gauge"></i> My Dashboard</a>
+        <a href="Order_tracking.html"><i class="fa fa-box"></i> My Orders</a>
+        <a href="cart.html"><i class="fa fa-basket-shopping"></i> Cart</a>
+        <a href="#"><i class="fa fa-right-from-bracket"></i> Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <a href="products.html" class="logo">
+      <div class="logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
+      </div>
+      <div class="logo-text"><span class="logo-farm">Farm</span><span class="logo-direct">Direct</span></div>
+    </a>
+    <div class="search-bar">
+      <input type="text" placeholder="Search fresh produce, meats, pantry essentials…" />
+      <button type="button"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="header-actions">
+      <a href="cart.html" class="cart-btn" title="My Cart">
+        <i class="fa fa-shopping-basket"></i>
+        <span class="cart-count">3</span>
+      </a>
+      <a href="Chat.html" class="cart-btn" title="Messages" style="position:relative;">
+        <i class="fa fa-comment"></i>
+      </a>
+    </div>
+  </div>
+  <div class="search-tags">
+    <a href="products.html">Organic Tomatoes</a>
+    <a href="products.html">Free-Range Eggs</a>
+    <a href="products.html">Grass-Fed Beef</a>
+    <a href="products.html">Sayote</a>
+    <a href="products.html">Coconut Oil</a>
+  </div>
+</header>
+
+
+
+
+
+
+<!-- CART NAVBAR: title + Edit + Message icon only -->
+
+
+<!-- FLASH SALE STRIP -->
+<div class="flash-strip">
+  🔥 Flash Sale ends in <strong id="cd">02:14:33</strong> &nbsp;—&nbsp; Up to 30% off!
+  <a href="products.html">Shop Now →</a>
+</div>
+
+<!-- CART CONTENT -->
+<div class="cart-wrap">
+  <div class="container" style="max-width:700px;">
+
+    <!-- SAVINGS BADGE -->
+    <div id="savings-badge" style="display:none;align-items:center;gap:0.4rem;background:var(--orange-light);border:1.5px solid var(--orange);color:var(--orange);font-size:0.8rem;font-weight:700;padding:0.38rem 0.9rem;border-radius:20px;margin-bottom:0.8rem;"></div>
+
+    <!-- SELECT ALL BAR -->
+    <div class="cart-sel-bar">
+      <input type="checkbox" class="cbox" id="sel-all" onchange="selectAll(this.checked)">
+      <label class="sel-label" for="sel-all">Select All</label>
+      <span class="del-sel" onclick="deleteSelected()">Delete</span>
+    </div>
+
+    <!-- DYNAMIC CART ITEMS -->
+    <div id="cart-items"></div>
+
+    <!-- YOU MIGHT ALSO LIKE -->
+    <div class="also-like">
+      <h4>🌿 You Might Also Like</h4>
+      <div class="al-grid">
+        <div class="al-card"><img class="al-img" src="https://images.unsplash.com/photo-1474440692490-2e83ae13ba29?w=300" alt="Pechay"><div class="al-body"><div class="al-name">Fresh Pechay</div><div class="al-price">₱45</div></div><button class="al-add" onclick="quickAdd({key:\'pechay_bundle\',id:\'pechay\',name:\'Fresh Pechay\',price:45,qty:1,unit:\'per bundle\',farm:\'Green Valley Farm, Labuan\',img:\'https://images.unsplash.com/photo-1474440692490-2e83ae13ba29?w=300\'})">+ Add</button></div>
+        <div class="al-card"><img class="al-img" src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=300" alt="Turmeric"><div class="al-body"><div class="al-name">Organic Turmeric</div><div class="al-price">₱75</div></div><button class="al-add" onclick="quickAdd({key:\'turmeric_250g\',id:\'turmeric\',name:\'Organic Turmeric\',price:75,qty:1,unit:\'per 250g\',farm:\'Taluksangay Spice Farm\',img:\'https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=300\'})">+ Add</button></div>
+        <div class="al-card"><img class="al-img" src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300" alt="Milk"><div class="al-body"><div class="al-name">Carabao Milk</div><div class="al-price" style="color:var(--green);">₱120</div></div><button class="al-add" onclick="quickAdd({key:\'milk_liter\',id:\'carabao-milk\',name:\'Fresh Carabao Milk\',price:120,qty:1,unit:\'per liter\',farm:\'Manenan Dairy\',img:\'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300\'})">+ Add</button></div>
+        <div class="al-card"><img class="al-img" src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=300" alt="Apples"><div class="al-body"><div class="al-name">Sweet Apples</div><div class="al-price" style="color:var(--green);">₱120</div></div><button class="al-add" onclick="quickAdd({key:\'apples_kg\',id:\'apples\',name:\'Sweet Apples\',price:120,qty:1,unit:\'per kg\',farm:\'Pasonanca Fruits\',img:\'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=300\'})">+ Add</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STICKY BOTTOM CHECKOUT BAR -->
+<div class="checkout-bar">
+  <div class="co-all-wrap">
+    <input type="checkbox" class="cbox" id="bot-all" onchange="selectAll(this.checked)">
+    <label class="co-all-label" for="bot-all">All</label>
+  </div>
+  <div class="co-totals">
+    <div class="co-total-label">Total</div>
+    <div class="co-total-amt" id="co-total-amt">₱0.00</div>
+    <div class="co-saved" id="co-saved"></div>
+  </div>
+  <a href="checkout.html" class="co-btn" id="co-btn">Check Out</a>
+</div>
+
+<div id="fd-toast" style="position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green);color:#fff;padding:0.7rem 1.4rem;border-radius:30px;font-size:0.88rem;font-weight:700;z-index:4000;transition:transform 0.35s,opacity 0.35s;opacity:0;pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.2);"></div>
+
+<script>
+/* Use shared FD library; fall back to inline helpers if needed */
+const CART_KEY = 'fd_cart';
+
+function getCart() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e) { return []; }
+}
+function saveCart(c) { localStorage.setItem(CART_KEY, JSON.stringify(c)); }
+function peso(v) { return '\u20B1' + Number(v).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+
+let checkedItems = new Set();
+
+/* Listen for cart changes from other tabs/pages */
+window.addEventListener('storage', function(e) {
+  if (e.key === CART_KEY) render();
+});
+
+/* Re-render on every page focus (user returns from product page) */
+window.addEventListener('focus', function() { render(); });
+
+function render() {
+  const cart = getCart();
+  if (checkedItems.size === 0) cart.forEach(i => checkedItems.add(i.key));
+
+  const farms = {};
+  cart.forEach(item => {
+    const f = item.farm || 'Farm';
+    if (!farms[f]) farms[f] = [];
+    farms[f].push(item);
+  });
+
+  const CHAT_MAP = { 'Green Valley Farm, Labuan': 'green-valley', 'Sunrise Farm, Tugbungan': 'sunrise-farm' };
+  const container = document.getElementById('cart-items');
+  container.innerHTML = '';
+
+  if (cart.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--text-light);"><div style="font-size:3rem;">🛒</div><br><b>Your cart is empty</b><br><a href="products.html" style="color:var(--green);font-weight:700;">Browse Products →</a></div>';
+    updateSummary();
+    return;
+  }
+
+  Object.entries(farms).forEach(([farmName, items]) => {
+    const chatId = CHAT_MAP[farmName] || 'green-valley';
+    const fChecked = items.every(i => checkedItems.has(i.key));
+    const g = document.createElement('div');
+    g.className = 'farm-group';
+    g.innerHTML = `<div class="farm-hdr"><input type="checkbox" class="cbox farm-check" ${fChecked ? 'checked' : ''} onchange="onFarmCheck('${farmName}',this.checked)"><label class="farm-hdr-name"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-right:3px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>${farmName}</label><span class="farm-vtag">✓ Verified</span><a href="chat.html?farm=${chatId}" class="farm-chat" style="margin-left:0.5rem;">Chat</a></div>`;
+
+    items.forEach(item => {
+      const isChk = checkedItems.has(item.key);
+      const pColor = item.discount ? 'var(--orange)' : 'var(--green)';
+
+      /* Build variety + unit line shown below the product name */
+      const unitLabel = item.unit ? item.unit : '';
+      const varietyLabel = item.variety ? item.variety : '';
+      const metaParts = [];
+      if (varietyLabel) metaParts.push(varietyLabel);
+      if (unitLabel) metaParts.push(unitLabel);
+      const metaLine = metaParts.length
+        ? `<span class="ci-unit" style="display:block;margin-top:0.1rem;">${metaParts.join(' · ')}</span>`
+        : '';
+
+      const row = document.createElement('div');
+      row.className = 'ci';
+      row.innerHTML = `
+        <input type="checkbox" class="cbox item-check" data-key="${item.key}" ${isChk ? 'checked' : ''} style="margin-top:0.25rem;" onchange="onItemCheck('${item.key}',this.checked)">
+        <img class="ci-img" src="${item.img}" alt="${item.name}">
+        <div class="ci-body">
+          <a href="product-detail.html" class="ci-name">${item.name}</a>
+          <span class="ci-farm">${item.farm}</span>
+          ${metaLine}
+          ${item.flash ? '<span class="ci-flash">🔥 Flash Sale</span>' : ''}
+          <div class="ci-price-row">
+            <span class="ci-price" style="color:${pColor};">${peso(item.price)}</span>
+            ${item.origPrice ? `<span class="ci-price-orig">${peso(item.origPrice)}</span><span class="ci-disc">-${item.discount}%</span>` : ''}
+          </div>
+          <div class="ci-foot">
+            <span class="ci-remove" onclick="removeItem('${item.key}')">Remove</span>
+            <div class="qty-s">
+              <span onclick="changeQty('${item.key}',-1)">−</span>
+              <span class="qv">${item.qty}</span>
+              <span onclick="changeQty('${item.key}',1)">+</span>
+            </div>
+          </div>
+          <div class="ci-sub" style="color:${pColor};">Subtotal: ${peso(item.price * item.qty)}</div>
+        </div>`;
+      g.appendChild(row);
+    });
+    container.appendChild(g);
+  });
+
+  updateSummary();
+  syncMaster();
+}
+
+function onItemCheck(key, checked) {
+  if (checked) checkedItems.add(key); else checkedItems.delete(key);
+  syncMaster(); updateSummary();
+}
+function onFarmCheck(farm, checked) {
+  getCart().filter(i => i.farm === farm).forEach(i => {
+    if (checked) checkedItems.add(i.key); else checkedItems.delete(i.key);
+  });
+  render();
+}
+function syncMaster() {
+  const cart = getCart();
+  const all = cart.length > 0 && cart.every(i => checkedItems.has(i.key));
+  const any = cart.some(i => checkedItems.has(i.key));
+  ['sel-all', 'bot-all'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.checked = all;
+    el.indeterminate = !all && any;
+  });
+}
+function selectAll(checked) {
+  const cart = getCart();
+  checkedItems = new Set(checked ? cart.map(i => i.key) : []);
+  render();
+}
+function deleteSelected() {
+  if (checkedItems.size === 0) { showToast('Select items first.', true); return; }
+  if (!confirm('Remove ' + checkedItems.size + ' item(s)?')) return;
+  let cart = getCart().filter(i => !checkedItems.has(i.key));
+  checkedItems = new Set();
+  saveCart(cart);
+  render();
+  showToast('✓ Items removed.');
+}
+function removeItem(key) {
+  if (typeof FD !== 'undefined') {
+    FD.Cart.remove(key);
+  } else {
+    saveCart(getCart().filter(i => i.key !== key));
+  }
+  checkedItems.delete(key);
+  render();
+  showToast('✓ Removed.');
+}
+
+function changeQty(key, delta) {
+  const cart = getCart();
+  const item = cart.find(i => i.key === key);
+  if (item) {
+    item.qty = Math.max(1, Math.min(99, item.qty + delta));
+    saveCart(cart);
+    if (typeof FD !== 'undefined') FD.syncCartBadge();
+    render();
+  }
+}
+
+function quickAdd(item) {
+  if (typeof FD !== 'undefined') {
+    FD.Cart.add(item);
+  } else {
+    const cart = getCart();
+    const ex = cart.find(i => i.key === item.key);
+    if (ex) ex.qty += 1; else { cart.push(item); checkedItems.add(item.key); }
+    saveCart(cart);
+  }
+  render();
+  showToast('✓ ' + item.name + ' added!');
+}
+function updateSummary() {
+  const cart = getCart();
+  const chk = cart.filter(i => checkedItems.has(i.key));
+  const sub = chk.reduce((s, i) => s + i.price * i.qty, 0);
+  const saved = chk.reduce((s, i) => s + ((i.origPrice || i.price) - i.price) * i.qty, 0);
+  const count = chk.reduce((s, i) => s + i.qty, 0);
+  const badge = document.getElementById('savings-badge');
+  if (saved > 0) { badge.style.display = 'inline-flex'; badge.textContent = '🎉 Saving ' + peso(saved) + ' on this order!'; }
+  else badge.style.display = 'none';
+  document.getElementById('co-total-amt').textContent = peso(sub);
+  document.getElementById('co-saved').textContent = saved > 0 ? 'Saved ' + peso(saved) + ' 🎉' : '';
+  document.getElementById('co-btn').textContent = count > 0 ? 'Check Out (' + count + ')' : 'Check Out';
+  document.querySelector('.cart-nav-count').textContent = '(' + cart.length + ')';
+  if (typeof FD !== 'undefined') FD.syncCartBadge();
+}
+function showToast(msg, warn) {
+  const t = document.getElementById('fd-toast');
+  t.textContent = msg;
+  t.style.background = warn ? 'var(--orange)' : 'var(--green)';
+  t.style.transform = 'translateX(-50%) translateY(0)';
+  t.style.opacity = '1';
+  setTimeout(() => { t.style.transform = 'translateX(-50%) translateY(80px)'; t.style.opacity = '0'; }, 2200);
+}
+
+/* Flash sale countdown */
+(function() {
+  var t = 2 * 3600 + 14 * 60 + 33, el = document.getElementById('cd');
+  if (!el) return;
+  setInterval(function() {
+    if (t > 0) {
+      t--;
+      var h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60), s = t % 60;
+      el.textContent = [h, m, s].map(x => String(x).padStart(2, '0')).join(':');
+    }
+  }, 1000);
+})();
+
+render();
+</script>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <i class="fa fa-seedling"></i>
+      <span>FarmDirect</span>
+    </div>
+    <p>© 2026 FarmDirect Philippines. Freshness Guaranteed.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+      <a href="Dashboard.html">My Account</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Chat -->
+<a href="Chat.html" class="float-chat">
+  💬 Chat with Farmer
+  <span class="chat-badge">2</span>
+</a>
+
+</body>
+</html>

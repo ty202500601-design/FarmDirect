@@ -28,6 +28,7 @@
   --font-display: "Georgia", "Times New Roman", serif;
   --font-body: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   --nav-h: 70px;
+  --sidebar-w: 210px;
 }
 
 *,
@@ -421,14 +422,41 @@ button {
   margin-top: 0.1rem;
 }
 
+/* ── SIDEBAR ── */
+.sidebar {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  width: var(--sidebar-w);
+  height: calc(100vh - var(--nav-h));
+  background: var(--green);
+  border-right: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem 0.7rem;
+  overflow-y: auto;
+}
+.sidebar-nav { display: flex; flex-direction: column; gap: 0.2rem; }
+.sidebar-link {
+  display: flex; align-items: center; gap: 0.65rem;
+  padding: 0.65rem 0.9rem; border-radius: 10px;
+  font-size: 0.9rem; font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  transition: background 0.18s, color 0.18s; white-space: nowrap;
+}
+.sidebar-link:hover { background: rgba(255,255,255,0.12); color: #fff; }
+.sidebar-link.active { background: rgba(255,255,255,0.18); color: #fff; font-weight: 700; }
+
 /* ── MAIN CONTENT AREA ── */
 .farmers-main {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
+  max-width: 1200px; width: 100%;
+  margin-left: var(--sidebar-w);
   padding: 2rem 1.5rem 3rem;
   padding-top: calc(var(--nav-h) + 2rem);
 }
+.footer { margin-left: var(--sidebar-w); }
 
 /* Page header */
 .dash {
@@ -1738,6 +1766,9 @@ input[type="date"] {
   }
 }
 @media (max-width: 900px) {
+  .sidebar { display: none; }
+  .farmers-main { margin-left: 0; }
+  .footer { margin-left: 0; }
   .nav-links {
     display: none;
   }
@@ -1856,6 +1887,12 @@ input[type="date"] {
     font-size: 15px;
   }
 }
+@media (max-width: 500px) {
+  .notif-dropdown { right: -50px; width: calc(100vw - 1.5rem); }
+  .notif-wrap .notif-dropdown[style*="min-width:180px"],
+  .notif-wrap .notif-dropdown[style*="min-width: 180px"] { width: 220px !important; max-width: 220px !important; }
+}
+@media (max-width: 420px) { .menu-panel { width: 100%; right: -100%; } }
 @media (max-width: 500px) {
   .notif-dropdown {
     right: -50px;

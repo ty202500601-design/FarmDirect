@@ -4,18 +4,179 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout – FarmDirect Zamboanga</title>
-<link rel="stylesheet" href="../CSS/checkout.css">
+<link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script src="farmdirect.js"></script>
+<style>
+.cart-navbar { position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--green);height:var(--nav-h);box-shadow:0 2px 16px rgba(0,0,0,0.18); }
+.cart-nav-inner { max-width:1200px;margin:0 auto;padding:0 1.2rem;height:100%;display:flex;align-items:center;gap:0.9rem; }
+.cart-nav-back { color:#fff;display:flex;align-items:center;flex-shrink:0; }
+.cart-nav-title { font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:#fff;flex:1; }
+.co-wrap { padding:calc(var(--header-total) + 1rem) 0 6rem;min-height:100vh; }
+.co-inner { max-width:700px;margin:0 auto;padding:0 1.2rem;display:flex;flex-direction:column;gap:0.7rem; }
+.co-card { background:var(--white);border-radius:var(--radius);border:1.5px solid var(--border);overflow:hidden; }
+.co-card-hdr { display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1.1rem;border-bottom:1px solid var(--border);background:var(--cream); }
+.co-card-hdr-title { font-size:0.92rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:0.5rem; }
+.co-card-hdr-action { font-size:0.8rem;color:var(--green);font-weight:700;cursor:pointer;background:none;border:none; }
+.addr-block { padding:1rem 1.1rem; }
+.addr-name { font-size:0.97rem;font-weight:700;margin-bottom:0.15rem; }
+.addr-phone { font-size:0.83rem;color:var(--text-mid);margin-bottom:0.2rem; }
+.addr-full { font-size:0.86rem;color:var(--text-mid);line-height:1.5; }
+.addr-tag { display:inline-block;background:var(--green-light);color:var(--green);font-size:0.67rem;font-weight:700;padding:0.1rem 0.45rem;border-radius:4px;margin-left:0.4rem; }
+.addr-form-toggle { display:none;padding:1rem 1.1rem; }
+.addr-form-toggle.show { display:block; }
+.addr-form-grid { display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-top:0.7rem; }
+.af-group { display:flex;flex-direction:column;gap:0.35rem; }
+.af-group.full { grid-column:1/-1; }
+.af-group label { font-size:0.83rem;font-weight:600;color:var(--text-mid); }
+.af-group input,.af-group textarea,.af-group select { padding:0.65rem 0.9rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;background:var(--cream);color:var(--text);transition:border-color 0.2s; }
+.af-group input:focus,.af-group textarea:focus { border-color:var(--green); }
+.af-save-btn { background:var(--green);color:#fff;border:none;padding:0.65rem 1.2rem;border-radius:var(--radius-sm);font-size:0.88rem;font-weight:700;cursor:pointer;margin-top:0.5rem;display:inline-block; }
+.oi { display:flex;gap:0.75rem;padding:0.85rem 1.1rem;border-bottom:1px solid var(--border);align-items:center; }
+.oi:last-child { border-bottom:none; }
+.oi-img { width:64px;height:64px;object-fit:cover;border-radius:var(--radius-sm);flex-shrink:0;border:1.5px solid var(--border); }
+.oi-body { flex:1;min-width:0; }
+.oi-name { font-size:0.88rem;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:0.18rem; }
+.oi-variant { font-size:0.75rem;color:var(--text-light); }
+.oi-price-row { display:flex;align-items:center;gap:0.4rem;margin-top:0.2rem; }
+.oi-price { font-size:0.98rem;font-weight:800;color:var(--orange); }
+.oi-orig { font-size:0.73rem;color:var(--text-light);text-decoration:line-through; }
+.oi-disc { background:var(--orange);color:#fff;font-size:0.6rem;font-weight:700;padding:0.07rem 0.3rem;border-radius:3px; }
+.oi-qty { font-size:0.78rem;color:var(--text-light);flex-shrink:0; }
+.oi-dropoff-select { margin-top:0.4rem;display:flex;align-items:center;gap:0.4rem; }
+.oi-dropoff-label { font-size:0.72rem;color:var(--text-light);font-weight:600; }
+.oi-dropoff-select select { padding:0.3rem 0.5rem;border:1.5px solid var(--border);border-radius:6px;font-size:0.78rem;background:var(--cream);color:var(--text);cursor:pointer; }
+.oi-dropoff-select select:focus { border-color:var(--green); }
+.ship-opts { padding:0.6rem 1.1rem;display:flex;flex-direction:column;gap:0.5rem; }
+.ship-opt { display:flex;align-items:center;gap:0.75rem;padding:0.75rem 0.9rem;border:2px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color 0.2s,background 0.2s; }
+.ship-opt.selected { border-color:var(--green);background:var(--green-light); }
+.ship-radio { width:17px;height:17px;flex-shrink:0;accent-color:var(--green); }
+.ship-info { flex:1; }
+.ship-name { font-size:0.9rem;font-weight:700;color:var(--text); }
+.ship-desc { font-size:0.76rem;color:var(--text-light);margin-top:0.1rem; }
+.ship-price { font-size:0.95rem;font-weight:800;color:var(--green);flex-shrink:0; }
+.ship-free { color:var(--green-bright);font-weight:800; }
+.pay-row { display:flex;align-items:center;gap:0.75rem;padding:0.9rem 1.1rem; }
+.pay-icon-big { font-size:1.5rem;flex-shrink:0; }
+.pay-details { flex:1; }
+.pay-name { font-size:0.9rem;font-weight:700; }
+.pay-sub { font-size:0.75rem;color:var(--text-light); }
+.summary-rows { padding:0.5rem 1.1rem 1rem; }
+.srow { display:flex;justify-content:space-between;padding:0.45rem 0;font-size:0.88rem;color:var(--text-mid); }
+.srow.disc { color:var(--orange);font-weight:600; }
+.srow.vat-row { color:var(--text-light);font-size:0.82rem; }
+.srow.total { font-size:1.05rem;font-weight:800;color:var(--text);border-top:2px solid var(--border);margin-top:0.4rem;padding-top:0.7rem; }
+.srow.total span:last-child { color:var(--orange); }
+.place-order-bar { position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--white);border-top:2px solid var(--border);padding:0.75rem 1.2rem;display:flex;align-items:center;gap:1rem;box-shadow:0 -4px 20px rgba(0,0,0,0.1); }
+.po-totals { flex:1; }
+.po-label { font-size:0.72rem;color:var(--text-light); }
+.po-amt { font-size:1.15rem;font-weight:800;color:var(--orange); }
+.po-saved { font-size:0.7rem;color:var(--orange);font-weight:600; }
+.po-btn { background:var(--green);color:#fff;border:none;border-radius:10px;padding:0.75rem 1.6rem;font-size:0.92rem;font-weight:700;cursor:pointer;transition:background 0.2s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;flex-shrink:0; }
+.po-btn:hover { background:var(--green-mid); }
+
+/* Multi-dropoff */
+.dropoff-section { padding:0.8rem 1.1rem; }
+.dropoff-point { background:var(--cream);border:1.5px solid var(--border);border-radius:10px;padding:0.9rem;margin-bottom:0.7rem;position:relative; }
+.dropoff-point-label { font-size:0.78rem;font-weight:700;color:var(--green);margin-bottom:0.5rem; }
+.dropoff-remove { position:absolute;top:0.6rem;right:0.6rem;background:none;border:none;color:var(--text-light);cursor:pointer;font-size:1rem;line-height:1; }
+.dropoff-remove:hover { color:var(--red); }
+.add-dropoff-btn { display:flex;align-items:center;gap:0.5rem;background:none;border:2px dashed var(--border);border-radius:10px;padding:0.75rem 1rem;font-size:0.88rem;font-weight:600;color:var(--green);cursor:pointer;width:100%;justify-content:center;transition:border-color 0.2s,background 0.2s; }
+.add-dropoff-btn:hover { border-color:var(--green);background:var(--green-light); }
+
+/* Special discount */
+.special-disc-section { padding:0.8rem 1.1rem; }
+.special-disc-title { font-size:0.84rem;font-weight:700;color:var(--text);margin-bottom:0.6rem; }
+.special-disc-opts { display:flex;gap:0.6rem;flex-wrap:wrap; }
+.special-disc-btn { border:2px solid var(--border);border-radius:8px;padding:0.55rem 1rem;font-size:0.83rem;font-weight:600;cursor:pointer;background:var(--white);color:var(--text-mid);transition:all 0.2s; }
+.special-disc-btn.active { border-color:var(--green);background:var(--green-light);color:var(--green); }
+.special-disc-note { font-size:0.75rem;color:var(--text-light);margin-top:0.5rem; }
+.upload-id-row { display:flex;align-items:center;gap:0.6rem;margin-top:0.6rem;display:none; }
+.upload-id-row.show { display:flex; }
+.upload-id-btn { background:var(--cream-dark);border:1.5px solid var(--border);border-radius:6px;padding:0.4rem 0.8rem;font-size:0.8rem;font-weight:600;cursor:pointer; }
+
+/* Voucher */
+.voucher-input-row { display:flex;gap:0.5rem;padding:0.8rem 1.1rem;border-top:1px solid var(--border); }
+.voucher-input-row input { flex:1;padding:0.6rem 0.9rem;border:2px solid var(--border);border-radius:8px;font-size:0.88rem;background:var(--cream);transition:border-color 0.2s; }
+.voucher-input-row input:focus { border-color:var(--green); }
+.voucher-apply-btn { background:var(--green);color:#fff;border:none;border-radius:8px;padding:0.6rem 1rem;font-size:0.85rem;font-weight:700;cursor:pointer; }
+.voucher-status { padding:0 1.1rem 0.8rem;font-size:0.82rem;font-weight:600; }
+.voucher-status.ok { color:var(--green); }
+.voucher-status.err { color:var(--red); }
+
+@media(max-width:600px) {
+  .addr-form-grid { grid-template-columns:1fr; }
+  .special-disc-opts { flex-direction:column; }
+}
+</style>
 </head>
 <body>
 
-<nav class="cart-navbar">
-  <div class="cart-nav-inner">
-    <a href="cart.html" class="cart-nav-back" title="Back">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-    </a>
-    <span class="cart-nav-title">Checkout</span>
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="products.html">Seller Centre</a>
+    <span class="sep">|</span>
+    <a href="products.html">Start Selling</a>
+    <span class="sep">|</span>
+    Follow us on
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
   </div>
-</nav>
+  <div class="topbar-right">
+    <a href="Notifications.html"><i class="fa fa-bell"></i> Notifications <span class="notif-dot">3</span></a>
+    <a href="#"><i class="fa fa-circle-question"></i> Help</a>
+    <div class="user-menu">
+      <a href="Dashboard.html" class="user-link"><i class="fa fa-user-circle"></i> farmuser <i class="fa fa-chevron-down" style="font-size:0.65rem;margin-left:3px;"></i></a>
+      <div class="user-dropdown">
+        <a href="Dashboard.html"><i class="fa fa-gauge"></i> My Dashboard</a>
+        <a href="Order_tracking.html"><i class="fa fa-box"></i> My Orders</a>
+        <a href="cart.html"><i class="fa fa-basket-shopping"></i> Cart</a>
+        <a href="#"><i class="fa fa-right-from-bracket"></i> Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <a href="products.html" class="logo">
+      <div class="logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg>
+      </div>
+      <div class="logo-text"><span class="logo-farm">Farm</span><span class="logo-direct">Direct</span></div>
+    </a>
+    <div class="search-bar">
+      <input type="text" placeholder="Search fresh produce, meats, pantry essentials…" />
+      <button type="button"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="header-actions">
+      <a href="cart.html" class="cart-btn" title="My Cart">
+        <i class="fa fa-shopping-basket"></i>
+        <span class="cart-count">3</span>
+      </a>
+      <a href="Chat.html" class="cart-btn" title="Messages" style="position:relative;">
+        <i class="fa fa-comment"></i>
+      </a>
+    </div>
+  </div>
+  <div class="search-tags">
+    <a href="products.html">Organic Tomatoes</a>
+    <a href="products.html">Free-Range Eggs</a>
+    <a href="products.html">Grass-Fed Beef</a>
+    <a href="products.html">Sayote</a>
+    <a href="products.html">Coconut Oil</a>
+  </div>
+</header>
+
+
+
+
+
+
+
 
 <div class="co-wrap">
   <div class="co-inner">
@@ -206,79 +367,6 @@
   </div>
   <a href="checkout-confirm.html" class="po-btn" onclick="saveCheckoutState()">Review Order →</a>
 </div>
-
-<script>
-/* ── Inline FD shim (works even without farmdirect.js) ── */
-(function() {
-  const STORAGE_KEY = 'fd_checkout';
-
-  const VOUCHERS = {
-    FARMSAVE50: { label:'₱50 Off',        type:'flat',    value:50  },
-    FRESH10:    { label:'10% Off Veggies', type:'percent', value:10  },
-    NEWBUYER:   { label:'₱100 Off (New)',  type:'flat',    value:100 },
-  };
-
-  const DEFAULT_ITEMS = [];   /* no hardcoded fallback — use real cart */
-
-  function subtotal(items) {
-    return items.reduce((s, i) => s + i.price * i.qty, 0);
-  }
-  function discountAmount(sub, voucherCode, specialDisc) {
-    let d = 0;
-    if (specialDisc) d += sub * 0.20;
-    if (voucherCode && VOUCHERS[voucherCode]) {
-      const v = VOUCHERS[voucherCode];
-      d += v.type === 'flat' ? v.value : sub * (v.value / 100);
-    }
-    return d;
-  }
-  function calcPricing(items, ship, voucherCode, specialDisc) {
-    const sub  = subtotal(items);
-    const disc = discountAmount(sub, voucherCode, specialDisc);
-    const base = sub - disc;
-    const vat  = Math.round(base * 0.12 * 100) / 100;
-    return { sub, disc, shipping: ship, vat, total: base + vat + ship };
-  }
-
-  function getRaw() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch(e) { return null; }
-  }
-
-  function ensureDefaults(data) {
-    if (!data) data = {};
-    if (!data.items || data.items.length === 0) data.items = DEFAULT_ITEMS;
-    if (!data.shippingFee && data.shippingFee !== 0) data.shippingFee = 60;
-    if (!data.pricing) {
-      data.pricing = calcPricing(data.items, data.shippingFee, data.voucherCode || '', data.specialDisc || '');
-    }
-    return data;
-  }
-
-  window.FD = window.FD || {};
-  window.FD.fmt = { peso: v => '₱' + Number(v).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',') };
-  window.FD.Pricing = { VOUCHERS, subtotal, discountAmount, total: calcPricing, vat: v => Math.round(v * 0.12 * 100) / 100 };
-  window.FD.Checkout = {
-    get()     { return ensureDefaults(getRaw()); },
-    save(obj) {
-      const cur = this.get();
-      const merged = Object.assign({}, cur, obj);
-      const ship = merged.shippingFee || 60;
-      merged.pricing = calcPricing(merged.items || DEFAULT_ITEMS, ship, merged.voucherCode || '', merged.specialDisc || '');
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
-    },
-    clear()   { localStorage.removeItem(STORAGE_KEY); },
-  };
-  window.FD.Orders = {
-    place(order) {
-      const id = 'FD-' + Date.now();
-      const orders = JSON.parse(localStorage.getItem('fd_orders') || '[]');
-      orders.push({ id, ...order, status:'pending', placedAt: new Date().toISOString() });
-      localStorage.setItem('fd_orders', JSON.stringify(orders));
-      return { id };
-    }
-  };
-})();
-</script>
 <script>
 /* ── CHECKOUT STATE ── */
 let state = {
@@ -287,6 +375,7 @@ let state = {
   specialDisc: '',
   dropoffs: [],
   dropoffCount: 0,
+  itemDropoffs: {},
 };
 
 /* ── Load cart items from localStorage (set by products.html) ── */
@@ -308,7 +397,6 @@ function renderOrderItems() {
   }
   list.innerHTML = ITEMS.map(item => {
     const pColor = item.discount ? 'var(--orange)' : 'var(--green)';
-    /* Build variant/unit tag shown under the product name */
     const metaParts = [];
     if (item.farm) metaParts.push(item.farm);
     if (item.variety) metaParts.push(item.variety);
@@ -316,6 +404,8 @@ function renderOrderItems() {
     const variantLine = metaParts.length
       ? `<div class="oi-variant">${metaParts.join(' · ')}</div>`
       : '';
+    const currentDropoff = state.itemDropoffs[item.key] || 'main';
+    const dropoffOptions = getDropoffOptions(currentDropoff, item.key);
     return `
       <div class="oi">
         <img class="oi-img" src="${item.img || ''}" alt="${item.name}">
@@ -326,10 +416,29 @@ function renderOrderItems() {
             <span class="oi-price" style="color:${pColor};">${FD.fmt.peso(item.price)}</span>
             ${item.origPrice ? `<span class="oi-orig">${FD.fmt.peso(item.origPrice)}</span><span class="oi-disc">-${item.discount}%</span>` : ''}
           </div>
+          <div class="oi-dropoff-select">
+            <span class="oi-dropoff-label">📍 Deliver to:</span>
+            <select onchange="assignItemToDropoff('${item.key}', this.value)">
+              ${dropoffOptions}
+            </select>
+          </div>
         </div>
         <span class="oi-qty">x${item.qty}</span>
       </div>`;
   }).join('');
+}
+
+function getDropoffOptions(selected, itemKey) {
+  let opts = `<option value="main" ${selected === 'main' ? 'selected' : ''}>Main Address</option>`;
+  state.dropoffs.forEach((dp, i) => {
+    opts += `<option value="${dp.id}" ${selected === dp.id ? 'selected' : ''}>Drop-off Point ${i + 2}</option>`;
+  });
+  return opts;
+}
+
+function assignItemToDropoff(itemKey, dropoffId) {
+  state.itemDropoffs[itemKey] = dropoffId;
+  renderDropoffItemSummary();
 }
 
 function renderSummary() {
@@ -433,20 +542,46 @@ function addDropoff() {
       <div class="af-group"><label>Landmark</label><input type="text" placeholder="Near LCC Mall"></div>
       <div class="af-group"><label>Recipient Name</label><input type="text" placeholder="Maria Santos"></div>
       <div class="af-group"><label>Recipient Phone</label><input type="tel" placeholder="+63 917 xxx xxxx"></div>
-    </div>`;
+    </div>
+    <div class="dropoff-items-summary" id="${id}-items"></div>`;
   document.getElementById('dropoff-list').appendChild(div);
+  renderOrderItems();
+  renderDropoffItemSummary();
   renderSummary();
 }
 
 function removeDropoff(id) {
+  const itemsAtDropoff = ITEMS.filter(i => state.itemDropoffs[i.key] === id);
+  if (itemsAtDropoff.length > 0) {
+    if (!confirm(`Remove this drop-off point? ${itemsAtDropoff.length} item(s) will be moved to Main Address.`)) return;
+    itemsAtDropoff.forEach(i => { state.itemDropoffs[i.key] = 'main'; });
+  }
   state.dropoffs = state.dropoffs.filter(d => d.id !== id);
   const el = document.getElementById(id);
   if (el) el.remove();
-  // Re-label remaining
   document.querySelectorAll('.dropoff-point-label').forEach((l, i) => {
     l.textContent = `📍 Drop-off Point ${i + 2}`;
   });
+  renderOrderItems();
+  renderDropoffItemSummary();
   renderSummary();
+}
+
+function renderDropoffItemSummary() {
+  const allDropoffs = ['main', ...state.dropoffs.map(d => d.id)];
+  allDropoffs.forEach(dpId => {
+    const itemsAtDp = ITEMS.filter(i => state.itemDropoffs[i.key] === dpId);
+    if (dpId === 'main') return;
+    const container = document.getElementById(dpId + '-items');
+    if (!container) return;
+    if (itemsAtDp.length === 0) {
+      container.innerHTML = '<div style="font-size:0.75rem;color:var(--text-light);margin-top:0.5rem;">No items assigned to this drop-off</div>';
+    } else {
+      container.innerHTML = '<div style="margin-top:0.5rem;padding-top:0.5rem;border-top:1px solid var(--border);">' +
+        itemsAtDp.map(i => `<div style="font-size:0.78rem;color:var(--text-mid);padding:0.15rem 0;">• ${i.name} (x${i.qty})</div>`).join('') +
+        '</div>';
+    }
+  });
 }
 
 function toggleAddrForm() {
@@ -479,7 +614,6 @@ function saveCheckoutState() {
   const P            = FD.Pricing;
   const pricing      = P.total(ITEMS, ship, state.voucherCode, state.specialDisc);
 
-  // Capture current address from DOM (use saved if already set)
   let address = FD.Checkout.get().address || {};
   if (!address.name) {
     const nameEl = document.querySelector('.addr-name');
@@ -493,12 +627,30 @@ function saveCheckoutState() {
     };
   }
 
+  const dropoffDetails = state.dropoffs.map(dp => {
+    const el = document.getElementById(dp.id);
+    const inputs = el ? el.querySelectorAll('input') : [];
+    return {
+      id: dp.id,
+      street: inputs[0]?.value || '',
+      brgy: inputs[1]?.value || '',
+      landmark: inputs[2]?.value || '',
+      recipientName: inputs[3]?.value || '',
+      recipientPhone: inputs[4]?.value || '',
+      items: ITEMS.filter(i => state.itemDropoffs[i.key] === dp.id).map(i => ({ key: i.key, name: i.name, qty: i.qty })),
+    };
+  });
+
+  const mainAddressItems = ITEMS.filter(i => state.itemDropoffs[i.key] === 'main').map(i => ({ key: i.key, name: i.name, qty: i.qty }));
+
   FD.Checkout.save({
     items: ITEMS,
     shippingFee: ship,
     voucherCode: state.voucherCode,
     specialDisc: state.specialDisc,
-    dropoffs: state.dropoffs,
+    dropoffs: dropoffDetails,
+    mainAddressItems,
+    itemDropoffs: state.itemDropoffs,
     pricing,
     address,
   });
@@ -506,8 +658,17 @@ function saveCheckoutState() {
 
 /* Load saved state */
 (function() {
+  ITEMS.forEach(item => {
+    if (!state.itemDropoffs[item.key]) {
+      state.itemDropoffs[item.key] = 'main';
+    }
+  });
   renderOrderItems();
   const saved = FD.Checkout.get();
+  if (saved.itemDropoffs) {
+    state.itemDropoffs = saved.itemDropoffs;
+    renderOrderItems();
+  }
   if (saved.voucherCode) {
     state.voucherCode = saved.voucherCode;
     document.getElementById('voucher-input').value = saved.voucherCode;
@@ -516,7 +677,6 @@ function saveCheckoutState() {
   if (saved.specialDisc) {
     toggleSpecialDisc(saved.specialDisc);
   }
-  // Load saved payment method display
   const payInfo = { cod:['💵','Cash on Delivery','Pay when your order arrives'], gcash:['📱','GCash','Instant digital payment'], bank:['🏦','Bank Transfer','BDO, BPI, UnionBank'] };
   const pm = saved.paymentMethod || 'cod';
   if (payInfo[pm]) {
@@ -527,5 +687,29 @@ function saveCheckoutState() {
   renderSummary();
 })();
 </script>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <i class="fa fa-seedling"></i>
+      <span>FarmDirect</span>
+    </div>
+    <p>© 2026 FarmDirect Philippines. Freshness Guaranteed.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+      <a href="Dashboard.html">My Account</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Chat -->
+<a href="Chat.html" class="float-chat">
+  💬 Chat with Farmer
+  <span class="chat-badge">2</span>
+</a>
+
 </body>
 </html>
