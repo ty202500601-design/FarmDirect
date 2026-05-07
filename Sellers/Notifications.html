@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notifications – FarmDirect Seller</title>
+    <link rel="stylesheet" href="Notifications.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="sellers-storage.js"></script>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <input type="checkbox" id="menu-check" class="menu-checkbox" />
+      <div class="nav-inner">
+        <a href="../index.html" class="logo"
+          ><span class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-vegan-icon lucide-vegan"><path d="M16 8q6 0 6-6-6 0-6 6"/><path d="M17.41 3.59a10 10 0 1 0 3 3"/><path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14"/></svg></span><span>FarmDirect</span></a
+        >
+        <div class="nav-actions">
+          <div class="notif-wrap">
+            <button class="notif-btn" tabindex="0" aria-label="Notifications">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+              <span class="notif-badge"></span>
+            </button>
+            <div class="notif-dropdown">
+              <div class="notif-header"><h4>Notifications</h4></div>
+              <div class="notif-list">
+                <div class="notif-item"><div class="notif-content"><strong>New Order</strong><p>🛒 Order #00242 received</p></div><span class="notif-time">2 min ago</span></div>
+                <div class="notif-item"><div class="notif-content"><strong>New Message</strong><p>💬 Buyer Maria messaged you</p></div><span class="notif-time">15 min ago</span></div>
+                <div class="notif-item"><div class="notif-content"><strong>New Review</strong><p>⭐ 5-star review received</p></div><span class="notif-time">1 hr ago</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="notif-wrap">
+            <button class="notif-btn avatar-badge-btn" tabindex="0" aria-label="Profile">JD</button>
+            <div class="notif-dropdown" style="min-width: 180px">
+              <div class="notif-header"><h4>Juan Dela Cruz</h4></div>
+              <div class="notif-list">
+                <div class="notif-item"><div class="notif-content"><a href="Dashboard.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-chart-column-increasing-icon lucide-file-chart-column-increasing"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M8 18v-2"/><path d="M12 18v-4"/><path d="M16 18v-6"/></svg> Management</a></div></div>
+                <div class="notif-item"><div class="notif-content"><a href="Profile.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Profile</a></div></div>
+                <div class="notif-item"><div class="notif-content"><a href="Settings.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-icon lucide-settings"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg> Settings</a></div></div>
+                <div class="notif-item"><div class="notif-content"><a href="../index.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg> Logout</a></div></div>
+              </div>
+            </div>
+          </div>
+          <label for="menu-check" class="menu-toggle"><span></span><span></span><span></span></label>
+        </div>
+      </div>
+      <label for="menu-check" class="menu-overlay"></label>
+      <div class="menu-panel">
+        <div class="menu-section">
+          <h3>Navigation</h3>
+          <a href="../index.html" class="menu-item">Home</a>
+          <a href="Dashboard.html" class="menu-item">Dashboard</a>
+          <a href="Products.html" class="menu-item">Products</a>
+          <a href="Orders.html" class="menu-item">Orders</a>
+          <a href="Notifications.html" class="menu-item">Notifications</a>
+          <a href="Chat.html" class="menu-item">Messages</a>
+          <a href="Reviews.html" class="menu-item">Reviews</a>
+          <a href="Settings.html" class="menu-item">Settings</a>
+        </div>
+        <a href="../index.html" class="menu-cta">Logout</a>
+      </div>
+    </nav>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <a href="../index.html"       class="sidebar-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> <span>Home</span></a>
+        <a href="Dashboard.html"     class="sidebar-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard-icon lucide-layout-dashboard"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg> <span>Dashboard</span></a>
+        <a href="Products.html"      class="sidebar-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-search-icon lucide-package-search"><path d="M12 22V12"/><path d="M20.27 18.27 22 20"/><path d="M21 10.498V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l.98-.559"/><path d="M3.29 7 12 12l8.71-5"/><path d="m7.5 4.27 8.997 5.148"/><circle cx="18.5" cy="16.5" r="2.5"/></svg> <span>Products</span></a>
+        <a href="Orders.html"        class="sidebar-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-truck-icon lucide-truck"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg> <span>Orders</span></a>
+        <a href="Notifications.html" class="sidebar-link active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell-icon lucide-bell"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg> <span>Notifications</span></a>
+        <a href="Chat.html"          class="sidebar-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-icon lucide-message-square"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/></svg> <span>Messages</span></a>
+        <a href="Reviews.html"       class="sidebar-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star-icon lucide-star"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg> <span>Reviews</span></a>
+        <a href="Settings.html"      class="sidebar-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-icon lucide-settings"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg> <span>Settings</span></a>
+      </nav>
+    </aside>
+
+    <!-- NOTIFICATIONS PAGE -->
+    <div class="notif-page-wrap">
+      <div class="notif-container">
+        <div class="notif-page-header">
+          <h1><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell-icon lucide-bell"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg> Notifications</h1>
+          <button class="mark-all-btn" onclick="markAllRead()">Mark all as read</button>
+        </div>
+
+        <!-- TABS -->
+        <div class="notif-tabs">
+          <div class="ntab active" onclick="switchTab('all', this)">All <span class="ntab-badge" id="badge-all">7</span></div>
+          <div class="ntab" onclick="switchTab('orders', this)"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-icon lucide-package"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></svg> Orders <span class="ntab-badge" id="badge-orders">3</span></div>
+          <div class="ntab" onclick="switchTab('chats', this)"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-icon lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg> Messages <span class="ntab-badge" id="badge-chats">2</span></div>
+          <div class="ntab" onclick="switchTab('reviews', this)"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star-icon lucide-star"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg> Reviews</div>
+          <div class="ntab" onclick="switchTab('system', this)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wrench-icon lucide-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg> System</div>
+        </div>
+
+        <!-- ALL -->
+        <div class="notif-section active" id="tab-all">
+
+          <!-- ORDERS -->
+          <div style="font-size:0.78rem;font-weight:800;text-transform:uppercase;color:var(--text-light);letter-spacing:0.06em;margin-bottom:0.5rem;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-icon lucide-package"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></svg> Orders</div>
+
+          <div class="ncard unread-green">
+            <div class="ncard-icon icon-order-new"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart-icon lucide-shopping-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></div>
+            <div class="ncard-body">
+              <div class="ncard-title">New Order #FD-242</div>
+              <div class="ncard-desc">Maria Santos placed an order: Fresh Carrots × 2kg, Heirloom Tomatoes × 1kg. Total: ₱485.00</div>
+              <div class="ncard-time">2 minutes ago</div>
+              <a href="Orders.html" class="ncard-action">View Order →</a>
+            </div>
+          </div>
+
+          <div class="ncard unread-orange">
+            <div class="ncard-icon icon-order-urgent"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hourglass-icon lucide-hourglass"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg></div>
+            <div class="ncard-body">
+              <div class="ncard-title">Order #FD-238 Pending Confirmation</div>
+              <div class="ncard-desc">Order from Juan Rivera needs confirmation. Fresh Organic Milk × 2L. Please confirm within 2 hours.</div>
+              <div class="ncard-time">45 minutes ago</div>
+              <a href="Orders.html" class="ncard-action">Confirm Now →</a>
+            </div>
+          </div>
+
+          <div class="ncard unread-red">
+            <div class="ncard-icon icon-cancel"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div>
+            <div class="ncard-body">
+              <div class="ncard-title">Order #FD-235 Cancelled by Buyer</div>
+              <div class="ncard-desc">Ana Cruz cancelled her order for Sweet Watermelon × 1pc. Reason: Changed mind. Refund will be processed.</div>
+              <div class="ncard-time">1 hour ago</div>
+            </div>
+          </div>
+
+          <!-- MESSAGES -->
+          <div style="font-size:0.78rem;font-weight:800;text-transform:uppercase;color:var(--text-light);letter-spacing:0.06em;margin:1rem 0 0.5rem;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-icon lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg> Messages</div>
+
+          <div class="ncard unread" onclick="window.location.href='Chat.html?buyer=maria-santos'">
+            <div class="ncard-icon icon-msg"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-icon lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></div>
+            <div class="ncard-body">
+              <div class="ncard-title">Maria Santos</div>
+              <div class="ncard-desc">Hi! Do you have organic carrots available today? I need 3kg for my restaurant.</div>
+              <div class="ncard-time">15 minutes ago</div>
+            </div>
+            <div class="ncard-unread-dot"></div>
+          </div>
+
+          <div class="ncard unread" onclick="window.location.href='Chat.html?buyer=juan-rivera'">
+            <div class="ncard-icon icon-msg"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-icon lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></div>
+            <div class="ncard-body">
+              <div class="ncard-title">Juan Rivera</div>
+              <div class="ncard-desc">Salamat for the quick delivery! The tomatoes were fresh. I'd like to place another order.</div>
+              <div class="ncard-time">1 hour ago</div>
+            </div>
+            <div class="ncard-unread-dot"></div>
+          </div>
+
+          <!-- REVIEWS -->
+          <div style="font-size:0.78rem;font-weight:800;text-transform:uppercase;color:var(--text-light);letter-spacing:0.06em;margin:1rem 0 0.5rem;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star-icon lucide-star"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg> Reviews</div>
+
+          <div class="ncard unread-green">
+            <div class="ncard-icon icon-star"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star-icon lucide-star"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></div>
+            <div class="ncard-body">
+              <div class="ncard-title">New 5-Star Review!</div>
+              <div class="ncard-desc">Maria Santos left a 5-star review: "Fresh and organic! Best carrots in the market. Will order again!"</div>
+              <div class="ncard-time">2 hours ago</div>
+              <a href="Reviews.html" class="ncard-action">View Review →</a>
+            </div>
+          </div>
+
+          <div class="ncard">
+            <div class="ncard-icon icon-star"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star-icon lucide-star"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></div>
+            <div class="ncard-body">
+              <div class="ncard-title">New 4-Star Review</div>
+              <div class="ncard-desc">Pedro Garcia left a 4-star review: "Good quality tomatoes but delivery was a bit slow."</div>
+              <div class="ncard-time">5 hours ago</div>
+            </div>
+          </div>
+
+          <!-- SYSTEM -->
+          <div style="font-size:0.78rem;font-weight:800;text-transform:uppercase;color:var(--text-light);letter-spacing:0.06em;margin:1rem 0 0.5rem;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wrench-icon lucide-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg> System Updates</div>
+
+          <div class="ncard">
+            <div class="ncard-icon icon-system"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wrench-icon lucide-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg></div>
+            <div class="ncard-body">
+              <div class="ncard-title">Low Stock Alert: Organic Carrots</div>
+              <div class="ncard-desc">Your Organic Carrots stock is down to 5kg. Consider restocking soon to avoid missing orders.</div>
+              <div class="ncard-time">3 hours ago</div>
+              <a href="Products.html" class="ncard-action outline">Update Stock →</a>
+            </div>
+          </div>
+
+          <div class="ncard">
+            <div class="ncard-icon icon-promo"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-party-popper-icon lucide-party-popper"><path d="M5.8 11.3 2 22l10.7-3.79"/><path d="M4 3h.01"/><path d="M22 8h.01"/><path d="M15 2h.01"/><path d="M22 20h.01"/><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10"/><path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17"/><path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7"/><path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z"/></svg></div>
+            <div class="ncard-body">
+              <div class="ncard-title">Your store reached 50 followers!</div>
+              <div class="ncard-desc">Congratulations! Your farm is gaining popularity. Keep up the great work!</div>
+              <div class="ncard-time">1 day ago</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ORDERS TAB -->
+        <div class="notif-section" id="tab-orders">
+          <div class="ncard unread-green">
+            <div class="ncard-icon icon-order-new">🛒</div>
+            <div class="ncard-body">
+              <div class="ncard-title">New Order #FD-242</div>
+              <div class="ncard-desc">Maria Santos ordered Fresh Carrots × 2kg, Heirloom Tomatoes × 1kg. Total: ₱485.00</div>
+              <div class="ncard-time">2 minutes ago</div>
+              <a href="Orders.html" class="ncard-action">View Order →</a>
+            </div>
+          </div>
+          <div class="ncard unread-orange">
+            <div class="ncard-icon icon-order-urgent">⏳</div>
+            <div class="ncard-body">
+              <div class="ncard-title">Order #FD-238 Awaiting Confirmation</div>
+              <div class="ncard-desc">Juan Rivera's order for Fresh Organic Milk × 2L needs your confirmation.</div>
+              <div class="ncard-time">45 minutes ago</div>
+              <a href="Orders.html" class="ncard-action">Confirm →</a>
+            </div>
+          </div>
+          <div class="ncard unread-red">
+            <div class="ncard-icon icon-cancel">❌</div>
+            <div class="ncard-body">
+              <div class="ncard-title">Order #FD-235 Cancelled</div>
+              <div class="ncard-desc">Ana Cruz cancelled Sweet Watermelon × 1pc. Refund will be processed automatically.</div>
+              <div class="ncard-time">1 hour ago</div>
+            </div>
+          </div>
+          <div class="ncard">
+            <div class="ncard-icon icon-delivered">✅</div>
+            <div class="ncard-body">
+              <div class="ncard-title">Order #FD-230 Delivered</div>
+              <div class="ncard-desc">Order to Pedro Garcia has been delivered successfully. Fresh Carabao Milk × 2L.</div>
+              <div class="ncard-time">2 days ago</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MESSAGES TAB -->
+        <div class="notif-section" id="tab-chats">
+          <div class="ncard unread" onclick="window.location.href='Chat.html?buyer=maria-santos'">
+            <div class="ncard-icon icon-msg">💬</div>
+            <div class="ncard-body">
+              <div class="ncard-title">Maria Santos</div>
+              <div class="ncard-desc">Hi! Do you have organic carrots available today? I need 3kg for my restaurant.</div>
+              <div class="ncard-time">15 minutes ago</div>
+              <a href="Chat.html?buyer=maria-santos" class="ncard-action">Reply →</a>
+            </div>
+            <div class="ncard-unread-dot"></div>
+          </div>
+          <div class="ncard unread" onclick="window.location.href='Chat.html?buyer=juan-rivera'">
+            <div class="ncard-icon icon-msg">💬</div>
+            <div class="ncard-body">
+              <div class="ncard-title">Juan Rivera</div>
+              <div class="ncard-desc">Salamat for the quick delivery! I'd like to place another order.</div>
+              <div class="ncard-time">1 hour ago</div>
+              <a href="Chat.html?buyer=juan-rivera" class="ncard-action">Reply →</a>
+            </div>
+            <div class="ncard-unread-dot"></div>
+          </div>
+          <div class="ncard" onclick="window.location.href='Chat.html?buyer=ana-cruz'">
+            <div class="ncard-icon icon-msg">💬</div>
+            <div class="ncard-body">
+              <div class="ncard-title">Ana Cruz</div>
+              <div class="ncard-desc">Thank you! The watermelon was so sweet. I'll order again next week.</div>
+              <div class="ncard-time">Yesterday</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- REVIEWS TAB -->
+        <div class="notif-section" id="tab-reviews">
+          <div class="ncard unread-green">
+            <div class="ncard-icon icon-star">⭐</div>
+            <div class="ncard-body">
+              <div class="ncard-title">5-Star Review from Maria Santos</div>
+              <div class="ncard-desc">"Fresh and organic! Best carrots in the market. Will order again!"</div>
+              <div class="ncard-time">2 hours ago</div>
+              <a href="Reviews.html" class="ncard-action">View →</a>
+            </div>
+          </div>
+          <div class="ncard">
+            <div class="ncard-icon icon-star">⭐</div>
+            <div class="ncard-body">
+              <div class="ncard-title">4-Star Review from Pedro Garcia</div>
+              <div class="ncard-desc">"Good quality tomatoes but delivery was a bit slow."</div>
+              <div class="ncard-time">5 hours ago</div>
+            </div>
+          </div>
+          <div class="ncard">
+            <div class="ncard-icon icon-star">⭐</div>
+            <div class="ncard-body">
+              <div class="ncard-title">5-Star Review from Juan Rivera</div>
+              <div class="ncard-desc">"Excellent service and fresh products. Highly recommended!"</div>
+              <div class="ncard-time">1 day ago</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SYSTEM TAB -->
+        <div class="notif-section" id="tab-system">
+          <div class="ncard">
+            <div class="ncard-icon icon-system">🔧</div>
+            <div class="ncard-body">
+              <div class="ncard-title">Low Stock Alert: Organic Carrots</div>
+              <div class="ncard-desc">Your Organic Carrots stock is down to 5kg. Restock soon.</div>
+              <div class="ncard-time">3 hours ago</div>
+              <a href="Products.html" class="ncard-action outline">Update Stock →</a>
+            </div>
+          </div>
+          <div class="ncard">
+            <div class="ncard-icon icon-promo">🎉</div>
+            <div class="ncard-body">
+              <div class="ncard-title">50 Followers Milestone!</div>
+              <div class="ncard-desc">Your store just reached 50 followers. Keep growing!</div>
+              <div class="ncard-time">1 day ago</div>
+            </div>
+          </div>
+          <div class="ncard">
+            <div class="ncard-icon icon-system">📋</div>
+            <div class="ncard-body">
+              <div class="ncard-title">Complete Your Profile</div>
+              <div class="ncard-desc">Add more details to your farm profile to attract more buyers.</div>
+              <div class="ncard-time">3 days ago</div>
+              <a href="Profile.html" class="ncard-action outline">Edit Profile →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+function switchTab(name, el) {
+  document.querySelectorAll('.ntab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.notif-section').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  const sec = document.getElementById('tab-' + name);
+  if (sec) sec.classList.add('active');
+}
+function markAllRead() {
+  document.querySelectorAll('.ncard-unread-dot').forEach(d => d.remove());
+  document.querySelectorAll('.ntab-badge').forEach(b => b.remove());
+  document.querySelectorAll('.ncard.unread, .ncard.unread-green, .ncard.unread-orange, .ncard.unread-red').forEach(c => {
+    c.classList.remove('unread','unread-green','unread-orange','unread-red');
+  });
+}
+// Close mobile menu when clicking a nav item
+document.querySelectorAll('.menu-panel .menu-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const cb = document.getElementById('menu-check');
+    if (cb) cb.checked = false;
+  });
+});
+    </script>
+  </body>
+</html>

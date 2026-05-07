@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --green:        #1a2e1e;
   --green-dark:   #0f1a10;
   --green-light:  #e3ebe4;
@@ -65,7 +65,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .nav-link {
   padding: .5rem 1rem; border-radius: 8px;
   font-size: .95rem; font-weight: 500; color: rgba(255,255,255,.85);
-  transition: background .2s, color .2s;
+
 }
 .nav-link:hover, .nav-link.active { background: rgba(255,255,255,.2); color: #fff; }
 .nav-actions { margin-left: auto; display: flex; align-items: center; gap: .8rem; }
@@ -80,7 +80,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .menu-overlay {
   position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
   background: rgba(0,0,0,.5); opacity: 0; pointer-events: none;
-  transition: opacity .3s; z-index: 999;
+ z-index: 999;
 }
 .menu-panel {
   position: fixed; top: var(--nav-h); right: -320px; width: 300px;
@@ -133,7 +133,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   box-shadow: 0 8px 40px rgba(0,0,0,.18); z-index: 1200; display: flex;
   flex-direction: column; overflow: hidden; opacity: 0; pointer-events: none;
   transform: translateY(-6px) scale(.98); transform-origin: top right;
-  transition: opacity .2s ease, transform .2s ease;
+
 }
 .notif-dropdown::before {
   content: ''; position: absolute; top: -7px; right: 14px; width: 13px; height: 13px;
@@ -201,7 +201,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
 /* ── STOCK GRID ── */
 .stock-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:1.4rem; margin-bottom:2rem; }
  
-.stock-card { background:var(--white); border:1.5px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm); transition:box-shadow .22s,transform .22s; animation:fadeUp .45s ease both; }
+.stock-card { background:var(--white); border:1.5px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm); transition:box-shadow .22s,transform .22s; }
 .stock-card:hover { box-shadow:var(--shadow-md); transform:translateY(-3px); }
  
 /* Card top: image + info */
@@ -280,7 +280,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   padding:.28rem .7rem; border:1.5px solid var(--border);
   border-radius:20px; font-size:.75rem; font-weight:600;
   background:var(--white); color:var(--text-mid);
-  transition:background .18s,color .18s,border-color .18s;
+
 }
 .quick-btn:hover { background:var(--green-light); color:var(--green); border-color:var(--green); }
  
@@ -331,7 +331,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   background:var(--green); color:white;
   border:none; border-radius:var(--radius-sm);
   font-size:.92rem; font-weight:700;
-  transition:background .2s,transform .15s;
+
 }
 .save-stock-btn:hover { background:var(--green-mid); transform:translateY(-1px); }
  
@@ -349,7 +349,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   padding:.72rem 1.8rem; background:var(--green); color:white;
   border:none; border-radius:var(--radius-sm);
   font-size:.92rem; font-weight:700; flex-shrink:0;
-  transition:background .2s,transform .15s;
+
 }
 .save-all-btn:hover { background:var(--green-mid); transform:translateY(-1px); }
  
@@ -362,7 +362,7 @@ button { font-family: inherit; border: none; cursor: pointer; }
   font-size:.9rem; font-weight:600;
   box-shadow:0 8px 28px rgba(0,0,0,.2);
   opacity:0; pointer-events:none;
-  transition:opacity .3s,transform .3s;
+
   z-index:2000; white-space:nowrap; max-width:90vw;
   text-align:center;
 }
@@ -383,9 +383,6 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .footer-col a,.footer-col p { display:block; font-size:.88rem; margin-bottom:.6rem; color:#8aab8e; transition:color .2s; }
 .footer-col a:hover { color:white; }
 .footer-bottom { padding-top:1.5rem; border-top:1px solid rgba(255,255,255,.1); text-align:center; font-size:.82rem; color:#567a5a; }
- 
-/* Animation */
-@keyframes fadeUp { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
  
 /* Responsive */
 @media(max-width:900px) {
